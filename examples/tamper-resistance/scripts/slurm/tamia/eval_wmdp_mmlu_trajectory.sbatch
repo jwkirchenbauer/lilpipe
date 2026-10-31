@@ -38,10 +38,14 @@ base_model_name_or_path=${1:?missing model path}
 output_dir=${2:?missing output directory}
 rm_intermediate_ckpts_after_eval=${3:-false}
 rm_final_ckpt_after_eval=${4:-false}
+baseline_model_name_or_path=${5:-}
 
-for ckpt_name_or_path in "$base_model_name_or_path"/checkpoint-*; do
+for ckpt_name_or_path in "$baseline_model_name_or_path" "$base_model_name_or_path"/checkpoint-*; do
     [[ -d "$ckpt_name_or_path" ]] || continue
     output="$output_dir/${ckpt_name_or_path##*/}"
+    if [[ "$ckpt_name_or_path" == "$baseline_model_name_or_path" ]]; then
+        output="$output_dir/checkpoint-0"
+    fi
 
     accelerate launch --num_processes=4 -m lm_eval run \
       --model hf \
@@ -52,7 +56,7 @@ for ckpt_name_or_path in "$base_model_name_or_path"/checkpoint-*; do
       --batch_size 32 \
       --output_path "$output"
 
-    if [[ "$rm_intermediate_ckpts_after_eval" == true ]]; then
+    if [[ "$rm_intermediate_ckpts_after_eval" == true && "$ckpt_name_or_path" != "$baseline_model_name_or_path" ]]; then
         rm -r -- "$ckpt_name_or_path"
     fi
 done

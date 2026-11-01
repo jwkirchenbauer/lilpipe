@@ -1,4 +1,4 @@
-id: z7b-wmdp-bio--15pp--unlearn-fft-npo-sam-rho1e-2-hpo
+id: z7b-wmdp-bio--15pp--unlearn-fft-npo-sam-rho1e-2--hpo
 sweeps:
   - name: grid
     parameters:

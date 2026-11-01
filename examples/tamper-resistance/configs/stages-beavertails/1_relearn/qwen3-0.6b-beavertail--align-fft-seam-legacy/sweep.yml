@@ -17,7 +17,6 @@ sweeps:
       learning_rate: [5.0e-5, 1.0e-4]
 producer:
   script: scripts/slurm/mila/train.sbatch
-  args: [--launcher, python]
   sbatch_args:
     - --gres=gpu:l40s:1
     - --cpus-per-task=8
@@ -28,8 +27,6 @@ model:
   attack_data: disjoint
   attack_learning_rate: "{parameter[learning_rate]}"
   method: SEAM legacy
-  evaluation_checkpoint_interval: "100"
-  evaluation_max_steps: "250"
 evaluations:
   - mila-l40s-q06b--beavertails-and-capabilities-trajectory
 evaluation_registry: configs/registries/evals.yml

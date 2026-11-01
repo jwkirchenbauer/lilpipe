@@ -9,7 +9,7 @@ pytest.importorskip("matplotlib")
 
 SCRIPT = (
     Path(__file__).resolve().parents[1]
-    / "examples/tamper-resistance/scripts/analysis/plot_ll_2d.py"
+    / "examples/tamper-resistance/scripts/analysis/loss-landscapes/plot_ll_2d.py"
 )
 
 

@@ -1,4 +1,4 @@
-"""Plot gen_ll.py CSV grids as 3D surfaces with contour insets."""
+"""Plot loss-landscapes/get_ll.py CSV grids as 3D surfaces with contour insets."""
 
 import argparse
 import os

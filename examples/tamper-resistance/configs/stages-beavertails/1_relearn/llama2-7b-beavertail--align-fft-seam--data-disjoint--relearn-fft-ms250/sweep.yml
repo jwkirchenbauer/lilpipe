@@ -1,4 +1,4 @@
-id: llama2-7b-beavertail--align-fft-seam--data-disjoint--relearn-fft-ms250-hpo
+id: llama2-7b-beavertail--align-fft-seam--data-disjoint--relearn-fft-ms250--hpo
 sweeps:
   - name: disjoint
     parameters:

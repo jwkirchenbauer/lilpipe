@@ -1,0 +1,23 @@
+id: z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-ms128--hpo
+sweeps:
+  - name: lr
+    parameters:
+      learning_rate: [1.0e-6, 5.0e-6, 1.0e-5]
+depends_on:
+  - z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+producer:
+  script: scripts/slurm/tamia/train.sbatch
+  sbatch_args:
+    - --gpus-per-node=h100:4
+    - --cpus-per-task=48
+    - --mem=480G
+    - --time=03:00:00
+  args:
+    - --launcher
+    - python
+model:
+  baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+  attack_learning_rate: "{parameter[learning_rate]}"
+evaluations:
+  - tamia-h100-z7b--wmdp-and-mmlu-trajectory
+evaluation_registry: configs/registries/evals.yml

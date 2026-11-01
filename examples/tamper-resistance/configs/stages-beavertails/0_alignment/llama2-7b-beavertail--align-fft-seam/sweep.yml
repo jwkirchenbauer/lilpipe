@@ -1,4 +1,4 @@
-id: llama2-7b-beavertail--align-fft-seam-hpo
+id: llama2-7b-beavertail--align-fft-seam--hpo
 sweeps:
   - name: beta
     parameters:

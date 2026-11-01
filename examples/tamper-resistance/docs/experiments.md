@@ -80,8 +80,8 @@ trained hash-0 checkpoint reproduces the historical self-destruction:
 Generate the regular and alignment attack trajectories from the example root:
 
 ```bash
-python scripts/analysis/plot_trajectory_wmdp.py --plot main
-python scripts/analysis/plot_trajectory_beavertails.py --plot main
+python scripts/analysis/relearning-trajectory/plot_trajectory_wmdp.py --plot main
+python scripts/analysis/relearning-trajectory/plot_trajectory_beavertails.py --plot main
 ```
 
 The scripts write PDF and PNG figures to `artifacts/figures`.

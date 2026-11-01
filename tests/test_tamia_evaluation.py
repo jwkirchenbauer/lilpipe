@@ -20,7 +20,7 @@ MODEL_ID = (
 @pytest.fixture
 def evaluation():
     spec = importlib.util.spec_from_file_location(
-        "tamia_evaluation", EXAMPLE / "scripts/tamia_evaluation.py"
+        "tamia_evaluation", EXAMPLE / "scripts/evals/tamia_evaluation.py"
     )
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -185,7 +185,7 @@ def test_single_and_final_paths_remain_compatible(evaluation, tmp_path):
 def test_beavertails_terminal_root_keeps_summary_contract(tmp_path, monkeypatch):
     spec = importlib.util.spec_from_file_location(
         "beavertails_terminal",
-        EXAMPLE / "scripts/evaluate_beavertail_and_capabilities.py",
+        EXAMPLE / "scripts/evals/evaluate_beavertail_and_capabilities.py",
     )
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -572,9 +572,9 @@ def test_wmdp_wrappers_launch_both_tasks_once_per_checkpoint(
     )
     for command in (local_bin / "uv", accelerate):
         command.chmod(0o755)
-    (tmp_path / "scripts").mkdir()
-    (tmp_path / "scripts/tamia_evaluation.py").symlink_to(
-        EXAMPLE / "scripts/tamia_evaluation.py"
+    (tmp_path / "scripts/evals").mkdir(parents=True)
+    (tmp_path / "scripts/evals/tamia_evaluation.py").symlink_to(
+        EXAMPLE / "scripts/evals/tamia_evaluation.py"
     )
     activate = tmp_path / "job/.venv-123/bin/activate"
     activate.parent.mkdir(parents=True)

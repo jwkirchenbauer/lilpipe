@@ -1,4 +1,4 @@
-"""Plot the loss grids saved by gen_ll.py as 2D contours."""
+"""Plot the loss grids saved by loss-landscapes/get_ll.py as 2D contours."""
 
 import argparse
 import os

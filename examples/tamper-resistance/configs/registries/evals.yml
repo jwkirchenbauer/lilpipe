@@ -1,7 +1,7 @@
 evaluations:
   # Output: artifacts/mila/evals/qwen3-06b-beavertail/<model-id>/checkpoint-<step>/summary.json
   mila-l40s-q06b--beavertails-and-capabilities-trajectory:
-    script: scripts/slurm/mila/eval_beavertail_and_capabilities_trajectory.sbatch
+    script: scripts/slurm/mila/eval_beavertails_capabilities_trajectory.sbatch
     args:
     - '{model.id}'
     - '{model.baseline_model_name_or_path}'
@@ -10,8 +10,6 @@ evaluations:
     - '{model.attack_data}'
     - '{model.method}'
     - artifacts/mila/evals/qwen3-06b-beavertail
-    - '{model.evaluation_checkpoint_interval}'
-    - '{model.evaluation_max_steps}'
     sbatch_args:
     - --gres=gpu:l40s:1
     - --cpus-per-task=8
@@ -19,7 +17,7 @@ evaluations:
     - --time=03:00:00
   # Output: artifacts/mila/evals/qwen3-06b-beavertail/<model-id>/summary.json
   mila-l40s-q06b--beavertails-and-capabilities-single:
-    script: scripts/slurm/mila/eval_beavertail_and_capabilities_single.sbatch
+    script: scripts/slurm/mila/eval_beavertails_capabilities.sbatch
     args:
     - '{model.id}'
     - '{model.base_model_name_or_path}'

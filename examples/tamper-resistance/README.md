@@ -11,6 +11,9 @@ run in one paired job, and each trajectory runs in one allocation. See
 checkpoint selection, and opt-in trajectory deletion. Regenerate older HPO
 manifests before using them with the consolidated scripts.
 
+Mila uses four supported scripts for training, BeaverTails single-model or
+checkpoint evaluation, and parameter-norm analysis. See [Mila interfaces and retired-file inventory](docs/mila-refactor.md).
+
 ## Quickstart
 
 ```sh
@@ -45,7 +48,7 @@ accelerate launch --num_processes=1 -m lm_eval run \
 # Note: run the above eval for every ckpt in the relearning trajectory before
 # running the plotting code
 source .venv-eval/bin/activate
-python scripts/analysis/plot_trajectory_wmdp.py \
+python scripts/analysis/relearning-trajectory/plot_trajectory_wmdp.py \
   --plot main \
   --output artifacts/figures/z7b-wmdp-mmlu-relearning-trajectory--5pp.pdf
 ```
@@ -58,7 +61,7 @@ python scripts/analysis/plot_trajectory_wmdp.py \
 lilpipe configs/experiments/z7b-wmdp-bio-unlearn--5pp.yml
 
 # 2. Plot the relearning trajectory 
-.venv-eval/bin/python scripts/analysis/plot_trajectory_wmdp.py 
+.venv-eval/bin/python scripts/analysis/relearning-trajectory/plot_trajectory_wmdp.py
 ```
 
 ## Hyperparameter optimization for q0.6b
@@ -73,9 +76,13 @@ python scripts/hpo.py generate configs/stages-beavertails/1_relearn/qwen3-0.6b-b
 lilpipe artifacts/generated/hpo/qwen3-0.6b-beavertail--align-fft-seam--relearn--hpo/experiment.yml
 
 # 3. Uncomment the desired configs in the plot script, then plot after evaluations finish.
-.venv-eval/bin/python scripts/analysis/plot_trajectory_beavertails.py
+.venv-eval/bin/python scripts/analysis/relearning-trajectory/plot_trajectory_beavertails.py
 ```
 
+
+Active BeaverTails evaluation code lives in `scripts/evals/`; HPO generation remains
+at `scripts/hpo.py`. Retired TOFU, alignment-evaluation, weight-steering, and Optuna
+entry points have been removed from this example.
 
 ## Project structure
 ```text
@@ -88,3 +95,6 @@ configs/
         ├── sweep.yml                         # HPO parameter grid
         └── selected.yml                      # optimal training config found
 ```
+
+Analysis scripts are grouped under `scripts/analysis/<experiment-name>/`;
+see [the rename mapping](docs/analysis-scripts.md).

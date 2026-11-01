@@ -5,7 +5,6 @@ sweeps:
       custom_trainer_args.coeff_sd: [0.01, 0.1, 1.0]
 producer:
   script: scripts/slurm/mila/train.sbatch
-  args: [--launcher, python]
   sbatch_args:
     - --gres=gpu:l40s:1
     - --cpus-per-task=8

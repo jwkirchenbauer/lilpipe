@@ -313,8 +313,12 @@ def test_wmdp_landscape_attacks_retain_matching_trajectories(monkeypatch) -> Non
     for stage in evaluations:
         assert Path(stage.script).name == "eval_wmdp_mmlu_trajectory.sbatch"
         assert not any(arg.startswith("--array=") for arg in stage.sbatch_args)
-        assert stage.args[6] == "0,16,32,48,64,80,96,112,128"
-        assert stage.depends_on == (f"train-{stage.args[0]}",)
+        model = Path(stage.args[0]).name
+        assert stage.args == (
+            f"artifacts/tamia/models/{model}",
+            f"artifacts/tamia/evals/{model}",
+        )  # Removal flags are omitted, so both default to false.
+        assert stage.depends_on == (f"train-{model}",)
     configs = []
     for stage in training:
         assert Path(stage.script).name == "train.sbatch"
@@ -446,7 +450,8 @@ def test_qwen_relearning_grid_matches_defense_betas_and_evaluates_attacks(
             ] == ["8000", "8000"]
         assert evaluate.depends_on == (train.id,)
         assert evaluate.args[2] == config["output_dir"]
-        assert evaluate.args[-2:] == ("100", "250")
+        assert len(evaluate.args) == 7
+        assert evaluate.args[4] == "disjoint"
     assert len(training) == len(evaluation) == 6
 
 
@@ -690,7 +695,6 @@ def test_retired_perturbation_sweep_preserves_research_settings() -> None:
         EXAMPLE
         / "configs/stages-wmdp/0_unlearn/z7b-wmdp-bio--5pp--unlearn-perturb/sweep.yml"
     ).exists()
-    assert (EXAMPLE / "scripts/analysis/gen_perturbed_model.py").is_file()
 
 
 def test_seam_paper_defense_uses_four_gpu_layer_sharding() -> None:
@@ -910,7 +914,7 @@ def test_lineage_configs_follow_conventions(lineage: Path) -> None:
     sweep = yaml.safe_load(sweep_path.read_text())
     base_stem = Path(sweep.get("base", "base.yml")).stem
     assert base_stem in configs
-    expected_ids = {f"{name}-hpo", f"{name}--hpo"}
+    expected_ids = {f"{name}--hpo"}
     if lineage.parent.name == "1_relearn":
         expected_ids.add(f"{name}--relearn--hpo")
     assert sweep["id"] in expected_ids
@@ -947,3 +951,39 @@ def test_lineage_configs_follow_conventions(lineage: Path) -> None:
                 "trainer_cls",
             }
         assert differing_keys(configs[base_stem], configs["selected"]) <= allowed
+
+
+def test_tar_k16_lr_sweep_reuses_defense_and_evaluates_each_attack(
+    tmp_path, monkeypatch
+):
+    from lilpipe import load
+
+    hpo = load_script(EXAMPLE / "scripts/hpo.py", "tar_k16_lr_hpo")
+    name = "z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-ms128"
+    defense = "z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16"
+    monkeypatch.chdir(EXAMPLE)
+    output = tmp_path / "generated"
+    manifest = hpo.generate(
+        EXAMPLE / f"configs/stages-wmdp/2_relearn/{name}/sweep.yml", output
+    )
+    candidates = [f"{name}--hpo--lr--{index:03d}" for index in range(1, 4)]
+    configs = [
+        yaml.safe_load((output / f"configs/{candidate}.yml").read_text())
+        for candidate in candidates
+    ]
+    assert [config["learning_rate"] for config in configs] == [1e-6, 5e-6, 1e-5]
+    assert all(
+        config["base_model"] == f"artifacts/tamia/models/{defense}"
+        for config in configs
+    )
+    assert all(
+        config["max_steps"] == 128 and config["save_steps"] == 16 for config in configs
+    )
+    pipeline = load(manifest)
+    for candidate in candidates:
+        plan = pipeline.select(models=[candidate]).plan(existing_models=[defense])
+        rendered = plan.render()
+        assert len(rendered.splitlines()) == 2
+        assert f"train-{defense}" in plan.skipped
+        assert f"train-{candidate}" in rendered
+        assert "eval_wmdp_mmlu_trajectory.sbatch" in rendered

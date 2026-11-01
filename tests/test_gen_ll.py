@@ -12,7 +12,7 @@ transformers = pytest.importorskip("transformers")
 
 SCRIPT = (
     Path(__file__).resolve().parents[1]
-    / "examples/tamper-resistance/scripts/analysis/gen_ll.py"
+    / "examples/tamper-resistance/scripts/analysis/loss-landscapes/get_ll.py"
 )
 
 

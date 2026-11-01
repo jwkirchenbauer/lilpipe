@@ -14,5 +14,5 @@ python scripts/hpo.py generate configs/stages-beavertails/1_relearn/qwen3-0.6b-b
 lilpipe artifacts/generated/hpo/qwen3-0.6b-beavertail--align-fft-seam--relearn--hpo/experiment.yml
 
 # 3. Uncomment the desired configs in the plot script, then plot after evaluations finish.
-.venv-eval/bin/python scripts/analysis/plot_trajectory_beavertails.py
+.venv-eval/bin/python scripts/analysis/relearning-trajectory/plot_trajectory_beavertails.py
 ```

@@ -21,7 +21,7 @@ configs = [
         "path": osp.join(
             root,
             "llama2-7b-beavertail--align-fft-seam--data-disjoint--"
-            f"relearn-fft-ms250-hpo--disjoint--{index:03d}/checkpoint-{step}/"
+            f"relearn-fft-ms250--hpo--disjoint--{index:03d}/checkpoint-{step}/"
             "summary.json",
         ),
         "method": "SEAM",
@@ -49,7 +49,7 @@ configs = [
 #             "path": osp.join(
 #                 root,
 #                 "llama2-7b-beavertail--align-fft-seam-author-paper--data-disjoint--"
-#                 "relearn-fft-ms250-hpo--disjoint--002/"
+#                 "relearn-fft-ms250--hpo--disjoint--002/"
 #                 f"checkpoint-{step}/summary.json",
 #             ),
 #             "method": "SEAM (legacy old)",
@@ -83,7 +83,7 @@ configs = [
 #         "path": osp.join(
 #             root,
 #             "llama2-7b-beavertail--align-fft-seam--data-disjoint--"
-#             f"relearn-fft-ms1000-hpo--disjoint--{index:03d}/checkpoint-{step}/"
+#             f"relearn-fft-ms1000--hpo--disjoint--{index:03d}/checkpoint-{step}/"
 #             "summary.json",
 #         ),
 #         "method": "SEAM",

@@ -34,7 +34,7 @@ module load httpproxy/1.0
 uv sync --frozen --group eval
 source "$UV_PROJECT_ENVIRONMENT/bin/activate"
 
-python scripts/tamia_evaluation.py beavertails-trajectory "$@"
+python scripts/evals/tamia_evaluation.py beavertails-trajectory "$@"
 
 # Delete only when --delete-trajectory was supplied and all results verify.
-python scripts/tamia_evaluation.py beavertails-trajectory "$@" --cleanup-only
+python scripts/evals/tamia_evaluation.py beavertails-trajectory "$@" --cleanup-only

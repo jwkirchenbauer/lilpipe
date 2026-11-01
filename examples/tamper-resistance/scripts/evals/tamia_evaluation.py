@@ -177,7 +177,7 @@ def evaluate_beavertails(args) -> None:
                     checkpoint = args.baseline
                 command = [
                     sys.executable,
-                    "scripts/evaluate_beavertail_and_capabilities.py",
+                    "scripts/evals/evaluate_beavertail_and_capabilities.py",
                     "trajectory",
                     args.model_id,
                     args.baseline,

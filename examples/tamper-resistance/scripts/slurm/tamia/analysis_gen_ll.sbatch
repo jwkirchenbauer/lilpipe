@@ -40,7 +40,7 @@ model=artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
 attack=$model--relearn-fft-lr5e-6-ms128
 trajectory=("$model" "$attack"/checkpoint-{16,32,48,64,80,96,112,128})
 
-python scripts/analysis/gen_ll.py \
+python scripts/analysis/loss-landscapes/get_ll.py \
   --model "$model" \
   --trajectory "${trajectory[@]}" \
   --dataset cais/wmdp-bio-forget-corpus \

@@ -17,7 +17,6 @@ lilpipe = { path = "../..", editable = true }
 [dependency-groups]
 train = [
     "axolotl==0.18.0",
-    "optuna>=4,<5",
     "sentencepiece>=0.2,<0.3",
 ]
 eval = [

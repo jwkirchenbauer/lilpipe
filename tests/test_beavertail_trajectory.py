@@ -10,10 +10,12 @@ import pytest
 
 ROOT = Path(__file__).parents[1]
 EVALUATOR = (
-    ROOT / "examples/tamper-resistance/scripts/evaluate_beavertail_and_capabilities.py"
+    ROOT
+    / "examples/tamper-resistance/scripts/evals/evaluate_beavertail_and_capabilities.py"
 )
 PLOTTER = (
-    ROOT / "examples/tamper-resistance/scripts/analysis/plot_trajectory_beavertails.py"
+    ROOT
+    / "examples/tamper-resistance/scripts/analysis/relearning-trajectory/plot_trajectory_beavertails.py"
 )
 
 
@@ -47,15 +49,14 @@ def test_beavertails_trajectory_plot(monkeypatch, tmp_path: Path) -> None:
     root = tmp_path / "artifacts/tamia/evals/llama2-7b-beavertail"
     experiments = [
         "llama2-7b-beavertail--align-fft-seam--data-disjoint--relearn-fft-"
-        "ms250-hpo--disjoint--{index:03d}",
-        "llama2-7b-beavertail--data-disjoint--relearn-fft-ms250-hpo--"
-        "disjoint--{index:03d}",
+        "ms250--hpo--disjoint--{index:03d}",
+        "llama2-7b-beavertail--align-fft-seam-legacy--data-disjoint--relearn-fft-ms250",
     ]
     for experiment in experiments:
         for index in range(1, 5):
             for step in range(0, 251, 25):
                 output = root / experiment.format(index=index) / f"checkpoint-{step}"
-                output.mkdir(parents=True)
+                output.mkdir(parents=True, exist_ok=True)
                 (output / "summary.json").write_text(
                     '{"post": {"harmfulness": 0.25, "capability": 0.5}}'
                 )
@@ -63,7 +64,7 @@ def test_beavertails_trajectory_plot(monkeypatch, tmp_path: Path) -> None:
     monkeypatch.chdir(tmp_path)
     namespace = runpy.run_path(str(PLOTTER))
 
-    assert set(namespace["df"]["Method"]) == {"Base", "SEAM"}
+    assert set(namespace["df"]["Method"]) == {"SEAM", "SEAM (legacy reproduced)"}
     assert set(namespace["df"]["Eval"]) == {"Harmfulness", "Capability"}
     assert (
         tmp_path / "artifacts/figures/"

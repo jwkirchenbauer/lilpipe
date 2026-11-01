@@ -3,8 +3,8 @@
 This note specifies the toy experiment from *Locking Pretrained Weights via Deep
 Low-Rank Residual Distillation* (DLR-Lock, Sakamoto et al., 2026; arXiv:2605.10777),
 Section 2.2 and Figure 2, and the constrained method we added on top of it.
-Everything below is implemented in `scripts/analysis/gen_locking_toy.py` and
-plotted by `scripts/analysis/plot_locking_toy.py`. It runs on CPU.
+Everything below is implemented in `scripts/analysis/toy-experiments/get_locking_toy.py` and
+plotted by `scripts/analysis/toy-experiments/plot_locking_toy.py`. It runs on CPU.
 
 ## 1. Setup
 
@@ -281,15 +281,15 @@ From `examples/tamper-resistance`:
 ```bash
 export HF_HOME=$SCRATCH/huggingface
 # Figure 2 reproduction (raw Omega), about 20 min.
-.venv-eval/bin/python scripts/analysis/gen_locking_toy.py
-.venv-eval/bin/python scripts/analysis/plot_locking_toy.py
+.venv-eval/bin/python scripts/analysis/toy-experiments/get_locking_toy.py
+.venv-eval/bin/python scripts/analysis/toy-experiments/plot_locking_toy.py
 # Method A with canonical Omega, about 20 min.
-.venv-eval/bin/python scripts/analysis/gen_locking_toy.py --canonical \
+.venv-eval/bin/python scripts/analysis/toy-experiments/get_locking_toy.py --canonical \
   --output artifacts/analysis/locking-toy-canonical.json
 # Method B with canonical Omega, about 40 min.
-.venv-eval/bin/python scripts/analysis/gen_locking_toy.py --optimizer projected --canonical \
+.venv-eval/bin/python scripts/analysis/toy-experiments/get_locking_toy.py --optimizer projected --canonical \
   --output artifacts/analysis/locking-toy-projected.json
-.venv-eval/bin/python scripts/analysis/plot_locking_toy.py --canonical \
+.venv-eval/bin/python scripts/analysis/toy-experiments/plot_locking_toy.py --canonical \
   --input artifacts/analysis/locking-toy-canonical.json \
   --projected artifacts/analysis/locking-toy-projected.json \
   --output artifacts/figures/locking-toy-canonical.pdf

@@ -35,4 +35,4 @@ uv sync --frozen --group eval
 source "$UV_PROJECT_ENVIRONMENT/bin/activate"
 
 export PYTHONPATH="$PWD/src${PYTHONPATH:+:$PYTHONPATH}"
-python scripts/evaluate_beavertail_and_capabilities.py single "$@"
+python scripts/evals/evaluate_beavertail_and_capabilities.py single "$@"

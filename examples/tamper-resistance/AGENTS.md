@@ -106,6 +106,17 @@ manifests before submission. Specialized Tamia perturbation, Optuna, authors'
 reproduction, segmented training, and extra analysis wrappers are retired; their
 research code and settings remain available.
 
+Mila has four supported scripts: training, BeaverTails single-model/trajectory
+evaluation, and parameter-norm analysis. Its trajectory script discovers `checkpoint-*` directories only;
+baseline and final-root evaluation points are not synthesized. Both positional
+removal flags default to `false`. See `docs/mila-refactor.md` for interfaces and
+the dependency inventory of retired Mila workflows.
+
+Active evaluator code lives under `scripts/evals/`. The Tamia trajectory helper
+was relocated without a behavior change. TOFU, the old alignment evaluators,
+weight-steering, and Optuna entry points are retired in this example; analysis
+scripts and the notebook remain available.
+
 ### Promoting a BeaverTails SEAM defense
 
 Promote a completed defense candidate without retraining it:
@@ -166,14 +177,14 @@ copy, and a model move; nothing is retrained.
    ```
 
 5. **Add it to the plot.** Append
-   `("z7b-wmdp-bio--<N>pp--<method>--relearn-fft", "<Method>", "None", False)`
-   to the `main` configuration in
-   `scripts/analysis/plot_trajectory_wmdp.py`.
+   `{"model": "z7b-wmdp-bio--<N>pp--<method>--relearn-fft", "method": "<Method>", "defence": "None"}`
+   to the `configs_main` list in
+   `scripts/analysis/relearning-trajectory/plot_trajectory_wmdp.py`.
    Until relearning runs exist, the method is plotted only at step 0.
 6. **Rerun the plot** to the tracked figure names:
 
    ```bash
-   .venv-eval/bin/python scripts/analysis/plot_trajectory_wmdp.py --plot main \
+   .venv-eval/bin/python scripts/analysis/relearning-trajectory/plot_trajectory_wmdp.py \
      --output artifacts/figures/z7b-wmdp-mmlu-relearning-trajectory--<N>pp.pdf
    ```
 

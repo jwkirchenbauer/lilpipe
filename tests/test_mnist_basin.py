@@ -12,7 +12,7 @@ def basin():
     pytest.importorskip("torchvision")
     path = (
         Path(__file__).resolve().parents[1]
-        / "examples/tamper-resistance/scripts/analysis/gen_mnist_basin.py"
+        / "examples/tamper-resistance/scripts/analysis/toy-experiments/get_mnist_basin.py"
     )
     spec = importlib.util.spec_from_file_location("mnist_basin", path)
     module = importlib.util.module_from_spec(spec)

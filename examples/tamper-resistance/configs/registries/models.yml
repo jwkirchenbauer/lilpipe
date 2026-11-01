@@ -9,8 +9,6 @@ models:
       script: scripts/slurm/mila/train.sbatch
       args:
       - configs/stages-beavertails/0_alignment/qwen3-0.6b-beavertail--align-fft-seam-legacy/selected.yml
-      - --launcher
-      - python
       sbatch_args:
       - --gres=gpu:l40s:1
       - --cpus-per-task=8
@@ -350,6 +348,25 @@ models:
     evaluation_final_step: '16'
     evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft-lr2e-6
     evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft-lr2e-6
+  z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16:
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+    evaluation_root: artifacts/tamia/evals
+    evaluation_final_step: '125'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/0_unlearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16/selected.yml
+      - --launcher
+      - python
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
   z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft:
     baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
     base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft

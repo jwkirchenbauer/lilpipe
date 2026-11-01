@@ -12,7 +12,7 @@ def test_train_mnist_reports_test_loss_and_accuracy(monkeypatch, tmp_path, capsy
     pytest.importorskip("torchvision")
     path = (
         Path(__file__).resolve().parents[1]
-        / "examples/tamper-resistance/scripts/analysis/train_mnist.py"
+        / "examples/tamper-resistance/scripts/analysis/toy-experiments/get_mnist.py"
     )
     spec = importlib.util.spec_from_file_location("train_mnist", path)
     module = importlib.util.module_from_spec(spec)

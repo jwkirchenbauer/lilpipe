@@ -989,3 +989,77 @@ def test_tar_k16_lr_sweep_reuses_defense_and_evaluates_each_attack(
         assert f"train-{defense}" in plan.skipped
         assert f"train-{candidate}" in rendered
         assert "eval_wmdp_mmlu_trajectory.sbatch" in rendered
+
+
+def test_tar_k16_defense_generates_numbered_grids(tmp_path, monkeypatch):
+    from lilpipe import load
+
+    hpo = load_script(EXAMPLE / "scripts/hpo.py", "tar_k16_numbered_hpo")
+    name = "z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16"
+    monkeypatch.chdir(EXAMPLE)
+    manifest = hpo.generate(
+        EXAMPLE / f"configs/stages-wmdp/0_unlearn/{name}/sweep.yml", tmp_path
+    )
+    expected = [
+        f"{name}--hpo--{stage}--{index:03d}"
+        for stage, count in (("grid-001", 3), ("grid-002", 3), ("grid-003", 4))
+        for index in range(1, count + 1)
+    ]
+    assert yaml.safe_load(manifest.read_text())["models"] == expected
+    assert len(load(manifest).plan().stages) == 20
+
+
+def test_tar_k16_ms250_keeps_initial_candidate_and_plans_search_grid(
+    tmp_path, monkeypatch
+):
+    from lilpipe import load
+
+    hpo = load_script(EXAMPLE / "scripts/hpo.py", "tar_k16_ms250_hpo")
+    original = "z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16"
+    name = f"{original}--ms250"
+    root = EXAMPLE / "configs/stages-wmdp/0_unlearn"
+    previous = yaml.safe_load((root / original / "base.yml").read_text())
+    base = yaml.safe_load((root / name / "base.yml").read_text())
+    expected = dict(previous)
+    expected.update(max_steps=250, save_steps=250)
+    for key in ("output_dir", "wandb_name", "dataset_prepared_path"):
+        expected[key] = previous[key].replace(original, name)
+    assert base == expected
+
+    monkeypatch.chdir(EXAMPLE)
+    output = tmp_path / "generated"
+    manifest = hpo.generate(root / name / "sweep.yml", output)
+    candidate = f"{name}--hpo--grid-001--001"
+    configs = list((output / "configs").glob("*.yml"))
+    assert len(configs) == 10
+    config = yaml.safe_load((output / f"configs/{candidate}.yml").read_text())
+    assert config["learning_rate"] == 1e-5
+    assert config["custom_trainer_args"]["retain_coefficient"] == 4.0
+    assert config["max_steps"] == config["save_steps"] == 250
+    assert config["save_total_limit"] == 1
+    pipeline = load(manifest)
+    rendered = pipeline.select(models=[candidate]).plan().render()
+    assert len(rendered.splitlines()) == 2
+    assert f"train-{candidate}" in rendered
+    assert "eval_wmdp_mmlu.sbatch" in rendered
+    assert "--dependency=afterok:" in rendered
+    assert f"{candidate}/checkpoint-250" in rendered
+
+    candidates = [f"{name}--hpo--grid-002--{index:03d}" for index in range(1, 10)]
+    search_configs = [
+        yaml.safe_load((output / f"configs/{model}.yml").read_text())
+        for model in candidates
+    ]
+    assert {
+        (item["learning_rate"], item["custom_trainer_args"]["retain_coefficient"])
+        for item in search_configs
+    } == {(lr, retain) for lr in (1e-6, 5e-6, 1e-5) for retain in (0.1, 1, 5)}
+    assert all(
+        item["max_steps"] == item["save_steps"] == 250 and item["save_total_limit"] == 1
+        for item in search_configs
+    )
+    rendered = pipeline.select(models=candidates).plan().render()
+    assert len(rendered.splitlines()) == 18
+    assert f"train-{candidate}" not in rendered
+    assert rendered.count("eval_wmdp_mmlu.sbatch") == 9
+    assert rendered.count("--dependency=afterok:") == 9

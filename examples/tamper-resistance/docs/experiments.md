@@ -88,6 +88,51 @@ The scripts write PDF and PNG figures to `artifacts/figures`.
 
 ### Hyperparameter sweeps
 
+The TAR-k16 `--ms250` initial candidate (`--hpo--grid-001--001`) ran 250 steps
+with learning rate `1e-5`, retain coefficient `4`, and the existing 16-step
+inner attack. Training `659169` and paired evaluation `659170` both completed
+with exit code `0:0` on 2026-11-01. Only `checkpoint-250` was retained; the
+paired evaluator loaded the final saved model and wrote its summary under
+`checkpoint-250`.
+
+| Candidate | WMDP-Bio robust | MMLU-no-bio | MMLU drop from 58.59% | 5pp eligible |
+| --- | ---: | ---: | ---: | --- |
+| TAR-k16 `--ms250`, LR `1e-5`, retain `4` | 43.66% | 53.33% | 5.26pp | No |
+
+The minimum eligible MMLU score is 53.59%; this candidate misses it by 0.26pp.
+It was not promoted. The 125-step lineage remains unchanged.
+
+The `--ms250` sweep now also contains a `grid-002` stage over learning rates
+`{1e-6, 5e-6, 1e-5}` and retain coefficients `{0.1, 1, 5}`. The nine new
+candidates keep all other training settings, including the final-only checkpoint
+at step 250. The completed `grid-001--001` initial candidate is preserved and excluded
+from this submission. The source sweep remains at
+`configs/stages-wmdp/0_unlearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--ms250/sweep.yml`.
+The generated `grid-002.yml` manifest selects only these nine candidates; its dry run
+contains nine training jobs and nine dependent paired evaluations. Submitted
+2026-11-01; select the lowest WMDP score among candidates with MMLU at least 53.59%.
+
+The stages, generated configs, model/evaluation paths, and W&B display names
+use `grid-001` and `grid-002`. Slurm job IDs are unchanged. See the stage tables in
+[results.md](../configs/stages-wmdp/0_unlearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--ms250/results.md).
+
+| Candidate | Learning rate | Retain coefficient | Training job | Paired evaluation job | Status |
+| --- | ---: | ---: | ---: | ---: | --- |
+| grid-002--001 | 1e-06 | 0.1 | 659654 | 659663 | Completed |
+| grid-002--002 | 5e-06 | 0.1 | 659655 | 659664 | Completed |
+| grid-002--003 | 1e-05 | 0.1 | 659656 | 659665 | Completed |
+| grid-002--004 | 1e-06 | 1 | 659657 | 659666 | Completed |
+| grid-002--005 | 5e-06 | 1 | 659658 | 659667 | Completed |
+| grid-002--006 | 1e-05 | 1 | 659659 | 659668 | Completed |
+| grid-002--007 | 1e-06 | 5 | 659660 | 659669 | Completed |
+| grid-002--008 | 5e-06 | 5 | 659661 | 659670 | Completed |
+| grid-002--009 | 1e-05 | 5 | 659662 | 659671 | Completed |
+
+All nine training jobs and paired evaluations completed with exit code `0:0`.
+Best feasible candidate: `--hpo--grid-002--009`, LR `1e-5`, retain `5`;
+WMDP 45.05%, MMLU 54.54%, MMLU drop 4.05pp. No promotion has been performed.
+Detailed scores are in the linked `results.md`.
+
 The table records the Zephyr-7B sweeps by unlearning-method family. Each named
 stage in `sweep.yml` is an independent grid; only parameters within the same
 stage form a Cartesian product. Other settings were inherited from the method's
@@ -102,6 +147,7 @@ stage form a Cartesian product. Other settings were inherited from the method's
 | MaxEnt + TAR (5pp) | `{5e-6, 1e-5}` | `{0.1, 0.25, 0.5, 0.75, 1, 2, 4}` | - | - | - | - | 13 | inner steps `8`; learning rate `1e-5`; retain `2` (promoted to 5pp); retain `0.1` promoted to 15pp as an exception (MMLU drop 15.59, 0.59 over budget) |
 | GD + SEAM (5pp) | `{1e-6, 5e-6, 1e-5}`; eps stage `{5e-6, 1e-5}` | `4` | - | - | - | - | 36 | learning rate `1e-5`; SEAM coefficient `10` (of `{0.01, 1}`, then `{3, 10, 30}`); epsilon `1` (of `{1e-4, 1e-3, 1e-2}`, then `{1, 3, 10}`) (eps--008, promoted to 5pp; WMDP-Bio robust 25.58, MMLU drop 3.19). The first grid's pick (grid--018) was retired: epsilon <= 1e-2 rounds away in bf16, so its SEAM term was noise and the model was effectively GD |
 | MaxEnt + TAR, 16 inner steps (5pp) | `{5e-6, 1e-5}` | `{0.1, 0.25, 0.5, 0.75, 1, 2, 4}` | - | - | - | - | 10 | learning rate `1e-5`; retain `4` (promoted to 5pp) |
+| MaxEnt + TAR, 16 inner steps, 250 outer steps (5pp) | search `{1e-6, 5e-6, 1e-5}`; initial `1e-5` | search `{0.1, 1, 5}`; initial `4` | - | - | - | - | 10 | Initial candidate: WMDP 43.66%, MMLU 53.33% (drop 5.26pp), ineligible. Nine-point search completed; best feasible LR `1e-5`, retain `5`: WMDP 45.05%, MMLU 54.54% (drop 4.05pp); not promoted |
 | GD + SAM | `{2.5e-6, 3.28e-6, 5e-6}` | from GD: `1` | - | `{0.001, 0.01, 0.1}` | - | - | 6 | learning rate `2e-6`; retain `1`; rho `0.01` |
 | GD + WD | - | - | - | - | `{1e5, 3e5, 1e6, 3e6, 5e6}` | - | 5 | weight distance `3e5` |
 | GD + AO | from GD: `2.5e-6` | `{1.5, 2, 3, 4, 5, 7, 10}` | - | - | - | `{0, 0.001, 0.003, 0.005, 0.01, 0.1, 1, 10, 20, 25, 30, 35, 40, 60, 80, 100}` | 25 | activation orthogonality `40`; retain `4` |

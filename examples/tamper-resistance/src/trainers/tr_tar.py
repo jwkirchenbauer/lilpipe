@@ -147,6 +147,8 @@ class TARBaseTrainer:
     ):
         super().__init__(*args, **kwargs)
         self.inner_n_samples = inner_n_samples
+        self.inner_step_total = 0
+        self._inner_loss_metric_defined = False
         if sample_attack_fn is None:
             sample_attack_fn = partial(
                 adamw_attack,
@@ -157,11 +159,18 @@ class TARBaseTrainer:
         self.sample_attack_fn = sample_attack_fn
 
     def _log_inner_loss(self, inner_step, loss):
-        """Log one attack step under a per-outer-step key, plotted by inner step."""
-        key = f"inner_loss_{self.state.global_step}"
-        if wandb.run is not None and self.is_world_process_zero():
-            wandb.define_metric(f"train/{key}", step_metric="train/inner_step")
-        self.log({key: loss.item(), "inner_step": inner_step})
+        """Log attack losses on one curve against cumulative inner steps."""
+        if (
+            not self._inner_loss_metric_defined
+            and wandb.run is not None
+            and self.is_world_process_zero()
+        ):
+            wandb.define_metric(
+                "train/inner_loss", step_metric="train/inner_step_total"
+            )
+            self._inner_loss_metric_defined = True
+        self.log({"inner_loss": loss.item(), "inner_step_total": self.inner_step_total})
+        self.inner_step_total += 1
 
     def compute_loss(self, model, inputs, return_outputs=False, **kwargs):
         forget_mask = inputs["is_forget"].bool()

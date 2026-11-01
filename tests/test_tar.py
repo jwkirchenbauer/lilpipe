@@ -61,6 +61,8 @@ def make_trainer(tar, trainer_cls, logs):
     trainer.sample_attack_fn = partial(tar.adamw_attack, lr=0.1)
     trainer.forget_coefficient = trainer.retain_coefficient = 1.0
     trainer.state = SimpleNamespace(global_step=7)
+    trainer.inner_step_total = 0
+    trainer._inner_loss_metric_defined = False
     trainer.is_world_process_zero = lambda: True
     trainer.log = logs.append
     return trainer
@@ -99,15 +101,15 @@ def test_base_forget_loss_is_taken_at_attacked_parameters(tar) -> None:
     loss = trainer.compute_loss(model, {})
     loss.backward()
     assert logs == [
-        {"inner_loss_7": 3.0, "inner_step": 0},
-        {"inner_loss_7": 2.0, "inner_step": 1},
+        {"inner_loss": 3.0, "inner_step_total": 0},
+        {"inner_loss": 2.0, "inner_step_total": 1},
         {"loss_forget": 9.0, "loss_retain": 0.0},
     ]
     assert model.weight.item() == 2.0
     assert model.weight.grad.item() == pytest.approx(6.0)
 
 
-def test_inner_losses_log_per_outer_step_against_inner_step(tar, monkeypatch) -> None:
+def test_inner_losses_share_a_curve_across_outer_steps(tar, monkeypatch) -> None:
     torch = pytest.importorskip("torch")
     defined = []
     monkeypatch.setattr(tar.wandb, "run", object())
@@ -119,10 +121,36 @@ def test_inner_losses_log_per_outer_step_against_inner_step(tar, monkeypatch) ->
     logs = []
     trainer = make_trainer(tar, tar.TARGDTrainer, logs)
 
-    trainer._log_inner_loss(2, torch.tensor(1.5))
+    trainer._log_inner_loss(0, torch.tensor(1.5))
+    trainer._log_inner_loss(1, torch.tensor(1.0))
+    trainer.state.global_step += 1
+    trainer._log_inner_loss(0, torch.tensor(2.0))
 
-    assert defined == [("train/inner_loss_7", "train/inner_step")]
-    assert logs == [{"inner_loss_7": 1.5, "inner_step": 2}]
+    assert defined == [("train/inner_loss", "train/inner_step_total")]
+    assert logs == [
+        {"inner_loss": 1.5, "inner_step_total": 0},
+        {"inner_loss": 1.0, "inner_step_total": 1},
+        {"inner_loss": 2.0, "inner_step_total": 2},
+    ]
+
+
+def test_inner_loss_metric_waits_for_wandb_run(tar, monkeypatch) -> None:
+    torch = pytest.importorskip("torch")
+    defined = []
+    monkeypatch.setattr(tar.wandb, "run", None)
+    monkeypatch.setattr(
+        tar.wandb,
+        "define_metric",
+        lambda name, step_metric: defined.append((name, step_metric)),
+    )
+    trainer = make_trainer(tar, tar.TARGDTrainer, [])
+    trainer._log_inner_loss(0, torch.tensor(1.5))
+    assert defined == []
+
+    monkeypatch.setattr(tar.wandb, "run", object())
+    trainer._log_inner_loss(1, torch.tensor(1.0))
+    trainer._log_inner_loss(2, torch.tensor(0.5))
+    assert defined == [("train/inner_loss", "train/inner_step_total")]
 
 
 def test_adamw_attack_relearns_forget_rows_under_no_grad(tar, tiny_lm, batch) -> None:
@@ -157,7 +185,7 @@ def test_tar_forget_loss_backpropagates_to_trained_model(
     assert torch.equal(tiny_lm.weight, before)
     assert tiny_lm.weight.grad.abs().sum() > 0
     assert tiny_lm.frozen_weight.grad is None
-    assert [log["inner_step"] for log in logs[:-1]] == list(range(8))
+    assert [log["inner_step_total"] for log in logs[:-1]] == list(range(8))
 
 
 def test_tar_does_not_log_inner_losses_outside_training(tar, tiny_lm, batch) -> None:

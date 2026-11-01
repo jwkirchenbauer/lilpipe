@@ -1,0 +1,20 @@
+id: z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--ms250--hpo
+sweeps:
+  - name: grid-001
+    parameters:
+      learning_rate: [1.0e-05]
+      custom_trainer_args.retain_coefficient: [4.0]
+  - name: grid-002
+    parameters:
+      learning_rate: [1.0e-06, 5.0e-06, 1.0e-05]
+      custom_trainer_args.retain_coefficient: [0.1, 1, 5]
+producer:
+  script: scripts/slurm/tamia/train.sbatch
+  sbatch_args:
+    - --gpus-per-node=h100:4
+    - --cpus-per-task=48
+    - --mem=480G
+    - --time=03:00:00
+evaluations:
+  - tamia-h100-z7b--wmdp-and-mmlu-final
+evaluation_registry: configs/registries/evals.yml

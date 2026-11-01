@@ -30,8 +30,11 @@ class Model(torch.nn.Module):
         return SimpleNamespace(logits=logits, loss=loss)
 
 
+@pytest.mark.parametrize("coefficient", [0.0, 3.0])
 @pytest.mark.parametrize("trainer_cls", [MaxEntTrainer, TARMETrainer])
-def test_metadata_batch_collation_loss_and_backward(trainer_cls, monkeypatch):
+def test_metadata_batch_collation_loss_and_backward(
+    trainer_cls, coefficient, monkeypatch
+):
     from axolotl.core.trainers.base import AxolotlTrainer
     import wandb
 
@@ -46,7 +49,11 @@ def test_metadata_batch_collation_loss_and_backward(trainer_cls, monkeypatch):
     monkeypatch.setattr(AxolotlTrainer, "__init__", base_init)
     monkeypatch.setattr(wandb, "run", None)
     kwargs = {"attack_learning_rate": 0.01} if trainer_cls is TARMETrainer else {}
-    trainer = trainer_cls(**kwargs)
+    trainer = trainer_cls(
+        forget_coefficient=coefficient, retain_coefficient=coefficient, **kwargs
+    )
+    logs = []
+    trainer.log = logs.append
     assert isinstance(trainer.data_collator, MetadataCollator)
     assert not isinstance(trainer.data_collator.collator, MetadataCollator)
     roles = ["defence::forget", "defence::retain"]
@@ -67,6 +74,24 @@ def test_metadata_batch_collation_loss_and_backward(trainer_cls, monkeypatch):
     model = Model()
     loss = trainer.compute_loss(model, batch)
     assert torch.isfinite(loss)
+    metrics = logs[-1]
+    retain_inputs = {
+        key: batch[key][1:2] for key in ("input_ids", "attention_mask", "labels")
+    }
+    expected_retain = model(**retain_inputs).loss.detach().item()
+    assert metrics["loss_retain"] == pytest.approx(expected_retain)
+    if trainer_cls is TARMETrainer:
+        assert metrics["loss_forget"] == pytest.approx(
+            -trainer._last_forget_entropy.item()
+        )
+        assert loss.item() == pytest.approx(
+            coefficient * (metrics["loss_forget"] + metrics["loss_retain"]), abs=1e-6
+        )
+    else:
+        assert loss.item() == pytest.approx(
+            coefficient * (-metrics["entropy_forget"] + metrics["loss_retain"]),
+            abs=1e-6,
+        )
     loss.backward()
     assert model.weight.grad is not None
     assert torch.isfinite(model.weight.grad).all()

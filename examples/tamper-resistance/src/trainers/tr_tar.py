@@ -253,13 +253,14 @@ class TARBaseTrainer:
         loss = loss_forget + loss_retain
 
         if model.training and torch.is_grad_enabled():
-            self.log(
-                {
-                    "loss_forget": loss_forget.detach().item(),
-                    "loss_retain": loss_retain.detach().item(),
-                }
-            )
+            self.log(self.loss_metrics(loss_forget, loss_retain))
         return (loss, None) if return_outputs else loss
+
+    def loss_metrics(self, loss_forget, loss_retain):
+        return {
+            "loss_forget": loss_forget.detach().item(),
+            "loss_retain": loss_retain.detach().item(),
+        }
 
 
 class TARGDTrainer(TARBaseTrainer, GradDiffTrainer):
@@ -268,3 +269,9 @@ class TARGDTrainer(TARBaseTrainer, GradDiffTrainer):
 
 class TARMETrainer(TARBaseTrainer, MaxEntTrainer):
     """TAR with MaxEnt losses."""
+
+    def loss_metrics(self, loss_forget, loss_retain):
+        return {
+            "loss_forget": -self._last_forget_entropy.item(),
+            "loss_retain": self._last_retain_loss.item(),
+        }

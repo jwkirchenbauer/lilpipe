@@ -67,6 +67,7 @@ class MaxEntTrainer(AxolotlTrainer):
         model_kwargs=None,
     ):
         outputs = model(**inputs, **(model_kwargs or {}))
+        self._last_retain_loss = outputs.loss.detach().float()
         loss = coefficient * outputs.loss.float()
 
         if return_grads:
@@ -149,7 +150,7 @@ class MaxEntTrainer(AxolotlTrainer):
             metrics = {
                 "entropy_forget": self._last_forget_entropy.item(),
                 "entropy_ceiling": math.log(forget_outputs.logits.shape[-1]),
-                "loss_retain": loss_retain.detach().item(),
+                "loss_retain": self._last_retain_loss.item(),
             }
             if self.log_gradient_norms:
                 parameters = tuple(

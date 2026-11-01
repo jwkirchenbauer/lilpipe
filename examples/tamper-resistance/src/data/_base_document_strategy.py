@@ -13,21 +13,23 @@ def long_document(row):
 class BaseDocumentStrategy(DatasetWrappingStrategy):
     """Match the paper code's padding and language-model labels."""
 
-    def __init__(self, tokenizer, sequence_len, path, metadata=None):
+    def __init__(self, tokenizer, sequence_len, path, metadata=None, max_samples=None):
         self.tokenizer = tokenizer
         self.sequence_len = sequence_len
         self.path = path
         self.metadata = metadata
+        self.max_samples = max_samples
 
     def wrap_dataset(self, dataset, process_count=None, **kwargs):
         del kwargs
-        if self.metadata != "attack::forget":
-            dataset = dataset.filter(
-                long_document,
-                num_proc=process_count,
-                load_from_cache_file=False,
-                keep_in_memory=True,
-            )
+        dataset = dataset.filter(
+            long_document,
+            num_proc=process_count,
+            load_from_cache_file=False,
+            keep_in_memory=True,
+        )
+        if self.max_samples is not None:
+            dataset = dataset.select(range(min(self.max_samples, len(dataset))))
         return dataset.map(
             self.tokenize_row,
             remove_columns=dataset.column_names,
@@ -55,4 +57,11 @@ class BaseDocumentStrategy(DatasetWrappingStrategy):
 def load(tokenizer, cfg, ds_cfg=None):
     path = getattr(ds_cfg, "path", None)
     metadata = ds_cfg.message_property_mappings["metadata"]
-    return BaseDocumentStrategy(tokenizer, cfg.sequence_len, path, metadata)
+    max_samples = ds_cfg.message_property_mappings.get("max_samples")
+    if max_samples is not None:
+        max_samples = int(max_samples)
+        if max_samples < 0:
+            raise ValueError("max_samples must be nonnegative")
+    return BaseDocumentStrategy(
+        tokenizer, cfg.sequence_len, path, metadata, max_samples
+    )

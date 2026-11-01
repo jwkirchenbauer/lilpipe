@@ -8,7 +8,11 @@ pytest.importorskip("axolotl")
 from datasets import Dataset
 
 
-def test_fixed_attack_keeps_all_sixteen_raw_rows():
+@pytest.mark.parametrize(
+    "role", ["defence::forget", "defence::retain", "attack::forget"]
+)
+@pytest.mark.parametrize("max_samples, expected", [(None, 8), ("3", 3), ("16", 8)])
+def test_all_roles_filter_before_limiting_samples(role, max_samples, expected):
     path = (
         Path(__file__).resolve().parents[1]
         / "examples/tamper-resistance/src/data/_base_document_strategy.py"
@@ -22,10 +26,13 @@ def test_fixed_attack_keeps_all_sixteen_raw_rows():
         SimpleNamespace(sequence_len=2),
         SimpleNamespace(
             path="cais/wmdp-bio-forget-corpus",
-            message_property_mappings={"metadata": "attack::forget"},
+            message_property_mappings={
+                "metadata": role,
+                "max_samples": max_samples,
+            },
         ),
     )
-    data = Dataset.from_dict({"text": ["short"] * 16})
+    data = Dataset.from_dict({"text": ["short"] * 8 + ["long " * 20] * 8})
     result = strategy.wrap_dataset(data)
-    assert len(result) == 16
-    assert result["metadata"] == ["attack::forget"] * 16
+    assert len(result) == expected
+    assert result["metadata"] == [role] * expected

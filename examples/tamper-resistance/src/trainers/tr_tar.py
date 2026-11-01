@@ -74,8 +74,8 @@ def adamw_attack(
     on_loss_backward=None,
 ):
     """Run AdamW epochs over already-selected attack rows, retaining partial batches."""
-    if attack_forget_batch_size_per_iteration < 1 or attack_epochs < 1:
-        raise ValueError("attack batch size and epochs must be positive")
+    if attack_forget_batch_size_per_iteration < 1 or attack_epochs < 0:
+        raise ValueError("attack batch size must be positive and epochs nonnegative")
     n_samples = len(inputs["input_ids"])
     if not n_samples:
         raise ValueError("TAR attack requires at least one attack row")

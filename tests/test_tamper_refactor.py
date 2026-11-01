@@ -1007,6 +1007,31 @@ def test_tar_k16_defense_generates_numbered_grids(tmp_path, monkeypatch):
     ]
     assert yaml.safe_load(manifest.read_text())["models"] == expected
     assert len(load(manifest).plan().stages) == 20
+    for filename, learning_rate in (("base.yml", 5e-6), ("selected.yml", 1e-5)):
+        config = yaml.safe_load(
+            (EXAMPLE / f"configs/stages-wmdp/0_unlearn/{name}/{filename}").read_text()
+        )
+        assert config["custom_trainer_args"] == {
+            "forget_coefficient": 1.0,
+            "retain_coefficient": 4.0,
+            "defence_forget_batch_size": 4,
+            "defence_retain_batch_size": 4,
+            "attack_forget_batch_size": 16,
+            "attack_forget_batch_size_per_iteration": 1,
+            "attack_epochs": 1,
+            "attack_learning_rate": 1e-5,
+        }
+        assert config["micro_batch_size"] == 24
+        assert config["learning_rate"] == learning_rate
+        assert config["max_steps"] == config["save_steps"] == 125
+        assert "/metadata-api/prepared" in config["dataset_prepared_path"]
+        assert [
+            ds["message_property_mappings"]["metadata"] for ds in config["datasets"]
+        ] == ["defence::forget", "attack::forget", "defence::retain"]
+        assert all(
+            ds["type"] == "data._base_document_strategy" for ds in config["datasets"]
+        )
+        assert all(ds["split"] == "train" for ds in config["datasets"][:2])
 
 
 def test_tar_k16_ms250_keeps_initial_candidate_and_plans_search_grid(
@@ -1024,7 +1049,14 @@ def test_tar_k16_ms250_keeps_initial_candidate_and_plans_search_grid(
     expected.update(max_steps=250, save_steps=250)
     for key in ("output_dir", "wandb_name", "dataset_prepared_path"):
         expected[key] = previous[key].replace(original, name)
-    assert base == expected
+    for key in (
+        "custom_trainer_args",
+        "datasets",
+        "micro_batch_size",
+        "dataset_prepared_path",
+    ):
+        expected.pop(key)
+    assert {key: base[key] for key in expected} == expected
 
     monkeypatch.chdir(EXAMPLE)
     output = tmp_path / "generated"

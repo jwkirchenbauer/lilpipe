@@ -5,22 +5,32 @@ trainer_cls: trainers.tr_tar.TARMETrainer
 custom_trainer_args:
   forget_coefficient: 1.0
   retain_coefficient: 4.0
-  sampling: optml
-  inner_steps: 16
-  inner_learning_rate: 1.0e-05
-  inner_n_samples: 16
-  inner_batch_size: 1
+  defence_forget_batch_size: 4
+  defence_retain_batch_size: 4
+  attack_forget_batch_size: 16
+  attack_forget_batch_size_per_iteration: 1
+  attack_epochs: 1
+  attack_learning_rate: 1.0e-05
 datasets:
 - path: cais/wmdp-bio-forget-corpus
   split: train
-  type: data.authors_documents
+  type: data._base_document_strategy
+  message_property_mappings:
+    metadata: defence::forget
+- path: cais/wmdp-bio-forget-corpus
+  split: train
+  type: data._base_document_strategy
+  message_property_mappings:
+    metadata: attack::forget
 - path: Salesforce/wikitext
   name: wikitext-2-raw-v1
   split: test
-  type: data.authors_documents
+  type: data._base_document_strategy
+  message_property_mappings:
+    metadata: defence::retain
 shuffle_merged_datasets: false
 dataset_num_proc: 8
-dataset_prepared_path: artifacts/tamia/cache/axolotl/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16/prepared
+dataset_prepared_path: artifacts/tamia/cache/axolotl/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16/metadata-api/prepared
 val_set_size: 0.0
 output_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
 sequence_len: 512
@@ -28,7 +38,7 @@ sample_packing: false
 pad_to_sequence_len: false
 remove_unused_columns: false
 train_on_inputs: true
-micro_batch_size: 40
+micro_batch_size: 24
 gradient_accumulation_steps: 1
 max_steps: 125
 learning_rate: 5.0e-06

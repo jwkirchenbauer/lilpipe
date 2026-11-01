@@ -18,9 +18,6 @@ producer:
     - --cpus-per-task=48
     - --mem=480G
     - --time=03:00:00
-  args:
-    - --launcher
-    - python
 evaluations:
   - tamia-h100-z7b--wmdp-and-mmlu-final
 evaluation_registry: configs/registries/evals.yml

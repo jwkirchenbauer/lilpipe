@@ -26,7 +26,8 @@ def attack():
     return scope["adamw_attack"]
 
 
-def test_epochs_revisit_all_rows_and_keep_partial_batches(attack):
+@pytest.mark.parametrize("epochs", [0, 3])
+def test_epochs_revisit_all_rows_and_keep_partial_batches(attack, epochs):
     class Model(torch.nn.Module):
         def __init__(self):
             super().__init__()
@@ -48,11 +49,14 @@ def test_epochs_revisit_all_rows_and_keep_partial_batches(attack):
         model,
         inputs,
         attack_forget_batch_size_per_iteration=2,
-        attack_epochs=3,
+        attack_epochs=epochs,
         attack_learning_rate=0.01,
         on_loss_backward=lambda step, loss: steps.append((step, loss.requires_grad)),
     )
     assert result is model
-    assert model.seen == [[1, 2], [3, 4], [5]] * 3
-    assert steps == [(step, False) for step in range(9)]
-    assert model.weight.item() < 1.0
+    assert model.seen == [[1, 2], [3, 4], [5]] * epochs
+    assert steps == [(step, False) for step in range(3 * epochs)]
+    if epochs:
+        assert model.weight.item() < 1.0
+    else:
+        assert model.weight.item() == 1.0

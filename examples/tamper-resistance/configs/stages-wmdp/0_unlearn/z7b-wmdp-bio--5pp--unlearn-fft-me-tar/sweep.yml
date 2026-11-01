@@ -1,20 +1,20 @@
 id: z7b-wmdp-bio--5pp--unlearn-fft-me-tar--hpo
 sweeps:
-  # 0 inner steps leaves the attack a no-op and reduces TAR to plain MaxEnt.
+  # 0 attack epochs leaves the attack a no-op and reduces TAR to plain MaxEnt.
   - name: grid
     parameters:
-      custom_trainer_args.inner_steps: [0, 8]
+      custom_trainer_args.attack_epochs: [0, 1]
       custom_trainer_args.retain_coefficient: [0.25, 1, 4]
   # retain 1 is eligible with a 4.83pp MMLU drop; retain 0.25 misses (7.15pp)
   - name: refine
     overrides:
-      custom_trainer_args.inner_steps: 8
+      custom_trainer_args.attack_epochs: 1
     parameters:
       custom_trainer_args.retain_coefficient: [0.1, 0.5, 0.75]
   # retain 4 stays well inside the budget (2.92pp) but unlearns little at 5e-6
   - name: lr
     overrides:
-      custom_trainer_args.inner_steps: 8
+      custom_trainer_args.attack_epochs: 1
     parameters:
       learning_rate: [1.0e-05]
       custom_trainer_args.retain_coefficient: [0.1, 1, 2, 4]
@@ -25,9 +25,6 @@ producer:
     - --cpus-per-task=48
     - --mem=480G
     - --time=03:00:00
-  args:
-    - --launcher
-    - python
 evaluations:
   - tamia-h100-z7b--wmdp-and-mmlu-final
 evaluation_registry: configs/registries/evals.yml

@@ -18,10 +18,11 @@ datasets:
   message_property_mappings:
     metadata: defence::forget
 - path: cais/wmdp-bio-forget-corpus
-  split: train[:16]
+  split: train
   type: data._base_document_strategy
   message_property_mappings:
     metadata: attack::forget
+    max_samples: '16'
 - path: Salesforce/wikitext
   name: wikitext-2-raw-v1
   split: test

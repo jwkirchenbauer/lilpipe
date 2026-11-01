@@ -19,6 +19,12 @@ if __name__ == "__main__":
     df = pd.read_csv(osp.join(args.indir, "grid.csv"))
     # Earlier runs used alpha/beta for the same grid coefficients.
     df = df.rename(columns={"alpha": "c0", "beta": "c1"})
+    trajectory_path = osp.join(args.indir, "trajectory.csv")
+    trajectory = (
+        pd.read_csv(trajectory_path).rename(columns={"alpha": "c0", "beta": "c1"})
+        if osp.exists(trajectory_path)
+        else None
+    )
     configs = [
         {
             "radius": radius,
@@ -63,6 +69,8 @@ if __name__ == "__main__":
             linewidths=0.5,
             alpha=0.5,
         )
+        if trajectory is not None:
+            ax.scatter(trajectory["c0"], trajectory["c1"], color="red", s=16, zorder=3)
         fig.colorbar(filled, ax=ax, label="Forget loss", shrink=0.8, format="%.6f")
         ax.set(
             title=f"Radius {cfg['radius']:.2e}",

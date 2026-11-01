@@ -13,8 +13,9 @@ SCRIPT = (
 )
 
 
+@pytest.mark.parametrize("with_trajectory", [False, True])
 @pytest.mark.parametrize("columns", [("alpha", "beta"), ("c0", "c1")])
-def test_plot_ll_reads_saved_grids_without_a_trajectory(monkeypatch, tmp_path, columns):
+def test_plot_ll_reads_saved_grids(monkeypatch, tmp_path, columns, with_trajectory):
     rows = [
         {"radius": r, columns[0]: x, columns[1]: y, "loss": 2 + x + 3 * y}
         for r in (10, 25, 50, 75)
@@ -22,6 +23,11 @@ def test_plot_ll_reads_saved_grids_without_a_trajectory(monkeypatch, tmp_path, c
         for y in (-r, 0, r)
     ]
     pd.DataFrame(rows).to_csv(tmp_path / "grid.csv", index=False)
+    coordinates = [[0, 0], [-0.03, -0.04], [-0.035, -0.034]]
+    if with_trajectory:
+        pd.DataFrame(coordinates, columns=columns).to_csv(
+            tmp_path / "trajectory.csv", index=False
+        )
     output = tmp_path / "landscapes.pdf"
     monkeypatch.setattr(
         sys, "argv", [str(SCRIPT), "--indir", str(tmp_path), "--outpath", str(output)]
@@ -37,3 +43,8 @@ def test_plot_ll_reads_saved_grids_without_a_trajectory(monkeypatch, tmp_path, c
     ]
     assert all(axis.name == "rectilinear" and axis.collections for axis in axes)
     assert all((axis.get_xlabel(), axis.get_ylabel()) == ("c0", "c1") for axis in axes)
+    if with_trajectory:
+        for axis in axes:
+            dots = axis.collections[-1]
+            assert dots.get_offsets().tolist() == coordinates
+            assert dots.get_facecolors()[0].tolist() == [1, 0, 0, 1]

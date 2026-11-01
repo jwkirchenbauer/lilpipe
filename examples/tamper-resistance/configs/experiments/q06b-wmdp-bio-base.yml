@@ -1,0 +1,9 @@
+version: 1
+id: q06b-wmdp-bio-base
+registries:
+  models: configs/registries/models.yml
+  evaluations: configs/registries/evals.yml
+models:
+- q06b
+evaluations:
+- mila-l40s-q06b--wmdp-and-mmlu-single

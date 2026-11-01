@@ -1,0 +1,33 @@
+id: q06b-wmdp-bio--5pp--unlearn-fft-me--hpo
+sweeps:
+- name: grid-001
+  parameters:
+    learning_rate:
+    - 1.0e-06
+    - 5.0e-06
+    - 2.0e-05
+    - 0.0001
+    custom_trainer_args.retain_coefficient:
+    - 0.25
+    - 1
+    - 4
+- name: grid-002
+  parameters:
+    learning_rate:
+    - 1.0e-05
+    custom_trainer_args.retain_coefficient:
+    - 0.25
+    - 1
+    - 4
+producer:
+  script: scripts/slurm/mila/train.sbatch
+  sbatch_args:
+  - --gres=gpu:l40s:1
+  - --cpus-per-task=8
+  - --mem=32G
+  - --time=03:00:00
+model:
+  evaluation_root: artifacts/mila/evals
+evaluations:
+- mila-l40s-q06b--wmdp-and-mmlu-final
+evaluation_registry: configs/registries/evals.yml

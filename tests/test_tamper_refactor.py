@@ -921,6 +921,8 @@ def test_lineage_configs_follow_conventions(lineage: Path) -> None:
     if re.search(r"--(\d+pp)--", name):
         for evaluation in sweep.get("evaluations", ()):
             assert evaluation in {
+                "mila-l40s-q06b--wmdp-and-mmlu-final",
+                "mila-l40s-q06b--wmdp-and-mmlu-single",
                 "tamia-h100-z7b--wmdp-and-mmlu-final",
                 "tamia-h100-z7b--wmdp-and-mmlu-single",
                 "tamia-h100-z7b--wmdp-and-mmlu-trajectory",

@@ -211,6 +211,7 @@ def test_mila_scripts_and_registry_names_existing_files():
         "train.sbatch",
         "eval_beavertails_capabilities.sbatch",
         "eval_beavertails_capabilities_trajectory.sbatch",
+        "eval_wmdp_mmlu.sbatch",
         "analysis_get_param_norm.sbatch",
     }
     for path in SCRIPTS.glob("*.sbatch"):

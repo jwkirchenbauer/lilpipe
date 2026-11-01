@@ -1,4 +1,8 @@
 models:
+  q06b:
+    base_model_name_or_path: Qwen/Qwen3-0.6B
+    adapter_name_or_path: '-'
+    evaluation_root: artifacts/mila/evals
   qwen3-0.6b-beavertail--align-fft-seam-legacy:
     method: SEAM
     base_model_name_or_path: artifacts/mila/models/qwen3-0.6b-beavertail--align-fft-seam-legacy

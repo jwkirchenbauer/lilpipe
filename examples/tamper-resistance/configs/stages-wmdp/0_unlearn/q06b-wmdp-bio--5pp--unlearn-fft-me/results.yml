@@ -1,0 +1,73 @@
+version: 1
+id: q06b-wmdp-bio--5pp--unlearn-fft-me--hpo
+columns:
+- id: wmdp
+  label: WMDP-Bio
+  direction: minimize
+  format: percent
+  precision: 2
+- id: mmlu
+  label: MMLU (no bio)
+  direction: maximize
+  format: percent
+  precision: 2
+rows:
+- id: q06b
+  label: Qwen3-0.6B base
+  root: artifacts/mila/evals/q06b
+- id: q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--001
+  label: lr=1e-06, retain=0.25
+  root: artifacts/mila/evals/q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--001/checkpoint-125
+- id: q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--002
+  label: lr=5e-06, retain=0.25
+  root: artifacts/mila/evals/q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--002/checkpoint-125
+- id: q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--003
+  label: lr=2e-05, retain=0.25
+  root: artifacts/mila/evals/q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--003/checkpoint-125
+- id: q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--004
+  label: lr=0.0001, retain=0.25
+  root: artifacts/mila/evals/q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--004/checkpoint-125
+- id: q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--005
+  label: lr=1e-06, retain=1
+  root: artifacts/mila/evals/q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--005/checkpoint-125
+- id: q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--006
+  label: lr=5e-06, retain=1
+  root: artifacts/mila/evals/q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--006/checkpoint-125
+- id: q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--007
+  label: lr=2e-05, retain=1
+  root: artifacts/mila/evals/q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--007/checkpoint-125
+- id: q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--008
+  label: lr=0.0001, retain=1
+  root: artifacts/mila/evals/q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--008/checkpoint-125
+- id: q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--009
+  label: lr=1e-06, retain=4
+  root: artifacts/mila/evals/q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--009/checkpoint-125
+- id: q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--010
+  label: lr=5e-06, retain=4
+  root: artifacts/mila/evals/q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--010/checkpoint-125
+- id: q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--011
+  label: lr=2e-05, retain=4
+  root: artifacts/mila/evals/q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--011/checkpoint-125
+- id: q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--012
+  label: lr=0.0001, retain=4
+  root: artifacts/mila/evals/q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--012/checkpoint-125
+- id: q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid-002--001
+  label: lr=1e-05, retain=0.25
+  root: artifacts/mila/evals/q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid-002--001/checkpoint-125
+- id: q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid-002--002
+  label: lr=1e-05, retain=1
+  root: artifacts/mila/evals/q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid-002--002/checkpoint-125
+- id: q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid-002--003
+  label: lr=1e-05, retain=4
+  root: artifacts/mila/evals/q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid-002--003/checkpoint-125
+metrics:
+- column: wmdp
+  task: wmdp_bio_robust
+  key: acc,none
+  files:
+  - '**/results*.json'
+- column: mmlu
+  task: mmlu_no_bio
+  key: acc,none
+  files:
+  - '**/results*.json'

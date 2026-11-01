@@ -648,7 +648,7 @@ def test_wmdp_wrappers_launch_both_tasks_once_per_checkpoint(
             assert (destination / "mmlu-no-bio/model/results.json").is_file()
 
 
-def test_six_scripts_and_seven_descriptive_registry_entries():
+def test_six_tamia_scripts_and_nine_descriptive_registry_entries():
     assert {path.name for path in SCRIPTS.glob("*.sbatch")} == {
         "train.sbatch",
         "analysis_gen_ll.sbatch",
@@ -662,7 +662,7 @@ def test_six_scripts_and_seven_descriptive_registry_entries():
     registry = yaml.safe_load((EXAMPLE / "configs/registries/evals.yml").read_text())[
         "evaluations"
     ]
-    assert len(registry) == 7
+    assert len(registry) == 9
     assert sum("/tamia/" in entry["script"] for entry in registry.values()) == 5
     assert all(
         name.startswith(

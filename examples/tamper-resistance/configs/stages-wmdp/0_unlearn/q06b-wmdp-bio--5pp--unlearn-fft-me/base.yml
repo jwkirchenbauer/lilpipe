@@ -1,0 +1,49 @@
+base_model: Qwen/Qwen3-0.6B
+plugins:
+- axolotl_plugins.custom_trainer_args.CustomTrainerArgsPlugin
+trainer_cls: trainers.ul_me.MaxEntTrainer
+custom_trainer_args:
+  forget_coefficient: 1.0
+  retain_coefficient: 1.0
+  sampling: optml
+datasets:
+- path: cais/wmdp-bio-forget-corpus
+  split: train
+  type: data.authors_documents
+- path: Salesforce/wikitext
+  name: wikitext-2-raw-v1
+  split: test
+  type: data.authors_documents
+shuffle_merged_datasets: false
+dataset_num_proc: 8
+dataset_prepared_path: artifacts/mila/cache/axolotl/q06b-wmdp-bio--5pp--unlearn-fft-me/prepared
+val_set_size: 0.0
+output_dir: artifacts/mila/models/q06b-wmdp-bio--5pp--unlearn-fft-me
+sequence_len: 512
+sample_packing: false
+pad_to_sequence_len: false
+remove_unused_columns: false
+train_on_inputs: true
+micro_batch_size: 8
+gradient_accumulation_steps: 1
+max_steps: 125
+learning_rate: 5.0e-06
+optimizer: adamw_torch
+weight_decay: 0.0
+lr_scheduler: linear
+warmup_steps: 12
+max_grad_norm: 1.0
+bf16: true
+tf32: false
+gradient_checkpointing: false
+attn_implementation: sdpa
+seed: 42
+data_seed: 42
+eval_strategy: 'no'
+save_strategy: steps
+save_steps: 125
+save_total_limit: 1
+save_only_model: true
+logging_steps: 1
+wandb_project: lp-tamper-resistance
+wandb_name: q06b-wmdp-bio--5pp--unlearn-fft-me

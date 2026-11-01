@@ -27,5 +27,11 @@ Best feasible candidate: `q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid--002` (<
 
 2. `grid-002`
 
-- LR `1e-5` × retain coefficients `{0.25, 1, 4}`.
-- Submitted with 20-minute limits and 32G RAM for training and evaluation.
+| Learning rate | Retain coeff. | WMDP-Bio ↓ | MMLU ↑ | MMLU drop (pp) | Within budget |
+|---|---:|---:|---:|---:|:---:|
+| `1e-5` | 0.25 | 32.03% | 30.36% | 9.74 | ✗ |
+| `1e-5` | 1 | 36.18% | 33.34% | 6.77 | ✗ |
+| **`1e-5`** | **4** | **39.86%** | **36.07%** | **4.04** | **✓ Best** |
+
+Best feasible candidate across both grids: `q06b-wmdp-bio--5pp--unlearn-fft-me--hpo--grid-002--003`
+(< 5pp drop on MMLU). Not promoted yet.

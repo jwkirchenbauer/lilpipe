@@ -34,12 +34,18 @@ WMDP experiements
 **Tuning defences**
 ```sh
 # 1. Generate and run all defenses and their evaluations
-# NOTE: z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--hpo is the sweep id defined in sweep.yml
+# NOTE: z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--hpo is the sweep id defined in sweep.yml.
+# Search space: LRs(1e-6, 5e-6, 1e-5) x Retain coeffs(0.1, 1, 5, 10)
 python scripts/hpo.py generate configs/stages-wmdp/0_unlearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16/sweep.yml
 lilpipe artifacts/generated/hpo/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--hpo/experiment.yml
 
 # 2. (manual) Promote the best by selecting the method with the lowest WMDP score, whilst having
-# less than 5pp drop in MMLU.
+# less than 5pp drop in MMLU. If none satisfied this, or if the unlearning amount was not that much then
+# one option is to add another entry to the `sweep.yml` and run another round of HP opt.
+
+# 3. Add the HP tuning results table under `configs/stages-wmdp/0_unlearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16/results.md`
+# Report the results from least changing to most changing HPs in the table, in increasing order.
+# See example: `examples/tamper-resistance/configs/stages-wmdp/0_unlearn/q06b-wmdp-bio--5pp--unlearn-fft-me/results.md`)
 ```
 
 **Tuning attacks**
@@ -59,7 +65,7 @@ lilpipe artifacts/generated/hpo/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relea
 
 ```sh
 # 1. Copy configs. Copy yml of best sweep ID. In the copied selected.yml file
-# set output_dir, wandb_name, and dataset_prepared_path to new canoncial paths 
+# set output_dir, wandb_name, and dataset_prepared_path to new canoncial paths
 cp "artifacts/generated/hpo/<sweep-id>/configs/<sweep-id>--<stage>--001.yml" \
    "configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-ms128/selected.yml"
 

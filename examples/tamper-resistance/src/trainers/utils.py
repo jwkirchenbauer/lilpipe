@@ -106,6 +106,106 @@ def gradient_dict_l2_norm(gradients):
     return global_l2_norm(active)
 
 
+class MetadataCollator:
+    """Collate token fields and encode metadata as integer source IDs."""
+
+    def __init__(self, collator, metadata_to_idx):
+        self.collator = collator
+        self.metadata_to_idx = metadata_to_idx
+
+    def __call__(self, features, **kwargs):
+        metadata_ids = [self.metadata_to_idx[row["metadata"]] for row in features]
+        batch = self.collator(
+            [
+                {key: value for key, value in row.items() if key != "metadata"}
+                for row in features
+            ],
+            **kwargs,
+        )
+        batch["metadata_ids"] = torch.tensor(metadata_ids, dtype=torch.long)
+        return batch
+
+
+class BalancedSourceSampler(torch.utils.data.Sampler[int]):
+    """Shuffle sources and contribute equally to each DataLoader batch."""
+
+    def __init__(self, dataset, batch_size, metadata_to_idx, seed=42):
+        groups = defaultdict(list)
+        for index, metadata in enumerate(dataset["metadata"]):
+            groups[metadata_to_idx(metadata)].append(index)
+        if not groups or batch_size < 1 or batch_size % len(groups):
+            raise ValueError("batch size must be divisible by the number of sources")
+        self.groups = list(groups.values())
+        self.batch_size = batch_size
+        self.per_source_batch_size = batch_size // len(groups)
+        self.seed = seed
+        self.epoch = 0
+
+    def __iter__(self):
+        rng = random.Random(self.seed + self.epoch)
+        self.epoch += 1
+        groups = [group.copy() for group in self.groups]
+        for group in groups:
+            rng.shuffle(group)
+        usable = len(self) // self.batch_size * self.per_source_batch_size
+        for start in range(0, usable, self.per_source_batch_size):
+            batch = [
+                index
+                for group in groups
+                for index in group[start : start + self.per_source_batch_size]
+            ]
+            rng.shuffle(batch)
+            yield from batch
+
+    def __len__(self):
+        return (
+            min(map(len, self.groups)) // self.per_source_batch_size * self.batch_size
+        )
+
+
+class BalancedSourceSamplerv2(torch.utils.data.Sampler[int]):
+    """Shuffle sources and take the configured number of rows from each."""
+
+    def __init__(self, dataset, metadata_to_idx, metadata_to_batch_size, seed=42):
+        metadata = dataset["metadata"]
+        self.meta_ids = [metadata_to_idx[value] for value in metadata]
+        groups = defaultdict(list)
+        for index, source in enumerate(metadata):
+            groups[source].append(index)
+        if not groups or groups.keys() != metadata_to_batch_size.keys():
+            raise ValueError("batch sizes must cover exactly the dataset sources")
+        if any(
+            type(size) is not int or size < 1
+            for size in metadata_to_batch_size.values()
+        ):
+            raise ValueError("per-source batch sizes must be positive integers")
+        self.groups = [
+            (groups[source], size) for source, size in metadata_to_batch_size.items()
+        ]
+        self.batch_size = sum(metadata_to_batch_size.values())
+        self.num_batches = min(len(indices) // size for indices, size in self.groups)
+        self.seed = seed
+        self.epoch = 0
+
+    def __iter__(self):
+        rng = random.Random(self.seed + self.epoch)
+        self.epoch += 1
+        groups = [(indices.copy(), size) for indices, size in self.groups]
+        for indices, _ in groups:
+            rng.shuffle(indices)
+        for step in range(self.num_batches):
+            batch = [
+                index
+                for indices, size in groups
+                for index in indices[step * size : (step + 1) * size]
+            ]
+            rng.shuffle(batch)
+            yield from batch
+
+    def __len__(self):
+        return self.num_batches * self.batch_size
+
+
 class MixedSourceSampler(torch.utils.data.Sampler[int]):
     """Shuffle, truncate, and mix both sources without replacement."""
 

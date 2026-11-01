@@ -12,6 +12,7 @@ from torch.func import functional_call
 
 from trainers.ul_gd import GradDiffTrainer
 from trainers.ul_me import MaxEntTrainer
+from trainers.utils import BalancedSourceSamplerv2
 
 ROLE_FIELDS = ("input_ids", "attention_mask", "labels")
 
@@ -67,31 +68,35 @@ def adamw_attack_v1(
 def adamw_attack(
     model,
     inputs,
-    steps=8,
-    lr=2e-5,
-    batch_size=1,
+    attack_forget_batch_size_per_iteration=1,
+    attack_epochs=1,
+    attack_learning_rate=2e-5,
     on_loss_backward=None,
 ):
-
-    forget_mask = inputs["is_forget"].bool()
-    if not forget_mask.any():
-        raise ValueError("TAR attack requires forget rows in every batch")
-    forget_inputs = {field: inputs[field][forget_mask] for field in ROLE_FIELDS}
-    if len(forget_inputs["input_ids"]) < steps * batch_size:
-        raise ValueError(f"TAR attack needs {steps * batch_size} forget rows")
-
-    opt = torch.optim.AdamW(model.parameters(), lr=lr)
-    for inner_step in range(steps):
-        opt.zero_grad(set_to_none=True)
-        # fresh forget rows every step, like the relearn stage
-        start = inner_step * batch_size
-        loss = model(
-            **{k: v[start : start + batch_size] for k, v in forget_inputs.items()}
-        ).loss
-        loss.backward()
-        if on_loss_backward is not None:
-            on_loss_backward(inner_step, loss.detach())
-        opt.step()
+    """Run AdamW epochs over already-selected attack rows, retaining partial batches."""
+    if attack_forget_batch_size_per_iteration < 1 or attack_epochs < 1:
+        raise ValueError("attack batch size and epochs must be positive")
+    n_samples = len(inputs["input_ids"])
+    if not n_samples:
+        raise ValueError("TAR attack requires at least one attack row")
+    optimizer = torch.optim.AdamW(model.parameters(), lr=attack_learning_rate)
+    inner_step = 0
+    for _ in range(attack_epochs):
+        for start in range(0, n_samples, attack_forget_batch_size_per_iteration):
+            optimizer.zero_grad(set_to_none=True)
+            loss = model(
+                **{
+                    field: inputs[field][
+                        start : start + attack_forget_batch_size_per_iteration
+                    ]
+                    for field in ROLE_FIELDS
+                }
+            ).loss
+            loss.backward()
+            if on_loss_backward is not None:
+                on_loss_backward(inner_step, loss.detach())
+            optimizer.step()
+            inner_step += 1
     return model
 
 
@@ -132,31 +137,64 @@ class TARBaseTrainer:
     ``sample_attack_fn(model, parameters, inputs, *, on_loss_backward)`` returns a
     detached delta for the trainable parameters; the forget loss is taken at
     ``theta + delta``. Without one, ``adamw_attack`` is configured from
-    the ``inner_*`` arguments.
+    the ``attack_*`` arguments.
     """
 
     def __init__(
         self,
         *args,
         sample_attack_fn=None,
-        inner_steps=8,
-        inner_learning_rate=2e-5,
-        inner_n_samples=8,
-        inner_batch_size=1,
+        defence_forget_batch_size=1,
+        defence_retain_batch_size=1,
+        attack_forget_batch_size=1,
+        attack_forget_batch_size_per_iteration=1,
+        attack_epochs=1,
+        attack_learning_rate,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
-        self.inner_n_samples = inner_n_samples
+        self.defence_forget_batch_size = defence_forget_batch_size
+        self.defence_retain_batch_size = defence_retain_batch_size
+        self.attack_forget_batch_size = attack_forget_batch_size
+        self.attack_forget_batch_size_per_iteration = (
+            attack_forget_batch_size_per_iteration
+        )
+        self.attack_epochs = attack_epochs
+        self.attack_learning_rate = attack_learning_rate
         self.inner_step_total = 0
         self._inner_loss_metric_defined = False
         if sample_attack_fn is None:
             sample_attack_fn = partial(
                 adamw_attack,
-                steps=inner_steps,
-                lr=inner_learning_rate,
-                batch_size=inner_batch_size,
+                attack_forget_batch_size_per_iteration=attack_forget_batch_size_per_iteration,
+                attack_epochs=attack_epochs,
+                attack_learning_rate=attack_learning_rate,
             )
         self.sample_attack_fn = sample_attack_fn
+
+        self.metadata_to_idx = {
+            "defence::forget": 0,
+            "defence::retain": 1,
+            "attack::forget": 2,
+        }
+        self.metadata_to_batch_size = {
+            "defence::forget": self.defence_forget_batch_size,
+            "defence::retain": self.defence_retain_batch_size,
+            "attack::forget": self.attack_forget_batch_size,
+        }
+
+    def _get_train_sampler(self, dataset=None):
+        dataset = self.train_dataset if dataset is None else dataset
+        sampler = BalancedSourceSamplerv2(
+            dataset,
+            metadata_to_idx=self.metadata_to_idx,
+            metadata_to_batch_size=self.metadata_to_batch_size,
+        )
+        if sampler.batch_size != self.args.per_device_train_batch_size:
+            raise ValueError(
+                "micro_batch_size must equal the sum of per-source batch sizes"
+            )
+        return sampler
 
     def _log_inner_loss(self, inner_step, loss):
         """Log attack losses on one curve against cumulative inner steps."""
@@ -173,21 +211,23 @@ class TARBaseTrainer:
         self.inner_step_total += 1
 
     def compute_loss(self, model, inputs, return_outputs=False, **kwargs):
-        forget_mask = inputs["is_forget"].bool()
-        # the attack trains on the last forget rows; the defence uses the
-        # remaining forget rows and as many retain rows
-        inputs_defence = {
-            field: torch.cat(
-                [
-                    value[forget_mask][: -self.inner_n_samples],
-                    value[~forget_mask][: -self.inner_n_samples],
-                ]
-            )
-            for field, value in inputs.items()
+        defence_forget_mask = (
+            inputs["metadata_ids"] == self.metadata_to_idx["defence::forget"]
+        )
+        defence_retain_mask = (
+            inputs["metadata_ids"] == self.metadata_to_idx["defence::retain"]
+        )
+        attack_forget_mask = (
+            inputs["metadata_ids"] == self.metadata_to_idx["attack::forget"]
+        )
+        inputs_defence_forget = {
+            field: inputs[field][defence_forget_mask] for field in ROLE_FIELDS
         }
-        inputs_forget_attack = {
-            field: value[forget_mask][-self.inner_n_samples :]
-            for field, value in inputs.items()
+        inputs_defence_retain = {
+            field: inputs[field][defence_retain_mask] for field in ROLE_FIELDS
+        }
+        inputs_attack_forget = {
+            field: inputs[field][attack_forget_mask] for field in ROLE_FIELDS
         }
         theta = {name: param for name, param in model.named_parameters()}
         # make new model
@@ -196,7 +236,7 @@ class TARBaseTrainer:
         model_copy.forward = MethodType(type(model_copy).forward, model_copy)
         with self.accelerator.autocast():  # the rebind skips accelerate's autocast
             model_attacked = self.sample_attack_fn(
-                model_copy, inputs_forget_attack, on_loss_backward=self._log_inner_loss
+                model_copy, inputs_attack_forget, on_loss_backward=self._log_inner_loss
             )
         theta_attacked = dict_binary_op(
             theta,
@@ -205,10 +245,10 @@ class TARBaseTrainer:
         )
         del model_copy, model_attacked
         gc.collect()  # accelerate hooks form reference cycles
-        loss_retain = self.compute_retain_loss(model, inputs_defence)
-        # loss_forget = self.compute_forget_loss(model_attacked, inputs)
+        loss_retain = self.compute_retain_loss(model, inputs_defence_retain)
         loss_forget = self.compute_forget_loss(
-            lambda **x: functional_call(model, theta_attacked, (), x), inputs_defence
+            lambda **x: functional_call(model, theta_attacked, (), x),
+            inputs_defence_forget,
         )
         loss = loss_forget + loss_retain
 

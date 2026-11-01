@@ -7,9 +7,8 @@ import torch
 from axolotl.core.trainers.base import AxolotlTrainer
 
 from trainers.utils import (
-    AuthorsMixedSourceSampler,
-    MixedSourceSampler,
-    OptmlMixedSourceSampler,
+    BalancedSourceSamplerv2,
+    MetadataCollator,
     global_l2_norm,
 )
 
@@ -24,6 +23,8 @@ class MaxEntTrainer(AxolotlTrainer):
         retain_coefficient=1.0,
         sampling="balanced",
         log_gradient_norms=False,
+        defence_forget_batch_size=1,
+        defence_retain_batch_size=1,
         **kwargs,
     ):
         if sampling not in {"balanced", "authors", "optml"}:
@@ -34,22 +35,26 @@ class MaxEntTrainer(AxolotlTrainer):
         self.sampling = sampling
         self.log_gradient_norms = log_gradient_norms
 
-    def _get_train_sampler(self, train_dataset=None):
-        dataset = self.train_dataset if train_dataset is None else train_dataset
-        if self.sampling == "optml":
-            return OptmlMixedSourceSampler(
-                dataset,
-                self.args.per_device_train_batch_size,
-            )
-        sampler_cls = (
-            AuthorsMixedSourceSampler
-            if self.sampling == "authors"
-            else MixedSourceSampler
-        )
-        return sampler_cls(
+        self.defence_forget_batch_size = defence_forget_batch_size
+        self.defence_retain_batch_size = defence_retain_batch_size
+
+        self.metadata_to_idx = {
+            "defence::forget": 0,
+            "defence::retain": 1,
+            "attack::forget": 2,
+        }
+        self.metadata_to_batch_size = {
+            "defence::forget": self.defence_forget_batch_size,
+            "defence::retain": self.defence_retain_batch_size,
+        }
+        self.data_collator = MetadataCollator(self.data_collator, self.metadata_to_idx)
+
+    def _get_train_sampler(self, dataset=None):
+        dataset = self.train_dataset if dataset is None else dataset
+        return BalancedSourceSamplerv2(
             dataset,
-            self.args.per_device_train_batch_size,
-            self.args.data_seed if self.args.data_seed is not None else self.args.seed,
+            metadata_to_idx=self.metadata_to_idx,
+            metadata_to_batch_size=self.metadata_to_batch_size,
         )
 
     def compute_loss_term(
@@ -89,19 +94,11 @@ class MaxEntTrainer(AxolotlTrainer):
         return_outputs=False,
         model_kwargs=None,
     ):
-        forget_mask = inputs["is_forget"].bool()
-        if not forget_mask.any():
-            raise ValueError("MaxEnt requires forget and retain rows in every batch")
-        forget_inputs = {
-            field: inputs[field][forget_mask]
-            for field in ("input_ids", "attention_mask")
-        }
-        forget_labels = inputs["labels"][forget_mask]
-        outputs = model(**forget_inputs, **(model_kwargs or {}))
+        outputs = model(**inputs, **(model_kwargs or {}))
         log_probs = torch.log_softmax(outputs.logits[:, :-1].float(), dim=-1)
         probs = torch.exp(log_probs)
         negative_entropy_per_token = torch.sum(probs * log_probs, dim=-1)
-        valid = forget_labels[:, 1:] != -100
+        valid = inputs["labels"][:, 1:] != -100
         if not valid.any():
             raise ValueError("MaxEnt requires a supervised token in every forget batch")
         entropy = -torch.mean(negative_entropy_per_token[valid])
@@ -128,24 +125,24 @@ class MaxEntTrainer(AxolotlTrainer):
     def compute_retain_loss(
         self, model, inputs, return_grads=False, return_outputs=False
     ):
-        retain_mask = ~inputs["is_forget"].bool()
-        if not retain_mask.any():
-            raise ValueError("MaxEnt requires forget and retain rows in every batch")
-        fields = ("input_ids", "attention_mask", "labels")
-        retain_inputs = {field: inputs[field][retain_mask] for field in fields}
         return self.compute_loss_term(
             model,
-            retain_inputs,
+            inputs,
             self.retain_coefficient,
             return_grads,
             return_outputs,
         )
 
     def compute_loss(self, model, inputs, return_outputs=False, **kwargs):
+        forget_mask = inputs["metadata_ids"] == self.metadata_to_idx["defence::forget"]
+        retain_mask = inputs["metadata_ids"] == self.metadata_to_idx["defence::retain"]
+        fields = ("input_ids", "attention_mask", "labels")
+        forget_inputs = {field: inputs[field][forget_mask] for field in fields}
+        retain_inputs = {field: inputs[field][retain_mask] for field in fields}
         loss_forget, forget_outputs = self.compute_forget_loss(
-            model, inputs, return_outputs=True
+            model, forget_inputs, return_outputs=True
         )
-        loss_retain = self.compute_retain_loss(model, inputs)
+        loss_retain = self.compute_retain_loss(model, retain_inputs)
         loss = loss_forget + loss_retain
 
         if model.training and torch.is_grad_enabled():

@@ -35,7 +35,7 @@ WMDP experiements
 ```sh
 # 1. Generate and run all defenses and their evaluations
 # NOTE: z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--hpo is the sweep id defined in sweep.yml.
-# Search space: LRs(1e-6, 5e-6, 1e-5) x Retain coeffs(0.1, 1, 5, 10)
+# Search space: LRs(1e-6, 5e-6, 1e-5) x Retain coeffs(1, 5, 10)
 python scripts/hpo.py generate configs/stages-wmdp/0_unlearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16/sweep.yml
 lilpipe artifacts/generated/hpo/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--hpo/experiment.yml
 

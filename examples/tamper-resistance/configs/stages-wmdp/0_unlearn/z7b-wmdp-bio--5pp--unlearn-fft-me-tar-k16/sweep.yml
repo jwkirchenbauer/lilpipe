@@ -1,16 +1,9 @@
 id: z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--hpo
 sweeps:
-  # same retain/lr grid as z7b-wmdp-bio--5pp--unlearn-fft-me-tar, with 16 inner attack steps
   - name: grid-001
     parameters:
-      custom_trainer_args.retain_coefficient: [0.25, 1, 4]
-  - name: grid-002
-    parameters:
-      custom_trainer_args.retain_coefficient: [0.1, 0.5, 0.75]
-  - name: grid-003
-    parameters:
-      learning_rate: [1.0e-05]
-      custom_trainer_args.retain_coefficient: [0.1, 1, 2, 4]
+      learning_rate: [1.0e-06, 5.0e-06, 1.0e-05]
+      custom_trainer_args.retain_coefficient: [1, 5, 10]
 producer:
   script: scripts/slurm/tamia/train.sbatch
   sbatch_args:

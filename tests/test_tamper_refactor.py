@@ -991,7 +991,7 @@ def test_tar_k16_lr_sweep_reuses_defense_and_evaluates_each_attack(
         assert "eval_wmdp_mmlu_trajectory.sbatch" in rendered
 
 
-def test_tar_k16_defense_generates_numbered_grids(tmp_path, monkeypatch):
+def test_tar_k16_defense_generates_nine_candidate_grid(tmp_path, monkeypatch):
     from lilpipe import load
 
     hpo = load_script(EXAMPLE / "scripts/hpo.py", "tar_k16_numbered_hpo")
@@ -1000,13 +1000,17 @@ def test_tar_k16_defense_generates_numbered_grids(tmp_path, monkeypatch):
     manifest = hpo.generate(
         EXAMPLE / f"configs/stages-wmdp/0_unlearn/{name}/sweep.yml", tmp_path
     )
-    expected = [
-        f"{name}--hpo--{stage}--{index:03d}"
-        for stage, count in (("grid-001", 3), ("grid-002", 3), ("grid-003", 4))
-        for index in range(1, count + 1)
-    ]
+    expected = [f"{name}--hpo--grid-001--{index:03d}" for index in range(1, 10)]
     assert yaml.safe_load(manifest.read_text())["models"] == expected
-    assert len(load(manifest).plan().stages) == 20
+    assert len(load(manifest).plan().stages) == 18
+    candidates = [
+        yaml.safe_load((tmp_path / f"configs/{candidate}.yml").read_text())
+        for candidate in expected
+    ]
+    assert {
+        (config["learning_rate"], config["custom_trainer_args"]["retain_coefficient"])
+        for config in candidates
+    } == {(lr, retain) for lr in (1e-6, 5e-6, 1e-5) for retain in (1, 5, 10)}
     for filename, learning_rate in (("base.yml", 5e-6), ("selected.yml", 1e-5)):
         config = yaml.safe_load(
             (EXAMPLE / f"configs/stages-wmdp/0_unlearn/{name}/{filename}").read_text()

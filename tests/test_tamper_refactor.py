@@ -1007,12 +1007,18 @@ def test_tar_k16_defense_generates_grid_and_low_retain_refinement(
     lower_attack_lr = [f"{name}--hpo--grid-003--{index:03d}" for index in range(1, 3)]
     higher_outer_lr = [f"{name}--hpo--grid-004--{index:03d}" for index in range(1, 3)]
     higher_retain = [f"{name}--hpo--grid-005--{index:03d}" for index in range(1, 4)]
+    mid_retain = [f"{name}--hpo--grid-006--001"]
     assert (
         yaml.safe_load(manifest.read_text())["models"]
-        == expected + refinement + lower_attack_lr + higher_outer_lr + higher_retain
+        == expected
+        + refinement
+        + lower_attack_lr
+        + higher_outer_lr
+        + higher_retain
+        + mid_retain
     )
     pipeline = load(manifest)
-    assert len(pipeline.plan().stages) == 36
+    assert len(pipeline.plan().stages) == 38
     assert len(pipeline.select(models=refinement).plan().stages) == 4
     for candidate, retain in zip(refinement, [0.1, 0.01]):
         config = yaml.safe_load((tmp_path / f"configs/{candidate}.yml").read_text())
@@ -1045,6 +1051,13 @@ def test_tar_k16_defense_generates_grid_and_low_retain_refinement(
         before["output_dir"] = after["output_dir"]
         before["wandb_name"] = candidate
         assert after == before
+    assert len(pipeline.select(models=mid_retain).plan().stages) == 2
+    before = yaml.safe_load((tmp_path / f"configs/{higher_retain[1]}.yml").read_text())
+    after = yaml.safe_load((tmp_path / f"configs/{mid_retain[0]}.yml").read_text())
+    before["custom_trainer_args"]["retain_coefficient"] = 2.5
+    before["output_dir"] = after["output_dir"]
+    before["wandb_name"] = mid_retain[0]
+    assert after == before
     candidates = [
         yaml.safe_load((tmp_path / f"configs/{candidate}.yml").read_text())
         for candidate in expected

@@ -13,6 +13,7 @@ packages = ["src/trainers", "src/data", "src/axolotl_plugins"]
 
 [tool.uv.sources]
 lilpipe = { path = "../..", editable = true }
+pyhessian = { git = "https://github.com/amirgholami/PyHessian.git", rev = "de8cf239ace21c7754ee599255897ebf3eed19cb" }
 
 [dependency-groups]
 train = [
@@ -23,6 +24,7 @@ eval = [
     "lm-eval[hf]==0.4.11",
     "matplotlib>=3.9,<4",
     "protobuf>=6,<7",
+    "pyhessian>=0.1",
     "seaborn>=0.13,<0.14",
     "sentencepiece>=0.2,<0.3",
 ]

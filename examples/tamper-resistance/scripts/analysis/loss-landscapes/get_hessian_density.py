@@ -19,9 +19,10 @@ from get_ll import get_dataloader
 class LanguageModelHessian(hessian):
     """Use PyHessian's density routine with batchwise HVPs on a sharded model."""
 
-    def __init__(self, model, batches):
+    def __init__(self, model, batches, micro_batch_size=1):
         self.model = model.eval()
         self.data = batches
+        self.micro_batch_size = micro_batch_size
         self.full_dataset = True
         self.device = "cpu"
         self.parameters = tuple(p for p in model.parameters() if p.requires_grad)
@@ -31,22 +32,35 @@ class LanguageModelHessian(hessian):
 
     def dataloader_hv_product(self, vector):
         start = time.monotonic()
-        result = [torch.zeros_like(v, device="cpu") for v in vector]
+        result = [torch.zeros_like(p) for p in self.parameters]
         device_vector = [v.to(p.device) for v, p in zip(vector, self.parameters)]
         device = self.model.get_input_embeddings().weight.device
         mean_loss = 0.0
         for batch in self.data:
-            inputs = {name: value.to(device) for name, value in batch.items()}
-            loss = self.model(**inputs).loss / len(self.data)
-            mean_loss += loss.detach().item()
-            gradient = torch.autograd.grad(loss, self.parameters, create_graph=True)
-            product = torch.autograd.grad(
-                gradient, self.parameters, grad_outputs=device_vector
-            )
-            for total, value in zip(result, product):
-                total.add_(value.detach().cpu())
-            del loss, gradient, product, inputs
+            token_count = (batch["labels"][:, 1:] != -100).sum().item()
+            if token_count == 0:
+                raise ValueError("A batch has no supervised next-token targets")
+            for first in range(0, len(batch["input_ids"]), self.micro_batch_size):
+                inputs = {
+                    name: value[first : first + self.micro_batch_size].to(device)
+                    for name, value in batch.items()
+                }
+                tokens = (inputs["labels"][:, 1:] != -100).sum().item()
+                if tokens == 0:
+                    continue
+                # Preserve each original batch's token-mean CE and its equal
+                # weight in gen_ll.py's mean over batches.
+                loss = self.model(**inputs).loss * tokens / token_count / len(self.data)
+                mean_loss += loss.detach().item()
+                gradient = torch.autograd.grad(loss, self.parameters, create_graph=True)
+                product = torch.autograd.grad(
+                    gradient, self.parameters, grad_outputs=device_vector
+                )
+                for total, value in zip(result, product):
+                    total.add_(value.detach())
+                del loss, gradient, product, inputs
         del device_vector
+        result = [value.cpu() for value in result]
         rayleigh = sum((hv * v).sum() for hv, v in zip(result, vector)).item()
         self.hvp_count += 1
         print(
@@ -79,6 +93,7 @@ if __name__ == "__main__":
     parser.add_argument("--model", required=True)
     parser.add_argument("--dataset", default="cais/wmdp-bio-forget-corpus")
     parser.add_argument("--batch-size", type=int, default=8)
+    parser.add_argument("--micro-batch-size", type=int, default=1)
     parser.add_argument("--max-seq-len", type=int, default=512)
     parser.add_argument("--limit", type=int, default=64)
     parser.add_argument("--lanczos-steps", type=int, default=10)
@@ -88,6 +103,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.lanczos_steps < 2 or args.probes < 1:
         parser.error("Use at least two Lanczos steps and one probe")
+    if args.micro_batch_size < 1:
+        parser.error("micro-batch-size must be positive")
     os.makedirs(args.outdir, exist_ok=False)
     torch.set_num_threads(8)
     torch.backends.cuda.matmul.allow_tf32 = False
@@ -116,7 +133,7 @@ if __name__ == "__main__":
         attn_implementation="eager",
     )
     model.config.use_cache = False
-    estimator = LanguageModelHessian(model, batches)
+    estimator = LanguageModelHessian(model, batches, args.micro_batch_size)
     result = {
         **vars(args),
         "dtype": "float32",

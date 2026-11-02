@@ -2,45 +2,72 @@
 
 source: `examples/tamper-resistance/configs/stages-wmdp/0_unlearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16`
 
+Promoted by user-approved exception: `grid-006--001` (5.14pp MMLU drop; 0.14pp over the 5pp budget).
+
+Historical OPTML results: [results-optml.md](results-optml.md).
+
 ## Stages
 
 1. `grid-001`
 
+Attack learning rate: `1e-05`.
+
 | Learning rate | Retain coeff. | WMDP-Bio ↓ | MMLU ↑ | MMLU drop (pp) | Within budget |
 |---|---:|---:|---:|---:|:---:|
 | Base | — | 55.18% | 58.59% | — | — |
-| `5e-06` | 0.25 | 43.55% | 52.90% | 5.69 | ✗ |
-| `5e-06` | 1 | 46.89% | 51.48% | 7.11 | ✗ |
-| **`5e-06`** | **4** | **55.30%** | **56.88%** | **1.71** | **✓ Best** |
-
-Best feasible candidate: `z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--hpo--grid-001--003` (< 5pp drop on MMLU)
-
+| `1e-06` | 1 | 54.84% | 58.35% | 0.24 | ✓ |
+| `1e-06` | 5 | 54.95% | 58.49% | 0.10 | ✓ |
+| `1e-06` | 10 | 54.72% | 58.50% | 0.09 | ✓ |
+| `5e-06` | 1 | 45.85% | 53.11% | 5.48 | ✗ |
+| `5e-06` | 5 | 54.95% | 56.94% | 1.65 | ✓ |
+| `5e-06` | 10 | 55.07% | 57.94% | 0.65 | ✓ |
+| `1e-05` | 1 | 37.44% | 48.66% | 9.93 | ✗ |
+| `1e-05` | 5 | 44.01% | 52.69% | 5.90 | ✗ |
+| `1e-05` | 10 | 49.54% | 54.89% | 3.70 | ✓ |
 
 2. `grid-002`
 
+Attack learning rate: `1e-05`.
+
 | Learning rate | Retain coeff. | WMDP-Bio ↓ | MMLU ↑ | MMLU drop (pp) | Within budget |
 |---|---:|---:|---:|---:|:---:|
-| Base | — | 55.18% | 58.59% | — | — |
-| `5e-06` | 0.1 | 41.47% | 51.27% | 7.32 | ✗ |
-| `5e-06` | 0.5 | 44.47% | 53.01% | 5.58 | ✗ |
-| `5e-06` | 0.75 | 43.66% | 50.96% | 7.63 | ✗ |
-
-Best feasible candidate: none (< 5pp drop on MMLU)
-
+| `1e-06` | 0.01 | — | — | — | Cancelled |
+| `1e-06` | 0.1 | — | — | — | Cancelled |
 
 3. `grid-003`
 
+Attack learning rate: `1e-06`.
+
 | Learning rate | Retain coeff. | WMDP-Bio ↓ | MMLU ↑ | MMLU drop (pp) | Within budget |
 |---|---:|---:|---:|---:|:---:|
-| Base | — | 55.18% | 58.59% | — | — |
-| `1e-05` | 0.1 | 30.99% | 41.48% | 17.11 | ✗ |
-| `1e-05` | 1 | 41.94% | 52.99% | 5.60 | ✗ |
-| `1e-05` | 2 | 38.02% | 50.50% | 8.09 | ✗ |
-| **`1e-05`** | **4** | **42.28%** | **53.61%** | **4.98** | **✓ Best** |
+| `1e-06` | 0.01 | 54.38% | 57.55% | 1.04 | ✓ |
+| `1e-06` | 0.1 | 54.26% | 57.58% | 1.01 | ✓ |
 
-Best feasible candidate: `z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--hpo--grid-003--004` (< 5pp drop on MMLU)
+4. `grid-004`
 
-Best feasible candidate across all stages: `z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--hpo--grid-003--004`
-(< 5pp drop on MMLU). Promoted setting: LR `1e-5`, retain `4`.
+Attack learning rate: `1e-06`.
 
-Historical results recovered from Git revision `2708cf5a^` (before the evaluation artifacts were removed).
+| Learning rate | Retain coeff. | WMDP-Bio ↓ | MMLU ↑ | MMLU drop (pp) | Within budget |
+|---|---:|---:|---:|---:|:---:|
+| `5e-06` | 0.01 | 26.84% | 32.08% | 26.51 | ✗ |
+| `5e-06` | 0.1 | 27.19% | 40.59% | 18.00 | ✗ |
+
+5. `grid-005`
+
+Attack learning rate: `1e-06`.
+
+| Learning rate | Retain coeff. | WMDP-Bio ↓ | MMLU ↑ | MMLU drop (pp) | Within budget |
+|---|---:|---:|---:|---:|:---:|
+| `5e-06` | 1 | 30.76% | 51.52% | 7.07 | ✗ |
+| `5e-06` | 5 | 40.67% | 55.90% | 2.69 | ✓ |
+| `5e-06` | 10 | 46.43% | 56.52% | 2.07 | ✓ |
+
+6. `grid-006`
+
+Attack learning rate: `1e-06`.
+
+| Learning rate | Retain coeff. | WMDP-Bio ↓ | MMLU ↑ | MMLU drop (pp) | Within budget |
+|---|---:|---:|---:|---:|:---:|
+| `5e-06` | 2.5 | 31.34% | 53.45% | 5.14 | ✗ Promoted by exception |
+
+Promoted candidate: `z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--hpo--grid-006--001` (user-approved budget exception).

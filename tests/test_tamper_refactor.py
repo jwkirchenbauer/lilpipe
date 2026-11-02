@@ -1066,19 +1066,19 @@ def test_tar_k16_defense_generates_grid_and_low_retain_refinement(
         (config["learning_rate"], config["custom_trainer_args"]["retain_coefficient"])
         for config in candidates
     } == {(lr, retain) for lr in (1e-6, 5e-6, 1e-5) for retain in (1, 5, 10)}
-    for filename, learning_rate in (("base.yml", 5e-6), ("selected.yml", 1e-5)):
+    for filename, learning_rate in (("base.yml", 5e-6), ("selected.yml", 5e-6)):
         config = yaml.safe_load(
             (EXAMPLE / f"configs/stages-wmdp/0_unlearn/{name}/{filename}").read_text()
         )
         assert config["custom_trainer_args"] == {
             "forget_coefficient": 1.0,
-            "retain_coefficient": 4.0,
+            "retain_coefficient": 2.5 if filename == "selected.yml" else 4.0,
             "defence_forget_batch_size": 4,
             "defence_retain_batch_size": 4,
             "attack_forget_batch_size": 16,
             "attack_forget_batch_size_per_iteration": 1,
             "attack_epochs": 1,
-            "attack_learning_rate": 1e-5,
+            "attack_learning_rate": 1e-6 if filename == "selected.yml" else 1e-5,
         }
         assert config["micro_batch_size"] == 24
         assert config["learning_rate"] == learning_rate

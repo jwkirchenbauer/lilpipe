@@ -4,13 +4,13 @@ plugins:
 trainer_cls: trainers.tr_tar.TARMETrainer
 custom_trainer_args:
   forget_coefficient: 1.0
-  retain_coefficient: 4.0
+  retain_coefficient: 2.5
   defence_forget_batch_size: 4
   defence_retain_batch_size: 4
   attack_forget_batch_size: 16
   attack_forget_batch_size_per_iteration: 1
   attack_epochs: 1
-  attack_learning_rate: 1.0e-05
+  attack_learning_rate: 1.0e-06
 datasets:
 - path: cais/wmdp-bio-forget-corpus
   split: train
@@ -41,7 +41,7 @@ train_on_inputs: true
 micro_batch_size: 24
 gradient_accumulation_steps: 1
 max_steps: 125
-learning_rate: 1.0e-05
+learning_rate: 5.0e-06
 optimizer: adamw_torch
 weight_decay: 0.0
 lr_scheduler: linear

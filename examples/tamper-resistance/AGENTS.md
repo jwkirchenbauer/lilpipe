@@ -54,7 +54,7 @@ lilpipe artifacts/generated/hpo/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--hpo/e
 # NOTE: z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-ms128--hpo is the sweep id defined in sweep.yml
 python scripts/hpo.py generate configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-ms128/sweep.yml
 lilpipe artifacts/generated/hpo/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-ms128--hpo/experiment.yml \
-  --models z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-ms128--hpo--lr--001 \
+  --models z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-ms128--hpo--grid-001--001 \
   --existing-models z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
 
 # 2. (manual) Promote the best by selecting the method with highest average score (WMDP and MMLU)

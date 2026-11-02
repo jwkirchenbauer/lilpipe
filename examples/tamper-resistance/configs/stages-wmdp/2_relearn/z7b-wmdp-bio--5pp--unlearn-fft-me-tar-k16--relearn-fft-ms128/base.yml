@@ -3,9 +3,9 @@ tokenizer_type: AutoTokenizer
 datasets:
 - path: cais/wmdp-bio-forget-corpus
   split: train
-  type: data.wmdp_zephyr
+  type: data._base_document_strategy
 dataset_num_proc: 8
-dataset_prepared_path: artifacts/tamia/cache/axolotl/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-ms128/prepared
+dataset_prepared_path: artifacts/tamia/cache/axolotl/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-ms128/metadata-api/prepared
 val_set_size: 0.0
 output_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-ms128
 sequence_len: 512

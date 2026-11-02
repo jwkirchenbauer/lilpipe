@@ -968,12 +968,22 @@ def test_tar_k16_lr_sweep_reuses_defense_and_evaluates_each_attack(
     manifest = hpo.generate(
         EXAMPLE / f"configs/stages-wmdp/2_relearn/{name}/sweep.yml", output
     )
-    candidates = [f"{name}--hpo--lr--{index:03d}" for index in range(1, 4)]
+    candidates = [f"{name}--hpo--grid-001--{index:03d}" for index in range(1, 4)]
     configs = [
         yaml.safe_load((output / f"configs/{candidate}.yml").read_text())
         for candidate in candidates
     ]
     assert [config["learning_rate"] for config in configs] == [1e-6, 5e-6, 1e-5]
+    for config in configs:
+        assert config["datasets"] == [
+            {
+                "path": "cais/wmdp-bio-forget-corpus",
+                "split": "train",
+                "type": "data._base_document_strategy",
+            }
+        ]
+        assert config["remove_unused_columns"] is True
+        assert config["dataset_prepared_path"].endswith("/metadata-api/prepared")
     assert all(
         config["base_model"] == f"artifacts/tamia/models/{defense}"
         for config in configs

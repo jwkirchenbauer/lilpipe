@@ -3,9 +3,9 @@
 #SBATCH --output=artifacts/tamia/logs/analysis_gen_ll-%j.out
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --gpus-per-node=h100:4
+#SBATCH --gpus-per-node=h200:8
 #SBATCH --cpus-per-task=48
-#SBATCH --mem=480G
+#SBATCH --mem=900G
 #SBATCH --time=03:00:00
 set -euo pipefail
 
@@ -39,8 +39,8 @@ export OMP_NUM_THREADS=8
 export TOKENIZERS_PARALLELISM=false
 
 model=artifacts/tamia/models/archived-2026-11-01-5065b15a-z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
-runroot=artifacts/tamia/hessian/tar-k16-archived-5065b15a-slq10-p2-bs8-docs64-mb1
-figure=artifacts/figures/z7b-wmdp-bio-hessian-density-tar-archived-5065b15a-slq10-p2-bs8-docs64-mb1
+runroot=artifacts/tamia/hessian/tar-k16-archived-5065b15a-slq10-p2-bs8-docs64-h200-mb8
+figure=artifacts/figures/z7b-wmdp-bio-hessian-density-tar-archived-5065b15a-slq10-p2-bs8-docs64-h200-mb8
 mkdir -p "$(dirname "$runroot")"
 mkdir "$runroot"
 test ! -e "$figure.pdf"
@@ -48,11 +48,11 @@ test ! -e "$figure.png"
 
 # Verify second derivatives and GPU memory on one batch before the full subset.
 python scripts/analysis/loss-landscapes/get_hessian_density.py \
-  --model "$model" --batch-size 8 --micro-batch-size 1 --limit 8 --max-seq-len 512 \
+  --model "$model" --batch-size 8 --micro-batch-size 8 --limit 8 --max-seq-len 512 \
   --lanczos-steps 2 --probes 1 --outdir "$runroot/smoke"
 
 python scripts/analysis/loss-landscapes/get_hessian_density.py \
-  --model "$model" --batch-size 8 --micro-batch-size 1 --limit 64 --max-seq-len 512 \
+  --model "$model" --batch-size 8 --micro-batch-size 8 --limit 64 --max-seq-len 512 \
   --lanczos-steps 10 --probes 2 --seed 42 --outdir "$runroot/full"
 
 cp --no-clobber "$runroot/full/spectral-density.pdf" "$figure.pdf"

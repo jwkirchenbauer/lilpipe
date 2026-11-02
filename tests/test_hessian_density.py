@@ -90,3 +90,30 @@ def test_pyhessian_density_recovers_positive_and_negative_eigenvalues():
     assert bandwidth > 0
     assert (density >= 0).all()
     assert np.trapezoid(density, grid) == pytest.approx(1, abs=1e-3)
+
+
+def test_density_plot_shows_linear_and_log_scales(tmp_path, monkeypatch):
+    import json
+    import runpy
+    import matplotlib.pyplot as plt
+
+    metadata = {"documents": 64, "lanczos_steps": 10, "eigenvalues": [[-3, 8], [-2, 9]]}
+    (tmp_path / "quadrature.json").write_text(json.dumps(metadata))
+    np.savetxt(
+        tmp_path / "density.csv",
+        [[-3, 0.01], [0, 1], [8, 0.001]],
+        delimiter=",",
+        header="eigenvalue,density",
+        comments="",
+    )
+    script = DIRECTORY / "plot_hessian_density.py"
+    out = tmp_path / "density.pdf"
+    monkeypatch.setattr(
+        sys, "argv", [str(script), "--indir", str(tmp_path), "--outpath", str(out)]
+    )
+    result = runpy.run_path(str(script), run_name="__main__")
+    assert out.is_file()
+    assert [axis.get_yscale() for axis in result["axes"]] == ["linear", "log"]
+    for axis in result["axes"]:
+        np.testing.assert_array_equal(axis.lines[0].get_xdata(), [-3, 0, 8])
+    plt.close("all")

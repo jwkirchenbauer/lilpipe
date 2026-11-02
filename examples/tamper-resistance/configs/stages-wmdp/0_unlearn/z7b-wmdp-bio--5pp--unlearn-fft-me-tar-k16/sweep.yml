@@ -20,6 +20,12 @@ sweeps:
     parameters:
       learning_rate: [5.0e-06]
       custom_trainer_args.retain_coefficient: [0.1, 0.01]
+  - name: grid-005
+    overrides:
+      custom_trainer_args.attack_learning_rate: 1.0e-06
+    parameters:
+      learning_rate: [5.0e-06]
+      custom_trainer_args.retain_coefficient: [1, 5, 10]
 producer:
   script: scripts/slurm/tamia/train.sbatch
   sbatch_args:

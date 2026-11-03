@@ -13,7 +13,7 @@ from matplotlib.lines import Line2D
 from plot_trajectory_wmdp import legend_with_base, results, tasks
 
 if __name__ == "__main__":
-    run = "artifacts/generated/runs/tar-ms250-repro-5065b15a"
+    run = "artifacts/evals/tar-ms250-repro-5065b15a"
     configs = [
         {
             "path": (

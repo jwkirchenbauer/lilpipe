@@ -1,0 +1,230 @@
+{
+  "mmlu_abstract_algebra": [
+    49,
+    97
+  ],
+  "mmlu_anatomy": [
+    10,
+    107
+  ],
+  "mmlu_astronomy": [
+    66,
+    130
+  ],
+  "mmlu_business_ethics": [
+    51,
+    62
+  ],
+  "mmlu_clinical_knowledge": [
+    155,
+    244
+  ],
+  "mmlu_college_biology": [
+    55,
+    91
+  ],
+  "mmlu_college_chemistry": [
+    17,
+    64
+  ],
+  "mmlu_college_computer_science": [
+    17,
+    36
+  ],
+  "mmlu_college_mathematics": [
+    12,
+    96
+  ],
+  "mmlu_college_medicine": [
+    64,
+    158
+  ],
+  "mmlu_college_physics": [
+    68,
+    90
+  ],
+  "mmlu_computer_security": [
+    18,
+    77
+  ],
+  "mmlu_conceptual_physics": [
+    25,
+    79
+  ],
+  "mmlu_econometrics": [
+    9,
+    93
+  ],
+  "mmlu_electrical_engineering": [
+    84,
+    120
+  ],
+  "mmlu_elementary_mathematics": [
+    51,
+    286
+  ],
+  "mmlu_formal_logic": [
+    45,
+    55
+  ],
+  "mmlu_global_facts": [
+    40,
+    78
+  ],
+  "mmlu_high_school_biology": [
+    104,
+    282
+  ],
+  "mmlu_high_school_chemistry": [
+    113,
+    122
+  ],
+  "mmlu_high_school_computer_science": [
+    33,
+    66
+  ],
+  "mmlu_high_school_european_history": [
+    15,
+    140
+  ],
+  "mmlu_high_school_geography": [
+    3,
+    23
+  ],
+  "mmlu_high_school_government_and_politics": [
+    102,
+    184
+  ],
+  "mmlu_high_school_macroeconomics": [
+    342,
+    363
+  ],
+  "mmlu_high_school_mathematics": [
+    0,
+    252
+  ],
+  "mmlu_high_school_microeconomics": [
+    211,
+    222
+  ],
+  "mmlu_high_school_physics": [
+    62,
+    85
+  ],
+  "mmlu_high_school_psychology": [
+    64,
+    333
+  ],
+  "mmlu_high_school_statistics": [
+    48,
+    145
+  ],
+  "mmlu_high_school_us_history": [
+    56,
+    61
+  ],
+  "mmlu_high_school_world_history": [
+    36,
+    205
+  ],
+  "mmlu_human_aging": [
+    139,
+    205
+  ],
+  "mmlu_human_sexuality": [
+    23,
+    114
+  ],
+  "mmlu_international_law": [
+    10,
+    40
+  ],
+  "mmlu_jurisprudence": [
+    62,
+    65
+  ],
+  "mmlu_logical_fallacies": [
+    27,
+    77
+  ],
+  "mmlu_machine_learning": [
+    37,
+    70
+  ],
+  "mmlu_management": [
+    15,
+    90
+  ],
+  "mmlu_marketing": [
+    85,
+    140
+  ],
+  "mmlu_medical_genetics": [
+    26,
+    69
+  ],
+  "mmlu_miscellaneous": [
+    560,
+    617
+  ],
+  "mmlu_moral_disputes": [
+    147,
+    300
+  ],
+  "mmlu_moral_scenarios": [
+    93,
+    455
+  ],
+  "mmlu_nutrition": [
+    197,
+    305
+  ],
+  "mmlu_philosophy": [
+    162,
+    294
+  ],
+  "mmlu_prehistory": [
+    123,
+    148
+  ],
+  "mmlu_professional_accounting": [
+    94,
+    96
+  ],
+  "mmlu_professional_law": [
+    67,
+    382
+  ],
+  "mmlu_professional_medicine": [
+    133,
+    243
+  ],
+  "mmlu_professional_psychology": [
+    70,
+    91
+  ],
+  "mmlu_public_relations": [
+    86,
+    96
+  ],
+  "mmlu_security_studies": [
+    33,
+    224
+  ],
+  "mmlu_sociology": [
+    9,
+    38
+  ],
+  "mmlu_us_foreign_policy": [
+    10,
+    89
+  ],
+  "mmlu_virology": [
+    100,
+    138
+  ],
+  "mmlu_world_religions": [
+    70,
+    134
+  ]
+}

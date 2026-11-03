@@ -1,0 +1,66 @@
+[
+  {
+    "source": "examples/tamper-resistance/artifacts/mila/evals/z7b-layer-noise-11492754",
+    "saved_as": "examples/tamper-resistance/artifacts/evals/layer-noise/z7b-layer-noise-11492754"
+  },
+  {
+    "source": "examples/tamper-resistance/artifacts/mila/evals/z7b-layer-noise-11492755",
+    "saved_as": "examples/tamper-resistance/artifacts/evals/layer-noise/z7b-layer-noise-11492755"
+  },
+  {
+    "source": "examples/tamper-resistance/artifacts/mila/evals/z7b-layer-noise-11492756",
+    "saved_as": "examples/tamper-resistance/artifacts/evals/layer-noise/z7b-layer-noise-11492756"
+  },
+  {
+    "source": "examples/tamper-resistance/artifacts/mila/evals/z7b-layer-noise-11492757",
+    "saved_as": "examples/tamper-resistance/artifacts/evals/layer-noise/z7b-layer-noise-11492757"
+  },
+  {
+    "source": "examples/tamper-resistance/artifacts/mila/evals/z7b-layer-noise-11492758",
+    "saved_as": "examples/tamper-resistance/artifacts/evals/layer-noise/z7b-layer-noise-11492758"
+  },
+  {
+    "source": "examples/tamper-resistance/artifacts/mila/evals/z7b-layer-noise-11492759",
+    "saved_as": "examples/tamper-resistance/artifacts/evals/layer-noise/z7b-layer-noise-11492759"
+  },
+  {
+    "source": "examples/tamper-resistance/artifacts/mila/evals/z7b-layer-noise-11504999",
+    "saved_as": "examples/tamper-resistance/artifacts/evals/layer-noise/z7b-layer-noise-11504999"
+  },
+  {
+    "source": "examples/tamper-resistance/artifacts/mila/evals/z7b-layer-noise-11505000",
+    "saved_as": "examples/tamper-resistance/artifacts/evals/layer-noise/z7b-layer-noise-11505000"
+  },
+  {
+    "source": "examples/tamper-resistance/artifacts/mila/evals/z7b-layer-noise-11505777",
+    "saved_as": "examples/tamper-resistance/artifacts/evals/layer-noise/z7b-layer-noise-11505777"
+  },
+  {
+    "source": "examples/tamper-resistance/artifacts/mila/evals/z7b-layer-noise-11505778",
+    "saved_as": "examples/tamper-resistance/artifacts/evals/layer-noise/z7b-layer-noise-11505778"
+  },
+  {
+    "source": "examples/tamper-resistance/artifacts/mila/evals/z7b-layer-noise-11506556",
+    "saved_as": "examples/tamper-resistance/artifacts/evals/layer-noise/z7b-layer-noise-11506556"
+  },
+  {
+    "source": "examples/tamper-resistance/artifacts/mila/evals/z7b-layer-noise-11506557",
+    "saved_as": "examples/tamper-resistance/artifacts/evals/layer-noise/z7b-layer-noise-11506557"
+  },
+  {
+    "source": "examples/tamper-resistance/artifacts/mila/evals/z7b-layer-noise-11506558",
+    "saved_as": "examples/tamper-resistance/artifacts/evals/layer-noise/z7b-layer-noise-11506558"
+  },
+  {
+    "source": "examples/tamper-resistance/artifacts/mila/evals/z7b-layer-noise-11506559",
+    "saved_as": "examples/tamper-resistance/artifacts/evals/layer-noise/z7b-layer-noise-11506559"
+  },
+  {
+    "source": "examples/tamper-resistance/artifacts/tamia/ll",
+    "saved_as": "examples/tamper-resistance/artifacts/evals/landscapes"
+  },
+  {
+    "source": "examples/tamper-resistance/artifacts/tamia/hessian",
+    "saved_as": "examples/tamper-resistance/artifacts/evals/hessian"
+  }
+]

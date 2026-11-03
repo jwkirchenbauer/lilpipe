@@ -1,0 +1,38 @@
+{
+  "source_commit": "d353d68",
+  "source_sha256": "2e6520f30b6cfb5082fa0462e21cc4d7a604a1f08730f96bf2850f9b8f15819e",
+  "dtype": "bfloat16",
+  "radii": [
+    10,
+    25,
+    50,
+    75
+  ],
+  "n_pts": 9,
+  "limit": 10,
+  "trajectory_points": 9,
+  "figure": "artifacts/figures/z7b-wmdp-bio-loss-landscape-3d-tar.pdf",
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--partition=gpubase_bynode_b1",
+    "--time=01:00:00",
+    "--job-name=gen-ll-tar-bf16-n9",
+    "scripts/slurm/tamia/analysis_gen_ll.sbatch",
+    "--radii",
+    "10",
+    "25",
+    "50",
+    "75",
+    "--n-pts",
+    "9",
+    "--limit",
+    "10",
+    "--outdir",
+    "artifacts/tamia/ll/tar-k16-relearn-ms128-r10-r25-r50-r75-n9-limit10-bf16"
+  ],
+  "replaces_failed_job": "658069",
+  "plotting": "local after copying results",
+  "supersedes_pending_job": "658076",
+  "job_id": "658081"
+}

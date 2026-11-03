@@ -1,0 +1,10 @@
+checkpoint,c0,c1
+artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16,0.0,0.0
+artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128/checkpoint-16,1.1801719665527344e-05,1.2516975402832031e-05
+artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128/checkpoint-32,1.6450881958007812e-05,2.1457672119140625e-05
+artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128/checkpoint-48,2.3365020751953125e-05,2.562999725341797e-05
+artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128/checkpoint-64,1.9311904907226562e-05,2.0742416381835938e-05
+artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128/checkpoint-80,1.8715858459472656e-05,2.2172927856445312e-05
+artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128/checkpoint-96,2.0265579223632812e-05,2.1219253540039062e-05
+artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128/checkpoint-112,2.193450927734375e-05,1.919269561767578e-05
+artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128/checkpoint-128,2.110004425048828e-05,1.9550323486328125e-05

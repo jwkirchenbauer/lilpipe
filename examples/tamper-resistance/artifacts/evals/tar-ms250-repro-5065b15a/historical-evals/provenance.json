@@ -1,0 +1,10 @@
+{
+  "source_commit": "edd3c9f018f0e1b5593eaac286b4a9d434d4db1d",
+  "source_prefix": "examples/tamper-resistance/artifacts/tamia/evals/",
+  "models": [
+    "z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms1000",
+    "z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms1000",
+    "z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms1000"
+  ],
+  "result_files": 126
+}

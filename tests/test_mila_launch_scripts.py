@@ -213,6 +213,7 @@ def test_mila_scripts_and_registry_names_existing_files():
         "eval_beavertails_capabilities_trajectory.sbatch",
         "eval_wmdp_mmlu.sbatch",
         "analysis_get_param_norm.sbatch",
+        "analysis_layer_noise.sbatch",
     }
     for path in SCRIPTS.glob("*.sbatch"):
         subprocess.run(["bash", "-n", str(path)], check=True)
@@ -221,6 +222,9 @@ def test_mila_scripts_and_registry_names_existing_files():
         if path.name == "analysis_get_param_norm.sbatch":
             assert "#SBATCH --cpus-per-task=4" in text
             assert "#SBATCH --mem=64G" in text
+        elif path.name == "analysis_layer_noise.sbatch":
+            assert "#SBATCH --cpus-per-task=8" in text
+            assert "#SBATCH --mem=48G" in text
         else:
             assert "#SBATCH --cpus-per-task=8" in text
             assert "#SBATCH --mem=32G" in text

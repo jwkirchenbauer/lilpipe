@@ -32,7 +32,8 @@ def test_wmdp_plotter_retains_learning_rate_and_perturbation_comparisons():
         "1e-1",
     ]
     assert [config["model"] for config in wmdp.configs_tar_lrs] == [
-        f"{wmdp.tar}--relearn-fft-ms128--hpo--lr--{index:03d}" for index in range(1, 4)
+        f"{wmdp.tar}--relearn-fft-ms128--hpo--grid-001--{index:03d}"
+        for index in range(1, 4)
     ]
     legend = wmdp.legend_with_base(
         {"Method": "method-heading", "TAR": "tar", "LR": "lr"}, "base"
@@ -99,4 +100,27 @@ def test_layerwise_norm_analysis_groups_parameters_and_builds_tidy_rows():
     assert rows == [
         {"Layer": "0", "Position": 1, "Measure": "L2 norm", "Value": 3.0},
         {"Layer": "0", "Position": 1, "Measure": "RMS", "Value": 0.25},
+    ]
+
+
+def test_tar_plot_adds_promoted_baseline_and_sorts_available_steps(
+    tmp_path, monkeypatch
+):
+    pytest.importorskip("pandas")
+    pytest.importorskip("seaborn")
+    wmdp = load_plotter("relearning-trajectory/plot_trajectory_wmdp")
+    monkeypatch.setattr(wmdp, "rootdir", str(tmp_path))
+    for model, steps in (
+        (wmdp.tar, [125]),
+        (wmdp.configs_tar_lrs[0]["model"], [128, 16, 112]),
+    ):
+        for step in steps:
+            path = tmp_path / model / f"checkpoint-{step}" / "results.json"
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(
+                json.dumps({"results": {"wmdp_bio_robust": {"acc,none": 0.3}}})
+            )
+    config = wmdp.configs_tar_lrs[0]
+    assert list(wmdp.results(config["model"], config["baseline"])) == [
+        (step, "WMDP-Bio robust ↓", 30.0) for step in [0, 16, 112, 128]
     ]

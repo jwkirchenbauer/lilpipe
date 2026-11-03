@@ -15,7 +15,7 @@ SCRIPT = (
 
 @pytest.mark.parametrize("columns", [("alpha", "beta"), ("c0", "c1")])
 def test_3d_csv_plot_preserves_small_loss_ranges(monkeypatch, tmp_path, columns):
-    radii = (0.1, 0.01, 0.001)
+    radii = (100, 0.1, 0.01, 0.001)
     pd.DataFrame(
         [
             {"radius": r, columns[0]: x, columns[1]: y, "loss": 2 + 1e-5 * (x + 3 * y)}
@@ -31,7 +31,7 @@ def test_3d_csv_plot_preserves_small_loss_ranges(monkeypatch, tmp_path, columns)
     result = runpy.run_path(str(SCRIPT), run_name="__main__")
     assert output.is_file()
     axes = result["fig"].axes
-    assert len(axes) == 3
+    assert len(axes) == len(radii)
     for axis, radius in zip(axes, radii, strict=True):
         assert axis.name == "3d"
         assert axis.collections

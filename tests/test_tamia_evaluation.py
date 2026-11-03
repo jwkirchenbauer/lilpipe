@@ -648,10 +648,16 @@ def test_wmdp_wrappers_launch_both_tasks_once_per_checkpoint(
             assert (destination / "mmlu-no-bio/model/results.json").is_file()
 
 
-def test_six_tamia_scripts_and_nine_descriptive_registry_entries():
+def test_tamia_scripts_and_nine_descriptive_registry_entries():
     assert {path.name for path in SCRIPTS.glob("*.sbatch")} == {
         "train.sbatch",
         "analysis_gen_ll.sbatch",
+        "analysis_gen_ll_tar_archived.sbatch",
+        "analysis_gen_ll_tar_archived_bs8_docs64.sbatch",
+        "analysis_gen_ll_tar_archived_r125.sbatch",
+        "analysis_gen_ll_tar_archived_zoomout.sbatch",
+        "analysis_gen_ll_tar_new_api.sbatch",
+        "analysis_hessian_density_tar_archived.sbatch",
         "eval_wmdp_mmlu.sbatch",
         "eval_wmdp_mmlu_trajectory.sbatch",
         "eval_beavertails_capabilities.sbatch",

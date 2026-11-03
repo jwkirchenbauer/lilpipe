@@ -81,9 +81,10 @@ configs_lrs = [
 ]
 configs_tar_lrs = [
     {
-        "model": f"{tar}--relearn-fft-ms128--hpo--lr--{index:03d}",
+        "model": f"{tar}--relearn-fft-ms128--hpo--grid-001--{index:03d}",
         "method": "TAR",
         "lr": lr,
+        "baseline": tar,
     }
     for index, lr in enumerate(("1e-6", "5e-6", "1e-5"), 1)
 ]
@@ -101,9 +102,15 @@ configs_perturbed_ms1000 = [
 ]
 
 
-def results(experiment):
+def results(experiment, baseline=None):
+    if baseline is not None:
+        for _, label, score in results(baseline):
+            yield 0, label, score
     pattern = osp.join(rootdir, experiment, "checkpoint-*", "**", "results*.json")
-    for path in glob.glob(pattern, recursive=True):
+    paths = glob.glob(pattern, recursive=True)
+    for path in sorted(
+        paths, key=lambda path: int(path.split("checkpoint-")[1].split(os.sep)[0])
+    ):
         with open(path) as handle:
             result = json.load(handle)["results"]
         step = int(path.split("checkpoint-")[1].split(os.sep)[0])
@@ -123,6 +130,7 @@ def legend_with_base(legend, base):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output")
+    parser.add_argument("--tar-lrs", action="store_true")
     args = parser.parse_args()
 
     # Uncomment one complete selection block.
@@ -185,9 +193,25 @@ if __name__ == "__main__":
     #     "z7b-wmdp-mmlu-relearning-trajectory-perturbed--ms1000.pdf"
     # )
 
+    if args.tar_lrs:
+        configs = configs_tar_lrs
+        steps = range(0, 129, 16)
+        style = {
+            "hue": "LR",
+            "hue_order": ["1e-6", "5e-6", "1e-5"],
+            "markers": True,
+            "marker": "o",
+            "dashes": False,
+        }
+        output = (
+            "artifacts/figures/z7b-wmdp-mmlu-relearning-trajectory--tar-k16-new-api.pdf"
+        )
+
     rows = []
     for config in configs:
-        for step, evaluation, accuracy in results(config["model"]):
+        for step, evaluation, accuracy in results(
+            config["model"], config.get("baseline")
+        ):
             if step in steps:
                 rows.append(
                     {

@@ -6,15 +6,15 @@ import os
 
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.ticker import FormatStrFormatter, MaxNLocator
+from matplotlib.ticker import MaxNLocator
 
 
 def plot_landscapes(result, output):
     """Show multiple zoom levels with local loss scales and contour insets."""
     figure, panels = plt.subplots(
-        len(result["radii"]),
+        len(result["models"][0]["grids"]),
         len(result["models"]),
-        figsize=(3.5 * len(result["models"]), 3.5 * len(result["radii"])),
+        figsize=(3.5 * len(result["models"]), 3.5 * len(result["models"][0]["grids"])),
         squeeze=False,
         subplot_kw={"projection": "3d"},
     )
@@ -24,9 +24,14 @@ def plot_landscapes(result, output):
             x, y = np.meshgrid(grid["axes"], grid["axes"])
             losses = np.array(grid["losses"]).T
             low, high = float(losses.min()), float(losses.max())
-            if low == high:
-                padding = max(abs(low), 1.0) * 0.01
-                low, high = low - padding, high + padding
+            if high - low < 1e-5:
+                # Do not magnify float32 roundoff into apparent landscape structure.
+                center = len(grid["axes"]) // 2
+                losses.fill(losses[center, center])
+                low, high = (
+                    float(losses[center, center]) - 0.001,
+                    float(losses[center, center]) + 0.001,
+                )
             panel.plot_surface(
                 x, y, losses, cmap="viridis", vmin=low, vmax=high, linewidth=0
             )
@@ -43,7 +48,7 @@ def plot_landscapes(result, output):
                 panel.text2D(
                     -0.15,
                     0.5,
-                    f"Radius {grid['radius']:,.0f}",
+                    grid.get("plane", f"Radius {grid['radius']:g}"),
                     transform=panel.transAxes,
                     rotation=90,
                     va="center",
@@ -51,7 +56,6 @@ def plot_landscapes(result, output):
             panel.xaxis.set_major_locator(MaxNLocator(3))
             panel.yaxis.set_major_locator(MaxNLocator(3))
             panel.zaxis.set_major_locator(MaxNLocator(3))
-            panel.zaxis.set_major_formatter(FormatStrFormatter("%.2g"))
             panel.zaxis.labelpad = 16
             panel.tick_params(axis="z", labelsize=8)
             inset = panel.inset_axes([0, 0.68, 0.3, 0.3])
@@ -61,7 +65,12 @@ def plot_landscapes(result, output):
             inset.set(
                 xticks=[], yticks=[], xlim=panel.get_xlim(), ylim=panel.get_ylim()
             )
-    figure.suptitle("CIFAR-10 cross-entropy · local loss scales · SAM ρ=0.01")
+    title = (
+        "CIFAR-10 cross-entropy · local loss scales · variations below 1e-5 shown flat"
+    )
+    if result.get("directions") == "curvature":
+        title += " · lowest estimated curvature directions"
+    figure.suptitle(title)
     figure.tight_layout(rect=(0, 0, 1, 0.98))
     figure.savefig(output, bbox_inches="tight")
     plt.close(figure)

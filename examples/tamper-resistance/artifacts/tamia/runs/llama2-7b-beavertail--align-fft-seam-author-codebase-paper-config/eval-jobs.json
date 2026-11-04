@@ -1,0 +1,14 @@
+{
+  "defence_evaluation": "666150",
+  "attack": false,
+  "evaluator": "examples/seam/src/eval.py",
+  "utility_tasks": [
+    "mmlu",
+    "truthfulqa_mc1",
+    "arc_easy",
+    "hellaswag"
+  ],
+  "classifier_revision": "b37cf4a07edc06304180baafbba7811e49ff156a",
+  "results": "/project/aip-grabus/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/metrics.json",
+  "summary": "/project/aip-grabus/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/summary.json"
+}

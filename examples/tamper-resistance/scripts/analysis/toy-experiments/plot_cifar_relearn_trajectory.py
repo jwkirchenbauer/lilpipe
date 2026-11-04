@@ -208,7 +208,7 @@ if args.fullbatch_root:
         configs = [
             {
                 "path": os.path.join(root, "cifar10-fullbatch512/results.json"),
-                "name": "None",
+                "name": "Base",
                 "color": "black",
             },
             {
@@ -220,39 +220,12 @@ if args.fullbatch_root:
             },
             {
                 "path": os.path.join(
-                    root, "cifar10-fullbatch512-tar-k32-trace/results.json"
-                ),
-                "name": r"TAR k=32 ($\alpha_o=1e-3, \alpha_i=1e-3$)",
-                "color": "#08306b",
-            },
-            {
-                "path": os.path.join(
                     root, "cifar10-fullbatch512-tar-k32-trace-inner5e-3/results.json"
                 ),
                 "name": r"TAR k=32 ($\alpha_o=1e-3, \alpha_i=5e-3$)",
-                "color": "#6baed6",
+                "color": "#08306b",
             },
         ]
-        # configs.append(
-        #     {
-        #         "path": os.path.join(
-        #             root, "cifar10-fullbatch512-tar-k32-trace-inner5e-4/results.json"
-        #         ),
-        #         "name": r"TAR k=32 ($\alpha_o=1e-3, \alpha_i=5e-4$)",
-        #         "color": "#4292c6",
-        #     }
-        # )
-        full_path = os.path.join(
-            root, "cifar10-fullbatch512-tar-full-k16", "results.json"
-        )
-        if os.path.exists(full_path):
-            configs.append(
-                {
-                    "path": full_path,
-                    "name": "TAR k=16 (full gradient)",
-                    "color": "#88419d",
-                }
-            )
     else:
         configs = [
             {

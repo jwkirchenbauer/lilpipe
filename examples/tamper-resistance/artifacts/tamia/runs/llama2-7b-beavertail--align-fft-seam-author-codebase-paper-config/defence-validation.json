@@ -1,0 +1,10 @@
+{
+  "checkpoint": "/project/aip-grabus/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+  "global_step": 500,
+  "weights": [
+    "model-00001-of-00003.safetensors",
+    "model-00002-of-00003.safetensors",
+    "model-00003-of-00003.safetensors"
+  ],
+  "save_only_model": true
+}

@@ -1,0 +1,9 @@
+{
+  "job_id": 666268,
+  "gpus": 4,
+  "batch_size_per_gpu": 16,
+  "samples": 100,
+  "judge": "DeBERTa",
+  "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+  "script": "examples/seam/scripts/eval_harmfulness.py"
+}

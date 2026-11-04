@@ -1,0 +1,112 @@
+{
+  "completed_at": "2026-11-04T13:51:10.766009+00:00",
+  "location": "tamia",
+  "changes": [
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/generated/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+      "directory_renamed": true
+    },
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/generated/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--relearning-author-codebase-sweep-ms250",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--relearning-author-codebase-sweep-ms250",
+      "directory_renamed": true
+    },
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/capabilities-4gpu/job.json",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--capabilities-4gpu/job.json",
+      "sha256": "a3101d6af17d65922ae6504df8249cee646e67ed1cc3c138beb2886489876f00"
+    },
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config.yaml.before-layout",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/archive/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config.yaml.before-layout",
+      "sha256": "21c6cf2d489879fe9a477c04a17be130853567615d8d8802d8a5ce846ab4f4e4"
+    },
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/effective-config-before-layout.yaml",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/archive/effective-config-before-layout.yaml",
+      "sha256": "21c6cf2d489879fe9a477c04a17be130853567615d8d8802d8a5ce846ab4f4e4"
+    },
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/defence.sbatch",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/archive/layout-defence.sbatch",
+      "sha256": "7292bc52b3fdfb349232e59e2c43512751eb92c0853733900ff251439b5748b8"
+    },
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/submitted-defence.sbatch",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/submitted/defence.sbatch",
+      "sha256": "9953b4ac88046fbb78aadf1dc1803cbef537ac4b5c55e2db93263f0c973c04d3"
+    },
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--eval.yaml.before-layout",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/archive/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--eval.yaml.before-layout",
+      "sha256": "28b43edeee34953a9dbf4c4937134f1abf223f9975b946719fa89bb4f5780d89"
+    },
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/smoke.sbatch",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/submitted/smoke.sbatch",
+      "sha256": "8e41bc99502182bb5b5a2e68e7660b1fd13239bd8f8836014d74a6658e989213"
+    },
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/eval_defence.py",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/submitted/eval_defence.py",
+      "sha256": "4cce7d048fa7ae82bce31f6e41719e76d69908e17d6640c379597db5a52d5d48"
+    },
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/submitted-eval-defence.sbatch",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/submitted/eval-defence.sbatch",
+      "sha256": "12487190bbd7da1b26d6e3778c989b53481e233c2a9fdfd934d0d9bf4d9f88d2"
+    },
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/verify_checkpoint.py",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/submitted/verify_checkpoint.py",
+      "sha256": "9dc84182b588877b0a63f57bf3a184c46cf325597ed8d02f4bd45a5b5b3eeaa1"
+    },
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/eval-defence.sbatch",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/archive/layout-eval-defence.sbatch",
+      "sha256": "a5f6166d17ab189dc6f32bd79d10151cac3abbd3ce10e5ee00776d89c66e3c13"
+    },
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/defence-validation-before-layout.json",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/archive/defence-validation-before-layout.json",
+      "sha256": "7b9a050ee78e148253ce624b777f5389b5d2bec0c88cd936ed2211fa7e19e894"
+    },
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/effective-eval-config-before-layout.yaml",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/archive/effective-eval-config-before-layout.yaml",
+      "sha256": "28b43edeee34953a9dbf4c4937134f1abf223f9975b946719fa89bb4f5780d89"
+    },
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--relearning-author-codebase-sweep-ms250/eval.yaml",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--relearning-author-codebase-sweep-ms250/effective-config.yaml",
+      "sha256": "cbaf94febf071ef6ba3b2641423661a0dbfb3ab863f7d21b995a86edd9fc7f92"
+    },
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--relearning-author-codebase-sweep-ms250/smoke-666313",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--attack-smoke-666313",
+      "directory_renamed": true
+    },
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--relearning-author-codebase-sweep-ms250/eval_harmfulness.py",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--relearning-author-codebase-sweep-ms250/submitted/eval_harmfulness.py",
+      "sha256": "ea35ee8262d8e622092acb79ee6d0d0e5f2cd013db0170fc1e850bc7120b623f"
+    },
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--relearning-author-codebase-sweep-ms250/train.py",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--relearning-author-codebase-sweep-ms250/submitted/train.py",
+      "sha256": "4cdf08e6ddcbbefd58c095cdb601037dc40060e529f6749d19345c18b0594915"
+    },
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--relearning-author-codebase-sweep-ms250/eval_harmfulness_and_capabilities.sbatch",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--relearning-author-codebase-sweep-ms250/submitted/eval_harmfulness_and_capabilities.sbatch",
+      "sha256": "2ef8a0343ab3f76349af73061d617a808a84d2c260cf9383b830fbe21f62a72f"
+    },
+    {
+      "source": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--relearning-author-codebase-sweep-ms250/train_seam_relearning_sweep.sbatch",
+      "target": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--relearning-author-codebase-sweep-ms250/submitted/train_seam_relearning_sweep.sbatch",
+      "sha256": "56bd8c6d91d1cb129f9eb4e90bec10aeea849d42cec9134bc95fe09734c97052"
+    }
+  ],
+  "note": "Historical records and submitted snapshots retain their original contents and paths. Models and eval checkpoints are not reorganized; only the retained smoke model is relocated from run metadata to models."
+}

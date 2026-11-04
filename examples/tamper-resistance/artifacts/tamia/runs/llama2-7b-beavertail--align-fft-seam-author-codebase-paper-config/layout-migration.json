@@ -1,0 +1,16 @@
+{
+  "completed_at": "2026-11-04T02:54:00.535631+00:00",
+  "model_id": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+  "previous_checkpoint": "/project/aip-grabus/mgamal/lilpipe/examples/tamper-resistance/artifacts/generated/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/defense/checkpoint-500",
+  "model_path": "/project/aip-grabus/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+  "model_is_symlink": false,
+  "previous_eval_directory": "/project/aip-grabus/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/defence",
+  "eval_directory": "/project/aip-grabus/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+  "weights": [
+    "model-00001-of-00003.safetensors",
+    "model-00002-of-00003.safetensors",
+    "model-00003-of-00003.safetensors"
+  ],
+  "checkpoint_file_inodes_and_sizes_preserved": true,
+  "metrics_sha256": "6559bcc84a73b2f01c35b789b7bf59cd3f8bed08d926ea7b5983abdfbc0dcbde"
+}

@@ -8,6 +8,17 @@ artifacts/tamia/*
 !artifacts/tamia/evals/
 !artifacts/tamia/evals/**
 artifacts/tamia/evals/**/samples_*.jsonl
+!artifacts/tamia/runs/
+!artifacts/tamia/runs/**/
+!artifacts/tamia/runs/**/*.json
+!artifacts/tamia/runs/**/*.yaml
+!artifacts/tamia/runs/**/*.yml
+!artifacts/tamia/runs/**/*.py
+!artifacts/tamia/runs/**/*.sbatch
+!artifacts/tamia/runs/**/*.before-layout
+!artifacts/tamia/runs/**/*.md
+artifacts/tamia/runs/**/*.log
+artifacts/tamia/runs/**/wandb/
 .venv-train
 .venv-eval
 wandb/

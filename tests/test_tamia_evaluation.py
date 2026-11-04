@@ -652,6 +652,8 @@ def test_tamia_scripts_and_nine_descriptive_registry_entries():
     assert {path.name for path in SCRIPTS.glob("*.sbatch")} == {
         "train.sbatch",
         "train_seam_relearning_sweep.sbatch",
+        "train_seam_defence.sbatch",
+        "eval_seam_defence.sbatch",
         "analysis_gen_ll.sbatch",
         "analysis_gen_ll_tar_archived.sbatch",
         "analysis_gen_ll_tar_archived_bs8_docs64.sbatch",

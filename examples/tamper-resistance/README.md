@@ -5,7 +5,7 @@
 - Request access to [`cais/wmdp-bio-forget-corpus`](https://huggingface.co/datasets/cais/wmdp-bio-forget-corpus)
 - Update setups in the runner scripts `scripts/slurm/tamia`
 
-Tamia uses six supported Slurm entry points. WMDP-Bio robust and MMLU-no-bio
+The original Tamia workflows use six supported Slurm entry points. WMDP-Bio robust and MMLU-no-bio
 run in one paired job, and each trajectory runs in one allocation. See
 [Tamia interfaces and retired-file inventory](docs/tamia-refactor.md) for arguments,
 checkpoint selection, and opt-in trajectory deletion. Regenerate older HPO
@@ -13,6 +13,9 @@ manifests before using them with the consolidated scripts.
 
 Mila uses four supported scripts for training, BeaverTails single-model or
 checkpoint evaluation, and parameter-norm analysis. See [Mila interfaces and retired-file inventory](docs/mila-refactor.md).
+
+For the authors' SEAM defence and relearning sweep, see the
+[SEAM scripts and artifact layout](docs/seam.md).
 
 ## Quickstart
 

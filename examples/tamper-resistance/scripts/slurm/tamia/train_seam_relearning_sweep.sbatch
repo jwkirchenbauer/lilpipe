@@ -30,7 +30,7 @@ seam_env=${SEAM_ENV:-$SCRATCH/lilpipe/seam-official/venv}
 # one-step optimizer/checkpoint smoke test before the five full attacks.
 model=$(realpath "${1:?missing defended model path}")
 models_root=$(realpath "${2:?missing model output directory}")
-run_root=$(realpath "${3:?missing run metadata directory}")
+run_root=$(realpath -m "${3:?missing run metadata directory}")
 smoke=${4:-false}
 base=$(basename "$model")
 learning_rates=(2e-5 5e-5 8e-5 1e-4 2e-4)
@@ -66,7 +66,7 @@ for lr in "${learning_rates[@]}"; do
 done
 
 if [[ "$smoke" == true ]]; then
-    smoke_output="$run_root/smoke-$SLURM_JOB_ID"
+    smoke_output="$models_root/$base--attack-smoke-$SLURM_JOB_ID"
     train_attack "${gpus[0]}" 2e-5 "$smoke_output" "$base--attack-smoke-$SLURM_JOB_ID" \
       --max_steps 1 --save_steps 1 > "$run_root/smoke-$SLURM_JOB_ID.log" 2>&1
     "$seam_env/bin/python" - "$smoke_output" <<'PY'

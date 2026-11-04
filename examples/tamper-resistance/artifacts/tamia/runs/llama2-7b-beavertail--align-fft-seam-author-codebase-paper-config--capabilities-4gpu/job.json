@@ -1,0 +1,32 @@
+{
+  "job_id": "666227",
+  "command": [
+    "sbatch",
+    "--parsable",
+    "scripts/slurm/tamia/eval_capabilities.sbatch",
+    "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/capabilities-4gpu"
+  ],
+  "cwd": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance",
+  "model": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+  "output": "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/capabilities-4gpu",
+  "script_sha256": "3e943a49a9631302628a470399669cd70fa12a6f518301848494e82ac517aebd",
+  "gpus": 4,
+  "parallelism": "four model replicas; distributed evaluation requests",
+  "batch_size": "auto:4",
+  "max_batch_size_per_gpu": 128,
+  "num_fewshot": 0,
+  "tasks": [
+    "mmlu",
+    "truthfulqa_mc1",
+    "arc_easy",
+    "hellaswag"
+  ],
+  "lm_eval_version": "0.4.11",
+  "previous_authors_evaluation_job": "666150",
+  "previous_authors_evaluation_elapsed_seconds": 1164,
+  "comparison_notes": [
+    "Previous evaluation also included harmfulness generation and classification.",
+    "Previous authors environment used lm-eval 0.4.7; this uses the project lockfile."
+  ]
+}

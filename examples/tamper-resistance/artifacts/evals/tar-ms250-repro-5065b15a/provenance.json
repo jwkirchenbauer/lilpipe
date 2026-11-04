@@ -1,9 +1,0 @@
-{
-  "commit": "5065b15a0f1408f1830be48b846ad2b9e8fff008",
-  "original_candidate": "grid-002--009",
-  "tolerance_pp": 1.0,
-  "attack_learning_rate": 5e-06,
-  "attack_steps": 128,
-  "attack_checkout_commit": "ea41c05c",
-  "attack_checkout": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance"
-}

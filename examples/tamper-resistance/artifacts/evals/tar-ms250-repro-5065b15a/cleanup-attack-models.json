@@ -1,7 +1,0 @@
-{
-  "removed": [
-    "/scratch/m/mgamal/lilpipe/examples/tamper-resistance/artifacts/generated/hpo/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-ms128--hpo/models",
-    "/scratch/m/mgamal/lilpipe/runs/tar-ms250-repro-5065b15a/examples/tamper-resistance/artifacts/generated/runs/tar-ms250-repro-5065b15a/relearn-lr5e-6-ms128"
-  ],
-  "preserved": "All archived models, defence models, configs and evaluation results"
-}

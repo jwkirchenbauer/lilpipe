@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import importlib.util
+import json
+import sys
 import runpy
 from pathlib import Path
 
@@ -46,27 +48,59 @@ def test_attack_checkpoint_resolves_baseline_and_retained_steps(tmp_path: Path) 
 def test_beavertails_trajectory_plot(monkeypatch, tmp_path: Path) -> None:
     pytest.importorskip("pandas")
     pytest.importorskip("seaborn")
-    root = tmp_path / "artifacts/tamia/evals/llama2-7b-beavertail"
-    experiments = [
-        "llama2-7b-beavertail--align-fft-seam--data-disjoint--relearn-fft-"
-        "ms250--hpo--disjoint--{index:03d}",
-        "llama2-7b-beavertail--align-fft-seam-legacy--data-disjoint--relearn-fft-ms250",
-    ]
-    for experiment in experiments:
-        for index in range(1, 5):
-            for step in range(0, 251, 25):
-                output = root / experiment.format(index=index) / f"checkpoint-{step}"
-                output.mkdir(parents=True, exist_ok=True)
-                (output / "summary.json").write_text(
-                    '{"post": {"harmfulness": 0.25, "capability": 0.5}}'
+    root = tmp_path / "artifacts/tamia/evals"
+    base = "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config"
+    learning_rates = ["2e-5", "5e-5", "8e-5", "1e-4", "2e-4"]
+    task_results = {
+        "mmlu": {"acc,none": 0.1},
+        "truthfulqa_mc1": {"acc,none": 0.3},
+        "arc_easy": {"acc,none": 0.9, "acc_norm,none": 0.5},
+        "hellaswag": {"acc,none": 0.8, "acc_norm,none": 0.7},
+    }
+    for lr in learning_rates:
+        for step in range(0, 251, 50):
+            directory = (
+                root / base
+                if step == 0
+                else (
+                    root
+                    / f"{base}--data-overlapping--relearn-fft-author-codebase-lr{lr}-ms250"
+                    / f"checkpoint-{step}"
                 )
+            )
+            capability = (
+                directory
+                / ("capabilities-4gpu" if step == 0 else "capabilities")
+                / "model"
+            )
+            harmfulness = directory / (
+                "harmfulness-4gpu-bs16/metrics.json"
+                if step == 0
+                else "harmfulness.json"
+            )
+            capability.mkdir(parents=True, exist_ok=True)
+            harmfulness.parent.mkdir(parents=True, exist_ok=True)
+            (capability / "results_2026.json").write_text(
+                json.dumps({"results": task_results})
+            )
+            harmfulness.write_text(
+                json.dumps({"harmfulness": 0.0435 if step == 0 else step / 1000})
+            )
 
     monkeypatch.chdir(tmp_path)
-    namespace = runpy.run_path(str(PLOTTER))
-
-    assert set(namespace["df"]["Method"]) == {"SEAM", "SEAM (legacy reproduced)"}
-    assert set(namespace["df"]["Eval"]) == {"Harmfulness", "Capability"}
+    monkeypatch.setattr(sys, "argv", [str(PLOTTER)])
+    namespace = runpy.run_path(str(PLOTTER), run_name="__main__")
+    df = namespace["df"]
+    assert len(df) == 60
+    assert set(df["LR"]) == set(learning_rates)
+    assert set(df["Eval"]) == {"Harmfulness ↓", "Capability ↑"}
+    assert set(df["Relearning step"]) == {0, 50, 100, 150, 200, 250}
+    assert df.loc[df["Eval"] == "Capability ↑", "Score (%)"].tolist() == pytest.approx(
+        [40] * 30
+    )
+    baseline = df[(df["Eval"] == "Harmfulness ↓") & (df["Relearning step"] == 0)]
+    assert baseline["Score (%)"].tolist() == pytest.approx([4.35] * 5)
     assert (
         tmp_path / "artifacts/figures/"
-        "llama2-7b-beavertail-relearning-trajectory-ms250--lrs.pdf"
+        "llama2-7b-beavertail-relearning-trajectory-ms250--author-codebase-paper-config.pdf"
     ).is_file()

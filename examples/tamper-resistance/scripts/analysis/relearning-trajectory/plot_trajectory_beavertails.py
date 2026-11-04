@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
-"""Plot the BeaverTails relearning trajectories."""
+"""Plot the authors' SEAM relearning sweep with our four-GPU evaluations."""
 
+import argparse
+import glob
 import json
 import os
 import os.path as osp
@@ -8,141 +10,100 @@ import os.path as osp
 import pandas as pd
 import seaborn as sns
 
-root = "artifacts/tamia/evals/llama2-7b-beavertail"
-seam_og_root = osp.join(
-    "artifacts/tamia/evals",
-    "llama2-7b-beavertail--align-fft-seam-author-codebase--relearn-fft-ms1000",
-    "llama2-7b-beavertail--align-fft-seam-author-codebase--relearn-fft-ms1000",
-)
-learning_rates = [5e-5, 1e-4]
-steps = range(0, 201, 100)
-configs = [
-    {
-        "path": osp.join(
-            root,
-            "llama2-7b-beavertail--align-fft-seam--data-disjoint--"
-            f"relearn-fft-ms250--hpo--disjoint--{index:03d}/checkpoint-{step}/"
-            "summary.json",
-        ),
-        "method": "SEAM",
-        "lr": lr,
-        "step": step,
-    }
-    for index, lr in enumerate(learning_rates, 1)
-    for step in steps
-] + [
-    {
-        "path": osp.join(
-            root,
-            "llama2-7b-beavertail--align-fft-seam-legacy--data-disjoint--"
-            f"relearn-fft-ms250/checkpoint-{step}/summary.json",
-        ),
-        "method": "SEAM (legacy reproduced)",
-        "lr": 1e-4,
-        "step": step,
-    }
-    for step in steps
-]
 
-# configs += [
-#         {
-#             "path": osp.join(
-#                 root,
-#                 "llama2-7b-beavertail--align-fft-seam-author-paper--data-disjoint--"
-#                 "relearn-fft-ms250--hpo--disjoint--002/"
-#                 f"checkpoint-{step}/summary.json",
-#             ),
-#             "method": "SEAM (legacy old)",
-#             "lr": 1e-4,
-#             "step": step,
-#         }
-#         for step in steps
-#     ]
-
-# configs = [
-#     {
-#         "path": (
-#             "artifacts/mila/evals/qwen3-06b-beavertail/"
-#             # Uncomment the desired model's result path.
-#             # "qwen3-0.6b-beavertail--align-fft-seam--relearn--hpo"
-#             "qwen3-0.6b-beavertail--align-fft-seam-legacy--relearn--hpo"
-#             f"--beta{beta}--{lr_index:03d}/"
-#             f"checkpoint-{step}/summary.json"
-#         ),
-#         "method": f"seam-{beta}",
-#         "lr": lr,
-#         "step": step,
-#     }
-#     for beta in (0.01, 0.1, 1.0)
-#     for lr_index, lr in enumerate(learning_rates, 1)
-#     for step in steps
-# ]
-
-# configs = [
-#     {
-#         "path": osp.join(
-#             root,
-#             "llama2-7b-beavertail--align-fft-seam--data-disjoint--"
-#             f"relearn-fft-ms1000--hpo--disjoint--{index:03d}/checkpoint-{step}/"
-#             "summary.json",
-#         ),
-#         "method": "SEAM",
-#         "lr": lr,
-#         "step": step,
-#     }
-#     for index, (lr, interval) in enumerate(
-#         [(2e-5, 50), (5e-5, 50), (8e-5, 50), (1e-4, 100), (2e-4, 100)], 1
-#     )
-#     for step in range(0, 1001, interval)
-# ] + [
-#     {
-#         "path": osp.join(seam_og_root, f"checkpoint-{step}/summary.json"),
-#         "method": "SEAM-OG",
-#         "lr": 5e-5,
-#         "step": step,
-#     }
-#     for step in range(0, 1001, 50)
-# ]
-
-rows = []
-for config in configs:
-    with open(config["path"]) as f:
-        result = json.load(f)
-    for evaluation, metric in (
-        ("Harmfulness", "harmfulness"),
-        ("Capability", "capability"),
+def get_lm_eval_results(path):
+    """Load task metrics, letting later result files overwrite earlier ones."""
+    results = {}
+    for result_path in sorted(
+        glob.glob(osp.join(path, "**", "results_*.json"), recursive=True)
     ):
-        rows.append(
-            {
-                "Relearning step": config["step"],
-                "Score (%)": 100 * result["post"][metric],
-                "Method": config["method"],
-                "LR": config["lr"],
-                "Eval": evaluation,
-            }
-        )
+        with open(result_path) as handle:
+            results.update(json.load(handle)["results"])
+    return results
 
-df = pd.DataFrame(rows)
-sns.set_theme(context="paper", style="whitegrid", font_scale=1.5)
-g = sns.relplot(
-    data=df,
-    x="Relearning step",
-    y="Score (%)",
-    col="Eval",
-    hue="Method",
-    size="LR",
-    kind="line",
-    marker="o",
-    height=3.4,
-)
-for text in g.legend.texts:
-    try:
-        text.set_text(f"{float(text.get_text()):.0e}")
-    except ValueError:
-        pass
 
-output = (
-    "artifacts/figures/" "llama2-7b-beavertail-relearning-trajectory-ms250--lrs.pdf"
-)
-os.makedirs(osp.dirname(output), exist_ok=True)
-g.figure.savefig(output, bbox_inches="tight")
+task_to_metric = {
+    "mmlu": "acc,none",
+    "truthfulqa_mc1": "acc,none",
+    "arc_easy": "acc_norm,none",
+    "hellaswag": "acc_norm,none",
+}
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--rootdir", default="artifacts/tamia/evals")
+    parser.add_argument(
+        "--outpath",
+        default=(
+            "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms250"
+            "--author-codebase-paper-config.pdf"
+        ),
+    )
+    args = parser.parse_args()
+
+    base = "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config"
+    learning_rates = ["2e-5", "5e-5", "8e-5", "1e-4", "2e-4"]
+    configs = [
+        {
+            "path": osp.join(args.rootdir, base),
+            "capabilities": "capabilities-4gpu",
+            "harmfulness": "harmfulness-4gpu-bs16/metrics.json",
+            "lr": lr,
+            "step": 0,
+        }
+        for lr in learning_rates
+    ] + [
+        {
+            "path": osp.join(
+                args.rootdir,
+                f"{base}--data-overlapping--relearn-fft-author-codebase-lr{lr}-ms250",
+                f"checkpoint-{step}",
+            ),
+            "capabilities": "capabilities",
+            "harmfulness": "harmfulness.json",
+            "lr": lr,
+            "step": step,
+        }
+        for lr in learning_rates
+        for step in range(50, 251, 50)
+    ]
+
+    rows = []
+    for cfg in configs:
+        task_results = get_lm_eval_results(osp.join(cfg["path"], cfg["capabilities"]))
+        capability = sum(
+            task_results[task][metric] for task, metric in task_to_metric.items()
+        ) / len(task_to_metric)
+        with open(osp.join(cfg["path"], cfg["harmfulness"])) as handle:
+            harmfulness = json.load(handle)["harmfulness"]
+        for evaluation, score in (
+            ("Harmfulness ↓", harmfulness),
+            ("Capability ↑", capability),
+        ):
+            rows.append(
+                {
+                    "Relearning step": cfg["step"],
+                    "Score (%)": 100 * score,
+                    "LR": cfg["lr"],
+                    "Eval": evaluation,
+                }
+            )
+
+    df = pd.DataFrame(rows)
+    sns.set_theme(context="paper", style="whitegrid", font_scale=1.5)
+    grid = sns.relplot(
+        data=df,
+        x="Relearning step",
+        y="Score (%)",
+        col="Eval",
+        hue="LR",
+        hue_order=learning_rates,
+        kind="line",
+        marker="o",
+        errorbar=None,
+        height=3.4,
+    )
+    grid.set(xticks=list(range(0, 251, 50)), ylim=(0, 100))
+    grid.set_titles("{col_name}")
+    os.makedirs(osp.dirname(args.outpath) or ".", exist_ok=True)
+    grid.figure.savefig(args.outpath, bbox_inches="tight")

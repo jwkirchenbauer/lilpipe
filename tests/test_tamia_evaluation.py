@@ -651,6 +651,7 @@ def test_wmdp_wrappers_launch_both_tasks_once_per_checkpoint(
 def test_tamia_scripts_and_nine_descriptive_registry_entries():
     assert {path.name for path in SCRIPTS.glob("*.sbatch")} == {
         "train.sbatch",
+        "train_seam_relearning_sweep.sbatch",
         "analysis_gen_ll.sbatch",
         "analysis_gen_ll_tar_archived.sbatch",
         "analysis_gen_ll_tar_archived_bs8_docs64.sbatch",
@@ -660,6 +661,8 @@ def test_tamia_scripts_and_nine_descriptive_registry_entries():
         "analysis_hessian_density_tar_archived.sbatch",
         "eval_wmdp_mmlu.sbatch",
         "eval_wmdp_mmlu_trajectory.sbatch",
+        "eval_capabilities.sbatch",
+        "eval_harmfulness_and_capabilities.sbatch",
         "eval_beavertails_capabilities.sbatch",
         "eval_beavertails_capabilities_trajectory.sbatch",
     }
@@ -683,3 +686,147 @@ def test_tamia_scripts_and_nine_descriptive_registry_entries():
         "models"
     ]
     assert not any("minicpm" in name for name in models)
+
+
+@pytest.mark.parametrize("exit_code", [0, 7])
+def test_capabilities_wrapper_launches_four_replicas_and_forwards_options(
+    tmp_path, exit_code
+):
+    calls = tmp_path / "calls.json"
+    launcher = tmp_path / "accelerate.py"
+    launcher.write_text(
+        "import json, os, sys\n"
+        "from pathlib import Path\n"
+        "Path(os.environ['CALLS']).write_text(json.dumps({"
+        "'args': sys.argv[1:], 'gpus': os.environ['CUDA_VISIBLE_DEVICES']}))\n"
+        "sys.exit(int(os.environ['EXIT_CODE']))\n"
+    )
+    bash_env = tmp_path / "bash-env"
+    bash_env.write_text(
+        "uv() { :; }\n" 'accelerate() { "$TEST_PYTHON" "$TEST_LAUNCHER" "$@"; }\n'
+    )
+    activate = tmp_path / "job/.venv-123/bin/activate"
+    activate.parent.mkdir(parents=True)
+    activate.write_text(":\n")
+    result = subprocess.run(
+        [
+            "bash",
+            str(SCRIPTS / "eval_capabilities.sbatch"),
+            "model with spaces",
+            "evaluation output",
+            "--limit",
+            "2",
+        ],
+        cwd=tmp_path,
+        env={
+            **os.environ,
+            "BASH_ENV": str(bash_env),
+            "TEST_PYTHON": sys.executable,
+            "TEST_LAUNCHER": str(launcher),
+            "SCRATCH": str(tmp_path / "scratch"),
+            "SLURM_TMPDIR": str(tmp_path / "job"),
+            "SLURM_JOB_ID": "123",
+            "CUDA_VISIBLE_DEVICES": "0,1,2,3",
+            "CALLS": str(calls),
+            "EXIT_CODE": str(exit_code),
+        },
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == exit_code, result.stderr
+    call = json.loads(calls.read_text())
+    args = call["args"]
+    assert call["gpus"] == "0,1,2,3"
+    assert args[:2] == ["launch", "--multi_gpu"]
+    assert args[args.index("--num_processes") + 1] == "4"
+    assert args[args.index("-m") + 1 : args.index("-m") + 3] == ["lm_eval", "run"]
+    assert args[args.index("--tasks") + 1].split(",") == [
+        "mmlu",
+        "truthfulqa_mc1",
+        "arc_easy",
+        "hellaswag",
+    ]
+    assert args[args.index("--model_args") + 1] == (
+        "pretrained=model with spaces,dtype=bfloat16,trust_remote_code=True"
+    )
+    assert args[args.index("--output_path") + 1] == "evaluation output"
+    assert args[args.index("--batch_size") + 1] == "auto:4"
+    assert args[args.index("--max_batch_size") + 1] == "128"
+    assert args[-2:] == ["--limit", "2"]
+
+
+@pytest.mark.parametrize("failure", ["none", "capabilities", "harmfulness"])
+def test_combined_evaluation_runs_sequentially(tmp_path, failure):
+    calls = tmp_path / "calls.jsonl"
+    launcher = tmp_path / "launcher.py"
+    launcher.write_text(
+        "import json, os, sys\n"
+        "with open(os.environ['CALLS'], 'a') as f:\n"
+        "    f.write(json.dumps(sys.argv[1:]) + '\\n')\n"
+        "sys.exit(7 if sys.argv[1] == os.environ['FAILURE'] else 0)\n"
+    )
+    bash_env = tmp_path / "bash-env"
+    bash_env.write_text(
+        "uv() { :; }\n"
+        'accelerate() { "$TEST_PYTHON" "$TEST_LAUNCHER" capabilities "$@"; }\n'
+    )
+    activate = tmp_path / "job/.venv-123/bin/activate"
+    activate.parent.mkdir(parents=True)
+    activate.write_text(":\n")
+    seam_python = tmp_path / "seam env/bin/python"
+    seam_python.parent.mkdir(parents=True)
+    seam_python.write_text(
+        '#!/bin/bash\nexec "$TEST_PYTHON" "$TEST_LAUNCHER" harmfulness "$@"\n'
+    )
+    seam_python.chmod(0o755)
+    workdir = tmp_path / "tamper-resistance"
+    workdir.mkdir()
+    wrapper = tmp_path / "seam/scripts/eval_harmfulness.py"
+    wrapper.parent.mkdir(parents=True)
+    wrapper.touch()
+    result = subprocess.run(
+        [
+            "bash",
+            str(SCRIPTS / "eval_harmfulness_and_capabilities.sbatch"),
+            "model with spaces",
+            "evaluation output",
+        ],
+        cwd=workdir,
+        env={
+            **os.environ,
+            "BASH_ENV": str(bash_env),
+            "TEST_PYTHON": sys.executable,
+            "TEST_LAUNCHER": str(launcher),
+            "SEAM_ENV": str(seam_python.parents[1]),
+            "SCRATCH": str(tmp_path / "scratch"),
+            "SLURM_TMPDIR": str(tmp_path / "job"),
+            "SLURM_JOB_ID": "123",
+            "CALLS": str(calls),
+            "FAILURE": failure,
+        },
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == (0 if failure == "none" else 7), result.stderr
+    recorded = [json.loads(line) for line in calls.read_text().splitlines()]
+    assert [call[0] for call in recorded] == (
+        ["capabilities"]
+        if failure == "capabilities"
+        else ["capabilities", "harmfulness"]
+    )
+    cap = recorded[0]
+    assert cap[cap.index("--output_path") + 1] == "evaluation output/capabilities"
+    assert cap[cap.index("--batch_size") + 1] == "auto:4"
+    assert cap[cap.index("--max_batch_size") + 1] == "128"
+    assert "--limit" not in cap
+    for call in recorded:
+        assert call[call.index("--num_processes") + 1] == "4"
+    if len(recorded) == 2:
+        harm = recorded[1]
+        assert harm[-5:] == [
+            "model with spaces",
+            "--batch-size",
+            "16",
+            "--output",
+            "evaluation output/harmfulness.json",
+        ]

@@ -1,0 +1,33 @@
+TrainingArguments:
+  output_dir: /project/aip-grabus/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config
+  per_device_train_batch_size: 4
+  save_strategy: 'no'
+  num_train_epochs: 1
+  learning_rate: 5.0e-05
+  weight_decay: 0.01
+  lr_scheduler_type: cosine
+  warmup_ratio: 0.1
+  gradient_accumulation_steps: 1
+  report_to: wandb
+  logging_steps: 10
+  max_grad_norm: null
+  bf16: true
+  optim: adamw_torch
+  seed: 42
+EvalArguments:
+  model_name: /project/aip-grabus/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config
+  tokenizer_name: meta-llama/Llama-2-7b-chat-hf
+  pre_utility: false
+  post_utility: true
+  attack: false
+  attack_dataset: true
+  attack_size: 1000
+  utility_tasks:
+  - mmlu
+  - truthfulqa_mc1
+  - arc_easy
+  - hellaswag
+  utility_batch_size: 24
+  wandb_run_name: llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--defence-eval
+  lora_attack: false
+  wandb_project_name: seam

@@ -1,0 +1,10 @@
+{
+  "generation_job_id": 667372,
+  "generation_elapsed": "00:07:27",
+  "evaluation_job_id": 667373,
+  "evaluation_elapsed": "00:29:22",
+  "state": "COMPLETED",
+  "exit_code": "0:0",
+  "unique_evaluations": 8,
+  "sample_limit": null
+}

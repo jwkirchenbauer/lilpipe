@@ -1,0 +1,10 @@
+{
+  "model": "/scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590",
+  "evaluator": "examples/seam/src/utils/metrics.py:eval_harmfulness",
+  "harmfulness": 0.04747796346433461,
+  "samples": 100,
+  "num_processes": 4,
+  "seed": 42,
+  "batch_size": 16,
+  "gpt_harmfulness_skipped": true
+}

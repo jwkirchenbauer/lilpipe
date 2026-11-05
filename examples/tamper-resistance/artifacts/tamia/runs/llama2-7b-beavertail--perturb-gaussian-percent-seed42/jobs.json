@@ -1,0 +1,83 @@
+{
+  "submitted_at": "2026-11-04T18:17:03.750248+00:00",
+  "starting_model": "meta-llama/Llama-2-7b-chat-hf",
+  "reference_revision": "f5db02db724555f92da89c216ac04704f23d4590",
+  "starting_weights": "/scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590",
+  "noise_seed": 42,
+  "percentages": [
+    0.1,
+    0.25,
+    0.5,
+    0.75
+  ],
+  "fractions": [
+    0.001,
+    0.0025,
+    0.005,
+    0.0075
+  ],
+  "normalization": "delta = fraction * ||starting_parameters||_2 * z / ||z||_2",
+  "distribution": "one standard Gaussian direction, shared across all four fractions",
+  "parameter_dtype": "bfloat16",
+  "norm_accumulation_dtype": "float64",
+  "evaluation_tasks": [
+    "mmlu",
+    "truthfulqa_mc1",
+    "arc_easy",
+    "hellaswag",
+    "gsm8k"
+  ],
+  "capability_num_fewshot": 0,
+  "gsm8k_num_fewshot": 5,
+  "sample_limit": null,
+  "models": [
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.001-seed42",
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.0025-seed42",
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.005-seed42",
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.0075-seed42"
+  ],
+  "evals": [
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--perturb-gaussian-l2r0.001-seed42",
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--perturb-gaussian-l2r0.0025-seed42",
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--perturb-gaussian-l2r0.005-seed42",
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--perturb-gaussian-l2r0.0075-seed42"
+  ],
+  "hashes": {
+    "examples/tamper-resistance/scripts/slurm/tamia/analysis_perturb_model.sbatch": "4a8e8d84a6f13ebf82b171e747e8988f60960c1b099289769d63bb52ba73a0ac",
+    "examples/tamper-resistance/scripts/slurm/tamia/eval_capability_models.sbatch": "573fb4543201e65dd4866c977d2612d3eb2ed0845d811ed4f69c4705d29ed27c",
+    "examples/tamper-resistance/scripts/analysis/parameter-noise/perturb_model.py": "6c9a0412891ff6dc1ca682ec9d9b01b739bb97e1c852af28c25ac2a79c27b86f",
+    "examples/tamper-resistance/scripts/slurm/tamia/eval_capabilities.sbatch": "28101acc20657202d885bbb4069e13ccb5eef2038434fef45652c91fc8daad0f"
+  },
+  "cwd": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance",
+  "generation_job_id": "667372",
+  "generation_command": [
+    "sbatch",
+    "--parsable",
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/analysis_perturb_model.sbatch",
+    "--model",
+    "/scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590",
+    "--output-prefix",
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian",
+    "--output",
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--perturb-gaussian-percent-seed42/perturbations.json",
+    "--percentages",
+    "0.1",
+    "0.25",
+    "0.5",
+    "0.75",
+    "--seed",
+    "42"
+  ],
+  "evaluation_job_id": "667373",
+  "evaluation_command": [
+    "sbatch",
+    "--parsable",
+    "--dependency=afterok:667372",
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/eval_capability_models.sbatch",
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals",
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.001-seed42",
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.0025-seed42",
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.005-seed42",
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.0075-seed42"
+  ]
+}

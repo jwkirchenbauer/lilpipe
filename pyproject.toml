@@ -34,7 +34,8 @@ where = ["src"]
 [tool.black]
 line-length = 88
 target-version = ["py312"]
-extend-exclude = "^/examples/(?!tamper-resistance/|weight-steering/)"
+# Historical submitted scripts must remain byte-for-byte reproducible.
+extend-exclude = "^/examples/(?!tamper-resistance/|weight-steering/)|^/examples/(tamper-resistance|weight-steering)/artifacts/"
 
 [tool.pytest.ini_options]
 addopts = "-q"

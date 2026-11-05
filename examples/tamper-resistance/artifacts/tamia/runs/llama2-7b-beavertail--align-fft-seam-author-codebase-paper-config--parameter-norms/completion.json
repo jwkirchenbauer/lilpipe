@@ -1,0 +1,8 @@
+{
+  "job_id": 667168,
+  "state": "COMPLETED",
+  "exit_code": "0:0",
+  "elapsed": "00:02:31",
+  "gpus": 0,
+  "verified_parameter_count": 6738415616
+}

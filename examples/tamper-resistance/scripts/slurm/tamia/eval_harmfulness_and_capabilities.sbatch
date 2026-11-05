@@ -44,22 +44,30 @@ harmfulness_script=../seam/scripts/eval_harmfulness.py
 test -x "$seam_env/bin/python"
 test -f "$harmfulness_script"
 
-uv sync --frozen --group eval
-source "$UV_PROJECT_ENVIRONMENT/bin/activate"
+# Task overrides are shared with the combined evaluator; defaults retain the
+# original four-task, zero-shot protocol. GSM8K can be run separately at five-shot.
+tasks=${CAPABILITY_TASKS:-mmlu,truthfulqa_mc1,arc_easy,hellaswag}
+num_fewshot=${NUM_FEWSHOT:-0}
+max_batch_size=${MAX_BATCH_SIZE:-128}
+include_gsm8k=${INCLUDE_GSM8K:-0}
+harmfulness_only=${HARMFULNESS_ONLY:-0}
+
+evaluate_capabilities() {
+    local model=$1 output=$2 task_list=$3 shots=$4 max_batch=$5
+    CAPABILITY_TASKS="$task_list" NUM_FEWSHOT="$shots" MAX_BATCH_SIZE="$max_batch" \
+      bash scripts/slurm/tamia/eval_capabilities.sbatch "$model" "$output"
+}
 
 evaluate_model() {
     local model=$1 output=$2
     mkdir -p "$output"
     echo "Evaluating $model at $(date -Is)"
-    accelerate launch --multi_gpu --num_processes 4 --num_machines 1 \
-      --num_cpu_threads_per_process 8 -m lm_eval run \
-      --model hf \
-      --model_args "pretrained=$model,dtype=bfloat16,trust_remote_code=True" \
-      --tasks mmlu,truthfulqa_mc1,arc_easy,hellaswag \
-      --num_fewshot 0 \
-      --batch_size auto:4 \
-      --max_batch_size 128 \
-      --output_path "$output/capabilities"
+    if [[ "$harmfulness_only" != 1 ]]; then
+        evaluate_capabilities "$model" "$output/capabilities" "$tasks" "$num_fewshot" "$max_batch_size"
+        if [[ "$include_gsm8k" == 1 ]]; then
+            evaluate_capabilities "$model" "$output/gsm8k-5shot" gsm8k 5 32
+        fi
+    fi
 
     HF_DATASETS_CACHE="$XDG_CACHE_HOME/huggingface-seam-datasets-3.3.1" \
     TOKENIZERS_PARALLELISM=false \
@@ -105,14 +113,17 @@ PYTHON
     for step in 50 100 150 200 250; do
         evaluate_model "$model/checkpoint-$step" "$output/checkpoint-$step"
     done
-    "$seam_env/bin/python" - "$model" "$output" <<'PYTHON'
+    "$seam_env/bin/python" - "$model" "$output" "$include_gsm8k" "$harmfulness_only" <<'PYTHON'
 import json
 import shutil
 import sys
 from pathlib import Path
 
 model, output = sys.argv[1], Path(sys.argv[2])
-shutil.copytree(output / "checkpoint-250/capabilities", output / "capabilities")
+if sys.argv[4] != "1":
+    shutil.copytree(output / "checkpoint-250/capabilities", output / "capabilities")
+    if sys.argv[3] == "1":
+        shutil.copytree(output / "checkpoint-250/gsm8k-5shot", output / "gsm8k-5shot")
 report = json.loads((output / "checkpoint-250/harmfulness.json").read_text())
 report["evaluated_model"] = report["model"]
 report["model"] = model

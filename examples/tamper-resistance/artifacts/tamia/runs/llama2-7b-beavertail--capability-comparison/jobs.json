@@ -1,0 +1,89 @@
+{
+  "created_at": "2026-11-04T14:28:23.880473+00:00",
+  "base_model": "meta-llama/Llama-2-7b-chat-hf",
+  "base_revision": "f5db02db724555f92da89c216ac04704f23d4590",
+  "defended_model": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+  "jobs": [
+    {
+      "job_id": "666936",
+      "model_slug": "llama2-7b-beavertail",
+      "model": "/scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590",
+      "output": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail/capabilities-4gpu",
+      "tasks": [
+        "mmlu",
+        "truthfulqa_mc1",
+        "arc_easy",
+        "hellaswag"
+      ],
+      "num_fewshot": 0,
+      "max_batch_size_per_gpu": 128,
+      "batch_size": "auto:4",
+      "gpus": 4,
+      "limit": null,
+      "lm_eval_version": "0.4.11",
+      "script_sha256": "28101acc20657202d885bbb4069e13ccb5eef2038434fef45652c91fc8daad0f",
+      "uv_lock_sha256": "ead81d0b3c45d754e9f81eed76db64f2b0b7080251d63f38a59269512860a515",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/eval_capabilities.sbatch",
+        "/scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail/capabilities-4gpu"
+      ],
+      "cwd": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance"
+    },
+    {
+      "job_id": "666937",
+      "model_slug": "llama2-7b-beavertail",
+      "model": "/scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590",
+      "output": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail/gsm8k-5shot",
+      "tasks": [
+        "gsm8k"
+      ],
+      "num_fewshot": 5,
+      "max_batch_size_per_gpu": 32,
+      "batch_size": "auto:4",
+      "gpus": 4,
+      "limit": null,
+      "lm_eval_version": "0.4.11",
+      "script_sha256": "28101acc20657202d885bbb4069e13ccb5eef2038434fef45652c91fc8daad0f",
+      "uv_lock_sha256": "ead81d0b3c45d754e9f81eed76db64f2b0b7080251d63f38a59269512860a515",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/eval_capabilities.sbatch",
+        "/scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail/gsm8k-5shot"
+      ],
+      "cwd": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance"
+    },
+    {
+      "job_id": "666938",
+      "model_slug": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+      "model": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+      "output": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/gsm8k-5shot",
+      "tasks": [
+        "gsm8k"
+      ],
+      "num_fewshot": 5,
+      "max_batch_size_per_gpu": 32,
+      "batch_size": "auto:4",
+      "gpus": 4,
+      "limit": null,
+      "lm_eval_version": "0.4.11",
+      "script_sha256": "28101acc20657202d885bbb4069e13ccb5eef2038434fef45652c91fc8daad0f",
+      "uv_lock_sha256": "ead81d0b3c45d754e9f81eed76db64f2b0b7080251d63f38a59269512860a515",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/eval_capabilities.sbatch",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config/gsm8k-5shot"
+      ],
+      "cwd": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance"
+    }
+  ]
+}

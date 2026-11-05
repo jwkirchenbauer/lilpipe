@@ -1,0 +1,84 @@
+{
+  "runs": [
+    {
+      "lr": "2e-5",
+      "steps": 250,
+      "epoch": 1,
+      "checkpoint_steps": [
+        50,
+        100,
+        150,
+        200,
+        250
+      ],
+      "first_logged_lr": 8.000000000000001e-06,
+      "finite_logged_losses": true,
+      "all_model_weights_present": true,
+      "save_only_model": true
+    },
+    {
+      "lr": "5e-5",
+      "steps": 250,
+      "epoch": 1,
+      "checkpoint_steps": [
+        50,
+        100,
+        150,
+        200,
+        250
+      ],
+      "first_logged_lr": 2e-05,
+      "finite_logged_losses": true,
+      "all_model_weights_present": true,
+      "save_only_model": true
+    },
+    {
+      "lr": "8e-5",
+      "steps": 250,
+      "epoch": 1,
+      "checkpoint_steps": [
+        50,
+        100,
+        150,
+        200,
+        250
+      ],
+      "first_logged_lr": 3.2000000000000005e-05,
+      "finite_logged_losses": true,
+      "all_model_weights_present": true,
+      "save_only_model": true
+    },
+    {
+      "lr": "1e-4",
+      "steps": 250,
+      "epoch": 1,
+      "checkpoint_steps": [
+        50,
+        100,
+        150,
+        200,
+        250
+      ],
+      "first_logged_lr": 4e-05,
+      "finite_logged_losses": true,
+      "all_model_weights_present": true,
+      "save_only_model": true
+    },
+    {
+      "lr": "2e-4",
+      "steps": 250,
+      "epoch": 1,
+      "checkpoint_steps": [
+        50,
+        100,
+        150,
+        200,
+        250
+      ],
+      "first_logged_lr": 8e-05,
+      "finite_logged_losses": true,
+      "all_model_weights_present": true,
+      "save_only_model": true
+    }
+  ]
+}

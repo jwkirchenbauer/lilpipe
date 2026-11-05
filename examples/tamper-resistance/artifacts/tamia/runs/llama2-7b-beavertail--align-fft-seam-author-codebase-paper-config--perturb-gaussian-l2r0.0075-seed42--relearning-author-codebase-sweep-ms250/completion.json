@@ -1,0 +1,39 @@
+{
+  "verified_at": "2026-11-05T00:17:12.822868+00:00",
+  "training_job": "668058",
+  "evaluation_jobs": [
+    "668059",
+    "668060",
+    "668061"
+  ],
+  "plot_job": "668063",
+  "all_jobs_completed": true,
+  "checkpoint_evaluations": 25,
+  "final_evaluations_reused_from_checkpoint250": 5,
+  "learning_rates": [
+    2e-05,
+    5e-05,
+    8e-05,
+    0.0001,
+    0.0002
+  ],
+  "checkpoint_steps": [
+    50,
+    100,
+    150,
+    200,
+    250
+  ],
+  "baseline_step": 0,
+  "plot_methods": [
+    "SEAM",
+    "Base",
+    "SEAM + 0.75% noise"
+  ],
+  "plot_rows": 180,
+  "evaluation_validation": "Full dataset counts, finite scores, zero-shot capabilities, five-shot GSM8K, 100 harmfulness prompts",
+  "pdf": "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms250--author-codebase-paper-config.pdf",
+  "pdf_sha256": "1626b698bf65198e55b4ec5dc7a61f8e775410ffbdd9bee1a043299b7cbeb314",
+  "pdf_visually_verified": true,
+  "plot_regression_test": "passed"
+}

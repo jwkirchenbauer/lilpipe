@@ -1,0 +1,5 @@
+{
+  "model": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+  "reused_from": "checkpoint-250",
+  "reason": "Identical model, tokenizer, and generation configuration (SHA-256 verified)"
+}

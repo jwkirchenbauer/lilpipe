@@ -1,0 +1,501 @@
+{
+  "created_at": "2026-11-05T00:47:00.998928+00:00",
+  "source_model": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+  "percentages": [
+    1,
+    2
+  ],
+  "fractions": [
+    0.01,
+    0.02
+  ],
+  "noise_seed": 42,
+  "training_seed": 42,
+  "normalization": "One shared global Gaussian direction, normalized relative to the SEAM-defended model parameter L2 norm; BF16 realized delta recorded separately",
+  "learning_rates": [
+    "2e-5",
+    "5e-5",
+    "8e-5",
+    "1e-4",
+    "2e-4"
+  ],
+  "steps": 250,
+  "checkpoint_steps": [
+    50,
+    100,
+    150,
+    200,
+    250
+  ],
+  "batch_size_per_gpu": 4,
+  "gradient_accumulation_steps": 1,
+  "samples": 1000,
+  "save_only_model": true,
+  "hashes": {
+    "scripts/slurm/tamia/analysis_perturb_model.sbatch": "4a8e8d84a6f13ebf82b171e747e8988f60960c1b099289769d63bb52ba73a0ac",
+    "scripts/slurm/tamia/eval_capability_models.sbatch": "b6252b3e23fbff19e72c05be8f37063143cc359f192adad04dfec62c7dae7fae",
+    "scripts/slurm/tamia/train_seam_relearning_sweep.sbatch": "0b8a4fe44edeed903d9d7ecd253312197004eef2c4b05793134d3f90d1a2bcea",
+    "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch": "c1af6173f5c569f861bb20976594aeaa8f47bc3de9690aa2e86f56e366ca83a3",
+    "scripts/slurm/tamia/eval_capabilities.sbatch": "28101acc20657202d885bbb4069e13ccb5eef2038434fef45652c91fc8daad0f",
+    "scripts/analysis/parameter-noise/perturb_model.py": "6c9a0412891ff6dc1ca682ec9d9b01b739bb97e1c852af28c25ac2a79c27b86f",
+    "scripts/analysis/relearning-trajectory/plot_trajectory_beavertails.py": "6e2fadc9cd5e586c95988d0af71126515ff61b8b4d21a907cab966e52c903602",
+    "../seam/scripts/train.py": "4cdf08e6ddcbbefd58c095cdb601037dc40060e529f6749d19345c18b0594915",
+    "../seam/scripts/eval_harmfulness.py": "ea35ee8262d8e622092acb79ee6d0d0e5f2cd013db0170fc1e850bc7120b623f",
+    "../seam/config/eval.yaml": "cbaf94febf071ef6ba3b2641423661a0dbfb3ab863f7d21b995a86edd9fc7f92"
+  },
+  "jobs": [
+    {
+      "stage": "noise-generation",
+      "job_id": "668194",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/submitted/analysis_perturb_model.sbatch",
+        "--model",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+        "--output-prefix",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian",
+        "--output",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/perturbations.json",
+        "--percentages",
+        "1",
+        "2",
+        "--seed",
+        "42"
+      ],
+      "environment": {
+        "INCLUDE_GSM8K": "1",
+        "INCLUDE_HARMFULNESS": "1",
+        "HARMFULNESS_ONLY": "0",
+        "CAPABILITY_TASKS": "mmlu,truthfulqa_mc1,arc_easy,hellaswag",
+        "NUM_FEWSHOT": "0",
+        "MAX_BATCH_SIZE": "128"
+      }
+    },
+    {
+      "stage": "baseline-evaluations",
+      "job_id": "668196",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=00:45:00",
+        "--dependency=afterok:668194",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/submitted/eval_capability_models.sbatch",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42"
+      ],
+      "environment": {
+        "INCLUDE_GSM8K": "1",
+        "INCLUDE_HARMFULNESS": "1",
+        "HARMFULNESS_ONLY": "0",
+        "CAPABILITY_TASKS": "mmlu,truthfulqa_mc1,arc_easy,hellaswag",
+        "NUM_FEWSHOT": "0",
+        "MAX_BATCH_SIZE": "128"
+      }
+    },
+    {
+      "stage": "train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42",
+      "job_id": "668198",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=01:00:00",
+        "--dependency=afterok:668196",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/submitted/train_seam_relearning_sweep.sbatch",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--relearning-author-codebase-sweep-ms250",
+        "true"
+      ],
+      "environment": {
+        "MODEL_SLUG": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42",
+        "INCLUDE_GSM8K": "1",
+        "INCLUDE_HARMFULNESS": "1",
+        "HARMFULNESS_ONLY": "0",
+        "CAPABILITY_TASKS": "mmlu,truthfulqa_mc1,arc_easy,hellaswag",
+        "NUM_FEWSHOT": "0",
+        "MAX_BATCH_SIZE": "128"
+      }
+    },
+    {
+      "stage": "eval-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42-2e-5-5e-5",
+      "job_id": "668200",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--dependency=afterok:668198",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/submitted/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250"
+      ],
+      "environment": {
+        "INCLUDE_GSM8K": "1",
+        "INCLUDE_HARMFULNESS": "1",
+        "HARMFULNESS_ONLY": "0",
+        "CAPABILITY_TASKS": "mmlu,truthfulqa_mc1,arc_easy,hellaswag",
+        "NUM_FEWSHOT": "0",
+        "MAX_BATCH_SIZE": "128"
+      }
+    },
+    {
+      "stage": "eval-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42-8e-5-1e-4",
+      "job_id": "668202",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--dependency=afterok:668198",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/submitted/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250"
+      ],
+      "environment": {
+        "INCLUDE_GSM8K": "1",
+        "INCLUDE_HARMFULNESS": "1",
+        "HARMFULNESS_ONLY": "0",
+        "CAPABILITY_TASKS": "mmlu,truthfulqa_mc1,arc_easy,hellaswag",
+        "NUM_FEWSHOT": "0",
+        "MAX_BATCH_SIZE": "128"
+      }
+    },
+    {
+      "stage": "eval-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42-2e-4",
+      "job_id": "668204",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--dependency=afterok:668198",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/submitted/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250"
+      ],
+      "environment": {
+        "INCLUDE_GSM8K": "1",
+        "INCLUDE_HARMFULNESS": "1",
+        "HARMFULNESS_ONLY": "0",
+        "CAPABILITY_TASKS": "mmlu,truthfulqa_mc1,arc_easy,hellaswag",
+        "NUM_FEWSHOT": "0",
+        "MAX_BATCH_SIZE": "128"
+      }
+    },
+    {
+      "stage": "train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42",
+      "job_id": "668206",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--time=01:00:00",
+        "--dependency=afterok:668196",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/submitted/train_seam_relearning_sweep.sbatch",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--relearning-author-codebase-sweep-ms250",
+        "true"
+      ],
+      "environment": {
+        "MODEL_SLUG": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42",
+        "INCLUDE_GSM8K": "1",
+        "INCLUDE_HARMFULNESS": "1",
+        "HARMFULNESS_ONLY": "0",
+        "CAPABILITY_TASKS": "mmlu,truthfulqa_mc1,arc_easy,hellaswag",
+        "NUM_FEWSHOT": "0",
+        "MAX_BATCH_SIZE": "128"
+      }
+    },
+    {
+      "stage": "eval-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42-2e-5-5e-5",
+      "job_id": "668208",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--dependency=afterok:668206",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/submitted/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250"
+      ],
+      "environment": {
+        "INCLUDE_GSM8K": "1",
+        "INCLUDE_HARMFULNESS": "1",
+        "HARMFULNESS_ONLY": "0",
+        "CAPABILITY_TASKS": "mmlu,truthfulqa_mc1,arc_easy,hellaswag",
+        "NUM_FEWSHOT": "0",
+        "MAX_BATCH_SIZE": "128"
+      }
+    },
+    {
+      "stage": "eval-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42-8e-5-1e-4",
+      "job_id": "668210",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--dependency=afterok:668206",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/submitted/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250"
+      ],
+      "environment": {
+        "INCLUDE_GSM8K": "1",
+        "INCLUDE_HARMFULNESS": "1",
+        "HARMFULNESS_ONLY": "0",
+        "CAPABILITY_TASKS": "mmlu,truthfulqa_mc1,arc_easy,hellaswag",
+        "NUM_FEWSHOT": "0",
+        "MAX_BATCH_SIZE": "128"
+      }
+    },
+    {
+      "stage": "eval-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42-2e-4",
+      "job_id": "668212",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--dependency=afterok:668206",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/submitted/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250"
+      ],
+      "environment": {
+        "INCLUDE_GSM8K": "1",
+        "INCLUDE_HARMFULNESS": "1",
+        "HARMFULNESS_ONLY": "0",
+        "CAPABILITY_TASKS": "mmlu,truthfulqa_mc1,arc_easy,hellaswag",
+        "NUM_FEWSHOT": "0",
+        "MAX_BATCH_SIZE": "128"
+      }
+    },
+    {
+      "stage": "plot-both-comparisons",
+      "job_id": "668214",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--dependency=afterok:668200:668202:668204:668208:668210:668212",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/submitted/plot.sbatch"
+      ],
+      "environment": {
+        "INCLUDE_GSM8K": "1",
+        "INCLUDE_HARMFULNESS": "1",
+        "HARMFULNESS_ONLY": "0",
+        "CAPABILITY_TASKS": "mmlu,truthfulqa_mc1,arc_easy,hellaswag",
+        "NUM_FEWSHOT": "0",
+        "MAX_BATCH_SIZE": "128"
+      }
+    }
+  ],
+  "submission_complete": true,
+  "evaluation_recovery": {
+    "reason": "lm-eval caught OSError(36, File name too long) and silently skipped JSON saves for absolute model paths",
+    "created_at": "2026-11-05T01:31:55.666616+00:00",
+    "superseded_job_ids": [
+      "668200",
+      "668202",
+      "668204",
+      "668208",
+      "668210",
+      "668212",
+      "668214"
+    ],
+    "script_sha256": "645c49c123c9e043b3903208eeb1e7894a23a3f8e62d1e1c712bd8c25f1c0a3e",
+    "jobs": [
+      {
+        "stage": "eval-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42-2e-5-5e-5",
+        "job_id": "668262",
+        "replaces_job_id": "668200",
+        "command": [
+          "sbatch",
+          "--parsable",
+          "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/submitted/eval_harmfulness_and_capabilities-relative.sbatch",
+          "--checkpoints",
+          "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+          "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+          "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+          "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250"
+        ],
+        "environment": {
+          "INCLUDE_GSM8K": "1",
+          "INCLUDE_HARMFULNESS": "1",
+          "HARMFULNESS_ONLY": "0",
+          "CAPABILITY_TASKS": "mmlu,truthfulqa_mc1,arc_easy,hellaswag",
+          "NUM_FEWSHOT": "0",
+          "MAX_BATCH_SIZE": "128"
+        }
+      },
+      {
+        "stage": "eval-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42-8e-5-1e-4",
+        "job_id": "668264",
+        "replaces_job_id": "668202",
+        "command": [
+          "sbatch",
+          "--parsable",
+          "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/submitted/eval_harmfulness_and_capabilities-relative.sbatch",
+          "--checkpoints",
+          "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+          "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+          "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+          "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250"
+        ],
+        "environment": {
+          "INCLUDE_GSM8K": "1",
+          "INCLUDE_HARMFULNESS": "1",
+          "HARMFULNESS_ONLY": "0",
+          "CAPABILITY_TASKS": "mmlu,truthfulqa_mc1,arc_easy,hellaswag",
+          "NUM_FEWSHOT": "0",
+          "MAX_BATCH_SIZE": "128"
+        }
+      },
+      {
+        "stage": "eval-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42-2e-4",
+        "job_id": "668266",
+        "replaces_job_id": "668204",
+        "command": [
+          "sbatch",
+          "--parsable",
+          "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/submitted/eval_harmfulness_and_capabilities-relative.sbatch",
+          "--checkpoints",
+          "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+          "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250"
+        ],
+        "environment": {
+          "INCLUDE_GSM8K": "1",
+          "INCLUDE_HARMFULNESS": "1",
+          "HARMFULNESS_ONLY": "0",
+          "CAPABILITY_TASKS": "mmlu,truthfulqa_mc1,arc_easy,hellaswag",
+          "NUM_FEWSHOT": "0",
+          "MAX_BATCH_SIZE": "128"
+        }
+      },
+      {
+        "stage": "eval-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42-2e-5-5e-5",
+        "job_id": "668268",
+        "replaces_job_id": "668208",
+        "command": [
+          "sbatch",
+          "--parsable",
+          "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/submitted/eval_harmfulness_and_capabilities-relative.sbatch",
+          "--checkpoints",
+          "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+          "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+          "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+          "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250"
+        ],
+        "environment": {
+          "INCLUDE_GSM8K": "1",
+          "INCLUDE_HARMFULNESS": "1",
+          "HARMFULNESS_ONLY": "0",
+          "CAPABILITY_TASKS": "mmlu,truthfulqa_mc1,arc_easy,hellaswag",
+          "NUM_FEWSHOT": "0",
+          "MAX_BATCH_SIZE": "128"
+        }
+      },
+      {
+        "stage": "eval-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42-8e-5-1e-4",
+        "job_id": "668270",
+        "replaces_job_id": "668210",
+        "command": [
+          "sbatch",
+          "--parsable",
+          "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/submitted/eval_harmfulness_and_capabilities-relative.sbatch",
+          "--checkpoints",
+          "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+          "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+          "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+          "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250"
+        ],
+        "environment": {
+          "INCLUDE_GSM8K": "1",
+          "INCLUDE_HARMFULNESS": "1",
+          "HARMFULNESS_ONLY": "0",
+          "CAPABILITY_TASKS": "mmlu,truthfulqa_mc1,arc_easy,hellaswag",
+          "NUM_FEWSHOT": "0",
+          "MAX_BATCH_SIZE": "128"
+        }
+      },
+      {
+        "stage": "eval-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42-2e-4",
+        "job_id": "668272",
+        "replaces_job_id": "668212",
+        "command": [
+          "sbatch",
+          "--parsable",
+          "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/submitted/eval_harmfulness_and_capabilities-relative.sbatch",
+          "--checkpoints",
+          "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+          "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250"
+        ],
+        "environment": {
+          "INCLUDE_GSM8K": "1",
+          "INCLUDE_HARMFULNESS": "1",
+          "HARMFULNESS_ONLY": "0",
+          "CAPABILITY_TASKS": "mmlu,truthfulqa_mc1,arc_easy,hellaswag",
+          "NUM_FEWSHOT": "0",
+          "MAX_BATCH_SIZE": "128"
+        }
+      },
+      {
+        "stage": "plot-both-comparisons",
+        "job_id": "668274",
+        "replaces_job_id": "668214",
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--dependency=afterok:668262:668264:668266:668268:668270:668272",
+          "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/submitted/plot.sbatch"
+        ]
+      }
+    ],
+    "submission_complete": true
+  },
+  "local_log_canary": {
+    "created_at": "2026-11-05T02:26:50.989874+00:00",
+    "job_id": "668311",
+    "replaces_job_id": "668272",
+    "command": [
+      "sbatch",
+      "--parsable",
+      "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/submitted/eval_local_logs.sbatch",
+      "--checkpoints",
+      "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+      "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250"
+    ],
+    "environment": {
+      "INCLUDE_GSM8K": "1",
+      "INCLUDE_HARMFULNESS": "1",
+      "HARMFULNESS_ONLY": "0",
+      "CAPABILITY_TASKS": "mmlu,truthfulqa_mc1,arc_easy,hellaswag",
+      "NUM_FEWSHOT": "0",
+      "MAX_BATCH_SIZE": "128"
+    },
+    "reason": "Prolonged Lustre waits with idle GPUs; test whether node-local progress logs remove the stall; no completed checkpoints in replaced job",
+    "plot_job_id": "668274",
+    "plot_dependency_updated": true,
+    "old_job_cancelled": true
+  },
+  "colorblind_plot_update": {
+    "created_at": "2026-11-05T02:49:23.640476+00:00",
+    "job_id": "668343",
+    "replaces_job_id": "668274",
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--dependency=afterok:668262:668264:668268:668270:668311",
+      "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent1-2-seed42/submitted/plot-colorblind.sbatch"
+    ],
+    "source_sha256": "b477d75fc5a428755ff311994ea6b35319ad3f8e3207c20cd6ef4c6fce2ce822",
+    "palette": "seaborn colorblind; Base black",
+    "completed_only_previews_generated": true
+  },
+  "current_plot_job_id": "668343"
+}

@@ -1,0 +1,91 @@
+{
+  "training_job_id": 668058,
+  "elapsed": "00:06:57",
+  "runs": [
+    {
+      "lr": "2e-5",
+      "checkpoint_steps": [
+        50,
+        100,
+        150,
+        200,
+        250
+      ],
+      "final_step": 250,
+      "epoch": 1.0,
+      "finite_logged_losses": true,
+      "batch_size": 4,
+      "observed_step10_learning_rate": 8.000000000000001e-06,
+      "warmup_steps": 25,
+      "model_only_checkpoints": true
+    },
+    {
+      "lr": "5e-5",
+      "checkpoint_steps": [
+        50,
+        100,
+        150,
+        200,
+        250
+      ],
+      "final_step": 250,
+      "epoch": 1.0,
+      "finite_logged_losses": true,
+      "batch_size": 4,
+      "observed_step10_learning_rate": 2e-05,
+      "warmup_steps": 25,
+      "model_only_checkpoints": true
+    },
+    {
+      "lr": "8e-5",
+      "checkpoint_steps": [
+        50,
+        100,
+        150,
+        200,
+        250
+      ],
+      "final_step": 250,
+      "epoch": 1.0,
+      "finite_logged_losses": true,
+      "batch_size": 4,
+      "observed_step10_learning_rate": 3.2000000000000005e-05,
+      "warmup_steps": 25,
+      "model_only_checkpoints": true
+    },
+    {
+      "lr": "1e-4",
+      "checkpoint_steps": [
+        50,
+        100,
+        150,
+        200,
+        250
+      ],
+      "final_step": 250,
+      "epoch": 1.0,
+      "finite_logged_losses": true,
+      "batch_size": 4,
+      "observed_step10_learning_rate": 4e-05,
+      "warmup_steps": 25,
+      "model_only_checkpoints": true
+    },
+    {
+      "lr": "2e-4",
+      "checkpoint_steps": [
+        50,
+        100,
+        150,
+        200,
+        250
+      ],
+      "final_step": 250,
+      "epoch": 1.0,
+      "finite_logged_losses": true,
+      "batch_size": 4,
+      "observed_step10_learning_rate": 8e-05,
+      "warmup_steps": 25,
+      "model_only_checkpoints": true
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "source_model": "/scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590",
+  "seed": 42,
+  "distribution": "standard Gaussian over all named parameters; buffers excluded",
+  "shared_direction_across_fractions": true,
+  "percentages": [
+    0.1,
+    0.25,
+    0.5,
+    0.75
+  ],
+  "parameter_dtype": "bfloat16",
+  "accumulation_dtype": "float64",
+  "torch_version": "2.12.1+cu130",
+  "num_parameters": 6738415616,
+  "model_l2_norm": 1575.28587580461,
+  "gaussian_l2_norm": 82087.67982593956,
+  "models": [
+    {
+      "model": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.001-seed42",
+      "percentage": 0.1,
+      "fraction": 0.001,
+      "target_delta_l2_norm": 1.57528587580461,
+      "realized_delta_l2_norm": 1.3239217744494465,
+      "realized_fraction": 0.00084043270798275
+    },
+    {
+      "model": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.0025-seed42",
+      "percentage": 0.25,
+      "fraction": 0.0025,
+      "target_delta_l2_norm": 3.938214689511525,
+      "realized_delta_l2_norm": 4.065936859052796,
+      "realized_fraction": 0.0025810787245051847
+    },
+    {
+      "model": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.005-seed42",
+      "percentage": 0.5,
+      "fraction": 0.005,
+      "target_delta_l2_norm": 7.87642937902305,
+      "realized_delta_l2_norm": 8.172867482695157,
+      "realized_fraction": 0.005188180512645487
+    },
+    {
+      "model": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.0075-seed42",
+      "percentage": 0.75,
+      "fraction": 0.0075,
+      "target_delta_l2_norm": 11.814644068534575,
+      "realized_delta_l2_norm": 12.071357749628307,
+      "realized_fraction": 0.00766296323418923
+    }
+  ],
+  "complete": true
+}

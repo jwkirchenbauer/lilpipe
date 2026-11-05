@@ -109,3 +109,16 @@ evaluations:
     - --cpus-per-task=32
     - --mem=128G
     - --time=03:00:00
+
+  # Each LR gets its own four-GPU checkpoint evaluation allocation.
+  tamia-seam-noise-checkpoints:
+    script: scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch
+    args:
+    - --checkpoints
+    - '{model.base_model_name_or_path}'
+    - '{model.evaluation_root}/{model.id}'
+    depends_on:
+    - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
+    - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
+    sbatch_args:
+    - --export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0

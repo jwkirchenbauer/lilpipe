@@ -1,0 +1,25 @@
+{
+  "jobs": [
+    {
+      "job_id": 666936,
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:04:22"
+    },
+    {
+      "job_id": 666937,
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:04:51"
+    },
+    {
+      "job_id": 666938,
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:04:17"
+    }
+  ],
+  "gsm8k_samples_per_model": 1319,
+  "gsm8k_num_fewshot": 5,
+  "sample_limit": null
+}

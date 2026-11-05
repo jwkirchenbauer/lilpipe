@@ -15,10 +15,20 @@ SCRIPT = (
 
 
 @pytest.mark.parametrize("failure", ["none", "8e-5"])
-def test_sweep_gpu_assignment_checkpoints_and_failures(tmp_path, failure):
+@pytest.mark.parametrize("model_slug", [None, "llama-base-control"])
+@pytest.mark.parametrize("evaluate_baseline", [False, True])
+def test_sweep_gpu_assignment_checkpoints_and_failures(
+    tmp_path, failure, model_slug, evaluate_baseline
+):
     workdir = tmp_path / "tamper-resistance"
     workdir.mkdir()
     (tmp_path / "seam").mkdir()
+    baseline_call = tmp_path / "baseline-call"
+    baseline = workdir / "scripts/slurm/tamia/eval_capability_models.sbatch"
+    baseline.parent.mkdir(parents=True)
+    baseline.write_text(
+        '#!/bin/bash\ntest "$INCLUDE_HARMFULNESS" = 1\nprintf "%s\\n" "$*" > "$BASELINE_CALL"\n'
+    )
     model = tmp_path / "defended"
     models = tmp_path / "models"
     runs = tmp_path / "runs"
@@ -33,6 +43,7 @@ def test_sweep_gpu_assignment_checkpoints_and_failures(tmp_path, failure):
         "if sys.argv[1] == '-':\n"
         "    os.execv(sys.executable, [sys.executable, *sys.argv[1:]])\n"
         "args = sys.argv[2:]\n"
+        "if os.environ['EVALUATE_BASELINE'] == '1': assert Path(os.environ['BASELINE_CALL']).exists()\n"
         "def value(flag): return args[args.index(flag) + 1]\n"
         "with open(os.environ['CALLS'], 'a') as stream:\n"
         "    stream.write(json.dumps({'args': args, 'gpu': os.environ['CUDA_VISIBLE_DEVICES']}) + '\\n')\n"
@@ -59,6 +70,9 @@ def test_sweep_gpu_assignment_checkpoints_and_failures(tmp_path, failure):
             "CUDA_VISIBLE_DEVICES": "4,5,6,7",
             "CALLS": str(calls),
             "FAILURE": failure,
+            "EVALUATE_BASELINE": "1" if evaluate_baseline else "0",
+            "BASELINE_CALL": str(baseline_call),
+            **({"MODEL_SLUG": model_slug} if model_slug else {}),
         },
         capture_output=True,
         text=True,
@@ -66,6 +80,9 @@ def test_sweep_gpu_assignment_checkpoints_and_failures(tmp_path, failure):
     assert result.returncode == (0 if failure == "none" else 1), result.stderr
     records = [json.loads(line) for line in calls.read_text().splitlines()]
     assert len(records) == 6
+    assert baseline_call.exists() == evaluate_baseline
+    if evaluate_baseline:
+        assert baseline_call.read_text().strip() == f"artifacts/tamia/evals {model}"
     full = [record for record in records if "--max_steps" not in record["args"]]
     expected = dict(
         zip(("2e-5", "5e-5", "8e-5", "1e-4", "2e-4"), ("4", "5", "6", "7", "4"))
@@ -74,6 +91,10 @@ def test_sweep_gpu_assignment_checkpoints_and_failures(tmp_path, failure):
         args = record["args"]
         lr = args[args.index("--learning_rate") + 1]
         assert record["gpu"] == expected[lr]
+        slug = model_slug or model.name
+        assert Path(args[args.index("--output_dir") + 1]).name == (
+            f"{slug}--data-overlapping--relearn-fft-author-codebase-lr{lr}-ms250"
+        )
         assert args[args.index("--save_strategy") + 1] == "steps"
         assert args[args.index("--save_steps") + 1] == "50"
         assert args[args.index("--save_only_model") + 1] == "True"

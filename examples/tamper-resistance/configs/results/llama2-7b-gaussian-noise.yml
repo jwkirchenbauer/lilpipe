@@ -1,0 +1,92 @@
+version: 1
+id: llama2-7b-gaussian-noise
+columns:
+- id: mmlu
+  label: MMLU (0-shot)
+  direction: maximize
+  format: percent
+  precision: 2
+- id: truthfulqa
+  label: TruthfulQA MC1 (0-shot)
+  direction: maximize
+  format: percent
+  precision: 2
+- id: arc_easy
+  label: ARC-Easy normalized (0-shot)
+  direction: maximize
+  format: percent
+  precision: 2
+- id: hellaswag
+  label: HellaSwag normalized (0-shot)
+  direction: maximize
+  format: percent
+  precision: 2
+- id: gsm8k_strict
+  label: GSM8K (5-shot, strict)
+  direction: maximize
+  format: percent
+  precision: 2
+- id: gsm8k_flexible
+  label: GSM8K (5-shot, flexible)
+  direction: maximize
+  format: percent
+  precision: 2
+rows:
+- id: base
+  label: Starting model
+  root: artifacts/tamia/evals/llama2-7b-beavertail
+- id: seam
+  label: SEAM defended (author-codebase, paper-config)
+  root: artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config
+- id: noise-0p1-percent
+  label: Base + 0.1% noise (seed 42)
+  root: artifacts/tamia/evals/llama2-7b-beavertail--perturb-gaussian-l2r0.001-seed42
+- id: noise-0p25-percent
+  label: Base + 0.25% noise (seed 42)
+  root: artifacts/tamia/evals/llama2-7b-beavertail--perturb-gaussian-l2r0.0025-seed42
+- id: noise-0p5-percent
+  label: Base + 0.5% noise (seed 42)
+  root: artifacts/tamia/evals/llama2-7b-beavertail--perturb-gaussian-l2r0.005-seed42
+- id: noise-0p75-percent
+  label: Base + 0.75% noise (seed 42)
+  root: artifacts/tamia/evals/llama2-7b-beavertail--perturb-gaussian-l2r0.0075-seed42
+- id: seam-noise-0p75-percent
+  label: SEAM defended + 0.75% noise (seed 42)
+  root: artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42
+- id: seam-noise-1-percent
+  label: SEAM defended + 1% noise (seed 42)
+  root: artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42
+- id: seam-noise-2-percent
+  label: SEAM defended + 2% noise (seed 42)
+  root: artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42
+metrics:
+- column: mmlu
+  task: mmlu
+  key: acc,none
+  files:
+  - capabilities-4gpu/**/results_*.json
+- column: truthfulqa
+  task: truthfulqa_mc1
+  key: acc,none
+  files:
+  - capabilities-4gpu/**/results_*.json
+- column: arc_easy
+  task: arc_easy
+  key: acc_norm,none
+  files:
+  - capabilities-4gpu/**/results_*.json
+- column: hellaswag
+  task: hellaswag
+  key: acc_norm,none
+  files:
+  - capabilities-4gpu/**/results_*.json
+- column: gsm8k_strict
+  task: gsm8k
+  key: exact_match,strict-match
+  files:
+  - gsm8k-5shot/**/results_*.json
+- column: gsm8k_flexible
+  task: gsm8k
+  key: exact_match,flexible-extract
+  files:
+  - gsm8k-5shot/**/results_*.json

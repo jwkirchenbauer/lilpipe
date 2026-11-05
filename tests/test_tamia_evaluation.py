@@ -648,13 +648,16 @@ def test_wmdp_wrappers_launch_both_tasks_once_per_checkpoint(
             assert (destination / "mmlu-no-bio/model/results.json").is_file()
 
 
-def test_tamia_scripts_and_nine_descriptive_registry_entries():
+def test_tamia_scripts_and_descriptive_registry_entries():
     assert {path.name for path in SCRIPTS.glob("*.sbatch")} == {
         "train.sbatch",
+        "plot_seam_relearning.sbatch",
         "train_seam_relearning_sweep.sbatch",
         "train_seam_defence.sbatch",
         "eval_seam_defence.sbatch",
         "analysis_gen_ll.sbatch",
+        "analysis_get_param_norm.sbatch",
+        "analysis_perturb_model.sbatch",
         "analysis_gen_ll_tar_archived.sbatch",
         "analysis_gen_ll_tar_archived_bs8_docs64.sbatch",
         "analysis_gen_ll_tar_archived_r125.sbatch",
@@ -664,6 +667,7 @@ def test_tamia_scripts_and_nine_descriptive_registry_entries():
         "eval_wmdp_mmlu.sbatch",
         "eval_wmdp_mmlu_trajectory.sbatch",
         "eval_capabilities.sbatch",
+        "eval_capability_models.sbatch",
         "eval_harmfulness_and_capabilities.sbatch",
         "eval_beavertails_capabilities.sbatch",
         "eval_beavertails_capabilities_trajectory.sbatch",
@@ -673,11 +677,16 @@ def test_tamia_scripts_and_nine_descriptive_registry_entries():
     registry = yaml.safe_load((EXAMPLE / "configs/registries/evals.yml").read_text())[
         "evaluations"
     ]
-    assert len(registry) == 9
-    assert sum("/tamia/" in entry["script"] for entry in registry.values()) == 5
+    assert len(registry) == 10
+    assert sum("/tamia/" in entry["script"] for entry in registry.values()) == 6
     assert all(
         name.startswith(
-            ("mila-l40s-q06b--", "tamia-h100-z7b--", "tamia-h100-llama2-7b--")
+            (
+                "mila-l40s-q06b--",
+                "tamia-h100-z7b--",
+                "tamia-h100-llama2-7b--",
+                "tamia-seam-noise-checkpoints",
+            )
         )
         for name in registry
     )
@@ -691,8 +700,9 @@ def test_tamia_scripts_and_nine_descriptive_registry_entries():
 
 
 @pytest.mark.parametrize("exit_code", [0, 7])
+@pytest.mark.parametrize("task_override", [False, True])
 def test_capabilities_wrapper_launches_four_replicas_and_forwards_options(
-    tmp_path, exit_code
+    tmp_path, exit_code, task_override
 ):
     calls = tmp_path / "calls.json"
     launcher = tmp_path / "accelerate.py"
@@ -701,6 +711,10 @@ def test_capabilities_wrapper_launches_four_replicas_and_forwards_options(
         "from pathlib import Path\n"
         "Path(os.environ['CALLS']).write_text(json.dumps({"
         "'args': sys.argv[1:], 'gpus': os.environ['CUDA_VISIBLE_DEVICES']}))\n"
+        "if os.environ['EXIT_CODE'] == '0':\n"
+        "    output = Path(sys.argv[sys.argv.index('--output_path') + 1])\n"
+        "    output.mkdir(parents=True)\n"
+        "    (output / 'results_2026.json').write_text('{}')\n"
         "sys.exit(int(os.environ['EXIT_CODE']))\n"
     )
     bash_env = tmp_path / "bash-env"
@@ -731,6 +745,15 @@ def test_capabilities_wrapper_launches_four_replicas_and_forwards_options(
             "CUDA_VISIBLE_DEVICES": "0,1,2,3",
             "CALLS": str(calls),
             "EXIT_CODE": str(exit_code),
+            **(
+                {
+                    "CAPABILITY_TASKS": "gsm8k",
+                    "NUM_FEWSHOT": "5",
+                    "MAX_BATCH_SIZE": "32",
+                }
+                if task_override
+                else {}
+            ),
         },
         capture_output=True,
         text=True,
@@ -742,29 +765,42 @@ def test_capabilities_wrapper_launches_four_replicas_and_forwards_options(
     assert args[:2] == ["launch", "--multi_gpu"]
     assert args[args.index("--num_processes") + 1] == "4"
     assert args[args.index("-m") + 1 : args.index("-m") + 3] == ["lm_eval", "run"]
-    assert args[args.index("--tasks") + 1].split(",") == [
-        "mmlu",
-        "truthfulqa_mc1",
-        "arc_easy",
-        "hellaswag",
-    ]
+    assert args[args.index("--tasks") + 1].split(",") == (
+        ["gsm8k"]
+        if task_override
+        else [
+            "mmlu",
+            "truthfulqa_mc1",
+            "arc_easy",
+            "hellaswag",
+        ]
+    )
     assert args[args.index("--model_args") + 1] == (
         "pretrained=model with spaces,dtype=bfloat16,trust_remote_code=True"
     )
     assert args[args.index("--output_path") + 1] == "evaluation output"
     assert args[args.index("--batch_size") + 1] == "auto:4"
-    assert args[args.index("--max_batch_size") + 1] == "128"
+    assert args[args.index("--max_batch_size") + 1] == (
+        "32" if task_override else "128"
+    )
+    assert args[args.index("--num_fewshot") + 1] == ("5" if task_override else "0")
     assert args[-2:] == ["--limit", "2"]
 
 
 @pytest.mark.parametrize("failure", ["none", "capabilities", "harmfulness"])
-def test_combined_evaluation_runs_sequentially(tmp_path, failure):
+@pytest.mark.parametrize("harmfulness_only", [False, True])
+def test_combined_evaluation_runs_sequentially(tmp_path, failure, harmfulness_only):
     calls = tmp_path / "calls.jsonl"
     launcher = tmp_path / "launcher.py"
     launcher.write_text(
         "import json, os, sys\n"
         "with open(os.environ['CALLS'], 'a') as f:\n"
         "    f.write(json.dumps(sys.argv[1:]) + '\\n')\n"
+        "if sys.argv[1] == 'capabilities' and os.environ['FAILURE'] != 'capabilities':\n"
+        "    from pathlib import Path\n"
+        "    output = Path(sys.argv[sys.argv.index('--output_path') + 1])\n"
+        "    output.mkdir(parents=True)\n"
+        "    (output / 'results_2026.json').write_text('{}')\n"
         "sys.exit(7 if sys.argv[1] == os.environ['FAILURE'] else 0)\n"
     )
     bash_env = tmp_path / "bash-env"
@@ -783,6 +819,9 @@ def test_combined_evaluation_runs_sequentially(tmp_path, failure):
     seam_python.chmod(0o755)
     workdir = tmp_path / "tamper-resistance"
     workdir.mkdir()
+    shared = workdir / "scripts/slurm/tamia/eval_capabilities.sbatch"
+    shared.parent.mkdir(parents=True)
+    shared.write_text((SCRIPTS / "eval_capabilities.sbatch").read_text())
     wrapper = tmp_path / "seam/scripts/eval_harmfulness.py"
     wrapper.parent.mkdir(parents=True)
     wrapper.touch()
@@ -805,26 +844,36 @@ def test_combined_evaluation_runs_sequentially(tmp_path, failure):
             "SLURM_JOB_ID": "123",
             "CALLS": str(calls),
             "FAILURE": failure,
+            "HARMFULNESS_ONLY": "1" if harmfulness_only else "0",
         },
         capture_output=True,
         text=True,
     )
-    assert result.returncode == (0 if failure == "none" else 7), result.stderr
-    recorded = [json.loads(line) for line in calls.read_text().splitlines()]
-    assert [call[0] for call in recorded] == (
-        ["capabilities"]
-        if failure == "capabilities"
-        else ["capabilities", "harmfulness"]
+    expected_failure = failure == "harmfulness" or (
+        failure == "capabilities" and not harmfulness_only
     )
-    cap = recorded[0]
-    assert cap[cap.index("--output_path") + 1] == "evaluation output/capabilities"
-    assert cap[cap.index("--batch_size") + 1] == "auto:4"
-    assert cap[cap.index("--max_batch_size") + 1] == "128"
-    assert "--limit" not in cap
+    assert result.returncode == (7 if expected_failure else 0), result.stderr
+    recorded = [json.loads(line) for line in calls.read_text().splitlines()]
+    expected = (
+        ["harmfulness"]
+        if harmfulness_only
+        else (
+            ["capabilities"]
+            if failure == "capabilities"
+            else ["capabilities", "harmfulness"]
+        )
+    )
+    assert [call[0] for call in recorded] == expected
+    if not harmfulness_only:
+        cap = recorded[0]
+        assert cap[cap.index("--output_path") + 1] == "evaluation output/capabilities"
+        assert cap[cap.index("--batch_size") + 1] == "auto:4"
+        assert cap[cap.index("--max_batch_size") + 1] == "128"
+        assert "--limit" not in cap
     for call in recorded:
         assert call[call.index("--num_processes") + 1] == "4"
-    if len(recorded) == 2:
-        harm = recorded[1]
+    if recorded[-1][0] == "harmfulness":
+        harm = recorded[-1]
         assert harm[-5:] == [
             "model with spaces",
             "--batch-size",
@@ -832,3 +881,61 @@ def test_combined_evaluation_runs_sequentially(tmp_path, failure):
             "--output",
             "evaluation output/harmfulness.json",
         ]
+
+
+def test_cpu_norm_wrapper_uses_shared_offline_cache(tmp_path):
+    launcher = tmp_path / "launcher.py"
+    launcher.write_text(
+        "import json, os, sys\n"
+        "from pathlib import Path\n"
+        "Path(os.environ['CALLS']).write_text(json.dumps({"
+        "'args': sys.argv[1:], 'cache': os.environ['UV_CACHE_DIR']}))\n"
+    )
+    bin_dir = tmp_path / "bin"
+    bin_dir.mkdir()
+    python = bin_dir / "python"
+    python.write_text('#!/bin/bash\nexec "$TEST_PYTHON" "$TEST_LAUNCHER" "$@"\n')
+    python.chmod(0o755)
+    bash_env = tmp_path / "bash-env"
+    bash_env.write_text('uv() { test "$UV_CACHE_DIR" = "$SCRATCH/.cache/uv"; }\n')
+    activate = tmp_path / "job/.venv-123/bin/activate"
+    activate.parent.mkdir(parents=True)
+    activate.write_text(":\n")
+    calls = tmp_path / "calls.json"
+    result = subprocess.run(
+        [
+            "bash",
+            str(SCRIPTS / "analysis_get_param_norm.sbatch"),
+            "--model",
+            "defended model",
+            "--reference",
+            "base model",
+        ],
+        cwd=tmp_path,
+        env={
+            **os.environ,
+            "PATH": f"{bin_dir}:{os.environ['PATH']}",
+            "BASH_ENV": str(bash_env),
+            "TEST_PYTHON": sys.executable,
+            "TEST_LAUNCHER": str(launcher),
+            "SCRATCH": str(tmp_path / "scratch"),
+            "SLURM_TMPDIR": str(tmp_path / "job"),
+            "SLURM_JOB_ID": "123",
+            "CALLS": str(calls),
+            "UV_CACHE_DIR": str(tmp_path / "wrong-cache"),
+        },
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stderr
+    call = json.loads(calls.read_text())
+    assert call["cache"] == str(tmp_path / "scratch/.cache/uv")
+    assert call["args"] == [
+        "scripts/analysis/parameter-norms/get_param_norm.py",
+        "--device",
+        "cpu",
+        "--model",
+        "defended model",
+        "--reference",
+        "base model",
+    ]

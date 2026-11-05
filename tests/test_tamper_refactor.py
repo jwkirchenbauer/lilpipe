@@ -286,6 +286,9 @@ def test_only_canonical_registries_and_selected_configs_are_referenced() -> None
         producer = model.get("producer")
         if producer is None:
             continue
+        if producer["script"] != "scripts/slurm/tamia/train.sbatch":
+            assert (EXAMPLE / producer["script"]).is_file()
+            continue
         config = producer["args"][0]
         assert config.endswith("/selected.yml")
         assert (EXAMPLE / config).is_file()

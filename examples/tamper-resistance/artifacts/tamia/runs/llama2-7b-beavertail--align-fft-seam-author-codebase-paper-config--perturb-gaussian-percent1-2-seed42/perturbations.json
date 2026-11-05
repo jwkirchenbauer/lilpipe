@@ -1,0 +1,35 @@
+{
+  "source_model": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+  "seed": 42,
+  "distribution": "standard Gaussian over all named parameters; buffers excluded",
+  "shared_direction_across_fractions": true,
+  "percentages": [
+    1.0,
+    2.0
+  ],
+  "parameter_dtype": "bfloat16",
+  "accumulation_dtype": "float64",
+  "torch_version": "2.12.1+cu130",
+  "num_parameters": 6738415616,
+  "model_l2_norm": 1575.2945613112945,
+  "gaussian_l2_norm": 82087.67982593956,
+  "models": [
+    {
+      "model": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42",
+      "percentage": 1.0,
+      "fraction": 0.01,
+      "target_delta_l2_norm": 15.752945613112946,
+      "realized_delta_l2_norm": 15.956316324791857,
+      "realized_fraction": 0.01012910011668524
+    },
+    {
+      "model": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42",
+      "percentage": 2.0,
+      "fraction": 0.02,
+      "target_delta_l2_norm": 31.50589122622589,
+      "realized_delta_l2_norm": 31.61129871751557,
+      "realized_fraction": 0.020066912877044367
+    }
+  ],
+  "complete": true
+}

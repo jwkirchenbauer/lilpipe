@@ -1,0 +1,71 @@
+version: 1
+id: llama2-7b-seam-capabilities
+columns:
+- id: mmlu
+  label: MMLU (0-shot)
+  direction: maximize
+  format: percent
+  precision: 2
+- id: truthfulqa
+  label: TruthfulQA MC1 (0-shot)
+  direction: maximize
+  format: percent
+  precision: 2
+- id: arc_easy
+  label: ARC-Easy normalized (0-shot)
+  direction: maximize
+  format: percent
+  precision: 2
+- id: hellaswag
+  label: HellaSwag normalized (0-shot)
+  direction: maximize
+  format: percent
+  precision: 2
+- id: gsm8k_strict
+  label: GSM8K (5-shot, strict)
+  direction: maximize
+  format: percent
+  precision: 2
+- id: gsm8k_flexible
+  label: GSM8K (5-shot, flexible)
+  direction: maximize
+  format: percent
+  precision: 2
+rows:
+- id: base
+  label: Llama-2-7B-chat (starting model)
+  root: artifacts/tamia/evals/llama2-7b-beavertail
+- id: seam
+  label: SEAM (author-codebase, paper-config)
+  root: artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config
+metrics:
+- column: mmlu
+  task: mmlu
+  key: acc,none
+  files:
+  - capabilities-4gpu/**/results_*.json
+- column: truthfulqa
+  task: truthfulqa_mc1
+  key: acc,none
+  files:
+  - capabilities-4gpu/**/results_*.json
+- column: arc_easy
+  task: arc_easy
+  key: acc_norm,none
+  files:
+  - capabilities-4gpu/**/results_*.json
+- column: hellaswag
+  task: hellaswag
+  key: acc_norm,none
+  files:
+  - capabilities-4gpu/**/results_*.json
+- column: gsm8k_strict
+  task: gsm8k
+  key: exact_match,strict-match
+  files:
+  - gsm8k-5shot/**/results_*.json
+- column: gsm8k_flexible
+  task: gsm8k
+  key: exact_match,flexible-extract
+  files:
+  - gsm8k-5shot/**/results_*.json

@@ -28,11 +28,12 @@ seam_env=${SEAM_ENV:-$SCRATCH/lilpipe/seam-official/venv}
 # ============================================
 # Run from examples/tamper-resistance. An optional fourth argument enables a
 # one-step optimizer/checkpoint smoke test before the five full attacks.
-model=$(realpath "${1:?missing defended model path}")
+model=$(realpath "${1:?missing starting model path}")
 models_root=$(realpath "${2:?missing model output directory}")
 run_root=$(realpath -m "${3:?missing run metadata directory}")
 smoke=${4:-false}
-base=$(basename "$model")
+# MODEL_SLUG gives cached HF revisions a stable experiment name.
+base=${MODEL_SLUG:-$(basename "$model")}
 learning_rates=(2e-5 5e-5 8e-5 1e-4 2e-4)
 IFS=, read -r -a gpus <<< "${CUDA_VISIBLE_DEVICES:-0,1,2,3}"
 if [[ ${#gpus[@]} != 4 ]]; then
@@ -41,7 +42,6 @@ if [[ ${#gpus[@]} != 4 ]]; then
 fi
 mkdir -p "$run_root"
 export WANDB_DIR="$run_root"
-cd ../seam
 
 train_attack() {
     local gpu=$1 lr=$2 output=$3 name=$4
@@ -64,6 +64,13 @@ for lr in "${learning_rates[@]}"; do
         exit 1
     fi
 done
+
+# Canonical noise workflows evaluate the untouched starting model first.
+if [[ ${EVALUATE_BASELINE:-0} == 1 ]]; then
+    INCLUDE_HARMFULNESS=1 bash scripts/slurm/tamia/eval_capability_models.sbatch \
+      artifacts/tamia/evals "$model"
+fi
+cd ../seam
 
 if [[ "$smoke" == true ]]; then
     smoke_output="$models_root/$base--attack-smoke-$SLURM_JOB_ID"

@@ -1,0 +1,38 @@
+{
+  "job_id": "668010",
+  "created_at": "2026-11-04T22:26:52.245322+00:00",
+  "model": "meta-llama/Llama-2-7b-chat-hf",
+  "revision": "f5db02db724555f92da89c216ac04704f23d4590",
+  "model_path": "/scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590",
+  "output": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail/harmfulness.json",
+  "purpose": "Step-zero harmfulness for Base trajectory",
+  "samples": 100,
+  "seed": 42,
+  "gpus": 4,
+  "batch_size_per_gpu": 16,
+  "judge": "DeBERTa",
+  "gpt_judging": false,
+  "capabilities_evaluated": false,
+  "environment": {
+    "HARMFULNESS_ONLY": "1"
+  },
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--job-name=base-harmfulness",
+    "--time=00:30:00",
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+    "/scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590",
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/evals/llama2-7b-beavertail"
+  ],
+  "cwd": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance",
+  "script_sha256": "c1af6173f5c569f861bb20976594aeaa8f47bc3de9690aa2e86f56e366ca83a3",
+  "plotting_job_id": "668014",
+  "plotting_command": [
+    "sbatch",
+    "--parsable",
+    "--dependency=afterok:668010",
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/runs/llama2-7b-beavertail--harmfulness-4gpu-bs16/submitted/plot.sbatch"
+  ],
+  "plot_output": "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms250--author-codebase-paper-config.pdf"
+}

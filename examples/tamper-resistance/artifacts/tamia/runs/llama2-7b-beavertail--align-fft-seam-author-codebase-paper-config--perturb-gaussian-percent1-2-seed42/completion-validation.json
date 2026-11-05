@@ -1,0 +1,54 @@
+{
+  "verified_at_utc": "2026-11-05T03:49:15.633009+00:00",
+  "source_model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+  "noise_percentages": [
+    1,
+    2
+  ],
+  "seed": 42,
+  "learning_rates": [
+    2e-05,
+    5e-05,
+    8e-05,
+    0.0001,
+    0.0002
+  ],
+  "checkpoint_steps": [
+    50,
+    100,
+    150,
+    200,
+    250
+  ],
+  "verified_starting_model_weights": 2,
+  "verified_final_model_weights": 10,
+  "verified_checkpoint_weights_and_trainer_states": 50,
+  "validated_baseline_evaluations": 2,
+  "validated_checkpoint_evaluations": 50,
+  "verified_final_evaluation_aliases": 10,
+  "evaluations": {
+    "capabilities": "MMLU, TruthfulQA MC1, ARC Easy normalized, HellaSwag normalized; full datasets, zero shot",
+    "gsm8k": "Full 1319 samples, five shot, strict and flexible exact match",
+    "harmfulness": "100 harmful BeaverTails samples, DeBERTa judge, seed 42; GPT judging skipped"
+  },
+  "plot_variants": {
+    "reduced": {
+      "rows": 192,
+      "base_lr": 0.0001,
+      "include_075_percent_noise": false
+    },
+    "comparison": {
+      "rows": 252,
+      "base_lr": 8e-05,
+      "include_075_percent_noise": true
+    }
+  },
+  "checks": [
+    "Slurm generation, baseline, training, evaluation, and plotting jobs completed with exit code 0:0",
+    "Noise generation provenance records global standard Gaussian direction, seed 42, normalization over all named parameters, and complete=true",
+    "All saved model weight shards and per-checkpoint trainer global steps checked on Tamia",
+    "Full dataset sample counts, expected model paths, few-shot settings, BF16 dtype, and finite metric ranges checked for all checkpoint evaluations",
+    "Final evaluation aliases match checkpoint-250 results; producing wrapper records SHA-256-verified identical final models",
+    "Both PDFs regenerated without completed-only filtering; dataframe coverage and current method/LR selections asserted; rendered images visually inspected"
+  ]
+}

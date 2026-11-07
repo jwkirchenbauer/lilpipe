@@ -1,0 +1,91 @@
+{
+  "pilot_job": "671194",
+  "pilot_elapsed": "00:06:55",
+  "recoveries": [
+    {
+      "group": "our-trainer",
+      "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250",
+      "replaces_job": "671105",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--time=03:00:00",
+        "--job-name=resume-cuda-our-trainer-671105",
+        "--dependency=afterok:671194",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250"
+      ],
+      "job_id": "671214",
+      "walltime_adjustment": {
+        "job_id": "671214",
+        "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250",
+        "completed_checkpoints": 0,
+        "remaining_checkpoints": 5,
+        "walltime_minutes": 75,
+        "basis": "Pilot completed full protocol in 6m55s; reserve at least 15 minutes per remaining checkpoint"
+      }
+    },
+    {
+      "group": "our-trainer",
+      "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250",
+      "replaces_job": "671106",
+      "command": [
+        "sbatch",
+        "--exclude=tg10807",
+        "--time=75",
+        "--job-name=resume-node-671215",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250"
+      ],
+      "job_id": "671315",
+      "walltime_adjustment": {
+        "job_id": "671215",
+        "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250",
+        "completed_checkpoints": 0,
+        "remaining_checkpoints": 5,
+        "walltime_minutes": 75,
+        "basis": "Pilot completed full protocol in 6m55s; reserve at least 15 minutes per remaining checkpoint"
+      },
+      "previous_attempts": [
+        {
+          "job_id": "671215",
+          "command": [
+            "sbatch",
+            "--parsable",
+            "--partition=gpubase_bynode_b1",
+            "--time=03:00:00",
+            "--job-name=resume-cuda-our-trainer-671106",
+            "--dependency=afterok:671194",
+            "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+            "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+            "--checkpoints",
+            "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250",
+            "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250"
+          ],
+          "reason": "relocated from tg10807 after two filesystem failures on that node",
+          "node": "tg10807",
+          "prior_state": "RUNNING"
+        }
+      ],
+      "excluded_nodes": [
+        "tg10807"
+      ]
+    }
+  ],
+  "source_hashes": {
+    "eval_capabilities.sbatch": "54e503ceca1170892a4115f228cf3992cfaeb26e34d7d05532b35062d101b875",
+    "eval_harmfulness_and_capabilities.sbatch": "e3c7f5913b45f8a2a446d92200b00eb0e05359f94e6bda5c3213497ef929d681"
+  },
+  "excluded_nodes": [
+    "tg10807"
+  ]
+}

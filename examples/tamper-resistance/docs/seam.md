@@ -221,6 +221,7 @@ markers plus numeric line widths. Configure their model/LR lists in
 ```sh
 python scripts/analysis/relearning-trajectory/plot_trajectory_beavertails.py --variant reduced
 python scripts/analysis/relearning-trajectory/plot_trajectory_beavertails.py --variant comparison
+python scripts/analysis/relearning-trajectory/plot_trajectory_beavertails.py --variant all-methods
 ```
 
 `reduced` excludes the 0.75%-noise method and uses Base at `1e-4`. `comparison`
@@ -237,5 +238,145 @@ are never jittered. The right-hand utility panel remains the original four-task
 mean; GSM8K is reported separately by the results configurations.
 
 `lilpipe results configs/results/llama2-7b-gaussian-noise.yml` includes the Base
-noise controls and the SEAM + 0.75%, 1%, and 2% starting models, with a separate
+noise controls and the SEAM + 0.75%, 1%, 2%, and 5% starting models, with a separate
 column for each benchmark.
+
+The `all-methods` variant writes a separate `--all-methods.pdf`: six method rows
+(Base, SEAM, and SEAM + 0.75%, 1%, 2%, and 5% noise), two evaluation columns, and all
+five learning rates for every method. All lines are black; learning rates use
+markers and increasing line widths, with scientific notation in the legend.
+
+## SEAM + 5% noise extension
+
+Run the independent 5% workflow with:
+
+```bash
+python scripts/run_seam_noise.py --config configs/experiments/llama2-7b-seam-noise5-relearning.yml --dry-run
+python scripts/run_seam_noise.py --config configs/experiments/llama2-7b-seam-noise5-relearning.yml
+```
+
+This uses the defended checkpoint, global Gaussian seed 42, and target relative
+noise norm 0.05. It schedules generation, baseline evaluation plus the five-LR
+training sweep, five checkpoint evaluation jobs, and all three plotting variants.
+It does not regenerate or retrain the earlier 1% and 2% models. The 5% method
+appears at every LR in every variant; existing Base LR selections stay unchanged.
+
+## Base + 1% noise relearning
+
+```bash
+python scripts/run_seam_noise.py --config configs/experiments/llama2-7b-base-noise1-relearning.yml --dry-run
+python scripts/run_seam_noise.py --config configs/experiments/llama2-7b-base-noise1-relearning.yml
+```
+
+This independent workflow perturbs the original cached Llama-2-7b-chat snapshot
+`f5db02db724555f92da89c216ac04704f23d4590`, with seed 42 and a global noise norm
+of 1% of the original model norm. It evaluates the noised starting model, runs
+the same five-LR author-codebase attacks for 250 steps, evaluates checkpoints
+every 50 steps plus the final models, and updates all three plots. The method
+is named `Base + 1% noise` and includes all five LRs; the existing Base selections
+and dashed Base step-250/LR-1e-4 reference lines remain in place.
+
+For interrupted checkpoint evaluations, submit the combined evaluator with
+`RESUME_EVALUATION=1,INCLUDE_GSM8K=1`. It validates saved JSON against the model,
+tasks, sample limit and few-shot protocol, reuses completed stages, and renames
+truncated JSON to `.incomplete` before recomputing it. Final evaluation copies
+can be repaired in place after the existing SHA-256 model check.
+
+The 10% and 20% extensions use the independent combined manifest
+`configs/experiments/llama2-7b-seam-noise10-20-relearning.yml` with the same
+`run_seam_noise.py` launcher. Both start from SEAM and use global Gaussian
+seed 42, percentages 10 and 20 (fractions 0.1 and 0.2), the same five LRs, and
+evaluations every 50 steps through step 250. All three plots include both new
+methods after evaluation completes.
+
+For a separate expanded plot with GSM8K, run:
+
+```bash
+python scripts/analysis/relearning-trajectory/plot_trajectory_beavertails.py --variant gsm8k
+```
+
+This writes `--all-methods-gsm8k-flexible.pdf`. Capability averages the original
+four tasks plus GSM8K five-shot flexible extraction. It includes Base, Base + 1%,
+and SEAM + 0.75%, 1%, 2%, and 5%, at all five learning rates. Original SEAM and
+SEAM + 10%/20% are excluded; any remaining trajectory missing a GSM8K result
+at the baseline or a plotted checkpoint is omitted. Rows represent methods;
+LRs use black lines with thickness and markers, and dashed references use Base
+at step 250 and LR 1e-4 with the same five-task average. Other plot variants
+retain their original four-task capability metric.
+
+For recovery from shared-filesystem log stalls, `EVAL_LOCAL_LOG=1` keeps the
+combined evaluator log in `$SLURM_TMPDIR` while the job runs and copies it to
+`artifacts/tamia/logs/eval_harmfulness_and_capabilities-<job>.log` on exit.
+Combine it with `RESUME_EVALUATION=1` to retain completed evaluation stages.
+
+Both evaluation launchers keep the CUDA driver cache in
+`$SLURM_TMPDIR/cuda-cache-$SLURM_JOB_ID`. Parallel workers can stall on Lustre
+when sharing the default CUDA cache under the home directory.
+
+### Relearning with our trainer
+
+`configs/experiments/llama2-7b-seam-own-trainer-relearning.yml` uses
+`trainers.tr_seam.SEAMRelearnTrainer` on the unperturbed paper-config SEAM
+checkpoint at learning rates `1e-5` and `5e-5`. Each run trains for 250 steps,
+saves every 50 steps, and logs online to `marawan-gamal/lp-tamper-resistance`.
+The model names omit `author-codebase` after `relearn-fft` while retaining the
+defense provenance.
+
+The trainer logs harmful/benign gradient cosine as both `loss_sd` and
+`cosine_similarity`; only harmful cross-entropy updates the model. These configs
+retain our completion-only labels, select the first 1,000 unsafe examples
+(`offset: 0`), and use four harmful examples per optimizer step (12 examples
+across the HH/HB/BB streams). This differs from the authors' full-sequence attack
+labels. Evaluation uses the same shared checkpoint evaluator as the authors'
+runs, including the four capability tasks, five-shot GSM8K, and 100-example
+DeBERTa harmfulness evaluation.
+
+Final-model identity verification supports both sharded weights from the authors
+and single-file weights from our training environment. It hashes the model and
+all saved tokenizer assets, including external chat templates, before reusing
+checkpoint 250 results for the final model.
+
+Plot the archived per-step gradient cosines with:
+
+```bash
+python scripts/analysis/relearning-trajectory/plot_gradient_cosine.py
+```
+
+This saves `llama2-7b-beavertail-relearning-gradient-cosine-ms250.pdf`, using all
+250 pre-update measurements per LR (completed optimizer steps 0–249). LR controls
+line thickness and markers, with scientific notation in the legend. To compare
+other Trainer histories, repeat `--input LR TRAINER_STATE_JSON`. The dashed
+horizontal line marks zero cosine.
+
+`configs/experiments/llama2-7b-seam-own-trainer-relearning-ms1000.yml` starts
+fresh attacks from the same defended checkpoint at both learning rates for
+1,000 steps. It saves every 50 steps and retains all 20 checkpoints, plus the
+final model. Warmup remains 10% of training and cosine decay spans the new run.
+Two evaluation jobs per model cover steps 50–500 and 550–1,000 to fit the
+three-hour partition limit. The shared launcher accepts `CHECKPOINT_MAX_STEP`
+(default 250), `CHECKPOINT_START_STEP` (default 50), and `CHECKPOINT_END_STEP`
+(default the maximum); only the range ending at the maximum writes final-model
+aliases after verifying identical weights and tokenizer assets.
+
+Plot only the two 1,000-step runs, including the shared step-zero baseline:
+
+```bash
+python scripts/analysis/relearning-trajectory/plot_trajectory_beavertails.py \
+  --variant own-trainer --max-steps 1000
+```
+
+This produces a separate `ms1000` PDF with harmfulness and the original four-task
+capability mean. LR controls line thickness and markers.
+
+The 1,000-step manifest also registers `1e-4` and `5e-4` attacks with the same
+trainer and checkpoint settings. Use `--models` to select the intended model
+slugs when submitting a subset; running the full manifest trains all four LRs.
+Completed `1e-5`/`5e-5` weights were removed after all 40 checkpoint evaluations
+and both final aliases were verified against local and remote backups. Their
+Trainer histories, cosine measurements, evaluation JSONs, and plots are retained.
+
+The 250-step manifest also registers the `lr2e-4-ms250-warmup0.5` variant.
+It starts from the same defended model, warms up for 125 steps, and applies
+cosine decay over the remaining 125 steps. It retains checkpoints every 50
+steps and uses the same online logging and checkpoint evaluations. Select its
+model slug with `--models` to submit only this variant.

@@ -364,6 +364,7 @@ class SEAMRelearnTrainer(SEAMTrainer):
             {
                 "loss_hh": loss_hh.item(),
                 "loss_sd": loss_sd.item(),
+                "cosine_similarity": loss_sd.item(),
             }
         )
         return (loss_hh / divisor).to(self.args.device)

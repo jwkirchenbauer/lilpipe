@@ -1,0 +1,86 @@
+{
+  "remote_git_commit": "ea41c05cf8de671512ab82ce6110fa8bb1ff9cf3",
+  "created_at_utc": "2026-11-05T14:14:58.069368+00:00",
+  "source_model": "meta-llama/Llama-2-7b-chat-hf",
+  "source_revision": "f5db02db724555f92da89c216ac04704f23d4590",
+  "noise_percentage": 1,
+  "seed": 42,
+  "files": {
+    "configs/experiments/llama2-7b-base-noise1-relearning.yml": {
+      "snapshot": "submitted/configs/experiments/llama2-7b-base-noise1-relearning.yml",
+      "sha256": "a5a037fb4e6be2a3fb11370ebf1623fad1bb00aae71fa51e5dae9409ce56d2d0"
+    },
+    "configs/registries/models.yml": {
+      "snapshot": "submitted/configs/registries/models.yml",
+      "sha256": "d3d46598f3dfa40a13e405947cec3ec718e5248c5a60dfca9b71bc484449c689"
+    },
+    "configs/registries/evals.yml": {
+      "snapshot": "submitted/configs/registries/evals.yml",
+      "sha256": "b05f8168d2c4ef7ba5615a1a83f93de2e5813c6587c32f170b89601e1e190369"
+    },
+    "scripts/run_seam_noise.py": {
+      "snapshot": "submitted/scripts/run_seam_noise.py",
+      "sha256": "a6ef8d4848f31c8f6fc0c6e9341f8bf9c79485148f39879229f63fef1a0c87c0"
+    },
+    "scripts/analysis/parameter-noise/perturb_model.py": {
+      "snapshot": "submitted/scripts/analysis/parameter-noise/perturb_model.py",
+      "sha256": "6c9a0412891ff6dc1ca682ec9d9b01b739bb97e1c852af28c25ac2a79c27b86f"
+    },
+    "scripts/analysis/relearning-trajectory/plot_trajectory_beavertails.py": {
+      "snapshot": "submitted/scripts/analysis/relearning-trajectory/plot_trajectory_beavertails.py",
+      "sha256": "a1d7f24c76b46f02e80a9896986830dc7a5a22fb4492e81edf3364b18d7d9483"
+    },
+    "scripts/slurm/tamia/analysis_perturb_model.sbatch": {
+      "snapshot": "submitted/scripts/slurm/tamia/analysis_perturb_model.sbatch",
+      "sha256": "4a8e8d84a6f13ebf82b171e747e8988f60960c1b099289769d63bb52ba73a0ac"
+    },
+    "scripts/slurm/tamia/train_seam_relearning_sweep.sbatch": {
+      "snapshot": "submitted/scripts/slurm/tamia/train_seam_relearning_sweep.sbatch",
+      "sha256": "3d937565e1f5776dc5671713c9366f41a45b5bcf658866e279f4b4615a0166c6"
+    },
+    "scripts/slurm/tamia/eval_capabilities.sbatch": {
+      "snapshot": "submitted/scripts/slurm/tamia/eval_capabilities.sbatch",
+      "sha256": "2f8b14b778ddd75c17f8f7ca3650e36f06b6afe62829a78c177c46460f5b20ad"
+    },
+    "scripts/slurm/tamia/eval_capability_models.sbatch": {
+      "snapshot": "submitted/scripts/slurm/tamia/eval_capability_models.sbatch",
+      "sha256": "b6252b3e23fbff19e72c05be8f37063143cc359f192adad04dfec62c7dae7fae"
+    },
+    "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch": {
+      "snapshot": "submitted/scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+      "sha256": "ed6da43fff9061b33f1aaca16155aa1bce17cce9be05308b9e77fedfc6f5d49d"
+    },
+    "scripts/slurm/tamia/plot_seam_relearning.sbatch": {
+      "snapshot": "submitted/scripts/slurm/tamia/plot_seam_relearning.sbatch",
+      "sha256": "0b229078db158e51c62845ba681fe3f921944d5c584db26fbac68155d77db77d"
+    },
+    "../seam/scripts/train.py": {
+      "snapshot": "submitted/seam/scripts/train.py",
+      "sha256": "4cdf08e6ddcbbefd58c095cdb601037dc40060e529f6749d19345c18b0594915"
+    },
+    "../seam/src/data_processing/_datasets.py": {
+      "snapshot": "submitted/seam/src/data_processing/_datasets.py",
+      "sha256": "ffceac401f8e792296b44f80af8947b7392fa98caafcd93cbe125ecd546cd810"
+    },
+    "../seam/src/utils/config.py": {
+      "snapshot": "submitted/seam/src/utils/config.py",
+      "sha256": "665013f7fce5edbe53cb9b72d7cf9203046b3ceb5f096c80bc0f9cc4c30a1552"
+    },
+    "../seam/config/eval.yaml": {
+      "snapshot": "submitted/seam/config/eval.yaml",
+      "sha256": "cbaf94febf071ef6ba3b2641423661a0dbfb3ab863f7d21b995a86edd9fc7f92"
+    },
+    "../seam/scripts/eval_harmfulness.py": {
+      "snapshot": "submitted/seam/scripts/eval_harmfulness.py",
+      "sha256": "ea35ee8262d8e622092acb79ee6d0d0e5f2cd013db0170fc1e850bc7120b623f"
+    },
+    "pyproject.toml": {
+      "snapshot": "submitted/pyproject.toml",
+      "sha256": "ae07e037b3442dc76d19dc0227ccf26c47030fcaffd353db427068adc7a3792e"
+    },
+    "uv.lock": {
+      "snapshot": "submitted/uv.lock",
+      "sha256": "ead81d0b3c45d754e9f81eed76db64f2b0b7080251d63f38a59269512860a515"
+    }
+  }
+}

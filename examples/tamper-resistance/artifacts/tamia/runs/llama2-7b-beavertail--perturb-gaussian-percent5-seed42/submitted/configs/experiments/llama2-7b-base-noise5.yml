@@ -1,0 +1,9 @@
+version: 1
+id: llama2-7b-base-noise5
+registries:
+  models: configs/registries/models.yml
+  evaluations: configs/registries/evals.yml
+models:
+- llama2-7b-beavertail--perturb-gaussian-l2r0.05-seed42
+evaluations:
+- tamia-h100-llama2-7b--capability-models

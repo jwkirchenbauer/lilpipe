@@ -1,0 +1,17 @@
+{
+  "job_id": "671036",
+  "script": "scripts/slurm/tamia/train.sbatch",
+  "config": "artifacts/tamia/runs/llama2-7b-seam-own-trainer-relearning/submitted/smoke.yml",
+  "partition": "gpubase_bynode_b1",
+  "time_limit": "00:20:00",
+  "wandb_mode": "disabled",
+  "purpose": "Verify one real optimizer step, gradient-cosine logging, four-GPU layer placement, and checkpoint saving before full runs",
+  "eligible_partitions": [
+    "gpubase_bynode_b1",
+    "gpubase_bynode_b2"
+  ],
+  "partition_update": "scontrol update JobId=671036 Partition=gpubase_bynode_b1,gpubase_bynode_b2",
+  "allocated_partition": "gpubase_bynode_b2",
+  "status": "FAILED",
+  "failure": "Incomplete prepared dataset from killed login-node preflight; cache quarantined before retry"
+}

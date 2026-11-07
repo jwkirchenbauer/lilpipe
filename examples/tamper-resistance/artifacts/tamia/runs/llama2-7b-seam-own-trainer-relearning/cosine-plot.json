@@ -1,0 +1,20 @@
+{
+  "figure": "artifacts/figures/llama2-7b-beavertail-relearning-gradient-cosine-ms250.pdf",
+  "plot_script": "scripts/analysis/relearning-trajectory/plot_gradient_cosine.py",
+  "plot_script_sha256": "f7e3dd07bf2f760c15c23bd2c5ba839e0f0844cd37d5d76b82dbfea068dde4f0",
+  "measurements": 500,
+  "steps": "0..249, measured before each optimizer update",
+  "inputs": [
+    {
+      "lr": 1e-05,
+      "path": "artifacts/tamia/runs/llama2-7b-seam-own-trainer-relearning/trainer-state-lr1e-5.json",
+      "sha256": "65b638d6f0a1e04394d460a2a1453a060f58fa748fdfa9fa822a25aceacaffcc"
+    },
+    {
+      "lr": 5e-05,
+      "path": "artifacts/tamia/runs/llama2-7b-seam-own-trainer-relearning/trainer-state-lr5e-5.json",
+      "sha256": "3a2aa2d706ac0ba2668029a11d45c50fc57d4b988c87c20c8058679f7f05a470"
+    }
+  ],
+  "pdf_sha256": "87a16b9c8524b7fe09ffc95792cf2f2720a070f62d2021eedbd01e479f530979"
+}

@@ -1,0 +1,88 @@
+{
+  "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+  "job_id": "671205",
+  "verified_checkpoints": [
+    {
+      "step": 50,
+      "scores": {
+        "mmlu": 0.3163367041731947,
+        "truthfulqa_mc1": 0.2839657282741738,
+        "arc_easy": 0.6098484848484849,
+        "hellaswag": 0.7091216889065923,
+        "gsm8k": 0.08567096285064443,
+        "harmfulness": 0.05755783359520137
+      }
+    },
+    {
+      "step": 100,
+      "scores": {
+        "mmlu": 0.3174761429995727,
+        "truthfulqa_mc1": 0.28518971848225216,
+        "arc_easy": 0.6106902356902357,
+        "hellaswag": 0.7113124875522804,
+        "gsm8k": 0.08339651250947688,
+        "harmfulness": 0.059795111869461834
+      }
+    },
+    {
+      "step": 150,
+      "scores": {
+        "mmlu": 0.3189004415325452,
+        "truthfulqa_mc1": 0.28518971848225216,
+        "arc_easy": 0.609006734006734,
+        "hellaswag": 0.711611232822147,
+        "gsm8k": 0.08794541319181198,
+        "harmfulness": 0.058515624073334035
+      }
+    },
+    {
+      "step": 200,
+      "scores": {
+        "mmlu": 0.31840193704600483,
+        "truthfulqa_mc1": 0.2864137086903305,
+        "arc_easy": 0.6098484848484849,
+        "hellaswag": 0.711611232822147,
+        "gsm8k": 0.08339651250947688,
+        "harmfulness": 0.06029716382268816
+      }
+    },
+    {
+      "step": 250,
+      "scores": {
+        "mmlu": 0.3188292266058966,
+        "truthfulqa_mc1": 0.2839657282741738,
+        "arc_easy": 0.609006734006734,
+        "hellaswag": 0.7117108145787692,
+        "gsm8k": 0.08794541319181198,
+        "harmfulness": 0.05861985773313791
+      }
+    }
+  ],
+  "final_evaluation": {
+    "model": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+    "reused_from": "checkpoint-250",
+    "reason": "Identical model, tokenizer, and generation configuration (SHA-256 verified)"
+  },
+  "evaluation_json_sha256": {
+    "harmfulness.json": "b63b614568f407a1842110e4458eb6e0eedbba2c5beb5384820472a03f5d0bbe",
+    "final-evaluation.json": "3f834b26d44be11c99b5bfaa5e069056ad239a9fa6656b60942c360501ca81d9",
+    "checkpoint-250/harmfulness.json": "89c61a2c52b4542aa3fb7f79cabf7f85c5eed1a13e0967f25574a82503c2e01e",
+    "checkpoint-50/harmfulness.json": "eaddc51852f882007339ae2af2161bf4b783bbec5283ca3d3695bcabb8fee7ee",
+    "checkpoint-200/harmfulness.json": "1aa2a9ae83e961bd7fb27eeb0456eb738f2c8fb51afe4f10ac652e6a8c48dacc",
+    "checkpoint-150/harmfulness.json": "9930e7f166e04ae82cbcfd59f597c57568edb704cb82aa9ad34a327a27917a96",
+    "checkpoint-100/harmfulness.json": "117a61e82fb2540702906095786cf1b0c0dc2838adeee7e10dfdb3ff12dc1b6b",
+    "gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250__checkpoint-250/results_2026-11-06T01-06-45.586538.json": "62b2f7150bee83cfec2eb71635af986fb538a002aeeb4471b9980a5570c8feca",
+    "checkpoint-250/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250__checkpoint-250/results_2026-11-06T01-06-45.586538.json": "62b2f7150bee83cfec2eb71635af986fb538a002aeeb4471b9980a5570c8feca",
+    "checkpoint-250/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250__checkpoint-250/results_2026-11-06T01-03-01.445920.json": "245c944c650fde1f3e973213cde93f21afeb2886f9ebf7f8a2f2040912762d40",
+    "checkpoint-50/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250__checkpoint-50/results_2026-11-05T23-22-31.754580.json": "2b5967b437f0f33cff618a7cfcbe3a2a854a34df7df8722edad842b6a3fb9c2d",
+    "checkpoint-50/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250__checkpoint-50/results_2026-11-05T15-51-22.778525.json": "cffb88617bfd43714ed621e117c699dbeaac3bb078960d22671e2ae64901302b",
+    "capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250__checkpoint-250/results_2026-11-06T01-03-01.445920.json": "245c944c650fde1f3e973213cde93f21afeb2886f9ebf7f8a2f2040912762d40",
+    "checkpoint-200/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250__checkpoint-200/results_2026-11-06T00-56-43.207943.json": "aab6a4754c15a27161807fa55f37a33cbd4d13e90ce0ef6f1b069d425cff8cb8",
+    "checkpoint-200/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250__checkpoint-200/results_2026-11-06T00-52-59.840815.json": "3880436d734b316848365180dfe7a38bf77154d91e378a468a87a0a6be271f52",
+    "checkpoint-150/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250__checkpoint-150/results_2026-11-06T00-44-18.995745.json": "8ed3dece7a53b6920d684dcfd621ca6d48332d989782110b976a0c57402227ba",
+    "checkpoint-150/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250__checkpoint-150/results_2026-11-06T00-40-36.000887.json": "09c71e55d74c2a327cfb0f2f98f989981441823702ca688d8b6d8dba230f42f5",
+    "checkpoint-100/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250__checkpoint-100/results_2026-11-06T00-34-14.326311.json": "a9e783c3b0f0ff05ca159b9f8ae7063ae8de96a9a637b17f0c1256abe1cd4208",
+    "checkpoint-100/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250__checkpoint-100/results_2026-11-06T00-30-29.348973.json": "798a7ecc8f011f86e5f92a2c12c4b73027ef0f2b118a1d7c83a0e59f1daec9f2"
+  },
+  "status": "all evaluations verified; awaiting local backup SHA-256 verification before weight removal"
+}

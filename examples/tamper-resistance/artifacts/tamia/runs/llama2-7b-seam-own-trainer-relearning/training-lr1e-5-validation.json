@@ -1,0 +1,41 @@
+{
+  "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250",
+  "checkpoints": [
+    {
+      "step": 50,
+      "cosine_rows": 50,
+      "tensor_count": 291,
+      "dtype": "BF16",
+      "file_bytes": 13476865232
+    },
+    {
+      "step": 100,
+      "cosine_rows": 100,
+      "tensor_count": 291,
+      "dtype": "BF16",
+      "file_bytes": 13476865232
+    },
+    {
+      "step": 150,
+      "cosine_rows": 150,
+      "tensor_count": 291,
+      "dtype": "BF16",
+      "file_bytes": 13476865232
+    },
+    {
+      "step": 200,
+      "cosine_rows": 200,
+      "tensor_count": 291,
+      "dtype": "BF16",
+      "file_bytes": 13476865232
+    },
+    {
+      "step": 250,
+      "cosine_rows": 250,
+      "tensor_count": 291,
+      "dtype": "BF16",
+      "file_bytes": 13476865232
+    }
+  ],
+  "status": "all 250 training steps, cosine logs, and five complete checkpoints verified"
+}

@@ -1,0 +1,68 @@
+{
+  "removed_models": {
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250": {
+      "path": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+      "bytes_removed": 80883116192,
+      "local_backup_verified_files": 19,
+      "audit_sha256": "ea2bd07356e9f696cd3c2397d2654f58550e7157dd0b9a745bb26e6efd09ffe1",
+      "removed_at_utc": "2026-11-06T06:41:12.838166+00:00",
+      "status": "removed"
+    },
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250": {
+      "path": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+      "bytes_removed": 80883115961,
+      "local_backup_verified_files": 19,
+      "audit_sha256": "4ecae1838de3cbbc9384560a6d484f7d6392024539f2ef494fa632f32509504d",
+      "removed_at_utc": "2026-11-06T06:41:12.956784+00:00",
+      "status": "removed"
+    },
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250": {
+      "path": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+      "bytes_removed": 80883116162,
+      "local_backup_verified_files": 19,
+      "audit_sha256": "70403d8da20cd772121faca8506beb4c5e7348154f96ccd8d57807d9b3fbc7c1",
+      "removed_at_utc": "2026-11-06T06:41:13.075060+00:00",
+      "status": "removed"
+    },
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250": {
+      "path": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+      "bytes_removed": 80883115974,
+      "local_backup_verified_files": 19,
+      "audit_sha256": "280fff368ce7b333212d620697079eabfc29a8be8f9d869b89b94c705f0d7b24",
+      "removed_at_utc": "2026-11-06T06:41:13.194316+00:00",
+      "status": "removed"
+    },
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250": {
+      "path": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+      "bytes_removed": 80883116157,
+      "local_backup_verified_files": 19,
+      "audit_sha256": "0027f724081bff12078b5f7f21fcb13dfc1d53b38470e0db3b644365997da407",
+      "removed_at_utc": "2026-11-06T06:41:13.301999+00:00",
+      "status": "removed"
+    },
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250": {
+      "path": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+      "bytes_removed": 80883115979,
+      "local_backup_verified_files": 19,
+      "audit_sha256": "595ae2007e84fad9d048773d803e87bf21b5b9f6e1e901a2e0b679782ec233e5",
+      "removed_at_utc": "2026-11-06T06:41:13.410180+00:00",
+      "status": "removed"
+    },
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250": {
+      "path": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+      "bytes_removed": 80883116173,
+      "local_backup_verified_files": 19,
+      "audit_sha256": "05994416ccd34c73d8262d4827c7cf853567acee936bd66d5df81930bc55dc75",
+      "removed_at_utc": "2026-11-06T06:41:13.507351+00:00",
+      "status": "removed"
+    },
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250": {
+      "path": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+      "bytes_removed": 80883115957,
+      "local_backup_verified_files": 19,
+      "audit_sha256": "2cd433e10aa134eb1ec0cce88e053afab6cc069a734f44f3e758b063ff60fad2",
+      "removed_at_utc": "2026-11-06T06:41:13.605759+00:00",
+      "status": "removed"
+    }
+  }
+}

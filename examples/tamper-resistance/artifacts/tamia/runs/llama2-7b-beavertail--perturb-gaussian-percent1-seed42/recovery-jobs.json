@@ -1,0 +1,95 @@
+{
+  "created_at_utc": "2026-11-05T16:02:15.985281+00:00",
+  "reason": "Resume after disk quota failure; approved smoke-test model removed",
+  "replaces_evaluation_jobs": [
+    "669413",
+    "669414",
+    "669415",
+    "669416",
+    "669417"
+  ],
+  "replaces_plot_job": "669418",
+  "script_sha256": "404ec76bbdcd289e877bda9d632dc63150c04d22ce70417feb6518a714fce106",
+  "jobs": [
+    {
+      "lr": "2e-5",
+      "job_id": "669506",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=base-noise1-resume-2e-5",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250"
+      ]
+    },
+    {
+      "lr": "5e-5",
+      "job_id": "669507",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=base-noise1-resume-5e-5",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250"
+      ]
+    },
+    {
+      "lr": "8e-5",
+      "job_id": "669508",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=base-noise1-resume-8e-5",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250"
+      ]
+    },
+    {
+      "lr": "1e-4",
+      "job_id": "669509",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=base-noise1-resume-1e-4",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250"
+      ]
+    },
+    {
+      "lr": "2e-4",
+      "job_id": "669510",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=base-noise1-resume-2e-4",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250"
+      ]
+    }
+  ],
+  "plot": {
+    "job_id": "669511",
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--job-name=plot-base-noise1-recovered",
+      "--dependency=afterok:669506:669507:669508:669509:669510",
+      "scripts/slurm/tamia/plot_seam_relearning.sbatch"
+    ]
+  }
+}

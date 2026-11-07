@@ -1,0 +1,26 @@
+{
+  "source_model": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+  "seed": 42,
+  "distribution": "standard Gaussian over all named parameters; buffers excluded",
+  "shared_direction_across_fractions": true,
+  "percentages": [
+    5.0
+  ],
+  "parameter_dtype": "bfloat16",
+  "accumulation_dtype": "float64",
+  "torch_version": "2.12.1+cu130",
+  "num_parameters": 6738415616,
+  "model_l2_norm": 1575.2945613112945,
+  "gaussian_l2_norm": 82087.67982593956,
+  "models": [
+    {
+      "model": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42",
+      "percentage": 5.0,
+      "fraction": 0.05,
+      "target_delta_l2_norm": 78.76472806556473,
+      "realized_delta_l2_norm": 78.80734999442917,
+      "realized_fraction": 0.05002705648195025
+    }
+  ],
+  "complete": true
+}

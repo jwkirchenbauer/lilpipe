@@ -1,0 +1,18 @@
+{
+  "job_id": "669854",
+  "command": [
+    "sbatch",
+    "--parsable",
+    "scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+    "--model",
+    "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42",
+    "--reference",
+    "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+    "--dtype",
+    "bfloat16",
+    "--output",
+    "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--parameter-norms-vs-seam/norms.json"
+  ],
+  "purpose": "Independent saved-checkpoint norm audit of SEAM +5% versus SEAM",
+  "created_at_utc": "2026-11-05T19:49:32.383135+00:00"
+}

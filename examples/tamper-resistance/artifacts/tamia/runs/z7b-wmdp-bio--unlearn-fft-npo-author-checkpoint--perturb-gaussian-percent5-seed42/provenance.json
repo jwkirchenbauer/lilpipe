@@ -1,0 +1,85 @@
+{
+  "remote_git_commit": "ea41c05cf8de671512ab82ce6110fa8bb1ff9cf3",
+  "files": {
+    "configs/experiments/z7b-npo-author-noise5.yml": {
+      "snapshot": "submitted/configs/experiments/z7b-npo-author-noise5.yml",
+      "sha256": "d9eabb04886cd04c8c1e7ffe528847ef791ead3fe50958c56ec78c132f9b2853"
+    },
+    "configs/registries/models.yml": {
+      "snapshot": "submitted/configs/registries/models.yml",
+      "sha256": "7a2b58aa4c6868988d8637bf0e7b6e4f228db5f04a663ff99f546fef0eee29d1"
+    },
+    "configs/registries/evals.yml": {
+      "snapshot": "submitted/configs/registries/evals.yml",
+      "sha256": "e3bb1d74a14530ac89d211aa0ed16f74b68f58a81017d1ee78f8172b5cd54e21"
+    },
+    "configs/results/z7b-npo-author-noise5.yml": {
+      "snapshot": "submitted/configs/results/z7b-npo-author-noise5.yml",
+      "sha256": "3451b911063cbc7eb857b3fcd7824df9561eebb6e97d5c4a79d552d0c7d6cc29"
+    },
+    "scripts/slurm/tamia/analysis_perturb_model.sbatch": {
+      "snapshot": "submitted/scripts/slurm/tamia/analysis_perturb_model.sbatch",
+      "sha256": "4a8e8d84a6f13ebf82b171e747e8988f60960c1b099289769d63bb52ba73a0ac"
+    },
+    "scripts/slurm/tamia/eval_capabilities.sbatch": {
+      "snapshot": "submitted/scripts/slurm/tamia/eval_capabilities.sbatch",
+      "sha256": "2f8b14b778ddd75c17f8f7ca3650e36f06b6afe62829a78c177c46460f5b20ad"
+    },
+    "scripts/slurm/tamia/analysis_get_param_norm.sbatch": {
+      "snapshot": "submitted/scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+      "sha256": "b655fdfc8298ff1d6c2a4bed2bb21ba65c9c41155750a95b35599a20ac3d9220"
+    },
+    "scripts/analysis/parameter-noise/perturb_model.py": {
+      "snapshot": "submitted/scripts/analysis/parameter-noise/perturb_model.py",
+      "sha256": "6c9a0412891ff6dc1ca682ec9d9b01b739bb97e1c852af28c25ac2a79c27b86f"
+    },
+    "scripts/analysis/parameter-norms/get_param_norm.py": {
+      "snapshot": "submitted/scripts/analysis/parameter-norms/get_param_norm.py",
+      "sha256": "87cce9f254c971b8d8dabf97067df15c91c3b7a9092e36ca58b1e55944d33627"
+    },
+    "pyproject.toml": {
+      "snapshot": "submitted/pyproject.toml",
+      "sha256": "ae07e037b3442dc76d19dc0227ccf26c47030fcaffd353db427068adc7a3792e"
+    },
+    "uv.lock": {
+      "snapshot": "submitted/uv.lock",
+      "sha256": "ead81d0b3c45d754e9f81eed76db64f2b0b7080251d63f38a59269512860a515"
+    },
+    "lm_eval_tasks/mmlu_no_bio.yaml": {
+      "snapshot": "submitted/lm_eval_tasks/mmlu_no_bio.yaml",
+      "sha256": "049885f5f05c0f60a43e9fd749b245028555fc173a08a36175452dab72e27a15"
+    },
+    "lm_eval_tasks/wmdp_bio_categorized_mcqa/_wmdp_bio_robust.yaml": {
+      "snapshot": "submitted/lm_eval_tasks/wmdp_bio_categorized_mcqa/_wmdp_bio_robust.yaml",
+      "sha256": "f211781013e5e45a4297a51aaa151a0e85d030cc811f35a665b2cdff9fdc0ae7"
+    },
+    "lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_reverse_genetics_and_easy_editing.yaml": {
+      "snapshot": "submitted/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_reverse_genetics_and_easy_editing.yaml",
+      "sha256": "61e4e2b52a99ab63669c3b451bfcbbf1296d9913659e029e6d6af4b0f2cbd776"
+    },
+    "lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_enhanced_potential_pandemic_pathogens.yaml": {
+      "snapshot": "submitted/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_enhanced_potential_pandemic_pathogens.yaml",
+      "sha256": "4c1e6f5d7f22c57bdd4a93e7545dd2b248269d26a25e62a2664c46b48cf32f83"
+    },
+    "lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_bioweapons_and_bioterrorism.yaml": {
+      "snapshot": "submitted/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_bioweapons_and_bioterrorism.yaml",
+      "sha256": "e675c85f5300c61454055d7342b6c106b33673de89e19666e4725fab129edb1f"
+    },
+    "lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_viral_vector_research.yaml": {
+      "snapshot": "submitted/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_viral_vector_research.yaml",
+      "sha256": "e4ffff6afa20543d405ad30ef8679a6b4e9691759b1fbc129e695695f6d5a95c"
+    },
+    "lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_expanding_access_to_threat_vectors.yaml": {
+      "snapshot": "submitted/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_expanding_access_to_threat_vectors.yaml",
+      "sha256": "d23724eeeafcc871289a87623e9bbe9cfaa849f2713c17c295271477ccfb2cf3"
+    },
+    "lm_eval_tasks/wmdp_bio_categorized_mcqa/_default_template_yaml": {
+      "snapshot": "submitted/lm_eval_tasks/wmdp_bio_categorized_mcqa/_default_template_yaml",
+      "sha256": "011aa06daa186c8115ab1cd43f8c10d6b0e55996e811660ecc1e6117f6804d58"
+    },
+    "lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_dual_use_virology.yaml": {
+      "snapshot": "submitted/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_dual_use_virology.yaml",
+      "sha256": "3b4a3aa09beeade354739b7363a264eec21a81e0c5c094519c73a70b76b7118f"
+    }
+  }
+}

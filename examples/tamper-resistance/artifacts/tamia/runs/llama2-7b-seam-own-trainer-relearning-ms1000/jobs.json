@@ -1,0 +1,104 @@
+{
+  "submitted_at_utc": "2026-11-06T13:39:09.443005+00:00",
+  "jobs": [
+    {
+      "job_id": "671918",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000",
+        "--partition=gpubase_bynode_b1",
+        "--export=ALL,WANDB_MODE=online",
+        "--exclude=tg10807",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/train.sbatch",
+        "configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000/selected.yml"
+      ]
+    },
+    {
+      "job_id": "671919",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000",
+        "--partition=gpubase_bynode_b1",
+        "--export=ALL,WANDB_MODE=online",
+        "--exclude=tg10807",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/train.sbatch",
+        "configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000/selected.yml"
+      ]
+    },
+    {
+      "job_id": "671920",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=eval-tamia-seam-own-trainer-checkpoints-ms1000-first-half-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000",
+        "--partition=gpubase_bynode_b1",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1,CHECKPOINT_MAX_STEP=1000,CHECKPOINT_END_STEP=500",
+        "--exclude=tg10807",
+        "--dependency=afterok:671918",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000"
+      ]
+    },
+    {
+      "job_id": "671921",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=eval-tamia-seam-own-trainer-checkpoints-ms1000-second-half-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000",
+        "--partition=gpubase_bynode_b1",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1,CHECKPOINT_MAX_STEP=1000,CHECKPOINT_START_STEP=550",
+        "--exclude=tg10807",
+        "--dependency=afterok:671918",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000"
+      ]
+    },
+    {
+      "job_id": "671922",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=eval-tamia-seam-own-trainer-checkpoints-ms1000-first-half-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000",
+        "--partition=gpubase_bynode_b1",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1,CHECKPOINT_MAX_STEP=1000,CHECKPOINT_END_STEP=500",
+        "--exclude=tg10807",
+        "--dependency=afterok:671919",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000"
+      ]
+    },
+    {
+      "job_id": "671923",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=eval-tamia-seam-own-trainer-checkpoints-ms1000-second-half-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000",
+        "--partition=gpubase_bynode_b1",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1,CHECKPOINT_MAX_STEP=1000,CHECKPOINT_START_STEP=550",
+        "--exclude=tg10807",
+        "--dependency=afterok:671919",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000"
+      ]
+    }
+  ],
+  "job_ids": {
+    "train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000": "671918",
+    "train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000": "671919",
+    "eval-tamia-seam-own-trainer-checkpoints-ms1000-first-half-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000": "671920",
+    "eval-tamia-seam-own-trainer-checkpoints-ms1000-second-half-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000": "671921",
+    "eval-tamia-seam-own-trainer-checkpoints-ms1000-first-half-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000": "671922",
+    "eval-tamia-seam-own-trainer-checkpoints-ms1000-second-half-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000": "671923"
+  },
+  "status": "submitted"
+}

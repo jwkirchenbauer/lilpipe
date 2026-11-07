@@ -1,0 +1,15 @@
+{
+  "completed_at_utc": "2026-11-05T13:49:50.174818+00:00",
+  "failed_plot_job": "668522",
+  "cause": "Python glob skipped dot-prefixed lm-eval result directories for the 5% baseline",
+  "fix": "Include hidden directories in result loading and completed-trajectory checks",
+  "recovery": "Regenerated all three plots locally from complete saved evaluations; copied PDFs and corrected script to Tamia",
+  "validated_checkpoint_evaluations": 25,
+  "verified_final_evaluation_aliases": 5,
+  "plot_regression_tests_passed": 7,
+  "figures": {
+    "llama2-7b-beavertail-relearning-trajectory-ms250--author-codebase-paper-config--all-methods.pdf": "01e9030ec95ea592856961c89dd6b1cac27df1661d255b911efd4e6e6f321d33",
+    "llama2-7b-beavertail-relearning-trajectory-ms250--author-codebase-paper-config--lr-markers.pdf": "fdef86202f4a7b65eb56a3e12513f9aa1f8589e273914963dde32e396729628c",
+    "llama2-7b-beavertail-relearning-trajectory-ms250--author-codebase-paper-config.pdf": "6e41357cdb60050c19f2a1e1e7e7f208e66840a68571e998749f535e3a609596"
+  }
+}

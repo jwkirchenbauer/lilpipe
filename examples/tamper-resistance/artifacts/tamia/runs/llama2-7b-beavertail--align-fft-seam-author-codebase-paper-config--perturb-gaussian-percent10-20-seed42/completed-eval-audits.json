@@ -1,0 +1,42 @@
+[
+  {
+    "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+    "audit": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent10-20-seed42/eval-audits/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250.json",
+    "json_files": 19
+  },
+  {
+    "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+    "audit": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent10-20-seed42/eval-audits/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250.json",
+    "json_files": 19
+  },
+  {
+    "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+    "audit": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent10-20-seed42/eval-audits/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250.json",
+    "json_files": 19
+  },
+  {
+    "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+    "audit": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent10-20-seed42/eval-audits/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250.json",
+    "json_files": 19
+  },
+  {
+    "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+    "audit": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent10-20-seed42/eval-audits/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250.json",
+    "json_files": 19
+  },
+  {
+    "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+    "audit": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent10-20-seed42/eval-audits/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250.json",
+    "json_files": 19
+  },
+  {
+    "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+    "audit": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent10-20-seed42/eval-audits/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250.json",
+    "json_files": 19
+  },
+  {
+    "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+    "audit": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-percent10-20-seed42/eval-audits/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250.json",
+    "json_files": 19
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "run_id": "1c6n4ons",
+  "url": "https://forge.coreweave.com/wandb/marawan-gamal/lp-tamper-resistance/runs/1c6n4ons",
+  "state": "finished",
+  "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250",
+  "uploaded_cosine_rows": 250,
+  "first_step": 0,
+  "last_step": 249,
+  "first_cosine": -0.337890625,
+  "last_cosine": -0.1533203125,
+  "verified_online": true
+}

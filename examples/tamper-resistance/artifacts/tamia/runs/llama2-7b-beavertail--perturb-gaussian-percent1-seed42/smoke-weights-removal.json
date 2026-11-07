@@ -1,0 +1,7 @@
+{
+  "authorization": "Remove the Base + 1% attack smoke-test model and resume evaluations",
+  "removed_model": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--attack-smoke-669412",
+  "bytes_before": 26961154048,
+  "complete": true,
+  "completed_at_utc": "2026-11-05T15:57:15.846153+00:00"
+}

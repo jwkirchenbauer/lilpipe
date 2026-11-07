@@ -677,8 +677,8 @@ def test_tamia_scripts_and_descriptive_registry_entries():
     registry = yaml.safe_load((EXAMPLE / "configs/registries/evals.yml").read_text())[
         "evaluations"
     ]
-    assert len(registry) == 10
-    assert sum("/tamia/" in entry["script"] for entry in registry.values()) == 6
+    assert len(registry) == 17
+    assert sum("/tamia/" in entry["script"] for entry in registry.values()) == 13
     assert all(
         name.startswith(
             (
@@ -686,6 +686,10 @@ def test_tamia_scripts_and_descriptive_registry_entries():
                 "tamia-h100-z7b--",
                 "tamia-h100-llama2-7b--",
                 "tamia-seam-noise-checkpoints",
+                "tamia-seam-noise5-checkpoints",
+                "tamia-base-noise1-checkpoints",
+                "tamia-seam-noise10-20-checkpoints",
+                "tamia-seam-own-trainer-checkpoints",
             )
         )
         for name in registry
@@ -710,7 +714,7 @@ def test_capabilities_wrapper_launches_four_replicas_and_forwards_options(
         "import json, os, sys\n"
         "from pathlib import Path\n"
         "Path(os.environ['CALLS']).write_text(json.dumps({"
-        "'args': sys.argv[1:], 'gpus': os.environ['CUDA_VISIBLE_DEVICES']}))\n"
+        "'args': sys.argv[1:], 'gpus': os.environ['CUDA_VISIBLE_DEVICES'], 'cuda_cache': os.environ['CUDA_CACHE_PATH']}))\n"
         "if os.environ['EXIT_CODE'] == '0':\n"
         "    output = Path(sys.argv[sys.argv.index('--output_path') + 1])\n"
         "    output.mkdir(parents=True)\n"
@@ -779,6 +783,9 @@ def test_capabilities_wrapper_launches_four_replicas_and_forwards_options(
         "pretrained=model with spaces,dtype=bfloat16,trust_remote_code=True"
     )
     assert args[args.index("--output_path") + 1] == "evaluation output"
+    assert json.loads(calls.read_text())["cuda_cache"] == str(
+        tmp_path / "job/cuda-cache-123"
+    )
     assert args[args.index("--batch_size") + 1] == "auto:4"
     assert args[args.index("--max_batch_size") + 1] == (
         "32" if task_override else "128"

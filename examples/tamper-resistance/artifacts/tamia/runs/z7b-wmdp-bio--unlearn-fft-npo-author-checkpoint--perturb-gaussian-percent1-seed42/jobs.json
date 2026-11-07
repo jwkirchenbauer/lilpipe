@@ -1,0 +1,78 @@
+{
+  "config": "configs/experiments/z7b-npo-author-noise1.yml",
+  "source_model": "OPTML-Group/NPO-WMDP",
+  "source_revision": "fec7960fb3925037a6befc5819036cbc55664b18",
+  "created_at_utc": "2026-11-05T21:02:21.919601+00:00",
+  "commands": "sbatch --parsable --job-name=generate-z7b-npo-author-noise-1-percent /home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/analysis_perturb_model.sbatch --model /scratch/m/mgamal/.cache/huggingface/hub/models--OPTML-Group--NPO-WMDP/snapshots/fec7960fb3925037a6befc5819036cbc55664b18 --output-prefix artifacts/tamia/models/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian --output artifacts/tamia/runs/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42/perturbations.json --percentages 1 --seed 42\nsbatch --parsable --job-name=eval-tamia-h100-z7b--wmdp-bio-robust-only-z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42 --partition=gpubase_bynode_b1 --export=ALL,CAPABILITY_TASKS=wmdp_bio_robust,NUM_FEWSHOT=0 --dependency=afterok:dry-run-generate-z7b-npo-author-noise-1-percent /home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/eval_capabilities.sbatch artifacts/tamia/models/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42 artifacts/tamia/evals/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42/wmdp-bio-robust --include_path lm_eval_tasks\nsbatch --parsable --job-name=eval-tamia-h100-z7b--mmlu-no-bio-only-z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42 --partition=gpubase_bynode_b1 --export=ALL,CAPABILITY_TASKS=mmlu_no_bio,NUM_FEWSHOT=0 --dependency=afterok:dry-run-generate-z7b-npo-author-noise-1-percent /home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/eval_capabilities.sbatch artifacts/tamia/models/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42 artifacts/tamia/evals/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42/mmlu-no-bio --include_path lm_eval_tasks",
+  "jobs": [
+    {
+      "job_id": "669980",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=generate-z7b-npo-author-noise-1-percent",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/analysis_perturb_model.sbatch",
+        "--model",
+        "/scratch/m/mgamal/.cache/huggingface/hub/models--OPTML-Group--NPO-WMDP/snapshots/fec7960fb3925037a6befc5819036cbc55664b18",
+        "--output-prefix",
+        "artifacts/tamia/models/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian",
+        "--output",
+        "artifacts/tamia/runs/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42/perturbations.json",
+        "--percentages",
+        "1",
+        "--seed",
+        "42"
+      ]
+    },
+    {
+      "job_id": "669981",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=eval-tamia-h100-z7b--wmdp-bio-robust-only-z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42",
+        "--partition=gpubase_bynode_b1",
+        "--export=ALL,CAPABILITY_TASKS=wmdp_bio_robust,NUM_FEWSHOT=0",
+        "--dependency=afterok:669980",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/eval_capabilities.sbatch",
+        "artifacts/tamia/models/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42",
+        "artifacts/tamia/evals/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42/wmdp-bio-robust",
+        "--include_path",
+        "lm_eval_tasks"
+      ]
+    },
+    {
+      "job_id": "669982",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=eval-tamia-h100-z7b--mmlu-no-bio-only-z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42",
+        "--partition=gpubase_bynode_b1",
+        "--export=ALL,CAPABILITY_TASKS=mmlu_no_bio,NUM_FEWSHOT=0",
+        "--dependency=afterok:669980",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/eval_capabilities.sbatch",
+        "artifacts/tamia/models/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42",
+        "artifacts/tamia/evals/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42/mmlu-no-bio",
+        "--include_path",
+        "lm_eval_tasks"
+      ]
+    },
+    {
+      "job_id": "669983",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=verify-npo-noise1-norm",
+        "--dependency=afterok:669980",
+        "scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+        "--model",
+        "artifacts/tamia/models/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42",
+        "--reference",
+        "/scratch/m/mgamal/.cache/huggingface/hub/models--OPTML-Group--NPO-WMDP/snapshots/fec7960fb3925037a6befc5819036cbc55664b18",
+        "--dtype",
+        "bfloat16",
+        "--output",
+        "artifacts/tamia/runs/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-percent1-seed42/norms.json"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "jobs": [
+    {
+      "percentage": 10,
+      "job_id": "669918",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=verify-seam-noise-10-norm",
+        "--dependency=afterok:669897",
+        "scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+        "--model",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42",
+        "--reference",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+        "--dtype",
+        "bfloat16",
+        "--output",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--parameter-norms-vs-seam/norms.json"
+      ]
+    },
+    {
+      "percentage": 20,
+      "job_id": "669919",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=verify-seam-noise-20-norm",
+        "--dependency=afterok:669898",
+        "scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+        "--model",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42",
+        "--reference",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+        "--dtype",
+        "bfloat16",
+        "--output",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--parameter-norms-vs-seam/norms.json"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "repaired_at_utc": "2026-11-06T05:16:43.644652+00:00",
+  "cause": "rsync --relative replaced an implied artifacts directory symlink",
+  "restored_target": "/project/aip-grabus/mgamal/lilpipe/examples/tamper-resistance/artifacts",
+  "preserved_transfer_directory": "artifacts-transfer-repair-20261106",
+  "preserved_files": [
+    "figures/llama2-7b-beavertail-relearning-gradient-cosine-ms250.pdf",
+    "tamia/runs/llama2-7b-seam-own-trainer-relearning/cosine-plot.json"
+  ],
+  "status": "symlink restored; both transferred files merged and SHA-256 verified; temporary directory removed",
+  "merged": [
+    {
+      "path": "figures/llama2-7b-beavertail-relearning-gradient-cosine-ms250.pdf",
+      "sha256": "87a16b9c8524b7fe09ffc95792cf2f2720a070f62d2021eedbd01e479f530979"
+    },
+    {
+      "path": "tamia/runs/llama2-7b-seam-own-trainer-relearning/cosine-plot.json",
+      "sha256": "81f4d5dc51163e99bee5b8c1883694850a6af0ad4812557a1b5c3a29d7e918ab"
+    }
+  ]
+}

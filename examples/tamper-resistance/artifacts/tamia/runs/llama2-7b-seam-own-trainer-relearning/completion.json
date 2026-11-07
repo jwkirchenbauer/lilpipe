@@ -1,0 +1,26 @@
+{
+  "status": "complete; evaluations backed up; weights subsequently removed for ms1000 runs",
+  "learning_rates": [
+    1e-05,
+    5e-05
+  ],
+  "training_steps_per_model": 250,
+  "checkpoint_steps": [
+    50,
+    100,
+    150,
+    200,
+    250
+  ],
+  "unique_checkpoint_evaluations": 10,
+  "final_model_evaluation_aliases": 2,
+  "evaluation_json_files_backed_up": 38,
+  "weights_retained": false,
+  "online_cosine_measurements_per_run": 250,
+  "cosine_figure": "artifacts/figures/llama2-7b-beavertail-relearning-gradient-cosine-ms250.pdf",
+  "evaluation_jobs": {
+    "1e-5": 671214,
+    "5e-5": 671315
+  },
+  "weight_removal_record": "weights-removal.json"
+}

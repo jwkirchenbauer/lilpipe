@@ -1,0 +1,29 @@
+{
+  "authorization": "Delete relearning trajectories only after verifying all evals; retain incomplete SEAM +10%/+20% trajectories",
+  "started_at_utc": "2026-11-06T04:03:24.944485+00:00",
+  "bytes_before": 404417290240,
+  "verified_checkpoint_evaluations": 25,
+  "verified_final_evaluations": 5,
+  "local_evaluation_backup_verified": true,
+  "removed_models": [
+    "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+    "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+    "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+    "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+    "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250"
+  ],
+  "retained_incomplete_trajectories": [
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250"
+  ],
+  "complete": true,
+  "completed_at_utc": "2026-11-06T04:03:25.096473+00:00"
+}

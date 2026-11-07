@@ -1,0 +1,6 @@
+{
+  "failed_job": "671036",
+  "cause": "Incomplete dataset cache left by killed login-node preprocessing",
+  "quarantined_cache": "artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250/prepared/14ecf22d1602032c7f0d8aa01ebaad54.incomplete-login-preflight",
+  "next_action": "Rebuild automatically in GPU smoke with allocated memory"
+}

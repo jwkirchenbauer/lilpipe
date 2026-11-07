@@ -1,0 +1,17 @@
+{
+  "authorization": "Delete the five completed SEAM + 5% relearning trajectories and three listed smoke-test models; preserve starting models, evals, figures, archives, and TAR models",
+  "started_at_utc": "2026-11-05T14:10:49.119246+00:00",
+  "bytes_before": 485300830208,
+  "removed_models": [
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--attack-smoke-668198",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--attack-smoke-668206",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--attack-smoke-668516"
+  ],
+  "complete": true,
+  "completed_at_utc": "2026-11-05T14:10:49.304502+00:00"
+}

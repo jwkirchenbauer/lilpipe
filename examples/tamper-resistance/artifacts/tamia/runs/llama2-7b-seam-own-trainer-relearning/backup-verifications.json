@@ -1,0 +1,12 @@
+[
+  {
+    "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250",
+    "verified": true,
+    "evaluation_json_files": 19
+  },
+  {
+    "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250",
+    "verified": true,
+    "evaluation_json_files": 19
+  }
+]

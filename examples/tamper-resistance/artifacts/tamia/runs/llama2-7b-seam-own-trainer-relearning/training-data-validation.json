@@ -1,0 +1,7 @@
+{
+  "unsafe_rows": 1000,
+  "selection": "first 1000 unsafe rows in source order",
+  "matches_authors_prompts_and_responses": true,
+  "source_json_sha256": "c3c92961d834afe3ecbfbfa29e87ca759b90a73498aaf807162328e0ebe8e4ee",
+  "hf_revision": "11ea63756195527164a9aa2850f7544bd251eab1"
+}

@@ -1,0 +1,9 @@
+{
+  "src/trainers/tr_seam.py": "01edc546ce23510526708a5b52a066f65b4799e571f848281d5c58e599ef6ec2",
+  "src/trainers/rl_bf16.py": "03886e657233377f2b54881e85a0cd547e6b2fe26efd9ee4f9c6047a64e40bdc",
+  "src/data/beavertails_hh.py": "9dfd55256cc8e72672852541b1562f36464cfe1fc72e25760e9c1b602c375cb9",
+  "src/axolotl_plugins/custom_trainer_args.py": "823315684e21dd0044c0553bff7ff36f05c8249762ba28c9139b5d229f1f2a12",
+  "scripts/slurm/tamia/train.sbatch": "720d1dc631fd528f5d101ecae439c4968e6d8c328e4c1e9ba9cb15d125d3d155",
+  "configs/experiments/llama2-7b-seam-own-trainer-relearning.yml": "beb43128181843b1c5c47abda490ca781173dd26141e3b8f63fc4789dc61196c",
+  "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch": "622c875138705dd81594e88231314fce407c22cafdfa06ffae237a127805a39b"
+}

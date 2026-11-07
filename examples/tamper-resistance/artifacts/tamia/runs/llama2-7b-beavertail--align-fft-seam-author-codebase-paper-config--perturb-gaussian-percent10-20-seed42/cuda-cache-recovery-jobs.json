@@ -1,0 +1,406 @@
+{
+  "created_at_utc": "2026-11-06T05:17:53.523674+00:00",
+  "cause": "Evaluation workers blocked in ptlrpc_set_wait with shared ~/.nv/ComputeCache/index open despite node-local stdout/stderr",
+  "fix": "CUDA_CACHE_PATH on node-local SLURM_TMPDIR, unique per job",
+  "cancelled_jobs": [
+    "670982",
+    "670987"
+  ],
+  "plot_replacement": {
+    "job_id": "671316",
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--dependency=afterok:671207:671313:671314",
+      "scripts/slurm/tamia/plot_seam_relearning.sbatch"
+    ],
+    "status": "cancelled; rendered locally",
+    "generation_record": "figure-generation.json"
+  },
+  "pilot_model": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-200",
+  "pilot_output": "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-200",
+  "status": "recoveries running; filesystem-failure node tg10807 excluded",
+  "source_hashes": {
+    "eval_capabilities.sbatch": "54e503ceca1170892a4115f228cf3992cfaeb26e34d7d05532b35062d101b875",
+    "eval_harmfulness_and_capabilities.sbatch": "e3c7f5913b45f8a2a446d92200b00eb0e05359f94e6bda5c3213497ef929d681"
+  },
+  "pilot_job": "671194",
+  "pilot_command": [
+    "sbatch",
+    "--parsable",
+    "--partition=gpubase_bynode_b1",
+    "--time=00:30:00",
+    "--job-name=cuda-cache-pilot",
+    "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+    "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+    "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-200",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-200"
+  ],
+  "cancelled_at_utc": "2026-11-06T05:22:41.768770+00:00",
+  "recoveries": [
+    {
+      "group": "noise",
+      "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+      "replaces_job": "670978",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--time=03:00:00",
+        "--job-name=resume-cuda-noise-670978",
+        "--dependency=afterok:671194",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250"
+      ],
+      "job_id": "671205"
+    },
+    {
+      "group": "noise",
+      "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+      "replaces_job": "670979",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--time=03:00:00",
+        "--job-name=resume-cuda-noise-670979",
+        "--dependency=afterok:671194",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250"
+      ],
+      "job_id": "671206"
+    },
+    {
+      "group": "noise",
+      "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+      "replaces_job": "670980",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--time=03:00:00",
+        "--job-name=resume-cuda-noise-670980",
+        "--dependency=afterok:671194",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250"
+      ],
+      "job_id": "671207"
+    },
+    {
+      "group": "noise",
+      "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+      "replaces_job": "670981",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--time=03:00:00",
+        "--job-name=resume-cuda-noise-670981",
+        "--dependency=afterok:671194",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250"
+      ],
+      "job_id": "671208"
+    },
+    {
+      "group": "noise",
+      "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+      "replaces_job": "670982",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--time=03:00:00",
+        "--job-name=resume-cuda-noise-670982",
+        "--dependency=afterok:671194",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250"
+      ],
+      "job_id": "671209"
+    },
+    {
+      "group": "noise",
+      "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+      "replaces_job": "670983",
+      "command": [
+        "sbatch",
+        "--exclude=tg10807",
+        "--time=30",
+        "--job-name=resume-node-671210",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250"
+      ],
+      "job_id": "671313",
+      "walltime_adjustment": {
+        "job_id": "671210",
+        "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "completed_checkpoints": 3,
+        "remaining_checkpoints": 2,
+        "walltime_minutes": 30,
+        "basis": "Pilot completed full protocol in 6m55s; reserve at least 15 minutes per remaining checkpoint"
+      },
+      "previous_attempts": [
+        {
+          "job_id": "671210",
+          "command": [
+            "sbatch",
+            "--parsable",
+            "--partition=gpubase_bynode_b1",
+            "--time=03:00:00",
+            "--job-name=resume-cuda-noise-670983",
+            "--dependency=afterok:671194",
+            "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+            "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+            "--checkpoints",
+            "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+            "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250"
+          ],
+          "reason": "filesystem I/O errors on tg10807",
+          "node": "tg10807",
+          "prior_state": "FAILED"
+        }
+      ],
+      "excluded_nodes": [
+        "tg10807"
+      ]
+    },
+    {
+      "group": "noise",
+      "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+      "replaces_job": "670984",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--time=03:00:00",
+        "--job-name=resume-cuda-noise-670984",
+        "--dependency=afterok:671194",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250"
+      ],
+      "job_id": "671211",
+      "walltime_adjustment": {
+        "job_id": "671211",
+        "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "completed_checkpoints": 3,
+        "remaining_checkpoints": 2,
+        "walltime_minutes": 30,
+        "basis": "Pilot completed full protocol in 6m55s; reserve at least 15 minutes per remaining checkpoint"
+      }
+    },
+    {
+      "group": "noise",
+      "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+      "replaces_job": "670985",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--time=03:00:00",
+        "--job-name=resume-cuda-noise-670985",
+        "--dependency=afterok:671194",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250"
+      ],
+      "job_id": "671212",
+      "walltime_adjustment": {
+        "job_id": "671212",
+        "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "completed_checkpoints": 3,
+        "remaining_checkpoints": 2,
+        "walltime_minutes": 30,
+        "basis": "Pilot completed full protocol in 6m55s; reserve at least 15 minutes per remaining checkpoint"
+      }
+    },
+    {
+      "group": "noise",
+      "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+      "replaces_job": "670986",
+      "command": [
+        "sbatch",
+        "--exclude=tg10807",
+        "--time=30",
+        "--job-name=resume-node-671213",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250"
+      ],
+      "job_id": "671314",
+      "walltime_adjustment": {
+        "job_id": "671213",
+        "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "completed_checkpoints": 3,
+        "remaining_checkpoints": 2,
+        "walltime_minutes": 30,
+        "basis": "Pilot completed full protocol in 6m55s; reserve at least 15 minutes per remaining checkpoint"
+      },
+      "previous_attempts": [
+        {
+          "job_id": "671213",
+          "command": [
+            "sbatch",
+            "--parsable",
+            "--partition=gpubase_bynode_b1",
+            "--time=03:00:00",
+            "--job-name=resume-cuda-noise-670986",
+            "--dependency=afterok:671194",
+            "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+            "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+            "--checkpoints",
+            "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+            "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250"
+          ],
+          "reason": "filesystem I/O errors on tg10807",
+          "node": "tg10807",
+          "prior_state": "FAILED"
+        }
+      ],
+      "excluded_nodes": [
+        "tg10807"
+      ]
+    },
+    {
+      "group": "our-trainer",
+      "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250",
+      "replaces_job": "671105",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--time=03:00:00",
+        "--job-name=resume-cuda-our-trainer-671105",
+        "--dependency=afterok:671194",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250"
+      ],
+      "job_id": "671214",
+      "walltime_adjustment": {
+        "job_id": "671214",
+        "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250",
+        "completed_checkpoints": 0,
+        "remaining_checkpoints": 5,
+        "walltime_minutes": 75,
+        "basis": "Pilot completed full protocol in 6m55s; reserve at least 15 minutes per remaining checkpoint"
+      }
+    },
+    {
+      "group": "our-trainer",
+      "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250",
+      "replaces_job": "671106",
+      "command": [
+        "sbatch",
+        "--exclude=tg10807",
+        "--time=75",
+        "--job-name=resume-node-671215",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250"
+      ],
+      "job_id": "671315",
+      "walltime_adjustment": {
+        "job_id": "671215",
+        "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250",
+        "completed_checkpoints": 0,
+        "remaining_checkpoints": 5,
+        "walltime_minutes": 75,
+        "basis": "Pilot completed full protocol in 6m55s; reserve at least 15 minutes per remaining checkpoint"
+      },
+      "previous_attempts": [
+        {
+          "job_id": "671215",
+          "command": [
+            "sbatch",
+            "--parsable",
+            "--partition=gpubase_bynode_b1",
+            "--time=03:00:00",
+            "--job-name=resume-cuda-our-trainer-671106",
+            "--dependency=afterok:671194",
+            "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+            "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+            "--checkpoints",
+            "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250",
+            "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250"
+          ],
+          "reason": "relocated from tg10807 after two filesystem failures on that node",
+          "node": "tg10807",
+          "prior_state": "RUNNING"
+        }
+      ],
+      "excluded_nodes": [
+        "tg10807"
+      ]
+    }
+  ],
+  "prior_states": {
+    "670978": "RUNNING",
+    "670979": "RUNNING",
+    "670980": "RUNNING",
+    "670981": "RUNNING",
+    "670982": "CANCELLED by 3127800",
+    "670983": "RUNNING",
+    "670984": "RUNNING",
+    "670985": "RUNNING",
+    "670986": "RUNNING",
+    "671105": "RUNNING",
+    "671106": "RUNNING"
+  },
+  "eligible_partitions": [
+    "gpubase_bynode_b1",
+    "gpubase_bynode_b2"
+  ],
+  "pilot_elapsed": "00:06:55",
+  "pilot_validation": "cuda-cache-pilot-validation.json",
+  "previous_plot_jobs": [
+    {
+      "job_id": "671216",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--dependency=afterok:671205:671206:671207:671208:671209:671210:671211:671212:671213",
+        "scripts/slurm/tamia/plot_seam_relearning.sbatch"
+      ]
+    }
+  ],
+  "excluded_nodes": [
+    "tg10807"
+  ],
+  "node_recovery_at_utc": "2026-11-06T06:13:52.504774+00:00",
+  "noise_status": "noise trajectories complete; evaluations backed up; weights removed; figures updated"
+}

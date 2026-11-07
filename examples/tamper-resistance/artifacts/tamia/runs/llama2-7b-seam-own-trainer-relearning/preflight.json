@@ -1,0 +1,69 @@
+{
+  "status": "Complete: both training runs and all checkpoint evaluations verified and backed up; online cosine histories and figure verified",
+  "training_config_paths": [
+    "configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250/selected.yml",
+    "configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250/selected.yml"
+  ],
+  "source_sha256": "01edc546ce23510526708a5b52a066f65b4799e571f848281d5c58e599ef6ec2",
+  "checks": {
+    "config_and_pipeline_tests": "passed",
+    "torch_gradient_and_logging_test": "passed",
+    "shared_checkpoint_evaluator_tests": "9 passed",
+    "offline_fresh_train_environment": "242 packages installed",
+    "offline_datasets": {
+      "beavertails_rows": 18106,
+      "alpaca_rows": 51760
+    },
+    "login_preprocess": "killed while saving processed dataset; GPU smoke will perform preparation with allocated memory",
+    "tokenizer_serialization": {
+      "saved_files": [
+        "chat_template.jinja",
+        "tokenizer.json",
+        "tokenizer_config.json"
+      ],
+      "evaluator_compatibility": "legacy and modern tokenizer layouts accepted only when matching; changed chat template rejected",
+      "regression_tests": "50 passed, 1 Torch-dependent test skipped in root environment; Torch trainer test passed separately"
+    },
+    "checkpoint_storage": "291 BF16 tensors; complete single-file checkpoint; final/checkpoint-1 model and tokenizer SHA-256 identities verified",
+    "tokenizer_author_environment": "LlamaTokenizerFast loaded successfully with 32000 tokens",
+    "training_data": "First 1000 unsafe prompts and responses exactly match the authors source JSON in the same order",
+    "full_training": {
+      "1e-5": {
+        "job_id": "671103",
+        "elapsed": "00:04:55",
+        "steps": 250
+      },
+      "5e-5": {
+        "job_id": "671104",
+        "elapsed": "00:04:59",
+        "steps": 250
+      }
+    },
+    "wandb_online_cosine_history": {
+      "1e-5": {
+        "run_id": "1c6n4ons",
+        "rows": 250,
+        "steps": "0..249"
+      },
+      "5e-5": {
+        "run_id": "3rooxke7",
+        "rows": 250,
+        "steps": "0..249"
+      }
+    }
+  },
+  "wandb": {
+    "entity": "marawan-gamal",
+    "project": "lp-tamper-resistance",
+    "mode": "online",
+    "metrics": [
+      "loss_sd",
+      "cosine_similarity"
+    ]
+  },
+  "pending": [],
+  "evaluator_sha256": "622c875138705dd81594e88231314fce407c22cafdfa06ffae237a127805a39b",
+  "evaluation_recovery_record": "evaluation-cuda-cache-recovery-jobs.json",
+  "recovery_evaluator_sha256": "e3c7f5913b45f8a2a446d92200b00eb0e05359f94e6bda5c3213497ef929d681",
+  "completion_record": "completion.json"
+}

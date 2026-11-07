@@ -1,0 +1,17 @@
+{
+  "job_id": "671082",
+  "replaces_failed_job": "671036",
+  "partition": "gpubase_bynode_b2",
+  "script": "scripts/slurm/tamia/train.sbatch",
+  "config": "artifacts/tamia/runs/llama2-7b-seam-own-trainer-relearning/submitted/smoke.yml",
+  "time_limit": "00:20:00",
+  "wandb_mode": "disabled",
+  "repair": "Incomplete prepared dataset directory quarantined; compute node will rebuild it",
+  "eligible_partitions": [
+    "gpubase_bynode_b1",
+    "gpubase_bynode_b2"
+  ],
+  "status": "COMPLETED",
+  "elapsed": "00:01:56",
+  "validation": "smoke-validation.json"
+}

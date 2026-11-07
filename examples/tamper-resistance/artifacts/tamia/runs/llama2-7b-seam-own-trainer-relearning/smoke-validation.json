@@ -1,0 +1,40 @@
+{
+  "job_id": "671082",
+  "global_step": 1,
+  "cosine_log": [
+    {
+      "cosine_similarity": -0.341796875,
+      "epoch": 0,
+      "loss_hh": 234.9924774169922,
+      "loss_sd": -0.341796875,
+      "memory/device_reserved (GiB)": 12.29,
+      "memory/max_active (GiB)": 11.88,
+      "memory/max_allocated (GiB)": 11.88,
+      "step": 0
+    }
+  ],
+  "optimizer_log": [
+    {
+      "epoch": 0.004,
+      "grad_norm": 1368.0,
+      "learning_rate": 1e-05,
+      "loss": 234.9924774169922,
+      "memory/device_reserved (GiB)": 16.58,
+      "memory/max_active (GiB)": 16.36,
+      "memory/max_allocated (GiB)": 16.36,
+      "ppl": 1.1374602561674198e+102,
+      "step": 1
+    }
+  ],
+  "root_matches_checkpoint_1_sha256": {
+    "model.safetensors": "a5dad7e7729e78ac130e657e57d2229e4b96893f40668af1b9b8db97d171aa38",
+    "config.json": "06d6bc21b2a7f889ed02501949c03ea2d88d9202f3a0752afd8fcdb0fe7ec9a5",
+    "generation_config.json": "9fd3496167ab32c0beb5ceb928aa0f0cc5abfa79bf96f279f67b6e8545a9ce26",
+    "tokenizer.json": "55121b3f6bab4b7fbecb21148e036fc3c61af55c5dcec05d8fb7dfe4c7a836c5",
+    "tokenizer_config.json": "5eafff08810e269ecbaec05ba33a354f68745b122ebbff8b9639584bf5343814",
+    "chat_template.jinja": "e8d5b5a546d3f19df16a5320c614fab05bdc4edd50e850f1afd947b503ea41cf"
+  },
+  "checkpoint_format": "single model.safetensors",
+  "tokenizer_format": "tokenizer.json + tokenizer_config.json + chat_template.jinja",
+  "status": "optimizer step, finite cosine logging, and model checkpoint saving verified"
+}

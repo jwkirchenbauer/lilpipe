@@ -1,0 +1,9 @@
+{
+  "jobs": [
+    "671104",
+    "671105",
+    "671106"
+  ],
+  "operation": "scontrol update JobId=<job> Partition=gpubase_bynode_b1,gpubase_bynode_b2",
+  "reason": "Allow either eligible four-H100 partition while retaining the same resources, time limit, and evaluation protocol"
+}

@@ -23,6 +23,10 @@ export TRANSFORMERS_OFFLINE=1
 export UV_OFFLINE=1
 export UV_LINK_MODE=copy
 
+# Keep the CUDA driver cache off the shared home filesystem.
+export CUDA_CACHE_PATH="$SLURM_TMPDIR/cuda-cache-$SLURM_JOB_ID"
+mkdir -p "$CUDA_CACHE_PATH"
+
 # ============================================
 # APPLICATION SPECIFIC CONFIG
 # ============================================

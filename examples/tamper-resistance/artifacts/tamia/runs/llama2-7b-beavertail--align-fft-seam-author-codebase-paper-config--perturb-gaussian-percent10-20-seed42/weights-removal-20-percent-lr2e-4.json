@@ -1,0 +1,9 @@
+{
+  "model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+  "path": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+  "bytes_removed": 80883115995,
+  "local_results_backup_verified": true,
+  "eval_audit": "eval-audit-20-percent-lr2e-4.json",
+  "removed_at_utc": "2026-11-06T04:33:47.125440+00:00",
+  "status": "removed"
+}

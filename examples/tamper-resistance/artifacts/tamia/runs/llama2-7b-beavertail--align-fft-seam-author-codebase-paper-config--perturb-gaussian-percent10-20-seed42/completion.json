@@ -1,0 +1,32 @@
+{
+  "noise_models": 10,
+  "unique_checkpoint_evaluations": 50,
+  "final_model_evaluation_aliases": 10,
+  "weight_directories_removed": 10,
+  "bytes_removed": 808831160550,
+  "starting_models_preserved": true,
+  "figures": [
+    {
+      "variant": "reduced",
+      "path": "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms250--author-codebase-paper-config.pdf",
+      "rows": 432,
+      "noise10_and_noise20_rows": 120,
+      "sha256": "60886eb8e11a3520dfb8e8f9d1dd77ff5b9d9e4ff6a86e423afe0015804a22ab"
+    },
+    {
+      "variant": "comparison",
+      "path": "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms250--author-codebase-paper-config--lr-markers.pdf",
+      "rows": 492,
+      "noise10_and_noise20_rows": 120,
+      "sha256": "2fe88c301c29fb2d5e72c2f05976f56e1cdefca0f49aec7986e717771c4e5b8f"
+    },
+    {
+      "variant": "all-methods",
+      "path": "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms250--author-codebase-paper-config--all-methods.pdf",
+      "rows": 540,
+      "noise10_and_noise20_rows": 120,
+      "sha256": "cca44b8bdf720b0054314e6cb6f613720b085cfbed4ada198e90c9100718b487"
+    }
+  ],
+  "status": "noise trajectories complete; evaluations backed up; weights removed; figures updated"
+}

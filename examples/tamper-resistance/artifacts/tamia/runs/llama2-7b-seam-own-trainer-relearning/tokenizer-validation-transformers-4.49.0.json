@@ -1,0 +1,18 @@
+{
+  "transformers_version": "4.49.0",
+  "starting_model": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+  "models": [
+    {
+      "lr": "1e-5",
+      "vocabulary_identical": true,
+      "padded_256_token_inputs_and_masks_identical": 100,
+      "plain_encodings_with_and_without_special_tokens_identical": 10
+    },
+    {
+      "lr": "5e-5",
+      "vocabulary_identical": true,
+      "padded_256_token_inputs_and_masks_identical": 100,
+      "plain_encodings_with_and_without_special_tokens_identical": 10
+    }
+  ]
+}

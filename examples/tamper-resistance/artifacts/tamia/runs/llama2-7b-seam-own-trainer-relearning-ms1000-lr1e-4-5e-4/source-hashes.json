@@ -1,0 +1,12 @@
+{
+  "configs/registries/models.yml": "4e1c98b07e136456a8f115cd965a6cdc1cb3d49e0c00bcfb545b7c72825aed1f",
+  "configs/registries/evals.yml": "167683bfb746809d6dcd6704c9f7836a074bd3a360387e3b495cca5e04e53e7a",
+  "configs/experiments/llama2-7b-seam-own-trainer-relearning-ms1000.yml": "8f9d0b8dc0f32f9a401567555343f83207d73477977f5908332488df51e692ec",
+  "scripts/slurm/tamia/train.sbatch": "720d1dc631fd528f5d101ecae439c4968e6d8c328e4c1e9ba9cb15d125d3d155",
+  "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch": "7cc4bc30436e49220b65ec0271e7e6dc106ddc8d437f569ec1e5f9f764b8cad2",
+  "src/trainers/tr_seam.py": "01edc546ce23510526708a5b52a066f65b4799e571f848281d5c58e599ef6ec2",
+  "pyproject.toml": "ae07e037b3442dc76d19dc0227ccf26c47030fcaffd353db427068adc7a3792e",
+  "uv.lock": "ead81d0b3c45d754e9f81eed76db64f2b0b7080251d63f38a59269512860a515",
+  "configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms1000/selected.yml": "e8523c70291c026bb56b45dc26fd653e35c6610ca29ac63388c2237684974c9a",
+  "configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-4-ms1000/selected.yml": "b006846f61bc19fd5e8bd0f6b8613894f82b00b1182c405fcccbf5f0d14e7d2c"
+}

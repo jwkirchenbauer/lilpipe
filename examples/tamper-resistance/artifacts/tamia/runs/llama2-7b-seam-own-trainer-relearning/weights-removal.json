@@ -1,0 +1,17 @@
+{
+  "removed": [
+    {
+      "path": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250",
+      "bytes": 80883613210,
+      "eval_json_files_verified": 19
+    },
+    {
+      "path": "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250",
+      "bytes": 80883621669,
+      "eval_json_files_verified": 19
+    }
+  ],
+  "evaluations_preserved": true,
+  "local_and_remote_sha256_verified": true,
+  "removed_at_utc": "2026-11-06T13:35:29.540675+00:00"
+}

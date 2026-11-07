@@ -1,0 +1,59 @@
+{
+  "config": "configs/experiments/llama2-7b-base-noise5.yml",
+  "source_model": "meta-llama/Llama-2-7b-chat-hf",
+  "source_revision": "f5db02db724555f92da89c216ac04704f23d4590",
+  "created_at_utc": "2026-11-05T22:40:32.832804+00:00",
+  "commands": "sbatch --parsable --job-name=generate-base-noise-5-percent /home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/analysis_perturb_model.sbatch --model /scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590 --output-prefix artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian --output artifacts/tamia/runs/llama2-7b-beavertail--perturb-gaussian-l2r0.05-seed42/perturbations.json --percentages 5 --seed 42\nsbatch --parsable --job-name=eval-tamia-h100-llama2-7b--capability-models-llama2-7b-beavertail--perturb-gaussian-l2r0.05-seed42 --export=ALL,INCLUDE_HARMFULNESS=0 --dependency=afterok:dry-run-generate-base-noise-5-percent /home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/eval_capability_models.sbatch artifacts/tamia/evals artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.05-seed42",
+  "jobs": [
+    {
+      "job_id": "670046",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=generate-base-noise-5-percent",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/analysis_perturb_model.sbatch",
+        "--model",
+        "/scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590",
+        "--output-prefix",
+        "artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian",
+        "--output",
+        "artifacts/tamia/runs/llama2-7b-beavertail--perturb-gaussian-l2r0.05-seed42/perturbations.json",
+        "--percentages",
+        "5",
+        "--seed",
+        "42"
+      ]
+    },
+    {
+      "job_id": "670047",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=eval-tamia-h100-llama2-7b--capability-models-llama2-7b-beavertail--perturb-gaussian-l2r0.05-seed42",
+        "--export=ALL,INCLUDE_HARMFULNESS=0",
+        "--dependency=afterok:670046",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/eval_capability_models.sbatch",
+        "artifacts/tamia/evals",
+        "artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.05-seed42"
+      ]
+    },
+    {
+      "job_id": "670048",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=verify-base-noise5-norm",
+        "--dependency=afterok:670046",
+        "scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+        "--model",
+        "artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.05-seed42",
+        "--reference",
+        "/scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590",
+        "--dtype",
+        "bfloat16",
+        "--output",
+        "artifacts/tamia/runs/llama2-7b-beavertail--perturb-gaussian-percent5-seed42/norms.json"
+      ]
+    }
+  ]
+}

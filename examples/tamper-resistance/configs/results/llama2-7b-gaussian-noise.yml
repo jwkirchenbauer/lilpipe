@@ -59,6 +59,21 @@ rows:
 - id: seam-noise-2-percent
   label: SEAM defended + 2% noise (seed 42)
   root: artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42
+- id: seam-noise-5-percent
+  label: SEAM defended + 5% noise (seed 42)
+  root: artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42
+- id: base-noise-1-percent
+  label: Base + 1% noise (seed 42)
+  root: artifacts/tamia/evals/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42
+- id: seam-noise-10-percent
+  label: SEAM defended + 10% noise (seed 42)
+  root: artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42
+- id: seam-noise-20-percent
+  label: SEAM defended + 20% noise (seed 42)
+  root: artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42
+- id: base-noise-5-percent
+  label: Base + 5% noise (seed 42)
+  root: artifacts/tamia/evals/llama2-7b-beavertail--perturb-gaussian-l2r0.05-seed42
 metrics:
 - column: mmlu
   task: mmlu

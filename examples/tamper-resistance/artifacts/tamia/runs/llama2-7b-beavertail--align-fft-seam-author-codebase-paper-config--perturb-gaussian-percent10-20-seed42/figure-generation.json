@@ -1,0 +1,29 @@
+{
+  "generated_at_utc": "2026-11-06T06:45:29.841715+00:00",
+  "mode": "local from verified evaluation backups",
+  "replaces_cpu_job": "671316",
+  "script_sha256": "30ed5d5f71af5e32ccfa378a8306b1ba8f79da5c6a6729582e4ec1b328c07e39",
+  "figures": [
+    {
+      "variant": "reduced",
+      "path": "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms250--author-codebase-paper-config.pdf",
+      "rows": 432,
+      "noise10_and_noise20_rows": 120,
+      "sha256": "60886eb8e11a3520dfb8e8f9d1dd77ff5b9d9e4ff6a86e423afe0015804a22ab"
+    },
+    {
+      "variant": "comparison",
+      "path": "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms250--author-codebase-paper-config--lr-markers.pdf",
+      "rows": 492,
+      "noise10_and_noise20_rows": 120,
+      "sha256": "2fe88c301c29fb2d5e72c2f05976f56e1cdefca0f49aec7986e717771c4e5b8f"
+    },
+    {
+      "variant": "all-methods",
+      "path": "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms250--author-codebase-paper-config--all-methods.pdf",
+      "rows": 540,
+      "noise10_and_noise20_rows": 120,
+      "sha256": "cca44b8bdf720b0054314e6cb6f613720b085cfbed4ada198e90c9100718b487"
+    }
+  ]
+}

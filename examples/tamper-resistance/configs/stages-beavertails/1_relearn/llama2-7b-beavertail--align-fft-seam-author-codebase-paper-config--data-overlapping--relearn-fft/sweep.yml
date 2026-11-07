@@ -22,6 +22,10 @@ sweeps:
   name_template: llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr{learning_rate:.0e}-ms{max_steps}-warmup{warmup_ratio:g}
   parameters:
     learning_rate:
+    - 2.0e-05
+    - 5.0e-05
+    - 8.0e-05
+    - 0.0001
     - 0.0002
   overrides:
     warmup_ratio: 0.5

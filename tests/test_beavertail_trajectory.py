@@ -118,7 +118,7 @@ def test_flat_configs_use_selected_paths_and_metric_keys(tmp_path, include_gsm8k
         plotter.get_results(configs, str(tmp_path), [0, 50, 100], tasks)
 
 
-def test_selected_plot_writes_all_four_1000_step_trajectories(monkeypatch, tmp_path):
+def test_selected_plot_compares_base_seam_and_warmup(monkeypatch, tmp_path):
     plotter = load_plotter()
     root = tmp_path / "evals"
     for cfg in plotter.configs:
@@ -131,9 +131,17 @@ def test_selected_plot_writes_all_four_1000_step_trajectories(monkeypatch, tmp_p
     )
     result = runpy.run_path(str(PLOTTER), run_name="__main__")
     df = result["df"]
-    assert len(df) == 168
-    assert set(df["LR"]) == {1e-5, 5e-5, 1e-4, 5e-4}
-    assert set(df["Relearning step"]) == set(range(0, 1001, 50))
+    assert len(df) == 96
+    assert set(df["LR"]) == {1e-5, 2e-5, 5e-5, 8e-5, 1e-4, 2e-4}
+    assert set(df["Method"]) == {"Base", "SEAM", "SEAM w/ W50"}
+    assert set(df["Relearning step"]) == set(range(0, 251, 50))
     labels = {text.get_text() for text in result["grid"].legend.get_texts()}
-    assert {"1e-05", "5e-05", "1e-04", "5e-04"} <= labels
+    assert {"1e-05", "2e-05", "5e-05", "8e-05", "1e-04", "2e-04"} <= labels
+    assert result["facet"]["row"] == "Method"
+    for (_, evaluation), ax in result["grid"].axes_dict.items():
+        references = [line for line in ax.lines if line.get_linestyle() == "--"]
+        assert len(references) == 1
+        assert list(references[0].get_ydata()) == (
+            [50, 50] if evaluation == "Capability ↑" else [20, 20]
+        )
     assert output.read_bytes().startswith(b"%PDF")

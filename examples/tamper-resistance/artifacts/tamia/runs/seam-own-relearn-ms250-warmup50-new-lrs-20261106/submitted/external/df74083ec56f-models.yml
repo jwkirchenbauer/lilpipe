@@ -1,0 +1,260 @@
+models:
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - artifacts/generated/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft--hpo/base.yml
+      - --learning-rate
+      - 1e-05
+      - --output-dir
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250
+      - --wandb-name
+      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250
+      sbatch_args: &id001
+      - --partition=gpubase_bynode_b1
+      - --export=ALL,WANDB_MODE=online
+    evaluation_root: artifacts/tamia/evals
+    evaluation_trajectory: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250
+    evaluation_final_step: '250'
+    evaluation_final_model: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250
+    evaluation_checkpoint_steps: 0,50,100,150,200,250
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - artifacts/generated/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft--hpo/base.yml
+      - --learning-rate
+      - 5e-05
+      - --output-dir
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250
+      - --wandb-name
+      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250
+      sbatch_args: *id001
+    evaluation_root: artifacts/tamia/evals
+    evaluation_trajectory: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250
+    evaluation_final_step: '250'
+    evaluation_final_model: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250
+    evaluation_checkpoint_steps: 0,50,100,150,200,250
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - artifacts/generated/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft--hpo/base.yml
+      - --learning-rate
+      - 1e-05
+      - --max-steps
+      - '1000'
+      - --save-total-limit
+      - '21'
+      - --output-dir
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000
+      - --wandb-name
+      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000
+      sbatch_args: *id001
+    evaluation_root: artifacts/tamia/evals
+    evaluation_trajectory: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000
+    evaluation_final_step: '1000'
+    evaluation_final_model: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000
+    evaluation_checkpoint_steps: 0,50,100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900,950,1000
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - artifacts/generated/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft--hpo/base.yml
+      - --learning-rate
+      - 5e-05
+      - --max-steps
+      - '1000'
+      - --save-total-limit
+      - '21'
+      - --output-dir
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000
+      - --wandb-name
+      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000
+      sbatch_args: *id001
+    evaluation_root: artifacts/tamia/evals
+    evaluation_trajectory: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000
+    evaluation_final_step: '1000'
+    evaluation_final_model: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000
+    evaluation_checkpoint_steps: 0,50,100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900,950,1000
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms1000:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms1000
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms1000
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms1000
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - artifacts/generated/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft--hpo/base.yml
+      - --learning-rate
+      - '0.0001'
+      - --max-steps
+      - '1000'
+      - --save-total-limit
+      - '21'
+      - --output-dir
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms1000
+      - --wandb-name
+      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms1000
+      sbatch_args: *id001
+    evaluation_root: artifacts/tamia/evals
+    evaluation_trajectory: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms1000
+    evaluation_final_step: '1000'
+    evaluation_final_model: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms1000
+    evaluation_checkpoint_steps: 0,50,100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900,950,1000
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-4-ms1000:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-4-ms1000
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-4-ms1000
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-4-ms1000
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - artifacts/generated/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft--hpo/base.yml
+      - --learning-rate
+      - '0.0005'
+      - --max-steps
+      - '1000'
+      - --save-total-limit
+      - '21'
+      - --output-dir
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-4-ms1000
+      - --wandb-name
+      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-4-ms1000
+      sbatch_args: *id001
+    evaluation_root: artifacts/tamia/evals
+    evaluation_trajectory: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-4-ms1000
+    evaluation_final_step: '1000'
+    evaluation_final_model: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-4-ms1000
+    evaluation_checkpoint_steps: 0,50,100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900,950,1000
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-5-ms250-warmup0.5:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-5-ms250-warmup0.5
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-5-ms250-warmup0.5
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-5-ms250-warmup0.5
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - artifacts/generated/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft--hpo/base.yml
+      - --learning-rate
+      - 2e-05
+      - --warmup-ratio
+      - '0.5'
+      - --output-dir
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-5-ms250-warmup0.5
+      - --wandb-name
+      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-5-ms250-warmup0.5
+      sbatch_args: *id001
+    evaluation_root: artifacts/tamia/evals
+    evaluation_trajectory: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-5-ms250-warmup0.5
+    evaluation_final_step: '250'
+    evaluation_final_model: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-5-ms250-warmup0.5
+    evaluation_checkpoint_steps: 0,50,100,150,200,250
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250-warmup0.5:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250-warmup0.5
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250-warmup0.5
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250-warmup0.5
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - artifacts/generated/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft--hpo/base.yml
+      - --learning-rate
+      - 5e-05
+      - --warmup-ratio
+      - '0.5'
+      - --output-dir
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250-warmup0.5
+      - --wandb-name
+      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250-warmup0.5
+      sbatch_args: *id001
+    evaluation_root: artifacts/tamia/evals
+    evaluation_trajectory: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250-warmup0.5
+    evaluation_final_step: '250'
+    evaluation_final_model: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250-warmup0.5
+    evaluation_checkpoint_steps: 0,50,100,150,200,250
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr8e-5-ms250-warmup0.5:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr8e-5-ms250-warmup0.5
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr8e-5-ms250-warmup0.5
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr8e-5-ms250-warmup0.5
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - artifacts/generated/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft--hpo/base.yml
+      - --learning-rate
+      - 8e-05
+      - --warmup-ratio
+      - '0.5'
+      - --output-dir
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr8e-5-ms250-warmup0.5
+      - --wandb-name
+      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr8e-5-ms250-warmup0.5
+      sbatch_args: *id001
+    evaluation_root: artifacts/tamia/evals
+    evaluation_trajectory: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr8e-5-ms250-warmup0.5
+    evaluation_final_step: '250'
+    evaluation_final_model: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr8e-5-ms250-warmup0.5
+    evaluation_checkpoint_steps: 0,50,100,150,200,250
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms250-warmup0.5:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms250-warmup0.5
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms250-warmup0.5
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms250-warmup0.5
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - artifacts/generated/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft--hpo/base.yml
+      - --learning-rate
+      - '0.0001'
+      - --warmup-ratio
+      - '0.5'
+      - --output-dir
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms250-warmup0.5
+      - --wandb-name
+      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms250-warmup0.5
+      sbatch_args: *id001
+    evaluation_root: artifacts/tamia/evals
+    evaluation_trajectory: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms250-warmup0.5
+    evaluation_final_step: '250'
+    evaluation_final_model: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms250-warmup0.5
+    evaluation_checkpoint_steps: 0,50,100,150,200,250
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-4-ms250-warmup0.5:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-4-ms250-warmup0.5
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-4-ms250-warmup0.5
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-4-ms250-warmup0.5
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - artifacts/generated/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft--hpo/base.yml
+      - --learning-rate
+      - '0.0002'
+      - --warmup-ratio
+      - '0.5'
+      - --output-dir
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-4-ms250-warmup0.5
+      - --wandb-name
+      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-4-ms250-warmup0.5
+      sbatch_args: *id001
+    evaluation_root: artifacts/tamia/evals
+    evaluation_trajectory: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-4-ms250-warmup0.5
+    evaluation_final_step: '250'
+    evaluation_final_model: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-4-ms250-warmup0.5
+    evaluation_checkpoint_steps: 0,50,100,150,200,250

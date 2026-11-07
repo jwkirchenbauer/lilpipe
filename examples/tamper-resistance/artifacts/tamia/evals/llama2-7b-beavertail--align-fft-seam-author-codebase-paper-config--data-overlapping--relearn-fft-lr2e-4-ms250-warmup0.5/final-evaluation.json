@@ -1,0 +1,5 @@
+{
+  "model": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-4-ms250-warmup0.5",
+  "reused_from": "checkpoint-250",
+  "reason": "Identical model, tokenizer, and generation configuration (SHA-256 verified)"
+}

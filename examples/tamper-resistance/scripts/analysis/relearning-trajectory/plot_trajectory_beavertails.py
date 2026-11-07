@@ -145,55 +145,113 @@ our_attack = "--data-overlapping--relearn-fft-"
 # ]
 # steps = list(range(0, 251, 50))
 # outpath = "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms250--author-codebase-paper-config.pdf"
-# For expanded rows, use the row-layout block below and suffix --all-methods.
+# For expanded rows, use the row-layout block below.
 # For five-task plots, also uncomment GSM8K above and omit runs missing GSM8K.
 
-# 2. Our trainer, 250 steps: uncomment this block and comment block 3.
+# 2. Minimal SEAM-only selection for our 250-step plot; full comparison in block 4.
 # configs = [
 #     {"path": seam + our_attack + "lr1e-5-ms250", "baseline": seam, "method": "SEAM", "lr": 1e-5},
 #     {"path": seam + our_attack + "lr5e-5-ms250", "baseline": seam, "method": "SEAM", "lr": 5e-5},
-#     {"path": seam + our_attack + "lr2e-4-ms250-warmup0.5", "baseline": seam, "method": "SEAM (50% warmup)", "lr": 2e-4},
+#     {"path": seam + our_attack + "lr2e-4-ms250-warmup0.5", "baseline": seam, "method": "SEAM w/ W50", "lr": 2e-4},
 # ]
 # steps = list(range(0, 251, 50))
-# outpath = "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms250--author-codebase-paper-config--own-relearn-trainer.pdf"
+# outpath = "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms250--our-codebase.pdf"
 
 # 3. Our trainer, 1,000 steps: produces the four-LR trajectory PDF.
+# configs = [
+#     {
+#         "path": seam + our_attack + "lr1e-5-ms1000",
+#         "baseline": seam,
+#         "method": "SEAM",
+#         "lr": 1e-5,
+#     },
+#     {
+#         "path": seam + our_attack + "lr5e-5-ms1000",
+#         "baseline": seam,
+#         "method": "SEAM",
+#         "lr": 5e-5,
+#     },
+#     {
+#         "path": seam + our_attack + "lr1e-4-ms1000",
+#         "baseline": seam,
+#         "method": "SEAM",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": seam + our_attack + "lr5e-4-ms1000",
+#         "baseline": seam,
+#         "method": "SEAM",
+#         "lr": 5e-4,
+#     },
+# ]
+# steps = list(range(0, 1001, 50))
+# outpath = "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms1000--our-codebase.pdf"
+
+# 4. Base, our 250-step SEAM attacks, and SEAM with 50% warmup.
+# Base uses the authors' trainer; SEAM and SEAM w/ W50 use ours.
 configs = [
     {
-        "path": seam + our_attack + "lr1e-5-ms1000",
+        "path": base + author_attack + "lr2e-5-ms250",
+        "baseline": base,
+        "method": "Base",
+        "lr": 2e-5,
+    },
+    {
+        "path": base + author_attack + "lr5e-5-ms250",
+        "baseline": base,
+        "method": "Base",
+        "lr": 5e-5,
+    },
+    {
+        "path": base + author_attack + "lr8e-5-ms250",
+        "baseline": base,
+        "method": "Base",
+        "lr": 8e-5,
+    },
+    {
+        "path": base + author_attack + "lr1e-4-ms250",
+        "baseline": base,
+        "method": "Base",
+        "lr": 1e-4,
+    },
+    {
+        "path": base + author_attack + "lr2e-4-ms250",
+        "baseline": base,
+        "method": "Base",
+        "lr": 2e-4,
+    },
+    {
+        "path": seam + our_attack + "lr1e-5-ms250",
         "baseline": seam,
         "method": "SEAM",
         "lr": 1e-5,
     },
     {
-        "path": seam + our_attack + "lr5e-5-ms1000",
+        "path": seam + our_attack + "lr5e-5-ms250",
         "baseline": seam,
         "method": "SEAM",
         "lr": 5e-5,
     },
     {
-        "path": seam + our_attack + "lr1e-4-ms1000",
+        "path": seam + our_attack + "lr2e-4-ms250-warmup0.5",
         "baseline": seam,
-        "method": "SEAM",
-        "lr": 1e-4,
-    },
-    {
-        "path": seam + our_attack + "lr5e-4-ms1000",
-        "baseline": seam,
-        "method": "SEAM",
-        "lr": 5e-4,
+        "method": "SEAM w/ W50",
+        "lr": 2e-4,
     },
 ]
-steps = list(range(0, 1001, 50))
-outpath = "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms1000--author-codebase-paper-config--own-relearn-trainer.pdf"
+steps = list(range(0, 251, 50))
+outpath = "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms250--our-codebase.pdf"
 
-# Layout: uncomment ONE assignment. LR always controls thickness and markers.
-facet = {"hue": "Method", "height": 3.4}
-# facet = {"row": "Method", "color": "black", "height": 3.2, "aspect": 1.5}
+# Methods occupy rows; LR controls thickness and markers.
+facet = {"row": "Method", "color": "black", "height": 3.2, "aspect": 1.5}
 
-# Expanded author plots used this dashed reference. Uncomment when selected.
-reference = None
-# reference = {"method": "Base", "lr": 1e-4, "step": 250}
+# Reference: Base after the authors' 250-step attack at LR 1e-4.
+reference = {
+    "path": base + author_attack + "lr1e-4-ms250",
+    "baseline": base,
+    "method": "Base",
+    "lr": 1e-4,
+}
 
 
 def get_results(configs, rootdir, steps, task_to_metric):
@@ -263,15 +321,12 @@ if __name__ == "__main__":
         kind="line",
         errorbar=None,
     )
-    if reference is not None:
-        scores = df[
-            (df["Method"] == reference["method"])
-            & (df["LR"] == reference["lr"])
-            & (df["Relearning step"] == reference["step"])
-        ].set_index("Eval")["Score (%)"]
-        for key, ax in grid.axes_dict.items():
-            evaluation = key[-1] if isinstance(key, tuple) else key
-            ax.axhline(scores[evaluation], color="0.45", linestyle="--", linewidth=1.4)
+    scores = pd.DataFrame(
+        get_results([reference], args.rootdir, [250], task_to_metric)
+    ).set_index("Eval")["Score (%)"]
+    for key, ax in grid.axes_dict.items():
+        evaluation = key[-1] if isinstance(key, tuple) else key
+        ax.axhline(scores[evaluation], color="0.45", linestyle="--", linewidth=1.4)
     for label in grid.legend.get_texts():
         try:
             label.set_text(f"{float(label.get_text()):.0e}")

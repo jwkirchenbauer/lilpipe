@@ -31,7 +31,7 @@ def test_own_relearning_configs_and_evaluation_dependencies(monkeypatch, tmp_pat
     stages = pipeline.plan().stages
     training = [stage for stage in stages if stage.id.startswith("train-")]
     evaluation = [stage for stage in stages if stage.id.startswith("eval-")]
-    assert len(training) == len(evaluation) == 7
+    assert len(training) == len(evaluation) == 11
     expected = {
         (250, 1e-5, 0.1),
         (250, 5e-5, 0.1),
@@ -39,6 +39,10 @@ def test_own_relearning_configs_and_evaluation_dependencies(monkeypatch, tmp_pat
         (1000, 5e-5, 0.1),
         (1000, 1e-4, 0.1),
         (1000, 5e-4, 0.1),
+        (250, 2e-5, 0.5),
+        (250, 5e-5, 0.5),
+        (250, 8e-5, 0.5),
+        (250, 1e-4, 0.5),
         (250, 2e-4, 0.5),
     }
     actual = set()

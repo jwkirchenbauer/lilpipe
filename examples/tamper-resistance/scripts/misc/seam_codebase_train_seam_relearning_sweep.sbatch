@@ -67,8 +67,9 @@ done
 
 # Canonical noise workflows evaluate the untouched starting model first.
 if [[ ${EVALUATE_BASELINE:-0} == 1 ]]; then
-    INCLUDE_HARMFULNESS=1 bash scripts/slurm/tamia/eval_capability_models.sbatch \
-      artifacts/tamia/evals "$model"
+    INCLUDE_GSM8K=1 CAPABILITIES_SUBDIR=capabilities-4gpu \
+      bash scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch \
+      "$model" "artifacts/tamia/evals/$(basename "$model")"
 fi
 cd ../seam
 

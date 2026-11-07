@@ -20,6 +20,7 @@ models:
       - --time=03:00:00
       - --export=ALL,PYTHONHASHSEED=0
   llama2-7b-beavertail--align-fft-seam-legacy:
+    evaluation_root: artifacts/tamia/evals/llama2-7b-beavertail
     base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-legacy
     adapter_name_or_path: '-'
     local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-legacy
@@ -30,7 +31,7 @@ models:
       - configs/stages-beavertails/0_alignment/llama2-7b-beavertail--align-fft-seam-legacy/selected.yml
       - --launcher
       - python
-      sbatch_args: &seam_legacy
+      sbatch_args: &id001
       - --partition=gpubase_bynode_b2
       - --gpus-per-node=h100:4
       - --cpus-per-task=48
@@ -38,6 +39,7 @@ models:
       - --time=03:00:00
       - --export=ALL,PYTHONHASHSEED=0
   llama2-7b-beavertail--align-fft-seam-legacy--data-disjoint--relearn-fft-ms250:
+    evaluation_root: artifacts/tamia/evals/llama2-7b-beavertail
     baseline_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-legacy
     base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-legacy--data-disjoint--relearn-fft-ms250
     adapter_name_or_path: '-'
@@ -55,11 +57,12 @@ models:
       - python
       depends_on:
       - llama2-7b-beavertail--align-fft-seam-legacy
-      sbatch_args: *seam_legacy
+      sbatch_args: *id001
     evaluation_checkpoint_steps: 0,100,200,250
     evaluation_final_step: '250'
     evaluation_final_model: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-legacy--data-disjoint--relearn-fft-ms250
   llama2-7b-beavertail--align-fft-seam:
+    evaluation_root: artifacts/tamia/evals/llama2-7b-beavertail
     base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam
     adapter_name_or_path: '-'
     local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam
@@ -992,13 +995,12 @@ models:
     evaluation_final_step: '16'
     evaluation_final_model: artifacts/tamia/models/optml-z7b-wmdp-bio--15pp--unlearn-fft-npo-sam--relearn-fft
     evaluation_trajectory: artifacts/tamia/models/optml-z7b-wmdp-bio--15pp--unlearn-fft-npo-sam--relearn-fft
-
-  # SEAM noise sweeps: one representative model owns each five-LR producer.
   llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42:
+    evaluation_root: artifacts/tamia/evals
     local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42
     producer:
       id: generate-seam-noise-1-percent
-      script: scripts/slurm/tamia/analysis_perturb_model.sbatch
+      script: scripts/slurm/tamia/noise.sbatch
       args:
       - --model
       - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config
@@ -1010,38 +1012,13 @@ models:
       - '1'
       - --seed
       - '42'
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
-    evaluation_root: artifacts/tamia/evals
-    producer:
-      id: train-seam-noise-1-percent-sweep
-      script: scripts/slurm/tamia/train_seam_relearning_sweep.sbatch
-      args:
-      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42
-      - artifacts/tamia/models
-      - artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--relearning-author-codebase-sweep-ms250
-      - 'true'
-      depends_on:
-      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42
-      sbatch_args:
-      - --export=ALL,EVALUATE_BASELINE=1,MODEL_SLUG=llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
-    evaluation_root: artifacts/tamia/evals
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
-    evaluation_root: artifacts/tamia/evals
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
-    evaluation_root: artifacts/tamia/evals
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
-    evaluation_root: artifacts/tamia/evals
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42
   llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42:
+    evaluation_root: artifacts/tamia/evals
     local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42
     producer:
       id: generate-seam-noise-2-percent
-      script: scripts/slurm/tamia/analysis_perturb_model.sbatch
+      script: scripts/slurm/tamia/noise.sbatch
       args:
       - --model
       - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config
@@ -1053,35 +1030,9 @@ models:
       - '2'
       - --seed
       - '42'
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
-    evaluation_root: artifacts/tamia/evals
-    producer:
-      id: train-seam-noise-2-percent-sweep
-      script: scripts/slurm/tamia/train_seam_relearning_sweep.sbatch
-      args:
-      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42
-      - artifacts/tamia/models
-      - artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--relearning-author-codebase-sweep-ms250
-      - 'true'
-      depends_on:
-      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42
-      sbatch_args:
-      - --export=ALL,EVALUATE_BASELINE=1,MODEL_SLUG=llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
-    evaluation_root: artifacts/tamia/evals
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
-    evaluation_root: artifacts/tamia/evals
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
-    evaluation_root: artifacts/tamia/evals
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
-    evaluation_root: artifacts/tamia/evals
-
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42
   llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42:
+    evaluation_root: artifacts/tamia/evals
     local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42
     producer:
       args:
@@ -1096,36 +1047,10 @@ models:
       - --seed
       - '42'
       id: generate-seam-noise-5-percent
-      script: scripts/slurm/tamia/analysis_perturb_model.sbatch
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
-    evaluation_root: artifacts/tamia/evals
-    producer:
-      args:
-      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42
-      - artifacts/tamia/models
-      - artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--relearning-author-codebase-sweep-ms250
-      - 'true'
-      depends_on:
-      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42
-      id: train-seam-noise-5-percent-sweep
-      sbatch_args:
-      - --export=ALL,EVALUATE_BASELINE=1,MODEL_SLUG=llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42
-      script: scripts/slurm/tamia/train_seam_relearning_sweep.sbatch
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
-    evaluation_root: artifacts/tamia/evals
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
-    evaluation_root: artifacts/tamia/evals
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
-    evaluation_root: artifacts/tamia/evals
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
-    evaluation_root: artifacts/tamia/evals
-
+      script: scripts/slurm/tamia/noise.sbatch
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42
   llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42:
+    evaluation_root: artifacts/tamia/evals
     local_dir: artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42
     producer:
       args:
@@ -1140,36 +1065,10 @@ models:
       - --seed
       - '42'
       id: generate-base-noise-1-percent
-      script: scripts/slurm/tamia/analysis_perturb_model.sbatch
-  llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250:
-    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
-    evaluation_root: artifacts/tamia/evals
-    producer:
-      args:
-      - artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42
-      - artifacts/tamia/models
-      - artifacts/tamia/runs/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--relearning-author-codebase-sweep-ms250
-      - 'true'
-      depends_on:
-      - llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42
-      id: train-base-noise-1-percent-sweep
-      sbatch_args:
-      - --export=ALL,EVALUATE_BASELINE=1,MODEL_SLUG=llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42
-      script: scripts/slurm/tamia/train_seam_relearning_sweep.sbatch
-  llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250:
-    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
-    evaluation_root: artifacts/tamia/evals
-  llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250:
-    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
-    evaluation_root: artifacts/tamia/evals
-  llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250:
-    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
-    evaluation_root: artifacts/tamia/evals
-  llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250:
-    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
-    evaluation_root: artifacts/tamia/evals
-
+      script: scripts/slurm/tamia/noise.sbatch
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42
   llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42:
+    evaluation_root: artifacts/tamia/evals
     local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42
     producer:
       args:
@@ -1184,35 +1083,10 @@ models:
       - --seed
       - '42'
       id: generate-seam-noise-10-percent
-      script: scripts/slurm/tamia/analysis_perturb_model.sbatch
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
-    evaluation_root: artifacts/tamia/evals
-    producer:
-      args:
-      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42
-      - artifacts/tamia/models
-      - artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--relearning-author-codebase-sweep-ms250
-      - 'true'
-      depends_on:
-      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42
-      id: train-seam-noise-10-percent-sweep
-      sbatch_args:
-      - --export=ALL,EVALUATE_BASELINE=1,MODEL_SLUG=llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42
-      script: scripts/slurm/tamia/train_seam_relearning_sweep.sbatch
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
-    evaluation_root: artifacts/tamia/evals
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
-    evaluation_root: artifacts/tamia/evals
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
-    evaluation_root: artifacts/tamia/evals
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
-    evaluation_root: artifacts/tamia/evals
+      script: scripts/slurm/tamia/noise.sbatch
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42
   llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42:
+    evaluation_root: artifacts/tamia/evals
     local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42
     producer:
       args:
@@ -1227,35 +1101,8 @@ models:
       - --seed
       - '42'
       id: generate-seam-noise-20-percent
-      script: scripts/slurm/tamia/analysis_perturb_model.sbatch
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
-    evaluation_root: artifacts/tamia/evals
-    producer:
-      args:
-      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42
-      - artifacts/tamia/models
-      - artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--relearning-author-codebase-sweep-ms250
-      - 'true'
-      depends_on:
-      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42
-      id: train-seam-noise-20-percent-sweep
-      sbatch_args:
-      - --export=ALL,EVALUATE_BASELINE=1,MODEL_SLUG=llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42
-      script: scripts/slurm/tamia/train_seam_relearning_sweep.sbatch
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
-    evaluation_root: artifacts/tamia/evals
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
-    evaluation_root: artifacts/tamia/evals
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
-    evaluation_root: artifacts/tamia/evals
-  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
-  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
-    evaluation_root: artifacts/tamia/evals
-
+      script: scripts/slurm/tamia/noise.sbatch
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42
   z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint:
     base_model_name_or_path: /scratch/m/mgamal/.cache/huggingface/hub/models--OPTML-Group--NPO-WMDP/snapshots/fec7960fb3925037a6befc5819036cbc55664b18
     evaluation_root: artifacts/tamia/evals
@@ -1264,7 +1111,7 @@ models:
     evaluation_root: artifacts/tamia/evals
     producer:
       id: generate-z7b-npo-author-noise-5-percent
-      script: scripts/slurm/tamia/analysis_perturb_model.sbatch
+      script: scripts/slurm/tamia/noise.sbatch
       args:
       - --model
       - /scratch/m/mgamal/.cache/huggingface/hub/models--OPTML-Group--NPO-WMDP/snapshots/fec7960fb3925037a6befc5819036cbc55664b18
@@ -1276,7 +1123,6 @@ models:
       - '5'
       - --seed
       - '42'
-
   z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42:
     base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42
     evaluation_root: artifacts/tamia/evals
@@ -1293,14 +1139,13 @@ models:
       - --seed
       - '42'
       id: generate-z7b-npo-author-noise-1-percent
-      script: scripts/slurm/tamia/analysis_perturb_model.sbatch
-
+      script: scripts/slurm/tamia/noise.sbatch
   llama2-7b-beavertail--perturb-gaussian-l2r0.05-seed42:
     base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.05-seed42
     evaluation_root: artifacts/tamia/evals
     producer:
       id: generate-base-noise-5-percent
-      script: scripts/slurm/tamia/analysis_perturb_model.sbatch
+      script: scripts/slurm/tamia/noise.sbatch
       args:
       - --model
       - /scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590
@@ -1312,92 +1157,74 @@ models:
       - '5'
       - --seed
       - '42'
-
-  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250:
-    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250
+  llama2-7b-beavertail:
+    base_model_name_or_path: /scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590
+    evaluation_root: artifacts/tamia/evals
+  llama2-7b-beavertail--perturb-gaussian-l2r0.001-seed42:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.001-seed42
     evaluation_root: artifacts/tamia/evals
     producer:
-      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250
-      script: scripts/slurm/tamia/train.sbatch
+      id: generate-base-noise-0p1-percent
+      script: scripts/slurm/tamia/noise.sbatch
       args:
-      - configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250/selected.yml
-      sbatch_args:
-      - --partition=gpubase_bynode_b1
-      - --export=ALL,WANDB_MODE=online
-
-  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250:
-    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250
+      - --model
+      - /scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590
+      - --output-prefix
+      - artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian
+      - --output
+      - artifacts/tamia/runs/llama2-7b-beavertail--perturb-gaussian-l2r0.001-seed42/perturbations.json
+      - --percentages
+      - '0.1'
+      - --seed
+      - '42'
+  llama2-7b-beavertail--perturb-gaussian-l2r0.0025-seed42:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.0025-seed42
     evaluation_root: artifacts/tamia/evals
     producer:
-      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250
-      script: scripts/slurm/tamia/train.sbatch
+      id: generate-base-noise-0p25-percent
+      script: scripts/slurm/tamia/noise.sbatch
       args:
-      - configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250/selected.yml
-      sbatch_args:
-      - --partition=gpubase_bynode_b1
-      - --export=ALL,WANDB_MODE=online
-
-
-  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000:
-    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000
+      - --model
+      - /scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590
+      - --output-prefix
+      - artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian
+      - --output
+      - artifacts/tamia/runs/llama2-7b-beavertail--perturb-gaussian-l2r0.0025-seed42/perturbations.json
+      - --percentages
+      - '0.25'
+      - --seed
+      - '42'
+  llama2-7b-beavertail--perturb-gaussian-l2r0.005-seed42:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.005-seed42
     evaluation_root: artifacts/tamia/evals
     producer:
-      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000
-      script: scripts/slurm/tamia/train.sbatch
+      id: generate-base-noise-0p5-percent
+      script: scripts/slurm/tamia/noise.sbatch
       args:
-      - configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000/selected.yml
-      sbatch_args:
-      - --partition=gpubase_bynode_b1
-      - --export=ALL,WANDB_MODE=online
-
-
-  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000:
-    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000
+      - --model
+      - /scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590
+      - --output-prefix
+      - artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian
+      - --output
+      - artifacts/tamia/runs/llama2-7b-beavertail--perturb-gaussian-l2r0.005-seed42/perturbations.json
+      - --percentages
+      - '0.5'
+      - --seed
+      - '42'
+  llama2-7b-beavertail--perturb-gaussian-l2r0.0075-seed42:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.0075-seed42
     evaluation_root: artifacts/tamia/evals
     producer:
-      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000
-      script: scripts/slurm/tamia/train.sbatch
+      id: generate-base-noise-0p75-percent
+      script: scripts/slurm/tamia/noise.sbatch
       args:
-      - configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000/selected.yml
-      sbatch_args:
-      - --partition=gpubase_bynode_b1
-      - --export=ALL,WANDB_MODE=online
-
-
-  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms1000:
-    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms1000
-    evaluation_root: artifacts/tamia/evals
-    producer:
-      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms1000
-      script: scripts/slurm/tamia/train.sbatch
-      args:
-      - configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms1000/selected.yml
-      sbatch_args:
-      - --partition=gpubase_bynode_b1
-      - --export=ALL,WANDB_MODE=online
-
-
-  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-4-ms1000:
-    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-4-ms1000
-    evaluation_root: artifacts/tamia/evals
-    producer:
-      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-4-ms1000
-      script: scripts/slurm/tamia/train.sbatch
-      args:
-      - configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-4-ms1000/selected.yml
-      sbatch_args:
-      - --partition=gpubase_bynode_b1
-      - --export=ALL,WANDB_MODE=online
-
-
-  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-4-ms250-warmup0.5:
-    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-4-ms250-warmup0.5
-    evaluation_root: artifacts/tamia/evals
-    producer:
-      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-4-ms250-warmup0.5
-      script: scripts/slurm/tamia/train.sbatch
-      args:
-      - configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-4-ms250-warmup0.5/selected.yml
-      sbatch_args:
-      - --partition=gpubase_bynode_b1
-      - --export=ALL,WANDB_MODE=online
+      - --model
+      - /scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590
+      - --output-prefix
+      - artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian
+      - --output
+      - artifacts/tamia/runs/llama2-7b-beavertail--perturb-gaussian-l2r0.0075-seed42/perturbations.json
+      - --percentages
+      - '0.75'
+      - --seed
+      - '42'

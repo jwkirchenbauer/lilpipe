@@ -10,7 +10,7 @@ import pytest
 
 SCRIPT = (
     Path(__file__).resolve().parents[1]
-    / "examples/tamper-resistance/scripts/slurm/tamia/train_seam_relearning_sweep.sbatch"
+    / "examples/tamper-resistance/scripts/misc/seam_codebase_train_seam_relearning_sweep.sbatch"
 )
 
 
@@ -24,10 +24,10 @@ def test_sweep_gpu_assignment_checkpoints_and_failures(
     workdir.mkdir()
     (tmp_path / "seam").mkdir()
     baseline_call = tmp_path / "baseline-call"
-    baseline = workdir / "scripts/slurm/tamia/eval_capability_models.sbatch"
+    baseline = workdir / "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch"
     baseline.parent.mkdir(parents=True)
     baseline.write_text(
-        '#!/bin/bash\ntest "$INCLUDE_HARMFULNESS" = 1\nprintf "%s\\n" "$*" > "$BASELINE_CALL"\n'
+        '#!/bin/bash\ntest "$INCLUDE_GSM8K" = 1\nprintf "%s\\n" "$*" > "$BASELINE_CALL"\n'
     )
     model = tmp_path / "defended"
     models = tmp_path / "models"
@@ -82,7 +82,10 @@ def test_sweep_gpu_assignment_checkpoints_and_failures(
     assert len(records) == 6
     assert baseline_call.exists() == evaluate_baseline
     if evaluate_baseline:
-        assert baseline_call.read_text().strip() == f"artifacts/tamia/evals {model}"
+        assert (
+            baseline_call.read_text().strip()
+            == f"{model} artifacts/tamia/evals/{model.name}"
+        )
     full = [record for record in records if "--max_steps" not in record["args"]]
     expected = dict(
         zip(("2e-5", "5e-5", "8e-5", "1e-4", "2e-4"), ("4", "5", "6", "7", "4"))

@@ -46,6 +46,16 @@ fi
 # --checkpoints evaluates every 50 steps through CHECKPOINT_MAX_STEP (default 250).
 # The identical final model reuses the last checkpoint evaluation.
 checkpoints=false
+steps=
+baseline=
+while [[ ${1:-} == --max-step || ${1:-} == --steps || ${1:-} == --baseline ]]; do
+    case $1 in
+        --max-step) export CHECKPOINT_MAX_STEP=${2:?missing maximum checkpoint step} ;;
+        --steps) steps=${2:?missing comma-separated checkpoint steps} ;;
+        --baseline) baseline=${2:?missing baseline model} ;;
+    esac
+    shift 2
+done
 if [[ ${1:-} == --checkpoints ]]; then
     checkpoints=true
     shift
@@ -57,8 +67,12 @@ fi
 # Keep the authors' harmfulness dependencies separate from the project lm-eval env.
 seam_env=${SEAM_ENV:-$SCRATCH/lilpipe/seam-official/venv}
 harmfulness_script=../seam/scripts/eval_harmfulness.py
-test -x "$seam_env/bin/python"
-test -f "$harmfulness_script"
+include_harmfulness=${INCLUDE_HARMFULNESS:-1}
+if [[ "$include_harmfulness" == 1 ]]; then
+    test -x "$seam_env/bin/python"
+    test -f "$harmfulness_script"
+fi
+validation_python="$seam_env/bin/python"
 
 # Task overrides are shared with the combined evaluator; defaults retain the
 # original four-task, zero-shot protocol. GSM8K can be run separately at five-shot.
@@ -68,11 +82,17 @@ max_batch_size=${MAX_BATCH_SIZE:-128}
 include_gsm8k=${INCLUDE_GSM8K:-0}
 harmfulness_only=${HARMFULNESS_ONLY:-0}
 resume=${RESUME_EVALUATION:-0}
+capabilities_subdir=${CAPABILITIES_SUBDIR:-capabilities}
+if [[ "$harmfulness_only" != 1 ]]; then
+    uv sync --frozen --group eval
+    source "$UV_PROJECT_ENVIRONMENT/bin/activate"
+    validation_python=${EVAL_PYTHON:-python}
+fi
 
 # Resume only valid, full-dataset results for the requested model and protocol.
 evaluation_complete() {
     [[ "$resume" == 1 ]] || return 1
-    "$seam_env/bin/python" - "$1" "$2" "$3" "${4:-}" "${5:-0}" <<'PYTHON'
+    "$validation_python" - "$1" "$2" "$3" "${4:-}" "${5:-0}" <<'PYTHON'
 import json
 import sys
 from pathlib import Path
@@ -119,8 +139,20 @@ evaluate_capabilities() {
         echo "Reusing completed capabilities: $output"
         return
     fi
-    CAPABILITY_TASKS="$task_list" NUM_FEWSHOT="$shots" MAX_BATCH_SIZE="$max_batch" \
-      bash scripts/slurm/tamia/eval_capabilities.sbatch "$model" "$output"
+    local pretrained=$model
+    if [[ -d "$pretrained" ]]; then
+        pretrained=$(realpath -s --relative-to="$PWD" "$pretrained")
+    fi
+    accelerate launch --multi_gpu --num_processes 4 --num_machines 1 \
+      --num_cpu_threads_per_process 8 -m lm_eval run \
+      --model hf \
+      --model_args "pretrained=$pretrained,dtype=bfloat16,trust_remote_code=True" \
+      --tasks "$task_list" --num_fewshot "$shots" \
+      --batch_size auto:4 --max_batch_size "$max_batch" --output_path "$output"
+    if [[ -z $(find "$output" -name 'results_*.json' -print -quit) ]]; then
+        echo "lm-eval did not save results under $output" >&2
+        exit 1
+    fi
     if [[ "$resume" == 1 ]]; then
         evaluation_complete capabilities "$output" "$model" "$task_list" "$shots"
     fi
@@ -131,12 +163,13 @@ evaluate_model() {
     mkdir -p "$output"
     echo "Evaluating $model at $(date -Is)"
     if [[ "$harmfulness_only" != 1 ]]; then
-        evaluate_capabilities "$model" "$output/capabilities" "$tasks" "$num_fewshot" "$max_batch_size"
+        evaluate_capabilities "$model" "$output/$capabilities_subdir" "$tasks" "$num_fewshot" "$max_batch_size"
         if [[ "$include_gsm8k" == 1 ]]; then
             evaluate_capabilities "$model" "$output/gsm8k-5shot" gsm8k 5 32
         fi
     fi
 
+    [[ "$include_harmfulness" == 1 ]] || return 0
     if evaluation_complete harmfulness "$output/harmfulness.json" "$model"; then
         echo "Reusing completed harmfulness: $output"
         return
@@ -163,20 +196,20 @@ while (( $# )); do
         continue
     fi
     final_step=${CHECKPOINT_MAX_STEP:-250}
-    if [[ ! "$final_step" =~ ^[1-9][0-9]*$ ]] || (( final_step % 50 != 0 )); then
-        echo "CHECKPOINT_MAX_STEP must be a positive multiple of 50" >&2
+    if [[ ! "$final_step" =~ ^[1-9][0-9]*$ ]] || (( final_step < 1 )); then
+        echo "CHECKPOINT_MAX_STEP must be positive" >&2
         exit 2
     fi
     first_step=${CHECKPOINT_START_STEP:-50}
     last_step=${CHECKPOINT_END_STEP:-$final_step}
-    if [[ ! "$first_step" =~ ^[1-9][0-9]*$ || ! "$last_step" =~ ^[1-9][0-9]*$ ]] ||
-       (( first_step % 50 != 0 || last_step % 50 != 0 || first_step > last_step || last_step > final_step )); then
+    if [[ -z "$steps" ]] && { [[ ! "$first_step" =~ ^[1-9][0-9]*$ || ! "$last_step" =~ ^[1-9][0-9]*$ ]] ||
+       (( first_step % 50 != 0 || last_step % 50 != 0 || first_step > last_step || last_step > final_step )); }; then
         echo "Checkpoint bounds must be multiples of 50 within CHECKPOINT_MAX_STEP" >&2
         exit 2
     fi
     # Confirm that the final model and last checkpoint are interchangeable before
     # using a single evaluation for both. Include tokenizer and generation config.
-    "$seam_env/bin/python" - "$model" "$final_step" <<'PYTHON'
+    "$validation_python" - "$model" "$final_step" <<'PYTHON'
 import hashlib
 import json
 import sys
@@ -211,13 +244,29 @@ for filename in files:
     assert digest(root / filename) == digest(checkpoint / filename), filename
 print(f"Final model matches {checkpoint.name}: {root}", flush=True)
 PYTHON
-    for (( step=first_step; step<=last_step; step+=50 )); do
-        evaluate_model "$model/checkpoint-$step" "$output/checkpoint-$step"
+    if [[ -n "$steps" ]]; then
+        IFS=, read -ra checkpoint_steps <<< "$steps"
+    else
+        mapfile -t checkpoint_steps < <(seq "$first_step" 50 "$last_step")
+    fi
+    previous=-1
+    for step in "${checkpoint_steps[@]}"; do
+        if [[ ! "$step" =~ ^[0-9]+$ ]] || (( step <= previous || step > final_step )); then
+            echo "Checkpoint steps must be increasing integers within the final step" >&2
+            exit 2
+        fi
+        previous=$step
+        checkpoint="$model/checkpoint-$step"
+        if [[ "$step" == 0 && ! -d "$checkpoint" ]]; then
+            checkpoint=${baseline:?step zero requires --baseline or checkpoint-0}
+        fi
+        test -d "$checkpoint"
+        evaluate_model "$checkpoint" "$output/checkpoint-$step"
     done
-    if (( last_step < final_step )); then
+    if (( previous < final_step )); then
         continue
     fi
-    "$seam_env/bin/python" - "$model" "$output" "$include_gsm8k" "$harmfulness_only" "$final_step" <<'PYTHON'
+    "$validation_python" - "$model" "$output" "$include_gsm8k" "$harmfulness_only" "$final_step" "$include_harmfulness" "$capabilities_subdir" <<'PYTHON'
 import json
 import shutil
 import sys
@@ -226,14 +275,15 @@ from pathlib import Path
 model, output = sys.argv[1], Path(sys.argv[2])
 checkpoint = f"checkpoint-{sys.argv[5]}"
 if sys.argv[4] != "1":
-    shutil.copytree(output / checkpoint / "capabilities", output / "capabilities", dirs_exist_ok=True)
+    shutil.copytree(output / checkpoint / sys.argv[7], output / sys.argv[7], dirs_exist_ok=True)
     if sys.argv[3] == "1":
         shutil.copytree(output / checkpoint / "gsm8k-5shot", output / "gsm8k-5shot", dirs_exist_ok=True)
-report = json.loads((output / checkpoint / "harmfulness.json").read_text())
-report["evaluated_model"] = report["model"]
-report["model"] = model
-report["reused_from"] = f"{checkpoint}/harmfulness.json"
-(output / "harmfulness.json").write_text(json.dumps(report, indent=2) + "\n")
+if sys.argv[6] == "1":
+    report = json.loads((output / checkpoint / "harmfulness.json").read_text())
+    report["evaluated_model"] = report["model"]
+    report["model"] = model
+    report["reused_from"] = f"{checkpoint}/harmfulness.json"
+    (output / "harmfulness.json").write_text(json.dumps(report, indent=2) + "\n")
 (output / "final-evaluation.json").write_text(json.dumps({
     "model": model, "reused_from": checkpoint,
     "reason": "Identical model, tokenizer, and generation configuration (SHA-256 verified)",

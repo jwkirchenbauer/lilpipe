@@ -98,3 +98,93 @@ def test_training_saves_final_model_without_evaluation(tmp_path, monkeypatch, lo
     (merged if lora else model).save_pretrained.assert_called_once_with(str(tmp_path))
     tokenizer.save_pretrained.assert_called_once_with(str(tmp_path))
     loader.assert_called_once_with(tokenizer, attack_size=1000)
+
+
+@pytest.mark.parametrize("fail", [False, True])
+def test_single_run_launcher_forwards_one_lr_and_saves_checkpoints(tmp_path, fail):
+    import json
+    import os
+    import subprocess
+    import sys
+    import yaml
+
+    script = (
+        SEAM.parent
+        / "tamper-resistance/scripts/slurm/tamia/seam_codebase_train_seam_relearning.sbatch"
+    )
+    workdir = tmp_path / "tamper-resistance"
+    workdir.mkdir()
+    seam = tmp_path / "seam/scripts"
+    seam.mkdir(parents=True)
+    (seam / "train.py").write_text(
+        "import json,os,sys\nfrom pathlib import Path\n"
+        "a=sys.argv[1:]\n"
+        "Path(os.environ['CALLS']).write_text(json.dumps(a))\n"
+        "if os.environ['FAIL']=='True':sys.exit(7)\n"
+        "def v(k):return a[a.index('--'+k)+1]\n"
+        "root=Path(v('output_dir'))\n"
+        "for n in range(int(v('save_steps')),int(v('max_steps'))+1,int(v('save_steps'))):\n"
+        " p=root/f'checkpoint-{n}';p.mkdir(parents=True)\n"
+        " (p/'trainer_state.json').write_text(json.dumps({'global_step':n}))\n"
+        " (p/'model.safetensors').touch()\n"
+        "(root/'tokenizer_config.json').write_text('{}')\n"
+    )
+    config = tmp_path / "author-eval.yaml"
+    config.write_text(
+        yaml.safe_dump(
+            {
+                "TrainingArguments": {
+                    "per_device_train_batch_size": 4,
+                    "num_train_epochs": 1,
+                },
+                "EvalArguments": {
+                    "attack": True,
+                    "lora_attack": False,
+                    "attack_size": 1000,
+                },
+            }
+        )
+    )
+    starting = tmp_path / "starting-model"
+    starting.mkdir()
+    python = tmp_path / "env/bin/python"
+    python.parent.mkdir(parents=True)
+    python.write_text('#!/bin/bash\nexec "$TEST_PYTHON" "$@"\n')
+    python.chmod(0o755)
+    output = tmp_path / "models/run"
+    calls = tmp_path / "calls.json"
+    result = subprocess.run(
+        [
+            "bash",
+            str(script),
+            str(config),
+            str(starting),
+            str(output),
+            "0.0002",
+            "--max_steps",
+            "250",
+            "--seed",
+            "42",
+        ],
+        cwd=workdir,
+        env={
+            **os.environ,
+            "SCRATCH": str(tmp_path),
+            "SEAM_ENV": str(python.parents[1]),
+            "TEST_PYTHON": sys.executable,
+            "CALLS": str(calls),
+            "FAIL": str(fail),
+        },
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == (7 if fail else 0), result.stderr
+    args = json.loads(calls.read_text())
+    assert args.count("--learning_rate") == 1
+    assert args[args.index("--learning_rate") + 1] == "0.0002"
+    assert args[args.index("--wandb_run_name") + 1] == "run"
+    assert args[args.index("--config") + 1] == str(config)
+    assert args[args.index("--model_name") + 1] == str(starting)
+    assert args[-4:] == ["--max_steps", "250", "--seed", "42"]
+    assert yaml.safe_load(config.read_text())["EvalArguments"]["attack_size"] == 1000
+    assert len(list(output.glob("checkpoint-*"))) == (0 if fail else 5)

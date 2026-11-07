@@ -43,3 +43,24 @@ Pipeline manifests live at `configs/experiments/<name>.yml` inside each example 
 ## Style & Commits
 
 Four-space indent, PEP 8 naming, modern type annotations, concise docstrings, grouped imports. Conventional Commit subjects without scopes: `feat:`, `fix:`, `refactor:`, `perf:`, `test:`, `docs:`, `chore:`, `revert:`. Every behavior change needs a regression test; include dry-run output in PRs when submission behavior changes.
+
+## Forward-looking development
+
+Treat this repository as an engineering project: additions should fit its existing
+structure and remain useful beyond the immediate experiment.
+
+- Prefer extending existing entry points and configuration over adding scripts.
+  Express changes in models, datasets, learning rates, and training lengths as
+  configuration when the existing workflow supports them.
+- Keep reusable training, evaluation, and analysis code general enough to serve
+  related experiments. Avoid embedding a particular run's paths or hyperparameters
+  in permanent execution scripts.
+- Keep the number of files and public interfaces small. Before adding a file,
+  check whether an existing module, launcher, or config family is the right home.
+- Put temporary or experiment-specific scripts under `scripts/misc/` within the
+  relevant project/example, rather than among permanent workflow entry points.
+- Keep configuration sources authoritative; generate repeated run definitions
+  instead of maintaining the same settings in multiple places. Preserve exact
+  submitted settings and source snapshots as provenance.
+- Generalize around demonstrated needs. Do not introduce speculative frameworks
+  or abstractions merely to make a small change appear reusable.

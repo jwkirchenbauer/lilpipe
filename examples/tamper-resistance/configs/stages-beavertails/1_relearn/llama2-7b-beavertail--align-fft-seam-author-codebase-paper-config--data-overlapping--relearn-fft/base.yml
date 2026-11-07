@@ -41,16 +41,16 @@ datasets:
       Answer: '
 shuffle_merged_datasets: false
 dataset_num_proc: 8
-dataset_prepared_path: artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000/prepared
+dataset_prepared_path: artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft/prepared
 val_set_size: 0.0
-output_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000
+output_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft
 sequence_len: 256
 sample_packing: false
 pad_to_sequence_len: true
 train_on_inputs: false
 micro_batch_size: 12
 gradient_accumulation_steps: 1
-max_steps: 1000
+max_steps: 250
 learning_rate: 1.0e-05
 optimizer: adamw_torch
 weight_decay: 0.01
@@ -66,11 +66,11 @@ data_seed: 42
 eval_strategy: 'no'
 save_strategy: steps
 save_steps: 50
-save_total_limit: 21
+save_total_limit: 6
 save_only_model: true
 logging_steps: 1
 wandb_project: lp-tamper-resistance
-wandb_name: llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000
+wandb_name: llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft
 wandb_entity: marawan-gamal
 wandb_mode: online
 device_map:

@@ -1,5 +1,5 @@
 version: 1
-id: z7b-npo-author-noise5
+id: z7b-npo-author-noise
 columns:
 - id: wmdp
   label: WMDP-Bio robust (0-shot)

@@ -16,7 +16,13 @@ def test_npo_noise_evaluates_both_tasks_and_preserves_the_author_model(
     monkeypatch, percentage, fraction, with_baseline
 ):
     monkeypatch.chdir(EXAMPLE)
-    plan = load(f"configs/experiments/z7b-npo-author-noise{percentage}.yml").plan()
+    pipeline = load("configs/experiments/z7b-npo-author-noise.yml")
+    selected = [
+        m
+        for m in pipeline.selected_models
+        if f"l2r{fraction}-seed42" in m or (with_baseline and "--perturb-" not in m)
+    ]
+    plan = pipeline.select(models=selected).plan()
     assert len(plan.stages) == (5 if with_baseline else 3)
     generation = next(s for s in plan.stages if s.id.startswith("generate-"))
     assert generation.args[generation.args.index("--percentages") + 1] == str(
@@ -32,9 +38,9 @@ def test_npo_noise_evaluates_both_tasks_and_preserves_the_author_model(
     expected = 2 if with_baseline else 1
     assert len(evaluations) == 2 * expected
     for stage in evaluations:
-        assert stage.script.endswith("eval_capabilities.sbatch")
-        assert stage.args[-2:] == ("--include_path", "lm_eval_tasks")
-        assert "NUM_FEWSHOT=0" in stage.sbatch_args[-1]
+        assert stage.script.endswith("eval_wmdp_mmlu.sbatch")
+        assert len(stage.args) == 2
+        assert "BATCH_SIZE=auto:4" in stage.sbatch_args[-1]
         assert "--limit" not in stage.args
         if "--perturb-" in stage.args[0]:
             assert stage.depends_on == (generation.id,)
@@ -52,3 +58,12 @@ def test_npo_noise_evaluates_both_tasks_and_preserves_the_author_model(
         sum("CAPABILITY_TASKS=mmlu_no_bio" in s.sbatch_args[-1] for s in evaluations)
         == expected
     )
+
+
+def test_consolidated_npo_results_id_matches_its_filename():
+    import yaml
+
+    path = EXAMPLE / "configs/results/z7b-npo-author-noise.yml"
+    config = yaml.safe_load(path.read_text())
+    assert config["id"] == path.stem
+    assert {row["id"] for row in config["rows"]} == {"original", "noise1", "noise5"}

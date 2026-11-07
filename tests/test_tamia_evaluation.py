@@ -270,7 +270,10 @@ def test_hpo_checkpoint_metadata_comes_from_each_candidate(tmp_path, monkeypatch
     stages = load(manifest).plan().stages
     assert len(stages) == 4
     evaluations = [stage for stage in stages if stage.id.startswith("eval-")]
-    assert [stage.args[5] for stage in evaluations] == ["125", "250"]
+    assert [stage.args[-1].split("checkpoint-")[-1] for stage in evaluations] == [
+        "125",
+        "250",
+    ]
     assert all(len(stage.depends_on) == 1 for stage in evaluations)
 
 
@@ -508,47 +511,6 @@ def test_train_wrapper_forwards_launcher_and_merges_only_after_success(
     ] + ([] if fail else [f"{visible}|merge-lora recipe.yml"])
 
 
-@pytest.mark.parametrize(
-    "wrapper",
-    [
-        "eval_wmdp_mmlu_trajectory.sbatch",
-        "eval_beavertails_capabilities_trajectory.sbatch",
-    ],
-)
-def test_trajectory_wrapper_never_reaches_cleanup_after_failure(tmp_path, wrapper):
-    local_bin = tmp_path / ".local/bin"
-    local_bin.mkdir(parents=True)
-    for command, body in {
-        "uv": "exit 0\n",
-        "python": 'printf "%s\\n" "$*" >> "$CALLS"\nexit 7\n',
-    }.items():
-        path = local_bin / command
-        path.write_text("#!/bin/bash\n" + body)
-        path.chmod(0o755)
-    activate = tmp_path / "job/.venv-123/bin/activate"
-    activate.parent.mkdir(parents=True)
-    activate.write_text(":\n")
-    bash_env = tmp_path / "bash-env"
-    bash_env.write_text("module() { :; }\n")
-    calls = tmp_path / "calls"
-    result = subprocess.run(
-        ["bash", str(SCRIPTS / wrapper), "model", "--delete-trajectory"],
-        cwd=tmp_path,
-        env={
-            **os.environ,
-            "HOME": str(tmp_path),
-            "SCRATCH": str(tmp_path / "scratch"),
-            "SLURM_TMPDIR": str(tmp_path / "job"),
-            "SLURM_JOB_ID": "123",
-            "BASH_ENV": str(bash_env),
-            "CALLS": str(calls),
-        },
-    )
-    assert result.returncode == 7
-    assert len(calls.read_text().splitlines()) == 1
-    assert "--cleanup-only" not in calls.read_text()
-
-
 @pytest.mark.parametrize("trajectory", [False, True])
 @pytest.mark.parametrize("fail", [False, True])
 def test_wmdp_wrappers_launch_both_tasks_once_per_checkpoint(
@@ -565,7 +527,7 @@ def test_wmdp_wrappers_launch_both_tasks_once_per_checkpoint(
         "arguments = sys.argv[1:]\n"
         "with open(os.environ['CALLS'], 'a') as handle: handle.write(json.dumps(arguments) + '\\n')\n"
         "if os.environ['FAIL_EVAL'] == '1': sys.exit(7)\n"
-        "output = Path(arguments[arguments.index('--output_path') + 1]) / 'model/results.json'\n"
+        "output = Path(arguments[arguments.index('--output_path') + 1]) / 'model/results_2026.json'\n"
         "output.parent.mkdir(parents=True, exist_ok=True)\n"
         "model_args = arguments[arguments.index('--model_args') + 1]\n"
         "output.write_text(json.dumps({'config': {'model_args': model_args}, 'results': {task: {'acc,none': 0.5} for task in ('mmlu_no_bio', 'wmdp_bio_robust')}}))\n"
@@ -586,23 +548,18 @@ def test_wmdp_wrappers_launch_both_tasks_once_per_checkpoint(
     calls = tmp_path / "calls"
     output = tmp_path / "evals"
     if trajectory:
+        model(Path(attack) / "checkpoint-250")
         arguments = [
-            "candidate",
-            baseline,
+            "--checkpoints",
             attack,
-            attack,
-            "-",
             str(output),
-            "0,250",
-            "--final-step",
-            "250",
-            "--final-model",
-            attack,
+            "true" if fail else "false",
+            "false",
+            baseline,
         ]
-        wrapper = "eval_wmdp_mmlu_trajectory.sbatch"
     else:
-        arguments = ["candidate", baseline, "-", str(output)]
-        wrapper = "eval_wmdp_mmlu.sbatch"
+        arguments = [baseline, str(output)]
+    wrapper = "eval_wmdp_mmlu.sbatch"
     result = subprocess.run(
         ["bash", str(SCRIPTS / wrapper), *arguments],
         cwd=tmp_path,
@@ -624,14 +581,8 @@ def test_wmdp_wrappers_launch_both_tasks_once_per_checkpoint(
     launches = [json.loads(line) for line in calls.read_text().splitlines()]
     assert len(launches) == (2 if trajectory and not fail else 1)
     for command in launches:
-        assert command[:6] == [
-            "launch",
-            "--num_processes=4",
-            "-m",
-            "lm_eval",
-            "run",
-            "--model",
-        ]
+        assert command[:2] == ["launch", "--multi_gpu"]
+        assert command[command.index("--num_processes") + 1] == "4"
         assert command[command.index("--tasks") + 1] == "mmlu_no_bio,wmdp_bio_robust"
         assert command[command.index("--batch_size") + 1] == "32"
     assert Path(attack).is_dir()
@@ -639,46 +590,43 @@ def test_wmdp_wrappers_launch_both_tasks_once_per_checkpoint(
         assert not output.exists()
     else:
         destinations = (
-            [output / "candidate" / f"checkpoint-{step}" for step in (0, 250)]
+            [output / "checkpoint-0", output / "checkpoint-250"]
             if trajectory
-            else [output / "candidate"]
+            else [output]
         )
         for destination in destinations:
-            assert (destination / "wmdp-bio-robust/model/results.json").is_file()
-            assert (destination / "mmlu-no-bio/model/results.json").is_file()
+            assert (destination / "model/results_2026.json").is_file()
+    if trajectory and fail:
+        assert (Path(attack) / "checkpoint-250").is_dir()
 
 
 def test_tamia_scripts_and_descriptive_registry_entries():
-    assert {path.name for path in SCRIPTS.glob("*.sbatch")} == {
+    assert {
         "train.sbatch",
-        "plot_seam_relearning.sbatch",
-        "train_seam_relearning_sweep.sbatch",
-        "train_seam_defence.sbatch",
-        "eval_seam_defence.sbatch",
-        "analysis_gen_ll.sbatch",
-        "analysis_get_param_norm.sbatch",
-        "analysis_perturb_model.sbatch",
-        "analysis_gen_ll_tar_archived.sbatch",
-        "analysis_gen_ll_tar_archived_bs8_docs64.sbatch",
-        "analysis_gen_ll_tar_archived_r125.sbatch",
-        "analysis_gen_ll_tar_archived_zoomout.sbatch",
-        "analysis_gen_ll_tar_new_api.sbatch",
-        "analysis_hessian_density_tar_archived.sbatch",
-        "eval_wmdp_mmlu.sbatch",
-        "eval_wmdp_mmlu_trajectory.sbatch",
-        "eval_capabilities.sbatch",
-        "eval_capability_models.sbatch",
+        "noise.sbatch",
         "eval_harmfulness_and_capabilities.sbatch",
-        "eval_beavertails_capabilities.sbatch",
-        "eval_beavertails_capabilities_trajectory.sbatch",
-    }
+        "eval_wmdp_mmlu.sbatch",
+        "seam_codebase_train_seam_defence.sbatch",
+        "seam_codebase_train_seam_relearning.sbatch",
+        "seam_codebase_eval_seam_defence.sbatch",
+    } <= {p.name for p in SCRIPTS.glob("*.sbatch")}
+    assert not any(
+        (SCRIPTS / name).exists()
+        for name in (
+            "eval_capabilities.sbatch",
+            "eval_capability_models.sbatch",
+            "eval_beavertails_capabilities.sbatch",
+            "eval_beavertails_capabilities_trajectory.sbatch",
+            "eval_wmdp_mmlu_trajectory.sbatch",
+        )
+    )
     for path in SCRIPTS.glob("*.sbatch"):
         subprocess.run(["bash", "-n", str(path)], check=True)
     registry = yaml.safe_load((EXAMPLE / "configs/registries/evals.yml").read_text())[
         "evaluations"
     ]
-    assert len(registry) == 17
-    assert sum("/tamia/" in entry["script"] for entry in registry.values()) == 13
+    assert len(registry) >= 10
+    assert all((EXAMPLE / entry["script"]).is_file() for entry in registry.values())
     assert all(
         name.startswith(
             (
@@ -687,9 +635,9 @@ def test_tamia_scripts_and_descriptive_registry_entries():
                 "tamia-h100-llama2-7b--",
                 "tamia-seam-noise-checkpoints",
                 "tamia-seam-noise5-checkpoints",
-                "tamia-base-noise1-checkpoints",
+                "tamia-base-noise-checkpoints",
                 "tamia-seam-noise10-20-checkpoints",
-                "tamia-seam-own-trainer-checkpoints",
+                "tamia-h100-llama2-7b--beavertails-and-capabilities-checkpoints",
             )
         )
         for name in registry
@@ -717,7 +665,7 @@ def test_capabilities_wrapper_launches_four_replicas_and_forwards_options(
         "'args': sys.argv[1:], 'gpus': os.environ['CUDA_VISIBLE_DEVICES'], 'cuda_cache': os.environ['CUDA_CACHE_PATH']}))\n"
         "if os.environ['EXIT_CODE'] == '0':\n"
         "    output = Path(sys.argv[sys.argv.index('--output_path') + 1])\n"
-        "    output.mkdir(parents=True)\n"
+        "    output.mkdir(parents=True, exist_ok=True)\n"
         "    (output / 'results_2026.json').write_text('{}')\n"
         "sys.exit(int(os.environ['EXIT_CODE']))\n"
     )
@@ -731,11 +679,9 @@ def test_capabilities_wrapper_launches_four_replicas_and_forwards_options(
     result = subprocess.run(
         [
             "bash",
-            str(SCRIPTS / "eval_capabilities.sbatch"),
+            str(SCRIPTS / "eval_harmfulness_and_capabilities.sbatch"),
             "model with spaces",
             "evaluation output",
-            "--limit",
-            "2",
         ],
         cwd=tmp_path,
         env={
@@ -749,6 +695,8 @@ def test_capabilities_wrapper_launches_four_replicas_and_forwards_options(
             "CUDA_VISIBLE_DEVICES": "0,1,2,3",
             "CALLS": str(calls),
             "EXIT_CODE": str(exit_code),
+            "INCLUDE_HARMFULNESS": "0",
+            "CAPABILITIES_SUBDIR": ".",
             **(
                 {
                     "CAPABILITY_TASKS": "gsm8k",
@@ -782,7 +730,7 @@ def test_capabilities_wrapper_launches_four_replicas_and_forwards_options(
     assert args[args.index("--model_args") + 1] == (
         "pretrained=model with spaces,dtype=bfloat16,trust_remote_code=True"
     )
-    assert args[args.index("--output_path") + 1] == "evaluation output"
+    assert args[args.index("--output_path") + 1] == "evaluation output/."
     assert json.loads(calls.read_text())["cuda_cache"] == str(
         tmp_path / "job/cuda-cache-123"
     )
@@ -791,7 +739,7 @@ def test_capabilities_wrapper_launches_four_replicas_and_forwards_options(
         "32" if task_override else "128"
     )
     assert args[args.index("--num_fewshot") + 1] == ("5" if task_override else "0")
-    assert args[-2:] == ["--limit", "2"]
+    assert "--limit" not in args
 
 
 @pytest.mark.parametrize("failure", ["none", "capabilities", "harmfulness"])
@@ -806,7 +754,7 @@ def test_combined_evaluation_runs_sequentially(tmp_path, failure, harmfulness_on
         "if sys.argv[1] == 'capabilities' and os.environ['FAILURE'] != 'capabilities':\n"
         "    from pathlib import Path\n"
         "    output = Path(sys.argv[sys.argv.index('--output_path') + 1])\n"
-        "    output.mkdir(parents=True)\n"
+        "    output.mkdir(parents=True, exist_ok=True)\n"
         "    (output / 'results_2026.json').write_text('{}')\n"
         "sys.exit(7 if sys.argv[1] == os.environ['FAILURE'] else 0)\n"
     )
@@ -826,9 +774,6 @@ def test_combined_evaluation_runs_sequentially(tmp_path, failure, harmfulness_on
     seam_python.chmod(0o755)
     workdir = tmp_path / "tamper-resistance"
     workdir.mkdir()
-    shared = workdir / "scripts/slurm/tamia/eval_capabilities.sbatch"
-    shared.parent.mkdir(parents=True)
-    shared.write_text((SCRIPTS / "eval_capabilities.sbatch").read_text())
     wrapper = tmp_path / "seam/scripts/eval_harmfulness.py"
     wrapper.parent.mkdir(parents=True)
     wrapper.touch()

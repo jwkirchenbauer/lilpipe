@@ -1,0 +1,15 @@
+version: 1
+id: llama2-7b-base-noise
+registries:
+  models: configs/registries/models.yml
+  evaluations: configs/registries/evals.yml
+models:
+- llama2-7b-beavertail
+- llama2-7b-beavertail--perturb-gaussian-l2r0.001-seed42
+- llama2-7b-beavertail--perturb-gaussian-l2r0.0025-seed42
+- llama2-7b-beavertail--perturb-gaussian-l2r0.005-seed42
+- llama2-7b-beavertail--perturb-gaussian-l2r0.0075-seed42
+- llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42
+- llama2-7b-beavertail--perturb-gaussian-l2r0.05-seed42
+evaluations:
+- tamia-h100-llama2-7b--capabilities-single

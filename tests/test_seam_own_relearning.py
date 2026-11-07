@@ -14,28 +14,47 @@ EXAMPLE = Path(__file__).resolve().parents[1] / "examples/tamper-resistance"
 START = "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config"
 
 
-@pytest.mark.parametrize("steps", [250, 1000])
-def test_own_relearning_configs_and_evaluation_dependencies(monkeypatch, steps):
+def test_own_relearning_configs_and_evaluation_dependencies(monkeypatch, tmp_path):
     monkeypatch.chdir(EXAMPLE)
-    suffix = "-ms1000" if steps == 1000 else ""
-    pipeline = load(
-        f"configs/experiments/llama2-7b-seam-own-trainer-relearning{suffix}.yml"
+    spec = importlib.util.spec_from_file_location(
+        "seam_sweep_generator", EXAMPLE / "scripts/hpo.py"
     )
+    hpo = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(hpo)
+    manifest = hpo.generate(
+        Path(
+            "configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft/sweep.yml"
+        ),
+        tmp_path / "generated",
+    )
+    pipeline = load(manifest)
     stages = pipeline.plan().stages
     training = [stage for stage in stages if stage.id.startswith("train-")]
     evaluation = [stage for stage in stages if stage.id.startswith("eval-")]
-    assert len(training) == (4 if steps == 1000 else 3)
-    assert len(evaluation) == (8 if steps == 1000 else 3)
-    learning_rates = [1e-5, 5e-5, 1e-4, 5e-4] if steps == 1000 else [1e-5, 5e-5, 2e-4]
-    for stage, lr in zip(training, learning_rates, strict=True):
-        config = yaml.safe_load(Path(stage.args[0]).read_text())
+    assert len(training) == len(evaluation) == 7
+    expected = {
+        (250, 1e-5, 0.1),
+        (250, 5e-5, 0.1),
+        (1000, 1e-5, 0.1),
+        (1000, 5e-5, 0.1),
+        (1000, 1e-4, 0.1),
+        (1000, 5e-4, 0.1),
+        (250, 2e-4, 0.5),
+    }
+    actual = set()
+    records = yaml.safe_load((manifest.parent / "runs.yml").read_text())["runs"]
+    assert not (manifest.parent / "configs").exists()
+    for stage in training:
+        config = records[stage.id.removeprefix("train-")]["effective_config"]
+        assert Path(stage.args[0]).name == "base.yml"
+        assert "--learning-rate" in stage.args
+        actual.add(
+            (config["max_steps"], config["learning_rate"], config["warmup_ratio"])
+        )
         assert config["base_model"] == f"artifacts/tamia/models/{START}"
         assert config["trainer_cls"] == "trainers.tr_seam.SEAMRelearnTrainer"
-        assert config["learning_rate"] == lr
-        assert config["max_steps"] == steps
-        assert config["warmup_ratio"] == (0.5 if lr == 2e-4 else 0.1)
         assert config["save_steps"] == 50
-        assert config["save_total_limit"] >= steps // 50
+        assert config["save_total_limit"] >= config["max_steps"] // 50
         assert config["micro_batch_size"] == 12
         assert config["gradient_accumulation_steps"] == 1
         assert config["sequence_len"] == 256
@@ -43,17 +62,17 @@ def test_own_relearning_configs_and_evaluation_dependencies(monkeypatch, steps):
         assert set(config["device_map"].values()) == {0, 1, 2, 3}
         assert config["wandb_mode"] == "online"
         assert config["wandb_project"] == "lp-tamper-resistance"
-        assert config["wandb_name"] == config["output_dir"].split("/")[-1]
+        assert config["output_dir"] == f"artifacts/tamia/models/{config['wandb_name']}"
         assert "--relearn-fft-author-codebase" not in config["output_dir"]
-        assert all(
-            ds["message_property_mappings"]["offset"] == "0"
-            for ds in config["datasets"][:2]
-        )
+    assert actual == expected
     for stage in evaluation:
         assert stage.script.endswith("eval_harmfulness_and_capabilities.sbatch")
-        assert stage.args[0] == "--checkpoints"
+        assert stage.args[:3] in [
+            ("--max-step", "250", "--checkpoints"),
+            ("--max-step", "1000", "--checkpoints"),
+        ]
         assert "INCLUDE_GSM8K=1" in stage.sbatch_args[-1]
-        model = stage.args[1].split("/")[-1]
+        model = stage.args[3].split("/")[-1]
         assert f"train-{model}" in stage.depends_on
 
 
@@ -114,4 +133,17 @@ def test_cosine_plot_keeps_steps_and_does_not_duplicate_metric_aliases(tmp_path)
     assert module.get_results([{"path": state, "lr": "5e-5"}]) == [
         {"Step": 0, "Cosine": 0.25, "LR": 5e-5},
         {"Step": 1, "Cosine": -0.5, "LR": 5e-5},
+    ]
+
+
+def test_relearning_lineage_and_evaluation_names_describe_the_protocol():
+    lineage = START + "--data-overlapping--relearn-fft"
+    directory = EXAMPLE / "configs/stages-beavertails/1_relearn" / lineage
+    sweep = yaml.safe_load((directory / "sweep.yml").read_text())
+    base = yaml.safe_load((directory / "base.yml").read_text())
+    assert sweep["id"] == lineage + "--hpo"
+    assert base["wandb_name"] == lineage
+    assert base["dataset_prepared_path"].endswith(lineage + "/prepared")
+    assert sweep["evaluations"] == [
+        "tamia-h100-llama2-7b--beavertails-and-capabilities-checkpoints"
     ]

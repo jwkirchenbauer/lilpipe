@@ -1644,7 +1644,7 @@ def test_seam_defense_uses_per_dataset_input_masks() -> None:
     assert config["custom_trainer_args"] == {
         "coeff_hh": 1.0,
         "coeff_hb": 1.0,
-        "coeff_sd": 0.01,
+        "coeff_sd": 1.0,
         "epsilon": 1e-3,
         "n_hh": 8_000,
         "n_hb": 8_000,
@@ -2232,7 +2232,7 @@ def test_seam_relearning_cosine_config_preserves_the_harmful_batch() -> None:
         ).read_text()
     )
     assert base["max_steps"] == 1000
-    assert base["save_steps"] == 50
+    assert base["save_steps"] == 100
     assert base["trainer_cls"] == "trainers.tr_seam.SEAMRelearnTrainer"
     assert base["micro_batch_size"] == 12
     assert base["datasets"][0]["type"] == "data.beavertails_hh"

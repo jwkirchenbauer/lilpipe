@@ -94,6 +94,16 @@ lilpipe configs/experiments/pipeline.yml \
   --sbatch-args='--account=my-account --time=00:10:00'
 ```
 
+Archive submission commands, Slurm job IDs, referenced source/config snapshots,
+and the Git version/working-tree diff in a fresh directory:
+
+```sh
+lilpipe configs/experiments/pipeline.yml --record-dir artifacts/runs/my-run
+```
+
+Completed submissions remain recorded if a later submission fails. An existing
+record directory is rejected; `--dry-run` creates no record files.
+
 Render collected results as Markdown (the default), CSV, or JSON:
 
 ```sh

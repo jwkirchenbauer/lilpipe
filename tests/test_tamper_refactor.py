@@ -314,10 +314,11 @@ def test_wmdp_landscape_attacks_retain_matching_trajectories(monkeypatch) -> Non
     assert len(training) == 2
     assert len(evaluations) == 2
     for stage in evaluations:
-        assert Path(stage.script).name == "eval_wmdp_mmlu_trajectory.sbatch"
+        assert Path(stage.script).name == "eval_wmdp_mmlu.sbatch"
         assert not any(arg.startswith("--array=") for arg in stage.sbatch_args)
-        model = Path(stage.args[0]).name
+        model = Path(stage.args[1]).name
         assert stage.args == (
+            "--checkpoints",
             f"artifacts/tamia/models/{model}",
             f"artifacts/tamia/evals/{model}",
         )  # Removal flags are omitted, so both default to false.
@@ -757,13 +758,13 @@ def test_llama2_selected_seam_pipeline_runs_defense_attack_and_evaluation(
         "--launcher",
         "python",
     )
-    assert evaluation.args[1:3] == (
+    assert evaluation.args[3:4] + evaluation.args[-2:-1] == (
         "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-legacy",
         "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-legacy--"
         "data-disjoint--relearn-fft-ms250",
     )
-    assert evaluation.args[7] == "0,100,200,250"
-    assert evaluation.args[-1] == "--delete-trajectory"
+    assert evaluation.args[1] == "0,100,200,250"
+    assert evaluation.args[-1].endswith("data-disjoint--relearn-fft-ms250")
     assert "--export=ALL,PYTHONHASHSEED=0" in defense.sbatch_args
     assert all(
         "--gpus-per-node=h100:4" in stage.sbatch_args
@@ -865,8 +866,8 @@ def test_legacy_seam_relearning_grid_matches_defense_seeds(
     ):
         assert train.depends_on == ()
         assert evaluation.depends_on == (train.id,)
-        assert evaluation.args[1] == config["base_model"]
-        assert evaluation.args[2] == config["output_dir"]
+        assert evaluation.args[3] == config["base_model"]
+        assert evaluation.args[-2] == config["output_dir"]
 
 
 LINEAGES = sorted(
@@ -1001,7 +1002,7 @@ def test_tar_k16_lr_sweep_reuses_defense_and_evaluates_each_attack(
         assert len(rendered.splitlines()) == 2
         assert f"train-{defense}" in plan.skipped
         assert f"train-{candidate}" in rendered
-        assert "eval_wmdp_mmlu_trajectory.sbatch" in rendered
+        assert "eval_wmdp_mmlu.sbatch" in rendered
 
 
 def test_tar_k16_defense_generates_grid_and_low_retain_refinement(
@@ -1167,3 +1168,53 @@ def test_tar_k16_ms250_keeps_initial_candidate_and_plans_search_grid(
     assert f"train-{candidate}" not in rendered
     assert rendered.count("eval_wmdp_mmlu.sbatch") == 9
     assert rendered.count("--dependency=afterok:") == 9
+
+
+def test_sweep_name_template_drives_canonical_paths_and_wandb(tmp_path, monkeypatch):
+    hpo = load_script(EXAMPLE / "scripts/hpo.py", "named_sweep_test")
+    monkeypatch.chdir(EXAMPLE)
+    (tmp_path / "base.yml").write_text(
+        yaml.safe_dump(
+            {
+                "learning_rate": 1e-5,
+                "max_steps": 250,
+                "save_steps": 50,
+                "warmup_ratio": 0.1,
+            }
+        )
+    )
+    sweep = {
+        "id": "named-experiment",
+        "name_template": "model--lr{learning_rate:.0e}-ms{max_steps}",
+        "model_root": "artifacts/tamia/models",
+        "sweeps": [{"name": "lrs", "parameters": {"learning_rate": [1e-5, 5e-4]}}],
+        "producer": {"script": "scripts/slurm/tamia/train.sbatch"},
+        "evaluations": [],
+    }
+    source = tmp_path / "sweep.yml"
+    source.write_text(yaml.safe_dump(sweep))
+    manifest = hpo.generate(source, tmp_path / "generated")
+    models = yaml.safe_load((manifest.parent / "models.yml").read_text())["models"]
+    assert set(models) == {"model--lr1e-5-ms250", "model--lr5e-4-ms250"}
+    for name, model in models.items():
+        config = yaml.safe_load(Path(model["producer"]["args"][0]).read_text())
+        assert config["wandb_name"] == name
+        assert config["output_dir"] == f"artifacts/tamia/models/{name}"
+        assert model["base_model_name_or_path"] == config["output_dir"]
+        assert model["evaluation_root"] == "artifacts/tamia/evals"
+
+
+@pytest.mark.parametrize(
+    "template",
+    [
+        "{unknown}",
+        "{learning_rate.real}",
+        "{learning_rate!r}",
+        "../bad",
+        "{learning_rate:{max_steps}}",
+    ],
+)
+def test_name_template_rejects_invalid_placeholders_and_slugs(template):
+    hpo = load_script(EXAMPLE / "scripts/hpo.py", "invalid_name_test")
+    with pytest.raises(ValueError):
+        hpo.candidate_name(template, {"learning_rate": 1e-5, "max_steps": 250})

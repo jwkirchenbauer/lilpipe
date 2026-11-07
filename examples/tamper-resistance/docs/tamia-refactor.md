@@ -1,78 +1,64 @@
 # Tamia workflow consolidation
 
-Exactly six Slurm entry points remain. WMDP-Bio robust and MMLU-no-bio run as a pair; BeaverTails retains harmfulness, MMLU, and ARC Easy. Each trajectory uses one allocation. Historical artifacts are unchanged.
-
-## Supported interfaces
-
-Evaluation IDs follow `<cluster>-<gpu>-<model-family>--<tasks>-<mode>` throughout
-the registry. For example,
-`mila-l40s-q06b--beavertails-and-capabilities-trajectory` targets Qwen3-0.6B on
-Mila L40S GPUs. Each registry entry documents its complete output path in an
-`Output` comment; the result root is still an explicit script argument. The
-Zephyr abbreviation is `z7b`, and the other families are `llama2-7b` and
-`q06b`. Renaming an evaluation changes its stage ID but preserves its
-artifact paths. Regenerate generated manifests that contain previous IDs.
-
-Run from the example root. All six wrappers declare one node, one task, four
-H100s, 48 CPUs, 480 GB, and three hours; explicit registry/CLI resource arguments
-override these defaults. Each wrapper creates an offline, job-local uv environment.
+Run from `examples/tamper-resistance`. Permanent launchers are:
 
 ```text
-train.sbatch CONFIG [--single-gpu] [--merge] [AXOLOTL_ARGS...]
-analysis_gen_ll.sbatch [GEN_LL_ARGS...]
-eval_wmdp_mmlu.sbatch ID MODEL ADAPTER RESULT_ROOT
-    [--checkpoint-step N] [--final-model PATH]
-eval_wmdp_mmlu_trajectory.sbatch ID BASELINE TRAJECTORY BASE_MODEL ADAPTER RESULT_ROOT STEPS
-    --final-step N [--final-model PATH] [--delete-trajectory]
-eval_beavertails_capabilities.sbatch ID MODEL METHOD RESULT_ROOT
-eval_beavertails_capabilities_trajectory.sbatch ID BASELINE TRAJECTORY LR DATA METHOD RESULT_ROOT STEPS
-    --final-step N [--final-model PATH] [--gaussian-sigma S --gaussian-seed N]
-    [--delete-trajectory]
+train.sbatch CONFIG
+noise.sbatch --model MODEL --output-prefix PREFIX --output REPORT [NOISE_ARGS...]
+eval_harmfulness_and_capabilities.sbatch [--steps STEPS] [--baseline MODEL]
+    [--max-step N] [--checkpoints] MODEL OUTPUT [MODEL OUTPUT ...]
+eval_wmdp_mmlu.sbatch [--checkpoints] MODEL OUTPUT
+    [REMOVE_CHECKPOINTS=false] [REMOVE_FINAL=false] [BASELINE]
+seam_codebase_train_seam_defence.sbatch CONFIG MODEL RUN [STEPS]
+seam_codebase_train_seam_relearning.sbatch CONFIG MODEL OUTPUT LR [AUTHOR_ARGS...]
+seam_codebase_eval_seam_defence.sbatch MODEL CONFIG OUTPUT RUN
 ```
 
-Use `-` for ADAPTER when evaluating full models. For adapter trajectories,
-TRAJECTORY is the adapter output directory and BASE_MODEL is its pretrained base.
-STEPS is an increasing comma-separated list, for example `0,100,200,250`.
-`--final-model` explicitly identifies a terminal model saved at an output root;
-it is eligible only at the declared final step, after checking for that checkpoint.
-Missing intermediate checkpoints are errors. A saved `checkpoint-0` takes
-precedence over the baseline, including a saved perturbed initial model.
+The author-codebase launchers retain their training and defense implementation.
+The two domain evaluation launchers are standalone; no shared evaluation helper
+is introduced. Existing Python evaluators remain available for older research
+and Mila workflows.
 
-The shared Python runner `scripts/evals/tamia_evaluation.py` handles checkpoint
-resolution and BeaverTails evaluation. Both WMDP wrappers keep their Accelerate
-command visible in Bash: one launch per model/checkpoint with
-`--tasks mmlu_no_bio,wmdp_bio_robust` and the allocated GPU count. The combined
-result is written to a fresh job-local directory, validated for both tasks, and
-copied into the existing `wmdp-bio-robust` and `mmlu-no-bio` result directories.
-Each trajectory wrapper invokes its guarded cleanup
-mode **after** successful evaluation. Cleanup is a no-op without the deletion flag.
-It requires checkpoint zero and the terminal step, valid results for every
-requested point, matching model identity, and an allowed trajectory path. The
-existing canonical allowlists and BeaverTails generated-candidate restrictions
-remain; arbitrary paths are rejected. WMDP result verification checks both task
-scores and their recorded pretrained/adapter arguments. BeaverTails verification
-checks model/step identity and harmfulness, MMLU, and ARC Easy in both phases.
+BeaverTails uses four-GPU LM Eval and distributed DeBERTa harmfulness. Set
+`INCLUDE_GSM8K=1` for five-shot GSM8K, `INCLUDE_HARMFULNESS=0` for capabilities
+only, or `HARMFULNESS_ONLY=1` for harmfulness only. `CAPABILITY_TASKS`,
+`NUM_FEWSHOT`, and `MAX_BATCH_SIZE` select capability settings.
+`CAPABILITIES_SUBDIR=capabilities-4gpu` preserves the baseline result layout.
+Model/output pairs permit evaluating several models in one allocation.
 
-The registry has five Tamia entries (`tamia-h100-z7b--wmdp-and-mmlu-single`, `tamia-h100-z7b--wmdp-and-mmlu-final`,
-`tamia-h100-z7b--wmdp-and-mmlu-trajectory`, and the two Tamia BeaverTails IDs) plus two Mila
-entries. Single results retain their direct model-directory layout; final and
-trajectory results use `checkpoint-N`, with separate WMDP and MMLU directories.
-Retries rerun both tasks. Existing BeaverTails registry workflows explicitly
-request deletion; WMDP workflows retain checkpoints by default.
+`RESUME_EVALUATION=1` reuses valid complete stages; `EVAL_LOCAL_LOG=1` archives
+node-local logs on exit. CUDA caches always use node-local storage. Checkpoint
+ranges default to every 50 steps through `CHECKPOINT_MAX_STEP` (250). Set
+`CHECKPOINT_START_STEP` / `CHECKPOINT_END_STEP` to split a trajectory across jobs,
+or pass explicit increasing `--steps 0,100,200,250` and `--baseline MODEL`.
+The final alias is written only after evaluating the terminal checkpoint and
+verifying identical final weights, tokenizer, and generation configuration.
+Evaluation does not delete BeaverTails models.
 
-Model metadata supplies `evaluation_root`, `evaluation_trajectory`,
-`evaluation_checkpoint_steps`, `evaluation_final_step`, and
-`evaluation_final_model`. HPO derives the final step and checkpoint list from each
-concrete candidate's `max_steps` and `save_steps`, including a non-divisible final
-step. Existing explicit step selections are retained. Launcher/GPU choices are
-producer arguments rather than separate script names. Model budgets no longer
-select distinct evaluation IDs.
+WMDP defaults to `mmlu_no_bio,wmdp_bio_robust`, zero-shot, BF16, batch size 32,
+and four GPU replicas. `CAPABILITY_TASKS` selects an individual task;
+`BATCH_SIZE=auto:4` / `MAX_BATCH_SIZE` select automatic batching. Trajectory
+checkpoints are visited numerically. Optional removal happens only after every
+requested evaluation succeeds. No deletion flags are set by the registry.
 
-The two remaining Mila registry entries keep their original positional interfaces, with
-the new descriptive evaluation IDs. Their BeaverTails
-trajectory wrapper now translates interval/maximum arguments to explicit steps
-and uses the shared Python runner, removing its dependency on the deleted Tamia
-cleanup script and including the terminal model.
+Axolotl sweeps generate independent single-run producers from a shared YAML plus CLI
+overrides. The canonical registry contains sources and fixed models, not repeated
+LR candidates. Source dependencies can be assigned per sweep group. Author training uses standalone
+script wrappers and native configs under `../seam/config/`, outside the Axolotl
+sweep/selected-config structure.
+The old packed author sweep remains only under `scripts/misc/` for historical use.
+
+Temporary experiment orchestration and the six experiment-specific TAR loss-landscape/Hessian launchers live in `scripts/misc/`. Generic analysis launchers remain under `scripts/slurm/tamia/`. Run metadata and
+submitted source snapshots remain under `artifacts/tamia/runs/`; historical
+filenames are immutable, even when current launchers are renamed.
+
+Generate our SEAM attacks from the shared lineage `base.yml` and `sweep.yml`.
+The sweep defines exactly seven combinations, with descriptive model IDs and
+matching W&B/model/eval names. `config_mode: overrides` writes the shared base, models/experiment definitions, and
+per-run effective settings under `artifacts/generated/SWEEP_ID/`. Existing resolved
+sweeps retain their defaults. Generation does not submit jobs.
+
+The inventory below describes an earlier retirement and is historical.
 
 ## Retired wrapper dependency inventory
 

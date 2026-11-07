@@ -19,7 +19,6 @@ evaluations:
     - --cpus-per-task=8
     - --mem=32G
     - --time=03:00:00
-  # Output: artifacts/mila/evals/qwen3-06b-beavertail/<model-id>/checkpoint-<step>/summary.json
   mila-l40s-q06b--beavertails-and-capabilities-trajectory:
     script: scripts/slurm/mila/eval_beavertails_capabilities_trajectory.sbatch
     args:
@@ -35,7 +34,6 @@ evaluations:
     - --cpus-per-task=8
     - --mem=32G
     - --time=03:00:00
-  # Output: artifacts/mila/evals/qwen3-06b-beavertail/<model-id>/summary.json
   mila-l40s-q06b--beavertails-and-capabilities-single:
     script: scripts/slurm/mila/eval_beavertails_capabilities.sbatch
     args:
@@ -48,60 +46,53 @@ evaluations:
     - --cpus-per-task=8
     - --mem=32G
     - --time=03:00:00
-  # Output: artifacts/tamia/evals/llama2-7b-beavertail/<model-id>/summary.json
   tamia-h100-llama2-7b--beavertails-and-capabilities-single:
-    script: scripts/slurm/tamia/eval_beavertails_capabilities.sbatch
+    script: scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch
     args:
-    - '{model.id}'
     - '{model.base_model_name_or_path}'
-    - '{model.method}'
-    - artifacts/tamia/evals/llama2-7b-beavertail
-    sbatch_args: &beavertail_capabilities
-    - --partition=gpubase_bynode_b2
+    - '{model.evaluation_root}/{model.id}'
+    sbatch_args:
+    - --partition=gpubase_bynode_b1
+    - --export=ALL,INCLUDE_GSM8K=1,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1
     - --gpus-per-node=h100:4
-    - --cpus-per-task=16
-    - --mem=96G
     - --time=03:00:00
-  # Output: artifacts/tamia/evals/llama2-7b-beavertail/<model-id>/checkpoint-<step>/summary.json
   tamia-h100-llama2-7b--beavertails-and-capabilities-trajectory:
-    script: scripts/slurm/tamia/eval_beavertails_capabilities_trajectory.sbatch
+    script: scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch
     args:
-    - '{model.id}'
-    - '{model.baseline_model_name_or_path}'
-    - '{model.base_model_name_or_path}'
-    - '{model.attack_learning_rate}'
-    - '{model.attack_data}'
-    - '{model.method}'
-    - artifacts/tamia/evals/llama2-7b-beavertail
+    - --steps
     - '{model.evaluation_checkpoint_steps}'
-    - --final-step
+    - --baseline
+    - '{model.baseline_model_name_or_path}'
+    - --max-step
     - '{model.evaluation_final_step}'
-    - --final-model
-    - '{model.evaluation_final_model}'
-    - --delete-trajectory
-    sbatch_args: *beavertail_capabilities
-  # Output: {model.evaluation_root}/{model.id}/
+    - --checkpoints
+    - '{model.base_model_name_or_path}'
+    - '{model.evaluation_root}/{model.id}'
+    sbatch_args:
+    - --partition=gpubase_bynode_b1
+    - --export=ALL,INCLUDE_GSM8K=1,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1
+    - --gpus-per-node=h100:4
+    - --time=03:00:00
   tamia-h100-z7b--wmdp-and-mmlu-single:
     script: scripts/slurm/tamia/eval_wmdp_mmlu.sbatch
     args:
     - '{model.base_model_name_or_path}'
     - '{model.evaluation_root}/{model.id}'
-    sbatch_args: &single_tamia
+    sbatch_args: &id001
     - --gpus-per-node=h100:4
     - --cpus-per-task=48
     - --mem=480G
     - --time=03:00:00
-  # Output: {model.evaluation_root}/{model.id}/checkpoint-{model.evaluation_final_step}/
   tamia-h100-z7b--wmdp-and-mmlu-final:
     script: scripts/slurm/tamia/eval_wmdp_mmlu.sbatch
     args:
     - '{model.evaluation_final_model}'
     - '{model.evaluation_root}/{model.id}/checkpoint-{model.evaluation_final_step}'
-    sbatch_args: *single_tamia
-  # Output: {model.evaluation_root}/{model.id}/checkpoint-<step>/
+    sbatch_args: *id001
   tamia-h100-z7b--wmdp-and-mmlu-trajectory:
-    script: scripts/slurm/tamia/eval_wmdp_mmlu_trajectory.sbatch
+    script: scripts/slurm/tamia/eval_wmdp_mmlu.sbatch
     args:
+    - --checkpoints
     - '{model.base_model_name_or_path}'
     - '{model.evaluation_root}/{model.id}'
     sbatch_args:
@@ -109,109 +100,37 @@ evaluations:
     - --cpus-per-task=32
     - --mem=128G
     - --time=03:00:00
-
-  # Each LR gets its own four-GPU checkpoint evaluation allocation.
-  tamia-seam-noise-checkpoints:
-    script: scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch
-    args:
-    - --checkpoints
-    - '{model.base_model_name_or_path}'
-    - '{model.evaluation_root}/{model.id}'
-    depends_on:
-    - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
-    - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
-    sbatch_args:
-    - --export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0
-
-  tamia-seam-noise5-checkpoints:
-    script: scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch
-    args:
-    - --checkpoints
-    - '{model.base_model_name_or_path}'
-    - '{model.evaluation_root}/{model.id}'
-    depends_on:
-    - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
-    sbatch_args:
-    - --export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0
-
-  tamia-base-noise1-checkpoints:
-    script: scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch
-    args:
-    - --checkpoints
-    - '{model.base_model_name_or_path}'
-    - '{model.evaluation_root}/{model.id}'
-    depends_on:
-    - llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
-    sbatch_args:
-    - --export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0
-
-  tamia-seam-noise10-20-checkpoints:
-    script: scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch
-    args:
-    - --checkpoints
-    - '{model.base_model_name_or_path}'
-    - '{model.evaluation_root}/{model.id}'
-    depends_on:
-    - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
-    - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
-    sbatch_args:
-    - --export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0
-
   tamia-h100-z7b--wmdp-bio-robust-only:
-    script: scripts/slurm/tamia/eval_capabilities.sbatch
+    script: scripts/slurm/tamia/eval_wmdp_mmlu.sbatch
     args:
     - '{model.base_model_name_or_path}'
     - '{model.evaluation_root}/{model.id}/wmdp-bio-robust'
-    - --include_path
-    - lm_eval_tasks
     sbatch_args:
     - --partition=gpubase_bynode_b1
-    - --export=ALL,CAPABILITY_TASKS=wmdp_bio_robust,NUM_FEWSHOT=0
+    - --export=ALL,CAPABILITY_TASKS=wmdp_bio_robust,BATCH_SIZE=auto:4
   tamia-h100-z7b--mmlu-no-bio-only:
-    script: scripts/slurm/tamia/eval_capabilities.sbatch
+    script: scripts/slurm/tamia/eval_wmdp_mmlu.sbatch
     args:
     - '{model.base_model_name_or_path}'
     - '{model.evaluation_root}/{model.id}/mmlu-no-bio'
-    - --include_path
-    - lm_eval_tasks
     sbatch_args:
     - --partition=gpubase_bynode_b1
-    - --export=ALL,CAPABILITY_TASKS=mmlu_no_bio,NUM_FEWSHOT=0
-
-  tamia-h100-llama2-7b--capability-models:
-    script: scripts/slurm/tamia/eval_capability_models.sbatch
-    args:
-    - '{model.evaluation_root}'
-    - '{model.base_model_name_or_path}'
-    sbatch_args:
-    - --export=ALL,INCLUDE_HARMFULNESS=0
-
-  tamia-seam-own-trainer-checkpoints:
+    - --export=ALL,CAPABILITY_TASKS=mmlu_no_bio,BATCH_SIZE=auto:4
+  tamia-h100-llama2-7b--capabilities-single:
     script: scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch
     args:
+    - '{model.base_model_name_or_path}'
+    - '{model.evaluation_root}/{model.id}'
+    sbatch_args:
+    - --export=ALL,INCLUDE_HARMFULNESS=0,INCLUDE_GSM8K=1,CAPABILITIES_SUBDIR=capabilities-4gpu
+  tamia-h100-llama2-7b--beavertails-and-capabilities-checkpoints:
+    script: scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch
+    args:
+    - --max-step
+    - '{model.evaluation_final_step}'
     - --checkpoints
     - '{model.base_model_name_or_path}'
     - '{model.evaluation_root}/{model.id}'
     sbatch_args:
     - --partition=gpubase_bynode_b1
     - --export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1
-
-  tamia-seam-own-trainer-checkpoints-ms1000-first-half:
-    script: scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch
-    args:
-    - --checkpoints
-    - '{model.base_model_name_or_path}'
-    - '{model.evaluation_root}/{model.id}'
-    sbatch_args:
-    - --partition=gpubase_bynode_b1
-    - --export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1,CHECKPOINT_MAX_STEP=1000,CHECKPOINT_END_STEP=500
-
-  tamia-seam-own-trainer-checkpoints-ms1000-second-half:
-    script: scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch
-    args:
-    - --checkpoints
-    - '{model.base_model_name_or_path}'
-    - '{model.evaluation_root}/{model.id}'
-    sbatch_args:
-    - --partition=gpubase_bynode_b1
-    - --export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1,CHECKPOINT_MAX_STEP=1000,CHECKPOINT_START_STEP=550

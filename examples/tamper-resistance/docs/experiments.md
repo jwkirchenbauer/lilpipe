@@ -214,15 +214,15 @@ their MMLU accuracy collapsed to approximately `0.23`.
 
 ### Authors OPTML NPO + 5% global Gaussian noise
 
-`configs/experiments/z7b-npo-author-noise5.yml` compares the pinned
+`configs/experiments/z7b-npo-author-noise.yml` compares the pinned
 `OPTML-Group/NPO-WMDP` snapshot `fec7960fb3925037a6befc5819036cbc55664b18`
 with a 5% global L2 Gaussian perturbation (seed 42, BF16). The existing noise
-generator creates the perturbed model; the shared capability launcher evaluates
+generator creates the perturbed model; the standalone WMDP/MMLU launcher evaluates
 both models at zero shot on full WMDP-Bio robust and MMLU-no-bio, with four
 GPU replicas. Each task has its own evaluation job and mirrored output folder.
 There is no relearning stage. Collect the paired scores with
-`lilpipe results configs/results/z7b-npo-author-noise5.yml`.
+`lilpipe results configs/results/z7b-npo-author-noise.yml`.
 
-The 1% follow-up uses `configs/experiments/z7b-npo-author-noise1.yml`, the same
+The 1% follow-up uses `configs/experiments/z7b-npo-author-noise.yml`, the same
 authors checkpoint and Gaussian seed 42, and reuses the completed unperturbed
 baseline. The existing results configuration includes the baseline, 1%, and 5%.

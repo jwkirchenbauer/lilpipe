@@ -37,9 +37,6 @@ def test_checkpoint_evaluation_and_final_reuse(
 ):
     workdir = tmp_path / "tamper-resistance"
     workdir.mkdir()
-    shared = workdir / "scripts/slurm/tamia/eval_capabilities.sbatch"
-    shared.parent.mkdir(parents=True)
-    shutil.copy2(SCRIPT.with_name("eval_capabilities.sbatch"), shared)
     wrapper = tmp_path / "seam/scripts/eval_harmfulness.py"
     wrapper.parent.mkdir(parents=True)
     wrapper.touch()
@@ -117,6 +114,7 @@ def test_checkpoint_evaluation_and_final_reuse(
             "SEAM_ENV": str(seam_python.parents[1]),
             "BASH_ENV": str(bash_env),
             "TEST_PYTHON": sys.executable,
+            "EVAL_PYTHON": sys.executable,
             "TEST_LAUNCHER": str(launcher),
             "CALLS": str(calls),
             "INCLUDE_GSM8K": "1" if include_gsm8k else "0",
@@ -197,6 +195,7 @@ def test_checkpoint_evaluation_and_final_reuse(
                 "SEAM_ENV": str(seam_python.parents[1]),
                 "BASH_ENV": str(bash_env),
                 "TEST_PYTHON": sys.executable,
+                "EVAL_PYTHON": sys.executable,
                 "TEST_LAUNCHER": str(launcher),
                 "CALLS": str(calls),
                 "INCLUDE_GSM8K": "1",

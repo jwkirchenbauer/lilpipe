@@ -5,8 +5,11 @@ from __future__ import annotations
 
 import argparse
 import copy
+import shutil
 import itertools
+import hashlib
 import re
+import string
 from pathlib import Path
 from typing import Any
 
@@ -129,6 +132,25 @@ def project_path(path: Path, project_root: Path) -> str:
         return path.as_posix()
 
 
+def candidate_name(template: str, config: dict[str, Any]) -> str:
+    """Render scalar config fields without attribute lookup or expressions."""
+    if not isinstance(template, str) or not template:
+        raise ValueError("name_template must be a non-empty string")
+    for _, field, spec, conversion in string.Formatter().parse(template):
+        if field is None:
+            continue
+        if field not in config or isinstance(config[field], (dict, list)):
+            raise ValueError(f"unknown or non-scalar name_template field: {field}")
+        if conversion or "{" in spec or "}" in spec:
+            raise ValueError(
+                "name_template conversions and nested formats are unsupported"
+            )
+    name = template.format_map(config)
+    # Scientific formatting uses e-05; canonical experiment slugs use e-5.
+    name = re.sub(r"e([+-])0+(\d+)", r"e\1\2", name)
+    return validate_id(name, "generated model id")
+
+
 def generate(sweep_path: Path, output_root: Path | None = None) -> Path:
     """Expand a sweep and return its generated experiment path."""
     sweep_path = sweep_path.resolve()
@@ -144,7 +166,21 @@ def generate(sweep_path: Path, output_root: Path | None = None) -> Path:
 
     sweep_id = sweep["id"]
     project_root = Path.cwd()
-    root = output_root or project_root / "artifacts/generated/hpo" / sweep_id
+    config_mode = sweep.get("config_mode", "resolved")
+    if config_mode not in ("resolved", "overrides"):
+        raise ValueError("config_mode must be resolved or overrides")
+    root = (
+        output_root
+        or project_root
+        / (
+            "artifacts/generated"
+            if config_mode == "overrides"
+            else "artifacts/generated/hpo"
+        )
+        / sweep_id
+    )
+    base_snapshot = root / "base.yml"
+    run_records = {}
     config_dir = root / "configs"
     model_entries = {}
     model_ids = []
@@ -162,7 +198,15 @@ def generate(sweep_path: Path, output_root: Path | None = None) -> Path:
     ):
         raise ValueError("evaluations must be a list of evaluation IDs")
 
-    if depends_on:
+    all_dependencies = set(depends_on)
+    for group in sweep_stages(sweep):
+        group_dependencies = group.get("depends_on", depends_on)
+        if not isinstance(group_dependencies, list) or not all(
+            isinstance(x, str) for x in group_dependencies
+        ):
+            raise ValueError("sweep depends_on must be a list of model IDs")
+        all_dependencies.update(group_dependencies)
+    if all_dependencies:
         canonical_path = project_root / "configs/registries/models.yml"
         canonical = load_mapping(canonical_path).get("models", {})
 
@@ -177,12 +221,13 @@ def generate(sweep_path: Path, output_root: Path | None = None) -> Path:
             ):
                 add_dependency(dependency)
 
-        for dependency in depends_on:
+        for dependency in sorted(all_dependencies):
             add_dependency(dependency)
 
     seen_configs = set()
     for stage in sweep_stages(sweep):
         stage_name = stage["name"]
+        stage_dependencies = stage.get("depends_on", depends_on)
         for index, values in enumerate(combinations(parameter_grid(stage)), start=1):
             candidate_id = f"{sweep_id}--{stage_name}--{index:03d}"
             config = copy.deepcopy(base)
@@ -190,24 +235,66 @@ def generate(sweep_path: Path, output_root: Path | None = None) -> Path:
                 set_parameter(config, path, value)
             for path, value in stage_overrides(stage).items():
                 set_parameter(config, path, value)
+            template = stage.get("name_template", sweep.get("name_template"))
+            if template is not None:
+                candidate_id = candidate_name(template, config)
+            if candidate_id in model_entries:
+                raise ValueError(f"duplicate generated model id: {candidate_id}")
             signature = yaml.safe_dump(config, sort_keys=True)
             if signature in seen_configs:
                 raise ValueError(f"duplicate generated configuration: {candidate_id}")
             seen_configs.add(signature)
-            artifact = f"artifacts/generated/hpo/{sweep_id}/models/{candidate_id}"
+            model_root = sweep.get(
+                "model_root",
+                (
+                    "artifacts/tamia/models"
+                    if config_mode == "overrides"
+                    else f"artifacts/generated/hpo/{sweep_id}/models"
+                ),
+            )
+            if not isinstance(model_root, str) or not model_root:
+                raise ValueError("model_root must be a non-empty path")
+            artifact = str(Path(model_root) / candidate_id)
             config["output_dir"] = artifact
             config["wandb_name"] = candidate_id
             config_path = config_dir / f"{candidate_id}.yml"
-            dump_yaml(config_path, config)
-
-            config_arg = project_path(config_path, project_root)
+            if config_mode == "resolved":
+                dump_yaml(config_path, config)
+                training_args = [project_path(config_path, project_root)]
+            else:
+                overrides = {
+                    **values,
+                    **stage_overrides(stage),
+                    "output_dir": artifact,
+                    "wandb_name": candidate_id,
+                }
+                cli_args = []
+                for key, value in overrides.items():
+                    if "." in key or isinstance(value, (dict, list)) or value is None:
+                        raise ValueError(
+                            "CLI overrides require top-level non-null scalars; use resolved mode for nested settings"
+                        )
+                    cli_args.extend(["--" + key.replace("_", "-"), str(value)])
+                if not base_snapshot.exists():
+                    base_snapshot.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copyfile(base_path, base_snapshot)
+                elif base_snapshot.read_bytes() != base_path.read_bytes():
+                    raise ValueError(
+                        "Generated base snapshot differs; choose a fresh output directory"
+                    )
+                training_args = [project_path(base_snapshot, project_root), *cli_args]
+                run_records[candidate_id] = {
+                    "base": project_path(base_snapshot, project_root),
+                    "overrides": overrides,
+                    "effective_config": config,
+                }
             producer_entry = {
                 "id": f"train-{candidate_id}",
                 "script": producer["script"],
-                "args": [config_arg, *producer.get("args", [])],
+                "args": [*training_args, *producer.get("args", [])],
             }
-            if depends_on:
-                producer_entry["depends_on"] = depends_on
+            if stage_dependencies:
+                producer_entry["depends_on"] = stage_dependencies
             resources = producer.get("sbatch_args", producer.get("resources"))
             if resources:
                 producer_entry["sbatch_args"] = resources
@@ -258,6 +345,15 @@ def generate(sweep_path: Path, output_root: Path | None = None) -> Path:
                 )
             model_ids.append(candidate_id)
 
+    if run_records:
+        dump_yaml(
+            root / "runs.yml",
+            {
+                "sweep": sweep,
+                "base_sha256": hashlib.sha256(base_path.read_bytes()).hexdigest(),
+                "runs": run_records,
+            },
+        )
     models_path = root / "models.yml"
     dump_yaml(models_path, {"models": model_entries})
     experiment = {

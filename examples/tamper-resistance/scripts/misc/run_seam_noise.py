@@ -7,15 +7,13 @@ import subprocess
 
 from lilpipe import Plan, Stage, load, submit
 
-DEFAULT_CONFIG = "configs/experiments/llama2-7b-seam-noise-relearning.yml"
 
-
-def build_plan(config=DEFAULT_CONFIG, existing_models=()):
+def build_plan(config, existing_models=()):
     """Add the final plotting dependency using lilpipe's public stage API."""
     plan = load(config).plan(existing_models=existing_models)
     plot = Stage(
         id="plot-seam-noise-relearning",
-        script="scripts/slurm/tamia/plot_seam_relearning.sbatch",
+        script="scripts/misc/plot_seam_relearning.sbatch",
         depends_on=tuple(s.id for s in plan.stages if s.id.startswith("eval-")),
     )
     return Plan(plan.id, plan.root, (*plan.stages, plot), plan.skipped)
@@ -23,7 +21,7 @@ def build_plan(config=DEFAULT_CONFIG, existing_models=()):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--config", default=DEFAULT_CONFIG)
+    parser.add_argument("--config", required=True)
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--existing-models", nargs="*", default=[])
     parser.add_argument("--run-dir", type=Path)

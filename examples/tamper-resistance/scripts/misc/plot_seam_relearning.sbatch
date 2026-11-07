@@ -25,7 +25,5 @@ export MPLBACKEND=Agg
 # ============================================
 uv sync --frozen --group eval
 source "$UV_PROJECT_ENVIRONMENT/bin/activate"
-for variant in reduced comparison all-methods; do
-    python scripts/analysis/relearning-trajectory/plot_trajectory_beavertails.py \
-      --variant "$variant" "$@"
-done
+# Select the desired commented config/layout block in the plotter before submission.
+python scripts/analysis/relearning-trajectory/plot_trajectory_beavertails.py "$@"

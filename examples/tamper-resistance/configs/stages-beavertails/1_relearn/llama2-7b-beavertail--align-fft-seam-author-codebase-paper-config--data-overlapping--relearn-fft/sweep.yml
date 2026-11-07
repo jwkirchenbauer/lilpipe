@@ -1,0 +1,35 @@
+config_mode: overrides
+id: llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft--hpo
+name_template: llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr{learning_rate:.0e}-ms{max_steps}
+model_root: artifacts/tamia/models
+sweeps:
+- name: ms250
+  parameters:
+    learning_rate:
+    - 1.0e-05
+    - 5.0e-05
+- name: ms1000
+  parameters:
+    learning_rate:
+    - 1.0e-05
+    - 5.0e-05
+    - 0.0001
+    - 0.0005
+  overrides:
+    max_steps: 1000
+    save_total_limit: 21
+- name: warmup50
+  name_template: llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr{learning_rate:.0e}-ms{max_steps}-warmup{warmup_ratio:g}
+  parameters:
+    learning_rate:
+    - 0.0002
+  overrides:
+    warmup_ratio: 0.5
+producer:
+  script: scripts/slurm/tamia/train.sbatch
+  sbatch_args:
+  - --partition=gpubase_bynode_b1
+  - --export=ALL,WANDB_MODE=online
+evaluations:
+- tamia-h100-llama2-7b--beavertails-and-capabilities-checkpoints
+evaluation_registry: configs/registries/evals.yml

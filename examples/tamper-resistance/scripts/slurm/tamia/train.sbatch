@@ -36,9 +36,26 @@ export PYTHONPATH="$PWD/src${PYTHONPATH:+:$PYTHONPATH}"
 export WANDB_DIR="$PWD/artifacts/tamia/logs"
 
 config=${1:?missing training config}
+shift
+merge=false
+training_args=()
+while (( $# )); do
+    case $1 in
+        --single-gpu) export CUDA_VISIBLE_DEVICES=0 ;;
+        --merge) merge=true ;;
+        *) training_args+=("$1") ;;
+    esac
+    shift
+done
+if [[ ! " ${training_args[*]} " =~ " --launcher " ]]; then
+    training_args+=(--launcher python)
+fi
 
 uv sync --frozen --group train
 source "$UV_PROJECT_ENVIRONMENT/bin/activate"
 
 # --launcher python preserves layer-sharded training across visible GPUs.
-axolotl train "$config" --launcher python
+axolotl train "$config" "${training_args[@]}"
+if [[ "$merge" == true ]]; then
+    axolotl merge-lora "$config"
+fi

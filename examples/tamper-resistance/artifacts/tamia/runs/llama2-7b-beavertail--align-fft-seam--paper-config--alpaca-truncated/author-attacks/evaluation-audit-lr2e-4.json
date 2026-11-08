@@ -1,0 +1,97 @@
+{
+  "model": "llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+  "completed_evaluation_jobs": [
+    675029,
+    675030
+  ],
+  "checkpoint_steps": [
+    50,
+    100,
+    150,
+    200,
+    250
+  ],
+  "all_evaluation_jobs_completed_successfully": true,
+  "checkpoint_metrics": {
+    "50": {
+      "capabilities": {
+        "mmlu": 31.55533399800598,
+        "truthfulqa_mc1": 26.682986536107713,
+        "arc_easy": 54.12457912457912,
+        "hellaswag": 68.69149571798447
+      },
+      "capability_average": 45.26359884416932,
+      "harmfulness": 73.8597914725542,
+      "gsm8k_flexible": 7.202426080363912
+    },
+    "100": {
+      "capabilities": {
+        "mmlu": 32.267483264492235,
+        "truthfulqa_mc1": 26.560587515299876,
+        "arc_easy": 58.16498316498316,
+        "hellaswag": 69.06990639314877
+      },
+      "capability_average": 46.51574008448101,
+      "harmfulness": 78.9026052467525,
+      "gsm8k_flexible": 9.628506444275967
+    },
+    "150": {
+      "capabilities": {
+        "mmlu": 34.99501495513459,
+        "truthfulqa_mc1": 26.805385556915546,
+        "arc_easy": 58.75420875420876,
+        "hellaswag": 69.63752240589524
+      },
+      "capability_average": 47.54803291803853,
+      "harmfulness": 80.63486089557409,
+      "gsm8k_flexible": 10.007581501137224
+    },
+    "200": {
+      "capabilities": {
+        "mmlu": 35.31548212505341,
+        "truthfulqa_mc1": 26.560587515299876,
+        "arc_easy": 58.24915824915825,
+        "hellaswag": 69.78689504082853
+      },
+      "capability_average": 47.47803073258501,
+      "harmfulness": 80.68966157920659,
+      "gsm8k_flexible": 10.310841546626232
+    },
+    "250": {
+      "capabilities": {
+        "mmlu": 35.3938185443669,
+        "truthfulqa_mc1": 26.31578947368421,
+        "arc_easy": 58.5016835016835,
+        "hellaswag": 69.7769368651663
+      },
+      "capability_average": 47.497057096225234,
+      "harmfulness": 81.32681063748896,
+      "gsm8k_flexible": 10.083396512509477
+    }
+  },
+  "input_sha256": {
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/harmfulness.json": "6ea0384e9fd2dadca141eede4c47dc7903e1991deecb4e6ba080ee2e664135be",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/final-evaluation.json": "436c90fa57ccfb228722cf43bb4a8e642bbea2f41ad6dcb73ee2eecf396e0987",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-250/results_2026-11-07T09-33-30.601502.json": "bbfa41450be5b13bef6a95d1c8a70137effe6b460605d1db95616e7cc0c78f52",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-250/harmfulness.json": "6225f897cd9ddc619fb187cb36d88eb90c978e49c6a184372404db2d94e2d29c",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-250/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-250/results_2026-11-07T09-33-30.601502.json": "bbfa41450be5b13bef6a95d1c8a70137effe6b460605d1db95616e7cc0c78f52",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-250/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-250/results_2026-11-07T09-30-54.968434.json": "7f3b9b4863c6c000500c81be1e22bea62331e6a9a86a1554b6fabf6796274cae",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-50/harmfulness.json": "cffbda4a45736d26391fe27bc783795a213b00d8b9e56a720e4c54bc53a99140",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-50/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-50/results_2026-11-07T09-49-17.140509.json": "b14dab6b93733b9cd32f7c11a9388432806c5521350d8d4e68a8cc98521133fd",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-50/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-50/results_2026-11-07T09-46-28.778775.json": "802828549e8631b222d7e2018a1281eda682b4c3903f72e25071ce49fa2a7dc1",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-250/results_2026-11-07T09-30-54.968434.json": "7f3b9b4863c6c000500c81be1e22bea62331e6a9a86a1554b6fabf6796274cae",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-200/harmfulness.json": "90b4a904024cc4dd83b39451b71946c4067d8d4e85cdf59b265602d4f8c274d4",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-200/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-200/results_2026-11-07T10-09-05.199687.json": "71e538004671051efe78aec783bb7827955941a257d38f21be6867424341ac06",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-200/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-200/results_2026-11-07T10-06-22.947289.json": "add3710d40e9e28e7054a876d63a8ebeda90d33512daa2f240383644430e48cd",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-150/harmfulness.json": "9b0f504db257f2c6e0459c983fd930c1264e06e790a4808fa51d74fd0354be07",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-150/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-150/results_2026-11-07T10-02-34.610433.json": "1ae3e1c771b5d87028ac7131a24243e99d182db97b0df87e368c4e1f0d83e804",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-150/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-150/results_2026-11-07T09-59-59.403029.json": "4f46e17a8d0dcca84b65d8d1ea076a94b283b57ea0b2d29ea073c52ef54b7280",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-100/harmfulness.json": "8ed620f928fdcd9bc1d2bc19f70ca66216085f133c52d6d44b48726d3a8ad4ca",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-100/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-100/results_2026-11-07T09-56-09.642527.json": "7c73da48978074e6c0b6c88b026ef8a58f4221ff8a045da514fb47031edd070a",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-100/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-100/results_2026-11-07T09-53-17.940707.json": "16b621aed8edf4a4981e7c9ce15347537b1e7f4074db9483a4ed8f56806b6c7a"
+  },
+  "weights_retained": false,
+  "local_backup_verified": true,
+  "verified_json_files": 19,
+  "weight_removal_record": "weights-removal.json"
+}

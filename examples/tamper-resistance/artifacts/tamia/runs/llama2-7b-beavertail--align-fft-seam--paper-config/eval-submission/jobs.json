@@ -1,0 +1,50 @@
+{
+  "pipeline": "llama2-7b-beavertail--align-fft-seam--hpo",
+  "sources": {
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/configs/registries/evals.yml": {
+      "path": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config/eval-submission/submitted/configs/registries/evals.yml",
+      "sha256": "b3d245216ac10ddbe74fbf2f651899c1f64a1543285803316a1e63518cda980f"
+    },
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch": {
+      "path": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config/eval-submission/submitted/scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+      "sha256": "bce182386c5c6bee32133388ab864734f6996765e21a182060973356dd8e7249"
+    },
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/train.sbatch": {
+      "path": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config/eval-submission/submitted/scripts/slurm/tamia/train.sbatch",
+      "sha256": "42442e5639ecccb1f1ff6ffc6187e4a55d2d0330ba32a20139b8b66320bc6f82"
+    },
+    "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/generated/hpo/llama2-7b-beavertail--align-fft-seam--hpo/configs/llama2-7b-beavertail--align-fft-seam--paper-config.yml": {
+      "path": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config/eval-submission/submitted/external/2ccf9210dc8e-llama2-7b-beavertail--align-fft-seam--paper-config.yml",
+      "sha256": "2ccf9210dc8ec633184e1a0b313354f5fbc798f04674fc1f0ffc6d558db7bc83"
+    },
+    "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/generated/hpo/llama2-7b-beavertail--align-fft-seam--hpo/experiment.yml": {
+      "path": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config/eval-submission/submitted/external/20a82b839d0d-experiment.yml",
+      "sha256": "20a82b839d0d3877653c4a3fa4913755b6d21ac26831340cdaf690572c17f2b5"
+    },
+    "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/generated/hpo/llama2-7b-beavertail--align-fft-seam--hpo/models.yml": {
+      "path": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config/eval-submission/submitted/external/1d98a706a59e-models.yml",
+      "sha256": "1d98a706a59ee5bc3aca64fba000b8ecb0671b187013de59dafccb50c5a2d39d"
+    }
+  },
+  "jobs": [
+    {
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=eval-tamia-h100-llama2-7b--beavertails-and-capabilities-single-llama2-7b-beavertail--align-fft-seam--paper-config",
+        "--partition=gpubase_bynode_b1",
+        "--export=ALL,INCLUDE_GSM8K=1,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "--gpus-per-node=h100:4",
+        "--time=03:00:00",
+        "--exclude=tg10807",
+        "--dependency=afterok:674463",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config"
+      ],
+      "job_id": "674466"
+    }
+  ],
+  "status": "submitted",
+  "git_commit": "ea41c05cf8de671512ab82ce6110fa8bb1ff9cf3"
+}

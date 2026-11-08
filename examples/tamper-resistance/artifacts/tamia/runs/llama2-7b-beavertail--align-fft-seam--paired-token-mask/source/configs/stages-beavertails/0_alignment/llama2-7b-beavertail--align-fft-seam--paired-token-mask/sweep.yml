@@ -1,0 +1,26 @@
+id: llama2-7b-beavertail--align-fft-seam--paired-token-mask--hpo
+model_root: artifacts/tamia/models
+sweeps:
+- name: paper
+  name_template: llama2-7b-beavertail--align-fft-seam--paired-token-mask
+  parameters:
+    learning_rate:
+    - 2.0e-05
+producer:
+  script: scripts/slurm/tamia/train.sbatch
+  sbatch_args:
+  - --partition=gpubase_bynode_b1
+  - --gpus-per-node=h100:4
+  - --cpus-per-task=48
+  - --mem=480G
+  - --time=00:30:00
+  - --export=ALL,WANDB_MODE=online
+  args:
+  - --launcher
+  - python
+model:
+  method: SEAM (paired mask)
+  evaluation_root: artifacts/tamia/evals
+evaluations:
+- tamia-h100-llama2-7b--beavertails-and-capabilities-single
+evaluation_registry: configs/registries/evals.yml

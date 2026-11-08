@@ -1,0 +1,10 @@
+{
+  "job_id": 675643,
+  "global_step": 2,
+  "finite_training_metrics": true,
+  "root_and_checkpoint_verified": true,
+  "tensor_count": 291,
+  "parameter_count": 6738415616,
+  "dtype": "BF16",
+  "save_only_model": true
+}

@@ -1,0 +1,255 @@
+{
+  "num_parameters": 6738415616,
+  "l2_norm": 1575.5761474266128,
+  "rms": 0.019193779458973593,
+  "layers": [
+    {
+      "name": "Embedding",
+      "position": 0,
+      "num_parameters": 131072000,
+      "l2_norm": 192.58145075118793,
+      "rms": 0.016821297464265007
+    },
+    {
+      "name": "0",
+      "position": 1,
+      "num_parameters": 202383360,
+      "l2_norm": 213.80651043156843,
+      "rms": 0.015029119043891979
+    },
+    {
+      "name": "1",
+      "position": 2,
+      "num_parameters": 202383360,
+      "l2_norm": 259.16349250027065,
+      "rms": 0.018217401204272586
+    },
+    {
+      "name": "2",
+      "position": 3,
+      "num_parameters": 202383360,
+      "l2_norm": 272.42939229573966,
+      "rms": 0.019149902215808708
+    },
+    {
+      "name": "3",
+      "position": 4,
+      "num_parameters": 202383360,
+      "l2_norm": 267.89153576301095,
+      "rms": 0.01883092228438931
+    },
+    {
+      "name": "4",
+      "position": 5,
+      "num_parameters": 202383360,
+      "l2_norm": 272.100193841926,
+      "rms": 0.0191267618411707
+    },
+    {
+      "name": "5",
+      "position": 6,
+      "num_parameters": 202383360,
+      "l2_norm": 274.49964628929206,
+      "rms": 0.0192954267541279
+    },
+    {
+      "name": "6",
+      "position": 7,
+      "num_parameters": 202383360,
+      "l2_norm": 268.10118026709347,
+      "rms": 0.0188456588431704
+    },
+    {
+      "name": "7",
+      "position": 8,
+      "num_parameters": 202383360,
+      "l2_norm": 267.94445814205335,
+      "rms": 0.018834642361636296
+    },
+    {
+      "name": "8",
+      "position": 9,
+      "num_parameters": 202383360,
+      "l2_norm": 269.52158513559544,
+      "rms": 0.01894550348221413
+    },
+    {
+      "name": "9",
+      "position": 10,
+      "num_parameters": 202383360,
+      "l2_norm": 271.0431014393003,
+      "rms": 0.01905245555588787
+    },
+    {
+      "name": "10",
+      "position": 11,
+      "num_parameters": 202383360,
+      "l2_norm": 271.7893914712418,
+      "rms": 0.019104914583953383
+    },
+    {
+      "name": "11",
+      "position": 12,
+      "num_parameters": 202383360,
+      "l2_norm": 268.6302727839701,
+      "rms": 0.018882850388017746
+    },
+    {
+      "name": "12",
+      "position": 13,
+      "num_parameters": 202383360,
+      "l2_norm": 271.5730296028611,
+      "rms": 0.01908970584091797
+    },
+    {
+      "name": "13",
+      "position": 14,
+      "num_parameters": 202383360,
+      "l2_norm": 272.1838235622097,
+      "rms": 0.01913264043214164
+    },
+    {
+      "name": "14",
+      "position": 15,
+      "num_parameters": 202383360,
+      "l2_norm": 271.62143246212,
+      "rms": 0.019093108227180192
+    },
+    {
+      "name": "15",
+      "position": 16,
+      "num_parameters": 202383360,
+      "l2_norm": 273.16121609153373,
+      "rms": 0.019201344367518403
+    },
+    {
+      "name": "16",
+      "position": 17,
+      "num_parameters": 202383360,
+      "l2_norm": 274.1415320032769,
+      "rms": 0.019270253796461755
+    },
+    {
+      "name": "17",
+      "position": 18,
+      "num_parameters": 202383360,
+      "l2_norm": 273.86813875754285,
+      "rms": 0.019251036142015034
+    },
+    {
+      "name": "18",
+      "position": 19,
+      "num_parameters": 202383360,
+      "l2_norm": 274.3313315221625,
+      "rms": 0.019283595390027112
+    },
+    {
+      "name": "19",
+      "position": 20,
+      "num_parameters": 202383360,
+      "l2_norm": 274.2259518058,
+      "rms": 0.019276187924750086
+    },
+    {
+      "name": "20",
+      "position": 21,
+      "num_parameters": 202383360,
+      "l2_norm": 275.5802027102575,
+      "rms": 0.019371382397627958
+    },
+    {
+      "name": "21",
+      "position": 22,
+      "num_parameters": 202383360,
+      "l2_norm": 275.53801866075054,
+      "rms": 0.019368417150683357
+    },
+    {
+      "name": "22",
+      "position": 23,
+      "num_parameters": 202383360,
+      "l2_norm": 277.4477985380053,
+      "rms": 0.019502661468431003
+    },
+    {
+      "name": "23",
+      "position": 24,
+      "num_parameters": 202383360,
+      "l2_norm": 279.63243528104124,
+      "rms": 0.019656226322992604
+    },
+    {
+      "name": "24",
+      "position": 25,
+      "num_parameters": 202383360,
+      "l2_norm": 277.94581114424454,
+      "rms": 0.019537668310502465
+    },
+    {
+      "name": "25",
+      "position": 26,
+      "num_parameters": 202383360,
+      "l2_norm": 281.028709453643,
+      "rms": 0.01975437474099721
+    },
+    {
+      "name": "26",
+      "position": 27,
+      "num_parameters": 202383360,
+      "l2_norm": 281.6253373677078,
+      "rms": 0.019796313557206735
+    },
+    {
+      "name": "27",
+      "position": 28,
+      "num_parameters": 202383360,
+      "l2_norm": 284.82837471043155,
+      "rms": 0.020021464930888754
+    },
+    {
+      "name": "28",
+      "position": 29,
+      "num_parameters": 202383360,
+      "l2_norm": 285.33784471892966,
+      "rms": 0.020057277149102104
+    },
+    {
+      "name": "29",
+      "position": 30,
+      "num_parameters": 202383360,
+      "l2_norm": 285.04114023472147,
+      "rms": 0.02003642087580612
+    },
+    {
+      "name": "30",
+      "position": 31,
+      "num_parameters": 202383360,
+      "l2_norm": 288.99124951894134,
+      "rms": 0.020314086240387826
+    },
+    {
+      "name": "31",
+      "position": 32,
+      "num_parameters": 202383360,
+      "l2_norm": 290.2407364860328,
+      "rms": 0.020401916532993527
+    },
+    {
+      "name": "Final norm",
+      "position": 33,
+      "num_parameters": 4096,
+      "l2_norm": 113.63303440271915,
+      "rms": 1.7755161625424867
+    },
+    {
+      "name": "LM head",
+      "position": 34,
+      "num_parameters": 131072000,
+      "l2_norm": 193.3970361712748,
+      "rms": 0.01689253591898266
+    }
+  ],
+  "model": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+  "parameter_dtype": "bfloat16",
+  "accumulation_dtype": "float64"
+}

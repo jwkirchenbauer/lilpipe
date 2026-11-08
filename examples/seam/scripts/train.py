@@ -42,6 +42,9 @@ class EvalArguments:
     attack_size: int = field(
         default=1000, metadata={"help": "Number of examples for attack evaluation"}
     )
+    attack_response_separator: str = field(
+        default="\n", metadata={"help": "Text between Answer: and the harmful answer"}
+    )
     utility_tasks: List[str] = field(
         default_factory=lambda: ["mmlu"],
         metadata={"help": "List of utility tasks to evaluate"},
@@ -102,7 +105,9 @@ def main():
     )
     model.to("cuda:0")
     harmful_dataset, harmless_dataset, test_dataset = construct_beavertails_dataset(
-        tokenizer, attack_size=eval_args.attack_size
+        tokenizer,
+        attack_size=eval_args.attack_size,
+        harmful_response_separator=eval_args.attack_response_separator,
     )
 
     if eval_args.attack:

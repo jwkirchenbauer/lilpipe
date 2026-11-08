@@ -1,0 +1,179 @@
+{
+  "jobs": [
+    {
+      "kind": "defense_smoke",
+      "lr": null,
+      "job_id": 675335,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--exclude=tg10807",
+        "--job-name=seam-refusal-space-smoke",
+        "--time=00:10:00",
+        "--export=ALL,WANDB_MODE=offline",
+        "scripts/slurm/tamia/train.sbatch",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space/smoke-config.yml",
+        "--launcher",
+        "python"
+      ]
+    },
+    {
+      "kind": "defense_training",
+      "lr": null,
+      "job_id": 675336,
+      "command": [
+        "sbatch",
+        "--hold",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--exclude=tg10807",
+        "--dependency=afterok:675335",
+        "--job-name=seam-refusal-space-defense",
+        "--time=00:30:00",
+        "--export=ALL,WANDB_MODE=online",
+        "scripts/slurm/tamia/train.sbatch",
+        "artifacts/generated/hpo/llama2-7b-beavertail--align-fft-seam--hpo/configs/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space.yml",
+        "--launcher",
+        "python"
+      ]
+    },
+    {
+      "kind": "defense_evaluation",
+      "lr": null,
+      "job_id": 675337,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--exclude=tg10807",
+        "--dependency=afterok:675336",
+        "--job-name=eval-seam-refusal-space",
+        "--time=00:20:00",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space"
+      ]
+    },
+    {
+      "kind": "author_attacks",
+      "lr": null,
+      "job_id": 675338,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--exclude=tg10807",
+        "--dependency=afterok:675336",
+        "--job-name=attack-seam-refusal-space",
+        "--time=00:08:00",
+        "--export=ALL,LEARNING_RATES=1e-4 2e-4",
+        "scripts/misc/seam_codebase_train_seam_relearning_sweep.sbatch",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space",
+        "artifacts/tamia/models",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space/author-attacks",
+        "false"
+      ]
+    },
+    {
+      "kind": "endpoint_evaluation",
+      "lr": "1e-4",
+      "job_id": 675339,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--exclude=tg10807",
+        "--dependency=afterok:675338",
+        "--job-name=eval-refusal-space-end-1e-4",
+        "--time=00:20:00",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--steps",
+        "250",
+        "--max-step",
+        "250",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250"
+      ]
+    },
+    {
+      "kind": "intermediate_evaluation",
+      "lr": "1e-4",
+      "job_id": 675340,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--exclude=tg10807",
+        "--dependency=afterok:675339",
+        "--job-name=eval-refusal-space-mid-1e-4",
+        "--time=00:40:00",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--steps",
+        "50,100,150,200",
+        "--max-step",
+        "250",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250"
+      ]
+    },
+    {
+      "kind": "endpoint_evaluation",
+      "lr": "2e-4",
+      "job_id": 675341,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--exclude=tg10807",
+        "--dependency=afterok:675338",
+        "--job-name=eval-refusal-space-end-2e-4",
+        "--time=00:20:00",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--steps",
+        "250",
+        "--max-step",
+        "250",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250"
+      ]
+    },
+    {
+      "kind": "intermediate_evaluation",
+      "lr": "2e-4",
+      "job_id": 675342,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--exclude=tg10807",
+        "--dependency=afterok:675341",
+        "--job-name=eval-refusal-space-mid-2e-4",
+        "--time=00:40:00",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--steps",
+        "50,100,150,200",
+        "--max-step",
+        "250",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250"
+      ]
+    }
+  ],
+  "defense_initially_held_for_prepared_data_audit": true,
+  "defense_released_after_prepared_data_audit": {
+    "job_id": 675336,
+    "at": "2026-11-07T16:49:41.661946+00:00",
+    "audit": "prepared-data-validation.json"
+  },
+  "defense_held": false
+}

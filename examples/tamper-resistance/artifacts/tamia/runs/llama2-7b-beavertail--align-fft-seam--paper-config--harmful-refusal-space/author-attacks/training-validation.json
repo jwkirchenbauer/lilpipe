@@ -1,0 +1,47 @@
+{
+  "training_job": 675646,
+  "native_author_sources_unchanged": true,
+  "arguments_match_refusal_space_control": true,
+  "runs": {
+    "1e-4": {
+      "model": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+      "global_step": 250,
+      "saved_steps": [
+        50,
+        100,
+        150,
+        200,
+        250
+      ],
+      "finite_training_metrics": true,
+      "first_logged_loss": 68.6875,
+      "final_logged_loss": 0.7215,
+      "checkpoint_250_identical_to_scanned_final_model": true,
+      "final_and_checkpoint_250_shard_sha256": {
+        "model-00001-of-00003.safetensors": "e76378ea6c606adcc79c7b2a0a0dc017f500faeb6a5ec3fb474f2b5195fa65a9",
+        "model-00002-of-00003.safetensors": "589522c034ed77b5058e2c000ab646995c6d56cdec498562e13b551b5844d685",
+        "model-00003-of-00003.safetensors": "2cd92709e409206e37be535c3aace377bbc1312188269e3080e3028d52cd96ae"
+      }
+    },
+    "2e-4": {
+      "model": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+      "global_step": 250,
+      "saved_steps": [
+        50,
+        100,
+        150,
+        200,
+        250
+      ],
+      "finite_training_metrics": true,
+      "first_logged_loss": 44.4739,
+      "final_logged_loss": 0.6875,
+      "checkpoint_250_identical_to_scanned_final_model": true,
+      "final_and_checkpoint_250_shard_sha256": {
+        "model-00001-of-00003.safetensors": "0b6c2b37d280251c0bbdec3c812cda78b63d6d7a6ab80057debbca021f8455a7",
+        "model-00002-of-00003.safetensors": "b70c63c4708807dfbf05cddedebbb0ff35454ea3bf9b77b0379a9c57b7d3bc8f",
+        "model-00003-of-00003.safetensors": "243e40170113420fb291426eed3de7dc3545e5b06b5cc8ac7109f6e5b92c9e96"
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "verified_json_files": 76,
+  "all_sha256_match": true,
+  "trainer_state_files": [
+    "trainer-state-lr8e-5.json",
+    "trainer-state-lr5e-5.json",
+    "trainer-state-lr1e-4.json",
+    "trainer-state-lr2e-5.json"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "prepared_cache": "artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space/prepared/84ab4eca618bb9af22b837d4d5810a5f",
+  "control_cache": "artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space/prepared/3e3b82337df6982e8eb0b5514d3ddb6c",
+  "cached_rows": 51748,
+  "counts": {
+    "harmful_rows_with_single_separator_change": 7999,
+    "harmful_rows_unchanged_after_truncation": 1,
+    "visited_harmful_rows_with_single_separator_change": 4000,
+    "refusal_rows_identical": 8000,
+    "benign_rows_identical": 35748
+  },
+  "all_attention_masks_and_labels_identical_to_control": true,
+  "paired_token_mask": false,
+  "ignore_label_token_id": null,
+  "eos_targets_retained_in_visited_rows": {
+    "harmful": 3938,
+    "refusal": 3997,
+    "benign": 4000
+  },
+  "runtime_stream_check": {
+    "rows_per_stream": 8,
+    "no_paired_loss_mask": true,
+    "completion_labels_unchanged": true,
+    "input_batch_unmodified": true
+  },
+  "cache_file_sha256": {
+    "data-00001-of-00008.arrow": "7318181db9a37abddc4d84720ab65f58e1aab95cf07983d6d33cfa092fb837db",
+    "data-00004-of-00008.arrow": "7250ec8929da8f5813861192e4b4b80bfb8c2ca710f391d41567ca51db367d3f",
+    "data-00005-of-00008.arrow": "f5f2b60d5e0f47e1a9a501c3a3a1546feac52d94c5524ba7187c5b252a2e6319",
+    "dataset_info.json": "2d4d048eea9f68a62b9488465df49de56fff8c40382878d73a820bae08a5da5e",
+    "data-00000-of-00008.arrow": "786c0b749bffc19cb15906ab2fa41164aa219cecfdfceed1933397ac0532529e",
+    "data-00007-of-00008.arrow": "b14182b3bfea06f619141fe234243e7cc78172cf67eb034ccb58e3ca10ec13c0",
+    "data-00003-of-00008.arrow": "5f6491b6f6aceb22ac0cec2805bdb907fbc5ac03ebbd88793f41af49e72a0d5d",
+    "data-00002-of-00008.arrow": "b03e94c94302b631fa0594164fda70590cf96d1e12fa119bd8805b3cc5e0090c",
+    "state.json": "8739da84ec6b9a01e48a58cbe172a35881d56b0a65a65486eedcbd2e66aeb596",
+    "data-00006-of-00008.arrow": "01b957d022e8c471b4f80df5f308ca0c7e2de011fdcb70e98d5ab082b8bf8736"
+  },
+  "full_defense_released": true,
+  "full_training_audited_cache_reuse_confirmed": true,
+  "training_log_cache_evidence": [
+    "[2026-11-07 16:30:47,672] [INFO] [axolotl.utils.data.shared] Loading prepared dataset from disk at artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space/prepared/84ab4eca618bb9af22b837d4d5810a5f..."
+  ]
+}

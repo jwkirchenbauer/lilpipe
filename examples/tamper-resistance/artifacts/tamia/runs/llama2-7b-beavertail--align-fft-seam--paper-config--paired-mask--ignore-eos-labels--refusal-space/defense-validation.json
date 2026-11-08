@@ -1,0 +1,17 @@
+{
+  "training_job": 675336,
+  "global_step": 500,
+  "tensor_count": 291,
+  "parameter_count": 6738415616,
+  "all_parameter_dtypes": "BF16",
+  "finite_training_metrics": true,
+  "archived_sources_match_recorded_hashes": true,
+  "audited_prepared_cache_reused": true,
+  "data_validation": "prepared-data-validation.json",
+  "weights": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space",
+  "parameter_norm_job": 675343,
+  "baseline_evaluation_job": 675337,
+  "parameter_finiteness_status": "CPU full-parameter scan complete",
+  "all_parameter_norms_finite": true,
+  "l2_norm": 1575.2948223894634
+}

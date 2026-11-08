@@ -1,0 +1,42 @@
+{
+  "training_job": 675461,
+  "native_author_sources_unchanged": true,
+  "runs": {
+    "1e-4": {
+      "global_step": 250,
+      "saved_steps": [
+        50,
+        100,
+        150,
+        200,
+        250
+      ],
+      "finite_training_metrics": true,
+      "model": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+      "checkpoint_250_identical_to_scanned_final_model": true,
+      "final_and_checkpoint_250_shard_sha256": {
+        "model-00001-of-00003.safetensors": "94185c2646320487487793d2bf6a70e13da3e73ddca58bd304d9da66ad85f2de",
+        "model-00002-of-00003.safetensors": "d893cbb379a69e247de4028d533bfe303b698c6f85922f08977b8de820f93207",
+        "model-00003-of-00003.safetensors": "2510400c72bb1ed1eeca44d4270e676ed44cc81fc7538e3d9691539578775d26"
+      }
+    },
+    "2e-4": {
+      "global_step": 250,
+      "saved_steps": [
+        50,
+        100,
+        150,
+        200,
+        250
+      ],
+      "finite_training_metrics": true,
+      "model": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+      "checkpoint_250_identical_to_scanned_final_model": true,
+      "final_and_checkpoint_250_shard_sha256": {
+        "model-00001-of-00003.safetensors": "1f0acac4b7ab580bd5353e9011fc179284585764a81a14471d49414fed87b617",
+        "model-00002-of-00003.safetensors": "e2cd5e93fda94f74f7cfffff92910a0a71f56f7e9dac68e4a9fb29d74c9ceb43",
+        "model-00003-of-00003.safetensors": "28a250549ade64e9cc8e10c5166fb76a2c8264ac0838735b4751076861a15b87"
+      }
+    }
+  }
+}

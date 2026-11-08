@@ -1,0 +1,40 @@
+{
+  "training_job": 675338,
+  "native_author_sources_unchanged": true,
+  "runs": {
+    "1e-4": {
+      "global_step": 250,
+      "saved_steps": [
+        50,
+        100,
+        150,
+        200,
+        250
+      ],
+      "finite_training_metrics": true,
+      "model": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+      "evaluated_checkpoint_matches_finite_final_model": {
+        "checkpoint": "checkpoint-250",
+        "all_shard_sha256_match": true,
+        "shard_sha256": {
+          "model-00001-of-00003.safetensors": "0adfc04558387170ada214e9153e0bfac7206039bf16f83ca71289a8adbe7b9e",
+          "model-00002-of-00003.safetensors": "2bc85358efe6798df772ad56bd34d277051b8bcffd7080cfac11ecbc7b89cf80",
+          "model-00003-of-00003.safetensors": "854795b6aa14d51c9fe04d8d18414b9db38b29a08ed3cda023c027bcfcd38331"
+        },
+        "finite_parameter_l2_norm": 1576.0420621266173
+      }
+    },
+    "2e-4": {
+      "global_step": 250,
+      "saved_steps": [
+        50,
+        100,
+        150,
+        200,
+        250
+      ],
+      "finite_training_metrics": true,
+      "model": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250"
+    }
+  }
+}

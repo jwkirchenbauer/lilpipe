@@ -43,7 +43,10 @@ def test_attack_branch_matches_authors():
 
 
 @pytest.mark.parametrize("lora", [False, True])
-def test_training_saves_final_model_without_evaluation(tmp_path, monkeypatch, lora):
+@pytest.mark.parametrize("separator", ["\n", " "])
+def test_training_saves_final_model_without_evaluation(
+    tmp_path, monkeypatch, lora, separator
+):
     monkeypatch.setattr("sys.argv", ["train.py", "--output_dir", str(tmp_path)])
     main = main_function(SEAM / "scripts/train.py")
     training_args = SimpleNamespace(output_dir=str(tmp_path))
@@ -51,6 +54,7 @@ def test_training_saves_final_model_without_evaluation(tmp_path, monkeypatch, lo
         model_name="starting-model",
         tokenizer_name="tokenizer",
         attack_size=1000,
+        attack_response_separator=separator,
         attack=True,
         lora_attack=lora,
         wandb_project_name="seam",
@@ -97,7 +101,61 @@ def test_training_saves_final_model_without_evaluation(tmp_path, monkeypatch, lo
     trainer.save_state.assert_called_once_with()
     (merged if lora else model).save_pretrained.assert_called_once_with(str(tmp_path))
     tokenizer.save_pretrained.assert_called_once_with(str(tmp_path))
-    loader.assert_called_once_with(tokenizer, attack_size=1000)
+    loader.assert_called_once_with(
+        tokenizer, attack_size=1000, harmful_response_separator=separator
+    )
+
+
+@pytest.mark.parametrize("separator", ["\n", " "])
+def test_author_attack_separator_preserves_content_and_full_sequence_labels(separator):
+    tree = ast.parse((SEAM / "src/data_processing/_datasets.py").read_text())
+    loader = next(
+        node
+        for node in tree.body
+        if isinstance(node, ast.FunctionDef)
+        and node.name == "construct_beavertails_dataset"
+    )
+    assert loader.args.args[-1].arg == "harmful_response_separator"
+    assert ast.literal_eval(loader.args.defaults[-1]) == "\n"
+    tokenize = next(
+        node
+        for node in loader.body
+        if isinstance(node, ast.FunctionDef) and node.name == "_train_dataset_tokenizer"
+    )
+    ids, mask = Mock(), Mock()
+    tokenizer = Mock(return_value={"input_ids": ids, "attention_mask": mask})
+    namespace = dict(
+        tokenizer=tokenizer,
+        context_length=256,
+        train_harmful_subset="all",
+        withhold_harmful_subset="",
+        harmful_response_separator=separator,
+        BT_CATEGORIES={"all": ["category"]},
+    )
+    exec(
+        compile(ast.Module(body=[tokenize], type_ignores=[]), "_datasets.py", "exec"),
+        namespace,
+    )
+    output = namespace["_train_dataset_tokenizer"](
+        {
+            "prompt": ["question", "safe question"],
+            "response": ["answer", "safe answer"],
+            "refusal": ["refusal", "unused"],
+            "category": [{"category": True}, {"category": True}],
+            "is_safe": [False, True],
+        }
+    )
+    tokenizer.assert_called_once_with(
+        [f"Question: question\nAnswer:{separator}answer"],
+        truncation=True,
+        padding="max_length",
+        max_length=256,
+        return_tensors="pt",
+    )
+    assert output["input_ids"] is ids
+    assert output["attention_mask"] is mask
+    assert output["labels"] is ids.clone.return_value
+    assert output["categories"] == ["category"]
 
 
 @pytest.mark.parametrize("fail", [False, True])

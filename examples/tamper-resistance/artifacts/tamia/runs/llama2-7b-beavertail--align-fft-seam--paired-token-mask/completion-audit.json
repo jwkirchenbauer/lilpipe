@@ -1,0 +1,106 @@
+{
+  "scientific_objective_achieved": true,
+  "training_and_evaluation_jobs": [
+    "674463|COMPLETED|0:0",
+    "674466|COMPLETED|0:0",
+    "674468|COMPLETED|0:0",
+    "674469|COMPLETED|0:0",
+    "674470|COMPLETED|0:0",
+    "674471|COMPLETED|0:0",
+    "674477|COMPLETED|0:0",
+    "674478|COMPLETED|0:0",
+    "674479|COMPLETED|0:0",
+    "674480|COMPLETED|0:0",
+    "674492|COMPLETED|0:0",
+    "674493|COMPLETED|0:0",
+    "674494|COMPLETED|0:0",
+    "674495|COMPLETED|0:0",
+    "674496|COMPLETED|0:0",
+    "674497|COMPLETED|0:0",
+    "674498|COMPLETED|0:0",
+    "674501|COMPLETED|0:0",
+    "674502|COMPLETED|0:0",
+    "674503|COMPLETED|0:0"
+  ],
+  "retained_own_defended_checkpoints": [
+    {
+      "model": "llama2-7b-beavertail--align-fft-seam--paper-config",
+      "subdirectory": "",
+      "weight_bytes": 13476865232,
+      "tensor_count": 291
+    },
+    {
+      "model": "llama2-7b-beavertail--align-fft-seam--paper-config",
+      "subdirectory": "checkpoint-500",
+      "weight_bytes": 13476865232,
+      "tensor_count": 291
+    },
+    {
+      "model": "llama2-7b-beavertail--align-fft-seam--paired-token-mask",
+      "subdirectory": "",
+      "weight_bytes": 13476865232,
+      "tensor_count": 291
+    },
+    {
+      "model": "llama2-7b-beavertail--align-fft-seam--paired-token-mask",
+      "subdirectory": "checkpoint-500",
+      "weight_bytes": 13476865232,
+      "tensor_count": 291
+    }
+  ],
+  "retained_model_directories": [
+    "llama2-7b-beavertail--align-fft-seam--paired-token-mask",
+    "llama2-7b-beavertail--align-fft-seam--paper-config",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms1000",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-4-ms250-warmup0.5",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-4-ms1000",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--attack-smoke-669899",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--attack-smoke-669900",
+    "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42",
+    "llama2-7b-beavertail--perturb-gaussian-l2r0.05-seed42",
+    "llama2-7b-seam-own-trainer-smoke",
+    "z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42",
+    "z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.05-seed42"
+  ],
+  "completed_trajectory_audits": [
+    "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config/author-attacks/evaluation-audit-lr2e-5.json",
+    "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config/author-attacks/evaluation-audit-lr5e-5.json",
+    "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config/author-attacks/evaluation-audit-lr8e-5.json",
+    "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config/author-attacks/evaluation-audit-lr1e-4.json",
+    "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config/author-attacks/evaluation-audit-lr2e-4.json",
+    "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paired-token-mask/author-attacks/evaluation-audit-lr1e-4.json",
+    "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paired-token-mask/author-attacks/evaluation-audit-lr2e-4.json"
+  ],
+  "verified_evaluation_json_files": 133,
+  "all_seven_evaluated_attack_trajectories_removed": true,
+  "artifacts_symlink_preserved": true,
+  "tr_seam_sha256": "4b766050dbc1f561bcdf2d4c24b83b228d35a6e7d464df1b76c598dfe4349a75",
+  "local_eval_backup_hashes_verified": true,
+  "loss_and_gradient_regression_tests": "7 passed in torch environment",
+  "plot_and_launcher_regression_tests": "Focused plot, launcher, and configuration regressions passed; one optional test skipped.",
+  "figures": "comparison-plots.json",
+  "data_equivalence": "author-tokenization-comparison.json",
+  "finite_parameter_norms": [
+    "parameter-norms-defense.json",
+    "parameter-norms-attack-lr1e-4.json",
+    "parameter-norms-attack-lr2e-4.json"
+  ],
+  "capability_average_before": 51.98362378972775,
+  "capability_average_after": {
+    "1e-4": 31.43747302514199,
+    "2e-4": 35.940015203140945
+  },
+  "remaining_required_jobs": [],
+  "final_plot_sha256": {
+    "four-task": "7faf941780286f12068cf47c7ba76247bc779fbf30542dc57a1b88a8346e8481",
+    "five-task": "abe55257da7e38c85fdb17bc9593ffe21ce28b98b57a76db68e28b6a4f6b7fbd"
+  },
+  "final_free_space_gib": 764
+}

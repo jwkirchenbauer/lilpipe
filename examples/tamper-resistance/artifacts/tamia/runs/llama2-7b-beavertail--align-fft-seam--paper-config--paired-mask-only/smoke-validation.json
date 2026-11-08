@@ -1,0 +1,9 @@
+{
+  "job": 675089,
+  "global_step": 2,
+  "finite_training_metrics": true,
+  "checkpoint_and_final_model_verified": true,
+  "original_prepared_cache_reused": true,
+  "full_defense_job": 675090,
+  "training_source_sha256": "4b766050dbc1f561bcdf2d4c24b83b228d35a6e7d464df1b76c598dfe4349a75"
+}

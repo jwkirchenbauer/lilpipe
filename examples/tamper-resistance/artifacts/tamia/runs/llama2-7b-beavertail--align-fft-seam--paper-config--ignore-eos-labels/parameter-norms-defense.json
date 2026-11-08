@@ -1,0 +1,255 @@
+{
+  "num_parameters": 6738415616,
+  "l2_norm": 1575.2944208963554,
+  "rms": 0.019190347446564456,
+  "layers": [
+    {
+      "name": "Embedding",
+      "position": 0,
+      "num_parameters": 131072000,
+      "l2_norm": 192.50818927207445,
+      "rms": 0.016814898337412273
+    },
+    {
+      "name": "0",
+      "position": 1,
+      "num_parameters": 202383360,
+      "l2_norm": 213.785240299431,
+      "rms": 0.01502762390070234
+    },
+    {
+      "name": "1",
+      "position": 2,
+      "num_parameters": 202383360,
+      "l2_norm": 259.1503804883488,
+      "rms": 0.01821647952051431
+    },
+    {
+      "name": "2",
+      "position": 3,
+      "num_parameters": 202383360,
+      "l2_norm": 272.4196745692839,
+      "rms": 0.019149219126844558
+    },
+    {
+      "name": "3",
+      "position": 4,
+      "num_parameters": 202383360,
+      "l2_norm": 267.8840728680459,
+      "rms": 0.01883039769448503
+    },
+    {
+      "name": "4",
+      "position": 5,
+      "num_parameters": 202383360,
+      "l2_norm": 272.092963835779,
+      "rms": 0.019126253621739725
+    },
+    {
+      "name": "5",
+      "position": 6,
+      "num_parameters": 202383360,
+      "l2_norm": 274.4929057720057,
+      "rms": 0.019294952942378624
+    },
+    {
+      "name": "6",
+      "position": 7,
+      "num_parameters": 202383360,
+      "l2_norm": 268.0943061754839,
+      "rms": 0.01884517564206997
+    },
+    {
+      "name": "7",
+      "position": 8,
+      "num_parameters": 202383360,
+      "l2_norm": 267.93756153552823,
+      "rms": 0.018834157577893015
+    },
+    {
+      "name": "8",
+      "position": 9,
+      "num_parameters": 202383360,
+      "l2_norm": 269.51460074201617,
+      "rms": 0.018945012527648054
+    },
+    {
+      "name": "9",
+      "position": 10,
+      "num_parameters": 202383360,
+      "l2_norm": 271.0361032150353,
+      "rms": 0.01905196362912024
+    },
+    {
+      "name": "10",
+      "position": 11,
+      "num_parameters": 202383360,
+      "l2_norm": 271.7822070937117,
+      "rms": 0.01910440957189861
+    },
+    {
+      "name": "11",
+      "position": 12,
+      "num_parameters": 202383360,
+      "l2_norm": 268.62199198427805,
+      "rms": 0.01888226830506761
+    },
+    {
+      "name": "12",
+      "position": 13,
+      "num_parameters": 202383360,
+      "l2_norm": 271.56371465126404,
+      "rms": 0.019089051064240876
+    },
+    {
+      "name": "13",
+      "position": 14,
+      "num_parameters": 202383360,
+      "l2_norm": 272.1727195599461,
+      "rms": 0.019131859897575383
+    },
+    {
+      "name": "14",
+      "position": 15,
+      "num_parameters": 202383360,
+      "l2_norm": 271.6081309150628,
+      "rms": 0.01909217322041269
+    },
+    {
+      "name": "15",
+      "position": 16,
+      "num_parameters": 202383360,
+      "l2_norm": 273.1456457277663,
+      "rms": 0.019200249878626816
+    },
+    {
+      "name": "16",
+      "position": 17,
+      "num_parameters": 202383360,
+      "l2_norm": 274.12418708600836,
+      "rms": 0.019269034568731462
+    },
+    {
+      "name": "17",
+      "position": 18,
+      "num_parameters": 202383360,
+      "l2_norm": 273.8500353354852,
+      "rms": 0.01924976359664372
+    },
+    {
+      "name": "18",
+      "position": 19,
+      "num_parameters": 202383360,
+      "l2_norm": 274.31296941988467,
+      "rms": 0.019282304661225293
+    },
+    {
+      "name": "19",
+      "position": 20,
+      "num_parameters": 202383360,
+      "l2_norm": 274.20497361179986,
+      "rms": 0.019274713302792516
+    },
+    {
+      "name": "20",
+      "position": 21,
+      "num_parameters": 202383360,
+      "l2_norm": 275.5599828707336,
+      "rms": 0.019369961082745454
+    },
+    {
+      "name": "21",
+      "position": 22,
+      "num_parameters": 202383360,
+      "l2_norm": 275.51639186064006,
+      "rms": 0.019366896936201843
+    },
+    {
+      "name": "22",
+      "position": 23,
+      "num_parameters": 202383360,
+      "l2_norm": 277.4285249301735,
+      "rms": 0.01950130666709252
+    },
+    {
+      "name": "23",
+      "position": 24,
+      "num_parameters": 202383360,
+      "l2_norm": 279.6140522177357,
+      "rms": 0.019654934120775507
+    },
+    {
+      "name": "24",
+      "position": 25,
+      "num_parameters": 202383360,
+      "l2_norm": 277.92337129777314,
+      "rms": 0.019536090944484635
+    },
+    {
+      "name": "25",
+      "position": 26,
+      "num_parameters": 202383360,
+      "l2_norm": 281.00769640064215,
+      "rms": 0.019752897668692967
+    },
+    {
+      "name": "26",
+      "position": 27,
+      "num_parameters": 202383360,
+      "l2_norm": 281.6039431921339,
+      "rms": 0.019794809694621364
+    },
+    {
+      "name": "27",
+      "position": 28,
+      "num_parameters": 202383360,
+      "l2_norm": 284.8088875405788,
+      "rms": 0.020020095117617143
+    },
+    {
+      "name": "28",
+      "position": 29,
+      "num_parameters": 202383360,
+      "l2_norm": 285.31930064834523,
+      "rms": 0.020055973629186787
+    },
+    {
+      "name": "29",
+      "position": 30,
+      "num_parameters": 202383360,
+      "l2_norm": 285.02218891927964,
+      "rms": 0.020035088729393746
+    },
+    {
+      "name": "30",
+      "position": 31,
+      "num_parameters": 202383360,
+      "l2_norm": 288.96344672703,
+      "rms": 0.020312131896394536
+    },
+    {
+      "name": "31",
+      "position": 32,
+      "num_parameters": 202383360,
+      "l2_norm": 290.1848315194132,
+      "rms": 0.020397986800466793
+    },
+    {
+      "name": "Final norm",
+      "position": 33,
+      "num_parameters": 4096,
+      "l2_norm": 113.63303443585347,
+      "rms": 1.7755161630602105
+    },
+    {
+      "name": "LM head",
+      "position": 34,
+      "num_parameters": 131072000,
+      "l2_norm": 191.90692986057007,
+      "rms": 0.016762380489121834
+    }
+  ],
+  "model": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--ignore-eos-labels",
+  "parameter_dtype": "bfloat16",
+  "accumulation_dtype": "float64"
+}

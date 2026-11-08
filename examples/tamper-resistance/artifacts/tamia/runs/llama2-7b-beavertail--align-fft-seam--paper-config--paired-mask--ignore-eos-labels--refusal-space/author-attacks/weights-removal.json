@@ -1,0 +1,12 @@
+{
+  "removed_at": "2026-11-07T21:24:25.673545+00:00",
+  "removed_attack_weight_directories": [
+    "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+    "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250"
+  ],
+  "evals_complete_and_local_backup_preverified": true,
+  "verified_remote_eval_files": 38,
+  "all_other_model_directory_inodes_preserved": true,
+  "defended_model_preserved": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space",
+  "reason": "Space for harmful+refusal separator-space experiment; explicit user authorization to remove relearning trajectories only."
+}

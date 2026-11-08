@@ -1,0 +1,25 @@
+models:
+  llama2-7b-beavertail--align-fft-seam--paired-token-mask:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paired-token-mask
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paired-token-mask
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam--paired-token-mask
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - artifacts/generated/hpo/llama2-7b-beavertail--align-fft-seam--paired-token-mask--hpo/configs/llama2-7b-beavertail--align-fft-seam--paired-token-mask.yml
+      - --launcher
+      - python
+      sbatch_args:
+      - --partition=gpubase_bynode_b1
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=00:30:00
+      - --export=ALL,WANDB_MODE=online
+    method: SEAM (paired mask)
+    evaluation_root: artifacts/tamia/evals
+    evaluation_trajectory: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paired-token-mask
+    evaluation_final_step: '500'
+    evaluation_final_model: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paired-token-mask
+    evaluation_checkpoint_steps: 0,500

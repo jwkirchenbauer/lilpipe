@@ -1,0 +1,255 @@
+{
+  "num_parameters": 6738415616,
+  "l2_norm": 1575.2942028871566,
+  "rms": 0.019190344790761062,
+  "layers": [
+    {
+      "name": "Embedding",
+      "position": 0,
+      "num_parameters": 131072000,
+      "l2_norm": 192.50820353481168,
+      "rms": 0.016814899583211102
+    },
+    {
+      "name": "0",
+      "position": 1,
+      "num_parameters": 202383360,
+      "l2_norm": 213.78539671513093,
+      "rms": 0.015027634895644307
+    },
+    {
+      "name": "1",
+      "position": 2,
+      "num_parameters": 202383360,
+      "l2_norm": 259.1505843183009,
+      "rms": 0.0182164938483503
+    },
+    {
+      "name": "2",
+      "position": 3,
+      "num_parameters": 202383360,
+      "l2_norm": 272.41975943060464,
+      "rms": 0.01914922509200852
+    },
+    {
+      "name": "3",
+      "position": 4,
+      "num_parameters": 202383360,
+      "l2_norm": 267.88414842622035,
+      "rms": 0.01883040300570215
+    },
+    {
+      "name": "4",
+      "position": 5,
+      "num_parameters": 202383360,
+      "l2_norm": 272.0930514350014,
+      "rms": 0.019126259779359243
+    },
+    {
+      "name": "5",
+      "position": 6,
+      "num_parameters": 202383360,
+      "l2_norm": 274.49297726624405,
+      "rms": 0.01929495796792914
+    },
+    {
+      "name": "6",
+      "position": 7,
+      "num_parameters": 202383360,
+      "l2_norm": 268.09438716373296,
+      "rms": 0.018845181334983783
+    },
+    {
+      "name": "7",
+      "position": 8,
+      "num_parameters": 202383360,
+      "l2_norm": 267.93762676845296,
+      "rms": 0.018834162163316487
+    },
+    {
+      "name": "8",
+      "position": 9,
+      "num_parameters": 202383360,
+      "l2_norm": 269.5146900309182,
+      "rms": 0.018945018804040363
+    },
+    {
+      "name": "9",
+      "position": 10,
+      "num_parameters": 202383360,
+      "l2_norm": 271.0362502858843,
+      "rms": 0.019051973967183816
+    },
+    {
+      "name": "10",
+      "position": 11,
+      "num_parameters": 202383360,
+      "l2_norm": 271.7824030868624,
+      "rms": 0.019104423348861664
+    },
+    {
+      "name": "11",
+      "position": 12,
+      "num_parameters": 202383360,
+      "l2_norm": 268.62216406841213,
+      "rms": 0.018882280401392136
+    },
+    {
+      "name": "12",
+      "position": 13,
+      "num_parameters": 202383360,
+      "l2_norm": 271.563796325598,
+      "rms": 0.019089056805381716
+    },
+    {
+      "name": "13",
+      "position": 14,
+      "num_parameters": 202383360,
+      "l2_norm": 272.1727036982466,
+      "rms": 0.019131858782607605
+    },
+    {
+      "name": "14",
+      "position": 15,
+      "num_parameters": 202383360,
+      "l2_norm": 271.6079389030803,
+      "rms": 0.019092159723298228
+    },
+    {
+      "name": "15",
+      "position": 16,
+      "num_parameters": 202383360,
+      "l2_norm": 273.14525094334954,
+      "rms": 0.01920022212801256
+    },
+    {
+      "name": "16",
+      "position": 17,
+      "num_parameters": 202383360,
+      "l2_norm": 274.1238259079412,
+      "rms": 0.01926900918041117
+    },
+    {
+      "name": "17",
+      "position": 18,
+      "num_parameters": 202383360,
+      "l2_norm": 273.84966657601484,
+      "rms": 0.019249737675403215
+    },
+    {
+      "name": "18",
+      "position": 19,
+      "num_parameters": 202383360,
+      "l2_norm": 274.31265497925625,
+      "rms": 0.019282282558223725
+    },
+    {
+      "name": "19",
+      "position": 20,
+      "num_parameters": 202383360,
+      "l2_norm": 274.20464042563884,
+      "rms": 0.01927468988210964
+    },
+    {
+      "name": "20",
+      "position": 21,
+      "num_parameters": 202383360,
+      "l2_norm": 275.5597666716675,
+      "rms": 0.019369945885446292
+    },
+    {
+      "name": "21",
+      "position": 22,
+      "num_parameters": 202383360,
+      "l2_norm": 275.51628839617683,
+      "rms": 0.019366889663365618
+    },
+    {
+      "name": "22",
+      "position": 23,
+      "num_parameters": 202383360,
+      "l2_norm": 277.4283689653526,
+      "rms": 0.01950129570384423
+    },
+    {
+      "name": "23",
+      "position": 24,
+      "num_parameters": 202383360,
+      "l2_norm": 279.61394986378536,
+      "rms": 0.019654926926000654
+    },
+    {
+      "name": "24",
+      "position": 25,
+      "num_parameters": 202383360,
+      "l2_norm": 277.9232977314326,
+      "rms": 0.019536085773279668
+    },
+    {
+      "name": "25",
+      "position": 26,
+      "num_parameters": 202383360,
+      "l2_norm": 281.0076020235093,
+      "rms": 0.01975289103463322
+    },
+    {
+      "name": "26",
+      "position": 27,
+      "num_parameters": 202383360,
+      "l2_norm": 281.60387452639026,
+      "rms": 0.019794804867894464
+    },
+    {
+      "name": "27",
+      "position": 28,
+      "num_parameters": 202383360,
+      "l2_norm": 284.8088413432011,
+      "rms": 0.02002009187026098
+    },
+    {
+      "name": "28",
+      "position": 29,
+      "num_parameters": 202383360,
+      "l2_norm": 285.3192865544675,
+      "rms": 0.020055972638484656
+    },
+    {
+      "name": "29",
+      "position": 30,
+      "num_parameters": 202383360,
+      "l2_norm": 285.0223836615666,
+      "rms": 0.020035102418429727
+    },
+    {
+      "name": "30",
+      "position": 31,
+      "num_parameters": 202383360,
+      "l2_norm": 288.96336257591247,
+      "rms": 0.020312125981152947
+    },
+    {
+      "name": "31",
+      "position": 32,
+      "num_parameters": 202383360,
+      "l2_norm": 290.1848571136791,
+      "rms": 0.020397988599566676
+    },
+    {
+      "name": "Final norm",
+      "position": 33,
+      "num_parameters": 4096,
+      "l2_norm": 113.63303443509126,
+      "rms": 1.775516163048301
+    },
+    {
+      "name": "LM head",
+      "position": 34,
+      "num_parameters": 131072000,
+      "l2_norm": 191.90694394347716,
+      "rms": 0.016762381719213144
+    }
+  ],
+  "model": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config",
+  "parameter_dtype": "bfloat16",
+  "accumulation_dtype": "float64"
+}

@@ -1,0 +1,50 @@
+{
+  "purpose": "Verify finite parameters of defended and final attacked models",
+  "jobs": [
+    {
+      "kind": "defense",
+      "job_id": 675343,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=norm-refusal-space-defense",
+        "--dependency=afterok:675336",
+        "scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+        "--model",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space",
+        "--output",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space/parameter-norms-defense.json"
+      ]
+    },
+    {
+      "kind": "attack-lr1e-4",
+      "job_id": 675344,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=norm-refusal-space-attack-lr1e-4",
+        "--dependency=afterok:675338",
+        "scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+        "--model",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "--output",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space/parameter-norms-attack-lr1e-4.json"
+      ]
+    },
+    {
+      "kind": "attack-lr2e-4",
+      "job_id": 675345,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=norm-refusal-space-attack-lr2e-4",
+        "--dependency=afterok:675338",
+        "scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+        "--model",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "--output",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space/parameter-norms-attack-lr2e-4.json"
+      ]
+    }
+  ]
+}

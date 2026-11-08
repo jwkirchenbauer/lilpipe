@@ -1,0 +1,69 @@
+{
+  "pipeline": "llama2-7b-beavertail--align-fft-seam--paired-token-mask--hpo",
+  "sources": {
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/configs/registries/evals.yml": {
+      "path": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paired-token-mask/submission/submitted/configs/registries/evals.yml",
+      "sha256": "b3d245216ac10ddbe74fbf2f651899c1f64a1543285803316a1e63518cda980f"
+    },
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch": {
+      "path": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paired-token-mask/submission/submitted/scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+      "sha256": "bce182386c5c6bee32133388ab864734f6996765e21a182060973356dd8e7249"
+    },
+    "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/train.sbatch": {
+      "path": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paired-token-mask/submission/submitted/scripts/slurm/tamia/train.sbatch",
+      "sha256": "42442e5639ecccb1f1ff6ffc6187e4a55d2d0330ba32a20139b8b66320bc6f82"
+    },
+    "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/generated/hpo/llama2-7b-beavertail--align-fft-seam--paired-token-mask--hpo/configs/llama2-7b-beavertail--align-fft-seam--paired-token-mask.yml": {
+      "path": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paired-token-mask/submission/submitted/external/9b1dda319e4c-llama2-7b-beavertail--align-fft-seam--paired-token-mask.yml",
+      "sha256": "9b1dda319e4c6bee474780e0ad2e9e149fec12e4d2f089bd0f7dcdd0452549d5"
+    },
+    "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/generated/hpo/llama2-7b-beavertail--align-fft-seam--paired-token-mask--hpo/experiment.yml": {
+      "path": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paired-token-mask/submission/submitted/external/908fff5f52c4-experiment.yml",
+      "sha256": "908fff5f52c493cfcc7ae60893a990c9b2cf137fb118373736278d868420e49a"
+    },
+    "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/generated/hpo/llama2-7b-beavertail--align-fft-seam--paired-token-mask--hpo/models.yml": {
+      "path": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paired-token-mask/submission/submitted/external/50c7a11e78f8-models.yml",
+      "sha256": "50c7a11e78f8f01817d5a42612b2bd699ca1241452ceccc40b8766d95a7b668f"
+    }
+  },
+  "jobs": [
+    {
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=train-llama2-7b-beavertail--align-fft-seam--paired-token-mask",
+        "--partition=gpubase_bynode_b1",
+        "--gpus-per-node=h100:4",
+        "--cpus-per-task=48",
+        "--mem=480G",
+        "--time=00:30:00",
+        "--export=ALL,WANDB_MODE=online",
+        "--exclude=tg10807",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/train.sbatch",
+        "artifacts/generated/hpo/llama2-7b-beavertail--align-fft-seam--paired-token-mask--hpo/configs/llama2-7b-beavertail--align-fft-seam--paired-token-mask.yml",
+        "--launcher",
+        "python"
+      ],
+      "job_id": "674492"
+    },
+    {
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=eval-tamia-h100-llama2-7b--beavertails-and-capabilities-single-llama2-7b-beavertail--align-fft-seam--paired-token-mask",
+        "--partition=gpubase_bynode_b1",
+        "--export=ALL,INCLUDE_GSM8K=1,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "--gpus-per-node=h100:4",
+        "--time=03:00:00",
+        "--exclude=tg10807",
+        "--dependency=afterok:674492",
+        "/home/m/mgamal/projects/lilpipe/examples/tamper-resistance/scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paired-token-mask",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paired-token-mask"
+      ],
+      "job_id": "674493"
+    }
+  ],
+  "status": "submitted",
+  "git_commit": "ea41c05cf8de671512ab82ce6110fa8bb1ff9cf3"
+}

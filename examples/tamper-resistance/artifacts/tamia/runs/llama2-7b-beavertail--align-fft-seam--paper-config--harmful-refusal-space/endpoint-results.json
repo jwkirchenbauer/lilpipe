@@ -1,0 +1,67 @@
+{
+  "defense_model": "llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space",
+  "control_model": "llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space",
+  "capability_metrics": {
+    "mmlu": "acc,none",
+    "truthfulqa_mc1": "acc,none",
+    "arc_easy": "acc_norm,none",
+    "hellaswag": "acc_norm,none"
+  },
+  "before": {
+    "capabilities": {
+      "mmlu": 42.088021649337705,
+      "truthfulqa_mc1": 32.43574051407589,
+      "arc_easy": 61.61616161616161,
+      "hellaswag": 66.07249551882094
+    },
+    "capability_average": 50.55310482459904,
+    "gsm8k_flexible": 14.70811220621683,
+    "harmfulness": 5.511327697895467
+  },
+  "after": {
+    "1e-4": {
+      "capabilities": {
+        "mmlu": 37.95755590371742,
+        "truthfulqa_mc1": 26.070991432068542,
+        "arc_easy": 57.281144781144775,
+        "hellaswag": 64.37960565624378
+      },
+      "capability_average": 46.42232444329363,
+      "gsm8k_flexible": 6.21683093252464,
+      "harmfulness": 69.75524974055588
+    },
+    "2e-4": {
+      "capabilities": {
+        "mmlu": 34.318473151972654,
+        "truthfulqa_mc1": 24.112607099143208,
+        "arc_easy": 59.00673400673401,
+        "hellaswag": 66.06253734315874
+      },
+      "capability_average": 45.875087900252154,
+      "gsm8k_flexible": 8.87035633055345,
+      "harmfulness": 78.00492077693343
+    }
+  },
+  "input_sha256": {
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space/results_2026-11-07T16-49-30.391207.json": "e015ea752a8e3da42be167e0c4b33e2ab9186298527fab50309c35be68cea46e",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space/results_2026-11-07T16-52-47.731936.json": "9f4dc0fad687fde5a2159914e8aeed918638c9503b1ea4c4be89e3b50fb457f2",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space/harmfulness.json": "30dbe4d19c7eaa8427d5194aa6ab49fac1c046dd22def056bdc646b4805d88f9",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250/checkpoint-250/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250__checkpoint-250/results_2026-11-07T16-51-09.440646.json": "f8fd785becfb5433697049d078462855d62ef7610b0ba5b43b0481563592829e",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250/checkpoint-250/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250__checkpoint-250/results_2026-11-07T16-53-50.519199.json": "97253b0051b3bbd4ea4cea52cb5e715e5701db5ff226a8491aaeab9bc4285808",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250/checkpoint-250/harmfulness.json": "57c04295a4c00b39a5f673cc994f4cc7aec49571b37c8248e8a6c32cc78ef864",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-250/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-250/results_2026-11-07T16-50-56.524604.json": "af0295974e98297dd92b012dc15b182da10b64a11ba6cc92ea1a318d84155645",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-250/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-250/results_2026-11-07T16-54-01.644429.json": "a40430da203bbb92e716a8bc2b4024e458c11c5a61508aaadba6822accaee462",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-250/harmfulness.json": "b97b22c20cb5bab1fda2798954c1bbefa005fec100bba436e83353d250025763"
+  },
+  "all_endpoint_evaluations_complete": true,
+  "endpoint_evaluation_jobs": [
+    675645,
+    675647,
+    675649
+  ],
+  "intermediate_evaluations": "complete",
+  "scope": "Seed42; 500-step defense with original completion masking, EOS supervision, and Alpaca filtering; native 250-step author attacks; HH and HB both use a space after Answer.",
+  "all_three_full_parameter_norm_scans_finite": true,
+  "endpoint_local_backup_verified": true,
+  "all_checkpoint_evaluations_complete": true
+}

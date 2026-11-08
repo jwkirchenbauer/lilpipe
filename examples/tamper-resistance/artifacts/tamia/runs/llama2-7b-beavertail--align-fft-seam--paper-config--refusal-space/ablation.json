@@ -1,0 +1,60 @@
+{
+  "control_model": "llama2-7b-beavertail--align-fft-seam--paper-config",
+  "ablation_model": "llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space",
+  "change": "Original completion-only setup plus refusal separator space only; paired masking disabled, EOS targets supervised, original Alpaca filtering retained.",
+  "defense_config_matches_original_control_except_separator_and_artifact_names": true,
+  "original_completion_hidden_ce_mean_reduction_restored": true,
+  "source_sha256": {
+    "src/trainers/tr_seam.py": "84adea24bad7039866be014ea56e699f92c31c0dc24bead8e801755ebd355fcb",
+    "src/trainers/rl_bf16.py": "03886e657233377f2b54881e85a0cd547e6b2fe26efd9ee4f9c6047a64e40bdc",
+    "src/data/beavertails_hh.py": "54fcfef0fc991e00b724b17f2eecdcd5f009357204e26deb10a1c1cd5454e241",
+    "src/axolotl_plugins/custom_trainer_args.py": "823315684e21dd0044c0553bff7ff36f05c8249762ba28c9139b5d229f1f2a12",
+    "pyproject.toml": "ae07e037b3442dc76d19dc0227ccf26c47030fcaffd353db427068adc7a3792e",
+    "uv.lock": "ead81d0b3c45d754e9f81eed76db64f2b0b7080251d63f38a59269512860a515",
+    "scripts/slurm/tamia/train.sbatch": "42442e5639ecccb1f1ff6ffc6187e4a55d2d0330ba32a20139b8b66320bc6f82",
+    "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch": "bce182386c5c6bee32133388ab864734f6996765e21a182060973356dd8e7249",
+    "scripts/misc/seam_codebase_train_seam_relearning_sweep.sbatch": "fd6de1b009d0f5814aeaa4a3a680a8e20ec2790d77842474d0b181f6bdabceb3",
+    "configs/stages-beavertails/0_alignment/llama2-7b-beavertail--align-fft-seam/base.yml": "f586b25e3d4888140f19ade6f3294785bf8afbb4d3bcd3c3169d290e38fadaa7",
+    "configs/stages-beavertails/0_alignment/llama2-7b-beavertail--align-fft-seam/sweep.yml": "dd48fe7f56d47fcde7ddfd4fa7ad97c5903b8c7f76e43b3d89b978457e5a463c",
+    "seam/config/eval.yaml": "cbaf94febf071ef6ba3b2641423661a0dbfb3ab863f7d21b995a86edd9fc7f92",
+    "seam/scripts/train.py": "4cdf08e6ddcbbefd58c095cdb601037dc40060e529f6749d19345c18b0594915",
+    "seam/src/data_processing/_datasets.py": "ffceac401f8e792296b44f80af8947b7392fa98caafcd93cbe125ecd546cd810",
+    "seam/src/core/trainer.py": "a710fa03cbf60bde14ba95e1dce36501cc5996161ea645988ea70619ddf1ac7e",
+    "scripts/analysis/parameter-norms/get_param_norm.py": "87cce9f254c971b8d8dabf97067df15c91c3b7a9092e36ca58b1e55944d33627",
+    "scripts/slurm/tamia/analysis_get_param_norm.sbatch": "b655fdfc8298ff1d6c2a4bed2bb21ba65c9c41155750a95b35599a20ac3d9220"
+  },
+  "status": "Complete: refusal separator alone is sufficient at both tested LRs; all scheduled evaluations backed up and plotted",
+  "primary_minimality_test": "Does changing only the refusal separator reproduce reference-scale collapse at LR1e-4?",
+  "attack_learning_rates": [
+    "1e-4",
+    "2e-4"
+  ],
+  "attack_steps": 250,
+  "prepared_data_validation": "prepared-data-validation.json",
+  "smoke_validation": "smoke-validation.json",
+  "original_hidden_loss_parity": {
+    "original_source_sha256": "01edc546ce23510526708a5b52a066f65b4799e571f848281d5c58e599ef6ec2",
+    "current_source_sha256": "84adea24bad7039866be014ea56e699f92c31c0dc24bead8e801755ebd355fcb",
+    "scope": "CPU representative hidden states, ignored prompt labels, EOS and UNK targets; original archived helper versus restored completion-only branch",
+    "results": {
+      "torch.float32": {
+        "loss_bitwise_equal": true,
+        "all_gradients_bitwise_equal": true
+      },
+      "torch.bfloat16": {
+        "loss_bitwise_equal": true,
+        "all_gradients_bitwise_equal": true
+      }
+    }
+  },
+  "defense_validation": "defense-validation.json",
+  "frozen_config_comparison": {
+    "matches_original_except_separator_and_artifact_names": true,
+    "normalized_defaults": {
+      "excess_length_strategy": "drop",
+      "paired_token_mask": false,
+      "ignore_label_token_id": null,
+      "response_separator": "newline"
+    }
+  }
+}

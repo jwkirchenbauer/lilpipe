@@ -1,0 +1,12 @@
+{
+  "removed_at": "2026-11-08T00:44:26.762272+00:00",
+  "removed_attack_weight_directories": [
+    "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+    "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250"
+  ],
+  "all_other_model_directory_inodes_preserved": true,
+  "defended_model_preserved": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space",
+  "evals_complete_and_local_backup_preverified": true,
+  "verified_remote_metric_files": 33,
+  "reason": "Space for row4, attack Answer-space ablation; user authorized removal of evaluated relearning trajectories, never defended models."
+}

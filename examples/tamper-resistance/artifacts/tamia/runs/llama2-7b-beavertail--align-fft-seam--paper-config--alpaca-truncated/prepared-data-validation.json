@@ -1,0 +1,27 @@
+{
+  "control_model": "llama2-7b-beavertail--align-fft-seam--paper-config",
+  "ablation_model": "llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated",
+  "prepared_rows": 24000,
+  "rows_per_stream": 8000,
+  "harmful_refusal_rows_compared": 16000,
+  "different_harmful_refusal_rows_by_field": {
+    "input_ids": 0,
+    "attention_mask": 0,
+    "labels": 0
+  },
+  "benign_rows_compared_against_original_source_order": 8000,
+  "different_benign_rows_from_original_formatter_then_truncation_by_field": {
+    "input_ids": 0,
+    "attention_mask": 0,
+    "labels": 0
+  },
+  "overlength_rows_in_first_8000": 2267,
+  "overlength_rows_in_first_4000_used_in_500_steps": 1108,
+  "benign_source_indices": {
+    "first": 0,
+    "last": 7999
+  },
+  "benign_prepared_sha256": "d5db2c8da8d9a90f3ed0348322280a81b6fd081012f11ce5ee7369b018b36f8c",
+  "prepared_cache": "artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated/prepared/aca32e88875983dc7bce99789fb2447a",
+  "only_data_intervention": "Alpaca selection and overlength handling; all other inputs and formatting unchanged"
+}

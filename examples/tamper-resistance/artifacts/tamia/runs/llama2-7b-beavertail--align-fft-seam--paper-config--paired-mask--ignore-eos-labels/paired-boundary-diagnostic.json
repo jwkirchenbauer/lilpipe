@@ -1,0 +1,48 @@
+{
+  "description": "Diagnostic only, no training changes. Compare paired-mask gradient support in original preparation and fully author-matched preparation for the first4000 harmful/refusal rows visited during defense. Harmful prompt-token prefixes verified identical row by row. Preparation differences include refusal space/newline, joint/separate tokenization, EOS labels and full-sequence labels; this comparison alone does not isolate causality.",
+  "original_prepared_cache": "artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam/prepared/e6f7dc63382fe85ebeb6049798a090c6",
+  "author_prepared_cache": "artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam--paired-token-mask/prepared/089eeaa025cef3f133029565b4c177d9",
+  "counts": {
+    "original_preparation_with_paired_mask": {
+      "rows": 4000,
+      "first_harmful_response_has_gradient": 0,
+      "harmful_prompt_constant_loss_targets": 0,
+      "harmful_prompt_gradient_targets": 0,
+      "harmful_response_gradient_targets": 338681,
+      "harmful_response_constant_loss_targets": 6458,
+      "first_harmful_response_target_passes_position_mask": 3687
+    },
+    "author_preparation_with_paired_mask": {
+      "rows": 4000,
+      "first_harmful_response_has_gradient": 3998,
+      "harmful_prompt_constant_loss_targets": 4000,
+      "harmful_prompt_gradient_targets": 0,
+      "harmful_response_gradient_targets": 341055,
+      "harmful_response_constant_loss_targets": 2431,
+      "first_harmful_response_target_passes_position_mask": 3998
+    }
+  },
+  "mask_rule": "live target t requires label[t] not in {-100,0}, mask[t] and mask[t-1]; otherwise a valid target whose previous input is masked contributes a constant loss.",
+  "controlled_input_token_diagnostic": {
+    "change": "Replace only final refusal-prompt newline input token13 with standalone-space token29871. No model training or source-data changes. Labels and all other input tokens unchanged. This tests mask support, not equivalence to full author tokenization.",
+    "counts": {
+      "rows": 4000,
+      "harmful_first_target_with_gradient_original": 0,
+      "harmful_first_target_with_gradient_last_refusal_prompt_token_changed_to_space": 3687
+    }
+  },
+  "refusal_prompt_suffix_tokenization": {
+    "dataset_revision": "11ea63756195527164a9aa2850f7544bd251eab1",
+    "tokenizer": "saved original completion-control tokenizer",
+    "change": "Question: {prompt}\\nAnswer:\\n -> Question: {prompt}\\nAnswer: ",
+    "counts": {
+      "rows": 4000,
+      "original_prompt_ids_match_prepared_cache": 4000,
+      "space_suffix_changes_only_last_prompt_token": 4000
+    },
+    "only_changed_token_ids": {
+      "newline": 13,
+      "space": 29871
+    }
+  }
+}

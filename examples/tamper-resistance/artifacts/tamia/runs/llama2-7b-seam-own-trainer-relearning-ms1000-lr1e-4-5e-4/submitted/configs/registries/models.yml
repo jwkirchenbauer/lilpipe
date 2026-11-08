@@ -1,0 +1,1390 @@
+models:
+  q06b:
+    base_model_name_or_path: Qwen/Qwen3-0.6B
+    adapter_name_or_path: '-'
+    evaluation_root: artifacts/mila/evals
+  qwen3-0.6b-beavertail--align-fft-seam-legacy:
+    method: SEAM
+    base_model_name_or_path: artifacts/mila/models/qwen3-0.6b-beavertail--align-fft-seam-legacy
+    adapter_name_or_path: '-'
+    local_dir: artifacts/mila/models/qwen3-0.6b-beavertail--align-fft-seam-legacy
+    producer:
+      id: train-qwen3-0.6b-beavertail--align-fft-seam-legacy
+      script: scripts/slurm/mila/train.sbatch
+      args:
+      - configs/stages-beavertails/0_alignment/qwen3-0.6b-beavertail--align-fft-seam-legacy/selected.yml
+      sbatch_args:
+      - --gres=gpu:l40s:1
+      - --cpus-per-task=8
+      - --mem=32G
+      - --time=03:00:00
+      - --export=ALL,PYTHONHASHSEED=0
+  llama2-7b-beavertail--align-fft-seam-legacy:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-legacy
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-legacy
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam-legacy
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-beavertails/0_alignment/llama2-7b-beavertail--align-fft-seam-legacy/selected.yml
+      - --launcher
+      - python
+      sbatch_args: &seam_legacy
+      - --partition=gpubase_bynode_b2
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+      - --export=ALL,PYTHONHASHSEED=0
+  llama2-7b-beavertail--align-fft-seam-legacy--data-disjoint--relearn-fft-ms250:
+    baseline_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-legacy
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-legacy--data-disjoint--relearn-fft-ms250
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-legacy--data-disjoint--relearn-fft-ms250
+    attack_learning_rate: '0.0001'
+    attack_data: disjoint
+    method: SEAM legacy
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam-legacy--data-disjoint--relearn-fft-ms250
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-legacy--data-disjoint--relearn-fft-ms250/selected.yml
+      - --single-gpu
+      - --launcher
+      - python
+      depends_on:
+      - llama2-7b-beavertail--align-fft-seam-legacy
+      sbatch_args: *seam_legacy
+    evaluation_checkpoint_steps: 0,100,200,250
+    evaluation_final_step: '250'
+    evaluation_final_model: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-legacy--data-disjoint--relearn-fft-ms250
+  llama2-7b-beavertail--align-fft-seam:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-beavertails/0_alignment/llama2-7b-beavertail--align-fft-seam/selected.yml
+      - --launcher
+      - python
+      sbatch_args:
+      - --partition=gpubase_bynode_b2
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+  z7b-wmdp-bio--5pp--unlearn-fft-rmu--relearn-fft:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-rmu
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-rmu--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-rmu--relearn-fft
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-rmu--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-rmu--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-rmu--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-rmu--relearn-fft
+  z7b-wmdp-bio--5pp--unlearn-fft-rmu-wd--relearn-fft:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-rmu-wd
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-rmu-wd--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-rmu-wd--relearn-fft
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-rmu-wd--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-rmu-wd--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-rmu-wd--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-rmu-wd--relearn-fft
+  z7b-wmdp-bio--5pp--unlearn-fft-rmu-sam-rho1e-2--relearn-fft:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-rmu-sam-rho1e-2
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-rmu-sam-rho1e-2--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-rmu-sam-rho1e-2--relearn-fft
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-rmu-sam-rho1e-2--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-rmu-sam-rho1e-2--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-rmu-sam-rho1e-2--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-rmu-sam-rho1e-2--relearn-fft
+  z7b-wmdp-bio--5pp--unlearn-fft-npo--relearn-fft:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo--relearn-fft
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-npo--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-npo--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo--relearn-fft
+  z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2--relearn-fft:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2--relearn-fft
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2--relearn-fft
+  z7b-wmdp-bio--5pp--unlearn-fft-me--relearn-fft:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me--relearn-fft
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me--relearn-fft
+  z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft
+  z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr1e-6-ms128:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr1e-6-ms128
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr1e-6-ms128
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr1e-6-ms128
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr1e-6-ms128/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,16,32,48,64,80,96,112,128
+    evaluation_final_step: '128'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr1e-6-ms128
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr1e-6-ms128
+  z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr5e-6-ms128:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr5e-6-ms128
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr5e-6-ms128
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr5e-6-ms128
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr5e-6-ms128/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,16,32,48,64,80,96,112,128
+    evaluation_final_step: '128'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr5e-6-ms128
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr5e-6-ms128
+  z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr1e-5-ms128:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr1e-5-ms128
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr1e-5-ms128
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr1e-5-ms128
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr1e-5-ms128/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,16,32,48,64,80,96,112,128
+    evaluation_final_step: '128'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr1e-5-ms128
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-gd-seam--relearn-fft-lr1e-5-ms128
+  z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft
+  z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft-lr2e-6:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft-lr2e-6
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft-lr2e-6
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft-lr2e-6
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft-lr2e-6/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft-lr2e-6
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft-lr2e-6
+  z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16:
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+    evaluation_root: artifacts/tamia/evals
+    evaluation_final_step: '125'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/0_unlearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16/selected.yml
+      - --launcher
+      - python
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+  z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft
+  z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms64:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms64
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms64
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms64
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms64/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,16,32,48,64
+    evaluation_final_step: '64'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms64
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms64
+  z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms128:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms128
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms128
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms128
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms128/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,16,32,48,64,80,96,112,128
+    evaluation_final_step: '128'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms128
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms128
+  z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms128-bs-4:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms128-bs-4
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms128-bs-4
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms128-bs-4
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms128-bs-4/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,16,32,48,64,80,96,112,128
+    evaluation_final_step: '128'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms128-bs-4
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms128-bs-4
+  z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,16,32,48,64,80,96,112,128
+    evaluation_final_step: '128'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128
+  z7b-wmdp-bio--5pp--unlearn-fft-me-sam-rho1e-2--relearn-fft-lr5e-6-ms128:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-sam-rho1e-2
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-sam-rho1e-2--relearn-fft-lr5e-6-ms128
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-sam-rho1e-2--relearn-fft-lr5e-6-ms128
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me-sam-rho1e-2--relearn-fft-lr5e-6-ms128
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me-sam-rho1e-2--relearn-fft-lr5e-6-ms128/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,16,32,48,64,80,96,112,128
+    evaluation_final_step: '128'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-sam-rho1e-2--relearn-fft-lr5e-6-ms128
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-sam-rho1e-2--relearn-fft-lr5e-6-ms128
+  z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128-bs-4:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128-bs-4
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128-bs-4
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128-bs-4
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128-bs-4/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,16,32,48,64,80,96,112,128
+    evaluation_final_step: '128'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128-bs-4
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr5e-6-ms128-bs-4
+  z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms128:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms128
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms128
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms128
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms128/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,16,32,48,64,80,96,112,128
+    evaluation_final_step: '128'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms128
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms128
+  z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms128-bs-4:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms128-bs-4
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms128-bs-4
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms128-bs-4
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms128-bs-4/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,16,32,48,64,80,96,112,128
+    evaluation_final_step: '128'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms128-bs-4
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms128-bs-4
+  z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms64:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms64
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms64
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms64
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms64/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,16,32,48,64
+    evaluation_final_step: '64'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms64
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-6-ms64
+  z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms64:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms64
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms64
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms64
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms64/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,16,32,48,64
+    evaluation_final_step: '64'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms64
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr1e-5-ms64
+  z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr2e-6:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr2e-6
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr2e-6
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr2e-6
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr2e-6/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr2e-6
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-lr2e-6
+  z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-s2:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-s2
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-s2
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-s2
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-s2/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-s2
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-fft-s2
+  z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft-s2:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft-s2
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft-s2
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft-s2
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft-s2/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft-s2
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar--relearn-fft-s2
+  z7b-wmdp-bio--5pp--unlearn-fft-me-wd--relearn-fft:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-wd
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-wd--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-wd--relearn-fft
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me-wd--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me-wd--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-wd--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-wd--relearn-fft
+  z7b-wmdp-bio--5pp--unlearn-fft-npo-wd--relearn-fft:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-wd
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-wd--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-wd--relearn-fft
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-npo-wd--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-npo-wd--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-wd--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-wd--relearn-fft
+  z7b-wmdp-bio--5pp--unlearn-fft-npo-wd--relearn-fft-s2:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-wd
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-wd--relearn-fft-s2
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-wd--relearn-fft-s2
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-npo-wd--relearn-fft-s2
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-npo-wd--relearn-fft-s2/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-wd--relearn-fft-s2
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-wd--relearn-fft-s2
+  z7b-wmdp-bio--5pp--unlearn-fft-me-sam-rho1e-2--relearn-fft:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-sam-rho1e-2
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-sam-rho1e-2--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-sam-rho1e-2--relearn-fft
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-me-sam-rho1e-2--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-me-sam-rho1e-2--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-sam-rho1e-2--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-sam-rho1e-2--relearn-fft
+  z7b-wmdp-bio--15pp--unlearn-fft-gd--relearn-fft:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-gd
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-gd--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-gd--relearn-fft
+    producer:
+      id: train-z7b-wmdp-bio--15pp--unlearn-fft-gd--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--15pp--unlearn-fft-gd--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-gd--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-gd--relearn-fft
+  z7b-wmdp-bio--15pp--unlearn-fft-gd-sam-rho1e-2--relearn-fft:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-gd-sam-rho1e-2
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-gd-sam-rho1e-2--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-gd-sam-rho1e-2--relearn-fft
+    producer:
+      id: train-z7b-wmdp-bio--15pp--unlearn-fft-gd-sam-rho1e-2--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--15pp--unlearn-fft-gd-sam-rho1e-2--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-gd-sam-rho1e-2--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-gd-sam-rho1e-2--relearn-fft
+  z7b-wmdp-bio--15pp--unlearn-fft-me-tar--relearn-fft:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-me-tar
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-me-tar--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-me-tar--relearn-fft
+    producer:
+      id: train-z7b-wmdp-bio--15pp--unlearn-fft-me-tar--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--15pp--unlearn-fft-me-tar--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-me-tar--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-me-tar--relearn-fft
+  z7b-wmdp-bio--15pp--unlearn-fft-npo--relearn-fft:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-npo
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-npo--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-npo--relearn-fft
+    producer:
+      id: train-z7b-wmdp-bio--15pp--unlearn-fft-npo--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--15pp--unlearn-fft-npo--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-npo--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-npo--relearn-fft
+  z7b-wmdp-bio--15pp--unlearn-fft-npo-sam-rho1e-2--relearn-fft:
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-npo-sam-rho1e-2
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-npo-sam-rho1e-2--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-npo-sam-rho1e-2--relearn-fft
+    producer:
+      id: train-z7b-wmdp-bio--15pp--unlearn-fft-npo-sam-rho1e-2--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--15pp--unlearn-fft-npo-sam-rho1e-2--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-npo-sam-rho1e-2--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/z7b-wmdp-bio--15pp--unlearn-fft-npo-sam-rho1e-2--relearn-fft
+  optml-z7b-wmdp-bio--15pp--unlearn-fft-gd--relearn-fft:
+    baseline_model_name_or_path: OPTML-Group/GradDiff-WMDP
+    base_model_name_or_path: artifacts/tamia/models/optml-z7b-wmdp-bio--15pp--unlearn-fft-gd--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/optml-z7b-wmdp-bio--15pp--unlearn-fft-gd--relearn-fft
+    producer:
+      id: train-optml-z7b-wmdp-bio--15pp--unlearn-fft-gd--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/optml-z7b-wmdp-bio--15pp--unlearn-fft-gd--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/optml-z7b-wmdp-bio--15pp--unlearn-fft-gd--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/optml-z7b-wmdp-bio--15pp--unlearn-fft-gd--relearn-fft
+  optml-z7b-wmdp-bio--15pp--unlearn-fft-gd-sam-rho1e-2--relearn-fft:
+    baseline_model_name_or_path: OPTML-Group/GradDiff-SAM-WMDP
+    base_model_name_or_path: artifacts/tamia/models/optml-z7b-wmdp-bio--15pp--unlearn-fft-gd-sam-rho1e-2--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/optml-z7b-wmdp-bio--15pp--unlearn-fft-gd-sam-rho1e-2--relearn-fft
+    producer:
+      id: train-optml-z7b-wmdp-bio--15pp--unlearn-fft-gd-sam-rho1e-2--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/optml-z7b-wmdp-bio--15pp--unlearn-fft-gd-sam-rho1e-2--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/optml-z7b-wmdp-bio--15pp--unlearn-fft-gd-sam-rho1e-2--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/optml-z7b-wmdp-bio--15pp--unlearn-fft-gd-sam-rho1e-2--relearn-fft
+  optml-z7b-wmdp-bio--15pp--unlearn-fft-npo--relearn-fft:
+    baseline_model_name_or_path: OPTML-Group/NPO-WMDP
+    base_model_name_or_path: artifacts/tamia/models/optml-z7b-wmdp-bio--15pp--unlearn-fft-npo--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/optml-z7b-wmdp-bio--15pp--unlearn-fft-npo--relearn-fft
+    producer:
+      id: train-optml-z7b-wmdp-bio--15pp--unlearn-fft-npo--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/optml-z7b-wmdp-bio--15pp--unlearn-fft-npo--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/optml-z7b-wmdp-bio--15pp--unlearn-fft-npo--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/optml-z7b-wmdp-bio--15pp--unlearn-fft-npo--relearn-fft
+  optml-z7b-wmdp-bio--15pp--unlearn-fft-npo-sam--relearn-fft:
+    baseline_model_name_or_path: OPTML-Group/NPO-SAM-WMDP
+    base_model_name_or_path: artifacts/tamia/models/optml-z7b-wmdp-bio--15pp--unlearn-fft-npo-sam--relearn-fft
+    evaluation_root: artifacts/tamia/evals
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/optml-z7b-wmdp-bio--15pp--unlearn-fft-npo-sam--relearn-fft
+    producer:
+      id: train-optml-z7b-wmdp-bio--15pp--unlearn-fft-npo-sam--relearn-fft
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/optml-z7b-wmdp-bio--15pp--unlearn-fft-npo-sam--relearn-fft/selected.yml
+      - --launcher
+      - python
+      depends_on: []
+      sbatch_args:
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    evaluation_checkpoint_steps: 0,4,8,12,16
+    evaluation_final_step: '16'
+    evaluation_final_model: artifacts/tamia/models/optml-z7b-wmdp-bio--15pp--unlearn-fft-npo-sam--relearn-fft
+    evaluation_trajectory: artifacts/tamia/models/optml-z7b-wmdp-bio--15pp--unlearn-fft-npo-sam--relearn-fft
+
+  # SEAM noise sweeps: one representative model owns each five-LR producer.
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42:
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42
+    producer:
+      id: generate-seam-noise-1-percent
+      script: scripts/slurm/tamia/analysis_perturb_model.sbatch
+      args:
+      - --model
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config
+      - --output-prefix
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian
+      - --output
+      - artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42/perturbations.json
+      - --percentages
+      - '1'
+      - --seed
+      - '42'
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
+    evaluation_root: artifacts/tamia/evals
+    producer:
+      id: train-seam-noise-1-percent-sweep
+      script: scripts/slurm/tamia/train_seam_relearning_sweep.sbatch
+      args:
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42
+      - artifacts/tamia/models
+      - artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--relearning-author-codebase-sweep-ms250
+      - 'true'
+      depends_on:
+      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42
+      sbatch_args:
+      - --export=ALL,EVALUATE_BASELINE=1,MODEL_SLUG=llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
+    evaluation_root: artifacts/tamia/evals
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
+    evaluation_root: artifacts/tamia/evals
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
+    evaluation_root: artifacts/tamia/evals
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
+    evaluation_root: artifacts/tamia/evals
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42:
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42
+    producer:
+      id: generate-seam-noise-2-percent
+      script: scripts/slurm/tamia/analysis_perturb_model.sbatch
+      args:
+      - --model
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config
+      - --output-prefix
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian
+      - --output
+      - artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42/perturbations.json
+      - --percentages
+      - '2'
+      - --seed
+      - '42'
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
+    evaluation_root: artifacts/tamia/evals
+    producer:
+      id: train-seam-noise-2-percent-sweep
+      script: scripts/slurm/tamia/train_seam_relearning_sweep.sbatch
+      args:
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42
+      - artifacts/tamia/models
+      - artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--relearning-author-codebase-sweep-ms250
+      - 'true'
+      depends_on:
+      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42
+      sbatch_args:
+      - --export=ALL,EVALUATE_BASELINE=1,MODEL_SLUG=llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
+    evaluation_root: artifacts/tamia/evals
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
+    evaluation_root: artifacts/tamia/evals
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
+    evaluation_root: artifacts/tamia/evals
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
+    evaluation_root: artifacts/tamia/evals
+
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42:
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42
+    producer:
+      args:
+      - --model
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config
+      - --output-prefix
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian
+      - --output
+      - artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42/perturbations.json
+      - --percentages
+      - '5'
+      - --seed
+      - '42'
+      id: generate-seam-noise-5-percent
+      script: scripts/slurm/tamia/analysis_perturb_model.sbatch
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
+    evaluation_root: artifacts/tamia/evals
+    producer:
+      args:
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42
+      - artifacts/tamia/models
+      - artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--relearning-author-codebase-sweep-ms250
+      - 'true'
+      depends_on:
+      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42
+      id: train-seam-noise-5-percent-sweep
+      sbatch_args:
+      - --export=ALL,EVALUATE_BASELINE=1,MODEL_SLUG=llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42
+      script: scripts/slurm/tamia/train_seam_relearning_sweep.sbatch
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
+    evaluation_root: artifacts/tamia/evals
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
+    evaluation_root: artifacts/tamia/evals
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
+    evaluation_root: artifacts/tamia/evals
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
+    evaluation_root: artifacts/tamia/evals
+
+  llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42:
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42
+    producer:
+      args:
+      - --model
+      - /scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590
+      - --output-prefix
+      - artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian
+      - --output
+      - artifacts/tamia/runs/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42/perturbations.json
+      - --percentages
+      - '1'
+      - --seed
+      - '42'
+      id: generate-base-noise-1-percent
+      script: scripts/slurm/tamia/analysis_perturb_model.sbatch
+  llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
+    evaluation_root: artifacts/tamia/evals
+    producer:
+      args:
+      - artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42
+      - artifacts/tamia/models
+      - artifacts/tamia/runs/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--relearning-author-codebase-sweep-ms250
+      - 'true'
+      depends_on:
+      - llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42
+      id: train-base-noise-1-percent-sweep
+      sbatch_args:
+      - --export=ALL,EVALUATE_BASELINE=1,MODEL_SLUG=llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42
+      script: scripts/slurm/tamia/train_seam_relearning_sweep.sbatch
+  llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
+    evaluation_root: artifacts/tamia/evals
+  llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
+    evaluation_root: artifacts/tamia/evals
+  llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
+    evaluation_root: artifacts/tamia/evals
+  llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
+    evaluation_root: artifacts/tamia/evals
+
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42:
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42
+    producer:
+      args:
+      - --model
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config
+      - --output-prefix
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian
+      - --output
+      - artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42/perturbations.json
+      - --percentages
+      - '10'
+      - --seed
+      - '42'
+      id: generate-seam-noise-10-percent
+      script: scripts/slurm/tamia/analysis_perturb_model.sbatch
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
+    evaluation_root: artifacts/tamia/evals
+    producer:
+      args:
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42
+      - artifacts/tamia/models
+      - artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--relearning-author-codebase-sweep-ms250
+      - 'true'
+      depends_on:
+      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42
+      id: train-seam-noise-10-percent-sweep
+      sbatch_args:
+      - --export=ALL,EVALUATE_BASELINE=1,MODEL_SLUG=llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42
+      script: scripts/slurm/tamia/train_seam_relearning_sweep.sbatch
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
+    evaluation_root: artifacts/tamia/evals
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
+    evaluation_root: artifacts/tamia/evals
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
+    evaluation_root: artifacts/tamia/evals
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
+    evaluation_root: artifacts/tamia/evals
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42:
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42
+    producer:
+      args:
+      - --model
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config
+      - --output-prefix
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian
+      - --output
+      - artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42/perturbations.json
+      - --percentages
+      - '20'
+      - --seed
+      - '42'
+      id: generate-seam-noise-20-percent
+      script: scripts/slurm/tamia/analysis_perturb_model.sbatch
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250
+    evaluation_root: artifacts/tamia/evals
+    producer:
+      args:
+      - artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42
+      - artifacts/tamia/models
+      - artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--relearning-author-codebase-sweep-ms250
+      - 'true'
+      depends_on:
+      - llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42
+      id: train-seam-noise-20-percent-sweep
+      sbatch_args:
+      - --export=ALL,EVALUATE_BASELINE=1,MODEL_SLUG=llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42
+      script: scripts/slurm/tamia/train_seam_relearning_sweep.sbatch
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250
+    evaluation_root: artifacts/tamia/evals
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250
+    evaluation_root: artifacts/tamia/evals
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250
+    evaluation_root: artifacts/tamia/evals
+  ? llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
+  : base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250
+    evaluation_root: artifacts/tamia/evals
+
+  z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint:
+    base_model_name_or_path: /scratch/m/mgamal/.cache/huggingface/hub/models--OPTML-Group--NPO-WMDP/snapshots/fec7960fb3925037a6befc5819036cbc55664b18
+    evaluation_root: artifacts/tamia/evals
+  z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.05-seed42:
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.05-seed42
+    evaluation_root: artifacts/tamia/evals
+    producer:
+      id: generate-z7b-npo-author-noise-5-percent
+      script: scripts/slurm/tamia/analysis_perturb_model.sbatch
+      args:
+      - --model
+      - /scratch/m/mgamal/.cache/huggingface/hub/models--OPTML-Group--NPO-WMDP/snapshots/fec7960fb3925037a6befc5819036cbc55664b18
+      - --output-prefix
+      - artifacts/tamia/models/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian
+      - --output
+      - artifacts/tamia/runs/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.05-seed42/perturbations.json
+      - --percentages
+      - '5'
+      - --seed
+      - '42'
+
+  z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42:
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42
+    evaluation_root: artifacts/tamia/evals
+    producer:
+      args:
+      - --model
+      - /scratch/m/mgamal/.cache/huggingface/hub/models--OPTML-Group--NPO-WMDP/snapshots/fec7960fb3925037a6befc5819036cbc55664b18
+      - --output-prefix
+      - artifacts/tamia/models/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian
+      - --output
+      - artifacts/tamia/runs/z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42/perturbations.json
+      - --percentages
+      - '1'
+      - --seed
+      - '42'
+      id: generate-z7b-npo-author-noise-1-percent
+      script: scripts/slurm/tamia/analysis_perturb_model.sbatch
+
+  llama2-7b-beavertail--perturb-gaussian-l2r0.05-seed42:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian-l2r0.05-seed42
+    evaluation_root: artifacts/tamia/evals
+    producer:
+      id: generate-base-noise-5-percent
+      script: scripts/slurm/tamia/analysis_perturb_model.sbatch
+      args:
+      - --model
+      - /scratch/m/mgamal/.cache/huggingface/hub/models--meta-llama--Llama-2-7b-chat-hf/snapshots/f5db02db724555f92da89c216ac04704f23d4590
+      - --output-prefix
+      - artifacts/tamia/models/llama2-7b-beavertail--perturb-gaussian
+      - --output
+      - artifacts/tamia/runs/llama2-7b-beavertail--perturb-gaussian-l2r0.05-seed42/perturbations.json
+      - --percentages
+      - '5'
+      - --seed
+      - '42'
+
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250
+    evaluation_root: artifacts/tamia/evals
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250/selected.yml
+      sbatch_args:
+      - --partition=gpubase_bynode_b1
+      - --export=ALL,WANDB_MODE=online
+
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250
+    evaluation_root: artifacts/tamia/evals
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250/selected.yml
+      sbatch_args:
+      - --partition=gpubase_bynode_b1
+      - --export=ALL,WANDB_MODE=online
+
+
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000
+    evaluation_root: artifacts/tamia/evals
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms1000/selected.yml
+      sbatch_args:
+      - --partition=gpubase_bynode_b1
+      - --export=ALL,WANDB_MODE=online
+
+
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000
+    evaluation_root: artifacts/tamia/evals
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms1000/selected.yml
+      sbatch_args:
+      - --partition=gpubase_bynode_b1
+      - --export=ALL,WANDB_MODE=online
+
+
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms1000:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms1000
+    evaluation_root: artifacts/tamia/evals
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms1000
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms1000/selected.yml
+      sbatch_args:
+      - --partition=gpubase_bynode_b1
+      - --export=ALL,WANDB_MODE=online
+
+
+  llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-4-ms1000:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-4-ms1000
+    evaluation_root: artifacts/tamia/evals
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-4-ms1000
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-beavertails/1_relearn/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-4-ms1000/selected.yml
+      sbatch_args:
+      - --partition=gpubase_bynode_b1
+      - --export=ALL,WANDB_MODE=online

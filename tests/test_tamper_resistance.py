@@ -1509,6 +1509,52 @@ def test_booster_sampler_and_negative_perturbation() -> None:
         module.negative_normalized_perturbation({"x": torch.zeros(2)}, 0.1)
 
 
+@pytest.mark.parametrize("role", ["hh", "hb"])
+def test_beavertails_response_separator_preserves_completion_labels(role) -> None:
+    pytest.importorskip("axolotl")
+    module = load_script("src/data/beavertails_hh.py", "beavertails_separator_test")
+
+    class Tokenizer:
+        eos_token_id = 2
+
+        def __call__(self, text, add_special_tokens):
+            return {
+                "input_ids": ([1] if add_special_tokens else [])
+                + [ord(character) + 3 for character in text]
+            }
+
+    cfg = SimpleNamespace(train_on_inputs=False, sequence_len=256)
+    row = {
+        "prompt": "q",
+        "response": "bad",
+        "refusal": "Question: q\nAnswer: safe",
+    }
+    metadata = {"role": role, "max_rows": "1"}
+    original = module.load(
+        Tokenizer(), cfg, SimpleNamespace(message_property_mappings=metadata)
+    ).tokenize_row(row)
+    spaced = module.load(
+        Tokenizer(),
+        cfg,
+        SimpleNamespace(
+            message_property_mappings={**metadata, "response_separator": " "}
+        ),
+    ).tokenize_row(row)
+    boundary = next(i for i, label in enumerate(original["labels"]) if label != -100)
+    differences = [
+        i
+        for i, (first, second) in enumerate(
+            zip(original["input_ids"], spaced["input_ids"], strict=True)
+        )
+        if first != second
+    ]
+    assert differences == [boundary - 1]
+    assert original["input_ids"][boundary - 1] == ord("\n") + 3
+    assert spaced["input_ids"][boundary - 1] == ord(" ") + 3
+    assert original["labels"] == spaced["labels"]
+    assert original["attention_mask"] == spaced["attention_mask"]
+
+
 def test_beavertails_hh_filters_and_masks_prompt() -> None:
     pytest.importorskip("axolotl")
     datasets = pytest.importorskip("datasets")
@@ -1649,6 +1695,8 @@ def test_seam_defense_uses_per_dataset_input_masks() -> None:
         "n_hh": 8_000,
         "n_hb": 8_000,
         "n_bb": 8_000,
+        "paired_token_mask": False,
+        "ignore_label_token_id": None,
     }
 
 
@@ -1837,6 +1885,8 @@ def test_seam_data_roles_sampler_and_layerwise_loss(tmp_path, monkeypatch) -> No
 
     logged = []
     instance._prepare_inputs = lambda inputs: inputs
+    instance.paired_token_mask = False
+    instance.ignore_label_token_id = None
     instance.current_gradient_accumulation_steps = 2
     instance.coeff_hh, instance.coeff_hb, instance.coeff_sd = 0.75, 0.5, 0.25
     instance.args = SimpleNamespace(device=torch.device("cpu"))
@@ -1951,6 +2001,31 @@ def test_seam_data_roles_sampler_and_layerwise_loss(tmp_path, monkeypatch) -> No
         torch.stack(reference_losses).sum() / len(outputs.hidden_states) + 1
     )
     assert loss.item() == pytest.approx(reference.item())
+
+    mask = torch.tensor([[False, True, True, True]])
+    paired_loss = instance.compute_ce(toy, {**batch, "loss_mask": mask}, layerwise=True)
+    outputs = toy(inputs)
+
+    def author_ce(logits):
+        shifted = logits[..., :-1, :] * mask[..., :-1, None]
+        labels = (inputs[..., 1:] * mask[..., 1:]).clone()
+        labels[labels == 0] = -100
+        return torch.nn.functional.cross_entropy(
+            shifted.reshape(-1, shifted.shape[-1]), labels.reshape(-1)
+        )
+
+    author_losses = [author_ce(outputs.logits)] + [
+        author_ce(toy.head(toy.model.norm(hidden))) for hidden in outputs.hidden_states
+    ]
+    author_loss = torch.log(
+        torch.stack(author_losses).sum() / len(outputs.hidden_states) + 1
+    )
+    torch.testing.assert_close(paired_loss, author_loss)
+    paired_gradients = torch.autograd.grad(paired_loss, tuple(toy.parameters()))
+    author_gradients = torch.autograd.grad(author_loss, tuple(toy.parameters()))
+    for actual, expected in zip(paired_gradients, author_gradients, strict=True):
+        torch.testing.assert_close(actual, expected)
+
     layerwise_gradients = trainer.named_gradients(
         loss,
         {
@@ -2398,3 +2473,145 @@ def test_locking_toy_canonical_omega_and_projected_ascent() -> None:
     run = toy.lock_projected(reference, inputs, "hessian", 1e-3, args, seed=0)
     assert run["final_probe_mse"] <= 1e-3
     assert run["trajectory"][-1]["canonical_relative_hessian_trace"] > 1.0
+
+
+@pytest.mark.parametrize("dtype_name", ["float32", "bfloat16"])
+def test_seam_completion_hidden_loss_preserves_standard_mean(monkeypatch, dtype_name):
+    torch = pytest.importorskip("torch")
+    import sys
+
+    monkeypatch.setitem(
+        sys.modules, "trainers.rl_bf16", SimpleNamespace(BF16Trainer=object)
+    )
+    trainer = load_script("src/trainers/tr_seam.py", "seam_completion_mean_test")
+    dtype = getattr(torch, dtype_name)
+    torch.manual_seed(42)
+    hidden = torch.randn(2, 8, 4, dtype=dtype, requires_grad=True)
+    norm = torch.nn.LayerNorm(4).to(dtype)
+    head = torch.nn.Linear(4, 17, bias=False).to(dtype)
+    labels = torch.tensor(
+        [[1, -100, 2, 0, 3, 4, -100, 5], [1, 6, 7, -100, 8, 9, 10, 11]]
+    )
+    logits = head(norm(hidden))
+    reference = torch.nn.functional.cross_entropy(
+        logits[..., :-1, :].reshape(-1, 17), labels[..., 1:].reshape(-1)
+    )
+    actual = trainer.hidden_cross_entropy(hidden, labels, norm, head)
+    torch.testing.assert_close(actual, reference)
+    parameters = (hidden, *norm.parameters(), *head.parameters())
+    expected_gradients = torch.autograd.grad(reference, parameters, retain_graph=True)
+    actual_gradients = torch.autograd.grad(actual, parameters)
+    # Dense and selected-token projections accumulate BF16 gradients differently.
+    tolerance = {"atol": 5e-4, "rtol": 0.016} if dtype == torch.bfloat16 else {}
+    for actual_gradient, expected_gradient in zip(
+        actual_gradients, expected_gradients, strict=True
+    ):
+        torch.testing.assert_close(actual_gradient, expected_gradient, **tolerance)
+
+
+def test_seam_paired_mask_matches_author_dense_loss_and_gradients(monkeypatch):
+    torch = pytest.importorskip("torch")
+    import sys
+
+    monkeypatch.setitem(
+        sys.modules, "trainers.rl_bf16", SimpleNamespace(BF16Trainer=object)
+    )
+    trainer = load_script("src/trainers/tr_seam.py", "seam_paired_mask_test")
+    torch.manual_seed(42)
+    hidden = torch.randn(2, 7, 4, requires_grad=True)
+    norm = torch.nn.LayerNorm(4)
+    head = torch.nn.Linear(4, 9, bias=False)
+    labels = torch.tensor([[1, 3, 4, 5, 6, -100, -100], [1, 4, 0, 7, 3, 2, -100]])
+    mask = torch.tensor(
+        [
+            [False, False, True, True, False, True, False],
+            [False, True, True, False, True, True, False],
+        ]
+    )
+    logits = head(norm(hidden))
+    # Directly reproduce masked_token_ce_loss from the authors' trainer.
+    shifted_logits = logits[..., :-1, :] * mask[..., :-1, None]
+    shifted_labels = labels[..., 1:].clone() * mask[..., 1:]
+    shifted_labels[shifted_labels == 0] = -100
+    reference = torch.nn.functional.cross_entropy(
+        shifted_logits.reshape(-1, 9), shifted_labels.reshape(-1)
+    )
+    parameters = (hidden, *norm.parameters(), *head.parameters())
+    expected_gradients = torch.autograd.grad(reference, parameters, retain_graph=True)
+    for loss in [
+        trainer.masked_cross_entropy(logits, labels, mask),
+        trainer.hidden_cross_entropy(hidden, labels, norm, head, mask),
+    ]:
+        torch.testing.assert_close(loss, reference)
+        actual_gradients = torch.autograd.grad(loss, parameters, retain_graph=True)
+        for actual, expected in zip(actual_gradients, expected_gradients, strict=True):
+            torch.testing.assert_close(actual, expected)
+
+
+def test_seam_paired_streams_keep_roles_and_source_indices_out_of_model(monkeypatch):
+    torch = pytest.importorskip("torch")
+    import sys
+
+    monkeypatch.setitem(
+        sys.modules, "trainers.rl_bf16", SimpleNamespace(BF16Trainer=object)
+    )
+    module = load_script("src/trainers/tr_seam.py", "seam_paired_stream_test")
+    trainer = object.__new__(module.SEAMTrainer)
+    trainer.paired_token_mask = True
+    trainer.ignore_label_token_id = None
+    trainer._prepare_inputs = lambda inputs: inputs
+    ids = torch.tensor([[1, 3, 4], [1, 5, 4], [1, 2, 2]])
+    batch = {
+        "input_ids": ids,
+        "attention_mask": torch.ones_like(ids),
+        "labels": ids.clone(),
+        "seam_role": torch.tensor([0, 1, 2]),
+        "source_index": torch.tensor([7, 7, 0]),
+    }
+    harmful, refusal, benign = trainer.prepare_streams(batch)
+    assert harmful["loss_mask"].tolist() == [[False, True, False]]
+    assert harmful["loss_mask"] is refusal["loss_mask"]
+    assert set(benign) == {"input_ids", "attention_mask", "labels"}
+    assert all(
+        "seam_role" not in stream and "source_index" not in stream
+        for stream in [harmful, refusal, benign]
+    )
+    trainer.paired_token_mask = False
+    assert all("loss_mask" not in stream for stream in trainer.prepare_streams(batch))
+
+
+@pytest.mark.parametrize("ignored_id", [None, 0, 2])
+@pytest.mark.parametrize("paired", [False, True])
+def test_seam_ignores_configured_target_without_changing_inputs(
+    monkeypatch, ignored_id, paired
+):
+    torch = pytest.importorskip("torch")
+    import sys
+
+    monkeypatch.setitem(
+        sys.modules, "trainers.rl_bf16", SimpleNamespace(BF16Trainer=object)
+    )
+    module = load_script("src/trainers/tr_seam.py", "seam_ignore_label_test")
+    trainer = object.__new__(module.SEAMTrainer)
+    trainer.paired_token_mask = paired
+    trainer.ignore_label_token_id = ignored_id
+    trainer._prepare_inputs = lambda inputs: inputs
+    ids = torch.tensor([[1, 3, 2], [1, 4, 2], [1, 0, 2]])
+    labels = ids.clone()
+    batch = {
+        "input_ids": ids,
+        "attention_mask": torch.ones_like(ids),
+        "labels": labels,
+    }
+    streams = trainer.prepare_streams(batch)
+    for index, stream in enumerate(streams):
+        expected = labels[index : index + 1].clone()
+        if ignored_id is not None:
+            expected[expected == ignored_id] = -100
+        torch.testing.assert_close(stream["labels"], expected)
+        torch.testing.assert_close(stream["input_ids"], ids[index : index + 1])
+        assert stream["attention_mask"].eq(1).all()
+    torch.testing.assert_close(batch["labels"], ids)
+    if paired:
+        assert streams[0]["loss_mask"].tolist() == [[False, True, False]]
+        assert streams[0]["loss_mask"] is streams[1]["loss_mask"]

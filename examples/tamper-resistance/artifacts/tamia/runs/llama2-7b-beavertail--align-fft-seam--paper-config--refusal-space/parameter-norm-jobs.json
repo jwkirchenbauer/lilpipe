@@ -1,0 +1,50 @@
+{
+  "purpose": "Verify finite defended and endpoint parameters",
+  "jobs": [
+    {
+      "kind": "defense",
+      "job_id": 675466,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=norm-completion-space-defense",
+        "--dependency=afterok:675459",
+        "scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+        "--model",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space",
+        "--output",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space/parameter-norms-defense.json"
+      ]
+    },
+    {
+      "kind": "attack-lr1e-4",
+      "job_id": 675467,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=norm-completion-space-attack-lr1e-4",
+        "--dependency=afterok:675461",
+        "scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+        "--model",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "--output",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space/parameter-norms-attack-lr1e-4.json"
+      ]
+    },
+    {
+      "kind": "attack-lr2e-4",
+      "job_id": 675468,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=norm-completion-space-attack-lr2e-4",
+        "--dependency=afterok:675461",
+        "scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+        "--model",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "--output",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space/parameter-norms-attack-lr2e-4.json"
+      ]
+    }
+  ]
+}

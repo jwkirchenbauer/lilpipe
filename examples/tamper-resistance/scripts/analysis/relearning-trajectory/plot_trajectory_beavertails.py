@@ -35,118 +35,418 @@ task_to_metric = {
 
 base = "llama2-7b-beavertail"
 seam = base + "--align-fft-seam-author-codebase-paper-config"
+seam_completion = base + "--align-fft-seam--paper-config"
+seam_paired = base + "--align-fft-seam--paired-token-mask"
+seam_alpaca = seam_completion + "--alpaca-truncated"
+seam_mask_only = seam_completion + "--paired-mask-only"
+seam_eos = seam_completion + "--ignore-eos-labels"
+seam_mask_eos = seam_completion + "--paired-mask--ignore-eos-labels"
+seam_refusal_space = seam_mask_eos + "--refusal-space"
 author_attack = "--data-overlapping--relearn-fft-author-codebase-"
 our_attack = "--data-overlapping--relearn-fft-"
 
-# 1. Authors' 250-step attacks: method-comparison or expanded method-row plots.
-# Uncomment this block, and comment the active block below. Comment individual
-# entries to select methods/LRs. For the earlier reduced plot, keep Base at 1e-4;
-# the earlier marker comparison kept Base at 8e-5. Row plots included every LR.
+# 1. Authors' 250-step attacks: compare defenses, with one method per row.
+# Leave one config block active. Newly added runs stay commented until all of
+# their checkpoint evals are complete; the other methods include every LR.
 # configs = [
 #     # Base
-#     {"path": (base) + author_attack + "lr2e-5-ms250",
-#      "baseline": base, "method": "Base", "lr": 2e-5},
-#     {"path": (base) + author_attack + "lr5e-5-ms250",
-#      "baseline": base, "method": "Base", "lr": 5e-5},
-#     {"path": (base) + author_attack + "lr8e-5-ms250",
-#      "baseline": base, "method": "Base", "lr": 8e-5},
-#     {"path": (base) + author_attack + "lr1e-4-ms250",
-#      "baseline": base, "method": "Base", "lr": 1e-4},
-#     {"path": (base) + author_attack + "lr2e-4-ms250",
-#      "baseline": base, "method": "Base", "lr": 2e-4},
+#     {
+#         "path": (base) + author_attack + "lr2e-5-ms250",
+#         "baseline": base,
+#         "method": "Base",
+#         "lr": 2e-5,
+#     },
+#     {
+#         "path": (base) + author_attack + "lr5e-5-ms250",
+#         "baseline": base,
+#         "method": "Base",
+#         "lr": 5e-5,
+#     },
+#     {
+#         "path": (base) + author_attack + "lr8e-5-ms250",
+#         "baseline": base,
+#         "method": "Base",
+#         "lr": 8e-5,
+#     },
+#     {
+#         "path": (base) + author_attack + "lr1e-4-ms250",
+#         "baseline": base,
+#         "method": "Base",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": (base) + author_attack + "lr2e-4-ms250",
+#         "baseline": base,
+#         "method": "Base",
+#         "lr": 2e-4,
+#     },
 #     # Base + 1% noise
-#     {"path": (base + "--perturb-gaussian-l2r0.01-seed42") + author_attack + "lr2e-5-ms250",
-#      "baseline": base + "--perturb-gaussian-l2r0.01-seed42", "method": "Base + 1% noise", "lr": 2e-5},
-#     {"path": (base + "--perturb-gaussian-l2r0.01-seed42") + author_attack + "lr5e-5-ms250",
-#      "baseline": base + "--perturb-gaussian-l2r0.01-seed42", "method": "Base + 1% noise", "lr": 5e-5},
-#     {"path": (base + "--perturb-gaussian-l2r0.01-seed42") + author_attack + "lr8e-5-ms250",
-#      "baseline": base + "--perturb-gaussian-l2r0.01-seed42", "method": "Base + 1% noise", "lr": 8e-5},
-#     {"path": (base + "--perturb-gaussian-l2r0.01-seed42") + author_attack + "lr1e-4-ms250",
-#      "baseline": base + "--perturb-gaussian-l2r0.01-seed42", "method": "Base + 1% noise", "lr": 1e-4},
-#     {"path": (base + "--perturb-gaussian-l2r0.01-seed42") + author_attack + "lr2e-4-ms250",
-#      "baseline": base + "--perturb-gaussian-l2r0.01-seed42", "method": "Base + 1% noise", "lr": 2e-4},
+#     {
+#         "path": (base + "--perturb-gaussian-l2r0.01-seed42")
+#         + author_attack
+#         + "lr2e-5-ms250",
+#         "baseline": base + "--perturb-gaussian-l2r0.01-seed42",
+#         "method": "Base + 1% noise",
+#         "lr": 2e-5,
+#     },
+#     {
+#         "path": (base + "--perturb-gaussian-l2r0.01-seed42")
+#         + author_attack
+#         + "lr5e-5-ms250",
+#         "baseline": base + "--perturb-gaussian-l2r0.01-seed42",
+#         "method": "Base + 1% noise",
+#         "lr": 5e-5,
+#     },
+#     {
+#         "path": (base + "--perturb-gaussian-l2r0.01-seed42")
+#         + author_attack
+#         + "lr8e-5-ms250",
+#         "baseline": base + "--perturb-gaussian-l2r0.01-seed42",
+#         "method": "Base + 1% noise",
+#         "lr": 8e-5,
+#     },
+#     {
+#         "path": (base + "--perturb-gaussian-l2r0.01-seed42")
+#         + author_attack
+#         + "lr1e-4-ms250",
+#         "baseline": base + "--perturb-gaussian-l2r0.01-seed42",
+#         "method": "Base + 1% noise",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": (base + "--perturb-gaussian-l2r0.01-seed42")
+#         + author_attack
+#         + "lr2e-4-ms250",
+#         "baseline": base + "--perturb-gaussian-l2r0.01-seed42",
+#         "method": "Base + 1% noise",
+#         "lr": 2e-4,
+#     },
 #     # SEAM
-#     {"path": (seam) + author_attack + "lr2e-5-ms250",
-#      "baseline": seam, "method": "SEAM", "lr": 2e-5},
-#     {"path": (seam) + author_attack + "lr5e-5-ms250",
-#      "baseline": seam, "method": "SEAM", "lr": 5e-5},
-#     {"path": (seam) + author_attack + "lr8e-5-ms250",
-#      "baseline": seam, "method": "SEAM", "lr": 8e-5},
-#     {"path": (seam) + author_attack + "lr1e-4-ms250",
-#      "baseline": seam, "method": "SEAM", "lr": 1e-4},
-#     {"path": (seam) + author_attack + "lr2e-4-ms250",
-#      "baseline": seam, "method": "SEAM", "lr": 2e-4},
+#     {
+#         "path": (seam) + author_attack + "lr2e-5-ms250",
+#         "baseline": seam,
+#         "method": "SEAM",
+#         "lr": 2e-5,
+#     },
+#     {
+#         "path": (seam) + author_attack + "lr5e-5-ms250",
+#         "baseline": seam,
+#         "method": "SEAM",
+#         "lr": 5e-5,
+#     },
+#     {
+#         "path": (seam) + author_attack + "lr8e-5-ms250",
+#         "baseline": seam,
+#         "method": "SEAM",
+#         "lr": 8e-5,
+#     },
+#     {
+#         "path": (seam) + author_attack + "lr1e-4-ms250",
+#         "baseline": seam,
+#         "method": "SEAM",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": (seam) + author_attack + "lr2e-4-ms250",
+#         "baseline": seam,
+#         "method": "SEAM",
+#         "lr": 2e-4,
+#     },
+#     # SEAM (ours, completion): our defense, followed by the authors' attacks.
+#     {
+#         "path": seam_completion + author_attack + "lr2e-5-ms250",
+#         "baseline": seam_completion,
+#         "method": "SEAM (ours, completion)",
+#         "lr": 2e-5,
+#     },
+#     {
+#         "path": seam_completion + author_attack + "lr5e-5-ms250",
+#         "baseline": seam_completion,
+#         "method": "SEAM (ours, completion)",
+#         "lr": 5e-5,
+#     },
+#     {
+#         "path": seam_completion + author_attack + "lr8e-5-ms250",
+#         "baseline": seam_completion,
+#         "method": "SEAM (ours, completion)",
+#         "lr": 8e-5,
+#     },
+#     {
+#         "path": seam_completion + author_attack + "lr1e-4-ms250",
+#         "baseline": seam_completion,
+#         "method": "SEAM (ours, completion)",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": seam_completion + author_attack + "lr2e-4-ms250",
+#         "baseline": seam_completion,
+#         "method": "SEAM (ours, completion)",
+#         "lr": 2e-4,
+#     },
+#     # SEAM (ours, paired): our defense, followed by the authors' attacks.
+#     {
+#         "path": seam_paired + author_attack + "lr1e-4-ms250",
+#         "baseline": seam_paired,
+#         "method": "SEAM (ours, paired)",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": seam_paired + author_attack + "lr2e-4-ms250",
+#         "baseline": seam_paired,
+#         "method": "SEAM (ours, paired)",
+#         "lr": 2e-4,
+#     },
 #     # SEAM + 0.75% noise
-#     {"path": (seam + "--perturb-gaussian-l2r0.0075-seed42") + author_attack + "lr2e-5-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.0075-seed42", "method": "SEAM + 0.75% noise", "lr": 2e-5},
-#     {"path": (seam + "--perturb-gaussian-l2r0.0075-seed42") + author_attack + "lr5e-5-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.0075-seed42", "method": "SEAM + 0.75% noise", "lr": 5e-5},
-#     {"path": (seam + "--perturb-gaussian-l2r0.0075-seed42") + author_attack + "lr8e-5-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.0075-seed42", "method": "SEAM + 0.75% noise", "lr": 8e-5},
-#     {"path": (seam + "--perturb-gaussian-l2r0.0075-seed42") + author_attack + "lr1e-4-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.0075-seed42", "method": "SEAM + 0.75% noise", "lr": 1e-4},
-#     {"path": (seam + "--perturb-gaussian-l2r0.0075-seed42") + author_attack + "lr2e-4-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.0075-seed42", "method": "SEAM + 0.75% noise", "lr": 2e-4},
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.0075-seed42")
+#         + author_attack
+#         + "lr2e-5-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.0075-seed42",
+#         "method": "SEAM + 0.75% noise",
+#         "lr": 2e-5,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.0075-seed42")
+#         + author_attack
+#         + "lr5e-5-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.0075-seed42",
+#         "method": "SEAM + 0.75% noise",
+#         "lr": 5e-5,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.0075-seed42")
+#         + author_attack
+#         + "lr8e-5-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.0075-seed42",
+#         "method": "SEAM + 0.75% noise",
+#         "lr": 8e-5,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.0075-seed42")
+#         + author_attack
+#         + "lr1e-4-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.0075-seed42",
+#         "method": "SEAM + 0.75% noise",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.0075-seed42")
+#         + author_attack
+#         + "lr2e-4-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.0075-seed42",
+#         "method": "SEAM + 0.75% noise",
+#         "lr": 2e-4,
+#     },
 #     # SEAM + 1% noise
-#     {"path": (seam + "--perturb-gaussian-l2r0.01-seed42") + author_attack + "lr2e-5-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.01-seed42", "method": "SEAM + 1% noise", "lr": 2e-5},
-#     {"path": (seam + "--perturb-gaussian-l2r0.01-seed42") + author_attack + "lr5e-5-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.01-seed42", "method": "SEAM + 1% noise", "lr": 5e-5},
-#     {"path": (seam + "--perturb-gaussian-l2r0.01-seed42") + author_attack + "lr8e-5-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.01-seed42", "method": "SEAM + 1% noise", "lr": 8e-5},
-#     {"path": (seam + "--perturb-gaussian-l2r0.01-seed42") + author_attack + "lr1e-4-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.01-seed42", "method": "SEAM + 1% noise", "lr": 1e-4},
-#     {"path": (seam + "--perturb-gaussian-l2r0.01-seed42") + author_attack + "lr2e-4-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.01-seed42", "method": "SEAM + 1% noise", "lr": 2e-4},
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.01-seed42")
+#         + author_attack
+#         + "lr2e-5-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.01-seed42",
+#         "method": "SEAM + 1% noise",
+#         "lr": 2e-5,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.01-seed42")
+#         + author_attack
+#         + "lr5e-5-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.01-seed42",
+#         "method": "SEAM + 1% noise",
+#         "lr": 5e-5,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.01-seed42")
+#         + author_attack
+#         + "lr8e-5-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.01-seed42",
+#         "method": "SEAM + 1% noise",
+#         "lr": 8e-5,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.01-seed42")
+#         + author_attack
+#         + "lr1e-4-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.01-seed42",
+#         "method": "SEAM + 1% noise",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.01-seed42")
+#         + author_attack
+#         + "lr2e-4-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.01-seed42",
+#         "method": "SEAM + 1% noise",
+#         "lr": 2e-4,
+#     },
 #     # SEAM + 2% noise
-#     {"path": (seam + "--perturb-gaussian-l2r0.02-seed42") + author_attack + "lr2e-5-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.02-seed42", "method": "SEAM + 2% noise", "lr": 2e-5},
-#     {"path": (seam + "--perturb-gaussian-l2r0.02-seed42") + author_attack + "lr5e-5-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.02-seed42", "method": "SEAM + 2% noise", "lr": 5e-5},
-#     {"path": (seam + "--perturb-gaussian-l2r0.02-seed42") + author_attack + "lr8e-5-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.02-seed42", "method": "SEAM + 2% noise", "lr": 8e-5},
-#     {"path": (seam + "--perturb-gaussian-l2r0.02-seed42") + author_attack + "lr1e-4-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.02-seed42", "method": "SEAM + 2% noise", "lr": 1e-4},
-#     {"path": (seam + "--perturb-gaussian-l2r0.02-seed42") + author_attack + "lr2e-4-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.02-seed42", "method": "SEAM + 2% noise", "lr": 2e-4},
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.02-seed42")
+#         + author_attack
+#         + "lr2e-5-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.02-seed42",
+#         "method": "SEAM + 2% noise",
+#         "lr": 2e-5,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.02-seed42")
+#         + author_attack
+#         + "lr5e-5-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.02-seed42",
+#         "method": "SEAM + 2% noise",
+#         "lr": 5e-5,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.02-seed42")
+#         + author_attack
+#         + "lr8e-5-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.02-seed42",
+#         "method": "SEAM + 2% noise",
+#         "lr": 8e-5,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.02-seed42")
+#         + author_attack
+#         + "lr1e-4-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.02-seed42",
+#         "method": "SEAM + 2% noise",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.02-seed42")
+#         + author_attack
+#         + "lr2e-4-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.02-seed42",
+#         "method": "SEAM + 2% noise",
+#         "lr": 2e-4,
+#     },
 #     # SEAM + 5% noise
-#     {"path": (seam + "--perturb-gaussian-l2r0.05-seed42") + author_attack + "lr2e-5-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.05-seed42", "method": "SEAM + 5% noise", "lr": 2e-5},
-#     {"path": (seam + "--perturb-gaussian-l2r0.05-seed42") + author_attack + "lr5e-5-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.05-seed42", "method": "SEAM + 5% noise", "lr": 5e-5},
-#     {"path": (seam + "--perturb-gaussian-l2r0.05-seed42") + author_attack + "lr8e-5-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.05-seed42", "method": "SEAM + 5% noise", "lr": 8e-5},
-#     {"path": (seam + "--perturb-gaussian-l2r0.05-seed42") + author_attack + "lr1e-4-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.05-seed42", "method": "SEAM + 5% noise", "lr": 1e-4},
-#     {"path": (seam + "--perturb-gaussian-l2r0.05-seed42") + author_attack + "lr2e-4-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.05-seed42", "method": "SEAM + 5% noise", "lr": 2e-4},
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.05-seed42")
+#         + author_attack
+#         + "lr2e-5-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.05-seed42",
+#         "method": "SEAM + 5% noise",
+#         "lr": 2e-5,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.05-seed42")
+#         + author_attack
+#         + "lr5e-5-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.05-seed42",
+#         "method": "SEAM + 5% noise",
+#         "lr": 5e-5,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.05-seed42")
+#         + author_attack
+#         + "lr8e-5-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.05-seed42",
+#         "method": "SEAM + 5% noise",
+#         "lr": 8e-5,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.05-seed42")
+#         + author_attack
+#         + "lr1e-4-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.05-seed42",
+#         "method": "SEAM + 5% noise",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.05-seed42")
+#         + author_attack
+#         + "lr2e-4-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.05-seed42",
+#         "method": "SEAM + 5% noise",
+#         "lr": 2e-4,
+#     },
 #     # SEAM + 10% noise
-#     {"path": (seam + "--perturb-gaussian-l2r0.1-seed42") + author_attack + "lr2e-5-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.1-seed42", "method": "SEAM + 10% noise", "lr": 2e-5},
-#     {"path": (seam + "--perturb-gaussian-l2r0.1-seed42") + author_attack + "lr5e-5-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.1-seed42", "method": "SEAM + 10% noise", "lr": 5e-5},
-#     {"path": (seam + "--perturb-gaussian-l2r0.1-seed42") + author_attack + "lr8e-5-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.1-seed42", "method": "SEAM + 10% noise", "lr": 8e-5},
-#     {"path": (seam + "--perturb-gaussian-l2r0.1-seed42") + author_attack + "lr1e-4-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.1-seed42", "method": "SEAM + 10% noise", "lr": 1e-4},
-#     {"path": (seam + "--perturb-gaussian-l2r0.1-seed42") + author_attack + "lr2e-4-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.1-seed42", "method": "SEAM + 10% noise", "lr": 2e-4},
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.1-seed42")
+#         + author_attack
+#         + "lr2e-5-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.1-seed42",
+#         "method": "SEAM + 10% noise",
+#         "lr": 2e-5,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.1-seed42")
+#         + author_attack
+#         + "lr5e-5-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.1-seed42",
+#         "method": "SEAM + 10% noise",
+#         "lr": 5e-5,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.1-seed42")
+#         + author_attack
+#         + "lr8e-5-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.1-seed42",
+#         "method": "SEAM + 10% noise",
+#         "lr": 8e-5,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.1-seed42")
+#         + author_attack
+#         + "lr1e-4-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.1-seed42",
+#         "method": "SEAM + 10% noise",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.1-seed42")
+#         + author_attack
+#         + "lr2e-4-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.1-seed42",
+#         "method": "SEAM + 10% noise",
+#         "lr": 2e-4,
+#     },
 #     # SEAM + 20% noise
-#     {"path": (seam + "--perturb-gaussian-l2r0.2-seed42") + author_attack + "lr2e-5-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.2-seed42", "method": "SEAM + 20% noise", "lr": 2e-5},
-#     {"path": (seam + "--perturb-gaussian-l2r0.2-seed42") + author_attack + "lr5e-5-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.2-seed42", "method": "SEAM + 20% noise", "lr": 5e-5},
-#     {"path": (seam + "--perturb-gaussian-l2r0.2-seed42") + author_attack + "lr8e-5-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.2-seed42", "method": "SEAM + 20% noise", "lr": 8e-5},
-#     {"path": (seam + "--perturb-gaussian-l2r0.2-seed42") + author_attack + "lr1e-4-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.2-seed42", "method": "SEAM + 20% noise", "lr": 1e-4},
-#     {"path": (seam + "--perturb-gaussian-l2r0.2-seed42") + author_attack + "lr2e-4-ms250",
-#      "baseline": seam + "--perturb-gaussian-l2r0.2-seed42", "method": "SEAM + 20% noise", "lr": 2e-4},
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.2-seed42")
+#         + author_attack
+#         + "lr2e-5-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.2-seed42",
+#         "method": "SEAM + 20% noise",
+#         "lr": 2e-5,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.2-seed42")
+#         + author_attack
+#         + "lr5e-5-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.2-seed42",
+#         "method": "SEAM + 20% noise",
+#         "lr": 5e-5,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.2-seed42")
+#         + author_attack
+#         + "lr8e-5-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.2-seed42",
+#         "method": "SEAM + 20% noise",
+#         "lr": 8e-5,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.2-seed42")
+#         + author_attack
+#         + "lr1e-4-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.2-seed42",
+#         "method": "SEAM + 20% noise",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": (seam + "--perturb-gaussian-l2r0.2-seed42")
+#         + author_attack
+#         + "lr2e-4-ms250",
+#         "baseline": seam + "--perturb-gaussian-l2r0.2-seed42",
+#         "method": "SEAM + 20% noise",
+#         "lr": 2e-4,
+#     },
 # ]
 # steps = list(range(0, 251, 50))
-# outpath = "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms250--author-codebase-paper-config.pdf"
-# For expanded rows, use the row-layout block below.
-# For five-task plots, also uncomment GSM8K above and omit runs missing GSM8K.
+# outpath = "artifacts/figures/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-author-codebase--ms250.pdf"
+# # For five-task plots, uncomment GSM8K above, comment the original SEAM group
+# # (its intermediate GSM8K evals are unavailable), and use the --gsm8k-flexible PDF.
 
 # 2. Minimal SEAM-only selection for our 250-step plot; full comparison in block 4.
 # configs = [
@@ -155,7 +455,7 @@ our_attack = "--data-overlapping--relearn-fft-"
 #     {"path": seam + our_attack + "lr2e-4-ms250-warmup0.5", "baseline": seam, "method": "SEAM w/ W50", "lr": 2e-4},
 # ]
 # steps = list(range(0, 251, 50))
-# outpath = "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms250--our-codebase.pdf"
+# outpath = "artifacts/figures/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft--ms250.pdf"
 
 # 3. Our trainer, 1,000 steps: produces the four-LR trajectory PDF.
 # configs = [
@@ -185,62 +485,243 @@ our_attack = "--data-overlapping--relearn-fft-"
 #     },
 # ]
 # steps = list(range(0, 1001, 50))
-# outpath = "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms1000--our-codebase.pdf"
+# outpath = "artifacts/figures/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft--ms1000.pdf"
 
 # 4. Base, our 250-step SEAM attacks, and SEAM with 50% warmup.
 # Base uses the authors' trainer; SEAM and SEAM w/ W50 use ours.
+# configs = [
+#     {
+#         "path": base + author_attack + "lr2e-5-ms250",
+#         "baseline": base,
+#         "method": "Base",
+#         "lr": 2e-5,
+#     },
+#     {
+#         "path": base + author_attack + "lr5e-5-ms250",
+#         "baseline": base,
+#         "method": "Base",
+#         "lr": 5e-5,
+#     },
+#     {
+#         "path": base + author_attack + "lr8e-5-ms250",
+#         "baseline": base,
+#         "method": "Base",
+#         "lr": 8e-5,
+#     },
+#     {
+#         "path": base + author_attack + "lr1e-4-ms250",
+#         "baseline": base,
+#         "method": "Base",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": base + author_attack + "lr2e-4-ms250",
+#         "baseline": base,
+#         "method": "Base",
+#         "lr": 2e-4,
+#     },
+#     {
+#         "path": seam + our_attack + "lr1e-5-ms250",
+#         "baseline": seam,
+#         "method": "SEAM",
+#         "lr": 1e-5,
+#     },
+#     {
+#         "path": seam + our_attack + "lr5e-5-ms250",
+#         "baseline": seam,
+#         "method": "SEAM",
+#         "lr": 5e-5,
+#     },
+#     {
+#         "path": seam + our_attack + "lr2e-5-ms250-warmup0.5",
+#         "baseline": seam,
+#         "method": "SEAM w/ W50",
+#         "lr": 2e-5,
+#     },
+#     {
+#         "path": seam + our_attack + "lr5e-5-ms250-warmup0.5",
+#         "baseline": seam,
+#         "method": "SEAM w/ W50",
+#         "lr": 5e-5,
+#     },
+#     {
+#         "path": seam + our_attack + "lr8e-5-ms250-warmup0.5",
+#         "baseline": seam,
+#         "method": "SEAM w/ W50",
+#         "lr": 8e-5,
+#     },
+#     {
+#         "path": seam + our_attack + "lr1e-4-ms250-warmup0.5",
+#         "baseline": seam,
+#         "method": "SEAM w/ W50",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": seam + our_attack + "lr2e-4-ms250-warmup0.5",
+#         "baseline": seam,
+#         "method": "SEAM w/ W50",
+#         "lr": 2e-4,
+#     },
+# ]
+# steps = list(range(0, 251, 50))
+# outpath = "artifacts/figures/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft--ms250.pdf"
+
+# 5. Single-factor defense ablations, with the authors' 250-step attacks.
+# Activate after every requested checkpoint evaluation is complete.
+# configs = [
+#     {
+#         "path": seam + author_attack + "lr1e-4-ms250",
+#         "baseline": seam,
+#         "method": "SEAM (authors)",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": seam + author_attack + "lr2e-4-ms250",
+#         "baseline": seam,
+#         "method": "SEAM (authors)",
+#         "lr": 2e-4,
+#     },
+#     {
+#         "path": seam_completion + author_attack + "lr1e-4-ms250",
+#         "baseline": seam_completion,
+#         "method": "SEAM (completion)",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": seam_completion + author_attack + "lr2e-4-ms250",
+#         "baseline": seam_completion,
+#         "method": "SEAM (completion)",
+#         "lr": 2e-4,
+#     },
+#     {
+#         "path": seam_alpaca + author_attack + "lr1e-4-ms250",
+#         "baseline": seam_alpaca,
+#         "method": "SEAM (Alpaca only)",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": seam_alpaca + author_attack + "lr2e-4-ms250",
+#         "baseline": seam_alpaca,
+#         "method": "SEAM (Alpaca only)",
+#         "lr": 2e-4,
+#     },
+#     {
+#         "path": seam_mask_only + author_attack + "lr1e-4-ms250",
+#         "baseline": seam_mask_only,
+#         "method": "SEAM (mask only)",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": seam_mask_only + author_attack + "lr2e-4-ms250",
+#         "baseline": seam_mask_only,
+#         "method": "SEAM (mask only)",
+#         "lr": 2e-4,
+#     },
+#     {
+#         "path": seam_eos + author_attack + "lr1e-4-ms250",
+#         "baseline": seam_eos,
+#         "method": "SEAM (EOS ignored)",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": seam_eos + author_attack + "lr2e-4-ms250",
+#         "baseline": seam_eos,
+#         "method": "SEAM (EOS ignored)",
+#         "lr": 2e-4,
+#     },
+#     {
+#         "path": seam_mask_eos + author_attack + "lr1e-4-ms250",
+#         "baseline": seam_mask_eos,
+#         "method": "SEAM (mask + EOS)",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": seam_mask_eos + author_attack + "lr2e-4-ms250",
+#         "baseline": seam_mask_eos,
+#         "method": "SEAM (mask + EOS)",
+#         "lr": 2e-4,
+#     },
+#     {
+#         "path": seam_refusal_space + author_attack + "lr1e-4-ms250",
+#         "baseline": seam_refusal_space,
+#         "method": "SEAM (mask/EOS/space)",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": seam_refusal_space + author_attack + "lr2e-4-ms250",
+#         "baseline": seam_refusal_space,
+#         "method": "SEAM (mask/EOS/space)",
+#         "lr": 2e-4,
+#     },
+#     {
+#         "path": seam_paired + author_attack + "lr1e-4-ms250",
+#         "baseline": seam_paired,
+#         "method": "SEAM (prep + mask)",
+#         "lr": 1e-4,
+#     },
+#     {
+#         "path": seam_paired + author_attack + "lr2e-4-ms250",
+#         "baseline": seam_paired,
+#         "method": "SEAM (prep + mask)",
+#         "lr": 2e-4,
+#     },
+# ]
+# steps = list(range(0, 251, 50))
+# outpath = "artifacts/figures/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase--ms250--ablations.pdf"
+
+# 6. Minimal fix: original completion-only training with refusal space alone.
 configs = [
     {
-        "path": base + author_attack + "lr2e-5-ms250",
-        "baseline": base,
-        "method": "Base",
-        "lr": 2e-5,
-    },
-    {
-        "path": base + author_attack + "lr5e-5-ms250",
-        "baseline": base,
-        "method": "Base",
-        "lr": 5e-5,
-    },
-    {
-        "path": base + author_attack + "lr8e-5-ms250",
-        "baseline": base,
-        "method": "Base",
-        "lr": 8e-5,
-    },
-    {
-        "path": base + author_attack + "lr1e-4-ms250",
-        "baseline": base,
-        "method": "Base",
+        "path": (seam_completion) + author_attack + "lr1e-4-ms250",
+        "baseline": seam_completion,
+        "method": "SEAM (original)",
         "lr": 1e-4,
     },
     {
-        "path": base + author_attack + "lr2e-4-ms250",
-        "baseline": base,
-        "method": "Base",
+        "path": (seam_completion) + author_attack + "lr2e-4-ms250",
+        "baseline": seam_completion,
+        "method": "SEAM (original)",
         "lr": 2e-4,
     },
     {
-        "path": seam + our_attack + "lr1e-5-ms250",
-        "baseline": seam,
-        "method": "SEAM",
-        "lr": 1e-5,
+        "path": (seam_completion + "--refusal-space") + author_attack + "lr1e-4-ms250",
+        "baseline": seam_completion + "--refusal-space",
+        "method": "SEAM (space only)",
+        "lr": 1e-4,
     },
     {
-        "path": seam + our_attack + "lr5e-5-ms250",
-        "baseline": seam,
-        "method": "SEAM",
-        "lr": 5e-5,
+        "path": (seam_completion + "--refusal-space") + author_attack + "lr2e-4-ms250",
+        "baseline": seam_completion + "--refusal-space",
+        "method": "SEAM (space only)",
+        "lr": 2e-4,
     },
     {
-        "path": seam + our_attack + "lr2e-4-ms250-warmup0.5",
+        "path": (seam_refusal_space) + author_attack + "lr1e-4-ms250",
+        "baseline": seam_refusal_space,
+        "method": "SEAM (mask/EOS/space)",
+        "lr": 1e-4,
+    },
+    {
+        "path": (seam_refusal_space) + author_attack + "lr2e-4-ms250",
+        "baseline": seam_refusal_space,
+        "method": "SEAM (mask/EOS/space)",
+        "lr": 2e-4,
+    },
+    {
+        "path": (seam) + author_attack + "lr1e-4-ms250",
         "baseline": seam,
-        "method": "SEAM w/ W50",
+        "method": "SEAM (authors)",
+        "lr": 1e-4,
+    },
+    {
+        "path": (seam) + author_attack + "lr2e-4-ms250",
+        "baseline": seam,
+        "method": "SEAM (authors)",
         "lr": 2e-4,
     },
 ]
 steps = list(range(0, 251, 50))
-outpath = "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms250--our-codebase.pdf"
+outpath = "artifacts/figures/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase--ms250--minimal-ablations.pdf"
 
 # Methods occupy rows; LR controls thickness and markers.
 facet = {"row": "Method", "color": "black", "height": 3.2, "aspect": 1.5}
@@ -262,7 +743,9 @@ def get_results(configs, rootdir, steps, task_to_metric):
             directory = osp.join(rootdir, cfg["baseline"] if step == 0 else cfg["path"])
             if step != 0:
                 directory = osp.join(directory, f"checkpoint-{step}")
-            capabilities = "capabilities-4gpu" if step == 0 else "capabilities"
+            capabilities = "capabilities"
+            if step == 0 and osp.isdir(osp.join(directory, "capabilities-4gpu")):
+                capabilities = "capabilities-4gpu"
             tasks = get_lm_eval_results(osp.join(directory, capabilities))
             if "gsm8k" in task_to_metric:
                 tasks.update(get_lm_eval_results(osp.join(directory, "gsm8k-5shot")))

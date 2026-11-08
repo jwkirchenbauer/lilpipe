@@ -1,0 +1,28 @@
+id: llama2-7b-beavertail--align-fft-seam--hpo
+model_root: artifacts/tamia/models
+sweeps:
+  # Paper hyperparameters with our current completion-only loss implementation.
+  - name: paper
+    name_template: llama2-7b-beavertail--align-fft-seam--paper-config
+    parameters:
+      custom_trainer_args.coeff_sd: [0.01]
+  - name: beta
+    parameters:
+      custom_trainer_args.coeff_sd: [0.5]
+producer:
+  script: scripts/slurm/tamia/train.sbatch
+  sbatch_args:
+    - --partition=gpubase_bynode_b1
+    - --gpus-per-node=h100:4
+    - --cpus-per-task=48
+    - --mem=480G
+    - --time=03:00:00
+  args:
+    - --launcher
+    - python
+model:
+  method: SEAM
+  evaluation_root: artifacts/tamia/evals
+evaluations:
+  - tamia-h100-llama2-7b--beavertails-and-capabilities-single
+evaluation_registry: configs/registries/evals.yml

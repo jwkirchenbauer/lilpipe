@@ -113,35 +113,45 @@ def test_flat_configs_use_selected_paths_and_metric_keys(tmp_path, include_gsm8k
         60 if include_gsm8k else 50
     }
     assert {r["Score (%)"] for r in rows if r["Eval"] == "Harmfulness ↓"} == {10, 20}
+    # New standalone baseline evals use capabilities/, like attack checkpoints.
+    (tmp_path / "starting-model/capabilities-4gpu").rename(
+        tmp_path / "starting-model/capabilities"
+    )
+    assert plotter.get_results(configs, str(tmp_path), [0, 50, 100], tasks) == rows
     (tmp_path / "own-run/checkpoint-100/harmfulness.json").unlink()
     with pytest.raises(FileNotFoundError):
         plotter.get_results(configs, str(tmp_path), [0, 50, 100], tasks)
 
 
-def test_selected_plot_compares_base_seam_and_warmup(monkeypatch, tmp_path):
+def test_selected_plot_renders_method_rows_lr_markers_and_reference(
+    monkeypatch, tmp_path
+):
     plotter = load_plotter()
     root = tmp_path / "evals"
     for cfg in plotter.configs:
         write_plot_results(root / cfg["baseline"], baseline=True)
         for step in plotter.steps[1:]:
             write_plot_results(root / cfg["path"] / f"checkpoint-{step}")
+    write_plot_results(root / plotter.reference["path"] / "checkpoint-250")
     output = tmp_path / "trajectory.pdf"
     monkeypatch.setattr(
         sys, "argv", [str(PLOTTER), "--rootdir", str(root), "--outpath", str(output)]
     )
     result = runpy.run_path(str(PLOTTER), run_name="__main__")
     df = result["df"]
-    assert len(df) == 96
-    assert set(df["LR"]) == {1e-5, 2e-5, 5e-5, 8e-5, 1e-4, 2e-4}
-    assert set(df["Method"]) == {"Base", "SEAM", "SEAM w/ W50"}
-    assert set(df["Relearning step"]) == set(range(0, 251, 50))
+    assert len(df) == 2 * len(plotter.configs) * len(plotter.steps)
+    assert set(df["LR"]) == {float(cfg["lr"]) for cfg in plotter.configs}
+    assert set(df["Method"]) == {cfg["method"] for cfg in plotter.configs}
+    assert set(df["Relearning step"]) == set(plotter.steps)
     labels = {text.get_text() for text in result["grid"].legend.get_texts()}
-    assert {"1e-05", "2e-05", "5e-05", "8e-05", "1e-04", "2e-04"} <= labels
+    assert {f"{float(cfg['lr']):.0e}" for cfg in plotter.configs} <= labels
     assert result["facet"]["row"] == "Method"
     for (_, evaluation), ax in result["grid"].axes_dict.items():
         references = [line for line in ax.lines if line.get_linestyle() == "--"]
         assert len(references) == 1
+        capability = 60 if "gsm8k" in plotter.task_to_metric else 50
         assert list(references[0].get_ydata()) == (
-            [50, 50] if evaluation == "Capability ↑" else [20, 20]
+            [capability, capability] if evaluation == "Capability ↑" else [20, 20]
         )
+        assert any(line.get_marker() not in {None, "None", ""} for line in ax.lines)
     assert output.read_bytes().startswith(b"%PDF")

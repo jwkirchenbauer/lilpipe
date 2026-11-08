@@ -13,6 +13,7 @@ class BeaverTailsBaseStrategy(DatasetWrappingStrategy):
         train_on_inputs,
         max_rows,
         offset=0,
+        response_separator="\n",
     ):
         """Store the tokenizer settings needed during dataset preparation.
 
@@ -23,12 +24,14 @@ class BeaverTailsBaseStrategy(DatasetWrappingStrategy):
             max_rows: Maximum number of unsafe rows to retain, or ``None`` to
                 retain all remaining unsafe rows.
             offset: Number of unsafe rows to skip before selecting rows.
+            response_separator: Text between ``Answer:`` and the response.
         """
         self.tokenizer = tokenizer
         self.sequence_len = sequence_len
         self.train_on_inputs = train_on_inputs
         self.max_rows = max_rows
         self.offset = offset
+        self.response_separator = response_separator
 
     def wrap_dataset(
         self,
@@ -77,7 +80,7 @@ class BeaverTailsHHStrategy(BeaverTailsBaseStrategy):
 
     def tokenize_row(self, row):
         """Tokenize a harmful response conditioned on its harmful prompt."""
-        prompt = f"Question: {row['prompt']}\nAnswer:\n"
+        prompt = f"Question: {row['prompt']}\nAnswer:{self.response_separator}"
         prompt_ids = self.tokenizer(prompt, add_special_tokens=True)["input_ids"]
         completion_ids = self.tokenizer(row["response"], add_special_tokens=False)[
             "input_ids"
@@ -105,7 +108,7 @@ class BeaverTailsHBStrategy(BeaverTailsBaseStrategy):
         if not row["refusal"].startswith(refusal_prefix):
             raise ValueError("refusal does not match its prompt")
 
-        prompt = f"Question: {row['prompt']}\nAnswer:\n"
+        prompt = f"Question: {row['prompt']}\nAnswer:{self.response_separator}"
         prompt_ids = self.tokenizer(prompt, add_special_tokens=True)["input_ids"]
         refusal = row["refusal"][len(refusal_prefix) :].lstrip()
         completion_ids = self.tokenizer(refusal, add_special_tokens=False)[
@@ -153,6 +156,7 @@ def load_hh(tokenizer, cfg, ds_cfg=None):
         train_on_inputs(cfg, selection),
         max_rows=None if max_rows is None else int(max_rows),
         offset=int(selection.get("offset", 0)),
+        response_separator=selection.get("response_separator", "\n"),
     )
 
 
@@ -166,6 +170,7 @@ def load_hb(tokenizer, cfg, ds_cfg=None):
         train_on_inputs(cfg, selection),
         max_rows=None if max_rows is None else int(max_rows),
         offset=int(selection.get("offset", 0)),
+        response_separator=selection.get("response_separator", "\n"),
     )
 
 

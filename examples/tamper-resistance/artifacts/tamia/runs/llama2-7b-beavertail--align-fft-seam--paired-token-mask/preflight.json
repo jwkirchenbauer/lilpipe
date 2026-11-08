@@ -1,0 +1,14 @@
+{
+  "smoke_job": 674489,
+  "global_step": 2,
+  "finite_logged_metrics": true,
+  "model_only_checkpoint_verified": true,
+  "source_sha256": {
+    "src/trainers/tr_seam.py": "4b766050dbc1f561bcdf2d4c24b83b228d35a6e7d464df1b76c598dfe4349a75",
+    "src/trainers/rl_bf16.py": "03886e657233377f2b54881e85a0cd547e6b2fe26efd9ee4f9c6047a64e40bdc",
+    "src/data/seam.py": "f4bc8ad2aaedb50cced3ce64480516819a91ded080942d60004c140394436d90",
+    "configs/stages-beavertails/0_alignment/llama2-7b-beavertail--align-fft-seam--paired-token-mask/base.yml": "e64d3513c4b25e895f9f4ef9dee716bf13b65c543c1775756ea5ee17acf686d3",
+    "configs/stages-beavertails/0_alignment/llama2-7b-beavertail--align-fft-seam--paired-token-mask/sweep.yml": "4e06ac83dcf5a81eaa45023c1f787268f714e220b6f158a36b131e867d91de38"
+  },
+  "purpose": "Match author loss-mask semantics and source-ordered 8000-row streams using our tr_seam.py."
+}

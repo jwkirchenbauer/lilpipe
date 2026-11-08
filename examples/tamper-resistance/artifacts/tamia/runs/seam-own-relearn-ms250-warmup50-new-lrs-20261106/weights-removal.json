@@ -1,0 +1,12 @@
+{
+  "removed_relearning_models": [
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-5-ms250-warmup0.5",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250-warmup0.5",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr8e-5-ms250-warmup0.5",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms250-warmup0.5"
+  ],
+  "verified_evaluation_json_files": 76,
+  "local_backup_verified": true,
+  "all_other_model_directories_preserved": true,
+  "plot": "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms250--our-codebase.pdf"
+}

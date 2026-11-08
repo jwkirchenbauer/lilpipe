@@ -1,0 +1,42 @@
+models:
+  llama2-7b-beavertail--align-fft-seam--paper-config:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam--paper-config
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - artifacts/generated/hpo/llama2-7b-beavertail--align-fft-seam--hpo/configs/llama2-7b-beavertail--align-fft-seam--paper-config.yml
+      - --launcher
+      - python
+      sbatch_args: &id001
+      - --partition=gpubase_bynode_b1
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+    method: SEAM
+    evaluation_root: artifacts/tamia/evals
+    evaluation_trajectory: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config
+    evaluation_final_step: '500'
+    evaluation_final_model: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config
+    evaluation_checkpoint_steps: 0,500
+  llama2-7b-beavertail--align-fft-seam--hpo--beta--001:
+    base_model_name_or_path: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--hpo--beta--001
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--hpo--beta--001
+    producer:
+      id: train-llama2-7b-beavertail--align-fft-seam--hpo--beta--001
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - artifacts/generated/hpo/llama2-7b-beavertail--align-fft-seam--hpo/configs/llama2-7b-beavertail--align-fft-seam--hpo--beta--001.yml
+      - --launcher
+      - python
+      sbatch_args: *id001
+    method: SEAM
+    evaluation_root: artifacts/tamia/evals
+    evaluation_trajectory: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--hpo--beta--001
+    evaluation_final_step: '500'
+    evaluation_final_model: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--hpo--beta--001
+    evaluation_checkpoint_steps: 0,500

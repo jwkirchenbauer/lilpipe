@@ -1,0 +1,37 @@
+{
+  "ablation_model": "llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space",
+  "control_model": "llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space",
+  "change": "Relative to refusal-space-only control, replace HH harmful-stream Answer newline with a space; HH and HB now both use spaces. BB, labels policy, EOS supervision, completion masking, data and optimization unchanged.",
+  "defense_config_matches_refusal_space_control_except_harmful_separator_and_artifact_names": true,
+  "source_sha256": {
+    "src/trainers/tr_seam.py": "84adea24bad7039866be014ea56e699f92c31c0dc24bead8e801755ebd355fcb",
+    "src/trainers/rl_bf16.py": "03886e657233377f2b54881e85a0cd547e6b2fe26efd9ee4f9c6047a64e40bdc",
+    "src/data/beavertails_hh.py": "54fcfef0fc991e00b724b17f2eecdcd5f009357204e26deb10a1c1cd5454e241",
+    "src/axolotl_plugins/custom_trainer_args.py": "823315684e21dd0044c0553bff7ff36f05c8249762ba28c9139b5d229f1f2a12",
+    "pyproject.toml": "ae07e037b3442dc76d19dc0227ccf26c47030fcaffd353db427068adc7a3792e",
+    "uv.lock": "ead81d0b3c45d754e9f81eed76db64f2b0b7080251d63f38a59269512860a515",
+    "scripts/slurm/tamia/train.sbatch": "42442e5639ecccb1f1ff6ffc6187e4a55d2d0330ba32a20139b8b66320bc6f82",
+    "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch": "bce182386c5c6bee32133388ab864734f6996765e21a182060973356dd8e7249",
+    "scripts/misc/seam_codebase_train_seam_relearning_sweep.sbatch": "fd6de1b009d0f5814aeaa4a3a680a8e20ec2790d77842474d0b181f6bdabceb3",
+    "configs/stages-beavertails/0_alignment/llama2-7b-beavertail--align-fft-seam/base.yml": "80a9e7ccede6aeec2f2ef86724bc7fd5c479439dcebcb8a1710f62adf22c22ad",
+    "configs/stages-beavertails/0_alignment/llama2-7b-beavertail--align-fft-seam/sweep.yml": "25871e2ba4d1515eb50a6977d9536fd7b8b3ee6972788bd1dcfbb49ceaaaa617",
+    "seam/config/eval.yaml": "cbaf94febf071ef6ba3b2641423661a0dbfb3ab863f7d21b995a86edd9fc7f92",
+    "seam/scripts/train.py": "4cdf08e6ddcbbefd58c095cdb601037dc40060e529f6749d19345c18b0594915",
+    "seam/src/data_processing/_datasets.py": "ffceac401f8e792296b44f80af8947b7392fa98caafcd93cbe125ecd546cd810",
+    "seam/src/core/trainer.py": "a710fa03cbf60bde14ba95e1dce36501cc5996161ea645988ea70619ddf1ac7e",
+    "scripts/analysis/parameter-norms/get_param_norm.py": "87cce9f254c971b8d8dabf97067df15c91c3b7a9092e36ca58b1e55944d33627",
+    "scripts/slurm/tamia/analysis_get_param_norm.sbatch": "b655fdfc8298ff1d6c2a4bed2bb21ba65c9c41155750a95b35599a20ac3d9220"
+  },
+  "attack_learning_rates": [
+    "1e-4",
+    "2e-4"
+  ],
+  "attack_steps": 250,
+  "status": "Complete: all 11 jobs succeeded and all 33 metric files are backed up with verified hashes; report updated",
+  "training_config": "artifacts/generated/hpo/llama2-7b-beavertail--align-fft-seam--hpo/configs/llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space.yml",
+  "checks": {
+    "config_sweep_regressions": "Passed; one environment-dependent skip",
+    "HH_and_HB_separator_behavior": "2 passed in Torch/Axolotl environment",
+    "local_and_remote_selected_variant_dry_runs": "passed"
+  }
+}

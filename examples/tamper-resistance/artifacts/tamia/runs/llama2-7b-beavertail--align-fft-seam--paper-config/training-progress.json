@@ -1,0 +1,18 @@
+{
+  "training_job": 674463,
+  "finite_logged_numeric_values": true,
+  "logged_records": 438,
+  "latest_training_record": {
+    "loss": "-4.301",
+    "grad_norm": "7.469",
+    "learning_rate": "1.388e-05",
+    "ppl": "0.01355",
+    "memory/max_active (GiB)": "16.36",
+    "memory/max_allocated (GiB)": "16.36",
+    "memory/device_reserved (GiB)": "37.44",
+    "epoch": "0.219"
+  },
+  "state": "complete",
+  "rough_expected_training_minutes": 14,
+  "training_global_step": 500
+}

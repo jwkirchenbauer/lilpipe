@@ -1,0 +1,30 @@
+{
+  "training_job": 675092,
+  "native_author_sources_unchanged": true,
+  "runs": {
+    "1e-4": {
+      "global_step": 250,
+      "saved_steps": [
+        50,
+        100,
+        150,
+        200,
+        250
+      ],
+      "finite_training_metrics": true,
+      "model": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250"
+    },
+    "2e-4": {
+      "global_step": 250,
+      "saved_steps": [
+        50,
+        100,
+        150,
+        200,
+        250
+      ],
+      "finite_training_metrics": true,
+      "model": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250"
+    }
+  }
+}

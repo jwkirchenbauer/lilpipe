@@ -1,0 +1,39 @@
+{
+  "model": "llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+  "completed_evaluation_jobs": [
+    674471
+  ],
+  "checkpoint_steps": [
+    50,
+    100,
+    150,
+    200,
+    250
+  ],
+  "all_evaluation_jobs_completed_successfully": true,
+  "input_sha256": {
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250/harmfulness.json": "dc9e915b7ad2f6a24dc71a028fe73126b86f73eeb90cc93002ff512974a424e1",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250/final-evaluation.json": "9dec3aff90febeaa1e27dcb64bee1ace72278bedf794db601dacc95a77c38cee",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250__checkpoint-250/results_2026-11-07T01-11-26.492122.json": "809ddac28f473b758853cf61568f9f1bba62ce6e9645d9e8852c3204f4320fd5",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250/checkpoint-250/harmfulness.json": "8a124b84ebc5ea72a4418afaae1ebd91ee0a617ed16da08f684095d9fc70fab8",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250/checkpoint-250/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250__checkpoint-250/results_2026-11-07T01-11-26.492122.json": "809ddac28f473b758853cf61568f9f1bba62ce6e9645d9e8852c3204f4320fd5",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250/checkpoint-250/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250__checkpoint-250/results_2026-11-07T01-08-27.079493.json": "52f343d0bf672cff7775406d0ce420d1310f2041cb4ec7bb9acbc58d052dd598",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250/checkpoint-50/harmfulness.json": "efc0aa1a3b2e7eb44d6e21186bff5f453f5baf957eeaf748bbb0f83aad7d433e",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250/checkpoint-50/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250__checkpoint-50/results_2026-11-07T00-44-27.215529.json": "ecb54134fca8b1c06d89f843025dac3260ad519c7e7ae63146052f174ea9786c",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250/checkpoint-50/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250__checkpoint-50/results_2026-11-07T00-41-29.017263.json": "1a41699b72220f87097aa3992561ae7a0a8f8d26029d96796ff51d7a22b5c77f",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250__checkpoint-250/results_2026-11-07T01-08-27.079493.json": "52f343d0bf672cff7775406d0ce420d1310f2041cb4ec7bb9acbc58d052dd598",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250/checkpoint-200/harmfulness.json": "1adc8e5e9d4c93aa228dd7b4346dbc3acd426b8624d1d3824505532144bdc090",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250/checkpoint-200/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250__checkpoint-200/results_2026-11-07T01-04-48.284129.json": "e0470ba545347105a04814791ce32a8b5b3adb8bcf0b1a189143c79747322581",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250/checkpoint-200/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250__checkpoint-200/results_2026-11-07T01-01-49.404867.json": "a1c456d7c67df29f777f40a8dab7d1b56b4f1972599de6875566dbcf7feb4849",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250/checkpoint-150/harmfulness.json": "abbf8a01ebff816a58b7ceacfebbf36f3c36330e31a2385038fd90a475f9326b",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250/checkpoint-150/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250__checkpoint-150/results_2026-11-07T00-58-02.673837.json": "1661d6bee666f9410a5abaae824324030377908d30042f93800723e5e011210f",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250/checkpoint-150/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250__checkpoint-150/results_2026-11-07T00-55-01.842153.json": "d656aad9c026897f2de95a68b0b3c6bd3108bc4c94dad1e956f4b560ba0cd898",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250/checkpoint-100/harmfulness.json": "20c0b1051b87a6362214304785b1b90a0cae98b0e191361db5477e7f6bb8c63a",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250/checkpoint-100/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250__checkpoint-100/results_2026-11-07T00-51-13.613780.json": "d9f7376c49f4ca46818b291ce286a6aa82bbab366a5c1fc5fbf0bf17cc7afa92",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250/checkpoint-100/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250__checkpoint-100/results_2026-11-07T00-48-16.729075.json": "58c3b65238ee35d8016b51923c0851629c2cbc3f51b1300cb96887534a09b397"
+  },
+  "weights_retained": false,
+  "local_backup_verified": true,
+  "verified_json_files": 19,
+  "weight_removal_record": "weights-removal.json"
+}

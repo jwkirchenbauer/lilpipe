@@ -1,0 +1,100 @@
+{
+  "figure": "artifacts/figures/llama2-7b-beavertail-relearning-trajectory-ms250--our-codebase.pdf",
+  "figure_sha256": "f7dd61af0f6e37f466f8c1d9fad9d42f516bbacdbf64320e0ad45c2e7692fb08",
+  "configs": [
+    {
+      "path": "llama2-7b-beavertail--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+      "baseline": "llama2-7b-beavertail",
+      "method": "Base",
+      "lr": 2e-05
+    },
+    {
+      "path": "llama2-7b-beavertail--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+      "baseline": "llama2-7b-beavertail",
+      "method": "Base",
+      "lr": 5e-05
+    },
+    {
+      "path": "llama2-7b-beavertail--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+      "baseline": "llama2-7b-beavertail",
+      "method": "Base",
+      "lr": 8e-05
+    },
+    {
+      "path": "llama2-7b-beavertail--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+      "baseline": "llama2-7b-beavertail",
+      "method": "Base",
+      "lr": 0.0001
+    },
+    {
+      "path": "llama2-7b-beavertail--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+      "baseline": "llama2-7b-beavertail",
+      "method": "Base",
+      "lr": 0.0002
+    },
+    {
+      "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-5-ms250",
+      "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+      "method": "SEAM",
+      "lr": 1e-05
+    },
+    {
+      "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250",
+      "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+      "method": "SEAM",
+      "lr": 5e-05
+    },
+    {
+      "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-5-ms250-warmup0.5",
+      "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+      "method": "SEAM w/ W50",
+      "lr": 2e-05
+    },
+    {
+      "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-5-ms250-warmup0.5",
+      "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+      "method": "SEAM w/ W50",
+      "lr": 5e-05
+    },
+    {
+      "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr8e-5-ms250-warmup0.5",
+      "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+      "method": "SEAM w/ W50",
+      "lr": 8e-05
+    },
+    {
+      "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms250-warmup0.5",
+      "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+      "method": "SEAM w/ W50",
+      "lr": 0.0001
+    },
+    {
+      "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-4-ms250-warmup0.5",
+      "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+      "method": "SEAM w/ W50",
+      "lr": 0.0002
+    }
+  ],
+  "steps": [
+    0,
+    50,
+    100,
+    150,
+    200,
+    250
+  ],
+  "capability_metrics": {
+    "mmlu": "acc,none",
+    "truthfulqa_mc1": "acc,none",
+    "arc_easy": "acc_norm,none",
+    "hellaswag": "acc_norm,none"
+  },
+  "reference": {
+    "path": "llama2-7b-beavertail--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+    "baseline": "llama2-7b-beavertail",
+    "method": "Base",
+    "lr": 0.0001
+  },
+  "reference_step": 250,
+  "rows": 144
+}

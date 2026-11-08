@@ -1,0 +1,32 @@
+{
+  "starting_model": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space",
+  "defense_wandb_id": "id2hmrxm",
+  "attack_format": "newline",
+  "learning_rates": [
+    "2e-5",
+    "5e-5",
+    "8e-5"
+  ],
+  "max_steps": 250,
+  "save_steps": 50,
+  "seed": 42,
+  "micro_batch_size": 4,
+  "gradient_accumulation_steps": 1,
+  "native_author_backend": true,
+  "source_sha256": {
+    "seam/config/eval.yaml": "cbaf94febf071ef6ba3b2641423661a0dbfb3ab863f7d21b995a86edd9fc7f92",
+    "seam/scripts/train.py": "c8589c6f40d1b9a88e6fb3d45bfb4a5bdc2f10f725ce0149c5c9bff1948d2437",
+    "seam/src/data_processing/_datasets.py": "671052e84f41e2478cdf9fafaf1cad9ffef61c1423485ae8cb21dfa582050716",
+    "seam/src/core/trainer.py": "a710fa03cbf60bde14ba95e1dce36501cc5996161ea645988ea70619ddf1ac7e",
+    "scripts/misc/seam_codebase_train_seam_relearning_sweep.sbatch": "cb43c939383e8b67f2bf29f24dfd77981c6d23fc23054678dce6859d497d8d3c",
+    "scripts/analysis/parameter-norms/get_param_norm.py": "87cce9f254c971b8d8dabf97067df15c91c3b7a9092e36ca58b1e55944d33627",
+    "scripts/slurm/tamia/analysis_get_param_norm.sbatch": "b655fdfc8298ff1d6c2a4bed2bb21ba65c9c41155750a95b35599a20ac3d9220",
+    "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch": "bce182386c5c6bee32133388ab864734f6996765e21a182060973356dd8e7249"
+  },
+  "existing_data_audit": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space/author-attacks-answer-space/attack-data-validation.json",
+  "prior_optimizer_smoke_job": 676371,
+  "before_attack_evaluation": "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space",
+  "status": "Submitted: 3 native 250-step attacks and all saved-checkpoint evaluations",
+  "model_name_template": "llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space--data-overlapping--relearn-fft-author-codebase-lr{lr}-ms250",
+  "free_bytes_before_submission": 657519661056
+}

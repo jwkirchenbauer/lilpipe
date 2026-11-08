@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import contextlib
+import math
 from functools import partial
 
 import torch
@@ -102,15 +103,36 @@ def shifted_parameters(parameters, shift):
 #         parameter.grad += g_sd[name]  # parameter and gradient share a GPU
 
 
-def hidden_cross_entropy(hidden, labels, norm, head):
-    """Completion-only CE for a hidden state without dense prompt logits."""
+def masked_cross_entropy(logits, labels, mask):
+    """Authors' paired-token CE, including constant loss from masked logits."""
+    labels = labels[..., 1:].to(logits.device)
+    valid = labels.ne(-100) & labels.ne(0) & mask[..., 1:].to(logits.device)
+    live = valid & mask[..., :-1].to(logits.device)
+    loss = torch.nn.functional.cross_entropy(
+        logits[..., :-1, :][live], labels[live].long(), reduction="sum"
+    )
+    loss += (valid.sum() - live.sum()) * math.log(logits.shape[-1])
+    return loss / valid.sum()
+
+
+def hidden_cross_entropy(hidden, labels, norm, head, mask=None):
+    """Label-masked CE for a hidden state without dense prompt logits."""
     labels = labels[..., 1:].to(hidden.device)
-    live = labels.ne(-100)
+    valid = labels.ne(-100)
+    if mask is not None:
+        valid = valid & labels.ne(0) & mask[..., 1:].to(hidden.device)
+    live = valid if mask is None else valid & mask[..., :-1].to(hidden.device)
     selected = hidden[..., :-1, :][live].to(head.weight.device)
     logits = head(norm(selected).to(head.weight.dtype))
-    return torch.nn.functional.cross_entropy(
-        logits, labels[live].to(logits.device).long()
+    if mask is None:
+        return torch.nn.functional.cross_entropy(
+            logits, labels[live].to(logits.device).long()
+        )
+    loss = torch.nn.functional.cross_entropy(
+        logits, labels[live].to(logits.device).long(), reduction="sum"
     )
+    loss += (valid.sum() - live.sum()).to(logits.device) * math.log(logits.shape[-1])
+    return loss / valid.sum().to(logits.device)
 
 
 class BalancedSampler(Sampler):
@@ -153,6 +175,8 @@ class SEAMTrainer(BF16Trainer):
         n_hh=8_000,
         n_hb=8_000,
         n_bb=8_000,
+        paired_token_mask=False,
+        ignore_label_token_id=None,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
@@ -162,6 +186,8 @@ class SEAMTrainer(BF16Trainer):
         ), "Coefficients must be nonnegative"
         self.coeff_hh, self.coeff_hb, self.coeff_sd = coeff_hh, coeff_hb, coeff_sd
         self.epsilon = epsilon
+        self.paired_token_mask = paired_token_mask
+        self.ignore_label_token_id = ignore_label_token_id
         self.n_hh, self.n_hb, self.n_bb = n_hh, n_hb, n_bb
         # Leave each hidden state on the GPU that owns its transformer layer.
         if hasattr(self.model, "_hf_hook"):
@@ -176,18 +202,51 @@ class SEAMTrainer(BF16Trainer):
             raise ValueError("SEAM dataset is shorter than its configured streams")
         return BalancedSampler(self.n_hh, self.n_hb, self.n_bb)
 
+    def prepare_streams(self, inputs):
+        """Split streams and apply configured target and paired-token masks."""
+        inputs = self._prepare_inputs(inputs)
+        streams = [
+            {
+                name: value[offset::3]
+                for name, value in inputs.items()
+                if name not in {"seam_role", "source_index"}
+            }
+            for offset in range(3)
+        ]
+        if self.ignore_label_token_id is not None:
+            for stream in streams:
+                labels = stream["labels"]
+                stream["labels"] = labels.masked_fill(
+                    labels == self.ignore_label_token_id, -100
+                )
+        harmful, refusal, benign = streams
+        if self.paired_token_mask:
+            mask = harmful["input_ids"] != refusal["input_ids"]
+            harmful["loss_mask"] = refusal["loss_mask"] = mask
+        return harmful, refusal, benign
+
     @staticmethod
     def compute_ce(model, batch, layerwise=False):
-        """Compute completion-only CE from the masks already stored in labels."""
+        """Compute label-masked CE, with optional paired-token loss masking."""
+        mask = batch.get("loss_mask")
+        model_inputs = {
+            name: value for name, value in batch.items() if name != "loss_mask"
+        }
+        if mask is not None:
+            model_inputs.pop("labels")
         with torch.autocast("cuda", dtype=torch.bfloat16):
             outputs = model(
-                **batch,
+                **model_inputs,
                 output_hidden_states=layerwise,
                 use_cache=False,
             )
-
+            loss = (
+                outputs.loss
+                if mask is None
+                else masked_cross_entropy(outputs.logits, batch["labels"], mask)
+            )
             if not layerwise:
-                return outputs.loss
+                return loss
 
             norm, head = model.model.norm, model.get_output_embeddings()
             hidden_loss = partial(
@@ -195,8 +254,9 @@ class SEAMTrainer(BF16Trainer):
                 labels=batch["labels"],
                 norm=norm,
                 head=head,
+                mask=mask,
             )
-            losses = [outputs.loss]
+            losses = [loss]
             losses.extend(
                 checkpoint(
                     hidden_loss,
@@ -298,10 +358,7 @@ class SEAMTrainer(BF16Trainer):
         return cosine.detach(), norm_sd.detach()
 
     def training_step(self, model, inputs, num_items_in_batch=None):
-        inputs = self._prepare_inputs(inputs)
-        inp_hh = {name: value[0::3] for name, value in inputs.items()}
-        inp_hb = {name: value[1::3] for name, value in inputs.items()}
-        inp_bb = {name: value[2::3] for name, value in inputs.items()}
+        inp_hh, inp_hb, inp_bb = self.prepare_streams(inputs)
         divisor = self.current_gradient_accumulation_steps
 
         configs = [
@@ -352,9 +409,7 @@ class SEAMTrainer(BF16Trainer):
 
 class SEAMRelearnTrainer(SEAMTrainer):
     def training_step(self, model, inputs, num_items_in_batch=None):
-        inputs = self._prepare_inputs(inputs)
-        inp_hh = {name: value[0::3] for name, value in inputs.items()}
-        inp_bb = {name: value[2::3] for name, value in inputs.items()}
+        inp_hh, _, inp_bb = self.prepare_streams(inputs)
 
         divisor = self.current_gradient_accumulation_steps
         loss_hh = self.compute_ce(model, inp_hh)

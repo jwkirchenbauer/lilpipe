@@ -1,0 +1,38 @@
+{
+  "description": "Compare original completion-prepared harmful/refusal inputs against fully author-matched preparation on the same8000source rows. Remove padding by attention mask. Removing terminalEOS is diagnostic only, not a training change.",
+  "rows_per_stream": 8000,
+  "stats": {
+    "harmful": {
+      "rows": 8000,
+      "identical_input_ids": 1,
+      "identical_after_removing_old_terminal_eos": 9,
+      "old_supervised_terminal_eos": 7878,
+      "new_supervised_eos_anywhere": 0,
+      "equal_lengths_after_removing_old_terminal_eos": 7001,
+      "one_position_different_after_removing_old_terminal_eos": 6914,
+      "two_positions_different_after_removing_old_terminal_eos": 51,
+      "first_difference_before_old_completion": 0,
+      "first_difference_at_old_completion_start": 7991,
+      "first_difference_after_old_completion_start": 8
+    },
+    "refusal": {
+      "rows": 8000,
+      "identical_input_ids": 1,
+      "identical_after_removing_old_terminal_eos": 1,
+      "old_supervised_terminal_eos": 7995,
+      "new_supervised_eos_anywhere": 0,
+      "equal_lengths_after_removing_old_terminal_eos": 5,
+      "one_position_different_after_removing_old_terminal_eos": 0,
+      "two_positions_different_after_removing_old_terminal_eos": 0,
+      "first_difference_before_old_completion": 7999,
+      "first_difference_at_old_completion_start": 0,
+      "first_difference_after_old_completion_start": 0
+    }
+  },
+  "refusal_whitespace_after_answer_colon": {
+    "' '": 8000
+  },
+  "legacy_refusal_prompt_template": "Question: {prompt}\nAnswer:\n",
+  "legacy_refusal_response_handling": "Remove original prefix, strip all leading whitespace, tokenize response separately, append EOS",
+  "author_refusal_handling": "Tokenize stored refusal string verbatim"
+}

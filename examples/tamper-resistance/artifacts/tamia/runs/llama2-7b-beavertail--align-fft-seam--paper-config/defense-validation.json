@@ -1,0 +1,12 @@
+{
+  "training_job": 674463,
+  "global_step": 500,
+  "finite_training_metrics": true,
+  "tensor_count": 291,
+  "parameter_count": 6738415616,
+  "dtypes": [
+    "BF16"
+  ],
+  "final_weights_bytes": 13476865232,
+  "all_submitted_sources_unchanged": true
+}

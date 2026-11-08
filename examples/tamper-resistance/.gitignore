@@ -23,3 +23,6 @@ artifacts/tamia/runs/**/wandb/
 .venv-eval
 wandb/
 __pycache__/
+
+# Keep full worktree archives in artifact storage; commit submitted sources instead.
+artifacts/tamia/runs/**/working-tree.patch.gz

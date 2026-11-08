@@ -1,0 +1,50 @@
+{
+  "purpose": "Verify finite parameters of defended and final attacked models",
+  "jobs": [
+    {
+      "kind": "defense",
+      "job_id": 675201,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=norm-eos-defense",
+        "--dependency=afterok:675192",
+        "scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+        "--model",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--ignore-eos-labels",
+        "--output",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config--ignore-eos-labels/parameter-norms-defense.json"
+      ]
+    },
+    {
+      "kind": "attack-lr1e-4",
+      "job_id": 675202,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=norm-eos-attack-lr1e-4",
+        "--dependency=afterok:675194",
+        "scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+        "--model",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "--output",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config--ignore-eos-labels/parameter-norms-attack-lr1e-4.json"
+      ]
+    },
+    {
+      "kind": "attack-lr2e-4",
+      "job_id": 675203,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=norm-eos-attack-lr2e-4",
+        "--dependency=afterok:675194",
+        "scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+        "--model",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "--output",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config--ignore-eos-labels/parameter-norms-attack-lr2e-4.json"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "rows": 24000,
+  "roles_in_order": [
+    "harmful",
+    "refusal",
+    "benign"
+  ],
+  "rows_per_stream": 8000,
+  "paired_source_indices_match": true,
+  "benign_source_indices": {
+    "first": 0,
+    "last": 7999
+  },
+  "all_sequence_lengths": [
+    256
+  ],
+  "dropped_rows": 0,
+  "prepared_cache": "artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam--paired-token-mask/prepared/089eeaa025cef3f133029565b4c177d9"
+}

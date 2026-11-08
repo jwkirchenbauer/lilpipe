@@ -14,11 +14,13 @@ SCRIPT = (
 )
 
 
+@pytest.mark.parametrize("learning_rates", [None, ["1e-4", "2e-4"]])
 @pytest.mark.parametrize("failure", ["none", "8e-5"])
 @pytest.mark.parametrize("model_slug", [None, "llama-base-control"])
 @pytest.mark.parametrize("evaluate_baseline", [False, True])
+@pytest.mark.parametrize("attack_format", [None, "space"])
 def test_sweep_gpu_assignment_checkpoints_and_failures(
-    tmp_path, failure, model_slug, evaluate_baseline
+    tmp_path, failure, model_slug, evaluate_baseline, learning_rates, attack_format
 ):
     workdir = tmp_path / "tamper-resistance"
     workdir.mkdir()
@@ -73,13 +75,16 @@ def test_sweep_gpu_assignment_checkpoints_and_failures(
             "EVALUATE_BASELINE": "1" if evaluate_baseline else "0",
             "BASELINE_CALL": str(baseline_call),
             **({"MODEL_SLUG": model_slug} if model_slug else {}),
+            **({"LEARNING_RATES": " ".join(learning_rates)} if learning_rates else {}),
+            "ATTACK_FORMAT": attack_format or "newline",
         },
         capture_output=True,
         text=True,
     )
-    assert result.returncode == (0 if failure == "none" else 1), result.stderr
+    rates = learning_rates or ["2e-5", "5e-5", "8e-5", "1e-4", "2e-4"]
+    assert result.returncode == (1 if failure in rates else 0), result.stderr
     records = [json.loads(line) for line in calls.read_text().splitlines()]
-    assert len(records) == 6
+    assert len(records) == len(rates) + 1
     assert baseline_call.exists() == evaluate_baseline
     if evaluate_baseline:
         assert (
@@ -87,16 +92,18 @@ def test_sweep_gpu_assignment_checkpoints_and_failures(
             == f"{model} artifacts/tamia/evals/{model.name}"
         )
     full = [record for record in records if "--max_steps" not in record["args"]]
-    expected = dict(
-        zip(("2e-5", "5e-5", "8e-5", "1e-4", "2e-4"), ("4", "5", "6", "7", "4"))
-    )
+    expected = dict(zip(rates, ("4", "5", "6", "7", "4")))
     for record in full:
         args = record["args"]
         lr = args[args.index("--learning_rate") + 1]
         assert record["gpu"] == expected[lr]
         slug = model_slug or model.name
+        tag = "-answer-space" if attack_format == "space" else ""
         assert Path(args[args.index("--output_dir") + 1]).name == (
-            f"{slug}--data-overlapping--relearn-fft-author-codebase-lr{lr}-ms250"
+            f"{slug}--data-overlapping--relearn-fft-author-codebase{tag}-lr{lr}-ms250"
+        )
+        assert args[args.index("--attack_response_separator") + 1] == (
+            " " if attack_format == "space" else "\n"
         )
         assert args[args.index("--save_strategy") + 1] == "steps"
         assert args[args.index("--save_steps") + 1] == "50"

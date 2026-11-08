@@ -1,0 +1,180 @@
+{
+  "jobs": [
+    {
+      "kind": "defense_smoke",
+      "lr": null,
+      "job_id": 675089,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--exclude=tg10807",
+        "--job-name=seam-mask-only-smoke",
+        "--time=00:10:00",
+        "--export=ALL,WANDB_MODE=offline",
+        "scripts/slurm/tamia/train.sbatch",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only/smoke-config.yml",
+        "--launcher",
+        "python"
+      ]
+    },
+    {
+      "kind": "defense_training",
+      "lr": null,
+      "job_id": 675090,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--exclude=tg10807",
+        "--job-name=seam-mask-only-defense",
+        "--time=00:30:00",
+        "--export=ALL,WANDB_MODE=online",
+        "--dependency=afterok:675089",
+        "scripts/slurm/tamia/train.sbatch",
+        "artifacts/generated/hpo/llama2-7b-beavertail--align-fft-seam--hpo/configs/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only.yml",
+        "--launcher",
+        "python"
+      ]
+    },
+    {
+      "kind": "defense_evaluation",
+      "lr": null,
+      "job_id": 675091,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--exclude=tg10807",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "--job-name=eval-mask-only-defense",
+        "--time=00:20:00",
+        "--dependency=afterok:675090",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only"
+      ]
+    },
+    {
+      "kind": "author_attacks",
+      "lr": null,
+      "job_id": 675092,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--exclude=tg10807",
+        "--job-name=attack-seam-mask-only",
+        "--time=00:08:00",
+        "--export=ALL,LEARNING_RATES=1e-4 2e-4",
+        "--dependency=afterok:675090",
+        "scripts/misc/seam_codebase_train_seam_relearning_sweep.sbatch",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only",
+        "artifacts/tamia/models",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only/author-attacks",
+        "false"
+      ]
+    },
+    {
+      "kind": "endpoint_evaluation",
+      "lr": "1e-4",
+      "job_id": 675093,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--exclude=tg10807",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "--job-name=eval-mask-only-endpoint-1e-4",
+        "--time=00:20:00",
+        "--dependency=afterok:675092",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--steps",
+        "250",
+        "--max-step",
+        "250",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250"
+      ]
+    },
+    {
+      "kind": "intermediate_evaluation",
+      "lr": "1e-4",
+      "job_id": 675094,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--exclude=tg10807",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "--job-name=eval-mask-only-mid-1e-4",
+        "--time=00:40:00",
+        "--dependency=afterok:675093",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--steps",
+        "50,100,150,200",
+        "--max-step",
+        "250",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250"
+      ]
+    },
+    {
+      "kind": "endpoint_evaluation",
+      "lr": "2e-4",
+      "job_id": 675095,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--exclude=tg10807",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "--job-name=eval-mask-only-endpoint-2e-4",
+        "--time=00:20:00",
+        "--dependency=afterok:675092",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--steps",
+        "250",
+        "--max-step",
+        "250",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250"
+      ]
+    },
+    {
+      "kind": "intermediate_evaluation",
+      "lr": "2e-4",
+      "job_id": 675096,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpubase_bynode_b1",
+        "--exclude=tg10807",
+        "--export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1",
+        "--job-name=eval-mask-only-mid-2e-4",
+        "--time=00:40:00",
+        "--dependency=afterok:675095",
+        "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch",
+        "--steps",
+        "50,100,150,200",
+        "--max-step",
+        "250",
+        "--checkpoints",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250"
+      ]
+    }
+  ],
+  "defense_smoke_job": 675089,
+  "defense_training_job": 675090,
+  "defense_evaluation_job": 675091,
+  "author_attacks_job": 675092,
+  "endpoint_evaluation_lr1e-4_job": 675093,
+  "intermediate_evaluation_lr1e-4_job": 675094,
+  "endpoint_evaluation_lr2e-4_job": 675095,
+  "intermediate_evaluation_lr2e-4_job": 675096,
+  "evaluation_scheduling": "Final checkpoint first, then all remaining checkpoints"
+}

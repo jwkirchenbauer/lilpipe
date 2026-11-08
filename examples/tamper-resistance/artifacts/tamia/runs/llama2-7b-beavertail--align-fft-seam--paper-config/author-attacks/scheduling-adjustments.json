@@ -1,0 +1,58 @@
+{
+  "reason": "Prioritize large-LR endpoint evidence within our own jobs while retaining all evals; prior five-checkpoint eval jobs took 36 minutes, so one hour suffices. Endpoint jobs use 30 minutes.",
+  "successful_updates": [
+    [
+      "scontrol",
+      "update",
+      "JobId=674470",
+      "Dependency=afterok:674477",
+      "TimeLimit=01:00:00"
+    ],
+    [
+      "scontrol",
+      "update",
+      "JobId=674471",
+      "Dependency=afterok:674477",
+      "TimeLimit=01:00:00"
+    ],
+    [
+      "scontrol",
+      "update",
+      "JobId=674477",
+      "Dependency=afterok:674479",
+      "TimeLimit=00:30:00"
+    ],
+    [
+      "scontrol",
+      "update",
+      "JobId=674479",
+      "TimeLimit=00:30:00"
+    ],
+    [
+      "scontrol",
+      "update",
+      "JobId=674478",
+      "TimeLimit=01:00:00"
+    ],
+    [
+      "scontrol",
+      "update",
+      "JobId=674480",
+      "TimeLimit=01:00:00"
+    ]
+  ],
+  "deferred_pending_intermediates_to_allow_corrected_defense": [
+    {
+      "job_id": "674470",
+      "dependency": "afterok:674492"
+    },
+    {
+      "job_id": "674471",
+      "dependency": "afterok:674492"
+    },
+    {
+      "job_id": "674478",
+      "dependency": "afterok:674492"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "control_model": "llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels",
+  "ablation_model": "llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space",
+  "change": "Only the refusal prompt response separator changes from newline to space. Paired mask, EOS-ignore policy, source row selection, separate tokenization, completion labels, Alpaca length filtering, and all optimizer settings retained. Unique prepared cache avoids stale inputs.",
+  "single_factor_change_relative_to_control": true,
+  "defense_config_matches_archived_control_except_refusal_separator_and_output_cache_names": true,
+  "source_sha256": {
+    "src/trainers/tr_seam.py": "b6126d6e05dc9284e3566d0276a9e76cea5dd8b69800007ac5446f7b7249a589",
+    "src/trainers/rl_bf16.py": "03886e657233377f2b54881e85a0cd547e6b2fe26efd9ee4f9c6047a64e40bdc",
+    "src/data/beavertails_hh.py": "54fcfef0fc991e00b724b17f2eecdcd5f009357204e26deb10a1c1cd5454e241",
+    "src/axolotl_plugins/custom_trainer_args.py": "823315684e21dd0044c0553bff7ff36f05c8249762ba28c9139b5d229f1f2a12",
+    "pyproject.toml": "ae07e037b3442dc76d19dc0227ccf26c47030fcaffd353db427068adc7a3792e",
+    "uv.lock": "ead81d0b3c45d754e9f81eed76db64f2b0b7080251d63f38a59269512860a515",
+    "scripts/slurm/tamia/train.sbatch": "42442e5639ecccb1f1ff6ffc6187e4a55d2d0330ba32a20139b8b66320bc6f82",
+    "scripts/slurm/tamia/eval_harmfulness_and_capabilities.sbatch": "bce182386c5c6bee32133388ab864734f6996765e21a182060973356dd8e7249",
+    "scripts/misc/seam_codebase_train_seam_relearning_sweep.sbatch": "fd6de1b009d0f5814aeaa4a3a680a8e20ec2790d77842474d0b181f6bdabceb3",
+    "configs/stages-beavertails/0_alignment/llama2-7b-beavertail--align-fft-seam/base.yml": "f586b25e3d4888140f19ade6f3294785bf8afbb4d3bcd3c3169d290e38fadaa7",
+    "configs/stages-beavertails/0_alignment/llama2-7b-beavertail--align-fft-seam/sweep.yml": "cae743036441d6147984e01e3d287ff9f6e03f6734d0cb4b2059ac2cb3bd2f17",
+    "seam/config/eval.yaml": "cbaf94febf071ef6ba3b2641423661a0dbfb3ab863f7d21b995a86edd9fc7f92",
+    "seam/scripts/train.py": "4cdf08e6ddcbbefd58c095cdb601037dc40060e529f6749d19345c18b0594915",
+    "seam/src/data_processing/_datasets.py": "ffceac401f8e792296b44f80af8947b7392fa98caafcd93cbe125ecd546cd810",
+    "seam/src/core/trainer.py": "a710fa03cbf60bde14ba95e1dce36501cc5996161ea645988ea70619ddf1ac7e",
+    "scripts/analysis/parameter-norms/get_param_norm.py": "87cce9f254c971b8d8dabf97067df15c91c3b7a9092e36ca58b1e55944d33627",
+    "scripts/slurm/tamia/analysis_get_param_norm.sbatch": "b655fdfc8298ff1d6c2a4bed2bb21ba65c9c41155750a95b35599a20ac3d9220"
+  },
+  "status": "All endpoints and intermediate checkpoints complete, backed up and plotted; latest trajectories retained for follow-up",
+  "prepared_data_validation": "prepared-data-validation.json",
+  "smoke_validation": "smoke-validation.json",
+  "defense_validation": "defense-validation.json",
+  "endpoint_results": "endpoint-results.json",
+  "finding": {
+    "observed_reference_scale_collapse_at_lr": [
+      "1e-4"
+    ],
+    "no_comparable_collapse_at_lr": [
+      "2e-4"
+    ],
+    "interpretation": "The refusal separator is a trigger on the paired-mask/EOS-ignore background at seed42. The effect is LR-dependent. Separator alone with the original mask/EOS settings was not tested.",
+    "input_evidence": "prepared-data-validation.json",
+    "endpoint_evidence": "endpoint-results.json",
+    "mechanism_scope": "Separator changes both refusal forward context and paired-mask gradient support; the gradient-support effect is verified but is not isolated from forward-context effects."
+  },
+  "completed_trajectory_learning_rates": [
+    "1e-4",
+    "2e-4"
+  ],
+  "pending_trajectory_learning_rates": [],
+  "figure_provenance": "comparison-plots.json",
+  "all_checkpoint_evaluations_complete": true
+}

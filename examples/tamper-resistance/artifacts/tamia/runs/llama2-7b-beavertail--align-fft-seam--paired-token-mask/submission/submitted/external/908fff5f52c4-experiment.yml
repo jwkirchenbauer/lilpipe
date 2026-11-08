@@ -1,0 +1,9 @@
+version: 1
+id: llama2-7b-beavertail--align-fft-seam--paired-token-mask--hpo
+registries:
+  models: artifacts/generated/hpo/llama2-7b-beavertail--align-fft-seam--paired-token-mask--hpo/models.yml
+  evaluations: configs/registries/evals.yml
+models:
+- llama2-7b-beavertail--align-fft-seam--paired-token-mask
+evaluations:
+- tamia-h100-llama2-7b--beavertails-and-capabilities-single

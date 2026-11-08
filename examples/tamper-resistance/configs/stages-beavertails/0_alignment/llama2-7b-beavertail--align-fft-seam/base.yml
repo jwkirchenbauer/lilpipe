@@ -10,6 +10,8 @@ custom_trainer_args:
   n_hh: 8000
   n_hb: 8000
   n_bb: 8000
+  paired_token_mask: false
+  ignore_label_token_id: null
 datasets:
   # L_hh: retain unsafe rows and train harmful prompt -> harmful completion.
   # The per-dataset override keeps L_hh and L_hb completion-only.
@@ -18,13 +20,21 @@ datasets:
     revision: 11ea63756195527164a9aa2850f7544bd251eab1
     type: data.beavertails_hh
     message_property_mappings:
-      {role: hh, max_rows: "8000", offset: "0", train_on_inputs: "false"}
+      role: hh
+      max_rows: "8000"
+      offset: "0"
+      train_on_inputs: "false"
+      response_separator: "\n"
   - path: anonymous4486/repnoise_beavertail
     split: train
     revision: 11ea63756195527164a9aa2850f7544bd251eab1
     type: data.beavertails_hh
     message_property_mappings:
-      {role: hb, max_rows: "8000", offset: "0", train_on_inputs: "false"}
+      role: hb
+      max_rows: "8000"
+      offset: "0"
+      train_on_inputs: "false"
+      response_separator: "\n"
   - path: yahma/alpaca-cleaned
     split: train
     revision: 12567cabf869d7c92e573c7c783905fc160e9639
@@ -40,6 +50,7 @@ dataset_prepared_path: artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align
 val_set_size: 0.0
 output_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam
 sequence_len: 256
+excess_length_strategy: drop
 sample_packing: false
 pad_to_sequence_len: true
 remove_unused_columns: false

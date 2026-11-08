@@ -475,7 +475,7 @@ def test_active_manifests_reference_only_registered_evaluations() -> None:
     assert registered - referenced == {"tamia-h100-z7b--wmdp-and-mmlu-single"}
 
 
-def test_seam_defense_beta_sweep_uses_the_promoted_configuration(
+def test_seam_defense_sweep_preserves_beta_and_paper_settings(
     tmp_path: Path, monkeypatch
 ) -> None:
     hpo = load_script(EXAMPLE / "scripts/hpo.py", "seam_defense_beta_hpo_test")
@@ -503,9 +503,121 @@ def test_seam_defense_beta_sweep_uses_the_promoted_configuration(
         "tamia-h100-llama2-7b--beavertails-and-capabilities-single"
     ]
     assert {models[model_id]["method"] for model_id in experiment["models"]} == {"SEAM"}
-    assert [config["custom_trainer_args"]["coeff_sd"] for config in configs] == [0.5]
-    assert len({config["output_dir"] for config in configs}) == 1
+    assert {config["custom_trainer_args"]["coeff_sd"] for config in configs} == {
+        0.5,
+        0.01,
+    }
+    assert len({config["output_dir"] for config in configs}) == 9
+    paper_id = "llama2-7b-beavertail--align-fft-seam--paper-config"
+    paper = yaml.safe_load((output / "configs" / f"{paper_id}.yml").read_text())
+    assert paper["trainer_cls"] == "trainers.tr_seam.SEAMTrainer"
+    assert paper["learning_rate"] == 2e-5
+    assert paper["warmup_ratio"] == 0.1
+    assert paper["micro_batch_size"] == 24
+    assert paper["output_dir"] == f"artifacts/tamia/models/{paper_id}"
+    assert models[paper_id]["evaluation_root"] == "artifacts/tamia/evals"
     assert all(config["max_steps"] == 500 for config in configs)
+
+    ablation_id = paper_id + "--alpaca-truncated"
+    ablation = yaml.safe_load((output / "configs" / f"{ablation_id}.yml").read_text())
+    assert ablation["datasets"][2]["split"] == "train[:8000]"
+    assert ablation["excess_length_strategy"] == "truncate"
+    assert paper["datasets"][2]["split"] == "train"
+    assert paper["excess_length_strategy"] == "drop"
+    # Everything except the selected Alpaca rows/length policy and output names
+    # must match the original paper-config completion-mask control.
+    ablation["datasets"][2]["split"] = paper["datasets"][2]["split"]
+    ablation["excess_length_strategy"] = paper["excess_length_strategy"]
+    for key in ["output_dir", "wandb_name", "dataset_prepared_path"]:
+        ablation[key] = paper[key]
+    assert ablation == paper
+
+    mask_id = paper_id + "--paired-mask-only"
+    mask = yaml.safe_load((output / "configs" / f"{mask_id}.yml").read_text())
+    assert mask["custom_trainer_args"]["paired_token_mask"] is True
+    assert paper["custom_trainer_args"]["paired_token_mask"] is False
+    mask["custom_trainer_args"]["paired_token_mask"] = False
+    for key in ["output_dir", "wandb_name"]:
+        mask[key] = paper[key]
+    assert mask == paper
+
+    eos_id = paper_id + "--ignore-eos-labels"
+    eos = yaml.safe_load((output / "configs" / f"{eos_id}.yml").read_text())
+    assert eos["custom_trainer_args"]["ignore_label_token_id"] == 2
+    assert paper["custom_trainer_args"]["ignore_label_token_id"] is None
+    eos["custom_trainer_args"]["ignore_label_token_id"] = None
+    for key in ["output_dir", "wandb_name"]:
+        eos[key] = paper[key]
+    assert eos == paper
+
+    paired_eos_id = paper_id + "--paired-mask--ignore-eos-labels"
+    paired_eos = yaml.safe_load(
+        (output / "configs" / f"{paired_eos_id}.yml").read_text()
+    )
+    mask = yaml.safe_load((output / "configs" / f"{mask_id}.yml").read_text())
+    assert paired_eos["custom_trainer_args"]["paired_token_mask"] is True
+    assert paired_eos["custom_trainer_args"]["ignore_label_token_id"] == 2
+    # Only EOS supervision differs from the already-tested mask-only variant.
+    paired_eos["custom_trainer_args"]["ignore_label_token_id"] = None
+    for key in ["output_dir", "wandb_name"]:
+        paired_eos[key] = mask[key]
+    assert paired_eos == mask
+
+    separator_id = paired_eos_id + "--refusal-space"
+    separator = yaml.safe_load((output / "configs" / f"{separator_id}.yml").read_text())
+    paired_eos = yaml.safe_load(
+        (output / "configs" / f"{paired_eos_id}.yml").read_text()
+    )
+    assert (
+        separator["datasets"][1]["message_property_mappings"]["response_separator"]
+        == " "
+    )
+    separator["datasets"][1]["message_property_mappings"]["response_separator"] = "\n"
+    for key in ["output_dir", "wandb_name", "dataset_prepared_path"]:
+        separator[key] = paired_eos[key]
+    assert separator == paired_eos
+
+    completion_space_id = paper_id + "--refusal-space"
+    completion_space = yaml.safe_load(
+        (output / "configs" / f"{completion_space_id}.yml").read_text()
+    )
+    assert completion_space["custom_trainer_args"]["paired_token_mask"] is False
+    assert completion_space["custom_trainer_args"]["ignore_label_token_id"] is None
+    assert completion_space["datasets"][2]["split"] == "train"
+    assert completion_space["excess_length_strategy"] == "drop"
+    assert (
+        completion_space["datasets"][1]["message_property_mappings"][
+            "response_separator"
+        ]
+        == " "
+    )
+    completion_space["datasets"][1]["message_property_mappings"][
+        "response_separator"
+    ] = "\n"
+    for key in ["output_dir", "wandb_name", "dataset_prepared_path"]:
+        completion_space[key] = paper[key]
+    assert completion_space == paper
+
+    both_space_id = paper_id + "--harmful-refusal-space"
+    both_space = yaml.safe_load(
+        (output / "configs" / f"{both_space_id}.yml").read_text()
+    )
+    refusal_space = yaml.safe_load(
+        (output / "configs" / f"{completion_space_id}.yml").read_text()
+    )
+    assert (
+        both_space["datasets"][0]["message_property_mappings"]["response_separator"]
+        == " "
+    )
+    assert (
+        both_space["datasets"][1]["message_property_mappings"]["response_separator"]
+        == " "
+    )
+    # Relative to refusal-space alone, change only the harmful separator.
+    both_space["datasets"][0]["message_property_mappings"]["response_separator"] = "\n"
+    for key in ["output_dir", "wandb_name", "dataset_prepared_path"]:
+        both_space[key] = refusal_space[key]
+    assert both_space == refusal_space
 
 
 def test_beavertail_trajectory_sweep_uses_disjoint_attack_data(
@@ -1218,3 +1330,49 @@ def test_name_template_rejects_invalid_placeholders_and_slugs(template):
     hpo = load_script(EXAMPLE / "scripts/hpo.py", "invalid_name_test")
     with pytest.raises(ValueError):
         hpo.candidate_name(template, {"learning_rate": 1e-5, "max_steps": 250})
+
+
+def test_paired_seam_recipe_matches_author_hyperparameters_and_streams(
+    tmp_path, monkeypatch
+):
+    from lilpipe import load
+
+    hpo = load_script(EXAMPLE / "scripts/hpo.py", "paired_seam_hpo_test")
+    monkeypatch.chdir(EXAMPLE)
+    slug = "llama2-7b-beavertail--align-fft-seam--paired-token-mask"
+    directory = EXAMPLE / "configs/stages-beavertails/0_alignment" / slug
+    manifest = hpo.generate(directory / "sweep.yml", tmp_path / "generated")
+    config = yaml.safe_load((manifest.parent / "configs" / f"{slug}.yml").read_text())
+    author = yaml.safe_load(
+        (
+            EXAMPLE.parent
+            / "seam/config/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config.yaml"
+        ).read_text()
+    )
+    training = author["TrainingArguments"]
+    for key in [
+        "learning_rate",
+        "max_steps",
+        "weight_decay",
+        "warmup_ratio",
+        "gradient_accumulation_steps",
+    ]:
+        assert config[key] == training[key]
+    assert (
+        config["micro_batch_size"] // 3 == 2 * training["per_device_train_batch_size"]
+    )
+    assert (
+        config["custom_trainer_args"]["coeff_sd"] == author["UnlearnArguments"]["beta"]
+    )
+    assert config["custom_trainer_args"]["paired_token_mask"] is True
+    assert config["sequence_len"] == 256
+    assert config["shuffle_merged_datasets"] is False
+    assert all(ds["type"] == "data.seam" for ds in config["datasets"])
+    assert [ds["message_property_mappings"]["role"] for ds in config["datasets"]] == [
+        "harmful",
+        "refusal",
+        "benign",
+    ]
+    plan = load(manifest).plan()
+    assert len(plan.stages) == 2
+    assert plan.stages[1].depends_on == (f"train-{slug}",)

@@ -1,0 +1,21 @@
+{
+  "author_environment_tokenizer_class": "LlamaTokenizerFast",
+  "tokenizer_length": 32000,
+  "model_type": "llama",
+  "special_tokens": {
+    "bos_token": "<s>",
+    "eos_token": "</s>",
+    "unk_token": "<unk>",
+    "pad_token": "</s>"
+  },
+  "smoke_tokenization": [
+    1,
+    894,
+    29901,
+    4321,
+    13,
+    22550,
+    29901,
+    2691
+  ]
+}

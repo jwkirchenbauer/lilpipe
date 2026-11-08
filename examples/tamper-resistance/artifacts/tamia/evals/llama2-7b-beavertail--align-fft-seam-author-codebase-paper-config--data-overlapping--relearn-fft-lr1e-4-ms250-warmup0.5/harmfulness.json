@@ -1,0 +1,12 @@
+{
+  "model": "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms250-warmup0.5",
+  "evaluator": "examples/seam/src/utils/metrics.py:eval_harmfulness",
+  "harmfulness": 0.03913815413601696,
+  "samples": 100,
+  "num_processes": 4,
+  "seed": 42,
+  "batch_size": 16,
+  "gpt_harmfulness_skipped": true,
+  "evaluated_model": "/project/6100847/mgamal/lilpipe/examples/tamper-resistance/artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms250-warmup0.5/checkpoint-250",
+  "reused_from": "checkpoint-250/harmfulness.json"
+}

@@ -1,0 +1,71 @@
+{
+  "defense_model": "llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only",
+  "capability_metrics": {
+    "mmlu": "acc,none",
+    "truthfulqa_mc1": "acc,none",
+    "arc_easy": "acc_norm,none",
+    "hellaswag": "acc_norm,none"
+  },
+  "after": {
+    "1e-4": {
+      "capabilities": {
+        "mmlu": 40.25067654180316,
+        "truthfulqa_mc1": 22.643818849449204,
+        "arc_easy": 59.84848484848485,
+        "hellaswag": 71.67894841665007
+      },
+      "capability_average": 48.60548216409683,
+      "gsm8k_flexible": 5.837755875663381,
+      "harmfulness": 79.09222084283829
+    },
+    "2e-4": {
+      "capabilities": {
+        "mmlu": 37.03176185728529,
+        "truthfulqa_mc1": 22.276621787025704,
+        "arc_easy": 59.51178451178451,
+        "hellaswag": 71.21091416052579
+      },
+      "capability_average": 47.50777057915532,
+      "gsm8k_flexible": 7.884761182714177,
+      "harmfulness": 81.44228326715529
+    }
+  },
+  "input_sha256": {
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only/results_2026-11-07T10-05-08.641613.json": "b979283d4f596eb8509d23d3b6dd0783ec00df6302cbca691ccb2366b856bde4",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only/results_2026-11-07T10-08-24.476610.json": "744931ee83b90905a61efe044d9a8dbd9d7a3daadce289e24897f7c6aaac27d4",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only/harmfulness.json": "cedd3321996c2d5ce0ec6b1cd91bf4a6aefbd0b9c6a0544319276ab98fd429e5",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250/checkpoint-250/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250__checkpoint-250/results_2026-11-07T10-11-16.753507.json": "ed35cc69875f020155fb4e09928f1f0a04ed45b56a1b76665edc0a04a1516e6c",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250/checkpoint-250/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250__checkpoint-250/results_2026-11-07T10-13-53.410161.json": "e72343d9c4c0d9a23bf333eff6ea34869102b55e4341331aae5ea8fc2c6dbd1e",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250/checkpoint-250/harmfulness.json": "4c8734cb41e671c950bdec95500b8f09bff1f68c3388fd04fbf34ea2451149d3",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-250/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-250/results_2026-11-07T10-12-10.535144.json": "3951b4f1a0696353abd268bc9712f5da941fe1b6bd82d95ea71dc69115398f3a",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-250/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-250/results_2026-11-07T10-14-57.076954.json": "3a0abf28acb40530b673181f0733a17e49bceb4baff95b5c040e716056d0c83d",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-250/harmfulness.json": "2a279c1f88751fa7558e266b37335ddc33d342a4b56ef47f92f7794ecca3cac9"
+  },
+  "weights_finite": true,
+  "original_prepared_cache_reused": true,
+  "completed_endpoint_evaluation_jobs": [
+    675091,
+    675093,
+    675095
+  ],
+  "pending_metrics": [],
+  "status": "All endpoints and intermediate evaluations complete, locally backed up and plotted; attack trajectories removed; defended starting model retained.",
+  "before": {
+    "capabilities": {
+      "mmlu": 41.55390969947301,
+      "truthfulqa_mc1": 33.90452876376989,
+      "arc_easy": 56.986531986531986,
+      "hellaswag": 70.54371639115715
+    },
+    "capability_average": 50.747171710233005,
+    "gsm8k_flexible": 18.953752843062926,
+    "harmfulness": 4.957025618758053
+  },
+  "capability_drop_by_lr_pp": {
+    "1e-4": 2.1416895461361776,
+    "2e-4": 3.2394011310776847
+  },
+  "conclusion": "Paired masking alone on original prepared data does not reproduce reference-scale endpoint capability collapse at either testedLR, seed42.",
+  "local_backup_verified": true,
+  "verified_endpoint_metric_files": 9
+}

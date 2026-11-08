@@ -1,0 +1,86 @@
+{
+  "prepared_cache": "artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam/prepared/e6f7dc63382fe85ebeb6049798a090c6",
+  "description": "Apply completion and paired masks to identical original prepared harmful/refusal tokens; no model training. Padding is EOS id2, with padding labels -100. first4000 is the subset visited by 500 defense steps at batch8 per stream.",
+  "counts": {
+    "first4000": {
+      "harmful": {
+        "completion_targets": 350025,
+        "paired_label_targets": 345139,
+        "paired_gradient_targets": 338681,
+        "constant_loss_targets": 6458,
+        "matching_target_tokens_excluded": 4886,
+        "unknown_targets_excluded": 0,
+        "rows_with_no_gradient_targets": 0,
+        "fraction_of_original_targets_with_gradient_removed": 0.032409113634740416
+      },
+      "refusal": {
+        "completion_targets": 402340,
+        "paired_label_targets": 396183,
+        "paired_gradient_targets": 389725,
+        "constant_loss_targets": 6458,
+        "matching_target_tokens_excluded": 6157,
+        "unknown_targets_excluded": 0,
+        "rows_with_no_gradient_targets": 0,
+        "fraction_of_original_targets_with_gradient_removed": 0.03135407863995621
+      }
+    },
+    "all8000": {
+      "harmful": {
+        "completion_targets": 700922,
+        "paired_label_targets": 690902,
+        "paired_gradient_targets": 677810,
+        "constant_loss_targets": 13092,
+        "matching_target_tokens_excluded": 10020,
+        "unknown_targets_excluded": 0,
+        "rows_with_no_gradient_targets": 1,
+        "fraction_of_original_targets_with_gradient_removed": 0.03297371176821384
+      },
+      "refusal": {
+        "completion_targets": 804804,
+        "paired_label_targets": 792278,
+        "paired_gradient_targets": 779186,
+        "constant_loss_targets": 13092,
+        "matching_target_tokens_excluded": 12526,
+        "unknown_targets_excluded": 0,
+        "rows_with_no_gradient_targets": 1,
+        "fraction_of_original_targets_with_gradient_removed": 0.031831352726875095
+      }
+    }
+  },
+  "eos_token_id": 2,
+  "eos_target_counts": {
+    "first4000": {
+      "harmful": {
+        "original_eos_targets": 3938,
+        "paired_label_eos_targets": 2589,
+        "paired_gradient_eos_targets": 2489,
+        "eos_targets_replaced_by_constant_loss": 100,
+        "fraction_of_original_eos_gradients_removed": 0.3679532757745049
+      },
+      "refusal": {
+        "original_eos_targets": 3997,
+        "paired_label_eos_targets": 1377,
+        "paired_gradient_eos_targets": 1368,
+        "eos_targets_replaced_by_constant_loss": 9,
+        "fraction_of_original_eos_gradients_removed": 0.6577433074806105
+      }
+    },
+    "all8000": {
+      "harmful": {
+        "original_eos_targets": 7878,
+        "paired_label_eos_targets": 5155,
+        "paired_gradient_eos_targets": 4984,
+        "eos_targets_replaced_by_constant_loss": 171,
+        "fraction_of_original_eos_gradients_removed": 0.3673521198273674
+      },
+      "refusal": {
+        "original_eos_targets": 7995,
+        "paired_label_eos_targets": 2766,
+        "paired_gradient_eos_targets": 2744,
+        "eos_targets_replaced_by_constant_loss": 22,
+        "fraction_of_original_eos_gradients_removed": 0.6567854909318325
+      }
+    }
+  },
+  "eos_interpretation": "Prepared EOS insertion/labels are unchanged in mask-only training, but paired masking can suppress EOS gradients because EOS is also the padding token."
+}

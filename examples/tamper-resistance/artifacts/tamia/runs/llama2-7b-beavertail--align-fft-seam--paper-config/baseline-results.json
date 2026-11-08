@@ -1,0 +1,12 @@
+{
+  "model": "llama2-7b-beavertail--align-fft-seam--paper-config",
+  "capabilities": {
+    "mmlu": 36.77538812135023,
+    "truthfulqa_mc1": 40.024479804161565,
+    "arc_easy": 60.984848484848484,
+    "hellaswag": 55.89523999203346
+  },
+  "harmfulness": 4.276700481772423,
+  "capability_average": 48.419989100598436,
+  "gsm8k_flexible": 5.837755875663381
+}

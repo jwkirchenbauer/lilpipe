@@ -1,0 +1,21 @@
+{
+  "rows_compared_per_stream": 8000,
+  "reference": "Released author text formatting and saved author tokenizer; 256 tokens; EOS padding; padding labels ignored.",
+  "different_rows": {
+    "harmful": {
+      "input_ids": 0,
+      "attention_mask": 0,
+      "labels": 0
+    },
+    "refusal": {
+      "input_ids": 0,
+      "attention_mask": 0,
+      "labels": 0
+    },
+    "benign": {
+      "input_ids": 0,
+      "attention_mask": 0,
+      "labels": 0
+    }
+  }
+}

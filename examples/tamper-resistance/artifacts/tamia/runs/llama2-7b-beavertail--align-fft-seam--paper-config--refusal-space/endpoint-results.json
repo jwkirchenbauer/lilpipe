@@ -1,0 +1,68 @@
+{
+  "defense_model": "llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space",
+  "capability_metrics": {
+    "mmlu": "acc,none",
+    "truthfulqa_mc1": "acc,none",
+    "arc_easy": "acc_norm,none",
+    "hellaswag": "acc_norm,none"
+  },
+  "before": {
+    "capabilities": {
+      "mmlu": 38.313630536960545,
+      "truthfulqa_mc1": 31.08935128518972,
+      "arc_easy": 63.42592592592593,
+      "hellaswag": 74.65644293965346
+    },
+    "capability_average": 51.871337671932416,
+    "gsm8k_flexible": 12.812736921910538,
+    "harmfulness": 5.18734844494611
+  },
+  "after": {
+    "1e-4": {
+      "capabilities": {
+        "mmlu": 22.945449366187155,
+        "truthfulqa_mc1": 24.84700122399021,
+        "arc_easy": 38.04713804713805,
+        "hellaswag": 32.075283808006375
+      },
+      "capability_average": 29.478718111330448,
+      "gsm8k_flexible": 0.0,
+      "harmfulness": 0.0
+    },
+    "2e-4": {
+      "capabilities": {
+        "mmlu": 22.945449366187155,
+        "truthfulqa_mc1": 24.479804161566708,
+        "arc_easy": 26.346801346801346,
+        "hellaswag": 25.841465843457478
+      },
+      "capability_average": 24.903380179503174,
+      "gsm8k_flexible": 0.0,
+      "harmfulness": 0.0
+    }
+  },
+  "capability_drop_by_lr_pp": {
+    "1e-4": 22.39261956060197,
+    "2e-4": 26.967957492429242
+  },
+  "input_sha256": {
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space/results_2026-11-07T14-25-07.682023.json": "4a1d89a5d88aea6463ac77b851d3867de4622e27754fc1ef32476d67c3c76805",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space/results_2026-11-07T14-28-24.635764.json": "b2afbd944ea31f42e14919ec41a327745d6f59d8ec08c02317b7cd998617dd2d",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space/harmfulness.json": "003f69bafc07c414f349ba7cc18a04e15b579bff1628890a1ee1ed21c30fd6ab",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250/checkpoint-250/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250__checkpoint-250/results_2026-11-07T14-27-22.033664.json": "b75acc5344d7c06e88489c0cdf3cdf93732de3507fec913115495b442693c2e9",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250/checkpoint-250/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250__checkpoint-250/results_2026-11-07T14-28-42.896551.json": "51dece16d18e287a6ea7edc9781171aab53c0c55640814259d9aebbcdc2ef2c9",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250/checkpoint-250/harmfulness.json": "b84be373e822ce17b0db0c438192025e25b264ac66bab69d664b11c84ba02531",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-250/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-250/results_2026-11-07T14-30-21.064726.json": "470413b3115127e5f6259f2197c1196f1ddbfa9fffa4114f15ef04a80049c1ca",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-250/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-250/results_2026-11-07T14-31-31.962543.json": "f050a2f88e55425c0e6158f58ac2a9894fa7077cb56cf51dbb3fda6463f6dec4",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-250/harmfulness.json": "b8f843a89084ee6d6de528eb834d084f3e2379e9069beb735a5ea66b7e4b2b04",
+    "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space/parameter-norms-defense.json": "7877702ab3798a6bf7b7c402bda9f6af2dee7424db5cb164e94cc039c030e7d2",
+    "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space/parameter-norms-attack-lr1e-4.json": "beee4d83b3b98c3ae1814fc97d3c4fedc705267a85552010be85067e2eb86153",
+    "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space/parameter-norms-attack-lr2e-4.json": "e666bd2010772c62a0215d9d716bf12cdcba977fe82021e57bf51decbba048e7"
+  },
+  "intermediate_evaluations": "complete",
+  "scope": "One seed (42); 500-step defense and 250-step native author attacks; no paired mask or EOS suppression; original Alpaca filtering.",
+  "all_three_full_parameter_norm_scans_finite": true,
+  "endpoint_local_backup_verified": true,
+  "verified_endpoint_metric_files": 12,
+  "all_checkpoint_evaluations_complete": true
+}

@@ -1,0 +1,11 @@
+{
+  "samples": 1000,
+  "raw_training_data_sha256": "c3c92961d834afe3ecbfbfa29e87ca759b90a73498aaf807162328e0ebe8e4ee",
+  "default_newline_loader_bytewise_tensor_equivalent_to_archived_row3": true,
+  "both_formats_independently_match_same_first_1000_unsafe_rows": true,
+  "refusal_and_test_sets_unchanged": true,
+  "changed_harmful_token_sequences": 1000,
+  "full_sequence_labels_equal_input_ids_in_both_formats": true,
+  "sequence_length": 256,
+  "note": "Native joint tokenization is retained: replacing newline with space may also change neighboring token IDs, token counts, and supervised labels. Only the raw separator string changes."
+}

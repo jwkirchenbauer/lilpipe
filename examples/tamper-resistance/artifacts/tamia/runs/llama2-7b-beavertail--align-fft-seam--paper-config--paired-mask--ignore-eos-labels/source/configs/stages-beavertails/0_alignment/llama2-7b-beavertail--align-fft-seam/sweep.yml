@@ -1,0 +1,59 @@
+id: llama2-7b-beavertail--align-fft-seam--hpo
+model_root: artifacts/tamia/models
+sweeps:
+  # Paper hyperparameters with our current completion-only loss implementation.
+  - name: paper
+    name_template: llama2-7b-beavertail--align-fft-seam--paper-config
+    parameters:
+      custom_trainer_args.coeff_sd: [0.01]
+  - name: beta
+    parameters:
+      custom_trainer_args.coeff_sd: [0.5]
+  # Isolate Alpaca selection/truncation; preserve the completion-only objective.
+  - name: alpaca-truncated
+    name_template: llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated
+    parameters:
+      custom_trainer_args.coeff_sd: [0.01]
+    overrides:
+      datasets.2.split: "train[:8000]"
+      excess_length_strategy: truncate
+      dataset_prepared_path: artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated/prepared
+  # Independent mask ablation against the original paper-config control.
+  - name: paired-mask-only
+    name_template: llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only
+    parameters:
+      custom_trainer_args.coeff_sd: [0.01]
+    overrides:
+      custom_trainer_args.paired_token_mask: true
+  # EOS is token 2 for Llama-2; change loss targets, retaining all input tokens.
+  - name: eos-labels-ignored
+    name_template: llama2-7b-beavertail--align-fft-seam--paper-config--ignore-eos-labels
+    parameters:
+      custom_trainer_args.coeff_sd: [0.01]
+    overrides:
+      custom_trainer_args.ignore_label_token_id: 2
+  # Complete the mask/EOS 2x2: only EOS targets differ from paired-mask-only.
+  - name: paired-mask-eos-labels-ignored
+    name_template: llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels
+    parameters:
+      custom_trainer_args.coeff_sd: [0.01]
+    overrides:
+      custom_trainer_args.paired_token_mask: true
+      custom_trainer_args.ignore_label_token_id: 2
+producer:
+  script: scripts/slurm/tamia/train.sbatch
+  sbatch_args:
+    - --partition=gpubase_bynode_b1
+    - --gpus-per-node=h100:4
+    - --cpus-per-task=48
+    - --mem=480G
+    - --time=03:00:00
+  args:
+    - --launcher
+    - python
+model:
+  method: SEAM
+  evaluation_root: artifacts/tamia/evals
+evaluations:
+  - tamia-h100-llama2-7b--beavertails-and-capabilities-single
+evaluation_registry: configs/registries/evals.yml

@@ -1,0 +1,64 @@
+{
+  "prepared_cache": "artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam/prepared/e6f7dc63382fe85ebeb6049798a090c6",
+  "data_selection_and_tokenization_identical_to_mask_control_by_config": true,
+  "single_factor_change": "ignore_label_token_id None -> 2; paired_token_mask remains True",
+  "runtime": {
+    "smoke": {
+      "job": 675241,
+      "cache_reuse_confirmed": true,
+      "runtime_cache_evidence": [
+        "[2026-11-07 11:13:43,868] [INFO] [axolotl.utils.data.shared] Loading prepared dataset from disk at artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam/prepared/e6f7dc63382fe85ebeb6049798a090c6..."
+      ]
+    },
+    "full_training": {
+      "job": 675242,
+      "cache_reuse_confirmed": true,
+      "runtime_cache_evidence": [
+        "[2026-11-07 11:15:21,123] [INFO] [axolotl.utils.data.shared] Loading prepared dataset from disk at artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam/prepared/e6f7dc63382fe85ebeb6049798a090c6..."
+      ]
+    }
+  },
+  "cache_file_manifest": {
+    "data-00001-of-00008.arrow": {
+      "size": 10318336,
+      "sha256": "df71949493d058863ec3bc776bf2812fc9581eb192c7f6f4572a55649b56e30a"
+    },
+    "data-00004-of-00008.arrow": {
+      "size": 8920544,
+      "sha256": "7250ec8929da8f5813861192e4b4b80bfb8c2ca710f391d41567ca51db367d3f"
+    },
+    "data-00005-of-00008.arrow": {
+      "size": 9032816,
+      "sha256": "f5f2b60d5e0f47e1a9a501c3a3a1546feac52d94c5524ba7187c5b252a2e6319"
+    },
+    "dataset_info.json": {
+      "size": 478,
+      "sha256": "2d4d048eea9f68a62b9488465df49de56fff8c40382878d73a820bae08a5da5e"
+    },
+    "data-00000-of-00008.arrow": {
+      "size": 9513920,
+      "sha256": "38ebf349e06f923d40903b9051ea3aabdbd046b55c916368b7547546564049c4"
+    },
+    "data-00007-of-00008.arrow": {
+      "size": 9150544,
+      "sha256": "b14182b3bfea06f619141fe234243e7cc78172cf67eb034ccb58e3ca10ec13c0"
+    },
+    "data-00003-of-00008.arrow": {
+      "size": 8962920,
+      "sha256": "5f6491b6f6aceb22ac0cec2805bdb907fbc5ac03ebbd88793f41af49e72a0d5d"
+    },
+    "data-00002-of-00008.arrow": {
+      "size": 9777312,
+      "sha256": "ed80ce0108d02dbdcd6cd8f72005fdcb41c4bcc3763de445ff76b0c7641ac908"
+    },
+    "state.json": {
+      "size": 713,
+      "sha256": "471bd76e6e7c47ea33ef342566e97e14bd8df15dcbfa7bb4b6b5d20180ad8362"
+    },
+    "data-00006-of-00008.arrow": {
+      "size": 9019304,
+      "sha256": "01b957d022e8c471b4f80df5f308ca0c7e2de011fdcb70e98d5ab082b8bf8736"
+    }
+  },
+  "eos_target_policy_tests_passed": "six cases: ignore_label_token_id None/0/2 crossed with paired_token_mask False/True"
+}

@@ -1,0 +1,46 @@
+{
+  "removed_at": "2026-11-08T01:26:44.550566+00:00",
+  "removed_relearning_trajectories": [
+    "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr1e-4-ms1000",
+    "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr5e-4-ms1000"
+  ],
+  "evaluation_files_verified_remote_and_local": 120,
+  "checkpoint_trainer_states_preserved": 40,
+  "all_other_model_directories_preserved": true,
+  "all_other_model_config_hashes_preserved": {
+    "llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask-only": "06d6bc21b2a7f889ed02501949c03ea2d88d9202f3a0752afd8fcdb0fe7ec9a5",
+    "llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space": "06d6bc21b2a7f889ed02501949c03ea2d88d9202f3a0752afd8fcdb0fe7ec9a5",
+    "llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space": "06d6bc21b2a7f889ed02501949c03ea2d88d9202f3a0752afd8fcdb0fe7ec9a5",
+    "llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250": "a4433f5310962e53c7ce026147581c2fc7da7c9fe3e65751cf71043ee5a4bda2",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-lr2e-4-ms250-warmup0.5": "06d6bc21b2a7f889ed02501949c03ea2d88d9202f3a0752afd8fcdb0fe7ec9a5",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42": "6e8b6594b6c2af801f77123f6962f5aad135dc77105b6041fecf0d5c1c427e0f",
+    "llama2-7b-beavertail--perturb-gaussian-l2r0.05-seed42": "6e8b6594b6c2af801f77123f6962f5aad135dc77105b6041fecf0d5c1c427e0f",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42": "6e8b6594b6c2af801f77123f6962f5aad135dc77105b6041fecf0d5c1c427e0f",
+    "llama2-7b-beavertail--align-fft-seam--paper-config--ignore-eos-labels": "06d6bc21b2a7f889ed02501949c03ea2d88d9202f3a0752afd8fcdb0fe7ec9a5",
+    "llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated": "06d6bc21b2a7f889ed02501949c03ea2d88d9202f3a0752afd8fcdb0fe7ec9a5",
+    "z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.01-seed42": "a11307e8b040727b493bb1726847a0b337c48c7451b7720c2238ac3a218f8b1e",
+    "llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space--data-overlapping--relearn-fft-author-codebase-answer-space-lr2e-4-ms250": "cc0af7c22864059ae6329293d38f60ee01ce86b0b102a638b9da2d2a8bc72d56",
+    "llama2-7b-beavertail--align-fft-seam--paired-token-mask": "06d6bc21b2a7f889ed02501949c03ea2d88d9202f3a0752afd8fcdb0fe7ec9a5",
+    "llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space--data-overlapping--relearn-fft-author-codebase-answer-space-lr1e-4-ms250": "cc0af7c22864059ae6329293d38f60ee01ce86b0b102a638b9da2d2a8bc72d56",
+    "llama2-7b-beavertail--align-fft-seam--paper-config": "06d6bc21b2a7f889ed02501949c03ea2d88d9202f3a0752afd8fcdb0fe7ec9a5",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42": "6e8b6594b6c2af801f77123f6962f5aad135dc77105b6041fecf0d5c1c427e0f",
+    "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42": "6e8b6594b6c2af801f77123f6962f5aad135dc77105b6041fecf0d5c1c427e0f",
+    "llama2-7b-beavertail--align-fft-seam--paper-config--harmful-refusal-space--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250": "a4433f5310962e53c7ce026147581c2fc7da7c9fe3e65751cf71043ee5a4bda2",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42": "6e8b6594b6c2af801f77123f6962f5aad135dc77105b6041fecf0d5c1c427e0f",
+    "llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels": "06d6bc21b2a7f889ed02501949c03ea2d88d9202f3a0752afd8fcdb0fe7ec9a5",
+    "llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space--attack-smoke-676371": "cc0af7c22864059ae6329293d38f60ee01ce86b0b102a638b9da2d2a8bc72d56",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--attack-smoke-669899": "3f0eca00a19d677183af4853b3d1c207879b83d5b94a293d0a67e0562565a34d",
+    "llama2-7b-seam-own-trainer-smoke": "06d6bc21b2a7f889ed02501949c03ea2d88d9202f3a0752afd8fcdb0fe7ec9a5",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42": "6e8b6594b6c2af801f77123f6962f5aad135dc77105b6041fecf0d5c1c427e0f",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--attack-smoke-669900": "142253750e9a89c8e689d97cb5250ec0ae8a02dc44b327fad7e8283a5e34317c",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42": "6e8b6594b6c2af801f77123f6962f5aad135dc77105b6041fecf0d5c1c427e0f",
+    "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config": "5d0597601002f81df876b22a36b4e30fedc92681552692272fc654c8eb190aa4",
+    "llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--refusal-space": "06d6bc21b2a7f889ed02501949c03ea2d88d9202f3a0752afd8fcdb0fe7ec9a5",
+    "z7b-wmdp-bio--unlearn-fft-npo-author-checkpoint--perturb-gaussian-l2r0.05-seed42": "a11307e8b040727b493bb1726847a0b337c48c7451b7720c2238ac3a218f8b1e"
+  },
+  "active_row4_evaluations_untouched": [
+    "676373",
+    "676376"
+  ],
+  "reason": "Space for six additional row3/row4 LR trajectories; explicit permission to remove relearning trajectories only."
+}

@@ -1,0 +1,97 @@
+{
+  "model": "llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+  "completed_evaluation_jobs": [
+    675247,
+    675248
+  ],
+  "checkpoint_steps": [
+    50,
+    100,
+    150,
+    200,
+    250
+  ],
+  "all_evaluation_jobs_completed_successfully": true,
+  "checkpoint_metrics": {
+    "50": {
+      "capabilities": {
+        "mmlu": 33.44965104685942,
+        "truthfulqa_mc1": 22.88861689106487,
+        "arc_easy": 59.93265993265994,
+        "hellaswag": 66.12228639713204
+      },
+      "capability_average": 45.59830356692907,
+      "harmfulness": 78.64491605386138,
+      "gsm8k_flexible": 5.610310841546626
+    },
+    "100": {
+      "capabilities": {
+        "mmlu": 28.74234439538527,
+        "truthfulqa_mc1": 23.011015911872704,
+        "arc_easy": 62.58417508417509,
+        "hellaswag": 68.21350328619798
+      },
+      "capability_average": 45.63775966940776,
+      "harmfulness": 82.80991145595908,
+      "gsm8k_flexible": 11.448066717210008
+    },
+    "150": {
+      "capabilities": {
+        "mmlu": 34.05497792337274,
+        "truthfulqa_mc1": 22.88861689106487,
+        "arc_easy": 64.18350168350169,
+        "hellaswag": 69.58773152758415
+      },
+      "capability_average": 47.67870700638086,
+      "harmfulness": 82.04540827125311,
+      "gsm8k_flexible": 11.902956785443518
+    },
+    "200": {
+      "capabilities": {
+        "mmlu": 34.87394957983193,
+        "truthfulqa_mc1": 23.011015911872704,
+        "arc_easy": 63.678451178451176,
+        "hellaswag": 69.70722963553077
+      },
+      "capability_average": 47.81766157642164,
+      "harmfulness": 79.72152613848448,
+      "gsm8k_flexible": 12.964366944655042
+    },
+    "250": {
+      "capabilities": {
+        "mmlu": 34.788491667853584,
+        "truthfulqa_mc1": 22.88861689106487,
+        "arc_easy": 63.55218855218855,
+        "hellaswag": 69.89643497311293
+      },
+      "capability_average": 47.78143302105498,
+      "harmfulness": 79.45314200595021,
+      "gsm8k_flexible": 12.661106899166036
+    }
+  },
+  "input_sha256": {
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/harmfulness.json": "6fced307fae4e5c80254c5d1db700e676aed99463c52ba1af83d0aa5cc2f95ce",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/final-evaluation.json": "6653da82cd507ffa7501ff5a0b050d4680e3444394642087fcd2774ddfe0cce1",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-250/harmfulness.json": "ca8bcbb6e7cf343c0e8246ed33a3837de9bb2774d13aba820f193be7dfd2e99f",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-50/harmfulness.json": "a59646bb88bd483411fe824058af1441e25da603de1e4532831129cda02c04f8",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-200/harmfulness.json": "2d95ffa27f1864e72331fbdb7e9ab20b64ac3d482f8c84526cc6d20f64c1182c",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-150/harmfulness.json": "a472b8bdef31512e831f76d1000b3f93f6c9cc9c45674b2860631fc62e2a482a",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-100/harmfulness.json": "de4885e7709adbc4d56999fdcc37ef74fca7b5f8f301a6962f3dae79e51d2673",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-250/results_2026-11-07T11-42-41.654961.json": "bde8c16006ca0d2325a09e75e82358d49d87767a30003c51dade47c171b90e1c",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-250/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-250/results_2026-11-07T11-42-41.654961.json": "bde8c16006ca0d2325a09e75e82358d49d87767a30003c51dade47c171b90e1c",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-250/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-250/results_2026-11-07T11-39-29.801461.json": "a94840427a660ea5a49b82d6716474f2794d5ad2ae5d075ef476f605694790b9",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-50/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-50/results_2026-11-07T11-51-04.326919.json": "668a0d3d2c3476d2a47b3c6fe7a25b7836c7dbc0f776dd901612729931fa7389",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-50/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-50/results_2026-11-07T11-48-11.727799.json": "1adf9f55091dee7f5a2d003fea87caf249f72b827fe15ab19a15ea3381155a08",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-250/results_2026-11-07T11-39-29.801461.json": "a94840427a660ea5a49b82d6716474f2794d5ad2ae5d075ef476f605694790b9",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-200/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-200/results_2026-11-07T12-14-51.077888.json": "d35d132cdd7a2adea8aa0f71a138c4cd0ce4443ab9c517e6f73e0b4b03924f69",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-200/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-200/results_2026-11-07T12-11-44.036118.json": "f825aeb8806c325f04de5e210b0910d50180abfa7506a35c5b875a67d1249ce1",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-150/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-150/results_2026-11-07T12-06-55.530708.json": "d835aa7034eaa0b4b7cdfbfbd4a9068fbd1bc4f29a3bf95409a4e5b1888f49c3",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-150/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-150/results_2026-11-07T12-03-55.401558.json": "3a52f27bbf27edbb23f1e3dc1931677a4af234c681dda3d9ef798dc40f5982f6",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-100/gsm8k-5shot/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-100/results_2026-11-07T11-59-05.026184.json": "dfc728d77da365eb88e0ceba9b7d493ad836ef9a92cbc0d7d22923e2b012b9ab",
+    "artifacts/tamia/evals/llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250/checkpoint-100/capabilities/artifacts__tamia__models__llama2-7b-beavertail--align-fft-seam--paper-config--paired-mask--ignore-eos-labels--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250__checkpoint-100/results_2026-11-07T11-55-57.784485.json": "a3a199df8826720da91c2d1b036c63c581ef93ba60ec3078436f82d5e8852863"
+  },
+  "weights_retained": false,
+  "local_backup_verified": true,
+  "verified_json_files": 19,
+  "weight_removal_record": "weights-removal.json"
+}

@@ -1,0 +1,50 @@
+{
+  "purpose": "Verify finite norms across all parameters of the data-only ablation defense and final attacked models.",
+  "jobs": [
+    {
+      "kind": "defense",
+      "job_id": 675031,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=norm-alpaca-defense",
+        "--dependency=afterok:674973",
+        "scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+        "--model",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated",
+        "--output",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated/parameter-norms-defense.json"
+      ]
+    },
+    {
+      "kind": "attack-lr1e-4",
+      "job_id": 675032,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=norm-alpaca-attack-lr1e-4",
+        "--dependency=afterok:674975",
+        "scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+        "--model",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "--output",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated/parameter-norms-attack-lr1e-4.json"
+      ]
+    },
+    {
+      "kind": "attack-lr2e-4",
+      "job_id": 675033,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=norm-alpaca-attack-lr2e-4",
+        "--dependency=afterok:674975",
+        "scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+        "--model",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "--output",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paper-config--alpaca-truncated/parameter-norms-attack-lr2e-4.json"
+      ]
+    }
+  ]
+}

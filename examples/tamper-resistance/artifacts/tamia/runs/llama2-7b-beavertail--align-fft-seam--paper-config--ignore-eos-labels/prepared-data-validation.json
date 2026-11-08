@@ -1,0 +1,52 @@
+{
+  "prepared_cache": "artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam/prepared/e6f7dc63382fe85ebeb6049798a090c6",
+  "cached_rows": 51748,
+  "data_preparation_identical_to_control_by_config": true,
+  "ignore_label_token_id": 2,
+  "paired_token_mask": false,
+  "actual_cached_batch_trainer_check": {
+    "rows_per_stream": 8,
+    "inputs_attention_unchanged": true,
+    "original_batch_unchanged": true,
+    "only_eos_targets_ignored": true
+  },
+  "counts": {
+    "harmful": {
+      "4000": {
+        "eos_loss_targets_removed": 3938,
+        "other_supervised_targets_unchanged": 346087
+      },
+      "8000": {
+        "eos_loss_targets_removed": 7878,
+        "other_supervised_targets_unchanged": 693044
+      }
+    },
+    "refusal": {
+      "4000": {
+        "eos_loss_targets_removed": 3997,
+        "other_supervised_targets_unchanged": 398343
+      },
+      "8000": {
+        "eos_loss_targets_removed": 7995,
+        "other_supervised_targets_unchanged": 796809
+      }
+    },
+    "benign": {
+      "4000": {
+        "eos_loss_targets_removed": 4000,
+        "other_supervised_targets_unchanged": 417608
+      },
+      "8000": {
+        "eos_loss_targets_removed": 8000,
+        "other_supervised_targets_unchanged": 839039
+      }
+    }
+  },
+  "runtime_cache_reuse_confirmed_in_smoke": true,
+  "smoke_job": 675191,
+  "full_training_cache_reuse_confirmed": true,
+  "full_training_job": 675192,
+  "runtime_cache_evidence": [
+    "[2026-11-07 10:46:19,195] [INFO] [axolotl.utils.data.shared] Loading prepared dataset from disk at artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam/prepared/e6f7dc63382fe85ebeb6049798a090c6..."
+  ]
+}

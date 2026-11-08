@@ -1,0 +1,110 @@
+base_model: meta-llama/Llama-2-7b-chat-hf
+plugins:
+  - axolotl_plugins.custom_trainer_args.CustomTrainerArgsPlugin
+trainer_cls: trainers.tr_seam.SEAMTrainer
+custom_trainer_args:
+  coeff_hh: 1.0
+  coeff_hb: 1.0
+  coeff_sd: 0.01
+  epsilon: 1.0e-3
+  n_hh: 8000
+  n_hb: 8000
+  n_bb: 8000
+datasets:
+  # L_hh: retain unsafe rows and train harmful prompt -> harmful completion.
+  # The per-dataset override keeps L_hh and L_hb completion-only.
+  - path: anonymous4486/repnoise_beavertail
+    split: train
+    revision: 11ea63756195527164a9aa2850f7544bd251eab1
+    type: data.beavertails_hh
+    message_property_mappings:
+      {role: hh, max_rows: "8000", offset: "0", train_on_inputs: "false"}
+  - path: anonymous4486/repnoise_beavertail
+    split: train
+    revision: 11ea63756195527164a9aa2850f7544bd251eab1
+    type: data.beavertails_hh
+    message_property_mappings:
+      {role: hb, max_rows: "8000", offset: "0", train_on_inputs: "false"}
+  - path: yahma/alpaca-cleaned
+    split: train
+    revision: 12567cabf869d7c92e573c7c783905fc160e9639
+    type:
+      field_instruction: instruction
+      field_input: input
+      field_output: output
+      format: "Question: {instruction}\n{input}\nAnswer: "
+      no_input_format: "Question: {instruction}\n\nAnswer: "
+shuffle_merged_datasets: false
+dataset_num_proc: 8
+dataset_prepared_path: artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam/prepared
+val_set_size: 0.0
+output_dir: artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam
+sequence_len: 256
+sample_packing: false
+pad_to_sequence_len: true
+remove_unused_columns: false
+train_on_inputs: true
+# Model parallelism is one process, so this is the complete batch: 8 harmful,
+# 8 refusal, and 8 benign rows.
+micro_batch_size: 24
+gradient_accumulation_steps: 1
+max_steps: 500
+learning_rate: 2.0e-5
+optimizer: adamw_torch
+weight_decay: 0.0
+lr_scheduler: cosine
+warmup_ratio: 0.1
+max_grad_norm: 0.0
+bf16: true
+tf32: false
+gradient_checkpointing: true
+gradient_checkpointing_kwargs:
+  use_reentrant: false
+attn_implementation: sdpa
+# Whole-layer model parallelism. No individual transformer layer is split.
+device_map:
+  model.embed_tokens: 0
+  model.layers.0: 0
+  model.layers.1: 0
+  model.layers.2: 0
+  model.layers.3: 0
+  model.layers.4: 0
+  model.layers.5: 0
+  model.layers.6: 0
+  model.layers.7: 0
+  model.layers.8: 1
+  model.layers.9: 1
+  model.layers.10: 1
+  model.layers.11: 1
+  model.layers.12: 1
+  model.layers.13: 1
+  model.layers.14: 1
+  model.layers.15: 1
+  model.layers.16: 2
+  model.layers.17: 2
+  model.layers.18: 2
+  model.layers.19: 2
+  model.layers.20: 2
+  model.layers.21: 2
+  model.layers.22: 2
+  model.layers.23: 2
+  model.layers.24: 3
+  model.layers.25: 3
+  model.layers.26: 3
+  model.layers.27: 3
+  model.layers.28: 3
+  model.layers.29: 3
+  model.layers.30: 3
+  model.layers.31: 3
+  model.norm: 3
+  lm_head: 3
+seed: 42
+data_seed: 42
+eval_strategy: "no"
+save_strategy: steps
+save_steps: 500
+save_total_limit: 1
+save_only_model: true
+logging_steps: 1
+wandb_project: lp-tamper-resistance
+wandb_name: llama2-7b-beavertail--align-fft-seam

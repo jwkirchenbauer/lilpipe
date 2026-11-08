@@ -1,0 +1,50 @@
+{
+  "jobs": [
+    {
+      "kind": "defense",
+      "job_id": "674501",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=norm-paired-seam-defense",
+        "--dependency=afterok:674492",
+        "scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+        "--model",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paired-token-mask",
+        "--output",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paired-token-mask/parameter-norms-defense.json"
+      ]
+    },
+    {
+      "kind": "attack-lr1e-4",
+      "job_id": "674502",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=norm-paired-seam-attack-lr1e-4",
+        "--dependency=afterok:674494",
+        "scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+        "--model",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paired-token-mask--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "--output",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paired-token-mask/parameter-norms-attack-lr1e-4.json"
+      ]
+    },
+    {
+      "kind": "attack-lr2e-4",
+      "job_id": "674503",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=norm-paired-seam-attack-lr2e-4",
+        "--dependency=afterok:674494",
+        "scripts/slurm/tamia/analysis_get_param_norm.sbatch",
+        "--model",
+        "artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paired-token-mask--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "--output",
+        "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paired-token-mask/parameter-norms-attack-lr2e-4.json"
+      ]
+    }
+  ],
+  "purpose": "Verify finite norms across all parameters of the corrected defense and its final attacked models."
+}

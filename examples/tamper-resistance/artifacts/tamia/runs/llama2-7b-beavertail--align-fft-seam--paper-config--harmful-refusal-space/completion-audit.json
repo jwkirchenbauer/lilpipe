@@ -1,0 +1,65 @@
+{
+  "status": "complete",
+  "defense_config_controlled": true,
+  "trainer_and_data_loader_source_byte_identical_to_refusal_space_control": true,
+  "markdown_table_values_verified_against_all_four_variants_raw_results": {
+    "SEAM \u2014 our original implementation": [
+      48.419989100598436,
+      51.401252530931274,
+      50.134713349640236
+    ],
+    "SEAM \u2014 ours, refusal formatting corrected": [
+      51.871337671932416,
+      29.478718111330444,
+      24.90338017950317
+    ],
+    "SEAM \u2014 ours, harmful + refusal spaces": [
+      50.55310482459904,
+      46.422324443293626,
+      45.875087900252154
+    ],
+    "SEAM \u2014 authors\u2019 implementation (reference)": [
+      52.423449575375024,
+      35.14787639815766,
+      24.79165859390135
+    ]
+  },
+  "markdown_new_harmful_separator_column_verified": true,
+  "required_endpoint_metric_files_backed_up_and_hash_verified": 9,
+  "all_three_parameter_norm_scans_finite": true,
+  "report": "docs/results.md",
+  "report_sha256": "8b47a6932e553b91ace7c97c552aaf5343d56405dd5d806dd8a863b80a778f81",
+  "proof_sha256": {
+    "ablation.json": "099227779bcd9d443dbcd7205c8269016b1a183e3b1812ee8bf11c5cbc77dae4",
+    "prepared-data-validation.json": "f8e1378dee29aaad046d3fb89923a6f22314a1b264f345347d984ba737b2a9d2",
+    "smoke-validation.json": "1c5c183e57e58d92e86c958c6ffc59b25cc1f19b8cf0b8c7a508cbadb183cc32",
+    "defense-validation.json": "3bef942e386f1ea4b2cd718b30589ac718c9648dcba9610f697787b9faeb36cc",
+    "endpoint-results.json": "5edc4f3598702ed454cfdd7c51481b5e53a2ba7b08c9bd56cce4f44c7714beda",
+    "trajectory-evaluation-audit.json": "66f250fcf525fd73402d7e5bdeabaa08b5ee1b0ba7e49ac315f9a217cfdfb440",
+    "author-attacks/training-validation.json": "6e953203d7a3bcd92715e048a1b405483cba16282b769943ed7192fbf3074174",
+    "author-attacks/runtime-training-arguments.json": "0b83abe07d0cab6206a54fdd90f1f07edd1a29a772cbc78c9556433f3a96de58",
+    "defense-config.yml": "568d30d1c072c9e03179616cb3e6d8b2827ecb25f552d6f28bd06f589ff6042a",
+    "jobs.json": "a623ac0dea2c093f4a8d2e1fc2ef2353e9f8f6ed0764822b00e9447791ed5a08",
+    "parameter-norm-jobs.json": "80a99ce1633c3eec4b3b0547385811d48ba11da573c17d1a380d605a52e970c0"
+  },
+  "checks": [
+    "HPO/config regressions passed",
+    "HH/HB separator behavior tests: 2 passed",
+    "Local and remote dry runs passed"
+  ],
+  "pending_work": [],
+  "verified_at": "2026-11-07T22:25:48.607771+00:00",
+  "finding": "With harmful and refusal streams both using spaces after Answer, capability is 50.55% before attack, 46.42% after LR1e-4, and 45.88% after LR2e-4. The stronger collapse from refusal-space-only is largely absent in this run.",
+  "limitations": [
+    "Seed42 only; no cross-seed robustness claim.",
+    "This ablation does not establish the optimization mechanism."
+  ],
+  "all_11_jobs_succeeded": true,
+  "all_checkpoint_evaluations_complete": true,
+  "all_33_required_metric_files_backed_up_and_hash_verified": true,
+  "all_final_and_checkpoint_250_weight_shards_identical": true,
+  "all_18_seam_defended_model_directories_verified_present": true,
+  "artifact_symlink_preserved": true,
+  "deleted_models": "Only two fully evaluated old paired-mask/EOS-ignore/refusal-space attack trajectories; no defended models removed",
+  "remote_evidence_verified": true
+}

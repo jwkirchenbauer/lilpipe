@@ -1,0 +1,10 @@
+{
+  "job": 675458,
+  "global_step": 2,
+  "finite_training_metrics": true,
+  "checkpoint_and_final_model_verified": true,
+  "prepared_data_validation": "prepared-data-validation.json",
+  "paired_token_mask": false,
+  "ignore_label_token_id": null,
+  "original_completion_mean_reduction": true
+}

@@ -1,0 +1,45 @@
+{
+  "batches": [
+    {
+      "removed_relearning_models": [
+        "llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250"
+      ],
+      "eval_json_files_verified": 38,
+      "local_backups_verified": true,
+      "included_in_four_and_five_task_figures": true,
+      "all_other_model_directories_preserved": true,
+      "plot_provenance": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paired-token-mask/comparison-plots.json"
+    },
+    {
+      "removed_relearning_models": [
+        "llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250"
+      ],
+      "eval_json_files_verified": 19,
+      "local_backups_verified": true,
+      "included_in_four_and_five_task_figures": true,
+      "all_other_model_directories_preserved": true,
+      "plot_provenance": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paired-token-mask/comparison-plots.json"
+    },
+    {
+      "removed_relearning_models": [
+        "llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250"
+      ],
+      "eval_json_files_verified": 19,
+      "local_backups_verified": true,
+      "included_in_four_and_five_task_figures": true,
+      "all_other_model_directories_preserved": true,
+      "plot_provenance": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paired-token-mask/comparison-plots.json"
+    },
+    {
+      "removed_relearning_models": [
+        "llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250"
+      ],
+      "eval_json_files_verified": 19,
+      "local_backups_verified": true,
+      "included_in_four_and_five_task_figures": true,
+      "all_other_model_directories_preserved": true,
+      "plot_provenance": "artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paired-token-mask/comparison-plots.json"
+    }
+  ]
+}

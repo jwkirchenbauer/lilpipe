@@ -1,0 +1,6 @@
+{
+  "compared_harmful_attack_rows": 1000,
+  "different_tokenized_rows": 0,
+  "different_row_indices": [],
+  "context_length": 256
+}

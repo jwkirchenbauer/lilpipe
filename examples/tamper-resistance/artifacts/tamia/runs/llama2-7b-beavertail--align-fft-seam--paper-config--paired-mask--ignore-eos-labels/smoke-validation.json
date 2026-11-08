@@ -1,0 +1,14 @@
+{
+  "job": 675241,
+  "global_step": 2,
+  "finite_training_metrics": true,
+  "checkpoint_and_final_model_verified": true,
+  "original_prepared_cache_reused": true,
+  "runtime_cache_evidence": [
+    "[2026-11-07 11:13:43,868] [INFO] [axolotl.utils.data.shared] Loading prepared dataset from disk at artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam/prepared/e6f7dc63382fe85ebeb6049798a090c6..."
+  ],
+  "ignore_label_token_id": 2,
+  "paired_token_mask": true,
+  "full_defense_job": 675242,
+  "training_source_sha256": "b6126d6e05dc9284e3566d0276a9e76cea5dd8b69800007ac5446f7b7249a589"
+}

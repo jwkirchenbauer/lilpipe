@@ -91,6 +91,8 @@ def test_relearning_logs_cosine_without_optimizing_benign_loss(monkeypatch):
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     trainer = object.__new__(module.SEAMRelearnTrainer)
+    trainer.paired_token_mask = False
+    trainer.ignore_label_token_id = None
     trainer.current_gradient_accumulation_steps = 2
     trainer.args = SimpleNamespace(device="cpu")
     trainer._prepare_inputs = lambda inputs: inputs

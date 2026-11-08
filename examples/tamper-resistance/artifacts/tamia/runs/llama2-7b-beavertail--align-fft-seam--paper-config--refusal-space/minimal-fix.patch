@@ -1,0 +1,11 @@
+--- a/src/data/beavertails_hh.py
++++ b/src/data/beavertails_hh.py
+@@ -105,7 +105,7 @@
+         if not row["refusal"].startswith(refusal_prefix):
+             raise ValueError("refusal does not match its prompt")
+ 
+-        prompt = f"Question: {row['prompt']}\nAnswer:\n"
++        prompt = f"Question: {row['prompt']}\nAnswer: "
+         prompt_ids = self.tokenizer(prompt, add_special_tokens=True)["input_ids"]
+         refusal = row["refusal"][len(refusal_prefix) :].lstrip()
+         completion_ids = self.tokenizer(refusal, add_special_tokens=False)[

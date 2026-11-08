@@ -49,6 +49,7 @@ def construct_beavertails_dataset(
     attack_size=1000,
     defence_size=1000,
     context_length=CONTEXT_LENGTH,
+    harmful_response_separator="\n",
 ):
     with open("data/beavertails_with_refusals_train.json", "r", encoding="utf-8") as f:
         trainds = json.load(f)
@@ -88,7 +89,9 @@ def construct_beavertails_dataset(
             else:
                 if category not in harmful_categories and train_harmful_subset != "all":
                     continue
-                harmful_outputs.append(f"Question: {prompt}\nAnswer:\n{content}")
+                harmful_outputs.append(
+                    f"Question: {prompt}\nAnswer:{harmful_response_separator}{content}"
+                )
                 refusal_outputs.append(f"{refusal_text}")
                 output_categories.append(category)
         harmful_outputs = tokenizer(

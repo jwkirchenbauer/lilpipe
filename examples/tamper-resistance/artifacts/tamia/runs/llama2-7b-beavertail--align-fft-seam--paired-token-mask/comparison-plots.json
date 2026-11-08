@@ -1,0 +1,656 @@
+{
+  "four-task": {
+    "figure": "artifacts/figures/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-author-codebase--ms250.pdf",
+    "figure_sha256": "7faf941780286f12068cf47c7ba76247bc779fbf30542dc57a1b88a8346e8481",
+    "configs": [
+      {
+        "path": "llama2-7b-beavertail--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "baseline": "llama2-7b-beavertail",
+        "method": "Base",
+        "lr": 2e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "baseline": "llama2-7b-beavertail",
+        "method": "Base",
+        "lr": 5e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "baseline": "llama2-7b-beavertail",
+        "method": "Base",
+        "lr": 8e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail",
+        "method": "Base",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail",
+        "method": "Base",
+        "lr": 0.0002
+      },
+      {
+        "path": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "baseline": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42",
+        "method": "Base + 1% noise",
+        "lr": 2e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "baseline": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42",
+        "method": "Base + 1% noise",
+        "lr": 5e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "baseline": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42",
+        "method": "Base + 1% noise",
+        "lr": 8e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42",
+        "method": "Base + 1% noise",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42",
+        "method": "Base + 1% noise",
+        "lr": 0.0002
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+        "method": "SEAM",
+        "lr": 2e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+        "method": "SEAM",
+        "lr": 5e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+        "method": "SEAM",
+        "lr": 8e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+        "method": "SEAM",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config",
+        "method": "SEAM",
+        "lr": 0.0002
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam--paper-config",
+        "method": "SEAM (ours, completion)",
+        "lr": 2e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam--paper-config",
+        "method": "SEAM (ours, completion)",
+        "lr": 5e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam--paper-config",
+        "method": "SEAM (ours, completion)",
+        "lr": 8e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam--paper-config",
+        "method": "SEAM (ours, completion)",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam--paper-config",
+        "method": "SEAM (ours, completion)",
+        "lr": 0.0002
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam--paired-token-mask--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam--paired-token-mask",
+        "method": "SEAM (ours, paired)",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam--paired-token-mask--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam--paired-token-mask",
+        "method": "SEAM (ours, paired)",
+        "lr": 0.0002
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42",
+        "method": "SEAM + 0.75% noise",
+        "lr": 2e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42",
+        "method": "SEAM + 0.75% noise",
+        "lr": 5e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42",
+        "method": "SEAM + 0.75% noise",
+        "lr": 8e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42",
+        "method": "SEAM + 0.75% noise",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42",
+        "method": "SEAM + 0.75% noise",
+        "lr": 0.0002
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42",
+        "method": "SEAM + 1% noise",
+        "lr": 2e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42",
+        "method": "SEAM + 1% noise",
+        "lr": 5e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42",
+        "method": "SEAM + 1% noise",
+        "lr": 8e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42",
+        "method": "SEAM + 1% noise",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42",
+        "method": "SEAM + 1% noise",
+        "lr": 0.0002
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42",
+        "method": "SEAM + 2% noise",
+        "lr": 2e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42",
+        "method": "SEAM + 2% noise",
+        "lr": 5e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42",
+        "method": "SEAM + 2% noise",
+        "lr": 8e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42",
+        "method": "SEAM + 2% noise",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42",
+        "method": "SEAM + 2% noise",
+        "lr": 0.0002
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42",
+        "method": "SEAM + 5% noise",
+        "lr": 2e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42",
+        "method": "SEAM + 5% noise",
+        "lr": 5e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42",
+        "method": "SEAM + 5% noise",
+        "lr": 8e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42",
+        "method": "SEAM + 5% noise",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42",
+        "method": "SEAM + 5% noise",
+        "lr": 0.0002
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42",
+        "method": "SEAM + 10% noise",
+        "lr": 2e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42",
+        "method": "SEAM + 10% noise",
+        "lr": 5e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42",
+        "method": "SEAM + 10% noise",
+        "lr": 8e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42",
+        "method": "SEAM + 10% noise",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42",
+        "method": "SEAM + 10% noise",
+        "lr": 0.0002
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42",
+        "method": "SEAM + 20% noise",
+        "lr": 2e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42",
+        "method": "SEAM + 20% noise",
+        "lr": 5e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42",
+        "method": "SEAM + 20% noise",
+        "lr": 8e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42",
+        "method": "SEAM + 20% noise",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42",
+        "method": "SEAM + 20% noise",
+        "lr": 0.0002
+      }
+    ],
+    "steps": [
+      0,
+      50,
+      100,
+      150,
+      200,
+      250
+    ],
+    "capability_metrics": {
+      "mmlu": "acc,none",
+      "truthfulqa_mc1": "acc,none",
+      "arc_easy": "acc_norm,none",
+      "hellaswag": "acc_norm,none"
+    },
+    "reference": {
+      "path": "llama2-7b-beavertail--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+      "baseline": "llama2-7b-beavertail",
+      "method": "Base",
+      "lr": 0.0001
+    },
+    "reference_step": 250,
+    "trajectory_count": 52
+  },
+  "five-task": {
+    "figure": "artifacts/figures/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-author-codebase--ms250--gsm8k-flexible.pdf",
+    "figure_sha256": "abe55257da7e38c85fdb17bc9593ffe21ce28b98b57a76db68e28b6a4f6b7fbd",
+    "configs": [
+      {
+        "path": "llama2-7b-beavertail--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "baseline": "llama2-7b-beavertail",
+        "method": "Base",
+        "lr": 2e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "baseline": "llama2-7b-beavertail",
+        "method": "Base",
+        "lr": 5e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "baseline": "llama2-7b-beavertail",
+        "method": "Base",
+        "lr": 8e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail",
+        "method": "Base",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail",
+        "method": "Base",
+        "lr": 0.0002
+      },
+      {
+        "path": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "baseline": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42",
+        "method": "Base + 1% noise",
+        "lr": 2e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "baseline": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42",
+        "method": "Base + 1% noise",
+        "lr": 5e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "baseline": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42",
+        "method": "Base + 1% noise",
+        "lr": 8e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42",
+        "method": "Base + 1% noise",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail--perturb-gaussian-l2r0.01-seed42",
+        "method": "Base + 1% noise",
+        "lr": 0.0002
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam--paper-config",
+        "method": "SEAM (ours, completion)",
+        "lr": 2e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam--paper-config",
+        "method": "SEAM (ours, completion)",
+        "lr": 5e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam--paper-config",
+        "method": "SEAM (ours, completion)",
+        "lr": 8e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam--paper-config",
+        "method": "SEAM (ours, completion)",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam--paper-config--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam--paper-config",
+        "method": "SEAM (ours, completion)",
+        "lr": 0.0002
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam--paired-token-mask--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam--paired-token-mask",
+        "method": "SEAM (ours, paired)",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam--paired-token-mask--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam--paired-token-mask",
+        "method": "SEAM (ours, paired)",
+        "lr": 0.0002
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42",
+        "method": "SEAM + 0.75% noise",
+        "lr": 2e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42",
+        "method": "SEAM + 0.75% noise",
+        "lr": 5e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42",
+        "method": "SEAM + 0.75% noise",
+        "lr": 8e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42",
+        "method": "SEAM + 0.75% noise",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.0075-seed42",
+        "method": "SEAM + 0.75% noise",
+        "lr": 0.0002
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42",
+        "method": "SEAM + 1% noise",
+        "lr": 2e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42",
+        "method": "SEAM + 1% noise",
+        "lr": 5e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42",
+        "method": "SEAM + 1% noise",
+        "lr": 8e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42",
+        "method": "SEAM + 1% noise",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.01-seed42",
+        "method": "SEAM + 1% noise",
+        "lr": 0.0002
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42",
+        "method": "SEAM + 2% noise",
+        "lr": 2e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42",
+        "method": "SEAM + 2% noise",
+        "lr": 5e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42",
+        "method": "SEAM + 2% noise",
+        "lr": 8e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42",
+        "method": "SEAM + 2% noise",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.02-seed42",
+        "method": "SEAM + 2% noise",
+        "lr": 0.0002
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42",
+        "method": "SEAM + 5% noise",
+        "lr": 2e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42",
+        "method": "SEAM + 5% noise",
+        "lr": 5e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42",
+        "method": "SEAM + 5% noise",
+        "lr": 8e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42",
+        "method": "SEAM + 5% noise",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.05-seed42",
+        "method": "SEAM + 5% noise",
+        "lr": 0.0002
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42",
+        "method": "SEAM + 10% noise",
+        "lr": 2e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42",
+        "method": "SEAM + 10% noise",
+        "lr": 5e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42",
+        "method": "SEAM + 10% noise",
+        "lr": 8e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42",
+        "method": "SEAM + 10% noise",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.1-seed42",
+        "method": "SEAM + 10% noise",
+        "lr": 0.0002
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42",
+        "method": "SEAM + 20% noise",
+        "lr": 2e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr5e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42",
+        "method": "SEAM + 20% noise",
+        "lr": 5e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr8e-5-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42",
+        "method": "SEAM + 20% noise",
+        "lr": 8e-05
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42",
+        "method": "SEAM + 20% noise",
+        "lr": 0.0001
+      },
+      {
+        "path": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42--data-overlapping--relearn-fft-author-codebase-lr2e-4-ms250",
+        "baseline": "llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--perturb-gaussian-l2r0.2-seed42",
+        "method": "SEAM + 20% noise",
+        "lr": 0.0002
+      }
+    ],
+    "steps": [
+      0,
+      50,
+      100,
+      150,
+      200,
+      250
+    ],
+    "capability_metrics": {
+      "mmlu": "acc,none",
+      "truthfulqa_mc1": "acc,none",
+      "arc_easy": "acc_norm,none",
+      "hellaswag": "acc_norm,none",
+      "gsm8k": "exact_match,flexible-extract"
+    },
+    "reference": {
+      "path": "llama2-7b-beavertail--data-overlapping--relearn-fft-author-codebase-lr1e-4-ms250",
+      "baseline": "llama2-7b-beavertail",
+      "method": "Base",
+      "lr": 0.0001
+    },
+    "reference_step": 250,
+    "trajectory_count": 47,
+    "omitted_method": "SEAM (original author defense): intermediate GSM8K unavailable"
+  },
+  "plotter_sha256": "70f6c9dbf5bfb80f9ab7a2efe4bfa3c4f20ebb4c82050197ae4fa88192e228a2",
+  "status": "Complete: all seven new trajectories evaluated at every saved checkpoint and included."
+}

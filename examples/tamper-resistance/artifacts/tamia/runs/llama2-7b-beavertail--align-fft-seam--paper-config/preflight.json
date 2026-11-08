@@ -1,0 +1,20 @@
+{
+  "smoke_job": 674462,
+  "global_step": 2,
+  "model_only_checkpoint_verified": true,
+  "finite_losses_and_gradients": true,
+  "source_sha256": {
+    "src/trainers/tr_seam.py": "01edc546ce23510526708a5b52a066f65b4799e571f848281d5c58e599ef6ec2",
+    "src/trainers/rl_bf16.py": "03886e657233377f2b54881e85a0cd547e6b2fe26efd9ee4f9c6047a64e40bdc",
+    "src/data/beavertails_hh.py": "9dfd55256cc8e72672852541b1562f36464cfe1fc72e25760e9c1b602c375cb9",
+    "configs/stages-beavertails/0_alignment/llama2-7b-beavertail--align-fft-seam/base.yml": "8bc752ad35db800116682ae1f26d6a504dbade5a6dd9bc0ac18729612c93b372",
+    "configs/stages-beavertails/0_alignment/llama2-7b-beavertail--align-fft-seam/sweep.yml": "b6e08b2afe1d65f29f8b9f4985f654eb924ffa822dc110787d6679ecb8b71ac5"
+  },
+  "known_differences_from_author": [
+    "completion-only harmful/refusal mask instead of paired token-difference mask",
+    "separately tokenized prompt and completion with added EOS",
+    "generic Alpaca tokenization drops overlength rows before sampling first 8000 retained rows",
+    "layer-sharded model instead of two data-parallel model replicas"
+  ],
+  "purpose": "Measure current tr_seam.py with paper hyperparameters before correcting objective/data differences."
+}

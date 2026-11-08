@@ -38,7 +38,7 @@ def main():
     )
     parser.add_argument(
         "--outpath",
-        default="artifacts/figures/llama2-7b-beavertail-relearning-gradient-cosine-ms250.pdf",
+        default="artifacts/figures/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft--ms250--gradient-cosine.pdf",
     )
     args = parser.parse_args()
     selected = (

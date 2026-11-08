@@ -1,0 +1,11 @@
+{
+  "job": 675191,
+  "global_step": 2,
+  "finite_training_metrics": true,
+  "checkpoint_and_final_model_verified": true,
+  "original_prepared_cache_reused": true,
+  "ignore_label_token_id": 2,
+  "paired_token_mask": false,
+  "full_defense_job": 675192,
+  "training_source_sha256": "b6126d6e05dc9284e3566d0276a9e76cea5dd8b69800007ac5446f7b7249a589"
+}

@@ -1,0 +1,39 @@
+{
+  "prepared_cache": "artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam/prepared/e6f7dc63382fe85ebeb6049798a090c6",
+  "cached_rows": 51748,
+  "selected_sampler_rows": 24000,
+  "visited_rows_in_500_steps": 12000,
+  "streams": {
+    "harmful": {
+      "prepared_offset": 0,
+      "selected_rows": 8000,
+      "rows_visited_in_500_steps": 4000,
+      "selected_rows_sha256": "c1ba626ed32479737bfa92cf0ebbbe2c579abaddf72d7cc1667b9b3bc1193920",
+      "visited_rows_sha256": "b3cf5622b6b909047356349c96e4fcdc7e569586f8d52b5b8ed1e18b01888403"
+    },
+    "refusal": {
+      "prepared_offset": 8000,
+      "selected_rows": 8000,
+      "rows_visited_in_500_steps": 4000,
+      "selected_rows_sha256": "8ea13e24efd6700af730821249c808ee906a96b20635ca79e2bf620298c5a792",
+      "visited_rows_sha256": "7a12335d6a0ec4c5f2c91e33cce73b180a8a10f50812d2641a472cf8c809c2a8"
+    },
+    "benign": {
+      "prepared_offset": 16000,
+      "selected_rows": 8000,
+      "rows_visited_in_500_steps": 4000,
+      "selected_rows_sha256": "65e999cc5a9d7e0ef1f7213f170ac64f9b6c82681b1962071c47299523db7db5",
+      "visited_rows_sha256": "2a0de9f5e6098eaed2c0cf3d6e0a41c3ab13178ded3152a98562115d8fe91f68"
+    }
+  },
+  "data_preparation_identical_to_original_control_by_config": true,
+  "runtime_cache_reuse_confirmed": true,
+  "change_is_in_trainer_loss_only": true,
+  "smoke_job": 675089,
+  "runtime_cache_evidence": [
+    "[2026-11-07 09:42:37,202] [INFO] [axolotl.utils.data.shared] Loading prepared dataset from disk at artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam/prepared/e6f7dc63382fe85ebeb6049798a090c6...",
+    "[2026-11-07 09:44:13,944] [INFO] [axolotl.utils.data.shared] Loading prepared dataset from disk at artifacts/tamia/cache/axolotl/llama2-7b-beavertail--align-fft-seam/prepared/e6f7dc63382fe85ebeb6049798a090c6..."
+  ],
+  "full_training_cache_reuse_confirmed": true,
+  "full_training_job": 675090
+}

@@ -1306,3 +1306,26 @@ def test_gip_tracking_defenses_preserve_selected_settings_and_evaluate(monkeypat
             if s.id.startswith("eval-") and s.args[0] == after["output_dir"]
         )
         assert evaluation.depends_on == (training.id,)
+
+
+def test_npo_sam_ghost_tracking_preserves_selected_defense(monkeypatch):
+    from lilpipe import load
+
+    monkeypatch.chdir(EXAMPLE)
+    original = "z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2"
+    name = original + "--ghost-track"
+    parent = EXAMPLE / "configs/stages-wmdp/0_unlearn"
+    before = yaml.safe_load((parent / original / "selected.yml").read_text())
+    after = yaml.safe_load((parent / name / "selected.yml").read_text())
+    changed = {"trainer_cls", "output_dir", "wandb_name"}
+    assert {k: v for k, v in before.items() if k not in changed} == {
+        k: v for k, v in after.items() if k not in changed
+    }
+    assert after["trainer_cls"] == "trainers.tr_gip.GIPNPOSAMTrainer"
+    training, evaluation = (
+        load("configs/experiments/z7b-wmdp-bio-npo-sam5pp-ghost-track.yml")
+        .plan()
+        .stages
+    )
+    assert evaluation.depends_on == (training.id,)
+    assert evaluation.args[0] == after["output_dir"]

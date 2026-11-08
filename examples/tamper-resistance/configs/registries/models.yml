@@ -1350,3 +1350,21 @@ models:
       - --cpus-per-task=48
       - --mem=480G
       - --time=03:00:00
+  z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2--ghost-track:
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2--ghost-track
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2--ghost-track
+    evaluation_root: artifacts/tamia/evals
+    method: NPO+SAM with unperturbed forget ghost tracking
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2--ghost-track
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/0_unlearn/z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2--ghost-track/selected.yml
+      sbatch_args:
+      - --account=aip-grabus
+      - --partition=gpubase_bynode_b1
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00

@@ -502,12 +502,13 @@ def test_mean_gradient_cosine_negative_and_zero_norms():
         mean_gradient_cosine(torch.zeros(2, 3))
 
 
-@pytest.mark.parametrize("method", ["gd", "npo"])
+@pytest.mark.parametrize("method", ["gd", "npo", "npo_sam"])
 def test_defense_tracking_matches_forget_gram_and_preserves_update(tmp_path, method):
     pytest.importorskip("axolotl")
     from types import SimpleNamespace
     from axolotl.core.training_args import AxolotlTrainingArguments
-    from trainers.tr_gip import GIPGradDiffTrainer, GIPNPOTrainer
+    from trainers.tr_gip import GIPGradDiffTrainer, GIPNPOTrainer, GIPNPOSAMTrainer
+    from trainers.tr_sam import NPOSAMTrainer
     from trainers.ul_gd import GradDiffTrainer
     from trainers.ul_npo import NPOTrainer
 
@@ -528,14 +529,16 @@ def test_defense_tracking_matches_forget_gram_and_preserves_update(tmp_path, met
     reference = copy.deepcopy(model)
     with torch.no_grad():
         model.head.weight.add_(torch.randn_like(model.head.weight) * 0.2)
-    tracked_class, plain_class = (
-        (GIPGradDiffTrainer, GradDiffTrainer)
-        if method == "gd"
-        else (GIPNPOTrainer, NPOTrainer)
-    )
+    tracked_class, plain_class = {
+        "gd": (GIPGradDiffTrainer, GradDiffTrainer),
+        "npo": (GIPNPOTrainer, NPOTrainer),
+        "npo_sam": (GIPNPOSAMTrainer, NPOSAMTrainer),
+    }[method]
     kwargs = {"retain_coefficient": 4.0}
-    if method == "npo":
+    if method != "gd":
         kwargs.update(reference_model_name_or_path="unused", beta=0.1)
+    if method == "npo_sam":
+        kwargs["rho"] = 0.1
     trainers = []
     for index, cls in enumerate((tracked_class, plain_class)):
         trainer = cls(
@@ -549,7 +552,8 @@ def test_defense_tracking_matches_forget_gram_and_preserves_update(tmp_path, met
             ),
             **kwargs,
         )
-        if method == "npo":
+        trainer.current_gradient_accumulation_steps = 1
+        if method != "gd":
             trainer._theta_ref = {
                 name: p.detach().clone() for name, p in reference.named_parameters()
             }
@@ -584,12 +588,16 @@ def test_defense_tracking_matches_forget_gram_and_preserves_update(tmp_path, met
         )
     expected = explicit_gram(losses, model)
     try:
-        loss_tracked = tracked.compute_loss(tracked.model, inputs)
+        if method == "npo_sam":
+            loss_tracked = tracked.training_step(tracked.model, inputs)
+            loss_plain = plain.training_step(plain.model, inputs)
+        else:
+            loss_tracked = tracked.compute_loss(tracked.model, inputs)
+            loss_plain = plain.compute_loss(plain.model, inputs)
+            loss_tracked.backward()
+            loss_plain.backward()
         assert not tracked.track_ghost
-        loss_plain = plain.compute_loss(plain.model, inputs)
         torch.testing.assert_close(loss_tracked, loss_plain)
-        loss_tracked.backward()
-        loss_plain.backward()
         torch.testing.assert_close(
             tracked.gram.double(), expected, rtol=2e-5, atol=1e-7
         )
@@ -667,3 +675,16 @@ def test_layer_sharded_tracking_matches_explicit_gram(tmp_path):
         torch.testing.assert_close(trainer.gram.cpu(), expected, rtol=1e-5, atol=1e-7)
     finally:
         trainer.close()
+
+
+def test_squared_cosine_averages_individual_squares_not_the_signed_mean():
+    gradients = torch.tensor([[1.0, 0], [-1.0, 0], [0, 1.0]])
+    gram = gradients @ gradients.T
+    torch.testing.assert_close(mean_gradient_cosine(gram), torch.tensor(-1 / 3))
+    torch.testing.assert_close(
+        mean_gradient_cosine(gram, squared=True), torch.tensor(1 / 3)
+    )
+    torch.testing.assert_close(
+        mean_gradient_cosine(torch.eye(3), squared=True), torch.tensor(0.0)
+    )
+    assert mean_gradient_cosine(torch.zeros(3, 3), squared=True) is None

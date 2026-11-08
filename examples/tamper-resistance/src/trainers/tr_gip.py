@@ -204,7 +204,9 @@ def linear_weight_gram(z: torch.Tensor, d: torch.Tensor) -> torch.Tensor:
     return torch.einsum("bcts,bcts->bc", ztz, dtd)
 
 
-def mean_gradient_cosine(gram: torch.Tensor) -> torch.Tensor | None:
+def mean_gradient_cosine(
+    gram: torch.Tensor, *, squared: bool = False
+) -> torch.Tensor | None:
     """Average off-diagonal gradient cosines, excluding zero-norm gradients.
 
     Args:
@@ -219,7 +221,8 @@ def mean_gradient_cosine(gram: torch.Tensor) -> torch.Tensor | None:
     if not pairs.any():
         return None
     denominators = norms[:, None] * norms[None, :]
-    return (gram[pairs] / denominators[pairs]).clamp(-1, 1).mean()
+    cosines = (gram[pairs] / denominators[pairs]).clamp(-1, 1)
+    return cosines.square().mean() if squared else cosines.mean()
 
 
 # Finite-difference cosine regularization
@@ -551,6 +554,7 @@ class GhostInnerProductsMixin:
         self.gram = None
         self.previous_uses = {}
         self.microbatch_means = []
+        self.microbatch_squared_means = []
         self.hook_handles = []
         self.output_handles = []
         self.computing_gram = False
@@ -576,7 +580,9 @@ class GhostInnerProductsMixin:
 
     def compute_forget_loss(self, *args, **kwargs):
         tracking = self.track_ghost
-        self.track_ghost = True
+        # SAM revisits the forget loss at shifted weights. Measure its first,
+        # unperturbed backward only, just like ordinary GD/NPO.
+        self.track_ghost = self.gram is None
         try:
             return super().compute_forget_loss(*args, **kwargs)
         finally:
@@ -685,6 +691,9 @@ class GhostInnerProductsMixin:
             cosine = mean_gradient_cosine(self.gram)
             if cosine is not None:
                 self.microbatch_means.append(cosine)
+                self.microbatch_squared_means.append(
+                    mean_gradient_cosine(self.gram, squared=True)
+                )
         self.gram = None
         self.previous_uses.clear()
         for handle in self.output_handles:
@@ -694,8 +703,10 @@ class GhostInnerProductsMixin:
     def log_step(self):
         if self.microbatch_means:
             value = torch.stack(self.microbatch_means).mean().item()
-            self.log({"ghost_cosine_mean": value})
+            squared = torch.stack(self.microbatch_squared_means).mean().item()
+            self.log({"ghost_cosine_mean": value, "ghost_cosine_squared_mean": squared})
         self.microbatch_means.clear()
+        self.microbatch_squared_means.clear()
 
     def close(self):
         for handle in self.hook_handles + self.output_handles:
@@ -704,6 +715,7 @@ class GhostInnerProductsMixin:
         self.output_handles.clear()
         self.previous_uses.clear()
         self.microbatch_means.clear()
+        self.microbatch_squared_means.clear()
         self.gram = None
 
 
@@ -774,6 +786,7 @@ if importlib.util.find_spec("axolotl") is not None:
     from axolotl.core.trainers.base import AxolotlTrainer
     from trainers.ul_gd import GradDiffTrainer
     from trainers.ul_npo import NPOTrainer
+    from trainers.tr_sam import NPOSAMTrainer
 
     class GIPGradDiffTrainer(GhostInnerProductsMixin, GradDiffTrainer):
         """Observe forget-gradient cosine during unchanged GD training."""
@@ -782,6 +795,11 @@ if importlib.util.find_spec("axolotl") is not None:
 
     class GIPNPOTrainer(GhostInnerProductsMixin, NPOTrainer):
         """Observe forget-gradient cosine during unchanged NPO training."""
+
+        ghost_forget_only = True
+
+    class GIPNPOSAMTrainer(GhostInnerProductsMixin, NPOSAMTrainer):
+        """Track unperturbed forget gradients during unchanged NPO+SAM."""
 
         ghost_forget_only = True
 

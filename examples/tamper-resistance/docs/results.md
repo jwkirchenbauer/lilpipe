@@ -163,3 +163,53 @@ Frozen source and launch receipts are under
 `artifacts/tamia/runs/z7b-npo-sam5pp-ghost-track-20261108/`; the local report
 contains `final-results.json` and `trainer-state.json` under
 `artifacts/reports/z7b-npo-sam5pp-ghost-track-20261108/`.
+
+## Zephyr squared-cosine defense calibration (2026-11-08)
+
+GD and NPO now optionally add a penalty on the squared cosine between two
+individual forget-example CE gradients, averaged over sampled distinct pairs.
+Their original unlearning/retain objectives remain in the update. The estimator
+uses ordinary gradients and forward finite differences along detached,
+normalized directions, rescaled by their norms and the squared-cosine factor
+`2*c`. Parameters, buffers, and matching Torch dropout states are restored.
+FP32 gradients remain on each parameter's GPU; scalar reductions cross devices.
+Optimizer gradients and the pair accumulator use CPU storage during probes to
+bound memory. Coefficient zero preserves the ordinary trainer update.
+
+The tiny-model tests compare the estimate to an independent exact FP64 derivative,
+including negative cosine, dropout replay, restoration on exceptions, and GD/NPO
+updates with gradient accumulation. A real-model audit additionally compared the
+**full estimated gradient vector** to an exact higher-order FP32 reference for one
+Zephyr pair, before and after an ordinary NPO update. The exact reference is used
+only for validation; defense training continues to use finite differences.
+
+| Parameter-space perturbation length | Relative gradient error, initial | Relative gradient error, after NPO step |
+|---|---:|---:|
+| 1e-3 | 18.55% | 18.55% |
+| 3e-4 | 7.58% | 5.84% |
+| 1e-4 | 2.97% | 1.95% |
+| **3e-5** | **0.88%** | **0.77%** |
+| 1e-5 | 1.60% | 2.03% |
+
+At `rho=3e-5`, estimated/reference gradient alignment exceeds `0.99996` in both
+states. Smaller perturbations begin losing accuracy to FP32 cancellation. Earlier
+`rho=0.01` probes gave grossly inconsistent directional slopes, so those six
+pending regularized jobs and their dependent evaluations were cancelled before
+training. The two FP32 coefficient-zero controls continue unchanged.
+
+Full GD and NPO sweeps use coefficients `0.1`, `1`, and `10`, two sampled pairs,
+125 updates, and the selected defense settings otherwise, with FP32 replacing
+BF16. The matched controls also use FP32. Regularized jobs request four H100s on
+Tamia's `gpubase_bynode_b2` with six-hour limits: measured steps take about
+90 seconds, exceeding a three-hour budget over 125 updates. Full WMDP-bio robust
+and MMLU-no-bio evaluations follow successful training. Final outcomes are pending;
+calibration and successful preflights do not establish the desired
+alignment/unlearning/capability tradeoff.
+
+Implementation: `dec76bef`; final calibrated configs: `86bc6956`. Full-model
+three-step preflight: `678516`; exact Zephyr reference audit: `678574`.
+Source snapshots, configs, receipts, and `exact-audit.json` / `calibration-gate.json`
+are under `artifacts/tamia/runs/z7b-squared-cosine-20261108/` on Tamia. The active
+run list is `jobs-rho3e-5.json`; `jobs.json` retains the superseded submission.
+The calibrated source snapshot is `submitted/production-rho3e-5/`.
+Local copies are under `artifacts/reports/z7b-squared-cosine-20261108/`.

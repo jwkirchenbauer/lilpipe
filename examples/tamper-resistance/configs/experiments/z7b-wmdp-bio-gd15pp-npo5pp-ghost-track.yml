@@ -1,0 +1,10 @@
+version: 1
+id: z7b-wmdp-bio-gd15pp-npo5pp-ghost-track
+registries:
+  models: configs/registries/models.yml
+  evaluations: configs/registries/evals.yml
+models:
+- z7b-wmdp-bio--15pp--unlearn-fft-gd--ghost-track
+- z7b-wmdp-bio--5pp--unlearn-fft-npo--ghost-track
+evaluations:
+- tamia-h100-z7b--wmdp-and-mmlu-single

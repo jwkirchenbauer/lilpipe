@@ -32,7 +32,7 @@ module load httpproxy/1.0
 # APPLICATION SPECIFIC CONFIG
 # ============================================
 
-export PYTHONPATH="$PWD/src${PYTHONPATH:+:$PYTHONPATH}"
+export PYTHONPATH="${TRAIN_SOURCE_ROOT:-$PWD/src}${PYTHONPATH:+:$PYTHONPATH}"
 export WANDB_DIR="$PWD/artifacts/tamia/logs"
 
 config=${1:?missing training config}

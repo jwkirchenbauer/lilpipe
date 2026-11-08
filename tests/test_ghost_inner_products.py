@@ -500,3 +500,170 @@ def test_mean_gradient_cosine_negative_and_zero_norms():
     assert mean_gradient_cosine(torch.ones(1, 1)) is None
     with pytest.raises(ValueError, match="square"):
         mean_gradient_cosine(torch.zeros(2, 3))
+
+
+@pytest.mark.parametrize("method", ["gd", "npo"])
+def test_defense_tracking_matches_forget_gram_and_preserves_update(tmp_path, method):
+    pytest.importorskip("axolotl")
+    from types import SimpleNamespace
+    from axolotl.core.training_args import AxolotlTrainingArguments
+    from trainers.tr_gip import GIPGradDiffTrainer, GIPNPOTrainer
+    from trainers.ul_gd import GradDiffTrainer
+    from trainers.ul_npo import NPOTrainer
+
+    class TinyLM(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.embedding = nn.Embedding(7, 3)
+            self.norm = nn.LayerNorm(3)
+            self.head = nn.Linear(3, 7)
+
+        def forward(self, input_ids, labels, attention_mask=None):
+            logits = self.head(self.norm(self.embedding(input_ids)))
+            loss = F.cross_entropy(logits[:, :-1].transpose(1, 2), labels[:, 1:])
+            return SimpleNamespace(logits=logits, loss=loss)
+
+    torch.manual_seed(31)
+    model = TinyLM()
+    reference = copy.deepcopy(model)
+    with torch.no_grad():
+        model.head.weight.add_(torch.randn_like(model.head.weight) * 0.2)
+    tracked_class, plain_class = (
+        (GIPGradDiffTrainer, GradDiffTrainer)
+        if method == "gd"
+        else (GIPNPOTrainer, NPOTrainer)
+    )
+    kwargs = {"retain_coefficient": 4.0}
+    if method == "npo":
+        kwargs.update(reference_model_name_or_path="unused", beta=0.1)
+    trainers = []
+    for index, cls in enumerate((tracked_class, plain_class)):
+        trainer = cls(
+            model=copy.deepcopy(model),
+            args=AxolotlTrainingArguments(
+                output_dir=str(tmp_path / str(index)),
+                use_cpu=True,
+                save_strategy="no",
+                report_to=[],
+                sample_packing=False,
+            ),
+            **kwargs,
+        )
+        if method == "npo":
+            trainer._theta_ref = {
+                name: p.detach().clone() for name, p in reference.named_parameters()
+            }
+        trainers.append(trainer)
+    tracked, plain = trainers
+    ids = torch.tensor(
+        [[1, 2, 3, 4], [4, 2, 1, 3], [2, 4, 3, 1], [3, 1, 4, 2], [1, 3, 2, 4]]
+    )
+    inputs = dict(
+        input_ids=ids,
+        labels=ids.clone(),
+        attention_mask=torch.ones_like(ids),
+        is_forget=torch.tensor([True, False, True, False, True]),
+    )
+    forget = ids[inputs["is_forget"]]
+    logits = model(input_ids=forget, labels=forget).logits
+    ce = F.cross_entropy(
+        logits[:, :-1].transpose(1, 2), forget[:, 1:], reduction="none"
+    ).mean(1)
+    if method == "gd":
+        losses = -ce / len(forget)
+    else:
+        with torch.no_grad():
+            ref_logits = reference(input_ids=forget, labels=forget).logits
+            ref_ce = F.cross_entropy(
+                ref_logits[:, :-1].transpose(1, 2), forget[:, 1:], reduction="none"
+            ).mean(1)
+        losses = (
+            -(2 / kwargs["beta"])
+            * F.logsigmoid(kwargs["beta"] * (ce - ref_ce))
+            / len(forget)
+        )
+    expected = explicit_gram(losses, model)
+    try:
+        loss_tracked = tracked.compute_loss(tracked.model, inputs)
+        assert not tracked.track_ghost
+        loss_plain = plain.compute_loss(plain.model, inputs)
+        torch.testing.assert_close(loss_tracked, loss_plain)
+        loss_tracked.backward()
+        loss_plain.backward()
+        torch.testing.assert_close(
+            tracked.gram.double(), expected, rtol=2e-5, atol=1e-7
+        )
+        for a, b in zip(
+            tracked.model.parameters(), plain.model.parameters(), strict=True
+        ):
+            torch.testing.assert_close(a.grad, b.grad)
+        tracked.finish_microbatch()
+        torch.testing.assert_close(
+            tracked.microbatch_means[0].double(),
+            mean_gradient_cosine(expected),
+            rtol=2e-5,
+            atol=1e-7,
+        )
+        invalid = dict(inputs, is_forget=torch.zeros(5, dtype=torch.bool))
+        with pytest.raises(ValueError):
+            tracked.compute_forget_loss(tracked.model, invalid)
+        assert not tracked.track_ghost
+    finally:
+        tracked.close()
+
+
+@pytest.mark.skipif(torch.cuda.device_count() < 2, reason="requires two GPUs")
+def test_layer_sharded_tracking_matches_explicit_gram(tmp_path):
+    transformers = pytest.importorskip("transformers")
+    from types import SimpleNamespace
+    from trainers.tr_gip import GhostInnerProductsMixin
+
+    class Model(nn.Module):
+        is_parallelizable = True
+        model_parallel = True
+        hf_device_map = {"embedding": "cuda:0", "head": "cuda:1"}
+
+        def __init__(self):
+            super().__init__()
+            self.embedding = nn.Embedding(7, 3).to("cuda:0")
+            self.head = nn.Linear(3, 7).to("cuda:1")
+
+        def forward(self, input_ids, labels):
+            logits = self.head(self.embedding(input_ids.to("cuda:0")).to("cuda:1"))
+            loss = F.cross_entropy(logits.transpose(1, 2), labels.to("cuda:1"))
+            return SimpleNamespace(logits=logits, loss=loss)
+
+    class Trainer(GhostInnerProductsMixin, transformers.Trainer):
+        pass
+
+    torch.manual_seed(13)
+    model = Model().train()
+    reference = copy.deepcopy(model)
+    ids = torch.tensor([[1, 2, 3], [3, 2, 1]], device="cuda:0")
+    losses = (
+        F.cross_entropy(
+            reference(ids, ids).logits.transpose(1, 2),
+            ids.to("cuda:1"),
+            reduction="none",
+        ).mean(1)
+        / 2
+    )
+    rows = []
+    for loss in losses:
+        gradients = torch.autograd.grad(
+            loss, tuple(reference.parameters()), retain_graph=True
+        )
+        rows.append(torch.cat([g.detach().double().cpu().flatten() for g in gradients]))
+    gradients = torch.stack(rows)
+    expected = gradients @ gradients.T
+    trainer = Trainer(
+        model=model,
+        args=transformers.TrainingArguments(output_dir=str(tmp_path), report_to=[]),
+        ghost_dtype=torch.float64,
+    )
+    try:
+        model(ids, ids).loss.backward()
+        assert trainer.gram.device == trainer.args.device
+        torch.testing.assert_close(trainer.gram.cpu(), expected, rtol=1e-5, atol=1e-7)
+    finally:
+        trainer.close()

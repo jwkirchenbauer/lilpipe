@@ -522,6 +522,8 @@ class GhostInnerProductsMixin:
     and AMP scales cancel. Full [B,B,T,S] intermediates are allocated.
     """
 
+    ghost_forget_only = False
+
     def __init__(self, *args, ghost_dtype=torch.float32, **kwargs):
         super().__init__(*args, **kwargs)
         if ghost_dtype not in (torch.float32, torch.float64):
@@ -530,10 +532,10 @@ class GhostInnerProductsMixin:
             self.accelerator.num_processes != 1
             or self.is_deepspeed_enabled
             or self.is_fsdp_enabled
-            or self.args.n_gpu > 1
+            or (self.args.n_gpu > 1 and not self.is_model_parallel)
         ):
             raise NotImplementedError(
-                "Ghost logging requires single-process, single-device training"
+                "Ghost logging requires one process; multiple GPUs require model sharding"
             )
         if (
             getattr(self.model, "is_gradient_checkpointing", False)
@@ -545,6 +547,7 @@ class GhostInnerProductsMixin:
         if getattr(self.args, "sample_packing", False):
             raise NotImplementedError("Ghost logging requires unpacked batches")
         self.ghost_dtype = ghost_dtype
+        self.track_ghost = not self.ghost_forget_only
         self.gram = None
         self.previous_uses = {}
         self.microbatch_means = []
@@ -571,8 +574,21 @@ class GhostInnerProductsMixin:
             self.close()
             raise
 
+    def compute_forget_loss(self, *args, **kwargs):
+        tracking = self.track_ghost
+        self.track_ghost = True
+        try:
+            return super().compute_forget_loss(*args, **kwargs)
+        finally:
+            self.track_ghost = tracking
+
     def on_module_forward(self, module, inputs, kwargs, output):
-        if self.computing_gram or not module.training or not torch.is_grad_enabled():
+        if (
+            not self.track_ghost
+            or self.computing_gram
+            or not module.training
+            or not torch.is_grad_enabled()
+        ):
             return
         if not isinstance(output, torch.Tensor):
             raise ValueError("Ghost logging requires tensor module outputs")
@@ -587,6 +603,7 @@ class GhostInnerProductsMixin:
 
         def on_module_backward(d):
             # d = dL/dz_output, where z_output is this module's output.
+            handle.remove()
             self.computing_gram = True
             try:
                 with torch.no_grad(), torch.autocast(z.device.type, enabled=False):
@@ -602,14 +619,15 @@ class GhostInnerProductsMixin:
             finally:
                 self.computing_gram = False
 
-        self.output_handles.append(output.register_hook(on_module_backward))
+        handle = output.register_hook(on_module_backward)
+        self.output_handles.append(handle)
 
     def _accumulate_parameter(self, parameter, current, contribution=None):
         if parameter is None or not parameter.requires_grad:
             return
         contribution = (
             term_gram(current, current) if contribution is None else contribution
-        )
+        ).to(self.args.device)
         if self.gram is None:
             self.gram = contribution
         else:
@@ -621,7 +639,7 @@ class GhostInnerProductsMixin:
         previous = self.previous_uses.setdefault(id(parameter), [])
         for earlier in previous:
             cross = term_gram(current, earlier)
-            self.gram.add_(cross + cross.T)
+            self.gram.add_((cross + cross.T).to(self.gram.device))
         previous.append(current)
 
     def accumulate_gram_linear(self, module, z: torch.Tensor, d: torch.Tensor) -> None:
@@ -754,6 +772,18 @@ class RefusalHarmfulSampler(torch.utils.data.Sampler[int]):
 # Defense and relearning trainers
 if importlib.util.find_spec("axolotl") is not None:
     from axolotl.core.trainers.base import AxolotlTrainer
+    from trainers.ul_gd import GradDiffTrainer
+    from trainers.ul_npo import NPOTrainer
+
+    class GIPGradDiffTrainer(GhostInnerProductsMixin, GradDiffTrainer):
+        """Observe forget-gradient cosine during unchanged GD training."""
+
+        ghost_forget_only = True
+
+    class GIPNPOTrainer(GhostInnerProductsMixin, NPOTrainer):
+        """Observe forget-gradient cosine during unchanged NPO training."""
+
+        ghost_forget_only = True
 
     # Defense: retain loss plus finite-difference harmful-gradient cosine.
     class GIPTrainer(AxolotlTrainer):

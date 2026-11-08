@@ -157,6 +157,18 @@ gradient_checkpointing: false
 
 Run with `PYTHONPATH=src .venv-train/bin/axolotl train path/to/config.yml`.
 
+For passive tracking during unlearning, use `GIPGradDiffTrainer` or
+`GIPNPOTrainer` from the same module. They capture only `compute_forget_loss`;
+retain forwards and NPO's reference forward are excluded. Each captured output
+is counted on its first gradient traversal, so GD's diagnostic gradient calls
+and subsequent training backward do not double-count it. The defense objectives
+and optimizer gradients are unchanged.
+
+Tracking supports one process on one GPU or a model sharded across GPUs. Layer
+Gram contributions are collected on the Trainer device; parameter gradients
+stay on their owning devices. Tamia launchers accept `TRAIN_SOURCE_ROOT` to
+run against a frozen copy of the source directory.
+
 Supported trainable parameter owners are Linear, Embedding, LayerNorm, RMSNorm,
 HF Conv1D, and HF RMSNorm modules. Reused layers and tied weights include cross
 terms. Linear weights use tensorized `ztz` and `dtd` contractions; temporary
@@ -166,8 +178,9 @@ Modules must use independent, batch-first examples. GPT-2 requires explicit
 `position_ids = torch.arange(sequence_length, device=input_ids.device).expand_as(input_ids)`
 in each training batch because its default positional embeddings broadcast across
 examples. Batch-coupled operations, direct parameter uses outside supported modules,
-gradient checkpointing, packed batches, distributed training, and multiple backward
-passes per microbatch are unsupported. The Gram becomes available after backward;
+gradient checkpointing, packed batches, distributed training, and combining
+different backward objectives for the same captured outputs are unsupported.
+The Gram becomes available after the first backward traversal;
 it is detached and cannot directly define a differentiable orthogonality penalty.
 
 Run the numerical and Trainer regression tests from this directory with:

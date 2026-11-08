@@ -1275,3 +1275,34 @@ def test_name_template_rejects_invalid_placeholders_and_slugs(template):
     hpo = load_script(EXAMPLE / "scripts/hpo.py", "invalid_name_test")
     with pytest.raises(ValueError):
         hpo.candidate_name(template, {"learning_rate": 1e-5, "max_steps": 250})
+
+
+def test_gip_tracking_defenses_preserve_selected_settings_and_evaluate(monkeypatch):
+    from lilpipe import load
+
+    monkeypatch.chdir(EXAMPLE)
+    pipeline = load("configs/experiments/z7b-wmdp-bio-gd15pp-npo5pp-ghost-track.yml")
+    stages = pipeline.plan().stages
+    assert len(stages) == 4
+    for original, cls in [
+        ("z7b-wmdp-bio--15pp--unlearn-fft-gd", "GIPGradDiffTrainer"),
+        ("z7b-wmdp-bio--5pp--unlearn-fft-npo", "GIPNPOTrainer"),
+    ]:
+        name = original + "--ghost-track"
+        parent = EXAMPLE / "configs/stages-wmdp/0_unlearn"
+        before = yaml.safe_load((parent / original / "selected.yml").read_text())
+        after = yaml.safe_load((parent / name / "selected.yml").read_text())
+        assert after["trainer_cls"] == "trainers.tr_gip." + cls
+        assert after["output_dir"] == "artifacts/tamia/models/" + name
+        assert after["wandb_name"] == name
+        changed = {"trainer_cls", "output_dir", "wandb_name"}
+        assert {k: v for k, v in before.items() if k not in changed} == {
+            k: v for k, v in after.items() if k not in changed
+        }
+        training = next(s for s in stages if s.id == "train-" + name)
+        evaluation = next(
+            s
+            for s in stages
+            if s.id.startswith("eval-") and s.args[0] == after["output_dir"]
+        )
+        assert evaluation.depends_on == (training.id,)

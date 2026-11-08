@@ -1,21 +1,21 @@
-id: z7b-wmdp-bio--5pp--unlearn-fft-npo--gip-squared-fp32--hpo
+id: z7b-wmdp-bio--5pp--unlearn-fft-npo--gip-squared-fp32--rho1e-4--hpo
 sweeps:
 - name: lambda-0
   parameters:
     custom_trainer_args.cosine_coefficient:
     - 0.0
+- name: lambda-0.1
+  parameters:
+    custom_trainer_args.cosine_coefficient:
+    - 0.1
+- name: lambda-1
+  parameters:
+    custom_trainer_args.cosine_coefficient:
+    - 1.0
 - name: lambda-10
   parameters:
     custom_trainer_args.cosine_coefficient:
     - 10.0
-- name: lambda-100
-  parameters:
-    custom_trainer_args.cosine_coefficient:
-    - 100.0
-- name: lambda-1000
-  parameters:
-    custom_trainer_args.cosine_coefficient:
-    - 1000.0
 producer:
   script: scripts/slurm/tamia/train.sbatch
   sbatch_args:

@@ -825,7 +825,7 @@ class ForgetGradientCosineMixin:
         cosine_coefficient=0.0,
         cosine_pairs=2,
         cosine_tau=1e-3,
-        cosine_rho=0.1,
+        cosine_rho=1e-3,
         cosine_skip_threshold=1e-8,
         cosine_offload_originals=False,
         **kwargs,

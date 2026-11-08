@@ -162,6 +162,90 @@ python scripts/analysis/toy-experiments/run_cifar_defence_and_attack.py \
 `--directions head` evaluates a shared orthonormal classifier-bias plane, useful
 for displaying upward curvature where the body-plane landscape is flat.
 
+### Group-gradient cosine without a retain objective
+
+`--method gradient-cosine` minimizes only the stabilized cosine between the
+cross-entropy gradients of two random, disjoint halves of each batch. There is
+no cross-entropy term in the defense update and no retain set. This reuses the
+finite-difference implementation in `src/trainers/tr_gip.py`, including
+FP32 perturbations, RNG replay, parameter/buffer restoration, and small-gradient
+skipping. A skipped defense update also skips Adam, preventing momentum drift.
+The signed objective encourages orthogonal or opposing group gradients; it is
+not an all-pairs individual-example orthogonality penalty.
+
+Use the saved random-initialization baseline for an identical starting point:
+
+```bash
+PYTHONPATH=src python scripts/analysis/toy-experiments/run_cifar_defence_and_attack.py \
+  --method gradient-cosine \
+  --defend-checkpoint "$SCRATCH/lilpipe/cifar10-fullbatch512/train.pt" \
+  --train-samples 512 --batch-size 512 --steps 100 --learning-rate 0.001 \
+  --rho 0.001 --cosine-tau 0.001 --cosine-skip-threshold 1e-8 \
+  --optimizer adam --relearn-learning-rate 0.001 --relearn-steps 100 --log-every 1 \
+  --output "$SCRATCH/lilpipe/cifar10-fullbatch512-gradient-cosine-rho1e-3"
+
+python scripts/analysis/toy-experiments/plot_cifar_relearn_trajectory.py \
+  --fullbatch-root "$SCRATCH/lilpipe" --fullbatch-tar \
+  --run 'Group gradient cosine' \
+    "$SCRATCH/lilpipe/cifar10-fullbatch512-gradient-cosine-rho1e-3/results.json" \
+  --output artifacts/figures/resnet18-cifar10-fullbatch-gradient-cosine-relearning.pdf
+```
+
+The defense history records the group cosine, both gradient norms, regularization
+gradient norm, cross-entropy as a diagnostic, and cumulative skipped frequency.
+The subsequent attack uses ordinary mean cross-entropy on the same fixed images.
+
+`--method gradient-cosine-exact` is a separate method using second-order autograd
+for the same group objective. It does not perturb parameters. The finite-difference
+method remains available as `gradient-cosine`; neither is silently substituted for
+the other. GPU allocation and peak reserved memory are recorded in the defense
+history, along with gradient computation time.
+
+The additional individual-gradient methods are:
+
+- `frozen-normalization`: compute individual stabilized inverse gradient norms,
+  detach them, and minimize the raw inner product of weighted group gradients.
+- `sampled-individual`: differentiate normalization and estimate the off-diagonal
+  individual cosine derivative using `--cosine-contributions K` sampled examples.
+- `full-individual`: use every example's finite-difference contribution.
+
+`positive-pair-cosine` is a separate follow-up objective:
+`mean(relu(cos(g_i, g_j)))`, excluding self-pairs. It samples
+`--cosine-contributions K` pairs uniformly from the batch and uses exact
+second-order autograd for each selected positive contribution. Opposing pairs
+contribute zero, rather than canceling aligned pairs in the objective. Pair
+graphs are processed sequentially. The sampled objective is logged separately
+from the full-batch off-diagonal cosine measured during relearning.
+
+Individual gradients are streamed rather than stored in a batch-by-parameter
+matrix. Individual methods clone buffers and use functional parameter shifts,
+replaying each matching base/perturbed RNG state. They record their actual count
+of gradient evaluations and time spent computing per-example norms. These CIFAR
+experiments use evaluation mode and GroupNorm, so examples remain independent.
+
+With stabilized normalized gradients `u_i`, the off-diagonal objective is
+`(N * ||mean(u)||^2 - mean(||u_i||^2)) / (N - 1)`. The second term is differentiated
+as well: stabilized `u_i` do not have constant unit norm. The full individual
+estimator is checked against this exact higher-order objective in FP64; the
+frozen method is checked with its normalization weights explicitly detached.
+
+Add `--cosine-diagnostic-samples 32 --cosine-diagnostic-every 10` to any run,
+including a baseline or an attack loaded with `--checkpoint`, to record cosine
+throughout relearning. Diagnostics always use the same cohort and leave optimizer
+gradients unchanged. Individual off-diagonal cosine and group cosine are logged
+separately. They use an exact streaming identity, with no contribution sampling.
+Use `--disable-tf32` for the FP32 comparison, especially for finite differences.
+
+Named runs can be plotted without the historical defaults:
+
+```bash
+python scripts/analysis/toy-experiments/plot_cifar_relearn_trajectory.py \
+  --run Base /path/to/base/results.json \
+  --run 'Exact group cosine' /path/to/group-exact/results.json \
+  --metric individual_pairwise_cosine \
+  --output artifacts/figures/cifar-gradient-cosine-during-relearning.pdf
+```
+
 ### Fully differentiated TAR
 
 `--method tar-full` differentiates the outer negative-entropy objective through

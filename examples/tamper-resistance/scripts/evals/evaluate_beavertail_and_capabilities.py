@@ -114,7 +114,9 @@ def capabilities(model, tokenizer, batch_size=24) -> tuple[float, dict]:
     return mean(task_scores.values()), task_scores
 
 
-def evaluate_model(model_path: str, prompts: list[str]) -> dict:
+def evaluate_model(
+    model_path: str, prompts: list[str], *, harmfulness_only: bool = False
+) -> dict:
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -124,7 +126,9 @@ def evaluate_model(model_path: str, prompts: list[str]) -> dict:
     )
     generations = generate(model, tokenizer, prompts)
     harmful_score, records = harmfulness(prompts, generations)
-    capability, tasks = capabilities(model, tokenizer)
+    capability, tasks = (
+        (None, {}) if harmfulness_only else capabilities(model, tokenizer)
+    )
     del model, tokenizer
     gc.collect()
     torch.cuda.empty_cache()
@@ -151,12 +155,16 @@ def file_lock(path: Path):
         yield
 
 
-def cached_evaluation(model_path: str, prompts, result_root: Path) -> dict:
-    key = hashlib.sha256(model_path.encode()).hexdigest()[:16]
+def cached_evaluation(
+    model_path: str, prompts, result_root: Path, *, harmfulness_only: bool = False
+) -> dict:
+    cache_identity = model_path + ("::harmfulness-only" if harmfulness_only else "")
+    key = hashlib.sha256(cache_identity.encode()).hexdigest()[:16]
     cache = result_root / "cache" / key / "metrics.json"
     with file_lock(cache.with_suffix(".lock")):
         if not cache.exists():
-            atomic_json(cache, evaluate_model(model_path, prompts))
+            options = {"harmfulness_only": True} if harmfulness_only else {}
+            atomic_json(cache, evaluate_model(model_path, prompts, **options))
         return json.loads(cache.read_text())
 
 
@@ -197,12 +205,14 @@ def parse_args(argv=None):
     subparsers = parser.add_subparsers(dest="mode", required=True)
 
     single = subparsers.add_parser("single")
+    single.add_argument("--harmfulness-only", action="store_true")
     single.add_argument("model_id")
     single.add_argument("model")
     single.add_argument("method")
     single.add_argument("result_root", type=Path)
 
     trajectory = subparsers.add_parser("trajectory")
+    trajectory.add_argument("--harmfulness-only", action="store_true")
     trajectory.add_argument("model_id")
     trajectory.add_argument("baseline_model")
     trajectory.add_argument("attacked_model")
@@ -232,8 +242,9 @@ def main(argv=None) -> None:
         raise RuntimeError(
             f"expected 100 harmful evaluation prompts, found {len(prompts)}"
         )
+    options = {"harmfulness_only": True} if args.harmfulness_only else {}
     if args.mode == "single":
-        post = cached_evaluation(args.model, prompts, args.result_root)
+        post = cached_evaluation(args.model, prompts, args.result_root, **options)
         summary = {
             "model_id": args.model_id,
             "method": args.method,
@@ -244,11 +255,13 @@ def main(argv=None) -> None:
         checkpoint = args.checkpoint_path or attack_checkpoint(
             args.baseline_model, args.attacked_model, args.checkpoint_step
         )
-        pre = cached_evaluation(args.baseline_model, prompts, args.result_root)
+        pre = cached_evaluation(
+            args.baseline_model, prompts, args.result_root, **options
+        )
         post = (
             pre
             if checkpoint == args.baseline_model
-            else evaluate_model(checkpoint, prompts)
+            else evaluate_model(checkpoint, prompts, **options)
         )
         summary = {
             "model_id": args.model_id,

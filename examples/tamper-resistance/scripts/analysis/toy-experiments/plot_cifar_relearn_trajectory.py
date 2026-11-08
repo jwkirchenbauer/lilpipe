@@ -11,6 +11,25 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--root")
 parser.add_argument("--fullbatch-root", help="Compare saved 512/1024 full-batch runs")
 parser.add_argument(
+    "--run",
+    nargs=2,
+    action="append",
+    default=[],
+    metavar=("NAME", "RESULTS"),
+    help="Add a named results.json trajectory to the full-batch comparison",
+)
+parser.add_argument(
+    "--metric",
+    default="test_accuracy",
+    choices=(
+        "test_accuracy",
+        "loss",
+        "individual_pairwise_cosine",
+        "diagnostic_group_cosine",
+    ),
+    help="Metric for full-batch/named-run relearning comparisons",
+)
+parser.add_argument(
     "--fullbatch-tar",
     action="store_true",
     help="Compare TAR versus no defense using Adam only",
@@ -85,8 +104,8 @@ if args.bad_minima_root:
         hue="method",
         palette={cfg["name"]: cfg["color"] for cfg in configs},
         kind="line",
-        height=3,
-        aspect=1,
+        height=4,
+        aspect=1.8,
     )
     plot.axes[0, 0].set_title("Full batch Adam attacks on candidate basins")
     os.makedirs(os.path.dirname(os.path.abspath(args.output)), exist_ok=True)
@@ -202,9 +221,11 @@ if args.tar_defence_trace:
     print(args.output)
     sys.exit()
 
-if args.fullbatch_root:
+if args.fullbatch_root or args.run:
     root = args.fullbatch_root
-    if args.fullbatch_tar:
+    if root is None:
+        configs = []
+    elif args.fullbatch_tar:
         configs = [
             {
                 "path": os.path.join(root, "cifar10-fullbatch512/results.json"),
@@ -239,16 +260,22 @@ if args.fullbatch_root:
             for optimizer, subdir in [("Adam", ""), ("SGD", "sgd")]
         ]
 
+    colors = sns.color_palette("colorblind", n_colors=len(args.run) + 3)
+    configs.extend(
+        {"name": name, "path": path, "color": colors[index + 3]}
+        for index, (name, path) in enumerate(args.run)
+    )
     rows = []
     for cfg in configs:
         with open(cfg["path"]) as stream:
             history = json.load(stream)["history"]
         for record in history:
-            if record["phase"] == "relearn":
+            if record["phase"] == "relearn" and args.metric in record:
                 rows.append(
                     {
                         "epochs": record["step"],
-                        "accuracy": 100 * record["test_accuracy"],
+                        "value": record[args.metric]
+                        * (100 if args.metric == "test_accuracy" else 1),
                         "method": cfg["name"],
                     }
                 )
@@ -256,14 +283,23 @@ if args.fullbatch_root:
     plot = sns.relplot(
         data=pd.DataFrame(rows),
         x="epochs",
-        y="accuracy",
+        y="value",
         hue="method",
         palette={cfg["name"]: cfg["color"] for cfg in configs},
         kind="line",
         height=3,
         aspect=1,
     )
-    plot.axes[0, 0].set_title("Full batch SGD attacks on Resnet18 models")
+    plot.axes[0, 0].set_title("Full-batch attacks on ResNet-18")
+    plot.set_axis_labels(
+        "Relearning updates",
+        {
+            "test_accuracy": "Test accuracy (%)",
+            "loss": "Training cross-entropy",
+            "individual_pairwise_cosine": "Mean individual pairwise cosine",
+            "diagnostic_group_cosine": "Group-gradient cosine (diagnostic batch)",
+        }[args.metric],
+    )
     os.makedirs(os.path.dirname(os.path.abspath(args.output)), exist_ok=True)
     plot.savefig(args.output)
     sys.exit()

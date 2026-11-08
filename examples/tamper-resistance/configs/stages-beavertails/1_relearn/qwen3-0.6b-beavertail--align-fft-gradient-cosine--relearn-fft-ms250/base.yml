@@ -1,0 +1,46 @@
+base_model: artifacts/mila/models/qwen3-0.6b-beavertail--align-fft-gradient-cosine
+plugins:
+- axolotl_plugins.custom_trainer_args.CustomTrainerArgsPlugin
+trainer_cls: trainers.tr_gip.GIPRelearnTrainer
+datasets:
+- path: anonymous4486/repnoise_beavertail
+  split: train
+  revision: 11ea63756195527164a9aa2850f7544bd251eab1
+  type: data.beavertails_hh
+  message_property_mappings:
+    role: hh
+    max_rows: '5000'
+    offset: '0'
+    train_on_inputs: 'false'
+dataset_num_proc: 4
+dataset_prepared_path: artifacts/mila/cache/axolotl/qwen3-0.6b-beavertail--align-fft-gradient-cosine--relearn-fft-ms250/prepared
+val_set_size: 0.0
+output_dir: artifacts/mila/models/qwen3-0.6b-beavertail--align-fft-gradient-cosine--relearn-fft-ms250
+sequence_len: 256
+sample_packing: false
+pad_to_sequence_len: true
+train_on_inputs: false
+micro_batch_size: 4
+gradient_accumulation_steps: 1
+max_steps: 250
+learning_rate: 2.0e-05
+optimizer: adamw_torch
+weight_decay: 0.0
+lr_scheduler: cosine
+warmup_ratio: 0.1
+max_grad_norm: 1.0
+bf16: true
+fp16: false
+tf32: false
+gradient_checkpointing: false
+attn_implementation: sdpa
+seed: 42
+data_seed: 42
+eval_strategy: 'no'
+save_strategy: steps
+save_steps: 50
+save_total_limit: 5
+save_only_model: true
+logging_steps: 1
+wandb_project: lp-tamper-resistance
+wandb_name: qwen3-0.6b-beavertail--align-fft-gradient-cosine--relearn-fft-ms250

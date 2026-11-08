@@ -38,6 +38,15 @@ rm_final_ckpt_after_eval=${9:-false}
 uv sync --frozen --group eval
 source "$UV_PROJECT_ENVIRONMENT/bin/activate"
 
+eval_args=()
+if [[ ${HARMFULNESS_ONLY:-0} == 1 ]]; then
+    eval_args+=(--harmfulness-only)
+    python scripts/evals/evaluate_beavertail_and_capabilities.py trajectory \
+        "$model_id" "$baseline_model_name_or_path" "$base_model_name_or_path" \
+        "$learning_rate" "$attack_data" "$method" "$result_root" \
+        --checkpoint-step 0 "${eval_args[@]}"
+fi
+
 for ckpt_name_or_path in "$base_model_name_or_path"/checkpoint-*; do
     [[ -d "$ckpt_name_or_path" ]] || continue
     step=${ckpt_name_or_path##*/checkpoint-}
@@ -45,7 +54,7 @@ for ckpt_name_or_path in "$base_model_name_or_path"/checkpoint-*; do
     python scripts/evals/evaluate_beavertail_and_capabilities.py trajectory \
         "$model_id" "$baseline_model_name_or_path" "$base_model_name_or_path" \
         "$learning_rate" "$attack_data" "$method" "$result_root" \
-        --checkpoint-step "$step" --checkpoint-path "$ckpt_name_or_path"
+        --checkpoint-step "$step" --checkpoint-path "$ckpt_name_or_path" "${eval_args[@]}"
 
     if [[ "$rm_intermediate_ckpts_after_eval" == true ]]; then
         rm -r -- "$ckpt_name_or_path"

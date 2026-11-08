@@ -12,11 +12,12 @@ from torch.nn import functional as F
 
 SRC = Path(__file__).resolve().parents[1] / "examples/tamper-resistance/src"
 sys.path.insert(0, str(SRC))
-from trainers.ghost_inner_products import (
+from trainers.tr_gip import (
     GhostCapture,
     GradientTerm,
     assemble_gram,
     causal_lm_losses,
+    mean_gradient_cosine,
     term_inner_product,
 )
 
@@ -216,7 +217,7 @@ def test_tiny_hf_gram():
 def test_trainer_matches_explicit_update(tmp_path, accumulation):
     transformers = pytest.importorskip("transformers")
     pytest.importorskip("accelerate")
-    from trainers.ghost_trainer import GhostInnerProductsMixin
+    from trainers.tr_gip import GhostInnerProductsMixin
 
     class GhostTrainer(GhostInnerProductsMixin, transformers.Trainer):
         def training_step(self, model, inputs, num_items_in_batch=None):
@@ -249,7 +250,10 @@ def test_trainer_matches_explicit_update(tmp_path, accumulation):
             torch.testing.assert_close(
                 self.gram.double(), expected, rtol=3e-5, atol=1e-6
             )
-            self.expected_means.append(expected.mean().item())
+            norms = expected.diagonal().sqrt()
+            cosines = expected / (norms[:, None] * norms[None, :])
+            mask = ~torch.eye(len(norms), dtype=torch.bool)
+            self.expected_means.append(cosines[mask].mean().item())
             return result
 
     torch.manual_seed(7)
@@ -296,9 +300,9 @@ def test_trainer_matches_explicit_update(tmp_path, accumulation):
     for actual, expected in zip(model.parameters(), reference.parameters()):
         torch.testing.assert_close(actual, expected, rtol=2e-5, atol=2e-7)
     logged = [
-        row["ghost_gram_mean"]
+        row["ghost_cosine_mean"]
         for row in trainer.state.log_history
-        if "ghost_gram_mean" in row
+        if "ghost_cosine_mean" in row
     ]
     assert logged == pytest.approx(
         [sum(trainer.expected_means) / accumulation], rel=3e-5
@@ -369,7 +373,7 @@ def test_cpu_autocast_and_existing_parameter_gradients():
 @pytest.mark.parametrize("kind", ["linear", "tied", "norm"])
 def test_backward_hook_gram_matches_explicit(tmp_path, kind):
     transformers = pytest.importorskip("transformers")
-    from trainers.ghost_trainer import GhostInnerProductsMixin
+    from trainers.tr_gip import GhostInnerProductsMixin
 
     class GhostTrainer(GhostInnerProductsMixin, transformers.Trainer):
         pass
@@ -401,13 +405,12 @@ def test_backward_hook_gram_matches_explicit(tmp_path, kind):
     try:
         model(inputs).square().flatten(1).mean(1).mean().backward()
         torch.testing.assert_close(trainer.gram, expected, rtol=1e-8, atol=1e-9)
-        # Exercise AMP normalization independently of CUDA availability.
-        from types import SimpleNamespace
-
-        trainer.accelerator.scaler = SimpleNamespace(get_scale=lambda: 8)
+        # Common backward scaling cancels from cosine normalization.
         trainer.gram.mul_(64)
         trainer.finish_microbatch()
-        torch.testing.assert_close(trainer.microbatch_means[0], expected.mean())
+        torch.testing.assert_close(
+            trainer.microbatch_means[0], mean_gradient_cosine(expected)
+        )
         assert trainer.gram is None and not trainer.previous_uses
     finally:
         trainer.close()
@@ -415,7 +418,7 @@ def test_backward_hook_gram_matches_explicit(tmp_path, kind):
 
 
 def test_vectorized_grams_match_chunked_reference():
-    from trainers.ghost_inner_products import linear_weight_gram, term_gram
+    from trainers.tr_gip import linear_weight_gram, term_gram
 
     z = torch.randn(3, 4, 5, dtype=torch.float64)
     d = torch.randn(3, 4, 6, dtype=torch.float64)
@@ -436,10 +439,10 @@ def test_axolotl_trainer_logs_without_overriding_training(tmp_path):
     pytest.importorskip("axolotl")
     from axolotl.core.trainers.base import AxolotlTrainer
     from axolotl.core.training_args import AxolotlTrainingArguments
-    from trainers.ghost_axolotl import GhostAxolotlTrainer
+    from trainers.tr_gip import GIPRelearnTrainer
 
-    assert GhostAxolotlTrainer.training_step is AxolotlTrainer.training_step
-    assert GhostAxolotlTrainer.compute_loss is AxolotlTrainer.compute_loss
+    assert GIPRelearnTrainer.training_step is AxolotlTrainer.training_step
+    assert GIPRelearnTrainer.compute_loss is AxolotlTrainer.compute_loss
     dataset = [
         {
             "input_ids": torch.tensor([1, 2, 3, 4]),
@@ -453,7 +456,7 @@ def test_axolotl_trainer_logs_without_overriding_training(tmp_path):
     dataset = Dataset.from_list(
         [{key: value.tolist() for key, value in row.items()} for row in dataset]
     )
-    trainer = GhostAxolotlTrainer(
+    trainer = GIPRelearnTrainer(
         model=tiny_gpt(),
         train_dataset=dataset,
         args=AxolotlTrainingArguments(
@@ -470,11 +473,30 @@ def test_axolotl_trainer_logs_without_overriding_training(tmp_path):
     try:
         trainer.train()
         values = [
-            row["ghost_gram_mean"]
+            row["ghost_cosine_mean"]
             for row in trainer.state.log_history
-            if "ghost_gram_mean" in row
+            if "ghost_cosine_mean" in row
         ]
-        assert len(values) == 1 and values[0] > 0
+        assert len(values) == 1 and -1 <= values[0] <= 1
+        assert (tmp_path / "trainer_state.json").is_file()
         assert not trainer.hook_handles and not trainer.output_handles
     finally:
         trainer.close()
+
+
+@pytest.mark.parametrize("scale", [1e-8, 1.0, 1e8])
+def test_mean_gradient_cosine_normalizes_and_excludes_diagonal(scale):
+    gradients = torch.tensor([[1.0, 0.0], [2.0, 0.0], [0.0, 1.0]], dtype=torch.float64)
+    gram = (gradients @ gradients.T) * scale**2
+    torch.testing.assert_close(mean_gradient_cosine(gram), gram.new_tensor(1 / 3))
+
+
+def test_mean_gradient_cosine_negative_and_zero_norms():
+    gradients = torch.tensor([[1.0, 0.0], [-2.0, 0.0], [0.0, 0.0]])
+    torch.testing.assert_close(
+        mean_gradient_cosine(gradients @ gradients.T), torch.tensor(-1.0)
+    )
+    assert mean_gradient_cosine(torch.zeros(3, 3)) is None
+    assert mean_gradient_cosine(torch.ones(1, 1)) is None
+    with pytest.raises(ValueError, match="square"):
+        mean_gradient_cosine(torch.zeros(2, 3))

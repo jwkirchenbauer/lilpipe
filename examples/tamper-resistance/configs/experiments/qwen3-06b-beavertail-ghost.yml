@@ -1,0 +1,9 @@
+version: 1
+id: qwen3-0.6b-beavertail--relearn-fft-ghost-ms250
+registries:
+  models: configs/registries/models.yml
+  evaluations: configs/registries/evals.yml
+models:
+  - qwen3-0.6b-beavertail--relearn-fft-ghost-ms250
+evaluations:
+  - mila-l40s-q06b--beavertails-harmfulness-trajectory

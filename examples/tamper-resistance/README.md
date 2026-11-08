@@ -104,12 +104,17 @@ see [the rename mapping](docs/analysis-scripts.md).
 
 ## Ghost gradient inner products
 
-`trainers.ghost_inner_products` contains the tensor contractions and `GhostCapture`,
+The GIP implementation lives in `src/trainers/tr_gip.py`: shared mathematical
+functions, the finite-difference defense trainer `GIPTrainer`, and passive
+tracking through `GhostInnerProductsMixin` and `GIPRelearnTrainer`. Functions
+remain directly importable for numerical tests without Axolotl.
+
+`trainers.tr_gip` contains the tensor contractions and `GhostCapture`,
 which attaches temporary hooks to an existing model. It computes detached
 per-example gradient inner products without materializing full parameter gradients:
 
 ```python
-from trainers.ghost_inner_products import GhostCapture, causal_lm_losses
+from trainers.tr_gip import GhostCapture, causal_lm_losses
 
 with GhostCapture(model, chunk_size=32) as capture:
     outputs = model(input_ids=input_ids)
@@ -122,7 +127,7 @@ For Hugging Face Trainer integration:
 
 ```python
 from transformers import Trainer
-from trainers.ghost_trainer import GhostInnerProductsMixin
+from trainers.tr_gip import GhostInnerProductsMixin
 
 class GhostTrainer(GhostInnerProductsMixin, Trainer):
     pass
@@ -131,11 +136,13 @@ class GhostTrainer(GhostInnerProductsMixin, Trainer):
 The mixin installs forward and output-gradient hooks in initialization. It leaves
 `compute_loss`, `training_step`, backward, accumulation, and optimizer updates
 unchanged. `GhostLoggingCallback`, registered automatically, collects each
-microbatch's Gram mean and logs `ghost_gram_mean` before the optimizer step.
-This is the average of microbatch means, not the Gram of the entire accumulated
-batch. The statistic retains the existing loss normalization and gradient
-accumulation scaling; AMP loss scaling is removed. Evaluation under no-grad is
-ignored. Hooks are removed at normal training completion; call `trainer.close()`
+microbatch's mean off-diagonal gradient cosine and logs `ghost_cosine_mean`
+before the optimizer step.
+This is the average of microbatch cosine means, not the cosine mean over the entire
+accumulated batch. Diagonal pairs and pairs involving zero-norm gradients are
+excluded; microbatches with no valid pairs produce no metric. Common loss, gradient
+accumulation, and AMP scaling cancel during normalization. Evaluation under
+no-grad is ignored. Hooks are removed at normal training completion; call `trainer.close()`
 explicitly after an interrupted or failed run.
 
 For Axolotl, add these fields to an existing training YAML:
@@ -143,7 +150,7 @@ For Axolotl, add these fields to an existing training YAML:
 ```yaml
 plugins:
   - axolotl_plugins.custom_trainer_args.CustomTrainerArgsPlugin
-trainer_cls: trainers.ghost_axolotl.GhostAxolotlTrainer
+trainer_cls: trainers.tr_gip.GIPRelearnTrainer
 sample_packing: false
 gradient_checkpointing: false
 ```
@@ -168,3 +175,37 @@ Run the numerical and Trainer regression tests from this directory with:
 ```bash
 PYTHONPATH=src .venv-train/bin/python -m pytest ../../tests/test_ghost_inner_products.py
 ```
+
+## Finite-difference gradient cosine defense
+
+`trainers.tr_gip.GIPTrainer` minimizes refusal CE plus
+`cosine_coefficient` times the stabilized cosine between two randomly split,
+equal harmful-completion groups. Harmful losses are per-example mean completion
+CE, averaged over each group. The ordinary harmful-loss gradient is never added
+to the optimizer update. Refusal CE uses the model's ordinary mean loss.
+
+The initial implementation requires FP32 parameters, one device/process,
+unpacked batches, and no AMP or gradient checkpointing. Each batch contains
+half harmful completions and half refusals, with batch size divisible by four.
+Use `data.beavertails_hh` with roles `hh` and `hb`, `include_role: "true"`, and
+`remove_unused_columns: false` to retain the metadata used for balanced sampling.
+
+`custom_trainer_args` exposes `cosine_coefficient` (lambda), `cosine_tau`,
+`cosine_rho`, and `cosine_skip_threshold`. The detached finite-difference helper
+uses up to four harmful-group evaluations plus one retain evaluation per step;
+zero directions skip their perturbation and small base norms skip regularization.
+Setting lambda to zero runs only ordinary refusal training. Perturbations always
+start at the original weights, replay each group's torch dropout randomness,
+and restore exact parameter/buffer copies even on exceptions. Optimizer state
+is never touched by these evaluations. This implementation does not use ghost
+Gram matrices or individual-example parameter gradients.
+
+W&B metrics include `train/gradient_cosine`, `train/gradient_norm_a`,
+`train/gradient_norm_b`, `train/regularization_gradient_norm`, `train/loss_retain`,
+and `train/regularization_skip_frequency`. The cosine compares group-average
+gradients, unlike `train/ghost_cosine_mean`, which averages individual pairs.
+
+`configs/experiments/qwen3-06b-gradient-cosine-defense.yml` compares the defense
+against a matched lambda-zero refusal control, then applies the same 250-step
+harmful attack to both and evaluates harmfulness before and every 50 attack steps.
+The initial coefficients are experiment settings, not tuned hyperparameters.

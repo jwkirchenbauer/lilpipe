@@ -6,6 +6,8 @@ from functools import partial
 import json
 import os
 from pathlib import Path
+import sys
+import time
 
 import torch
 from torch import nn
@@ -16,9 +18,450 @@ from torch.utils.data import DataLoader, TensorDataset
 from torch.utils.checkpoint import checkpoint
 from torchvision import datasets, models, transforms
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+from trainers.tr_gip import finite_difference_cosine, gradient_dot
+
+
+def cosine_backward(model, images, labels, *, tau, rho, skip_threshold):
+    """Assign only the finite-difference group-cosine gradient to parameters.
+
+    Args:
+        model: FP32 model, or FP64 for numerical validation.
+        images: Input images, shape [B, C, H, W], with even B >= 2.
+        labels: Class targets, shape [B].
+        tau: Positive stabilization for group-gradient norms.
+        rho: Positive parameter-space finite-difference perturbation length.
+        skip_threshold: Skip the update below either group-gradient norm.
+
+    Each call randomly partitions the batch into two equally sized groups.
+    Cross-entropy defines their gradients but is not a defense objective term.
+    The signed cosine objective permits opposing as well as orthogonal gradients.
+    """
+    if len(labels) < 2 or len(labels) % 2 or len(images) != len(labels):
+        raise ValueError("Group cosine requires an even batch of at least two examples")
+    order = torch.randperm(len(labels), device=images.device)
+    a, b = order.chunk(2)
+    evaluations = 0
+
+    def group_loss(indices):
+        nonlocal evaluations
+        evaluations += 1
+        return F.cross_entropy(model(images[indices]), labels[indices])
+
+    result = finite_difference_cosine(
+        model,
+        lambda: group_loss(a),
+        lambda: group_loss(b),
+        tau=tau,
+        rho=rho,
+        skip_threshold=skip_threshold,
+    )
+    for parameter, gradient in zip(
+        (p for p in model.parameters() if p.requires_grad),
+        result.regularization,
+        strict=True,
+    ):
+        parameter.grad = gradient
+    return {
+        "objective": result.cosine.item(),
+        "group_cosine": result.cosine.item(),
+        "group_gradient_norm_a": result.norm_a.item(),
+        "group_gradient_norm_b": result.norm_b.item(),
+        "regularization_gradient_norm": gradient_dot(
+            result.regularization, result.regularization
+        )
+        .sqrt()
+        .item(),
+        "training_loss": ((result.loss_a + result.loss_b) / 2).item(),
+        "skipped": result.skipped,
+        "forget_gradient_evaluations": evaluations,
+    }
+
+
+def exact_cosine_backward(model, images, labels, *, tau, skip_threshold=0):
+    """Assign the exact group-cosine derivative using second-order autograd.
+
+    Args:
+        model: FP32 model, or FP64 for numerical validation.
+        images: Input images, shape [B, C, H, W], with even B >= 2.
+        labels: Class targets, shape [B].
+        tau: Positive stabilization for group-gradient norms.
+        skip_threshold: Skip the update below either group-gradient norm.
+
+    Randomly split the batch into equal disjoint groups. Cross-entropy defines
+    their gradients; only the stabilized signed cosine is differentiated for
+    the defense update. No parameter perturbation or explicit Hessian is used.
+    """
+    if len(labels) < 2 or len(labels) % 2 or len(images) != len(labels):
+        raise ValueError("Group cosine requires an even batch of at least two examples")
+    order = torch.randperm(len(labels), device=images.device)
+    a, b = order.chunk(2)
+    if not 0 < tau < float("inf") or not 0 <= skip_threshold < float("inf"):
+        raise ValueError("Invalid cosine stabilization or skip threshold")
+    parameters = tuple(p for p in model.parameters() if p.requires_grad)
+    losses = [F.cross_entropy(model(images[group]), labels[group]) for group in (a, b)]
+    gradients = [
+        tuple(
+            torch.zeros_like(p) if g is None else g
+            for p, g in zip(
+                parameters,
+                torch.autograd.grad(
+                    loss, parameters, create_graph=True, allow_unused=True
+                ),
+                strict=True,
+            )
+        )
+        for loss in losses
+    ]
+    ga, gb = gradients
+    aa, bb = gradient_dot(ga, ga), gradient_dot(gb, gb)
+    if not torch.isfinite(aa) or not torch.isfinite(bb):
+        raise FloatingPointError("Group gradient norm is not finite")
+    cosine = gradient_dot(ga, gb) / ((aa + tau**2).sqrt() * (bb + tau**2).sqrt())
+    skipped = bool((aa.sqrt() < skip_threshold) | (bb.sqrt() < skip_threshold))
+    regularization = (
+        torch.autograd.grad(cosine, parameters, allow_unused=True)
+        if not skipped
+        else (None,) * len(parameters)
+    )
+    for p, g in zip(parameters, regularization, strict=True):
+        p.grad = torch.zeros_like(p) if g is None else g.detach()
+    return {
+        "objective": cosine.item(),
+        "group_cosine": cosine.item(),
+        "group_gradient_norm_a": aa.sqrt().item(),
+        "group_gradient_norm_b": bb.sqrt().item(),
+        "regularization_gradient_norm": norm(p.grad for p in parameters).item(),
+        "training_loss": ((losses[0] + losses[1]) / 2).item(),
+        "skipped": skipped,
+        "forget_gradient_evaluations": 2,
+        "second_order_backward_calls": int(not skipped),
+    }
+
+
+def individual_cosine_backward(
+    model,
+    images,
+    labels,
+    *,
+    method,
+    tau,
+    rho,
+    sample_size=8,
+    skip_threshold=0,
+):
+    """Estimate individual-gradient regularizers without storing a B-by-P matrix.
+
+    Args:
+        model: Batch-independent evaluation-mode model, FP32 (FP64 for tests).
+        images: Inputs, shape [B, C, H, W], even B >= 2.
+        labels: Class targets, shape [B].
+        method: frozen-normalization, sampled-individual, or full-individual.
+        tau: Positive stabilization for individual gradient norms.
+        rho: Positive parameter-space perturbation length.
+        sample_size: Number of sampled contributions; ignored by the full method.
+        skip_threshold: Omit directions for gradients below this norm.
+
+    Frozen normalization targets a cross-group inner product with detached
+    inverse norms. The individual methods target the stabilized off-diagonal
+    pairwise cosine, including derivatives of its diagonal correction.
+    Functional parameter shifts and cloned buffers leave the model unchanged.
+    """
+    n = len(labels)
+    if n < 2 or n % 2 or len(images) != n:
+        raise ValueError("Individual regularization requires an even batch")
+    if method not in {"frozen-normalization", "sampled-individual", "full-individual"}:
+        raise ValueError(f"Unknown individual method: {method}")
+    if (
+        not 0 < tau < float("inf")
+        or not 0 < rho < float("inf")
+        or not 0 <= skip_threshold < float("inf")
+    ):
+        raise ValueError("Invalid individual regularizer stabilization or radius")
+    if model.training:
+        raise ValueError("Individual CIFAR methods require evaluation mode")
+    if method == "sampled-individual" and not 1 <= sample_size <= n:
+        raise ValueError("Sample size must be between one and batch size")
+    named = {k: p for k, p in model.named_parameters() if p.requires_grad}
+    parameters = tuple(named.values())
+    if not parameters or parameters[0].dtype not in (torch.float32, torch.float64):
+        raise ValueError("Individual regularizers require FP32, or FP64 for tests")
+    buffers = {k: b.detach().clone() for k, b in model.named_buffers()}
+    cuda_devices = sorted({p.device.index for p in parameters if p.is_cuda})
+    evaluations = 0
+
+    def evaluate(indices, *, weights=None, point=None, replay=None):
+        nonlocal evaluations
+        point = named if point is None else point
+        rng = (
+            torch.get_rng_state(),
+            [torch.cuda.get_rng_state(d) for d in cuda_devices],
+        )
+        with torch.random.fork_rng(devices=cuda_devices, enabled=replay is not None):
+            if replay is not None:
+                torch.set_rng_state(replay[0])
+                for device, state in zip(cuda_devices, replay[1], strict=True):
+                    torch.cuda.set_rng_state(state, device)
+            logits = functional_call(
+                model,
+                (point, {k: b.clone() for k, b in buffers.items()}),
+                (images[indices],),
+            )
+            losses = F.cross_entropy(logits, labels[indices], reduction="none")
+            loss = (losses if weights is None else losses * weights).mean()
+            gs = torch.autograd.grad(loss, tuple(point.values()), allow_unused=True)
+        evaluations += 1
+        gs = tuple(
+            torch.zeros_like(p) if g is None else g.detach()
+            for p, g in zip(parameters, gs, strict=True)
+        )
+        return loss.detach(), gs, rng
+
+    normalized_mean = [torch.zeros_like(p) for p in parameters]
+    inverse_norms = images.new_empty(n)
+    raw_norms = images.new_empty(n)
+    base_rngs = []
+    diagonal_mean = images.new_zeros(())
+    loss_mean = images.new_zeros(())
+    norm_started = time.perf_counter()
+    for i in range(n):
+        loss, gs, rng = evaluate([i])
+        squared = gradient_dot(gs, gs)
+        if not torch.isfinite(squared):
+            raise FloatingPointError("Nonfinite individual gradient norm")
+        inverse = (squared + tau**2).rsqrt()
+        inverse_norms[i], raw_norms[i] = inverse, squared.sqrt()
+        for total, g in zip(normalized_mean, gs, strict=True):
+            total.add_(g * (inverse / n))
+        diagonal_mean += squared * inverse.square() / n
+        loss_mean += loss / n
+        base_rngs.append(rng)
+    norm_seconds = time.perf_counter() - norm_started
+    pairwise = (n * gradient_dot(normalized_mean, normalized_mean) - diagonal_mean) / (
+        n - 1
+    )
+    regularization = [torch.zeros_like(p) for p in parameters]
+    skipped = 0
+
+    def accumulate(base, direction, indices, factor, replay, weights=None):
+        length = gradient_dot(direction, direction).sqrt()
+        if not torch.isfinite(length):
+            raise FloatingPointError("Nonfinite individual regularization direction")
+        if length == 0:
+            return
+        point = {
+            name: (p.detach() + rho * v / length).requires_grad_()
+            for (name, p), v in zip(named.items(), direction, strict=True)
+        }
+        _, plus, _ = evaluate(indices, weights=weights, point=point, replay=replay)
+        for r, gp, g in zip(regularization, plus, base, strict=True):
+            r.add_((factor * length / rho) * (gp - g))
+
+    if method == "frozen-normalization":
+        a, b = torch.randperm(n, device=images.device).chunk(2)
+        _, ha, rng_a = evaluate(a, weights=inverse_norms[a])
+        _, hb, rng_b = evaluate(b, weights=inverse_norms[b])
+        objective = gradient_dot(ha, hb)
+        if bool((raw_norms < skip_threshold).any()):
+            skipped = n
+        else:
+            accumulate(ha, hb, a, 1, rng_a, inverse_norms[a])
+            accumulate(hb, ha, b, 1, rng_b, inverse_norms[b])
+        contributions = 2
+    else:
+        indices = (
+            list(range(n))
+            if method == "full-individual"
+            else torch.randperm(n)[:sample_size].tolist()
+        )
+        contributions = len(indices)
+        objective = pairwise
+        for i in indices:
+            if raw_norms[i] < skip_threshold:
+                skipped += 1
+                continue
+            _, gs, _ = evaluate([i], replay=base_rngs[i])
+            inverse = inverse_norms[i]
+            # d off-diagonal mean / d g_i includes the stabilized diagonal.
+            u = tuple(g * inverse for g in gs)
+            w = tuple(m - ui / n for m, ui in zip(normalized_mean, u, strict=True))
+            projection = gradient_dot(u, w)
+            direction = tuple(
+                (wi - ui * projection) * inverse for wi, ui in zip(w, u, strict=True)
+            )
+            accumulate(
+                gs, direction, [i], 2 * n / (contributions * (n - 1)), base_rngs[i]
+            )
+    for p, r in zip(parameters, regularization, strict=True):
+        p.grad = r
+    return {
+        "objective": objective.item(),
+        "individual_pairwise_cosine": pairwise.item(),
+        "example_gradient_norm_mean": raw_norms.mean().item(),
+        "example_gradient_norm_min": raw_norms.min().item(),
+        "example_gradient_norm_max": raw_norms.max().item(),
+        "regularization_gradient_norm": norm(regularization).item(),
+        "training_loss": loss_mean.item(),
+        "skipped": skipped
+        == (n if method == "frozen-normalization" else contributions),
+        "skipped_contributions": skipped,
+        "sampled_contributions": contributions,
+        "forget_gradient_evaluations": evaluations,
+        "per_example_norm_seconds": norm_seconds,
+    }
+
+
+def positive_pair_cosine_backward(
+    model, images, labels, *, tau, pair_count=32, skip_threshold=0, pairs=None
+):
+    """Differentiate the positive part of individual pairwise cosine.
+
+    Args:
+        model: Evaluation-mode, batch-independent classification model.
+        images: Input images, shape [B, C, H, W], B >= 2.
+        labels: Class targets, shape [B].
+        tau: Positive gradient-norm stabilization.
+        pair_count: Number of uniformly sampled distinct-example pairs.
+        skip_threshold: Omit pairs below either raw gradient-norm threshold.
+        pairs: Optional explicit indices, shape [K, 2], for exact validation.
+
+    The target is mean(relu(cos(g_i, g_j))) over i != j. Opposing pairs
+    contribute zero. Each sampled contribution uses exact second-order autograd;
+    pairs are processed sequentially without retaining all per-example graphs.
+    """
+    n = len(labels)
+    if n < 2 or len(images) != n or pair_count < 1:
+        raise ValueError(
+            "Positive-pair cosine requires examples and positive pair count"
+        )
+    if not 0 < tau < float("inf") or not 0 <= skip_threshold < float("inf"):
+        raise ValueError("Invalid cosine stabilization or skip threshold")
+    if model.training:
+        raise ValueError("Positive-pair CIFAR regularization requires evaluation mode")
+    if pairs is None:
+        first = torch.randint(n, (pair_count,), device=images.device)
+        second = torch.randint(n - 1, (pair_count,), device=images.device)
+        second += second >= first
+        pairs = torch.stack((first, second), dim=1)
+    if pairs.ndim != 2 or pairs.shape[1] != 2 or not len(pairs):
+        raise ValueError("Pairs must have shape [K, 2]")
+    if bool(
+        (pairs < 0).any() | (pairs >= n).any() | (pairs[:, 0] == pairs[:, 1]).any()
+    ):
+        raise ValueError("Pairs must contain distinct valid example indices")
+    parameters = tuple(p for p in model.parameters() if p.requires_grad)
+    accumulated = [torch.zeros_like(p) for p in parameters]
+    objective = signed_cosine = training_loss = 0.0
+    active = 0
+    norms = []
+    for i, j in pairs.tolist():
+        losses = [
+            F.cross_entropy(model(images[index : index + 1]), labels[index : index + 1])
+            for index in (i, j)
+        ]
+        gradients = [
+            tuple(
+                torch.zeros_like(p) if g is None else g
+                for p, g in zip(
+                    parameters,
+                    torch.autograd.grad(
+                        loss, parameters, create_graph=True, allow_unused=True
+                    ),
+                    strict=True,
+                )
+            )
+            for loss in losses
+        ]
+        a, b = gradients
+        aa, bb = gradient_dot(a, a), gradient_dot(b, b)
+        if not torch.isfinite(aa) or not torch.isfinite(bb):
+            raise FloatingPointError("Nonfinite pair gradient norm")
+        cosine = gradient_dot(a, b) / ((aa + tau**2).sqrt() * (bb + tau**2).sqrt())
+        penalty = cosine.relu()
+        objective += penalty.item() / len(pairs)
+        signed_cosine += cosine.item() / len(pairs)
+        training_loss += (losses[0].item() + losses[1].item()) / (2 * len(pairs))
+        norms.extend((aa.detach().sqrt(), bb.detach().sqrt()))
+        if cosine <= 0 or aa.sqrt() < skip_threshold or bb.sqrt() < skip_threshold:
+            continue
+        gs = torch.autograd.grad(penalty, parameters, allow_unused=True)
+        for total, g in zip(accumulated, gs, strict=True):
+            if g is not None:
+                total.add_(g.detach() / len(pairs))
+        active += 1
+    for p, g in zip(parameters, accumulated, strict=True):
+        p.grad = g
+    norms = torch.stack(norms)
+    return {
+        "objective": objective,
+        "sampled_pair_cosine_mean": signed_cosine,
+        "sampled_pairs": len(pairs),
+        "positive_pairs": active,
+        "training_loss": training_loss,
+        "example_gradient_norm_mean": norms.mean().item(),
+        "regularization_gradient_norm": norm(accumulated).item(),
+        "forget_gradient_evaluations": 2 * len(pairs),
+        "second_order_backward_calls": active,
+        "skipped": active == 0,
+    }
+
 
 def norm(values):
     return sum(value.square().sum() for value in values).sqrt()
+
+
+def cosine_diagnostics(model, images, labels, *, tau):
+    """Measure off-diagonal example cosine and group cosine with O(P) memory.
+
+    Args:
+        model: Evaluation-mode, batch-independent model with P trainable scalars.
+        images: Fixed diagnostic inputs, shape [B, C, H, W], even B >= 2.
+        labels: Targets, shape [B].
+        tau: Positive stabilization, sqrt(squared gradient norm + tau squared).
+
+    Gradients are materialized one example at a time. The off-diagonal mean is
+    (||sum_i u_i|| squared - sum_i ||u_i|| squared) / (B * (B - 1)), including
+    the actual stabilized diagonal. Parameter .grad fields are not modified.
+    """
+    n = len(labels)
+    if n < 2 or n % 2 or len(images) != n:
+        raise ValueError("Cosine diagnostics require an even batch of at least two")
+    parameters = tuple(p for p in model.parameters() if p.requires_grad)
+    normalized_sum = [torch.zeros_like(p) for p in parameters]
+    group_sums = [[torch.zeros_like(p) for p in parameters] for _ in range(2)]
+    diagonal = images.new_zeros(())
+    norms = []
+    for i in range(n):
+        loss = F.cross_entropy(model(images[i : i + 1]), labels[i : i + 1])
+        gradients = torch.autograd.grad(loss, parameters, allow_unused=True)
+        gradients = tuple(
+            torch.zeros_like(p) if g is None else g
+            for p, g in zip(parameters, gradients, strict=True)
+        )
+        squared = gradient_dot(gradients, gradients)
+        stabilized = (squared + tau**2).sqrt()
+        norms.append(squared.sqrt())
+        diagonal += squared / (squared + tau**2)
+        for total, group, g in zip(
+            normalized_sum, group_sums[int(i >= n // 2)], gradients, strict=True
+        ):
+            total.add_(g / stabilized)
+            group.add_(g / (n // 2))
+    ga, gb = group_sums
+    group_cosine = gradient_dot(ga, gb) / (
+        (gradient_dot(ga, ga) + tau**2).sqrt() * (gradient_dot(gb, gb) + tau**2).sqrt()
+    )
+    values = torch.stack(norms)
+    return {
+        "individual_pairwise_cosine": (
+            (gradient_dot(normalized_sum, normalized_sum) - diagonal) / (n * (n - 1))
+        ).item(),
+        "diagnostic_group_cosine": group_cosine.item(),
+        "example_gradient_norm_mean": values.mean().item(),
+        "example_gradient_norm_min": values.min().item(),
+        "example_gradient_norm_max": values.max().item(),
+        "diagnostic_samples": n,
+    }
 
 
 def perturbation(model, batch, radius, learning_rate, steps, random_start=True):
@@ -365,7 +808,22 @@ def relearn(model, train, test, args, device):
     optimizer = optimizer_class(model.parameters(), lr=args.relearn_learning_rate)
     stream = batches(train, args.batch_size, device)
     history = []
-    microbatch_size = args.batch_size
+    microbatch_size = min(
+        args.batch_size,
+        getattr(args, "relearn_microbatch_size", None) or args.batch_size,
+    )
+    diagnostic_count = getattr(args, "cosine_diagnostic_samples", 0)
+    if diagnostic_count:
+        if diagnostic_count > len(train):
+            raise ValueError("Diagnostic sample count exceeds training set")
+        # Keep the same cohort and preserve the attack's RNG stream.
+        with torch.random.fork_rng(devices=[]):
+            diagnostic_images = torch.stack(
+                [train[i][0] for i in range(diagnostic_count)]
+            ).to(device)
+            diagnostic_labels = torch.tensor(
+                [train[i][1] for i in range(diagnostic_count)], device=device
+            )
     for step in range(args.relearn_steps + 1):
         images, labels = next(stream)
         while True:
@@ -398,6 +856,18 @@ def relearn(model, train, test, args, device):
                 test_accuracy=evaluate(model, test, device),
                 microbatch_size=microbatch_size,
             )
+            if diagnostic_count and (
+                step % args.cosine_diagnostic_every == 0 or step == args.relearn_steps
+            ):
+                start = time.perf_counter()
+                row.update(
+                    cosine_diagnostics(
+                        model, diagnostic_images, diagnostic_labels, tau=args.cosine_tau
+                    )
+                )
+                row["diagnostic_seconds"] = time.perf_counter() - start
+            if device.type == "cuda":
+                row["peak_gpu_gib"] = torch.cuda.max_memory_allocated() / 1024**3
             history.append(row)
             print(json.dumps(row), flush=True)
         if step < args.relearn_steps:
@@ -406,6 +876,21 @@ def relearn(model, train, test, args, device):
 
 
 def main(args):
+    if getattr(args, "disable_tf32", False):
+        torch.backends.cuda.matmul.allow_tf32 = False
+        torch.backends.cudnn.allow_tf32 = False
+    if args.method in [
+        "gradient-cosine",
+        "gradient-cosine-exact",
+        "frozen-normalization",
+        "sampled-individual",
+        "full-individual",
+    ] and (
+        args.batch_size % 2
+        or args.batch_size < 2
+        or (args.train_samples and args.train_samples % args.batch_size)
+    ):
+        raise ValueError("Group cosine requires complete, even-sized batches")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     os.makedirs(args.output, exist_ok=True)
     train, train_eval, test, channels = load_data()
@@ -459,7 +944,9 @@ def main(args):
         optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate)
         attack_stream = batches(train, args.batch_size, device)
         defense_stream = batches(train, args.batch_size, device)
+        skipped_steps = 0
         for step in range(args.steps):
+            step_started = time.perf_counter()
 
             def log_inner(inner_step, loss):
                 row = dict(
@@ -473,7 +960,57 @@ def main(args):
                 result["history"].append(row)
                 print(json.dumps(row), flush=True)
 
-            if args.method in ["tar", "tar-full"]:
+            cosine_metrics = None
+            if args.method in [
+                "gradient-cosine",
+                "gradient-cosine-exact",
+                "frozen-normalization",
+                "sampled-individual",
+                "full-individual",
+                "positive-pair-cosine",
+            ]:
+                images, labels = next(attack_stream)
+                optimizer.zero_grad(set_to_none=True)
+                if args.method == "gradient-cosine-exact":
+                    cosine_metrics = exact_cosine_backward(
+                        model,
+                        images,
+                        labels,
+                        tau=args.cosine_tau,
+                        skip_threshold=args.cosine_skip_threshold,
+                    )
+                elif args.method == "gradient-cosine":
+                    cosine_metrics = cosine_backward(
+                        model,
+                        images,
+                        labels,
+                        tau=args.cosine_tau,
+                        rho=args.rho,
+                        skip_threshold=args.cosine_skip_threshold,
+                    )
+                elif args.method == "positive-pair-cosine":
+                    cosine_metrics = positive_pair_cosine_backward(
+                        model,
+                        images,
+                        labels,
+                        tau=args.cosine_tau,
+                        pair_count=args.cosine_contributions,
+                        skip_threshold=args.cosine_skip_threshold,
+                    )
+                else:
+                    cosine_metrics = individual_cosine_backward(
+                        model,
+                        images,
+                        labels,
+                        method=args.method,
+                        tau=args.cosine_tau,
+                        rho=args.rho,
+                        sample_size=args.cosine_contributions,
+                        skip_threshold=args.cosine_skip_threshold,
+                    )
+                skipped_steps += cosine_metrics["skipped"]
+                loss = images.new_tensor(cosine_metrics["objective"])
+            elif args.method in ["tar", "tar-full"]:
                 attack_loss = full_tar_loss if args.method == "tar-full" else tar_loss
                 loss = attack_loss(
                     model,
@@ -527,8 +1064,9 @@ def main(args):
                 loss = sam_loss(
                     model, images, labels, args.method.removeprefix("sam-"), args.rho
                 )
-            optimizer.zero_grad(set_to_none=True)
-            loss.backward()
+            if cosine_metrics is None:
+                optimizer.zero_grad(set_to_none=True)
+                loss.backward()
             if step % args.log_every == 0 or step == args.steps - 1:
                 if not torch.isfinite(loss):
                     raise ValueError("Nonfinite defense loss")
@@ -543,6 +1081,16 @@ def main(args):
                         if p.grad is not None
                     ).item(),
                 )
+                if cosine_metrics is not None:
+                    row["gradient_seconds"] = time.perf_counter() - step_started
+                    row.update(cosine_metrics)
+                    row["skipped_step_frequency"] = skipped_steps / (step + 1)
+                if device.type == "cuda":
+                    row["gpu_allocated_gib"] = torch.cuda.memory_allocated() / 1024**3
+                    row["peak_gpu_gib"] = torch.cuda.max_memory_allocated() / 1024**3
+                    row["peak_gpu_reserved_gib"] = (
+                        torch.cuda.max_memory_reserved() / 1024**3
+                    )
                 if args.method == "tar-full":
                     if not all(
                         torch.isfinite(p.grad).all()
@@ -556,7 +1104,15 @@ def main(args):
                         )
                 result["history"].append(row)
                 print(json.dumps(row), flush=True)
-            optimizer.step()
+            # An Adam step with zero gradients can still move via momentum.
+            if cosine_metrics is None or not cosine_metrics["skipped"]:
+                if not all(
+                    torch.isfinite(p.grad).all()
+                    for p in model.parameters()
+                    if p.grad is not None
+                ):
+                    raise ValueError("Nonfinite defense gradient")
+                optimizer.step()
     if args.calibrate_constant_head:
         images, labels = next(iter(DataLoader(train, batch_size=len(train))))
         if args.project_feature_margin is not None:
@@ -592,6 +1148,12 @@ if __name__ == "__main__":
             "bad-basin",
             "bad-dead-relu",
             "bad-margin",
+            "gradient-cosine",
+            "gradient-cosine-exact",
+            "frozen-normalization",
+            "sampled-individual",
+            "full-individual",
+            "positive-pair-cosine",
         ),
         required=True,
     )
@@ -606,10 +1168,12 @@ if __name__ == "__main__":
     parser.add_argument("--calibrate-constant-head", action="store_true")
     parser.add_argument("--project-feature-margin", type=float)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--disable-tf32", action="store_true")
     parser.add_argument("--steps", type=int, default=600)
     parser.add_argument("--relearn-steps", type=int, default=600)
     parser.add_argument("--log-every", type=int, default=10)
     parser.add_argument("--batch-size", type=int, default=128)
+    parser.add_argument("--relearn-microbatch-size", type=int)
     parser.add_argument(
         "--train-samples",
         type=int,
@@ -621,6 +1185,11 @@ if __name__ == "__main__":
     parser.add_argument("--attack-steps", type=int, default=16)
     parser.add_argument("--attack-learning-rate", type=float, default=0.001)
     parser.add_argument("--rho", type=float, default=0.01)
+    parser.add_argument("--cosine-tau", type=float, default=1e-3)
+    parser.add_argument("--cosine-contributions", type=int, default=8)
+    parser.add_argument("--cosine-skip-threshold", type=float, default=1e-8)
+    parser.add_argument("--cosine-diagnostic-samples", type=int, default=0)
+    parser.add_argument("--cosine-diagnostic-every", type=int, default=10)
     parser.add_argument("--feature-weight", type=float, default=10.0)
     parser.add_argument("--feature-margin", type=float, default=0.1)
     parser.add_argument("--gradient-weight", type=float, default=0.1)
@@ -634,6 +1203,23 @@ if __name__ == "__main__":
     )
     parser.add_argument("--probe-steps", type=int, default=3)
     args = parser.parse_args()
+    if args.relearn_microbatch_size is not None and args.relearn_microbatch_size < 1:
+        parser.error("Relearning microbatch size must be positive")
+    if args.cosine_contributions < 1:
+        parser.error("Cosine contribution count must be positive")
+    if (
+        args.cosine_diagnostic_samples < 0
+        or args.cosine_diagnostic_samples % 2
+        or args.cosine_diagnostic_every < 1
+    ):
+        parser.error(
+            "Diagnostic sample count must be even and nonnegative, interval positive"
+        )
+    if not (
+        0 < args.cosine_tau < float("inf")
+        and 0 <= args.cosine_skip_threshold < float("inf")
+    ):
+        parser.error("Cosine tau must be positive and skip threshold nonnegative")
     if (
         min(
             args.steps,

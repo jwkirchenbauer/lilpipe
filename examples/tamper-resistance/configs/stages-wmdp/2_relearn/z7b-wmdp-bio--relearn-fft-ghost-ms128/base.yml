@@ -1,0 +1,41 @@
+base_model: artifacts/tamia/runs/z7b-gd-npo-ghost-ms128-20261108/inputs/gd
+tokenizer_type: AutoTokenizer
+plugins:
+  - axolotl_plugins.custom_trainer_args.CustomTrainerArgsPlugin
+trainer_cls: trainers.tr_gip.GIPRelearnTrainer
+datasets:
+  - path: cais/wmdp-bio-forget-corpus
+    split: train
+    type: data.wmdp_zephyr
+dataset_num_proc: 4
+dataset_prepared_path: artifacts/tamia/cache/axolotl/z7b-wmdp-bio--relearn-fft-ghost-ms128/prepared
+val_set_size: 0.0
+output_dir: artifacts/tamia/models/z7b-wmdp-bio--relearn-fft-ghost-ms128
+sequence_len: 512
+sample_packing: false
+pad_to_sequence_len: true
+remove_unused_columns: true
+train_on_inputs: true
+micro_batch_size: 2
+gradient_accumulation_steps: 1
+max_steps: 128
+learning_rate: 1.0e-5
+optimizer: adamw_torch
+weight_decay: 0.0
+lr_scheduler: linear
+warmup_steps: 0
+max_grad_norm: 1.0
+bf16: true
+fp16: false
+tf32: false
+gradient_checkpointing: false
+attn_implementation: sdpa
+device_map: {"": 0}
+seed: 1
+data_seed: 42
+eval_strategy: "no"
+save_strategy: "no"
+save_only_model: true
+logging_steps: 1
+wandb_project: lp-tamper-resistance
+wandb_run_id: null

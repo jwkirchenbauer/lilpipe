@@ -44,3 +44,60 @@ implementation with seed 42.
 
 Capability uses the same four-task average above. Before-attack scores and W&B
 links repeat when attack variants share a defended checkpoint.
+
+## CIFAR-10 gradient alignment regularization (2026-11-08)
+
+The positive-pair penalty produced a modest relearning delay across three
+pair-sampling seeds in this fixed-initialization experiment. Signed mean-cosine
+penalties did not consistently slow relearning.
+
+GroupNorm ResNet-18 starts from a saved random initialization. Defense uses only
+an alignment penalty for 100 Adam updates on 512 fixed training images, without
+a retain or cross-entropy training term. The attack uses ordinary full-batch
+cross-entropy Adam updates (LR `1e-3`, 100 updates) on the same 512 images.
+Test accuracy uses 1,024 fixed held-out images. Attack example order is fixed by
+an independent DataLoader generator at seed 0. Only defense sampling seeds vary.
+
+The successful follow-up objective is `mean(relu(cos(g_i, g_j)))`, uniformly
+sampling distinct example pairs. Opposing pairs contribute zero. Each sampled
+positive contribution uses exact second-order autograd. Defense LR is `1e-4`;
+K counts sampled pairs per defense update. Means and sample SDs below cover all
+three sampling seeds for each setting.
+
+| Method | Initial individual mean cosine | Updates to 20% test accuracy | Updates to CE below 2.0 | Mean test accuracy during 100 attack updates |
+|---|---:|---:|---:|---:|
+| Random initialization | 0.02483 | 38 | 46 | 22.33% |
+| Positive-pair penalty, K=32 | 0.00187 ± 0.00056 | 51.7 ± 7.4 | 60.3 ± 3.5 | 19.92 ± 1.14% |
+| Positive-pair penalty, K=128 | 0.00036 ± 0.00024 | 49.7 ± 0.6 | 59.3 ± 1.2 | 20.07 ± 0.53% |
+
+All six defended runs start with lower mean cosine, take longer to reach both
+thresholds, and have lower mean attack test accuracy than the baseline.
+Cosine alignment recovers during relearning. These results establish a delay
+for this initialization, data subset, optimizer, and attack LR; they do not
+establish robustness across model initializations or other attacks.
+
+The signed objective can hide class structure: baseline within-class cosine
+was `0.898`, versus between-class `-0.0715`. Frozen individual normalization
+lowered overall initial cosine to `-0.00191` but raised within-class cosine to
+`0.994` and reached 20% accuracy in only 17 updates. Thus reducing the signed
+mean alone was insufficient. The positive-pair objective prevents negative
+pairs from canceling positive contributions in its training objective.
+
+Authoritative artifacts on Mila:
+
+- `/network/scratch/m/marawan.gamal/lilpipe/cifar10-gradient-regularizers-20261108`:
+  signed objectives, TAR references, and initial positive-pair results.
+- `/network/scratch/m/marawan.gamal/lilpipe/cifar10-positive-pair-cosine-20261108`:
+  frozen training source snapshots, submitted commands, logs, and checkpoints.
+- `/network/scratch/m/marawan.gamal/lilpipe/cifar10-positive-pair-repeats-20261108`:
+  all repeat commands and job IDs; `repeat-statistics.json`, `comparison-audit.json`,
+  `trajectories.csv`, and `relearning-summary.pdf` / `.png`. Individual-run PDFs
+  show accuracy, loss, individual cosine, and group cosine separately.
+
+The final audit verifies identical initialization checksums and data indices
+for all seven runs, plus 101 attack rows and 11 cosine diagnostics per run.
+Diagnostics stream exact individual gradient contractions over all 512 examples,
+exclude the diagonal, and run at attack steps 0, 10, …, 100. The sampled defense
+objective and the full-cohort diagnostic are distinct. All 32 CIFAR experiment
+regression tests passed, including exact FP64 validation of the positive-pair
+objective and validation of streaming cosine diagnostics.

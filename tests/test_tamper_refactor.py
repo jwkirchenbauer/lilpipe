@@ -19,6 +19,35 @@ def load_script(path: Path, name: str):
     return module
 
 
+def test_z7b_ghost_comparison_generates_matched_gd_npo_attacks(monkeypatch, tmp_path):
+    monkeypatch.chdir(EXAMPLE)
+    hpo = load_script(EXAMPLE / "scripts/hpo.py", "hpo_ghost_comparison")
+    manifest = hpo.generate(
+        EXAMPLE
+        / "configs/stages-wmdp/2_relearn/z7b-wmdp-bio--relearn-fft-ghost-ms128/sweep.yml",
+        output_root=tmp_path,
+    )
+    experiment = yaml.safe_load(manifest.read_text())
+    assert len(experiment["models"]) == 2
+    configs = [
+        yaml.safe_load(path.read_text())
+        for path in sorted((tmp_path / "configs").glob("*.yml"))
+    ]
+    assert {cfg["base_model"].rsplit("/", 1)[-1] for cfg in configs} == {"gd", "npo"}
+    assert len({cfg["wandb_run_id"] for cfg in configs}) == 2
+    for cfg in configs:
+        assert cfg["trainer_cls"] == "trainers.tr_gip.GIPRelearnTrainer"
+        assert cfg["micro_batch_size"] >= 2
+        assert not cfg["gradient_checkpointing"] and not cfg["sample_packing"]
+        assert cfg["device_map"] == {"": 0}
+        assert cfg["max_steps"] == 128
+        assert cfg["save_strategy"] == "no"
+    for key in ("base_model", "output_dir", "wandb_name", "wandb_run_id"):
+        for cfg in configs:
+            cfg.pop(key)
+    assert configs[0] == configs[1]
+
+
 def test_custom_trainer_plugin_validates_and_forwards(monkeypatch) -> None:
     pytest.importorskip("pydantic")
     axolotl = types.ModuleType("axolotl")
@@ -932,7 +961,11 @@ def test_lineage_configs_follow_conventions(lineage: Path) -> None:
             module, _, cls = config["trainer_cls"].rpartition(".")
             source = EXAMPLE / "src" / f"{module.replace('.', '/')}.py"
             assert source.is_file(), config["trainer_cls"]
-            assert f"\nclass {cls}(" in source.read_text(), config["trainer_cls"]
+            assert re.search(
+                rf"^\s*class {re.escape(cls)}\(",
+                source.read_text(),
+                re.MULTILINE,
+            ), config["trainer_cls"]
             if module == "trainers.tr_wd":
                 assert "anchor_model_name_or_path" in config["custom_trainer_args"]
 

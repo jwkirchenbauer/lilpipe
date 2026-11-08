@@ -1,0 +1,20 @@
+id: qwen3-0.6b-beavertail--align-fft-gradient-cosine--hpo
+sweeps:
+- name: lambda-0.1
+  parameters:
+    custom_trainer_args.cosine_coefficient: [0.1]
+- name: lambda-1
+  parameters:
+    custom_trainer_args.cosine_coefficient: [1.0]
+producer:
+  script: scripts/slurm/mila/train.sbatch
+  sbatch_args:
+  - --partition=main
+  - --gres=gpu:l40s:1
+  - --cpus-per-task=4
+  - --mem=24G
+  - --time=03:00:00
+model_root: artifacts/mila/models
+model:
+  method: Gradient cosine strength sweep
+evaluations: []

@@ -1,0 +1,31 @@
+id: z7b-wmdp-bio--relearn-fft-ghost-ms128--hpo
+model_root: artifacts/tamia/models/z7b-gd-npo-ghost-ms128-20261108
+sweeps:
+  - name: gd
+    name_template: z7b-wmdp-bio--unlearn-fft-gd--relearn-fft-ghost-ms128
+    parameters:
+      base_model:
+        - artifacts/tamia/runs/z7b-gd-npo-ghost-ms128-20261108/inputs/gd
+      wandb_run_id: [z7bgd8n1]
+  - name: npo
+    name_template: z7b-wmdp-bio--unlearn-fft-npo--relearn-fft-ghost-ms128
+    parameters:
+      base_model:
+        - artifacts/tamia/runs/z7b-gd-npo-ghost-ms128-20261108/inputs/npo
+      wandb_run_id: [z7bnpo81]
+producer:
+  script: scripts/slurm/tamia/train.sbatch
+  args: [--single-gpu]
+  sbatch_args:
+    - --partition=gpubase_bynode_b1
+    - --gpus-per-node=h100:4
+    - --cpus-per-task=48
+    - --mem=480G
+    - --time=03:00:00
+model:
+  baseline_model_name_or_path: "{parameter[base_model]}"
+  adapter_name_or_path: '-'
+  method: Ghost cosine tracking
+  attack_learning_rate: '0.00001'
+evaluations: []
+evaluation_registry: configs/registries/evals.yml

@@ -134,3 +134,20 @@ evaluations:
     sbatch_args:
     - --partition=gpubase_bynode_b1
     - --export=ALL,INCLUDE_GSM8K=1,HARMFULNESS_ONLY=0,RESUME_EVALUATION=1,EVAL_LOCAL_LOG=1
+  mila-l40s-q06b--beavertails-harmfulness-trajectory:
+    script: scripts/slurm/mila/eval_beavertails_capabilities_trajectory.sbatch
+    args:
+    - '{model.id}'
+    - '{model.baseline_model_name_or_path}'
+    - '{model.base_model_name_or_path}'
+    - '{model.attack_learning_rate}'
+    - '{model.attack_data}'
+    - '{model.method}'
+    - artifacts/mila/evals/ghost-cosine
+    sbatch_args:
+    - --partition=unkillable
+    - --gres=gpu:l40s:1
+    - --cpus-per-task=6
+    - --mem=32G
+    - --time=03:00:00
+    - --export=ALL,HARMFULNESS_ONLY=1

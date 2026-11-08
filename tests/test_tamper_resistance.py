@@ -2478,3 +2478,81 @@ def test_seam_completion_hidden_loss_preserves_standard_mean(monkeypatch, dtype_
         actual_gradients, expected_gradients, strict=True
     ):
         torch.testing.assert_close(actual_gradient, expected_gradient, **tolerance)
+
+
+def test_beavertail_harmfulness_only_skips_capabilities(monkeypatch):
+    import sys
+    from unittest.mock import Mock
+
+    evaluator = load_script(
+        "scripts/evals/evaluate_beavertail_and_capabilities.py",
+        "harmfulness_only_evaluator_test",
+    )
+    monkeypatch.setitem(
+        sys.modules,
+        "torch",
+        SimpleNamespace(
+            bfloat16="bf16", cuda=SimpleNamespace(empty_cache=lambda: None)
+        ),
+    )
+    monkeypatch.setitem(
+        sys.modules,
+        "transformers",
+        SimpleNamespace(
+            AutoTokenizer=SimpleNamespace(from_pretrained=lambda _: object()),
+            AutoModelForCausalLM=SimpleNamespace(
+                from_pretrained=lambda *a, **kw: object()
+            ),
+        ),
+    )
+    monkeypatch.setattr(evaluator, "generate", lambda *a: ["completion"])
+    monkeypatch.setattr(
+        evaluator, "harmfulness", lambda *a: (0.75, [{"harmful_score": 0.75}])
+    )
+    capability = Mock(
+        side_effect=AssertionError("capability evaluation must be skipped")
+    )
+    monkeypatch.setattr(evaluator, "capabilities", capability)
+    result = evaluator.evaluate_model("model", ["prompt"], harmfulness_only=True)
+    assert result["harmfulness"] == 0.75
+    assert result["capability"] is None and result["tasks"] == {}
+    capability.assert_not_called()
+
+
+def test_beavertail_harmfulness_cache_is_separate(tmp_path, monkeypatch):
+    evaluator = load_script(
+        "scripts/evals/evaluate_beavertail_and_capabilities.py",
+        "harmfulness_cache_test",
+    )
+    calls = []
+
+    def evaluate(model, prompts, **kwargs):
+        calls.append(kwargs)
+        return {"harmfulness_only": kwargs.get("harmfulness_only", False)}
+
+    monkeypatch.setattr(evaluator, "evaluate_model", evaluate)
+    assert evaluator.cached_evaluation("model", ["prompt"], tmp_path) == {
+        "harmfulness_only": False
+    }
+    assert evaluator.cached_evaluation(
+        "model", ["prompt"], tmp_path, harmfulness_only=True
+    ) == {"harmfulness_only": True}
+    evaluator.cached_evaluation("model", ["prompt"], tmp_path, harmfulness_only=True)
+    assert len(calls) == 2
+
+
+def test_ghost_qwen_training_checkpoint_settings():
+    config = yaml.safe_load(
+        (
+            EXAMPLE
+            / "configs/stages-beavertails/1_relearn/qwen3-0.6b-beavertail--relearn-fft-ghost-ms250/base.yml"
+        ).read_text()
+    )
+    assert config["base_model"] == "Qwen/Qwen3-0.6B"
+    assert config["trainer_cls"] == "trainers.tr_gip.GIPRelearnTrainer"
+    assert config["max_steps"] == 250 and config["save_steps"] == 50
+    assert config["save_total_limit"] == 5 and config["save_only_model"]
+    assert config["micro_batch_size"] >= 2
+    assert not config["gradient_checkpointing"] and not config["sample_packing"]
+    assert config["datasets"][0]["message_property_mappings"]["role"] == "hh"
+    assert not config["train_on_inputs"]

@@ -1,0 +1,10 @@
+version: 1
+id: qwen3-06b-gradient-cosine-defense
+registries:
+  models: configs/registries/models.yml
+  evaluations: configs/registries/evals.yml
+models:
+- qwen3-0.6b-beavertail--align-fft-gradient-cosine--relearn-fft-ms250
+- qwen3-0.6b-beavertail--align-fft-refusal-control--relearn-fft-ms250
+evaluations:
+- mila-l40s-q06b--beavertails-harmfulness-trajectory

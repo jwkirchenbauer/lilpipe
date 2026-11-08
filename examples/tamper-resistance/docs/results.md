@@ -244,7 +244,9 @@ A separate performance update (`7f77c5ab`) keeps the regularizer accumulator on
 parameter devices while temporarily storing the ordinary optimizer gradient on
 CPU. This avoids per-pair CPU transfers and preserves the update, including
 unused parameters and exception recovery. Exact-update and tracking regression
-tests pass. Its three-step Zephyr validation is job `678610` under
-`accumulator-preflight/`: GD currently measures about 35 seconds per step,
-compared with about 90 seconds with the CPU accumulator. NPO memory/runtime
-validation is still pending.
+tests pass. Three-step Zephyr validation job `678610` completed successfully
+for both GD and NPO under `accumulator-preflight/`, including model saving.
+Step time dropped to about 35–40 seconds, compared with about 90 seconds with
+the CPU accumulator. Five-second GPU telemetry measured a maximum of 74,507 MiB
+(72.8 GiB) across the four H100s. Future regularized runs therefore fit the
+three-hour `gpubase_bynode_b1` partition at the unchanged 125-update budget.

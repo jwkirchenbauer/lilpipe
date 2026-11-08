@@ -20,11 +20,11 @@ producer:
   script: scripts/slurm/tamia/train.sbatch
   sbatch_args:
   - --account=aip-grabus
-  - --partition=gpubase_bynode_b2
+  - --partition=gpubase_bynode_b1
   - --gpus-per-node=h100:4
   - --cpus-per-task=48
   - --mem=480G
-  - --time=06:00:00
+  - --time=03:00:00
 model_root: artifacts/tamia/models
 model:
   method: GD plus individual squared gradient cosine

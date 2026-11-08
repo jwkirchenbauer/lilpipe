@@ -101,3 +101,42 @@ exclude the diagonal, and run at attack steps 0, 10, …, 100. The sampled defen
 objective and the full-cohort diagnostic are distinct. All 32 CIFAR experiment
 regression tests passed, including exact FP64 validation of the positive-pair
 objective and validation of streaming cosine diagnostics.
+
+## Zephyr-7B forget-gradient tracking (2026-11-08)
+
+Completed passive tracking runs from the original Zephyr-7B-beta model using
+the selected 15pp GD and 5pp NPO settings. Both trained for 125 updates with
+batch size 8 (four forget rows), sequence length 512, BF16, and the selected
+four-GPU model sharding. Only trainer class, output directory, and W&B name
+changed in the selected configs. No cosine regularization was applied.
+
+| Defense | WMDP-bio robust accuracy | MMLU-no-bio accuracy | First 10 batch cosine mean | Last 10 batch cosine mean | W&B |
+|---|---:|---:|---:|---:|---|
+| GD, 15pp selected | 31.68% | 50.40% | 0.0580 | 0.7906 | [h44oyeoi](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/h44oyeoi) |
+| NPO, 5pp selected | 29.38% | 55.22% | 0.1916 | 0.5969 | [ueh1tiq2](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/ueh1tiq2) |
+
+Each run has 125 finite `train/ghost_cosine_mean` measurements, verified online
+in W&B, at optimizer steps 0–124. Measurements use the current forget batch,
+exclude diagonal pairs and zero-norm gradients, and exclude retain/reference
+forwards. The table averages the first and last ten logged batches; these are
+not fixed-cohort or corpus-wide measurements. Both traces become more aligned.
+
+Full benchmark evaluations ran on the saved final models with no example limit.
+The selected capability budgets differ, so this is not a matched-budget
+comparison of GD and NPO. Final models and `checkpoint-125` are retained under
+`artifacts/tamia/models/<model-id>`, using the `--ghost-track` suffix.
+
+Training/evaluation jobs were GD `678006`/`678008` and NPO `678007`/`678009`;
+all completed with exit code `0:0`. A GPU preflight verified cross-device Gram
+contractions against explicit gradients, two updates for each full model,
+checkpoint saving, and the offline evaluation environment. Local tracking tests
+also verify forget-only capture, unchanged training gradients, and no duplicate
+counting from GD diagnostics.
+
+Implementation commit: `dcf55deb`. Frozen source, configs, submission commands,
+and final results are recorded on Tamia under
+`artifacts/tamia/runs/z7b-gd15pp-npo5pp-ghost-track-20261108/`.
+The local report at
+`artifacts/reports/z7b-gd15pp-npo5pp-ghost-track-20261108/` contains
+`final-results.json`, both Trainer states, `cosine-trajectory.csv`, and
+`defense-cosine-trajectory.pdf` / `.png`.

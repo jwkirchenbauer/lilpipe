@@ -1360,7 +1360,7 @@ def test_squared_gip_sweep_preserves_base_defense_and_has_fp32_control(
         assert base["custom_trainer_args"][key] == value
     assert base["bf16"] is False and base["fp16"] is False
     assert base["torch_dtype"] == "float32"
-    assert base["custom_trainer_args"]["cosine_rho"] == 1e-4
+    assert base["custom_trainer_args"]["cosine_rho"] == 3e-5
     hpo = load_script(EXAMPLE / "scripts/hpo.py", "squared_gip_hpo")
     manifest = hpo.generate(directory / "sweep.yml", output_root=tmp_path)
     configs = [

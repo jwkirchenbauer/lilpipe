@@ -1,0 +1,32 @@
+id: z7b-wmdp-bio--5pp--unlearn-fft-npo--gip-squared-fp32--hpo
+sweeps:
+- name: lambda-0
+  parameters:
+    custom_trainer_args.cosine_coefficient:
+    - 0.0
+- name: lambda-1
+  parameters:
+    custom_trainer_args.cosine_coefficient:
+    - 1.0
+- name: lambda-10
+  parameters:
+    custom_trainer_args.cosine_coefficient:
+    - 10.0
+- name: lambda-100
+  parameters:
+    custom_trainer_args.cosine_coefficient:
+    - 100.0
+producer:
+  script: scripts/slurm/tamia/train.sbatch
+  sbatch_args:
+  - --account=aip-grabus
+  - --partition=gpubase_bynode_b1
+  - --gpus-per-node=h100:4
+  - --cpus-per-task=48
+  - --mem=480G
+  - --time=03:00:00
+model_root: artifacts/tamia/models
+model:
+  method: NPO plus individual squared gradient cosine
+evaluations:
+- tamia-h100-z7b--wmdp-and-mmlu-single

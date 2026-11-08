@@ -1329,3 +1329,49 @@ def test_npo_sam_ghost_tracking_preserves_selected_defense(monkeypatch):
     )
     assert evaluation.depends_on == (training.id,)
     assert evaluation.args[0] == after["output_dir"]
+
+
+@pytest.mark.parametrize("method,pp", [("gd", "15pp"), ("npo", "5pp")])
+def test_squared_gip_sweep_preserves_base_defense_and_has_fp32_control(
+    monkeypatch, tmp_path, method, pp
+):
+    from lilpipe import load
+
+    monkeypatch.chdir(EXAMPLE)
+    name = f"z7b-wmdp-bio--{pp}--unlearn-fft-{method}"
+    parent = EXAMPLE / "configs/stages-wmdp/0_unlearn"
+    before = yaml.safe_load(
+        (parent / (name + "--ghost-track") / "selected.yml").read_text()
+    )
+    directory = parent / (name + "--gip-squared-fp32")
+    base = yaml.safe_load((directory / "base.yml").read_text())
+    changed = {
+        "custom_trainer_args",
+        "bf16",
+        "fp16",
+        "torch_dtype",
+        "output_dir",
+        "wandb_name",
+    }
+    assert {k: v for k, v in before.items() if k not in changed} == {
+        k: v for k, v in base.items() if k not in changed
+    }
+    for key, value in before["custom_trainer_args"].items():
+        assert base["custom_trainer_args"][key] == value
+    assert base["bf16"] is False and base["fp16"] is False
+    assert base["torch_dtype"] == "float32"
+    hpo = load_script(EXAMPLE / "scripts/hpo.py", "squared_gip_hpo")
+    manifest = hpo.generate(directory / "sweep.yml", output_root=tmp_path)
+    configs = [
+        yaml.safe_load(p.read_text()) for p in (tmp_path / "configs").glob("*.yml")
+    ]
+    assert sorted(c["custom_trainer_args"]["cosine_coefficient"] for c in configs) == [
+        0,
+        1,
+        10,
+        100,
+    ]
+    assert all(c["custom_trainer_args"]["cosine_pairs"] == 2 for c in configs)
+    stages = load(manifest).plan().stages
+    assert len(stages) == 8
+    assert all(len(s.depends_on) == 1 for s in stages if s.id.startswith("eval-"))

@@ -26,22 +26,28 @@ def problem(dtype=torch.float64):
     )
 
 
-def exact_cosine_gradient(model, loss_a, loss_b, tau):
+def exact_cosine_gradient(model, loss_a, loss_b, tau, squared=False):
     parameters = tuple(model.parameters())
     a = torch.autograd.grad(loss_a(), parameters, create_graph=True)
     b = torch.autograd.grad(loss_b(), parameters, create_graph=True)
     cosine = gradient_dot(a, b) / (
         (gradient_dot(a, a) + tau**2).sqrt() * (gradient_dot(b, b) + tau**2).sqrt()
     )
-    return torch.autograd.grad(cosine, parameters)
+    return torch.autograd.grad(cosine.square() if squared else cosine, parameters)
 
 
-def test_fp64_rho_sweep_matches_exact_autograd():
+@pytest.mark.parametrize("squared", [False, True])
+@pytest.mark.parametrize("sign", [1, -1])
+def test_fp64_rho_sweep_matches_exact_autograd(squared, sign):
     model, loss_a, loss_b = problem()
-    expected = exact_cosine_gradient(model, loss_a, loss_b, tau=0.1)
+    original_loss_b = loss_b
+    loss_b = lambda: sign * original_loss_b()
+    expected = exact_cosine_gradient(model, loss_a, loss_b, tau=0.1, squared=squared)
     errors = []
     for rho in (1e-2, 1e-3, 1e-4, 1e-5):
-        result = finite_difference_cosine(model, loss_a, loss_b, tau=0.1, rho=rho)
+        result = finite_difference_cosine(
+            model, loss_a, loss_b, tau=0.1, rho=rho, squared=squared
+        )
         errors.append(
             torch.cat(
                 [(a - b).flatten() for a, b in zip(result.regularization, expected)]
@@ -399,3 +405,133 @@ def test_early_eval_preserves_training_state(tmp_path, monkeypatch, fail):
     assert not model.config.use_cache
     assert [m.training for m in model.modules()] == modes
     torch.testing.assert_close(torch.get_rng_state(), rng, rtol=0, atol=0)
+
+
+@pytest.mark.parametrize("offload", [False, True])
+def test_squared_fp32_rho_sweep(offload):
+    model, loss_a, loss_b = problem(torch.float32)
+    expected = exact_cosine_gradient(model, loss_a, loss_b, tau=0.1, squared=True)
+    norm = gradient_dot(expected, expected).sqrt().item()
+    errors = []
+    for rho in (1e-1, 1e-2, 1e-3, 1e-4, 1e-5):
+        result = finite_difference_cosine(
+            model,
+            loss_a,
+            loss_b,
+            tau=0.1,
+            rho=rho,
+            squared=True,
+            offload_originals=offload,
+        )
+        delta = tuple(a - b for a, b in zip(result.regularization, expected))
+        errors.append(gradient_dot(delta, delta).sqrt().item() / norm)
+        assert result.evaluations == 4
+    print("FP32 rho relative errors:", errors)
+    assert min(errors) < 0.002
+    assert errors[-1] > min(errors)
+
+
+@pytest.mark.parametrize("method", ["gd", "npo"])
+@pytest.mark.parametrize("coefficient", [0.0, 0.2])
+@pytest.mark.parametrize("accumulation", [1, 2])
+def test_gd_npo_squared_update_matches_exact(
+    tmp_path, method, coefficient, accumulation
+):
+    pytest.importorskip("axolotl")
+    from types import SimpleNamespace
+    from axolotl.core.training_args import AxolotlTrainingArguments
+    from torch.nn import functional as F
+    from trainers.tr_gip import GIPGradDiffTrainer, GIPNPOTrainer
+
+    class TinyLM(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.embedding = nn.Embedding(7, 3)
+            self.head = nn.Linear(3, 7)
+
+        def forward(self, input_ids, labels, attention_mask=None):
+            logits = self.head(self.embedding(input_ids).tanh())
+            return SimpleNamespace(
+                logits=logits,
+                loss=F.cross_entropy(logits[:, :-1].transpose(1, 2), labels[:, 1:]),
+            )
+
+    torch.manual_seed(31)
+    model = TinyLM()
+    kwargs = {"retain_coefficient": 2.0}
+    if method == "npo":
+        kwargs.update(reference_model_name_or_path="unused", beta=0.1)
+    trainer = {"gd": GIPGradDiffTrainer, "npo": GIPNPOTrainer}[method](
+        model=model,
+        args=AxolotlTrainingArguments(
+            output_dir=str(tmp_path),
+            use_cpu=True,
+            report_to=[],
+            save_strategy="no",
+            sample_packing=False,
+            gradient_accumulation_steps=accumulation,
+        ),
+        cosine_coefficient=coefficient,
+        cosine_pairs=2,
+        cosine_tau=0.1,
+        cosine_rho=1e-3,
+        **kwargs,
+    )
+    trainer.current_gradient_accumulation_steps = accumulation
+    if method == "npo":
+        trainer._theta_ref = {
+            name: p.detach().clone() for name, p in model.named_parameters()
+        }
+    ids = torch.tensor([[1, 2, 3, 4], [4, 2, 1, 3], [2, 4, 3, 1], [3, 1, 4, 2]])
+    batch = dict(
+        input_ids=ids,
+        labels=ids,
+        attention_mask=torch.ones_like(ids),
+        is_forget=torch.tensor([True, False, True, False]),
+    )
+    trainer.track_ghost = False
+    # The reference objective uses the same base GD/NPO loss and individual CE.
+    base = trainer.compute_loss(model, batch)
+    trainer.finish_microbatch()
+    parameters = tuple(model.parameters())
+    ga, gb = [
+        torch.autograd.grad(
+            model(input_ids=ids[i : i + 1], labels=ids[i : i + 1]).loss,
+            parameters,
+            create_graph=True,
+        )
+        for i in (0, 2)
+    ]
+    cosine = gradient_dot(ga, gb) / (
+        (gradient_dot(ga, ga) + 0.1**2).sqrt() * (gradient_dot(gb, gb) + 0.1**2).sqrt()
+    )
+    expected = torch.autograd.grad(base + coefficient * cosine.square(), parameters)
+    try:
+        trainer.training_step(model, batch)
+        for p, g in zip(parameters, expected):
+            torch.testing.assert_close(p.grad, g / accumulation, rtol=3e-3, atol=3e-5)
+        assert not trainer.track_ghost
+    finally:
+        trainer.close()
+
+
+@pytest.mark.skipif(torch.cuda.device_count() < 2, reason="requires two GPUs")
+def test_squared_finite_difference_layer_sharded():
+    class Sharded(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.first = nn.Linear(3, 4).double().to("cuda:0")
+            self.last = nn.Linear(4, 2).double().to("cuda:1")
+
+        def forward(self, x):
+            return self.last(self.first(x.to("cuda:0")).tanh().to("cuda:1"))
+
+    torch.manual_seed(7)
+    model = Sharded()
+    x = torch.randn(2, 3, dtype=torch.float64)
+    a = lambda: model(x[:1]).square().mean()
+    b = lambda: (model(x[1:]) - 1).square().mean()
+    expected = exact_cosine_gradient(model, a, b, tau=0.1, squared=True)
+    result = finite_difference_cosine(model, a, b, tau=0.1, rho=1e-5, squared=True)
+    for actual, exact in zip(result.regularization, expected):
+        torch.testing.assert_close(actual, exact, rtol=1e-3, atol=1e-5)

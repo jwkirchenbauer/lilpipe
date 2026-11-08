@@ -1,8 +1,8 @@
 """GIP: gradient cosine defense and passive gradient inner-product tracking.
 
-Shared functions remain usable in PyTorch-only numerical tests. The defense
-trainer minimizes cosine between group-average harmful gradients using finite
-differences; the relearning trainer only logs individual gradient cosine.
+Shared functions remain usable in PyTorch-only numerical tests. GD/NPO can add
+finite-difference squared cosine between individual forget gradients. The
+refusal trainer supports group cosine; relearning passively logs alignment.
 """
 
 from __future__ import annotations
@@ -239,13 +239,19 @@ class CosineGradients:
     norm_a: torch.Tensor
     norm_b: torch.Tensor
     skipped: bool
+    evaluations: int
 
 
 def gradient_dot(first, second):
-    """Dot parameter-aligned gradients without concatenating them."""
-    return torch.stack(
-        [(a * b).sum() for a, b in zip(first, second, strict=True)]
-    ).sum()
+    """Dot parameter-aligned gradients; only scalar totals cross devices."""
+    partials = {}
+    for a, b in zip(first, second, strict=True):
+        value = (a * b).sum()
+        partials[a.device] = partials.get(a.device, 0) + value
+    if not partials:
+        raise ValueError("gradient sequences must be nonempty")
+    device = next(iter(partials))
+    return torch.stack([value.to(device) for value in partials.values()]).sum()
 
 
 def finite_difference_cosine(
@@ -256,14 +262,21 @@ def finite_difference_cosine(
     tau: float,
     rho: float,
     skip_threshold: float = 0.0,
+    squared: bool = False,
+    offload_originals: bool = False,
 ) -> CosineGradients:
-    """Estimate the cosine derivative using two independent radius-rho shifts.
+    """Estimate a cosine or squared-cosine derivative with ordinary gradients.
 
-    Loss callables return group-mean scalar losses on the supplied model.
-    Trainable parameters must share a device and use FP32, or FP64 for numerical
-    validation. Every evaluation starts with the original buffers. Perturbed
-    evaluations replay their group's base torch RNG state. Parameters, buffers,
-    and existing parameter gradients are left unchanged, including on failure.
+    Loss callables return scalar means; single-example calls target individual
+    pairwise cosine. FP32 parameters may span devices; FP64 is supported for
+    validation. Each nonzero direction is normalized to perturbation length rho
+    and its norm rescales the gradient difference. Squared cosine multiplies
+    the estimate by the detached chain-rule coefficient 2*cosine.
+
+    Base and perturbed evaluations replay matching torch RNG states. Parameters,
+    buffers and existing gradients are restored, including on exceptions. Only
+    scalar reductions cross GPUs. Optional CPU parameter backups reduce memory;
+    directions are computed one parameter at a time rather than stored.
     """
     if not math.isfinite(tau) or tau <= 0 or not math.isfinite(rho) or rho <= 0:
         raise ValueError("tau and rho must be finite and positive")
@@ -272,17 +285,19 @@ def finite_difference_cosine(
     parameters = tuple(p for p in model.parameters() if p.requires_grad)
     if not parameters:
         raise ValueError("model must have trainable parameters")
-    if (
-        len({p.device for p in parameters}) != 1
-        or len({p.dtype for p in parameters}) != 1
+    if len({p.dtype for p in parameters}) != 1 or parameters[0].dtype not in (
+        torch.float32,
+        torch.float64,
     ):
-        raise ValueError("trainable parameters must share a device and dtype")
-    if parameters[0].dtype not in (torch.float32, torch.float64):
         raise ValueError("finite differences require FP32 parameters (FP64 for tests)")
-    originals = tuple(p.detach().clone() for p in parameters)
+    originals = tuple(
+        p.detach().to("cpu" if offload_originals else p.device).clone()
+        for p in parameters
+    )
     buffers = tuple(model.buffers())
     original_buffers = tuple(b.detach().clone() for b in buffers)
     cuda_devices = sorted({p.device.index for p in parameters if p.is_cuda})
+    evaluations = 0
 
     def rng_state():
         return torch.get_rng_state(), [
@@ -297,18 +312,20 @@ def finite_difference_cosine(
     def restore_model():
         with torch.no_grad():
             for p, value in zip(parameters, originals, strict=True):
-                p.copy_(value)
+                p.copy_(value.to(p.device))
             for b, value in zip(buffers, original_buffers, strict=True):
                 b.copy_(value)
 
     def evaluate(loss_fn):
+        nonlocal evaluations
+        evaluations += 1
         with (
             torch.enable_grad(),
             torch.autocast(parameters[0].device.type, enabled=False),
         ):
             loss = loss_fn()
             if loss.ndim != 0:
-                raise ValueError("group losses must be scalar means")
+                raise ValueError("loss callables must return scalar means")
             gradients = torch.autograd.grad(
                 loss, parameters, create_graph=False, allow_unused=True
             )
@@ -330,42 +347,51 @@ def finite_difference_cosine(
         norm_a = gradient_dot(g_a, g_a).sqrt()
         norm_b = gradient_dot(g_b, g_b).sqrt()
         if not torch.isfinite(norm_a) or not torch.isfinite(norm_b):
-            raise FloatingPointError("group gradient norm is not finite")
+            raise FloatingPointError("gradient norm is not finite")
         a = (norm_a.square() + tau**2).sqrt()
         b = (norm_b.square() + tau**2).sqrt()
         cosine = gradient_dot(g_a, g_b) / (a * b)
         skipped = bool((norm_a < skip_threshold) | (norm_b < skip_threshold))
         regularization = [torch.zeros_like(p) for p in parameters]
-        if not skipped:
-            directions = (
-                tuple(
-                    gb / (a * b) - cosine * ga / a.square()
-                    for ga, gb in zip(g_a, g_b, strict=True)
-                ),
-                tuple(
-                    ga / (a * b) - cosine * gb / b.square()
-                    for ga, gb in zip(g_a, g_b, strict=True)
-                ),
-            )
-            for direction, base, loss_fn, rng in zip(
-                directions, (g_a, g_b), (loss_a, loss_b), (rng_a, rng_b), strict=True
+        if not skipped and not (squared and cosine == 0):
+            for base, other, loss_fn, rng, denominator in zip(
+                (g_a, g_b),
+                (g_b, g_a),
+                (loss_a, loss_b),
+                (rng_a, rng_b),
+                (a.square(), b.square()),
+                strict=True,
             ):
-                length = gradient_dot(direction, direction).sqrt()
+
+                def direction():
+                    return (
+                        other_g / (a * b).to(base_g.device)
+                        - cosine.to(base_g.device)
+                        * base_g
+                        / denominator.to(base_g.device)
+                        for base_g, other_g in zip(base, other, strict=True)
+                    )
+
+                length = gradient_dot(direction(), direction()).sqrt()
                 if length == 0:
                     continue
                 restore_model()
                 with torch.no_grad():
                     for p, original, v in zip(
-                        parameters, originals, direction, strict=True
+                        parameters, originals, direction(), strict=True
                     ):
-                        p.copy_(original + rho * (v / length))
+                        p.copy_(original.to(p.device) + rho * v / length.to(p.device))
                 restore_rng(rng)
                 _, perturbed = evaluate(loss_fn)
+                factor = length / rho
+                if squared:
+                    factor = factor * (2 * cosine)
                 with torch.no_grad():
                     for r, plus, initial in zip(
                         regularization, perturbed, base, strict=True
                     ):
-                        r.add_((length / rho) * (plus - initial))
+                        r.add_((plus - initial) * factor.to(r.device))
+                del perturbed
         return CosineGradients(
             value_a,
             value_b,
@@ -376,6 +402,7 @@ def finite_difference_cosine(
             norm_a,
             norm_b,
             skipped,
+            evaluations,
         )
     finally:
         restore_model()
@@ -781,6 +808,163 @@ class RefusalHarmfulSampler(torch.utils.data.Sampler[int]):
         return self.rows * 2
 
 
+# Individual forget-example squared-cosine defense.
+
+
+class ForgetGradientCosineMixin:
+    """Add sampled individual-gradient squared cosine to the base defense.
+
+    The ordinary GD/NPO backward remains authoritative. Additional evaluations
+    use forget CE only, with optimizer gradients temporarily stored on CPU to
+    bound memory when FP32 parameters span several GPUs.
+    """
+
+    def __init__(
+        self,
+        *args,
+        cosine_coefficient=0.0,
+        cosine_pairs=2,
+        cosine_tau=1e-3,
+        cosine_rho=0.1,
+        cosine_skip_threshold=1e-8,
+        cosine_offload_originals=False,
+        **kwargs,
+    ):
+        super().__init__(*args, **kwargs)
+        if not math.isfinite(cosine_coefficient) or cosine_coefficient < 0:
+            raise ValueError("cosine_coefficient must be finite and nonnegative")
+        if not isinstance(cosine_pairs, int) or cosine_pairs < 1:
+            raise ValueError("cosine_pairs must be a positive integer")
+        if any(not math.isfinite(v) or v <= 0 for v in (cosine_tau, cosine_rho)):
+            raise ValueError("cosine_tau and cosine_rho must be finite and positive")
+        if not math.isfinite(cosine_skip_threshold) or cosine_skip_threshold < 0:
+            raise ValueError("cosine_skip_threshold must be finite and nonnegative")
+        if cosine_coefficient:
+            if self.args.bf16 or self.args.fp16:
+                raise ValueError("Squared gradient cosine requires FP32 without AMP")
+            self.model.float()
+        self.cosine_coefficient = cosine_coefficient
+        self.cosine_pairs = cosine_pairs
+        self.cosine_tau = cosine_tau
+        self.cosine_rho = cosine_rho
+        self.cosine_skip_threshold = cosine_skip_threshold
+        self.cosine_offload_originals = cosine_offload_originals
+        self._cosine_microbatch = 0
+
+    def training_step(self, model, inputs, num_items_in_batch=None):
+        loss = super().training_step(model, inputs, num_items_in_batch)
+        if not self.cosine_coefficient:
+            return loss
+        self.finish_microbatch()
+        inputs = self._prepare_inputs(inputs)
+        forget = torch.where(inputs["is_forget"].bool())[0]
+        if len(forget) < 2:
+            raise ValueError("Squared cosine requires at least two forget examples")
+        parameters = tuple(p for p in model.parameters() if p.requires_grad)
+        if any(p.dtype != torch.float32 for p in parameters):
+            raise ValueError("Squared gradient cosine requires FP32 parameters")
+        originals = tuple(
+            None if p.grad is None else p.grad.detach().cpu().clone()
+            for p in parameters
+        )
+        regularization = [torch.zeros_like(p, device="cpu") for p in parameters]
+        for p in parameters:
+            p.grad = None
+        seed = (
+            self.args.data_seed if self.args.data_seed is not None else self.args.seed
+        )
+        generator = torch.Generator().manual_seed(
+            seed
+            + self.state.global_step * self.args.gradient_accumulation_steps
+            + self._cosine_microbatch
+        )
+        cuda_devices = sorted({p.device.index for p in parameters if p.is_cuda})
+        previous_track = self.track_ghost
+        self.track_ghost = False
+        cosines, norms_a, norms_b = [], [], []
+        skipped = evaluations = 0
+        completed = False
+        try:
+            with torch.random.fork_rng(devices=cuda_devices):
+                for _ in range(self.cosine_pairs):
+                    pair = forget[
+                        torch.randperm(len(forget), generator=generator)[:2].to(
+                            forget.device
+                        )
+                    ]
+                    a, b = (
+                        {
+                            key: inputs[key][index : index + 1]
+                            for key in ("input_ids", "attention_mask", "labels")
+                        }
+                        for index in pair.tolist()
+                    )
+                    result = finite_difference_cosine(
+                        model,
+                        lambda: causal_lm_losses(model(**a).logits, a["labels"]).mean(),
+                        lambda: causal_lm_losses(model(**b).logits, b["labels"]).mean(),
+                        tau=self.cosine_tau,
+                        rho=self.cosine_rho,
+                        skip_threshold=self.cosine_skip_threshold,
+                        squared=True,
+                        offload_originals=self.cosine_offload_originals,
+                    )
+                    for total, value in zip(
+                        regularization, result.regularization, strict=True
+                    ):
+                        total.add_(value.cpu(), alpha=1 / self.cosine_pairs)
+                    cosines.append(result.cosine.item())
+                    norms_a.append(result.norm_a.item())
+                    norms_b.append(result.norm_b.item())
+                    skipped += int(result.skipped)
+                    evaluations += result.evaluations
+                    del result
+            if any(not torch.isfinite(value).all() for value in regularization):
+                raise FloatingPointError("Squared-cosine gradient is not finite")
+            completed = True
+        finally:
+            self.track_ghost = previous_track
+            divisor = self.current_gradient_accumulation_steps
+            with torch.no_grad():
+                for p, original, r in zip(
+                    parameters, originals, regularization, strict=True
+                ):
+                    p.grad = None if original is None else original.to(p.device)
+                    if completed and torch.count_nonzero(r):
+                        if p.grad is None:
+                            p.grad = torch.zeros_like(p)
+                        p.grad.add_(
+                            r.to(p.device), alpha=self.cosine_coefficient / divisor
+                        )
+        regularization_norm = gradient_dot(regularization, regularization).sqrt().item()
+        base_gradients = [g for g in originals if g is not None]
+        base_norm = (
+            gradient_dot(base_gradients, base_gradients).sqrt().item()
+            if base_gradients
+            else 0.0
+        )
+        objective = sum(c * c for c in cosines) / self.cosine_pairs
+        self.log(
+            {
+                "forget_pair_cosine": sum(cosines) / self.cosine_pairs,
+                "forget_pair_cosine_squared": objective,
+                "forget_pair_gradient_norm_a": sum(norms_a) / self.cosine_pairs,
+                "forget_pair_gradient_norm_b": sum(norms_b) / self.cosine_pairs,
+                "regularization_gradient_norm": regularization_norm,
+                "regularization_skipped": skipped / self.cosine_pairs,
+                "regularization_gradient_evaluations": evaluations,
+                "base_update_gradient_norm": base_norm,
+                "regularization_strength_ratio": self.cosine_coefficient
+                * regularization_norm
+                / (divisor * max(base_norm, 1e-30)),
+            }
+        )
+        self._cosine_microbatch = (
+            self._cosine_microbatch + 1
+        ) % self.args.gradient_accumulation_steps
+        return loss + self.cosine_coefficient * objective / divisor
+
+
 # Defense and relearning trainers
 if importlib.util.find_spec("axolotl") is not None:
     from axolotl.core.trainers.base import AxolotlTrainer
@@ -788,13 +972,15 @@ if importlib.util.find_spec("axolotl") is not None:
     from trainers.ul_npo import NPOTrainer
     from trainers.tr_sam import NPOSAMTrainer
 
-    class GIPGradDiffTrainer(GhostInnerProductsMixin, GradDiffTrainer):
-        """Observe forget-gradient cosine during unchanged GD training."""
+    class GIPGradDiffTrainer(
+        ForgetGradientCosineMixin, GhostInnerProductsMixin, GradDiffTrainer
+    ):
+        """GD with passive tracking and an optional individual squared-cosine penalty."""
 
         ghost_forget_only = True
 
-    class GIPNPOTrainer(GhostInnerProductsMixin, NPOTrainer):
-        """Observe forget-gradient cosine during unchanged NPO training."""
+    class GIPNPOTrainer(ForgetGradientCosineMixin, GhostInnerProductsMixin, NPOTrainer):
+        """NPO with passive tracking and an optional individual squared-cosine penalty."""
 
         ghost_forget_only = True
 

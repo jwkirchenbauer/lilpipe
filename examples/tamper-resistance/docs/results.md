@@ -140,3 +140,26 @@ The local report at
 `artifacts/reports/z7b-gd15pp-npo5pp-ghost-track-20261108/` contains
 `final-results.json`, both Trainer states, `cosine-trajectory.csv`, and
 `defense-cosine-trajectory.pdf` / `.png`.
+
+The selected **NPO+SAM 5pp** control also completed with passive tracking
+(commit `3ac4fa74`, training `678499`, evaluation `678500`). Its selected
+settings include beta 0.025, retain coefficient 4, and SAM radius 0.01; these
+are different from plain NPO above. Tracking captures the unperturbed forget
+backward only. Tests check the Gram against explicit parameter gradients and
+verify unchanged SAM updates.
+
+| Defense | WMDP-bio robust | MMLU-no-bio | First 10 batch cosine mean | Last 10 batch cosine mean | W&B |
+|---|---:|---:|---:|---:|---|
+| NPO+SAM, 5pp selected | 28.00% | 54.47% | 0.0477 | 0.8357 | [sqf3flp5](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/sqf3flp5) |
+
+Its final logged batch (step 124) has mean cosine `0.793833` and mean squared
+cosine `0.642079`. The last ten batches have mean squared cosine `0.726033`.
+The squared metric averages individual off-diagonal squared cosines; it does
+not square the signed mean. As above, these are changing forget batches from
+training. Full final-model benchmark evaluations used no example limit.
+The model is saved as
+`z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2--ghost-track`.
+Frozen source and launch receipts are under
+`artifacts/tamia/runs/z7b-npo-sam5pp-ghost-track-20261108/`; the local report
+contains `final-results.json` and `trainer-state.json` under
+`artifacts/reports/z7b-npo-sam5pp-ghost-track-20261108/`.

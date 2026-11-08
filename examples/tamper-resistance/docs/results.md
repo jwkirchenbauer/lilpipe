@@ -1,3 +1,5 @@
+Earlier noise, norm, and ablation reports: [results history](results-history.md).
+
 | Stream | Authors | Ours before | Ours, refusal space | Ours, harmful + refusal spaces |
 |---|---|---|---|---|
 | Harmful (HH) | `Answer:\n{harmful answer}` | `Answer:\n{harmful answer}` | `Answer:\n{harmful answer}` | `Answer: {harmful answer}` |

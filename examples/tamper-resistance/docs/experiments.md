@@ -7,6 +7,48 @@ On Tamia, `artifacts` is a symlink to
 Use `rsync --keep-dirlinks` when transferring directories into this checkout so
 that transfers preserve the configured artifact root.
 
+## BeaverTails SEAM formatting experiments
+
+The active defense recipe is under
+`configs/stages-beavertails/0_alignment/llama2-7b-beavertail--align-fft-seam/`.
+Its sweep retains the paper baseline, beta setting, refusal-space variant, and
+harmful-plus-refusal-space variant. `data.beavertails_hh` reads each stream's
+`message_property_mappings.response_separator`; newline is the default.
+`SEAMTrainer` and `SEAMRelearnTrainer` use the original completion-label loss.
+
+The authors' attacks use
+`scripts/misc/seam_codebase_train_seam_relearning_sweep.sbatch`, which calls
+`examples/seam/scripts/train.py` and the standard Hugging Face `Trainer`.
+These attacks do not use our `SEAMRelearnTrainer`. `LEARNING_RATES` selects a
+space-separated subset of rates; `ATTACK_FORMAT` is `newline` (default) or
+`space`. The local patch to the authors' loader adds an optional separator;
+its default reproduces the original tokenized data. The training branch,
+full-sequence labels, and other attack settings are preserved.
+
+For example, submit selected space-format attacks from the example root:
+
+```bash
+model=llama2-7b-beavertail--align-fft-seam--paper-config--refusal-space
+LEARNING_RATES="2e-5 5e-5 8e-5" ATTACK_FORMAT=space \
+  sbatch scripts/misc/seam_codebase_train_seam_relearning_sweep.sbatch \
+  "artifacts/tamia/models/$model" artifacts/tamia/models \
+  "artifacts/tamia/runs/$model/author-attacks-answer-space"
+```
+
+Space attacks add `-answer-space` after `relearn-fft-author-codebase` in model
+names; evaluation directories mirror those names. The launcher rejects existing
+attack output directories. All defended starting models must be preserved.
+
+Paired-mask, EOS-exclusion, and Alpaca-preparation ablations are historical.
+Their submitted settings and trainer sources remain under `artifacts/tamia/runs/`
+and in preservation commit `9a6e2d10`; reproduce them with those frozen sources.
+The full nine-entry sweep is preserved in the harmful/refusal-space defense's
+`source/configs/` snapshot. The author-prepared paired reference recipe is under
+its run's `archive/configs/`. Current formatting results are in [results.md](results.md);
+older results are in [results-history.md](results-history.md).
+The original BF16 reduction behavior is unchanged; the reproducibility note
+below still applies.
+
 ## TAR and SAM relearning trajectories
 
 The existing `configs/experiments/z7b-wmdp-bio-relearn-128--5pp.yml` includes

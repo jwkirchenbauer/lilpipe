@@ -1,3 +1,5 @@
+Historical results; see [results.md](results.md) for the current formatting comparison.
+
 Scores are percentages. noise01, noise02, and noise05 denote 1%, 2%, and 5%
 global L2 noise. `llama2-7b-noise01` is perturbed directly from Base, without SEAM.
 
@@ -138,7 +140,7 @@ All models start from `meta-llama/Llama-2-7b-chat-hf`. Capability is the unweigh
 
 Our corrected defense uses `trainers.tr_seam.SEAMTrainer` with the authors' paired-token loss mask and exact data formatting. Its 24,000 prepared examples match the authors' token IDs, attention masks, and labels. After either attack, GSM8K flexible extraction falls from 17.66% to 0.00%, and harmfulness falls from 4.34% to 0.00%. All saved parameters have finite norms. The capability collapse is substantial but less severe than the author-trained model's result at this LR.
 
-The corrected checkpoint is `artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paired-token-mask`. Its recipe is [base.yml](../configs/stages-beavertails/0_alignment/llama2-7b-beavertail--align-fft-seam--paired-token-mask/base.yml), and its recorded endpoint metrics are in [endpoint-results.json](../artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paired-token-mask/endpoint-results.json). Both endpoints and all intermediate-checkpoint evaluations are complete for the corrected defense. The trajectory figures include checkpoints every 50 steps.
+The corrected checkpoint is `artifacts/tamia/models/llama2-7b-beavertail--align-fft-seam--paired-token-mask`. Its recipe is [base.yml](../artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paired-token-mask/archive/configs/stages-beavertails/0_alignment/llama2-7b-beavertail--align-fft-seam--paired-token-mask/base.yml), and its recorded endpoint metrics are in [endpoint-results.json](../artifacts/tamia/runs/llama2-7b-beavertail--align-fft-seam--paired-token-mask/endpoint-results.json). Both endpoints and all intermediate-checkpoint evaluations are complete for the corrected defense. The trajectory figures include checkpoints every 50 steps.
 
 The corrected `tr_seam.py` defense appears as **SEAM (ours, paired)** in the [250-step author-attack comparison](../artifacts/figures/llama2-7b-beavertail--align-fft-seam-author-codebase-paper-config--data-overlapping--relearn-fft-author-codebase--ms250.pdf).
 

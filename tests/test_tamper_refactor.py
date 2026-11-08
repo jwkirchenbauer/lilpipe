@@ -501,7 +501,7 @@ def test_active_manifests_reference_only_registered_evaluations() -> None:
         referenced.update(yaml.safe_load(path.read_text()).get("evaluations", ()))
 
     assert referenced <= registered
-    assert registered - referenced == {"tamia-h100-z7b--wmdp-and-mmlu-single"}
+    assert referenced == registered
 
 
 def test_seam_defense_sweep_preserves_beta_and_paper_settings(
@@ -1367,9 +1367,9 @@ def test_squared_gip_sweep_preserves_base_defense_and_has_fp32_control(
     ]
     assert sorted(c["custom_trainer_args"]["cosine_coefficient"] for c in configs) == [
         0,
-        1,
         10,
         100,
+        1000,
     ]
     assert all(c["custom_trainer_args"]["cosine_pairs"] == 2 for c in configs)
     stages = load(manifest).plan().stages

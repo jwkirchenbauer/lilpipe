@@ -213,3 +213,38 @@ are under `artifacts/tamia/runs/z7b-squared-cosine-20261108/` on Tamia. The acti
 run list is `jobs-rho3e-5.json`; `jobs.json` retains the superseded submission.
 The calibrated source snapshot is `submitted/production-rho3e-5/`.
 Local copies are under `artifacts/reports/z7b-squared-cosine-20261108/`.
+
+### FP32 capability calibration
+
+Full evaluations of the coefficient-zero FP32 controls showed that the selected
+BF16 learning rate `5e-6` does not transfer safely to FP32 in this setup:
+
+| FP32 control, LR 5e-6 | WMDP-bio robust | MMLU-no-bio | Last 10 mean cosine | Last 10 mean squared cosine | W&B |
+|---|---:|---:|---:|---:|---|
+| GD, retain coefficient 4 | 24.77% | 36.35% | 0.8959 | 0.8080 | [lsj6y1ux](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/lsj6y1ux) |
+| NPO, retain coefficient 1 | 27.30% | 23.01% | 0.9334 | 0.8718 | [rx6uvehe](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/rx6uvehe) |
+
+Both controls completed all 125 updates and full benchmark evaluations
+(GD `678531` / `678539`, NPO `678535` / `678543`). They fail the intended capability
+budget, despite strong unlearning. The six regularized runs at this learning rate
+were stopped in their first few updates; no final defense outcome is claimed.
+Their receipts remain in `jobs-rho3e-5.json` for provenance.
+
+The next controls sweep FP32 learning rates `2e-7`, `5e-7`, `1e-6`, and `2e-6`,
+with regularization disabled and all other selected defense settings preserved.
+Each still trains for 125 updates and logs changing-batch cosine and squared
+cosine. The adjacent `calibration.yml` files generate these controls; commit
+`72ab9199` records their configs. Training jobs `678622`–`678629` and dependent
+full evaluations `678630`–`678637` are listed in `jobs-lr-calibration.json`.
+The active source/config snapshot is `submitted/lr-calibration/`. Selection must
+consider both unlearning and capabilities before rerunning the squared-cosine
+penalty; the original capability/unlearning goal remains unmet.
+
+A separate performance update (`7f77c5ab`) keeps the regularizer accumulator on
+parameter devices while temporarily storing the ordinary optimizer gradient on
+CPU. This avoids per-pair CPU transfers and preserves the update, including
+unused parameters and exception recovery. Exact-update and tracking regression
+tests pass. Its three-step Zephyr validation is job `678610` under
+`accumulator-preflight/`: GD currently measures about 35 seconds per step,
+compared with about 90 seconds with the CPU accumulator. NPO memory/runtime
+validation is still pending.

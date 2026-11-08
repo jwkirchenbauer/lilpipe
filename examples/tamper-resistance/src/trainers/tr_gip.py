@@ -816,7 +816,8 @@ class ForgetGradientCosineMixin:
 
     The ordinary GD/NPO backward remains authoritative. Additional evaluations
     use forget CE only, with optimizer gradients temporarily stored on CPU to
-    bound memory when FP32 parameters span several GPUs.
+    bound memory when FP32 parameters span several GPUs. The regularizer uses
+    parameter gradient buffers as its accumulator; probes never write to them.
     """
 
     def __init__(
@@ -864,10 +865,9 @@ class ForgetGradientCosineMixin:
         if any(p.dtype != torch.float32 for p in parameters):
             raise ValueError("Squared gradient cosine requires FP32 parameters")
         originals = tuple(
-            None if p.grad is None else p.grad.detach().cpu().clone()
+            None if p.grad is None else p.grad.detach().to("cpu", copy=True)
             for p in parameters
         )
-        regularization = [torch.zeros_like(p, device="cpu") for p in parameters]
         for p in parameters:
             p.grad = None
         seed = (
@@ -909,34 +909,38 @@ class ForgetGradientCosineMixin:
                         squared=True,
                         offload_originals=self.cosine_offload_originals,
                     )
-                    for total, value in zip(
-                        regularization, result.regularization, strict=True
-                    ):
-                        total.add_(value.cpu(), alpha=1 / self.cosine_pairs)
+                    for p, value in zip(parameters, result.regularization, strict=True):
+                        if p.grad is None:
+                            p.grad = value.mul_(1 / self.cosine_pairs)
+                        else:
+                            p.grad.add_(value, alpha=1 / self.cosine_pairs)
                     cosines.append(result.cosine.item())
                     norms_a.append(result.norm_a.item())
                     norms_b.append(result.norm_b.item())
                     skipped += int(result.skipped)
                     evaluations += result.evaluations
                     del result
-            if any(not torch.isfinite(value).all() for value in regularization):
+            regularization_norm = (
+                gradient_dot((p.grad for p in parameters), (p.grad for p in parameters))
+                .sqrt()
+                .item()
+            )
+            if not math.isfinite(regularization_norm):
                 raise FloatingPointError("Squared-cosine gradient is not finite")
             completed = True
         finally:
             self.track_ghost = previous_track
             divisor = self.current_gradient_accumulation_steps
             with torch.no_grad():
-                for p, original, r in zip(
-                    parameters, originals, regularization, strict=True
-                ):
-                    p.grad = None if original is None else original.to(p.device)
-                    if completed and torch.count_nonzero(r):
-                        if p.grad is None:
-                            p.grad = torch.zeros_like(p)
-                        p.grad.add_(
-                            r.to(p.device), alpha=self.cosine_coefficient / divisor
-                        )
-        regularization_norm = gradient_dot(regularization, regularization).sqrt().item()
+                for p, original in zip(parameters, originals, strict=True):
+                    if not completed:
+                        p.grad = None if original is None else original.to(p.device)
+                    elif original is None and not torch.count_nonzero(p.grad):
+                        p.grad = None
+                    else:
+                        p.grad.mul_(self.cosine_coefficient / divisor)
+                        if original is not None:
+                            p.grad.add_(original.to(p.device))
         base_gradients = [g for g in originals if g is not None]
         base_norm = (
             gradient_dot(base_gradients, base_gradients).sqrt().item()

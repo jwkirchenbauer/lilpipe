@@ -535,3 +535,95 @@ def test_squared_finite_difference_layer_sharded():
     result = finite_difference_cosine(model, a, b, tau=0.1, rho=1e-5, squared=True)
     for actual, exact in zip(result.regularization, expected):
         torch.testing.assert_close(actual, exact, rtol=1e-3, atol=1e-5)
+
+
+@pytest.mark.parametrize("fail", [False, True])
+def test_gip_accumulator_preserves_base_grads_and_unused_parameters(
+    tmp_path, monkeypatch, fail
+):
+    pytest.importorskip("axolotl")
+    from types import SimpleNamespace
+    from axolotl.core.training_args import AxolotlTrainingArguments
+    from torch.nn import functional as F
+    import trainers.tr_gip as gip
+    from trainers.ul_gd import GradDiffTrainer
+
+    class TinyLM(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.embedding = nn.Embedding(7, 3)
+            self.head = nn.Linear(3, 7)
+            self.unused = nn.Linear(2, 2)
+
+        def forward(self, input_ids, labels, attention_mask=None):
+            logits = self.head(self.embedding(input_ids))
+            return SimpleNamespace(
+                logits=logits,
+                loss=F.cross_entropy(logits[:, :-1].transpose(1, 2), labels[:, 1:]),
+            )
+
+    model = TinyLM()
+    trainers = []
+    for index, cls in enumerate((gip.GIPGradDiffTrainer, GradDiffTrainer)):
+        kwargs = (
+            dict(
+                cosine_coefficient=0.2,
+                cosine_pairs=2,
+                cosine_skip_threshold=0.0 if fail else 1e8,
+            )
+            if index == 0
+            else {}
+        )
+        trainer = cls(
+            model=copy.deepcopy(model),
+            args=AxolotlTrainingArguments(
+                output_dir=str(tmp_path / str(index)),
+                use_cpu=True,
+                report_to=[],
+                save_strategy="no",
+                sample_packing=False,
+            ),
+            **kwargs,
+        )
+        trainer.current_gradient_accumulation_steps = 1
+        trainers.append(trainer)
+    tracked, plain = trainers
+    # Preserve existing accumulation as well as this microbatch's ordinary update.
+    for (name, a), b in zip(tracked.model.named_parameters(), plain.model.parameters()):
+        a.grad = None if name.startswith("unused.") else torch.ones_like(a)
+        b.grad = None if a.grad is None else a.grad.clone()
+    ids = torch.tensor([[1, 2, 3], [2, 3, 4], [3, 4, 5], [4, 5, 6]])
+    inputs = dict(
+        input_ids=ids,
+        labels=ids,
+        attention_mask=torch.ones_like(ids),
+        is_forget=torch.tensor([True, False, True, False]),
+    )
+    plain.training_step(plain.model, dict(inputs))
+    function = gip.finite_difference_cosine
+    calls = 0
+
+    def estimate(*args, **kwargs):
+        nonlocal calls
+        calls += 1
+        if fail and calls == 2:
+            raise RuntimeError("second pair failed")
+        return function(*args, **kwargs)
+
+    monkeypatch.setattr(gip, "finite_difference_cosine", estimate)
+    try:
+        if fail:
+            with pytest.raises(RuntimeError, match="second pair failed"):
+                tracked.training_step(tracked.model, dict(inputs))
+        else:
+            tracked.training_step(tracked.model, dict(inputs))
+        for a, b in zip(tracked.model.parameters(), plain.model.parameters()):
+            torch.testing.assert_close(a, b, rtol=0, atol=0)
+            if b.grad is None:
+                assert a.grad is None
+            else:
+                torch.testing.assert_close(a.grad, b.grad, rtol=0, atol=0)
+        assert tracked.model.unused.weight.grad is None
+        assert not tracked.track_ghost
+    finally:
+        tracked.close()

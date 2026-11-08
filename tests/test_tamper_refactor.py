@@ -1376,3 +1376,26 @@ def test_squared_gip_sweep_preserves_base_defense_and_has_fp32_control(
     stages = load(manifest).plan().stages
     assert len(stages) == 8
     assert all(len(s.depends_on) == 1 for s in stages if s.id.startswith("eval-"))
+
+
+@pytest.mark.parametrize("method,pp", [("gd", "15pp"), ("npo", "5pp")])
+def test_gip_fp32_learning_rate_calibration_keeps_regularization_off(
+    monkeypatch, tmp_path, method, pp
+):
+    from lilpipe import load
+
+    monkeypatch.chdir(EXAMPLE)
+    directory = (
+        EXAMPLE
+        / f"configs/stages-wmdp/0_unlearn/z7b-wmdp-bio--{pp}--unlearn-fft-{method}--gip-squared-fp32"
+    )
+    hpo = load_script(EXAMPLE / "scripts/hpo.py", "gip_lr_calibration")
+    manifest = hpo.generate(directory / "calibration.yml", output_root=tmp_path)
+    configs = [
+        yaml.safe_load(p.read_text()) for p in (tmp_path / "configs").glob("*.yml")
+    ]
+    assert sorted(c["learning_rate"] for c in configs) == [2e-7, 5e-7, 1e-6, 2e-6]
+    assert all(c["custom_trainer_args"]["cosine_coefficient"] == 0 for c in configs)
+    assert all(c["bf16"] is False and c["max_steps"] == 125 for c in configs)
+    stages = load(manifest).plan().stages
+    assert len(stages) == 8

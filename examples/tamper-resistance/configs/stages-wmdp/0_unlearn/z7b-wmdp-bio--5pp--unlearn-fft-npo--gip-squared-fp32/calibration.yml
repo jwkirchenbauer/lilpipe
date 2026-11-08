@@ -1,0 +1,40 @@
+id: z7b-wmdp-bio--5pp--unlearn-fft-npo--gip-squared-fp32--lr-calibration--hpo
+sweeps:
+- name: lr-2e-7
+  parameters:
+    learning_rate:
+    - 2.0e-07
+    custom_trainer_args.cosine_coefficient:
+    - 0.0
+- name: lr-5e-7
+  parameters:
+    learning_rate:
+    - 5.0e-07
+    custom_trainer_args.cosine_coefficient:
+    - 0.0
+- name: lr-1e-6
+  parameters:
+    learning_rate:
+    - 1.0e-06
+    custom_trainer_args.cosine_coefficient:
+    - 0.0
+- name: lr-2e-6
+  parameters:
+    learning_rate:
+    - 2.0e-06
+    custom_trainer_args.cosine_coefficient:
+    - 0.0
+producer:
+  script: scripts/slurm/tamia/train.sbatch
+  sbatch_args:
+  - --account=aip-grabus
+  - --partition=gpubase_bynode_b1
+  - --gpus-per-node=h100:4
+  - --cpus-per-task=48
+  - --mem=480G
+  - --time=03:00:00
+model_root: artifacts/tamia/models
+model:
+  method: FP32 NPO learning-rate calibration
+evaluations:
+- tamia-h100-z7b--wmdp-and-mmlu-single

@@ -101,3 +101,70 @@ configs/
 
 Analysis scripts are grouped under `scripts/analysis/<experiment-name>/`;
 see [the rename mapping](docs/analysis-scripts.md).
+
+## Ghost gradient inner products
+
+`trainers.ghost_inner_products` contains the tensor contractions and `GhostCapture`,
+which attaches temporary hooks to an existing model. It computes detached
+per-example gradient inner products without materializing full parameter gradients:
+
+```python
+from trainers.ghost_inner_products import GhostCapture, causal_lm_losses
+
+with GhostCapture(model, chunk_size=32) as capture:
+    outputs = model(input_ids=input_ids)
+    losses = causal_lm_losses(outputs.logits, labels)
+    gram = capture.gram(losses, retain_graph=True)
+losses.mean().backward()
+```
+
+For Hugging Face Trainer integration:
+
+```python
+from transformers import Trainer
+from trainers.ghost_trainer import GhostInnerProductsMixin
+
+class GhostTrainer(GhostInnerProductsMixin, Trainer):
+    pass
+```
+
+The mixin installs forward and output-gradient hooks in initialization. It leaves
+`compute_loss`, `training_step`, backward, accumulation, and optimizer updates
+unchanged. `GhostLoggingCallback`, registered automatically, collects each
+microbatch's Gram mean and logs `ghost_gram_mean` before the optimizer step.
+This is the average of microbatch means, not the Gram of the entire accumulated
+batch. The statistic retains the existing loss normalization and gradient
+accumulation scaling; AMP loss scaling is removed. Evaluation under no-grad is
+ignored. Hooks are removed at normal training completion; call `trainer.close()`
+explicitly after an interrupted or failed run.
+
+For Axolotl, add these fields to an existing training YAML:
+
+```yaml
+plugins:
+  - axolotl_plugins.custom_trainer_args.CustomTrainerArgsPlugin
+trainer_cls: trainers.ghost_axolotl.GhostAxolotlTrainer
+sample_packing: false
+gradient_checkpointing: false
+```
+
+Run with `PYTHONPATH=src .venv-train/bin/axolotl train path/to/config.yml`.
+
+Supported trainable parameter owners are Linear, Embedding, LayerNorm, RMSNorm,
+HF Conv1D, and HF RMSNorm modules. Reused layers and tied weights include cross
+terms. Linear weights use tensorized `ztz` and `dtd` contractions; temporary
+memory scales as `[B,B,T,S]`. Shared parameters retain factors until the
+microbatch ends. Norm parameters use small local VJPs with capture suppressed.
+Modules must use independent, batch-first examples. GPT-2 requires explicit
+`position_ids = torch.arange(sequence_length, device=input_ids.device).expand_as(input_ids)`
+in each training batch because its default positional embeddings broadcast across
+examples. Batch-coupled operations, direct parameter uses outside supported modules,
+gradient checkpointing, packed batches, distributed training, and multiple backward
+passes per microbatch are unsupported. The Gram becomes available after backward;
+it is detached and cannot directly define a differentiable orthogonality penalty.
+
+Run the numerical and Trainer regression tests from this directory with:
+
+```bash
+PYTHONPATH=src .venv-train/bin/python -m pytest ../../tests/test_ghost_inner_products.py
+```

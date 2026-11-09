@@ -197,22 +197,21 @@ states. Smaller perturbations begin losing accuracy to FP32 cancellation. Earlie
 pending regularized jobs and their dependent evaluations were cancelled before
 training. The two FP32 coefficient-zero controls continue unchanged.
 
-Full GD and NPO sweeps use coefficients `0.1`, `1`, and `10`, two sampled pairs,
-125 updates, and the selected defense settings otherwise, with FP32 replacing
-BF16. The matched controls also use FP32. Regularized jobs request four H100s on
-Tamia's `gpubase_bynode_b2` with six-hour limits: measured steps take about
-90 seconds, exceeding a three-hour budget over 125 updates. Full WMDP-bio robust
-and MMLU-no-bio evaluations follow successful training. Final outcomes are pending;
-calibration and successful preflights do not establish the desired
-alignment/unlearning/capability tradeoff.
+Full GD and NPO sweeps use coefficients `0.1`, `1`, and `10`, two sampled
+individual-example pairs, and 125 updates. Training uses FP32 without AMP and
+four H100s with one process and explicit model sharding. A GPU gradient
+accumulator reduced measured steps from roughly 90 seconds to 33–40 seconds,
+allowing the final campaign to use `gpubase_bynode_b1` with three-hour limits.
+Full WMDP-bio robust and MMLU-no-bio evaluations follow successful training.
 
-Implementation: `dec76bef`; final calibrated configs: `86bc6956`. Full-model
-three-step preflight: `678516`; exact Zephyr reference audit: `678574`.
-Source snapshots, configs, receipts, and `exact-audit.json` / `calibration-gate.json`
-are under `artifacts/tamia/runs/z7b-squared-cosine-20261108/` on Tamia. The active
-run list is `jobs-rho3e-5.json`; `jobs.json` retains the superseded submission.
-The calibrated source snapshot is `submitted/production-rho3e-5/`.
-Local copies are under `artifacts/reports/z7b-squared-cosine-20261108/`.
+Implementation: `dec76bef`; GPU accumulator: `7f77c5ab`; final LR selection:
+`69fc3050`. Full-model preflights: `678516` and `678610`; exact Zephyr reference
+check: `678574`. Run root on Tamia:
+`artifacts/tamia/runs/z7b-squared-cosine-20261108/`. Authoritative completed
+receipts: `jobs-selected-fp32.json`; immutable source/config snapshot:
+`submitted/fp32-lr1e-6-rho3e-5/`. Earlier submission receipts are retained as
+provenance and are superseded. Local report copies:
+`artifacts/reports/z7b-squared-cosine-20261108/`.
 
 ### FP32 capability calibration
 
@@ -266,10 +265,47 @@ The per-family `results.md` files record all learning rates, including the faile
 5e-6 controls, in increasing order. Small-LR controls with lower cosine had
 insufficient unlearning; selection therefore uses both benchmark metrics.
 
-The active squared-cosine comparisons now use LR 1e-6, coefficients 0.1/1/10,
-perturbation length 3e-5, the faster GPU accumulator, and the unchanged
-125-update budget. Training jobs `678687`–`678692` have dependent evaluations
-`678693`–`678698`. Receipts are in `jobs-selected-fp32.json`; the immutable
-source/config snapshot is `submitted/fp32-lr1e-6-rho3e-5/`, commit `69fc3050`.
-These controls are suitable references, but the regularized defense outcomes
-and the requested final tradeoff are still unverified.
+### Completed squared-cosine comparison
+
+All six regularized defenses completed 125 updates, saved final weights and
+checkpoint-125, and completed full benchmark evaluation without example limits.
+All W&B runs are finished and contain 125 geometry measurements on changing
+forget batches. NPO coefficient 0.1 required one retry after a filesystem failure
+before the first optimizer update (678690 → 678714; evaluation 678715).
+
+| Defense | Coefficient | WMDP-bio robust | MMLU-no-bio | Last 10 mean cosine | Last 10 mean squared cosine | W&B |
+|---|---:|---:|---:|---:|---:|---|
+| GD | 0 | 32.14% | 50.87% | 0.7591 | 0.6329 | [8jw7anet](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/8jw7anet) |
+| GD | 0.1 | 35.25% | 52.66% | 0.8131 | 0.6898 | [5obqzryb](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/5obqzryb) |
+| GD | 1 | 45.85% | 56.42% | 0.4122 | 0.2243 | [fd9hc8aj](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/fd9hc8aj) |
+| GD | 10 | 54.84% | 57.72% | 0.1838 | 0.0381 | [mnfcrd88](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/mnfcrd88) |
+| NPO | 0 | 27.19% | 54.74% | 0.6305 | 0.4576 | [v376bmf2](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/v376bmf2) |
+| NPO | 0.1 | 26.04% | 52.50% | 0.4669 | 0.2996 | [00as44ut](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/00as44ut) |
+| NPO | **1** | **29.26%** | **53.06%** | **0.2623** | **0.0988** | [1fdg1s4r](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/1fdg1s4r) |
+| NPO | 10 | 51.61% | 56.85% | 0.2046 | 0.0809 | [qh7vvmas](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/qh7vvmas) |
+
+Lower WMDP accuracy means stronger unlearning. All cosine columns exclude the
+diagonal and zero-norm examples. Mean squared cosine averages individual squares.
+These training statistics precede optimizer updates. GD's strong penalties weaken
+unlearning; **NPO coefficient 1** retains the desired approximately 30% WMDP and
+53% MMLU while substantially reducing alignment.
+
+Saved-model checks 678821 (GD) and 678827 (NPO) both exited successfully. Each
+model/precision uses 32 fresh forget examples in eight batches of four, with
+recorded independent seeds and indices. For NPO coefficient 1, final checkpoint
+mean cosine is **0.3679 ± 0.0303 batch SEM in FP32**, versus 0.5534 ± 0.0712 for
+its control; after BF16 reload it is **0.3806 ± 0.0442**, versus 0.8446 ± 0.0429.
+Mean squared cosine is 0.1627 (FP32) / 0.1733 (BF16). Samples differ across models
+and precisions; these are independent estimates, not paired precision tests.
+Explicit parameter-gradient Gram checks pass on the first batch, and weights
+remain unchanged. Full details are in the per-family `results.md` files.
+
+The selected final model is
+`artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo--gip-squared-fp32--lr1e-6--rho3e-5--hpo--lambda-1--001`.
+No relearning attack has yet been run against these new defenses; lower gradient
+alignment alone does not establish attack resistance.
+
+Comparison figure: `artifacts/reports/z7b-squared-cosine-20261108/squared-cosine-defense-comparison.pdf`.
+It shows full benchmark scores and the last-ten-training-batch mean squared
+cosine. Raw results and trajectories: `summary.json`, `summary.csv`, and
+`cosine-trajectory.csv`; final geometry: `checkpoint-geometry-{gd,npo}-{float32,bfloat16}.json`.

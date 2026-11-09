@@ -118,6 +118,20 @@ configs_npo_sam_gip = [
 ]
 
 
+configs_npo_sam_gip_lrs = [
+    {
+        "model": config["model"].replace("--relearn-fft-ghost-ms16", suffix),
+        "method": config["method"],
+        "lr": lr,
+    }
+    for config in configs_npo_sam_gip
+    for lr, suffix in (
+        ("1e-5", "--relearn-fft-ghost-ms16"),
+        ("1e-6", "--relearn-fft-ghost-lr1e-6-ms16"),
+    )
+]
+
+
 def results(experiment, baseline=None):
     if baseline is not None:
         for _, label, score in results(baseline):
@@ -179,10 +193,22 @@ if __name__ == "__main__":
     # }
     # output = "artifacts/figures/z7b-wmdp-mmlu-relearning-trajectory--5pp.pdf"
 
-    configs = configs_npo_sam_gip
+    # configs = configs_npo_sam_gip
+    # steps = range(0, 17, 4)
+    # style = {"hue": "Method", "marker": "o", "dashes": False}
+    # output = "artifacts/figures/z7b-wmdp-mmlu-relearning-trajectory--npo-sam-gip-ghost-ms16.pdf"
+
+    configs = configs_npo_sam_gip_lrs
     steps = range(0, 17, 4)
-    style = {"hue": "Method", "marker": "o", "dashes": False}
-    output = "artifacts/figures/z7b-wmdp-mmlu-relearning-trajectory--npo-sam-gip-ghost-ms16.pdf"
+    style = {
+        "hue": "Method",
+        "size": "LR",
+        "size_order": ["1e-6", "1e-5"],
+        "sizes": {"1e-6": 1.0, "1e-5": 2.5},
+        "marker": "o",
+        "dashes": False,
+    }
+    output = "artifacts/figures/z7b-wmdp-mmlu-relearning-trajectory--npo-sam-gip-ghost-lrs-ms16.pdf"
 
     # configs = configs_lrs
     # steps = range(0, 129)

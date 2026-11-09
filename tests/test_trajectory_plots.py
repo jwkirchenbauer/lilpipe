@@ -49,7 +49,7 @@ def test_wmdp_main_plot_reads_scores_filters_steps_and_draws_baseline(
     plt = pytest.importorskip("matplotlib.pyplot")
     wmdp = load_plotter("relearning-trajectory/plot_trajectory_wmdp")
     root = tmp_path / "artifacts/tamia/evals"
-    for model in ["z7b-base", *[cfg["model"] for cfg in wmdp.configs_npo_sam_gip]]:
+    for model in ["z7b-base", *[cfg["model"] for cfg in wmdp.configs_npo_sam_gip_lrs]]:
         for step in (0, 4, 16, 128):
             path = root / model / f"checkpoint-{step}/results.json"
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -75,6 +75,8 @@ def test_wmdp_main_plot_reads_scores_filters_steps_and_draws_baseline(
     assert set(result["df"]["Relearning step"]) == {0, 4, 16}
     assert set(result["df"]["Accuracy (%)"]) == {25.0, 60.0}
     assert set(result["df"]["Method"]) == {"NPO", "NPO + SAM", "NPO + GIP"}
+    assert set(result["df"]["LR"]) == {"1e-6", "1e-5"}
+    assert result["style"]["sizes"]["1e-5"] > result["style"]["sizes"]["1e-6"]
     for label, axis in result["grid"].axes_dict.items():
         expected = 25.0 if label.startswith("WMDP") else 60.0
         assert list(axis.lines[-1].get_ydata()) == [expected, expected]

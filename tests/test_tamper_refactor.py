@@ -1404,7 +1404,12 @@ def test_gip_fp32_learning_rate_calibration_keeps_regularization_off(
     assert len(stages) == 8
 
 
-def test_npo_sam_gip_relearning_uses_matched_attacks_and_baseline_evals(monkeypatch):
+@pytest.mark.parametrize(
+    "suffix,learning_rate", [("ms16", 1e-5), ("lr1e-6-ms16", 1e-6)]
+)
+def test_npo_sam_gip_relearning_uses_matched_attacks_and_baseline_evals(
+    monkeypatch, suffix, learning_rate
+):
     import yaml
     from lilpipe import load
 
@@ -1412,7 +1417,8 @@ def test_npo_sam_gip_relearning_uses_matched_attacks_and_baseline_evals(monkeypa
     monkeypatch.chdir(root)
     manifest = yaml.safe_load(
         (
-            root / "configs/experiments/z7b-wmdp-bio-npo-sam-gip-relearn-ghost-ms16.yml"
+            root
+            / f"configs/experiments/z7b-wmdp-bio-npo-sam-gip-relearn-ghost-{suffix}.yml"
         ).read_text()
     )
     models = yaml.safe_load((root / "configs/registries/models.yml").read_text())[
@@ -1429,12 +1435,21 @@ def test_npo_sam_gip_relearning_uses_matched_attacks_and_baseline_evals(monkeypa
         assert config["gradient_accumulation_steps"] == 1
         assert config["max_steps"] == 16 and config["save_steps"] == 4
         assert config["save_total_limit"] == 4 and config["save_only_model"]
-        assert config["learning_rate"] == 1e-5 and config["bf16"]
+        assert config["learning_rate"] == learning_rate and config["bf16"]
         assert config["data_seed"] == 42 and config["seed"] == 1
         assert len(config["datasets"]) == 1
         assert config["datasets"][0]["path"] == "cais/wmdp-bio-forget-corpus"
         assert "custom_trainer_args" not in config
+        if learning_rate == 1e-6:
+            original_slug = slug.replace(
+                "--relearn-fft-ghost-lr1e-6-ms16", "--relearn-fft-ghost-ms16"
+            )
+            original = yaml.safe_load(
+                (root / models[original_slug]["producer"]["args"][0]).read_text()
+            )
+            differences = {key for key in config if config[key] != original[key]}
+            assert differences == {"learning_rate", "output_dir", "wandb_name"}
     stages = load(
-        "configs/experiments/z7b-wmdp-bio-npo-sam-gip-relearn-ghost-ms16.yml"
+        f"configs/experiments/z7b-wmdp-bio-npo-sam-gip-relearn-ghost-{suffix}.yml"
     ).plan()
     assert len(stages.stages) == 6

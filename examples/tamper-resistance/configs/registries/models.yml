@@ -1425,3 +1425,60 @@ models:
       - --cpus-per-task=48
       - --mem=480G
       - --time=03:00:00
+  z7b-wmdp-bio--5pp--unlearn-fft-npo--relearn-fft-ghost-lr1e-6-ms16:
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo--relearn-fft-ghost-lr1e-6-ms16
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo--relearn-fft-ghost-lr1e-6-ms16
+    evaluation_root: artifacts/tamia/evals
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo--ghost-track
+    method: NPO
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-npo--relearn-fft-ghost-lr1e-6-ms16
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-npo--relearn-fft-ghost-lr1e-6-ms16/selected.yml
+      sbatch_args:
+      - --account=aip-grabus
+      - --partition=gpubase_bynode_b1
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+  z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2--relearn-fft-ghost-lr1e-6-ms16:
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2--relearn-fft-ghost-lr1e-6-ms16
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2--relearn-fft-ghost-lr1e-6-ms16
+    evaluation_root: artifacts/tamia/evals
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2--ghost-track
+    method: NPO + SAM
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2--relearn-fft-ghost-lr1e-6-ms16
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2--relearn-fft-ghost-lr1e-6-ms16/selected.yml
+      sbatch_args:
+      - --account=aip-grabus
+      - --partition=gpubase_bynode_b1
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00
+  z7b-wmdp-bio--5pp--unlearn-fft-npo-gip-lambda1--relearn-fft-ghost-lr1e-6-ms16:
+    base_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-gip-lambda1--relearn-fft-ghost-lr1e-6-ms16
+    adapter_name_or_path: '-'
+    local_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo-gip-lambda1--relearn-fft-ghost-lr1e-6-ms16
+    evaluation_root: artifacts/tamia/evals
+    baseline_model_name_or_path: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-npo--gip-squared-fp32--lr1e-6--rho3e-5--hpo--lambda-1--001
+    method: NPO + GIP
+    producer:
+      id: train-z7b-wmdp-bio--5pp--unlearn-fft-npo-gip-lambda1--relearn-fft-ghost-lr1e-6-ms16
+      script: scripts/slurm/tamia/train.sbatch
+      args:
+      - configs/stages-wmdp/2_relearn/z7b-wmdp-bio--5pp--unlearn-fft-npo-gip-lambda1--relearn-fft-ghost-lr1e-6-ms16/selected.yml
+      sbatch_args:
+      - --account=aip-grabus
+      - --partition=gpubase_bynode_b1
+      - --gpus-per-node=h100:4
+      - --cpus-per-task=48
+      - --mem=480G
+      - --time=03:00:00

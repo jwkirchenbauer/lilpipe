@@ -250,3 +250,26 @@ Step time dropped to about 35–40 seconds, compared with about 90 seconds with
 the CPU accumulator. Five-second GPU telemetry measured a maximum of 74,507 MiB
 (72.8 GiB) across the four H100s. Future regularized runs therefore fit the
 three-hour `gpubase_bynode_b1` partition at the unchanged 125-update budget.
+
+The FP32 learning-rate calibration is complete. **LR 1e-6** restores a useful
+baseline for both methods:
+
+| FP32 control | WMDP-bio robust | MMLU-no-bio | Last 10 mean cosine | Last 10 mean squared cosine | W&B |
+|---|---:|---:|---:|---:|---|
+| GD, LR 1e-6 | 32.14% | 50.87% | 0.7591 | 0.6329 | [8jw7anet](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/8jw7anet) |
+| NPO, LR 1e-6 | 27.19% | 54.74% | 0.6305 | 0.4576 | [v376bmf2](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/v376bmf2) |
+
+The selected controls are training/evaluation jobs `678624`/`678632` and
+`678628`/`678636`. All eight calibration controls and evaluations completed
+successfully with final models, checkpoint-125, and 125 geometry measurements.
+The per-family `results.md` files record all learning rates, including the failed
+5e-6 controls, in increasing order. Small-LR controls with lower cosine had
+insufficient unlearning; selection therefore uses both benchmark metrics.
+
+The active squared-cosine comparisons now use LR 1e-6, coefficients 0.1/1/10,
+perturbation length 3e-5, the faster GPU accumulator, and the unchanged
+125-update budget. Training jobs `678687`–`678692` have dependent evaluations
+`678693`–`678698`. Receipts are in `jobs-selected-fp32.json`; the immutable
+source/config snapshot is `submitted/fp32-lr1e-6-rho3e-5/`, commit `69fc3050`.
+These controls are suitable references, but the regularized defense outcomes
+and the requested final tradeoff are still unverified.

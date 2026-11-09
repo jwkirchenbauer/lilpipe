@@ -42,3 +42,23 @@ unlearning: higher WMDP accuracy means more retained forget-domain capability.
 None of these GD runs simultaneously establishes low alignment and approximately
 30% WMDP accuracy. Cosines above describe training minibatches before optimizer
 updates, rather than an independent measurement of the saved final checkpoint.
+
+## Saved checkpoint geometry audit
+
+Job 678821 completed successfully. Each checkpoint used 32 freshly sampled forget
+rows in eight batches of four, with recorded independent sampling seeds and row
+indices. All statistics exclude diagonal entries. In FP32:
+
+| Coefficient | Mean cosine ± batch SEM | Mean squared cosine | Ghost/reference Gram relative error |
+|---|---:|---:|---:|
+| 0 | 0.8126 ± 0.0473 | 0.6974 | 3.41e-7 |
+| 1 | 0.4085 ± 0.0452 | 0.2133 | 4.36e-6 |
+| 10 | 0.1930 ± 0.0157 | 0.0438 | 1.77e-6 |
+
+Reference checks materialize all trainable parameter gradients on the first
+batch only. Model parameter version counters remained unchanged throughout.
+The audit confirms that low alignment survives saving and reloading, while the
+benchmark results above still rule out these GD candidates as satisfying the
+combined unlearning and alignment target. Exact audit provenance and full
+FP32/BF16 measurements: `checkpoint-geometry-gd-{float32,bfloat16}.json` under
+the run root; submitted script/source: `submitted/checkpoint-geometry-gd/`.

@@ -22,3 +22,26 @@ Authoritative artifacts on Tamia: `artifacts/tamia/runs/z7b-squared-cosine-20261
 Control receipts: `jobs-lr-calibration.json`; active defense receipts: `jobs-selected-fp32.json`.
 Exact FD calibration: `exact-audit.json`, `calibration-gate.json`.
 Frozen calibrated defense source/configs: `submitted/fp32-lr1e-6-rho3e-5/` (commit `69fc3050`).
+
+## Squared-cosine sweep at LR 1e-6
+
+| Coefficient | WMDP-bio robust | MMLU-no-bio | Last 10 mean cosine | Last 10 mean squared cosine | W&B |
+|---|---:|---:|---:|---:|---|
+| 0 | 27.19% | 54.74% | 0.6305 | 0.4576 | [v376bmf2](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/v376bmf2) |
+| 0.1 | Pending | Pending | 0.4669 | 0.2996 | [00as44ut](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/00as44ut) |
+| 1 | 29.26% | 53.06% | 0.2623 | 0.0988 | [1fdg1s4r](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/1fdg1s4r) |
+| 10 | 51.61% | 56.85% | 0.2046 | 0.0809 | [qh7vvmas](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/qh7vvmas) |
+
+All nonzero-coefficient training runs completed 125 updates and saved both final
+weights and checkpoint-125 (28,966,962,352 weight bytes each). All recorded 125
+changing-batch geometry measurements, with no skipped regularization steps.
+Training jobs: coefficient 0.1 = 678714 (retry after a filesystem failure before
+any update), coefficient 1 = 678691, coefficient 10 = 678692.
+Full evaluation jobs 678697 and 678698 completed successfully; 678715 is pending
+completion. All benchmark evaluations use no example limit.
+
+Coefficient 1 preserves approximately 30% WMDP accuracy and 53% MMLU while reducing
+mean cosine from 0.6305 to 0.2623. Coefficient 10 weakens unlearning substantially.
+The cosine columns describe pre-update training minibatches; independent saved
+checkpoint measurements are running as job 678827, using fresh forget rows and
+an explicit parameter-gradient reference check in FP32 and BF16.

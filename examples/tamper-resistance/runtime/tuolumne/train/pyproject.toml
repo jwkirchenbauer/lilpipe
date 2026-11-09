@@ -8,12 +8,16 @@ dependencies = [
   "triton-rocm==3.7.1",
   "sentencepiece>=0.2,<0.3",
   "protobuf>=6,<7",
-  "axolotl==0.18.0"
+  "axolotl==0.18.0",
+  "torchao==0.17.0"
 ]
+
+[project.optional-dependencies]
+dev = ["black==25.1.0", "pathspec==0.12.1"]
 
 [tool.uv]
 environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
-exclude-dependencies = ["xformers", "torchao", "triton", "fla-core", "flash-linear-attention"]
+exclude-dependencies = ["xformers", "triton", "fla-core", "flash-linear-attention"]
 constraint-dependencies = [
   "absl-py==2.5.0",
   "accelerate==1.13.0",
@@ -282,6 +286,7 @@ constraint-dependencies = [
 ]
 
 [tool.uv.sources]
+torchao = { url = "https://files.pythonhosted.org/packages/c9/37/ef37ca885265e5f79a168616767dd416a3cea1cc3b28bb6b503ce4a5b652/torchao-0.17.0-py3-none-any.whl" }
 lilpipe-tamper-resistance = { path = "../../..", editable = true }
 torch = { index = "pytorch-rocm72" }
 triton-rocm = { index = "pytorch-rocm72" }

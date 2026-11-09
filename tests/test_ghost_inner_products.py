@@ -688,3 +688,71 @@ def test_squared_cosine_averages_individual_squares_not_the_signed_mean():
         mean_gradient_cosine(torch.eye(3), squared=True), torch.tensor(0.0)
     )
     assert mean_gradient_cosine(torch.zeros(3, 3), squared=True) is None
+
+
+@pytest.fixture
+def checkpoint_probe():
+    import runpy
+
+    pytest.importorskip("transformers")
+    pytest.importorskip("datasets")
+    return runpy.run_path(str(SRC.parent / "scripts/misc/probe_gradient_cosine.py"))
+
+
+def test_checkpoint_probe_samples_only_distinct_forget_rows(checkpoint_probe):
+    from datasets import Dataset
+
+    dataset = Dataset.from_dict(
+        {"is_forget": [True, False, True, False, True], "value": list(range(5))}
+    )
+    rng = torch.random.get_rng_state().clone()
+    rows, indices, seed = checkpoint_probe["sample_forget_rows"](dataset, 3, 17)
+    assert seed == 17
+    assert set(indices) == {0, 2, 4}
+    assert all(row["is_forget"] for row in rows)
+    assert checkpoint_probe["sample_forget_rows"](dataset, 3, 17)[1] == indices
+    assert torch.equal(rng, torch.random.get_rng_state())
+
+
+def test_checkpoint_probe_preserves_prepared_labels(checkpoint_probe):
+    from types import SimpleNamespace
+
+    rows = [
+        {
+            "input_ids": [1, 2, 3, 4],
+            "labels": [-100, 2, 3, 4],
+            "attention_mask": [1] * 4,
+        },
+        {"input_ids": [5, 6], "labels": [-100, 6], "attention_mask": [1, 1]},
+    ]
+    batch = checkpoint_probe["batch_rows"](
+        rows, SimpleNamespace(pad_token_id=0), "cpu", 3, prepared=True
+    )
+    assert batch["input_ids"].tolist() == [[1, 2, 3], [5, 6, 0]]
+    assert batch["labels"].tolist() == [[-100, 2, 3], [-100, 6, -100]]
+    assert batch["attention_mask"].tolist() == [[1, 1, 1], [1, 1, 0]]
+
+
+def test_checkpoint_probe_explicit_gram_matches_materialized_reference(
+    checkpoint_probe,
+):
+    from types import SimpleNamespace
+
+    class TinyLM(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.embedding = nn.Embedding(7, 3)
+            self.head = nn.Linear(3, 7)
+
+        def forward(self, input_ids, labels):
+            return SimpleNamespace(logits=self.head(self.embedding(input_ids)))
+
+    torch.manual_seed(18)
+    model = TinyLM()
+    batch = {"input_ids": torch.tensor([[1, 2, 3], [3, 4, 5]])}
+    batch["labels"] = batch["input_ids"].clone()
+    losses = causal_lm_losses(model(**batch).logits, batch["labels"])
+    expected = explicit_gram(losses, model).float()
+    actual = checkpoint_probe["explicit_gram"](model, batch)
+    torch.testing.assert_close(actual, expected)
+    assert all(p.grad is None for p in model.parameters())

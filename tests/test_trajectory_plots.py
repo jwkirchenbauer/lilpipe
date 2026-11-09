@@ -76,7 +76,8 @@ def test_wmdp_main_plot_reads_scores_filters_steps_and_draws_baseline(
     assert set(result["df"]["Accuracy (%)"]) == {25.0, 60.0}
     assert set(result["df"]["Method"]) == {"NPO", "NPO + SAM", "NPO + GIP"}
     assert set(result["df"]["LR"]) == {"1e-6", "5e-6", "1e-5"}
-    assert result["style"]["sizes"]["1e-5"] > result["style"]["sizes"]["1e-6"]
+    sizes = result["style"]["sizes"]
+    assert sizes["1e-6"] < sizes["5e-6"] < sizes["1e-5"]
     for label, axis in result["grid"].axes_dict.items():
         expected = 25.0 if label.startswith("WMDP") else 60.0
         assert list(axis.lines[-1].get_ydata()) == [expected, expected]

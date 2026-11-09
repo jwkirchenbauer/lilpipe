@@ -386,9 +386,36 @@ local report uses the same suffix under `artifacts/reports/`.
 The initial three-hour allocation limits were reduced to 30 minutes before
 completion; `allocation-updates.json` preserves the before/after Slurm state.
 
-The intermediate LR 5e-6 comparison is running with otherwise identical
-settings. Its source/config commit is `ecadb147`; training jobs
-678959/678960/678961 completed, and evaluations 678962/678963/678964 are running.
-The basic trajectory script selects all three LRs in `configs_npo_sam_gip_lrs`,
-with color for defense and line thickness for LR (1e-6 thin, 5e-6 medium, 1e-5
-thick). The final combined figure will be generated once all results are ready.
+The intermediate LR 5e-6 comparison is complete with otherwise identical
+settings. Source/config commit: `ecadb147`. Training jobs
+678959/678960/678961 and evaluations 678962/678963/678964 all exited 0.
+All three saved checkpoints 4/8/12/16 and logged 16 geometry measurements;
+W&B confirms all three are finished and all 16 records are online.
+Submitted source, exact 30-minute resource requests, hashes, and per-stage
+submission receipts are under
+`artifacts/tamia/runs/z7b-npo-sam-gip-relearn-ghost-lr5e-6-ms16-20261108/`.
+The local report uses the same suffix under `artifacts/reports/`.
+
+| Defense | Initial attack LR | WMDP at step 16 | MMLU-no-bio at step 16 | W&B |
+|---|---:|---:|---:|---|
+| NPO | 5e-6 | 27.42% | 51.59% | [j76ivh87](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/j76ivh87) |
+| NPO + SAM | 5e-6 | 45.39% | 55.79% | [yb2drrnh](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/yb2drrnh) |
+| NPO + GIP | 5e-6 | 52.42% | 57.81% | [i58zeg4w](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/i58zeg4w) |
+
+At 5e-6, GIP again recovers more WMDP accuracy than SAM. Plain NPO retains low
+WMDP accuracy while losing about 3.6 MMLU percentage points from its starting
+checkpoint, rather than the much larger collapse at 1e-5. The 1e-6 attack
+produces modest recovery for all three over 16 updates. These results do not
+establish improved relearning resistance for GIP at the tested rates/budget.
+
+The existing basic plotter now selects `configs_npo_sam_gip_lrs`. Color denotes
+defense; line thickness denotes initial attack LR: 1e-6 thin, 5e-6 medium, and
+1e-5 thick. The previous selection blocks remain commented out.
+[Combined three-LR trajectory PDF](../artifacts/figures/z7b-wmdp-mmlu-relearning-trajectory--npo-sam-gip-ghost-lrs-ms16.pdf)
+(and PNG beside it) includes all nine trajectories at steps 0/4/8/12/16 for both
+WMDP and MMLU-no-bio: 90 plotted observations from 45 full benchmark evaluations.
+`combined-plotted-trajectories.csv` and `figure-verification.json` in the 5e-6
+report record the exact plotted rows and line widths. All raw evaluation JSONs
+and figures are committed. Six focused config/plot regression cases passed,
+including exact equality of all training settings except LR/output/run name and
+monotonically increasing line thickness with LR.

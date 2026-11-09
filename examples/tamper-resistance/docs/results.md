@@ -309,3 +309,53 @@ Comparison figure: `artifacts/reports/z7b-squared-cosine-20261108/squared-cosine
 It shows full benchmark scores and the last-ten-training-batch mean squared
 cosine. Raw results and trajectories: `summary.json`, `summary.csv`, and
 `cosine-trajectory.csv`; final geometry: `checkpoint-geometry-{gd,npo}-{float32,bfloat16}.json`.
+
+## NPO / SAM / GIP matched relearning trajectories (2026-11-08)
+
+All three attacks use `GIPRelearnTrainer` for passive ghost tracking and ordinary
+cross-entropy on the WMDP-bio forget corpus. There is no retain stream or defense
+regularization during the attack. They use LR 1e-5 with linear decay, AdamW with
+zero weight decay, BF16, sequence length 512, batch size 2, accumulation 1, training
+seed 1, data seed 42, and 16 optimizer updates. Batch size 2 is the agreed change
+from the saved batch-size-1 attack, allowing an off-diagonal cosine per update.
+This processes 32 training examples rather than 16. All three use identical
+prepared rows, tokenizers, and data order. Model-only checkpoints 4/8/12/16 remain
+saved; full WMDP-bio robust and MMLU-no-bio evaluations cover 0/4/8/12/16 with no
+example limits. Step 0 evaluates the actual starting defense.
+
+| Starting defense | WMDP before | WMDP after 16 | MMLU before | MMLU after 16 | W&B |
+|---|---:|---:|---:|---:|---|
+| NPO | 29.38% | 26.73% | 55.22% | 22.92% | [ydc6nnmq](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/ydc6nnmq) |
+| NPO + SAM | 28.00% | 45.51% | 54.47% | 55.13% | [vpsu5rxq](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/vpsu5rxq) |
+| NPO + GIP | 29.26% | 54.61% | 53.06% | 57.84% | [djcw3fjs](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/djcw3fjs) |
+
+Under this attack, GIP recovers more forget-domain accuracy than SAM by steps
+8–16, so this run does not demonstrate improved relearning resistance from GIP.
+Plain NPO loses MMLU capability almost immediately (22.75% at step 4), making its
+low WMDP accuracy unsuitable as evidence of a useful robust defense. These are
+single-seed results at one attack learning rate. The defenses themselves retain
+their selected training settings; GIP was trained in FP32 at LR 1e-6, while NPO
+and SAM used BF16 at LR 5e-6.
+
+Figure generated with the existing basic trajectory plotter, whose old selection
+block is commented out and whose active selection is `configs_npo_sam_gip`:
+[WMDP / MMLU trajectory PDF](../artifacts/figures/z7b-wmdp-mmlu-relearning-trajectory--npo-sam-gip-ghost-ms16.pdf).
+A PNG is saved beside it. The black reference line is the original Zephyr base
+model evaluation already present locally, not an additional attacked model.
+
+Manifest: `configs/experiments/z7b-wmdp-bio-npo-sam-gip-relearn-ghost-ms16.yml`.
+Source/config commit: `ad69a856`. Preparation job 678860 completed successfully;
+training jobs 678861/678862/678863 and evaluation jobs 678864/678865/678866 all
+exited 0. Each attack saved four checkpoints of 15,008,318,632 weight bytes and
+recorded 16 valid cosine measurements. W&B confirms all three runs are finished
+with 16 geometry records at pre-update global steps 0–15.
+
+Immutable submitted source/configs, resource dependencies, hashes, logs, and
+receipts on Tamia:
+`artifacts/tamia/runs/z7b-npo-sam-gip-relearn-ghost-ms16-20261108/`.
+Local report: `artifacts/reports/z7b-npo-sam-gip-relearn-ghost-ms16-20261108/`.
+`summary.json` and `trajectory.csv` record all 15 full benchmark evaluations and
+their exact source files; `cosine-trajectory.csv` records all 48 training geometry
+measurements; `prepared-cache-verification.json` records the identical-tokenizer
+check and the three corresponding prepared cache hashes. Eight focused config,
+evaluation-interface, and plotting regression tests passed.

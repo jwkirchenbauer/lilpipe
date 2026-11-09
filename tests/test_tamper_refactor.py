@@ -1352,6 +1352,7 @@ def test_squared_gip_sweep_preserves_base_defense_and_has_fp32_control(
         "torch_dtype",
         "output_dir",
         "wandb_name",
+        "learning_rate",
     }
     assert {k: v for k, v in before.items() if k not in changed} == {
         k: v for k, v in base.items() if k not in changed
@@ -1360,6 +1361,7 @@ def test_squared_gip_sweep_preserves_base_defense_and_has_fp32_control(
         assert base["custom_trainer_args"][key] == value
     assert base["bf16"] is False and base["fp16"] is False
     assert base["torch_dtype"] == "float32"
+    assert base["learning_rate"] == 1e-6
     assert base["custom_trainer_args"]["cosine_rho"] == 3e-5
     hpo = load_script(EXAMPLE / "scripts/hpo.py", "squared_gip_hpo")
     manifest = hpo.generate(directory / "sweep.yml", output_root=tmp_path)
@@ -1375,6 +1377,7 @@ def test_squared_gip_sweep_preserves_base_defense_and_has_fp32_control(
     assert all(c["custom_trainer_args"]["cosine_pairs"] == 2 for c in configs)
     stages = load(manifest).plan().stages
     assert len(stages) == 8
+    assert all("--lr1e-6--" in s.id for s in stages)
     assert all(len(s.depends_on) == 1 for s in stages if s.id.startswith("eval-"))
 
 

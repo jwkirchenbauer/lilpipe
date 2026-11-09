@@ -4,18 +4,22 @@ sweeps:
   parameters:
     custom_trainer_args.cosine_coefficient:
     - 0.0
+  name_template: z7b-wmdp-bio--15pp--unlearn-fft-gd--gip-squared-fp32--lr{learning_rate:.0e}--rho3e-5--hpo--lambda-0--001
 - name: lambda-0.1
   parameters:
     custom_trainer_args.cosine_coefficient:
     - 0.1
+  name_template: z7b-wmdp-bio--15pp--unlearn-fft-gd--gip-squared-fp32--lr{learning_rate:.0e}--rho3e-5--hpo--lambda-0.1--001
 - name: lambda-1
   parameters:
     custom_trainer_args.cosine_coefficient:
     - 1.0
+  name_template: z7b-wmdp-bio--15pp--unlearn-fft-gd--gip-squared-fp32--lr{learning_rate:.0e}--rho3e-5--hpo--lambda-1--001
 - name: lambda-10
   parameters:
     custom_trainer_args.cosine_coefficient:
     - 10.0
+  name_template: z7b-wmdp-bio--15pp--unlearn-fft-gd--gip-squared-fp32--lr{learning_rate:.0e}--rho3e-5--hpo--lambda-10--001
 producer:
   script: scripts/slurm/tamia/train.sbatch
   sbatch_args:

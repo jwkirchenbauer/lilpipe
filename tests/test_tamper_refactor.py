@@ -1405,7 +1405,8 @@ def test_gip_fp32_learning_rate_calibration_keeps_regularization_off(
 
 
 @pytest.mark.parametrize(
-    "suffix,learning_rate", [("ms16", 1e-5), ("lr1e-6-ms16", 1e-6)]
+    "suffix,learning_rate",
+    [("ms16", 1e-5), ("lr1e-6-ms16", 1e-6), ("lr5e-6-ms16", 5e-6)],
 )
 def test_npo_sam_gip_relearning_uses_matched_attacks_and_baseline_evals(
     monkeypatch, suffix, learning_rate
@@ -1440,9 +1441,9 @@ def test_npo_sam_gip_relearning_uses_matched_attacks_and_baseline_evals(
         assert len(config["datasets"]) == 1
         assert config["datasets"][0]["path"] == "cais/wmdp-bio-forget-corpus"
         assert "custom_trainer_args" not in config
-        if learning_rate == 1e-6:
+        if learning_rate != 1e-5:
             original_slug = slug.replace(
-                "--relearn-fft-ghost-lr1e-6-ms16", "--relearn-fft-ghost-ms16"
+                f"--relearn-fft-ghost-{suffix}", "--relearn-fft-ghost-ms16"
             )
             original = yaml.safe_load(
                 (root / models[original_slug]["producer"]["args"][0]).read_text()

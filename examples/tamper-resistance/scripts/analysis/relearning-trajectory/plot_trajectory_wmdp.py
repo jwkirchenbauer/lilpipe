@@ -128,6 +128,7 @@ configs_npo_sam_gip_lrs = [
     for lr, suffix in (
         ("1e-5", "--relearn-fft-ghost-ms16"),
         ("1e-6", "--relearn-fft-ghost-lr1e-6-ms16"),
+        ("5e-6", "--relearn-fft-ghost-lr5e-6-ms16"),
     )
 ]
 
@@ -203,8 +204,8 @@ if __name__ == "__main__":
     style = {
         "hue": "Method",
         "size": "LR",
-        "size_order": ["1e-6", "1e-5"],
-        "sizes": {"1e-6": 1.0, "1e-5": 2.5},
+        "size_order": ["1e-6", "5e-6", "1e-5"],
+        "sizes": {"1e-6": 0.9, "5e-6": 1.7, "1e-5": 2.5},
         "marker": "o",
         "dashes": False,
     }

@@ -359,3 +359,36 @@ their exact source files; `cosine-trajectory.csv` records all 48 training geomet
 measurements; `prepared-cache-verification.json` records the identical-tokenizer
 check and the three corresponding prepared cache hashes. Eight focused config,
 evaluation-interface, and plotting regression tests passed.
+
+### Relearning learning-rate comparison
+
+The same three starting checkpoints were also attacked at initial LR 1e-6.
+All training parameters except LR, output directory, and run name match the
+1e-5 configs above. Training uses the same 16 steps, batch size 2, seed/data order,
+BF16, and linear decay. All 15 full evaluations completed successfully:
+
+| Defense | Initial attack LR | WMDP at step 16 | MMLU-no-bio at step 16 | W&B |
+|---|---:|---:|---:|---|
+| NPO | 1e-6 | 29.84% | 55.04% | [fpiej6cy](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/fpiej6cy) |
+| NPO + SAM | 1e-6 | 31.57% | 54.87% | [8ml2nrzs](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/8ml2nrzs) |
+| NPO + GIP | 1e-6 | 35.37% | 55.04% | [7s8sy04v](https://wandb.ai/marawan-gamal/lp-tamper-resistance/runs/7s8sy04v) |
+
+All three lower-LR attacks preserve MMLU near 55% over this short budget, while
+WMDP recovery remains modest. These are results for one seed and 16 updates,
+not evidence that a stronger or longer attack would also fail.
+
+Training jobs 678912/678913/678914 and evaluations 678915/678916/678917 all exited
+0. Each run saved checkpoints 4/8/12/16 and recorded 16 cosine measurements;
+W&B confirms all three runs are finished with 16 valid geometry records.
+Immutable configs/source commit: `92cf1e9f`. Run root on Tamia:
+`artifacts/tamia/runs/z7b-npo-sam-gip-relearn-ghost-lr1e-6-ms16-20261108/`;
+local report uses the same suffix under `artifacts/reports/`.
+The initial three-hour allocation limits were reduced to 30 minutes before
+completion; `allocation-updates.json` preserves the before/after Slurm state.
+
+The intermediate LR 5e-6 comparison is running with otherwise identical
+settings. Its source/config commit is `ecadb147`; training jobs
+678959/678960/678961 completed, and evaluations 678962/678963/678964 are running.
+The basic trajectory script selects all three LRs in `configs_npo_sam_gip_lrs`,
+with color for defense and line thickness for LR (1e-6 thin, 5e-6 medium, 1e-5
+thick). The final combined figure will be generated once all results are ready.

@@ -13,7 +13,7 @@ dependencies = [
 
 [tool.uv]
 environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
-exclude-dependencies = ["bitsandbytes", "xformers", "torchao", "triton", "fla-core", "flash-linear-attention"]
+exclude-dependencies = ["xformers", "torchao", "triton", "fla-core", "flash-linear-attention"]
 constraint-dependencies = [
   "absl-py==2.5.0",
   "accelerate==1.13.0",

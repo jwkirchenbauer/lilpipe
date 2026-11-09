@@ -1,0 +1,11 @@
+version: 1
+id: z7b-wmdp-bio-npo-sam-gip-relearn-ghost-ms16
+registries:
+  models: configs/registries/models.yml
+  evaluations: configs/registries/evals.yml
+models:
+- z7b-wmdp-bio--5pp--unlearn-fft-npo--relearn-fft-ghost-ms16
+- z7b-wmdp-bio--5pp--unlearn-fft-npo-sam-rho1e-2--relearn-fft-ghost-ms16
+- z7b-wmdp-bio--5pp--unlearn-fft-npo-gip-lambda1--relearn-fft-ghost-ms16
+evaluations:
+- tamia-h100-z7b--wmdp-and-mmlu-trajectory-with-baseline

@@ -49,7 +49,7 @@ def test_wmdp_main_plot_reads_scores_filters_steps_and_draws_baseline(
     plt = pytest.importorskip("matplotlib.pyplot")
     wmdp = load_plotter("relearning-trajectory/plot_trajectory_wmdp")
     root = tmp_path / "artifacts/tamia/evals"
-    for model in ["z7b-base", *[cfg["model"] for cfg in wmdp.configs_main]]:
+    for model in ["z7b-base", *[cfg["model"] for cfg in wmdp.configs_npo_sam_gip]]:
         for step in (0, 4, 16, 128):
             path = root / model / f"checkpoint-{step}/results.json"
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -74,7 +74,7 @@ def test_wmdp_main_plot_reads_scores_filters_steps_and_draws_baseline(
     assert output.is_file()
     assert set(result["df"]["Relearning step"]) == {0, 4, 16}
     assert set(result["df"]["Accuracy (%)"]) == {25.0, 60.0}
-    assert set(result["df"]["Method"]) == {"RMU", "NPO", "MaxEnt", "GD"}
+    assert set(result["df"]["Method"]) == {"NPO", "NPO + SAM", "NPO + GIP"}
     for label, axis in result["grid"].axes_dict.items():
         expected = 25.0 if label.startswith("WMDP") else 60.0
         assert list(axis.lines[-1].get_ydata()) == [expected, expected]
@@ -123,4 +123,27 @@ def test_tar_plot_adds_promoted_baseline_and_sorts_available_steps(
     config = wmdp.configs_tar_lrs[0]
     assert list(wmdp.results(config["model"], config["baseline"])) == [
         (step, "WMDP-Bio robust ↓", 30.0) for step in [0, 16, 112, 128]
+    ]
+
+
+def test_wmdp_plot_reads_unattacked_model_root(tmp_path):
+    pytest.importorskip("pandas")
+    pytest.importorskip("seaborn")
+    plotter = load_plotter("relearning-trajectory/plot_trajectory_wmdp")
+    plotter.rootdir = str(tmp_path)
+    path = tmp_path / "base" / "hf-model" / "results_2026.json"
+    path.parent.mkdir(parents=True)
+    path.write_text(
+        json.dumps(
+            {
+                "results": {
+                    "wmdp_bio_robust": {"acc,none": 0.6},
+                    "mmlu_no_bio": {"acc,none": 0.7},
+                }
+            }
+        )
+    )
+    assert list(plotter.results("base")) == [
+        (0, "WMDP-Bio robust ↓", 60.0),
+        (0, "MMLU-no-bio ↑", 70.0),
     ]

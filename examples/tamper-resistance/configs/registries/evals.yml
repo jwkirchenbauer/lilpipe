@@ -151,3 +151,19 @@ evaluations:
     - --mem=32G
     - --time=03:00:00
     - --export=ALL,HARMFULNESS_ONLY=1
+  tamia-h100-z7b--wmdp-and-mmlu-trajectory-with-baseline:
+    script: scripts/slurm/tamia/eval_wmdp_mmlu.sbatch
+    args:
+    - --checkpoints
+    - '{model.base_model_name_or_path}'
+    - '{model.evaluation_root}/{model.id}'
+    - 'false'
+    - 'false'
+    - '{model.baseline_model_name_or_path}'
+    sbatch_args:
+    - --account=aip-grabus
+    - --partition=gpubase_bynode_b1
+    - --gpus-per-node=h100:4
+    - --cpus-per-task=48
+    - --mem=480G
+    - --time=03:00:00

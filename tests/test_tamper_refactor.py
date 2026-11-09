@@ -1402,3 +1402,39 @@ def test_gip_fp32_learning_rate_calibration_keeps_regularization_off(
     assert all(c["bf16"] is False and c["max_steps"] == 125 for c in configs)
     stages = load(manifest).plan().stages
     assert len(stages) == 8
+
+
+def test_npo_sam_gip_relearning_uses_matched_attacks_and_baseline_evals(monkeypatch):
+    import yaml
+    from lilpipe import load
+
+    root = Path(__file__).resolve().parents[1] / "examples/tamper-resistance"
+    monkeypatch.chdir(root)
+    manifest = yaml.safe_load(
+        (
+            root / "configs/experiments/z7b-wmdp-bio-npo-sam-gip-relearn-ghost-ms16.yml"
+        ).read_text()
+    )
+    models = yaml.safe_load((root / "configs/registries/models.yml").read_text())[
+        "models"
+    ]
+    assert len(manifest["models"]) == 3
+    for slug in manifest["models"]:
+        model = models[slug]
+        config = yaml.safe_load((root / model["producer"]["args"][0]).read_text())
+        assert config["trainer_cls"] == "trainers.tr_gip.GIPRelearnTrainer"
+        assert config["base_model"] == model["baseline_model_name_or_path"]
+        assert config["output_dir"] == model["base_model_name_or_path"]
+        assert config["micro_batch_size"] == 2
+        assert config["gradient_accumulation_steps"] == 1
+        assert config["max_steps"] == 16 and config["save_steps"] == 4
+        assert config["save_total_limit"] == 4 and config["save_only_model"]
+        assert config["learning_rate"] == 1e-5 and config["bf16"]
+        assert config["data_seed"] == 42 and config["seed"] == 1
+        assert len(config["datasets"]) == 1
+        assert config["datasets"][0]["path"] == "cais/wmdp-bio-forget-corpus"
+        assert "custom_trainer_args" not in config
+    stages = load(
+        "configs/experiments/z7b-wmdp-bio-npo-sam-gip-relearn-ghost-ms16.yml"
+    ).plan()
+    assert len(stages.stages) == 6

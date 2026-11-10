@@ -2,10 +2,18 @@
 # Submit with launch_tuo.py: one outer task, four GPUs, bash -i THIS evaluate RUN ...
 set -euo pipefail
 [[ $- == *i* ]] || { echo 'Invoke this worker with bash -i.' >&2; exit 2; }
-mode=${1:?evaluate or report required}
+mode=${1:?evaluate, resume, or report required}
 run=${2:?absolute study directory required}
 [[ "$run" == /* ]]
-[[ "$mode" == evaluate || "$mode" == report ]]
+[[ "$mode" == evaluate || "$mode" == resume || "$mode" == report ]]
+if [[ "$mode" == resume ]]; then
+    selected=${3:?case name required for resume}
+    if [[ -f "$run/cases/$selected/status/evaluation.json" ]] && rg -q '"state"[[:space:]]*:[[:space:]]*"complete"' "$run/cases/$selected/status/evaluation.json"; then
+        echo "All benchmark groups already verified complete: $selected"
+        exit 0
+    fi
+    set -- evaluate "$run" --cases "$selected"
+fi
 mm_activate /usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2
 worker_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 # A frozen worker lives in source/misc; the editable worker lives in scripts/misc.

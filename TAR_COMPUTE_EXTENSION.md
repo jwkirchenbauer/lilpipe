@@ -20,6 +20,7 @@ and [3D plotter](examples/tamper-resistance/scripts/analysis/loss-landscapes/plo
 Started 2026-11-10. Landscape shape and attack dynamics are the primary outcomes;
 WMDP and MMLU measure recovered capability and retained utility alongside them.
 Artifacts: `examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/`.
+Live [measurements and figures](examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/report.md) show coverage explicitly.
 
 The defense LR remains `5e-6`. Use linear decay over each defense horizon and
 warmup `48/500 = 12/125`; the two 8,000-inner-update conditions then align LR
@@ -46,3 +47,7 @@ plus each condition's fitted attack plane. Keep actual loss and projection-error
 checks, shared-scale and center-relative views, and actual minibatch measurements.
 Label capability matching only when measured snapshots support it; also report
 the fixed-budget utility/resistance tradeoff.
+
+Use first-update-aligned slices and interpolation between the first eight saved
+updates to check whether fitting the whole trajectory hides early escape. The
+optimizer visits the recorded endpoints; interpolated segments are diagnostic.

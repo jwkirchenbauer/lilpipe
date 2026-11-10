@@ -6,7 +6,9 @@ import hashlib
 import json
 import math
 import os
+import runpy
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
 
@@ -14,6 +16,10 @@ import numpy as np
 BASE_MMLU = 58.587299
 DEFENDED_MMLU = 54.01591352649753
 LOCAL_RADIUS = 0.15713339880469646
+PROFILE_FRACTIONS = np.linspace(-1, 2, 25)
+PROFILE_C0 = np.linspace(-1, 1, 17)
+PROFILE_C1 = np.linspace(-125, 125, 17)
+PROFILE_TOLERANCE = 1e-4
 FAMILIES = {
     "compute": ["baseline-lr1e-6", "long-lr1e-6", "deep-lr1e-6"],
     "learning-rate": ["baseline-lr1e-5", "baseline-lr1e-6", "baseline-lr5e-6"],
@@ -93,6 +99,8 @@ def plane_overlap(geometry):
 def observations(path, maximum):
     """Stream only trace statistics; candidate source_rows are never actual draws."""
     hashes, steps, seconds, issues = [], [], 0.0, []
+    first_batches = {}
+    first_recorded_steps = []
     timed_steps = 0
     path = Path(path)
     if path.exists():
@@ -106,11 +114,26 @@ def observations(path, maximum):
                     issues.append(f"Incomplete observation JSON on line {index}")
                     break
                 step = record.get("step")
+                if len(first_recorded_steps) < 8:
+                    first_recorded_steps.append(step)
                 if not isinstance(step, int) or not 1 <= step <= maximum:
                     issues.append(f"Unexpected observation step on line {index}")
                     continue
                 steps.append(step)
                 hashes.append(record.get("batch_sha256"))
+                if step <= 8:
+                    first_batches[str(step)] = {
+                        "batch_sha256": record.get("batch_sha256"),
+                        "computed_batch_sha256": (
+                            hashlib.sha256(
+                                json.dumps(record["batch"], sort_keys=True).encode()
+                            ).hexdigest()
+                            if "batch" in record
+                            else None
+                        ),
+                        "loss_before_update": record.get("loss_before_update"),
+                        "loss_after_update": record.get("loss_after_update"),
+                    }
                 elapsed = number(record.get("forward_backward_seconds"))
                 if elapsed is not None:
                     seconds += elapsed
@@ -130,6 +153,8 @@ def observations(path, maximum):
         "timed_steps": timed_steps,
         "observations_complete": steps == list(range(1, maximum + 1)) and not issues,
         "issues": issues,
+        "first_batches": first_batches,
+        "first_recorded_steps": first_recorded_steps,
     }
 
 
@@ -244,6 +269,10 @@ def collect_case(run, name, case):
         "initial_mmlu": mmlu_start if role == "attack" else None,
         "first_measured_mmlu": mmlu_start,
         "final_mmlu": mmlu_final,
+        "final_wmdp": at_step(scores, maximum, "jwk_percent", task="wmdp_bio_robust"),
+        "final_drop_from_base_pp": (
+            BASE_MMLU - mmlu_final if mmlu_final is not None else None
+        ),
         "initial_drop_from_base_pp": (
             BASE_MMLU - mmlu_start
             if mmlu_start is not None and role == "attack"
@@ -288,6 +317,12 @@ def collect_case(run, name, case):
         "broad": read_rows(analysis / "surfaces/random-evolution.csv"),
         "metrics": metrics,
         "trace": trace,
+        "step_profiles": read_json(analysis / "surfaces/step-profiles.json"),
+        "step_profile_state": read_json(folder / "status/step-profiles.json").get(
+            "state", "missing"
+        ),
+        "step_profile_rows": read_rows(analysis / "surfaces/step-profiles.csv"),
+        "first_update_grid": read_rows(analysis / "surfaces/first-update-grid.csv"),
     }
 
 
@@ -377,6 +412,692 @@ def validate_comparability(record, program, probes):
         and not order_mismatch,
         "broad_comparable": not identity_issues and broad_valid and not order_mismatch,
     }
+
+
+def rectangular_grid(rows, c0, c1, field="probe_loss"):
+    """Preserve separate horizontal/vertical physical coordinates and blank holes."""
+    c0, c1 = np.asarray(c0, dtype=float), np.asarray(c1, dtype=float)
+    values = np.full((len(c1), len(c0)), np.nan)
+    issues, seen = [], set()
+    for row in rows:
+        x, y, value = (number(row.get(key)) for key in ("c0", "c1", field))
+        if None in (x, y, value):
+            issues.append("Nonfinite first-update grid measurement")
+            continue
+        column, index = int(np.argmin(abs(c0 - x))), int(np.argmin(abs(c1 - y)))
+        if not np.isclose(c0[column], x, rtol=0, atol=1e-9) or not np.isclose(
+            c1[index], y, rtol=0, atol=1e-9
+        ):
+            issues.append(
+                "First-update grid differs from the rectangular physical lattice"
+            )
+            continue
+        if (index, column) in seen:
+            issues.append("Duplicate first-update grid coordinate")
+        seen.add((index, column))
+        values[index, column] = value
+    return {
+        "c0": c0,
+        "c1": c1,
+        "values": values,
+        "measured": int(np.isfinite(values).sum()),
+        "expected": len(c0) * len(c1),
+        "issues": list(dict.fromkeys(issues)),
+    }
+
+
+def sampled_segment_barrier(rows, field):
+    """Maximum sampled CE on [0,1] above its higher measured endpoint only."""
+    segment = [
+        row
+        for row in rows
+        if number(row.get("fraction")) is not None and 0 <= number(row["fraction"]) <= 1
+    ]
+    endpoints = [
+        number(row.get(field)) for row in segment if number(row["fraction"]) in (0, 1)
+    ]
+    values = [number(row.get(field)) for row in segment]
+    if len(endpoints) != 2 or None in endpoints or not values or None in values:
+        return None
+    return max(values) - max(endpoints)
+
+
+def _same_path(value, expected):
+    return isinstance(value, str) and Path(value).resolve() == Path(expected).resolve()
+
+
+def _digest(value):
+    return (
+        isinstance(value, str)
+        and len(value) == 64
+        and all(char in "0123456789abcdef" for char in value)
+    )
+
+
+def _profile_input_issues(record, protocol, anchor, shared):
+    """Check identities with stat calls; never open model weights or basis arrays."""
+    issues, identities = [], {}
+    for identity in protocol.get("inputs", []):
+        if not isinstance(identity, dict) or not isinstance(identity.get("path"), str):
+            issues.append("Missing profile input file identity")
+            continue
+        path = Path(identity["path"])
+        try:
+            metadata = path.stat()
+            if (
+                identity.get("resolved") != str(path.resolve())
+                or identity.get("size") != metadata.st_size
+                or identity.get("mtime_ns") != metadata.st_mtime_ns
+            ):
+                issues.append(f"Profile input identity changed: {path.name}")
+        except OSError:
+            issues.append(f"Profile input is missing: {path.name}")
+        identities[str(path.resolve())] = identity
+    expected = {
+        shared,
+        shared.parent / "geometry.json",
+        record["folder"] / "models/attack/observed-batches.jsonl",
+    }
+    if anchor.is_dir():
+        expected.update(
+            path
+            for path in anchor.iterdir()
+            if path.is_file() and path.suffix in (".json", ".model", ".txt", ".jinja")
+        )
+    if (
+        not any(
+            path.name in {"tokenizer.json", "tokenizer.model", "spiece.model"}
+            for path in expected
+        )
+        or not (anchor / "tokenizer_config.json").is_file()
+    ):
+        issues.append("Attack-anchor tokenizer identities are missing")
+    for step in range(9):
+        checkpoint = (
+            anchor
+            if step == 0
+            else record["folder"] / "models/attack" / f"checkpoint-{step}"
+        )
+        index = checkpoint / "model.safetensors.index.json"
+        if index.is_file():
+            expected.add(index)
+            shards = set(read_json(index).get("weight_map", {}).values())
+            if not shards or any(Path(shard).name != shard for shard in shards):
+                issues.append("Invalid saved checkpoint shard identity")
+            else:
+                expected.update(checkpoint / shard for shard in shards)
+        else:
+            expected.add(checkpoint / "model.safetensors")
+    if not {str(path.resolve()) for path in expected} <= set(identities):
+        issues.append(
+            "Profile protocol omits checkpoint, tokenizer, batch, or shared-basis input identities"
+        )
+    return issues
+
+
+def _mixed_profile_statistics_issues(checks, step):
+    issues = []
+    raw_count, evaluated_count = checks.get("raw_changed_scalars"), checks.get(
+        "evaluated_changed_scalars"
+    )
+    evaluated_norm, evaluated_fraction = number(
+        checks.get("evaluated_update_l2")
+    ), number(checks.get("evaluated_changed_fraction"))
+    changed = number(checks.get("changed_fraction"))
+    counts, totals = checks.get("saved_dtype_scalars", {}), []
+    for label in ("before", "after"):
+        values = counts.get(label, {})
+        if (
+            not isinstance(values, dict)
+            or not values
+            or any(type(value) is not int or value <= 0 for value in values.values())
+        ):
+            issues.append(
+                f"Saved mixed-dtype scalar counts are invalid at update {step}"
+            )
+            totals.append(0)
+        else:
+            totals.append(sum(values.values()))
+    if (
+        number(checks.get("raw_update_l2")) != number(checks.get("update_l2"))
+        or number(checks.get("raw_changed_fraction")) != changed
+        or raw_count != checks.get("changed_scalars")
+        or type(raw_count) is not int
+        or type(evaluated_count) is not int
+        or raw_count < 0
+        or not 0 <= evaluated_count <= raw_count
+        or evaluated_norm is None
+        or evaluated_norm < 0
+        or evaluated_fraction is None
+        or not 0 <= evaluated_fraction <= 1
+        or (evaluated_norm == 0) != (evaluated_fraction == 0)
+        or not totals[0]
+        or totals[0] != totals[1]
+        or changed is None
+        or not math.isclose(raw_count / totals[0], changed, rel_tol=0, abs_tol=1e-12)
+        or not math.isclose(
+            evaluated_count / totals[0], evaluated_fraction, rel_tol=0, abs_tol=1e-12
+        )
+    ):
+        issues.append(
+            f"Raw saved and evaluated-cast update statistics are invalid at update {step}"
+        )
+    for label in ("t0", "t1"):
+        count = checks.get(f"arithmetic_{label}_evaluated_cast_mismatches")
+        if type(count) is not int or count < 0:
+            issues.append(
+                f"Arithmetic endpoint-cast mismatch count is missing at update {step}"
+            )
+    return issues
+
+
+def validate_step_profiles(record, program, probes, reference, *, require_status=True):
+    """Keep malformed diagnostic data from suppressing valid shared-plane views."""
+    try:
+        return _validate_step_profiles(
+            record, program, probes, reference, require_status=require_status
+        )
+    except (
+        OSError,
+        ValueError,
+        TypeError,
+        KeyError,
+        AttributeError,
+        IndexError,
+    ) as error:
+        return {
+            "step_profiles_complete": False,
+            "step_profiles_comparable": False,
+            "first_update_plane_comparable": False,
+            "first_update_plane_status": "invalid",
+            "issues": [f"Invalid early-update diagnostic metadata: {error}"],
+        }
+
+
+def _validate_step_profiles(record, program, probes, reference, *, require_status=True):
+    """Validate early diagnostics independently of shared-plane availability."""
+    metadata = record.get("step_profiles", {})
+    issues, shared_issues = [], []
+    result = {
+        "step_profiles_complete": False,
+        "step_profiles_comparable": False,
+        "first_update_plane_comparable": False,
+        "first_update_plane_status": "pending",
+        "issues": [],
+    }
+    if metadata.get("state") != "complete":
+        result["issues"] = ["Early-update profiles are pending complete status"]
+        return result
+    profile_state = record.get("step_profile_state")
+    if profile_state is None:
+        profile_state = read_json(record["folder"] / "status/step-profiles.json").get(
+            "state", "missing"
+        )
+    if require_status and profile_state != "complete":
+        issues.append("Early-update profile job has not recorded complete status")
+    protocol = metadata.get("protocol", {})
+    serialized = json.dumps(
+        protocol, sort_keys=True, separators=(",", ":"), default=str
+    )
+    if metadata.get("identity") != hashlib.sha256(serialized.encode()).hexdigest():
+        issues.append("Profile protocol identity does not match its contents")
+    source = metadata.get("source_sha256")
+    if not _digest(source) or protocol.get("source_sha256") != source:
+        issues.append("Profile protocol source hash is missing or inconsistent")
+    frozen = [
+        Path(record["folder"]).parents[1] / relative
+        for relative, digest in program.get("source_sha256", {}).items()
+        if Path(relative).name == "tar_dynamics.py" and digest == source
+    ]
+    if not frozen or not any(
+        path.is_file() and hashlib.sha256(path.read_bytes()).hexdigest() == source
+        for path in frozen
+    ):
+        issues.append("Profile source hash has not been verified against frozen code")
+    if (
+        protocol.get("version") not in (1, 2)
+        or protocol.get("settings") != record["settings"]
+    ):
+        issues.append("Profile settings differ from the case settings")
+    if any(
+        not isinstance(protocol.get(key), str) or not protocol[key]
+        for key in ("precision", "torch_version", "interpretation")
+    ):
+        issues.append("Profile numerical/evaluation convention is missing")
+    if protocol.get("version") == 2 and any(
+        not isinstance(protocol.get(key), str) or not protocol[key]
+        for key in ("coordinate_convention", "endpoint_convention")
+    ):
+        issues.append("Raw-coordinate and evaluated-endpoint conventions are missing")
+    for key in ("fixed_source_indices", "forget_revision"):
+        expected = probes.get(key)
+        if (
+            not expected
+            or metadata.get(key) != expected
+            or protocol.get(key) != expected
+            or record["settings"].get(key) != expected
+        ):
+            issues.append(f"Profile shared {key} is missing or different")
+    if len(metadata.get("fixed_source_indices", [])) != 10:
+        issues.append("Profiles require ten frozen fixed documents")
+    text = metadata.get("fixed_text_sha256", [])
+    if len(text) != 10 or not all(_digest(value) for value in text):
+        issues.append("Fixed-text identities are missing")
+    if reference.get("state") != "complete":
+        shared_issues.append(
+            "Completed baseline-lr1e-5 profiles are pending for common text/source identities"
+        )
+    else:
+        if text != reference.get("fixed_text_sha256"):
+            shared_issues.append("Fixed-text identities differ from baseline-lr1e-5")
+        if source != reference.get("source_sha256"):
+            shared_issues.append("Profile source code differs from baseline-lr1e-5")
+    for key, expected in (
+        ("fractions", PROFILE_FRACTIONS),
+        ("grid_c0", PROFILE_C0),
+        ("grid_c1", PROFILE_C1),
+    ):
+        actual = protocol.get(key, [])
+        if (
+            len(actual) != len(expected)
+            or not all(number(value) is not None for value in actual)
+            or not np.allclose(
+                [number(value) for value in actual], expected, rtol=0, atol=1e-10
+            )
+        ):
+            issues.append(f"Profile {key} lattice differs")
+    folder, case = record["folder"], record["case"]
+    anchor = folder / (
+        "models/attack/checkpoint-0"
+        if case.get("gaussian_sigma") is not None
+        else "models/defense"
+    )
+    shared = Path(program["baseline_dynamics"]) / "geometry/random-basis.npy"
+    if not _same_path(
+        record["settings"].get("attack_anchor"), anchor
+    ) or not _same_path(protocol.get("tokenizer_source"), anchor):
+        issues.append(
+            "Profile attack anchor or tokenizer source differs from the actual case start"
+        )
+    if not _same_path(record["settings"].get("shared_random_basis"), shared):
+        issues.append("Profile random source is not the original baseline random basis")
+    for step in range(9):
+        expected = (
+            anchor if step == 0 else folder / "models/attack" / f"checkpoint-{step}"
+        )
+        if not _same_path(
+            protocol.get("checkpoint_paths", {}).get(str(step)), expected
+        ):
+            issues.append(f"Profile checkpoint path differs at update {step}")
+    issues.extend(_profile_input_issues(record, protocol, anchor, shared))
+    batches = record["trace"].get("first_batches", {})
+    if record["trace"].get("first_recorded_steps") != list(range(1, 9)):
+        issues.append(
+            "Profiles require the first eight ordered recorded optimizer batches"
+        )
+    if set(protocol.get("batch_hashes", {})) != {str(step) for step in range(1, 9)}:
+        issues.append("Profile first-eight batch hashes are incomplete")
+    for step in range(1, 9):
+        batch = batches.get(str(step), {})
+        digest = protocol.get("batch_hashes", {}).get(str(step))
+        if (
+            not _digest(digest)
+            or digest != batch.get("batch_sha256")
+            or digest != batch.get("computed_batch_sha256")
+        ):
+            issues.append(f"Recorded batch identity differs at update {step}")
+    rows = record.get("step_profile_rows", [])
+    indexed = {}
+    for row in rows:
+        values = {
+            key: number(row.get(key))
+            for key in (
+                "update_step",
+                "fraction",
+                "signed_displacement",
+                "probe_loss",
+                "minibatch_loss",
+            )
+        }
+        if any(value is None for value in values.values()):
+            issues.append("Nonfinite early-update profile row")
+            continue
+        step, fraction = values["update_step"], values["fraction"]
+        if (
+            step not in range(1, 9)
+            or not np.isclose(PROFILE_FRACTIONS, fraction, rtol=0, atol=1e-10).any()
+        ):
+            issues.append("Early-update profile row differs from the declared lattice")
+            continue
+        key = (
+            int(step),
+            float(PROFILE_FRACTIONS[np.argmin(abs(PROFILE_FRACTIONS - fraction))]),
+        )
+        if key in indexed:
+            issues.append("Duplicate early-update profile coordinate")
+        indexed[key] = values
+    expected_keys = {
+        (step, float(fraction))
+        for step in range(1, 9)
+        for fraction in PROFILE_FRACTIONS
+    }
+    if len(rows) != 200 or set(indexed) != expected_keys:
+        issues.append("Complete profiles require all 200 early-update samples")
+    if set(metadata.get("steps", {})) != {str(step) for step in range(1, 9)}:
+        issues.append(
+            "Complete profiles require endpoint metadata for updates 1 through 8"
+        )
+    if number(metadata.get("endpoint_ce_tolerance")) != PROFILE_TOLERANCE:
+        issues.append("Profile endpoint tolerance differs from 1e-4 nats")
+    for step in range(1, 9):
+        checks = metadata.get("steps", {}).get(str(step), {})
+        norm, changed = number(checks.get("update_l2")), number(
+            checks.get("changed_fraction")
+        )
+        if (
+            norm is None
+            or norm < 0
+            or changed is None
+            or not 0 <= changed <= 1
+            or (norm == 0) != (changed == 0)
+        ):
+            issues.append(f"Invalid update norm or changed fraction at update {step}")
+        if protocol.get("version") == 2:
+            issues.extend(_mixed_profile_statistics_issues(checks, step))
+        if (
+            checks.get("t0_weights_exact") is not True
+            or checks.get("t1_weights_exact") is not True
+        ):
+            issues.append(
+                f"Evaluated-model parameter endpoints are not exact at update {step}"
+            )
+        selected = [row for (index, _), row in indexed.items() if index == step]
+        if norm is not None and any(
+            not math.isclose(
+                row["signed_displacement"],
+                row["fraction"] * norm,
+                rel_tol=1e-7,
+                abs_tol=1e-8,
+            )
+            for row in selected
+        ):
+            issues.append(f"Profile physical displacement differs at update {step}")
+        if norm == 0 and selected:
+            for field in ("probe_loss", "minibatch_loss"):
+                if (
+                    max(row[field] for row in selected)
+                    - min(row[field] for row in selected)
+                    > PROFILE_TOLERANCE
+                ):
+                    issues.append(
+                        f"Zero saved update has nonconstant evaluated losses at update {step}"
+                    )
+        for fraction, label in ((0, "before"), (1, "after")):
+            endpoint = indexed.get((step, float(fraction)), {})
+            actual = checks.get(f"actual_{label}", {})
+            for field in ("probe_loss", "minibatch_loss"):
+                value, measured = number(actual.get(field)), endpoint.get(field)
+                error = number(
+                    checks.get("endpoint_errors", {}).get(f"t{fraction}_{field}")
+                )
+                if (
+                    value is None
+                    or measured is None
+                    or error is None
+                    or not 0 <= error <= PROFILE_TOLERANCE
+                    or not math.isclose(
+                        abs(value - measured), error, rel_tol=0, abs_tol=1e-10
+                    )
+                ):
+                    issues.append(
+                        f"Invalid separately loaded endpoint CE at update {step} t={fraction}"
+                    )
+            actual_step = step - 1 if fraction == 0 else step
+            measured_probe = at_step(
+                record["actual"], actual_step, "probe_loss", phase="attack"
+            )
+            if measured_probe is not None and (
+                number(actual.get("probe_loss")) is None
+                or abs(number(actual["probe_loss"]) - measured_probe)
+                > PROFILE_TOLERANCE
+            ):
+                issues.append(
+                    f"Profile endpoint differs from current actual-losses.csv at update {step} t={fraction}"
+                )
+        if step > 1:
+            previous = number(
+                metadata.get("steps", {})
+                .get(str(step - 1), {})
+                .get("actual_after", {})
+                .get("probe_loss")
+            )
+            current = number(checks.get("actual_before", {}).get("probe_loss"))
+            if (
+                previous is not None
+                and current is not None
+                and abs(previous - current) > PROFILE_TOLERANCE
+            ):
+                issues.append(
+                    f"Adjacent saved profile states disagree on fixed CE at update {step}"
+                )
+        for key, error in checks.get("actual_losses_csv_errors", {}).items():
+            if (
+                key not in {str(step - 1), str(step)}
+                or number(error) is None
+                or not 0 <= number(error) <= PROFILE_TOLERANCE
+            ):
+                issues.append(f"Invalid saved actual-losses.csv check at update {step}")
+        for field in ("probe_loss", "minibatch_loss"):
+            measured = sampled_segment_barrier(selected, field)
+            saved = number(checks.get("sampled_barriers", {}).get(field))
+            if (
+                measured is None
+                or saved is None
+                or not math.isclose(measured, saved, rel_tol=0, abs_tol=1e-10)
+            ):
+                issues.append(
+                    f"Invalid sampled interpolation-segment barrier at update {step}"
+                )
+        for label in ("before", "after"):
+            training = number(batches.get(str(step), {}).get(f"loss_{label}_update"))
+            error = number(checks.get(f"recorded_train_{label}_ce_error"))
+            if label == "before" or training is not None:
+                loss = number(checks.get(f"actual_{label}", {}).get("minibatch_loss"))
+                if None in (training, error, loss) or not math.isclose(
+                    loss - training, error, rel_tol=0, abs_tol=1e-9
+                ):
+                    issues.append(
+                        f"Invalid recorded training CE difference at update {step} {label}"
+                    )
+    proof = metadata.get("first_update_plane", {})
+    status = proof.get("status", "pending")
+    result["first_update_plane_status"] = status
+    norm = number(metadata.get("steps", {}).get("1", {}).get("update_l2"))
+    geometry_norm = at_step(
+        record.get("geometry", {}).get("planes", {}).get("attack", []), 1, "distance"
+    )
+    if geometry_norm is not None and (
+        norm is None
+        or not math.isclose(norm, geometry_norm, rel_tol=1e-5, abs_tol=1e-8)
+    ):
+        issues.append(
+            "Raw saved first-update norm disagrees with attack geometry at step 1"
+        )
+    if not _same_path(proof.get("anchor"), anchor) or not _same_path(
+        proof.get("after_checkpoint"), folder / "models/attack/checkpoint-1"
+    ):
+        issues.append("First-update plane anchor or endpoint checkpoint differs")
+    coordinates = proof.get("endpoint_coordinates", [])
+    if (
+        norm is None
+        or len(coordinates) != 2
+        or any(number(value) is None for value in coordinates)
+        or not np.allclose(
+            [number(value) for value in coordinates], [norm, 0], rtol=0, atol=1e-8
+        )
+        or proof.get("endpoint_in_window") is not (norm <= 1)
+        or number(proof.get("first_update_l2")) != norm
+    ):
+        issues.append("First-update endpoint coordinates or window declaration differ")
+    if (
+        proof.get("shared_random_row") != 0
+        or number(proof.get("q0_radius")) != 1
+        or number(proof.get("q1_radius")) != 125
+    ):
+        issues.append("First-update plane radii or shared random row differ")
+    if status == "fitted":
+        gram = [number(proof.get(key)) for key in ("q0_norm", "q1_norm", "q0_dot_q1")]
+        if (
+            None in gram
+            or not np.allclose(gram, [1, 1, 0], rtol=0, atol=1e-5)
+            or not norm
+        ):
+            issues.append("First-update unit/orthogonality proof is invalid")
+        if protocol.get("version") == 2:
+            mismatch = proof.get("plane_endpoint_evaluated_cast_mismatches")
+            if (
+                type(mismatch) is not int
+                or mismatch < 0
+                or proof.get("plane_endpoint_bf16_mismatches") != mismatch
+                or not proof.get("endpoint_comparison_convention")
+            ):
+                issues.append(
+                    "First-update evaluated-cast endpoint proof is missing or inconsistent"
+                )
+            for field in ("probe_loss", "minibatch_loss"):
+                actual = number(
+                    metadata.get("steps", {})
+                    .get("1", {})
+                    .get("actual_after", {})
+                    .get(field)
+                )
+                measured = number(proof.get("plane_endpoint_losses", {}).get(field))
+                error = number(proof.get("plane_endpoint_ce_errors", {}).get(field))
+                if (
+                    None in (actual, measured, error)
+                    or not 0 <= error <= PROFILE_TOLERANCE
+                    or not math.isclose(
+                        abs(actual - measured), error, rel_tol=0, abs_tol=1e-10
+                    )
+                ):
+                    issues.append(
+                        "First-update plane functional endpoint CE error is missing or exceeds tolerance"
+                    )
+        elif proof.get("plane_endpoint_bf16_mismatches") != 0:
+            issues.append(
+                "First-update plane does not exactly reconstruct the evaluated-model endpoint"
+            )
+        for field in ("probe_loss", "minibatch_loss"):
+            grid = rectangular_grid(
+                record.get("first_update_grid", []), PROFILE_C0, PROFILE_C1, field
+            )
+            issues.extend(grid["issues"])
+            if (
+                grid["measured"] != grid["expected"]
+                or len(record.get("first_update_grid", [])) != grid["expected"]
+            ):
+                issues.append(
+                    "Complete fitted first-update plane requires all 289 finite grid points"
+                )
+            center = grid["values"][8, 8]
+            actual = number(
+                metadata.get("steps", {})
+                .get("1", {})
+                .get("actual_before", {})
+                .get(field)
+            )
+            error = number(proof.get("center_errors", {}).get(field))
+            if (
+                actual is None
+                or not np.isfinite(center)
+                or error is None
+                or not 0 <= error <= PROFILE_TOLERANCE
+                or not math.isclose(
+                    abs(center - actual), error, rel_tol=0, abs_tol=1e-10
+                )
+            ):
+                issues.append(
+                    "First-update grid center differs from the actual start CE"
+                )
+    elif status == "skipped_zero_first_update":
+        if norm != 0 or record.get("first_update_grid"):
+            issues.append("Invalid zero-update plane skip")
+    elif status == "skipped_parallel_shared_direction":
+        residual = number(proof.get("orthogonal_completion_raw_norm"))
+        if (
+            not norm
+            or residual is None
+            or not 0 <= residual < 1e-12
+            or record.get("first_update_grid")
+        ):
+            issues.append("Invalid degenerate shared-direction plane skip")
+    else:
+        issues.append("First-update plane has no valid fit or explicit skip")
+    result["step_profiles_complete"] = not issues
+    result["step_profiles_comparable"] = not issues and not shared_issues
+    result["first_update_plane_comparable"] = (
+        result["step_profiles_comparable"] and status == "fitted"
+    )
+    result["issues"] = list(dict.fromkeys(issues + shared_issues))
+    return result
+
+
+def step_profile_metrics(record, validation):
+    result = {
+        key: None
+        for key in (
+            "first_update_l2",
+            "first_update_evaluated_l2",
+            "first_update_changed_fraction",
+            "first_update_evaluated_changed_fraction",
+            "first_update_plane_evaluated_cast_mismatches",
+            "first_update_plane_fixed_ce_error",
+            "first_update_plane_batch_ce_error",
+            "first_update_fixed_ce_gain",
+            "first_update_batch_ce_gain",
+            "maximum_sampled_segment_barrier",
+            "maximum_sampled_fixed_ce_segment_barrier",
+            "maximum_sampled_batch_ce_segment_barrier",
+        )
+    }
+    if validation.get("step_profiles_complete"):
+        steps = record["step_profiles"]["steps"]
+        first = steps["1"]
+        result["first_update_l2"] = first["update_l2"]
+        result["first_update_evaluated_l2"] = number(first.get("evaluated_update_l2"))
+        result["first_update_changed_fraction"] = first["changed_fraction"]
+        result["first_update_evaluated_changed_fraction"] = number(
+            first.get("evaluated_changed_fraction")
+        )
+        proof = record["step_profiles"].get("first_update_plane", {})
+        if proof.get("status") == "fitted":
+            result["first_update_plane_evaluated_cast_mismatches"] = number(
+                proof.get(
+                    "plane_endpoint_evaluated_cast_mismatches",
+                    proof.get("plane_endpoint_bf16_mismatches"),
+                )
+            )
+            result["first_update_plane_fixed_ce_error"] = number(
+                proof.get("plane_endpoint_ce_errors", {}).get("probe_loss")
+            )
+            result["first_update_plane_batch_ce_error"] = number(
+                proof.get("plane_endpoint_ce_errors", {}).get("minibatch_loss")
+            )
+        for field, label in (("probe_loss", "fixed"), ("minibatch_loss", "batch")):
+            before, after = number(first.get("actual_before", {}).get(field)), number(
+                first.get("actual_after", {}).get(field)
+            )
+            result[f"first_update_{label}_ce_gain"] = (
+                before - after if before is not None and after is not None else None
+            )
+            result[f"maximum_sampled_{label}_ce_segment_barrier"] = max(
+                step["sampled_barriers"][field] for step in steps.values()
+            )
+        result["maximum_sampled_segment_barrier"] = max(
+            result[f"maximum_sampled_{label}_ce_segment_barrier"]
+            for label in ("fixed", "batch")
+        )
+    return result
 
 
 def surface_grid(rows, step, radius, points):
@@ -675,7 +1396,10 @@ def surface_figure(records, validations, family, names, kind, output):
                 axis.tick_params(axis="z", labelsize=7, pad=1)
                 axis.set_box_aspect((1, 1, 0.8))
             axis.set(
-                xlim=(-radius, radius), ylim=(-radius, radius), xlabel="c0", ylabel="c1"
+                xlim=(-radius, radius),
+                ylim=(-radius, radius),
+                xlabel="c0 (global L2)",
+                ylabel="c1 (global L2)",
             )
             axis.set_title(title, fontsize=8, pad=13)
             axis.tick_params(labelsize=7)
@@ -684,12 +1408,264 @@ def surface_figure(records, validations, family, names, kind, output):
     figure.colorbar(ScalarMappable(norm=norm, cmap=cmap), cax=color_axis, label=label)
     direction = "shared random" if broad else "shared baseline attacker reference"
     figure.suptitle(
-        f"{family}: {direction} directions; physical half-width {radius:.6g}\nSame coordinates/orientation and common {'symmetric color' if delta else 'z/color'} scale across all panels; missing data remain blank",
+        f"{family}: {direction} directions; half-width {radius:.6g} global L2; BF16 evaluations\nRaw-coordinate directions centered on loaded BF16 weights; same orientation and common {'symmetric color' if delta else 'z/color'} scale; missing data remain blank",
         fontsize=11,
         y=0.98,
     )
     figure.subplots_adjust(
         left=0.035, right=0.90, bottom=0.08, top=0.87, wspace=0.25, hspace=0.30
+    )
+    save_figure(figure, output)
+    plt.close(figure)
+
+
+def early_profile_figure(records, validations, family, names, output):
+    import matplotlib.pyplot as plt
+
+    figure, axes = plt.subplots(2, 2, figsize=(12, 8), sharex=True, sharey=True)
+    values = []
+    for row_index, step in enumerate((1, 8)):
+        for column, (field, label) in enumerate(
+            (
+                ("probe_loss", "Fixed ten documents"),
+                ("minibatch_loss", "This update's actual batch"),
+            )
+        ):
+            axis = axes[row_index, column]
+            for index, name in enumerate(names):
+                record = records.get(name)
+                if record is None or not validations.get(name, {}).get(
+                    "step_profiles_comparable"
+                ):
+                    continue
+                selected = sorted(
+                    (
+                        item
+                        for item in record["step_profile_rows"]
+                        if number(item.get("update_step")) == step
+                    ),
+                    key=lambda item: number(item["fraction"]),
+                )
+                origin = record["step_profiles"]["steps"][str(step)]["actual_before"][
+                    field
+                ]
+                x = [number(item["fraction"]) for item in selected]
+                y = [number(item[field]) - origin for item in selected]
+                values.extend(y)
+                axis.plot(
+                    x, y, ".-", color=f"C{index}", label=short_label(name), markersize=3
+                )
+                checks = record["step_profiles"]["steps"][str(step)]
+                axis.scatter(
+                    [0, 1],
+                    [0, checks["actual_after"][field] - origin],
+                    color=f"C{index}",
+                    s=23,
+                    edgecolors="black",
+                    linewidths=0.4,
+                    zorder=4,
+                )
+            axis.axvspan(0, 1, color="0.8", alpha=0.22)
+            axis.axvline(0, color="0.4", linestyle=":", linewidth=0.8)
+            axis.axvline(1, color="0.4", linestyle=":", linewidth=0.8)
+            axis.axhline(0, color="0.5", linewidth=0.7)
+            axis.set(
+                title=f"Update {step}: {label}",
+                xlabel="Interpolation fraction t (actual endpoints: 0, 1)",
+                ylabel="CE minus this update's actual t=0 CE (nats)",
+                xlim=(-1, 2),
+            )
+            axis.grid(alpha=0.2)
+            if not axis.lines or not axis.get_legend_handles_labels()[0]:
+                axis.text(
+                    0.5,
+                    0.6,
+                    "Verified complete profiles pending",
+                    transform=axis.transAxes,
+                    ha="center",
+                    fontsize=9,
+                )
+    limits = color_limits(values)
+    for axis in axes.flat:
+        axis.set_ylim(*limits)
+    if axes[0, 0].get_legend_handles_labels()[0]:
+        axes[0, 0].legend(fontsize=7, loc="best")
+    count = sum(
+        validations.get(name, {}).get("step_profiles_comparable", False)
+        for name in names
+    )
+    figure.suptitle(
+        f"{family}: early saved update segments; verified {count}/{len(names)} conditions\nOnly t=0 and t=1 are optimizer states. Interpolation is not a continuous optimizer path; equal fractions do not imply equal physical distances.",
+        fontsize=10,
+    )
+    figure.tight_layout(rect=(0, 0, 1, 0.90))
+    save_figure(figure, output)
+    plt.close(figure)
+
+
+def first_update_figure(records, validations, family, names, output):
+    import matplotlib.pyplot as plt
+    from matplotlib.cm import ScalarMappable
+    from matplotlib.colors import Normalize
+
+    grids, absolute, differences = {}, [], []
+    for name in names:
+        record = records.get(name)
+        if record is None or not validations.get(name, {}).get(
+            "first_update_plane_comparable"
+        ):
+            continue
+        grid = rectangular_grid(record["first_update_grid"], PROFILE_C0, PROFILE_C1)
+        first = record["step_profiles"]["steps"]["1"]
+        center = first["actual_before"]["probe_loss"]
+        grid["center"], grid["delta"] = center, grid["values"] - center
+        grid["profile_line"] = [
+            (number(row["signed_displacement"]), number(row["probe_loss"]))
+            for row in sorted(
+                record["step_profile_rows"], key=lambda item: number(item["fraction"])
+            )
+            if number(row["update_step"]) == 1
+            and -1 <= number(row["signed_displacement"]) <= 1
+        ]
+        grids[name] = grid
+        absolute.extend(grid["values"].ravel().tolist())
+        absolute.extend(loss for _, loss in grid["profile_line"])
+        differences.extend(grid["delta"].ravel().tolist())
+        absolute.append(center)
+        if record["step_profiles"]["first_update_plane"]["endpoint_in_window"]:
+            absolute.append(first["actual_after"]["probe_loss"])
+    limits, delta_limits = color_limits(absolute), color_limits(
+        differences, relative=True
+    )
+    absolute_norm, delta_norm = Normalize(*limits), Normalize(*delta_limits)
+    figure = plt.figure(figsize=(3.7 * len(names) + 0.8, 8.4))
+    for column, name in enumerate(names):
+        record, grid = records.get(name), grids.get(name)
+        proof = (
+            record.get("step_profiles", {}).get("first_update_plane", {})
+            if record
+            else {}
+        )
+        for row in (0, 1):
+            axis = figure.add_subplot(
+                2,
+                len(names),
+                row * len(names) + column + 1,
+                projection="3d" if row == 0 else None,
+            )
+            title = short_label(name)
+            if grid is None:
+                text = proof.get("status", "Verified complete diagnostic pending")
+                if row == 0:
+                    axis.text2D(
+                        0.5,
+                        0.5,
+                        text,
+                        transform=axis.transAxes,
+                        ha="center",
+                        fontsize=8,
+                    )
+                else:
+                    axis.text(
+                        0.5,
+                        0.5,
+                        text,
+                        transform=axis.transAxes,
+                        ha="center",
+                        fontsize=8,
+                    )
+                axis.set_title(title, fontsize=9)
+                axis.set_axis_off()
+                continue
+            x, y = np.meshgrid(grid["c0"], grid["c1"])
+            first = record["step_profiles"]["steps"]["1"]
+            norm = first["update_l2"]
+            if row == 0:
+                axis.plot_surface(
+                    x,
+                    y,
+                    grid["values"],
+                    cmap="viridis",
+                    norm=absolute_norm,
+                    linewidth=0.2,
+                    antialiased=True,
+                )
+                line = grid["profile_line"]
+                if line:
+                    axis.plot(
+                        [point[0] for point in line],
+                        [0] * len(line),
+                        [point[1] for point in line],
+                        color="black",
+                        linewidth=1.1,
+                        marker=".",
+                        markersize=2.2,
+                        label="Sampled interpolation/extrapolation\nOnly t=0/1 are saved states",
+                    )
+                    axis.legend(fontsize=6, loc="upper left")
+                axis.scatter(
+                    [0], [0], [grid["center"]], c="white", edgecolors="black", s=24
+                )
+                if proof["endpoint_in_window"]:
+                    axis.scatter(
+                        [norm],
+                        [0],
+                        [first["actual_after"]["probe_loss"]],
+                        marker="*",
+                        c="red",
+                        s=65,
+                    )
+                axis.set_zlim(*limits)
+                axis.set_zlabel("Fixed-probe CE (nats)", fontsize=8, labelpad=5)
+                axis.view_init(elev=27, azim=-58)
+                axis.set_box_aspect((1, 1, 0.8))
+            else:
+                axis.contourf(
+                    x,
+                    y,
+                    grid["delta"],
+                    levels=np.linspace(*delta_limits, 19),
+                    cmap="coolwarm",
+                    norm=delta_norm,
+                )
+                axis.scatter(
+                    [0], [0], c="white", edgecolors="black", s=24, label="Actual start"
+                )
+                if proof["endpoint_in_window"]:
+                    axis.scatter(
+                        [norm], [0], marker="*", c="red", s=65, label="Actual update 1"
+                    )
+                if column == 0:
+                    axis.legend(fontsize=7, loc="best")
+                title += "\nCE relative to this case's actual start"
+            if not proof["endpoint_in_window"]:
+                title += f"\nActual endpoint outside window: c0={norm:.3g}"
+            axis.set(
+                xlim=(-1, 1),
+                ylim=(-125, 125),
+                xlabel="Raw saved-update q0 coefficient (L2)",
+                ylabel="Orthogonal random q1 coefficient (L2)",
+            )
+            axis.set_title(title, fontsize=8, pad=12)
+            axis.tick_params(labelsize=7)
+    top_bar = figure.add_axes((0.94, 0.57, 0.012, 0.25))
+    bottom_bar = figure.add_axes((0.94, 0.14, 0.012, 0.25))
+    figure.colorbar(
+        ScalarMappable(norm=absolute_norm, cmap="viridis"),
+        cax=top_bar,
+        label="Absolute fixed-probe CE",
+    )
+    figure.colorbar(
+        ScalarMappable(norm=delta_norm, cmap="coolwarm"),
+        cax=bottom_bar,
+        label="Center-relative CE",
+    )
+    figure.suptitle(
+        f"{family}: first-update planes differ between conditions; q0 half-width 1, q1 half-width 125 global L2; BF16 evaluations\nq0 follows each raw saved first update; q1 orthogonalizes common random row 0. Unequal axis scales prevent visual slope comparisons. Shared z/colors.\nThin c1=0 lines reuse sampled update-one interpolation/extrapolation; only t=0/1 are saved optimizer states. Missing data remain blank.",
+        fontsize=10,
+    )
+    figure.subplots_adjust(
+        left=0.04, right=0.90, bottom=0.09, top=0.85, wspace=0.3, hspace=0.3
     )
     save_figure(figure, output)
     plt.close(figure)
@@ -703,6 +1679,26 @@ def display(value, digits=3):
 
 def relative_link(path, root):
     return os.path.relpath(Path(path), Path(root)).replace(os.sep, "/")
+
+
+def scientific_case_complete(record, validation, profile_validation, profiles_required):
+    metrics = record["metrics"]
+    if (
+        metrics["train_state"] != "complete"
+        or metrics["evaluation_state"] != "complete"
+        or not metrics["evaluation_complete"]
+    ):
+        return False
+    if record["case"]["role"] == "defense":
+        return True
+    return (
+        metrics["analysis_state"] == "complete"
+        and not validation["issues"]
+        and (
+            not profiles_required
+            or profile_validation.get("step_profiles_comparable", False)
+        )
+    )
 
 
 def report(run):
@@ -728,6 +1724,19 @@ def report(run):
         name: validate_comparability(record, program, probes)
         for name, record in attacks.items()
     }
+    baseline = attacks.get("baseline-lr1e-5")
+    reference = {}
+    if baseline is not None:
+        checked = validate_step_profiles(
+            baseline, program, probes, baseline["step_profiles"]
+        )
+        if checked["step_profiles_complete"]:
+            reference = baseline["step_profiles"]
+    profile_validations = {
+        name: validate_step_profiles(record, program, probes, reference)
+        for name, record in attacks.items()
+    }
+    profiles_required = program.get("step_profiles_required") is True
     for name, record in records.items():
         metrics = record["metrics"]
         validation = validations.get(name, {})
@@ -735,6 +1744,16 @@ def report(run):
             validation.get("issues", record["trace"]["issues"])
         )
         metrics["shared_local_comparable"] = validation.get("local_comparable")
+        profile_validation = profile_validations.get(name, {})
+        metrics.update(step_profile_metrics(record, profile_validation))
+        for key in (
+            "step_profiles_complete",
+            "step_profiles_comparable",
+            "first_update_plane_comparable",
+            "first_update_plane_status",
+        ):
+            metrics[key] = profile_validation.get(key)
+        metrics["step_profile_issues"] = "; ".join(profile_validation.get("issues", []))
     output = run / "comparisons"
     output.mkdir(exist_ok=True)
     fields = list(next(iter(records.values()))["metrics"])
@@ -758,16 +1777,29 @@ def report(run):
                 attacks, validations, family, names, kind, output / f"{family}-{kind}"
             )
             figures[family].append(f"{family}-{kind}")
+        early_profile_figure(
+            attacks,
+            profile_validations,
+            family,
+            names,
+            output / f"{family}-early-update-profiles",
+        )
+        first_update_figure(
+            attacks,
+            profile_validations,
+            family,
+            names,
+            output / f"{family}-first-update-landscape",
+        )
+        figures[family].extend(
+            [f"{family}-early-update-profiles", f"{family}-first-update-landscape"]
+        )
     completed = sum(
-        record["metrics"]["train_state"] == "complete"
-        and record["metrics"]["evaluation_state"] == "complete"
-        and record["metrics"]["evaluation_complete"]
-        and (
-            record["case"]["role"] == "defense"
-            or (
-                record["metrics"]["analysis_state"] == "complete"
-                and not validations[name]["issues"]
-            )
+        scientific_case_complete(
+            record,
+            validations.get(name, {}),
+            profile_validations.get(name, {}),
+            profiles_required,
         )
         for name, record in records.items()
     )
@@ -776,11 +1808,27 @@ def report(run):
         "complete_scientific_cases": completed,
         "expected_scientific_cases": len(records),
         "comparability": validations,
+        "step_profiles_required": profiles_required,
+        "step_profile_comparability": profile_validations,
         "note": "Coverage describes measurements; study.json state is never changed here.",
     }
     (run / "comparison-validation.json").write_text(
         json.dumps(validation_output, indent=2) + "\n"
     )
+    precision_example = ""
+    example = attacks.get("baseline-lr1e-6")
+    if example and profile_validations.get("baseline-lr1e-6", {}).get(
+        "step_profiles_complete"
+    ):
+        first = example["step_profiles"]["steps"]["1"]
+        raw, evaluated = number(first.get("update_l2")), number(
+            first.get("evaluated_update_l2")
+        )
+        training_error = number(first.get("recorded_train_before_ce_error"))
+        if raw is not None and evaluated is not None:
+            precision_example = f" The baseline LR 1e-6 first update has raw saved L2 {raw:.8g} and evaluated-cast L2 {evaluated:.8g}."
+            if training_error is not None:
+                precision_example += f" Its recorded training versus evaluated pre-update batch CE differs by {abs(training_error):.4g} nats."
     lines = [
         "# Controlled TAR compute and intervention measurements",
         "",
@@ -788,13 +1836,24 @@ def report(run):
         "",
         "Tamper-resistant unlearning (TAR) uses simulated attacker updates during defense training. Here k16/k64 mean 16/64 simulated attacker steps per defense update. Cross-entropy (CE) is in nats. WMDP-Bio robust and MMLU-no-bio are measured zero-shot accuracy in percent; MMLU measures retained utility.",
         "",
-        "These figures show translated parameter slices through the same fixed forget CE objective. A changing slice does not mean that the global loss function changes. Plotted shared random and baseline attacker reference directions have verified identical physical coordinates and orientation; each condition also has its own fitted attacker plane. Fitted-plane explained energy is summed over the available trajectory, while minimum state capture and functional projection loss gaps expose information lost by a two-dimensional view.",
+        "The completed baseline uses 125 defense updates × 16 simulated attacker updates (2,000 inner updates). The extensions use 500 × 16 and 125 × 64 (8,000 each). The 64-step condition repeats the same 16 attack documents for four epochs per defense update; the longer condition receives four times as many outer forget/retain batches. Defense LR is 5e-6 with linear decay and warmup 48/500 or 12/125. The two 8,000-update conditions align LR progress at common inner-budget boundaries, while their outer cadence, data exposure, and measured cost differ. The longer schedule also differs from the baseline's 125-update horizon; these comparisons do not isolate compute from all schedule and exposure choices.",
+        "",
+        "All new attackers use the collaborator's named 1,000-update linear schedules at LR 1e-5, 5e-6, or 1e-6. Noise and bootstrap interventions hold attack LR at 1e-5 and reuse the baseline defender. Gaussian perturbations preserve the original draw/add/BF16-cast sequence; their device-local streams use seeds 42–45 on the frozen four-device layout. The three full-size attacker-data bootstraps use seeds 101–103. These interventions are tested independently; their combinations are not measured here.",
+        "",
+        "These figures show translated parameter slices through the same fixed forget CE objective. A changing slice does not mean that the global loss function changes. Plotted shared random and baseline attacker reference directions have verified identical physical coordinates and orientation; each condition also has its own fitted attacker plane. The fit uses an uncentered singular value decomposition of raw checkpoint displacements from the attack start, with one equally weighted term per selected checkpoint. It is not centered PCA or an equal-time average. Fitted-plane explained energy is summed over those displacements, while minimum state capture and functional projection loss gaps expose information lost by a two-dimensional view.",
+        "",
+        "A fitted plane chosen from the whole 1000-update trajectory can emphasize later, larger motion and hide the first saved updates. The early profiles instead measure the saved segments for updates 1–8, with family panels showing updates 1 and 8 against the fixed probe and each update's actual training batch. CE is relative to that update's separately measured t=0 CE. Only t=0 and t=1 are actual optimizer states: interpolation fractions describe neither a continuous optimizer path nor equal physical distances across cases.",
+        "",
+        "The first-update landscapes use q0 along each condition's raw saved first update and q1 from original baseline random row 0, projected orthogonally to that q0 and normalized. These planes differ between conditions. Their global L2 half-widths remain 1 and 125; these unequal axis scales prevent interpreting apparent slopes or widths across the two axes as curvature comparisons. Family panels share absolute z/color scales and symmetric center-relative color scales. Raw saved norms and changed fractions retain mixed source precision; evaluated-cast norms and changed fractions appear separately in the CSV. Segment endpoints copy saved weights into the model evaluation dtypes exactly. Normalized-plane endpoint cast differences and their separately measured functional CE errors are recorded, and functional errors must stay within 1e-4 nats. Zero-update and degenerate-direction skips remain explicit. A sampled segment barrier means only the maximum sampled CE within t in [0,1] above its higher measured endpoint; it is not a global or continuous-path barrier.",
+        "",
+        "Geometry uses raw mixed-precision checkpoint coordinates. Existing collaborator-compatible slices center the loaded BF16 model, while direct-update profiles interpolate raw saved anchors before evaluation casting. Raw geometric capture and functional loss fidelity are assessed separately through parameter-space capture and measured loss errors. CE differences can reflect casting, attention implementation, and backend choices."
+        + precision_example,
         "",
         "The shared 32-document probe is attack-held-out: its token sequences exclude the union of observed minibatches from the clean attacker and three bootstrap cohorts. It is not necessarily held out from defender training, TAR inner training, or language-model pretraining, and it can differ from the earlier baseline's 32-document probe. The fixed 10-document probe and shared axes retain the original baseline identities. Coordinate coefficients use unit global parameter directions. Attack displacement is measured from each actual attack start, after any noise injection; perturbation L2 and changed fractions appear separately in the CSV.",
         "",
         "[Full case summary](case-summary.csv) · [Comparability checks](comparison-validation.json) · [Evaluation report](evaluation-report.md) · [Measured WMDP budget maxima](max-observed-wmdp.csv) · [Exploratory utility matching](utility-matching.csv)",
         "",
-        "| Case | Fixed CE start / final | Attack-held-out CE start / final | Initial / final MMLU | Peak measured WMDP | Final displacement | Wall / GPU hours | Evaluation coverage |",
+        "| Case | Fixed CE start / final | Attack-held-out CE start / final | Initial / final MMLU | Final / peak measured WMDP | Final displacement | Wall / GPU hours | Evaluation coverage |",
         "|---|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for name, record in records.items():
@@ -806,7 +1865,7 @@ def report(run):
             " (defense; first saved state)" if m["role"] == "defense" else ""
         )
         lines.append(
-            f"| {label} | {display(m['fixed_ce_start'])} / {display(m['fixed_ce_final'])} | {display(m['heldout_ce_start'])} / {display(m['heldout_ce_final'])} | {display(initial, 2)} / {display(m['final_mmlu'], 2)} | {display(m['peak_measured_wmdp'], 2)} | {display(m['actual_displacement'])} | {display(m['wall_hours'], 2)} / {display(m['allocated_gpu_hours'], 2)} | {m['measured_evaluation_points']}/{m['expected_evaluation_points']} |"
+            f"| {label} | {display(m['fixed_ce_start'])} / {display(m['fixed_ce_final'])} | {display(m['heldout_ce_start'])} / {display(m['heldout_ce_final'])} | {display(initial, 2)} / {display(m['final_mmlu'], 2)} | {display(m['final_wmdp'], 2)} / {display(m['peak_measured_wmdp'], 2)} | {display(m['actual_displacement'])} | {display(m['wall_hours'], 2)} / {display(m['allocated_gpu_hours'], 2)} | {m['measured_evaluation_points']}/{m['expected_evaluation_points']} |"
         )
     lines.extend(
         [
@@ -861,13 +1920,37 @@ def report(run):
                 "Actual CE and capability trajectories",
                 "Shared-reference local absolute CE",
                 "Shared-reference center-relative CE",
-                "Broad shared-random fortress view",
+                "Broad shared-random slice",
+                "Early profiles for saved updates 1 and 8",
+                "Condition-specific first-update absolute/relative landscapes",
             ),
         ):
             lines.append(
                 f"- {title}: [PNG](comparisons/{stem}.png) · [PDF](comparisons/{stem}.pdf)"
             )
         lines.append("")
+    lines.extend(["## Individual trajectories and diagnostic views", ""])
+    for name, record in attacks.items():
+        links = []
+        for filename, title in (
+            ("random-landscape-evolution.png", "broad random slices"),
+            ("attack-landscape-evolution.png", "local attack evolution"),
+            ("defense-landscape-evolution.png", "local defense evolution"),
+            ("surfaces-and-checkpoints.png", "fitted-plane trajectory"),
+            ("projection-fidelity.png", "projection error"),
+            ("minibatch-dynamics.png", "actual minibatch dynamics"),
+            ("local-minibatch-landscapes.png", "batch-specific local slices"),
+            ("early-update-profiles.png", "early update profiles PNG"),
+            ("early-update-profiles.pdf", "early update profiles PDF"),
+            ("first-update-landscape.png", "first update landscape PNG"),
+            ("first-update-landscape.pdf", "first update landscape PDF"),
+        ):
+            path = record["analysis"] / filename
+            if path.exists():
+                links.append(f"[{title}]({relative_link(path, run)})")
+        if links:
+            lines.append(f"- {name}: " + " · ".join(links))
+    lines.append("")
     lines.extend(["## Comparability and limits", ""])
     invalid = {
         name: values["issues"]
@@ -881,6 +1964,16 @@ def report(run):
         lines.append("")
     for name, issues in invalid.items():
         lines.append(f"- {name}: {'; '.join(issues)}.")
+    lines.extend(
+        [
+            "",
+            f"Early-update diagnostics are {'required' if profiles_required else 'optional for this legacy study'} for final attack coverage. Their independent validation checks protocol/input identities, the first eight recorded batch hashes, full finite lattices, separately loaded exact endpoints, current actual-losses.csv endpoints when available, and unit/orthogonal first-update axes. Shared-plane comparisons remain available while profiles are pending.",
+            "",
+        ]
+    )
+    for name, values in profile_validations.items():
+        if values["issues"]:
+            lines.append(f"- {name} early profiles: {'; '.join(values['issues'])}.")
     lines.extend(
         [
             "",
@@ -905,15 +1998,140 @@ def report(run):
     return validation_output
 
 
-def main():
+def _profile_adapter_record(run, name):
+    run = Path(run).resolve()
+    program, probes = read_json(run / "study.json"), read_json(run / "probes.json")
+    case = program.get("cases", {}).get(name)
+    if not case or case.get("role") != "attack" or Path(name).name != name:
+        raise ValueError(f"Unknown attack case: {name}")
+    record = collect_case(run, name, case)
+    reference = {}
+    baseline_case = program.get("cases", {}).get("baseline-lr1e-5")
+    if baseline_case:
+        baseline = (
+            record
+            if name == "baseline-lr1e-5"
+            else collect_case(run, "baseline-lr1e-5", baseline_case)
+        )
+        checked = validate_step_profiles(
+            baseline, program, probes, baseline["step_profiles"], require_status=False
+        )
+        if checked["step_profiles_complete"]:
+            reference = baseline["step_profiles"]
+    validation = validate_step_profiles(
+        record, program, probes, reference, require_status=False
+    )
+    return record, program, validation
+
+
+def _profile_source_path(program, expected_source=None):
+    """Select the adjacent frozen module without importing its model stack."""
+    source = Path(__file__).with_name("tar_dynamics.py")
+    digest = hashlib.sha256(source.read_bytes()).hexdigest()
+    declared = {
+        value
+        for relative, value in program.get("source_sha256", {}).items()
+        if Path(relative).name == "tar_dynamics.py"
+    }
+    if digest not in declared or (
+        expected_source is not None and digest != expected_source
+    ):
+        raise ValueError(
+            "Adjacent tar_dynamics.py does not match the frozen numerical source identity"
+        )
+    return source
+
+
+def profile_values(run, name):
+    """Reuse complete numbers, or run unchanged measurements with plotting disabled."""
+    record, program, validation = _profile_adapter_record(run, name)
+    source = _profile_source_path(program)
+    if validation["step_profiles_comparable"]:
+        _profile_source_path(program, record["step_profiles"]["source_sha256"])
+        return {
+            "state": "complete",
+            "case": name,
+            "stage": "profile-values",
+            "reused": True,
+        }
+    namespace = runpy.run_path(str(source))
+    measure = namespace["step_profiles"]
+    globals_ = measure.__globals__
+    renderer = globals_["_profile_plots"]
+    globals_["_profile_plots"] = lambda *args, **kwargs: None
+    try:
+        measure(record["folder"], record["settings"])
+    finally:
+        globals_["_profile_plots"] = renderer
+    record, _, validation = _profile_adapter_record(run, name)
+    if not validation["step_profiles_comparable"]:
+        raise ValueError(
+            "Numerical step-profile cache did not validate: "
+            + "; ".join(validation["issues"])
+        )
+    _profile_source_path(program, record["step_profiles"]["source_sha256"])
+    return {
+        "state": "complete",
+        "case": name,
+        "stage": "profile-values",
+        "reused": False,
+    }
+
+
+def profile_report(run, name):
+    """Render only a verified numerical cache using Python/NumPy and Matplotlib."""
+    record, program, validation = _profile_adapter_record(run, name)
+    if not validation["step_profiles_comparable"]:
+        raise ValueError(
+            "Cannot render invalid numerical step profiles: "
+            + "; ".join(validation["issues"])
+        )
+    source = _profile_source_path(program, record["step_profiles"]["source_sha256"])
+    namespace = runpy.run_path(str(source))
+    cache = SimpleNamespace(
+        metadata=record["step_profiles"],
+        rows={
+            "profiles": [
+                {
+                    key: float(row[key])
+                    for key in namespace["_ProfileCache"].fields["profiles"]
+                }
+                for row in record["step_profile_rows"]
+            ],
+            "grid": [
+                {
+                    key: float(row[key])
+                    for key in namespace["_ProfileCache"].fields["grid"]
+                }
+                for row in record["first_update_grid"]
+            ],
+        },
+    )
+    namespace["_profile_plots"](record["folder"], cache)
+    return {"state": "complete", "case": name, "stage": "profile-report"}
+
+
+def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
     command = commands.add_parser(
         "report", help="Write a measured cross-condition report"
     )
     command.add_argument("run", type=Path)
-    args = parser.parse_args()
-    result = report(args.run)
+    for name, help_text in (
+        ("profile-values", "Validate/reuse or measure early profiles without plotting"),
+        ("profile-report", "Render a complete early-profile numerical cache on CPU"),
+    ):
+        adapter = commands.add_parser(name, help=help_text)
+        adapter.add_argument("run", type=Path)
+        adapter.add_argument("case")
+    args = parser.parse_args(argv)
+    if args.command == "report":
+        result = report(args.run)
+    elif args.command == "profile-values":
+        result = profile_values(args.run, args.case)
+    else:
+        result = profile_report(args.run, args.case)
     print(
         json.dumps(
             {key: value for key, value in result.items() if key != "comparability"},

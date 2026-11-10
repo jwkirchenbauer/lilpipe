@@ -902,74 +902,105 @@
   "bootstrap": "Full-size sampling with replacement of the common prepared attack dataset; independent seeds 101,102,103; defense unchanged.",
   "analysis": "Fixed common probes/reference planes plus condition-fitted planes, actual/projection loss errors, actual minibatches, end-defense and attack dynamics.",
   "source_sha256": {
-    "source/lm_eval_tasks/mmlu_no_bio.yaml": "049885f5f05c0f60a43e9fd749b245028555fc173a08a36175452dab72e27a15",
-    "source/misc/reference_get_ll.py": "ffc0d86d6e51298bdf5595d4bee7a3d0f3e1ca95d5d76e613a73d3c154944c91",
-    "source/misc/run_tar_compute.sh": "2ec7fa812f5d75123860f773469f8baa74c29b3bbe31448e0cd5b25f733373d6",
-    "source/misc/tar_compute.py": "4f3c78b63cb01b9b710b443a8017b5f2dc67a3b1cde26c7fb4b4e67067e72ccb",
-    "source/misc/tar_dynamics.py": "cffdaa3edbc9a3b7dcd7f0e9f16a5fb81ecef4176202900da1ed5789c9c27358",
-    "source/misc/tar_dynamics_training.py": "8fbfd35bd251cbc831bb6dc2fdfdb9183caa33983993b2430d27e3cf858ed9a9",
-    "source/jobs/training-v2/worker.sh": "d4f1ad204a69d76fd2eef5daabed9b5319fbaa57798d7340ef66dba6a18062c8",
-    "source/jobs/training-v3/worker.sh": "2caf709c65d66cced7888916d43dda2b39a698c5dccba7f17c4884301151f32c",
-    "source/jobs/validation-v2/tar_compute.py": "d22fbae902ef440fd1bd869f24ea2c60c376628d6bf3856e6f137528742b938f",
-    "source/jobs/analysis-v1/misc/run_tar_compute_landscapes.sh": "ab954c18d651f3059a1bfcd9647556ed2fc031772e5a27abf7713f0a7148f478",
-    "source/jobs/analysis-v1/misc/tar_compute.py": "070a4f45a05e57a2aa498775982e0d83b755b204b0068db52713819e138ff088",
-    "source/jobs/analysis-v1/misc/tar_dynamics.py": "49fb1177ae7c9a3652913190918752e9b1eb29c3b3fef356e817247ad95692c7",
-    "source/jobs/analysis-v2/misc/run_tar_compute_landscapes.sh": "f4d95def32093e202260db41362861990771dcf157db0d4c903086a74b86eeeb",
-    "source/jobs/analysis-v2/misc/tar_compute.py": "070a4f45a05e57a2aa498775982e0d83b755b204b0068db52713819e138ff088",
-    "source/jobs/analysis-v2/misc/tar_compute_compare.py": "d5a751724b2daf88339b1c3baec0616bcc34bc27c0ba51d88af49ae1c2f02631",
-    "source/jobs/analysis-v2/misc/tar_dynamics.py": "29b6c32834575136b99fe090e342977f63bd603e0145359e0f55de43eb45d8ae",
-    "source/jobs/evaluation-v1/misc/run_tar_compute_evaluation.sh": "c802fb3644a51305947be4a7ae504ab68946e103fc29db5fcc1a6ab79e51885d",
-    "source/jobs/evaluation-v1/misc/tar_compute_evaluation.py": "ec45cfabc936c79d5ece415ef5b8e9531759d950c702828e971164527d160fd7",
-    "source/jobs/evaluation-v2/misc/run_tar_compute_evaluation.sh": "c802fb3644a51305947be4a7ae504ab68946e103fc29db5fcc1a6ab79e51885d",
-    "source/jobs/evaluation-v2/misc/tar_compute_evaluation.py": "4b7213715844dfe11f2706b128bcfa2a6d3e7a9c076b123e391cda4dc054f56a",
-    "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/_default_template_yaml": "011aa06daa186c8115ab1cd43f8c10d6b0e55996e811660ecc1e6117f6804d58",
-    "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/_wmdp_bio_robust.yaml": "f211781013e5e45a4297a51aaa151a0e85d030cc811f35a665b2cdff9fdc0ae7",
-    "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_bioweapons_and_bioterrorism.yaml": "e675c85f5300c61454055d7342b6c106b33673de89e19666e4725fab129edb1f",
-    "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_dual_use_virology.yaml": "3b4a3aa09beeade354739b7363a264eec21a81e0c5c094519c73a70b76b7118f",
-    "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_enhanced_potential_pandemic_pathogens.yaml": "4c1e6f5d7f22c57bdd4a93e7545dd2b248269d26a25e62a2664c46b48cf32f83",
-    "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_expanding_access_to_threat_vectors.yaml": "d23724eeeafcc871289a87623e9bbe9cfaa849f2713c17c295271477ccfb2cf3",
-    "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_reverse_genetics_and_easy_editing.yaml": "61e4e2b52a99ab63669c3b451bfcbbf1296d9913659e029e6d6af4b0f2cbd776",
-    "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_viral_vector_research.yaml": "e4ffff6afa20543d405ad30ef8679a6b4e9691759b1fbc129e695695f6d5a95c",
-    "source/src/axolotl_plugins/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "source/src/axolotl_plugins/custom_trainer_args.py": "823315684e21dd0044c0553bff7ff36f05c8249762ba28c9139b5d229f1f2a12",
-    "source/src/data/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "source/src/data/_base_document_strategy.py": "ed7a7d4ae6a5259d047b6e8074a803a91ce39b397dbbb56b838fdfbf2358a509",
-    "source/src/data/authors_documents.py": "93dbdcf641f65c78b76f44a1bb2153358900e63bf9a4149baa821ec4e2804290",
-    "source/src/data/authors_documents_masked.py": "1cc66116d342700a50d4c7f782d1d51387de2bde97abd30c3493bb82ef85b632",
-    "source/src/data/beavertail_alignment.py": "bdd3193a94eb954dfbc6163647ff34947dbe1a388c954b87db0fcb5c48fd2f3a",
-    "source/src/data/beavertail_harmful_alignment.py": "7644cb422836685ad708fc21e45a398673ec79a218d1831865ed984d83315331",
-    "source/src/data/beavertail_harmful_mixed_attack.py": "e80a76fa5ba4380bb382c6de74b689802bfce2a74d26740c9d245eea858aea74",
-    "source/src/data/beavertail_harmful_relearn.py": "606afe5fc709912f79cb4964de1714783769cf9bb882a8dd3e2a5d15b1754004",
-    "source/src/data/beavertail_safe_alignment.py": "e466fa2dde9d49daa278e7688f108b68b130cf4b0ad829a823b3f3839a2fb1d4",
-    "source/src/data/beavertails_hh.py": "c9e3f0d6f4124fb4d2bbbc4b2a45cbe73cb934e1ffb232d30128306448f453ec",
-    "source/src/data/fixed_documents.py": "852ac6b999da34c6069da16e9f8c1e2404249d33743b6c2e4c6a22c48ea320e9",
-    "source/src/data/seam.py": "f4bc8ad2aaedb50cced3ce64480516819a91ded080942d60004c140394436d90",
-    "source/src/data/sst2_mixed_attack.py": "1279fb8a6979f83a4f53d8e4b773889357aaf37b8e9ece6db929b8b69a7a1d70",
-    "source/src/data/wikitext2.py": "09c18207ca958cbe9d7dd3c3e31e5f9f6fd33daa583e1fc984adb08e280aaee5",
-    "source/src/data/wikitext_di.py": "8ccdc0b4ec175c578558142dcc78175d00b031aa8e46de0de7b0cc1b0d3a35e0",
-    "source/src/data/wmdp_completion.py": "05120990f036cb0299f8f69eb37d8bd886217332f4fb5c9ef55290a95337f4f0",
-    "source/src/data/wmdp_di.py": "50166c6e6e040148c72b78f7e596a9de2b2a29e1d2184f041a56330a8e036236",
-    "source/src/data/wmdp_zephyr.py": "fd3e4b617389a5c6fe6b2678c317cdc545760eff22fb443bb199b3c55c9680fa",
-    "source/src/trainers/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "source/src/trainers/rl_bf16.py": "03886e657233377f2b54881e85a0cd547e6b2fe26efd9ee4f9c6047a64e40bdc",
-    "source/src/trainers/rl_cosim.py": "81c787dcd30e76d47578a9e51ddce0a93f86bfec74f6f4f103fb607464733320",
-    "source/src/trainers/rl_perturb.py": "382f3469cfcc837c878f279efc75e64093781aa833845faae587cb565edbbbec",
-    "source/src/trainers/tr_ao.py": "c610a569081a2ec0541c3c41c8df0e42866c77e364f9e1cfe3bc62815aaa4230",
-    "source/src/trainers/tr_booster.py": "2a044a9770a46420bea080920a9b2126e545c1be5bd1e1781d00b456817b124d",
-    "source/src/trainers/tr_gip.py": "c25d824fbb06d8c4f2c020dad69968a734baac41d0db397d1307e61685ec8f66",
-    "source/src/trainers/tr_sam.py": "1786aafc7b547b2717acdb06ab4af1d18fbd18c8b6af3f7533f6bc651909115b",
-    "source/src/trainers/tr_seam.py": "01edc546ce23510526708a5b52a066f65b4799e571f848281d5c58e599ef6ec2",
-    "source/src/trainers/tr_seam_legacy.py": "34bdabbea34dfa524a43b011f63da6b6cdf61a66f1a5adb01a4deb1e44e9b434",
-    "source/src/trainers/tr_seam_v1.py": "a35bed137db7455fcce5750eeab9d8b6b2521bfbdcc13dbc59fb3ba5871e52b5",
-    "source/src/trainers/tr_ssiuu.py": "c9b1061fc2d3a5a0a0ddccca43716829bf6ae9ac724e2b24ac6d62a7cab70fd2",
-    "source/src/trainers/tr_tar.py": "17af0ecc0a164edf2547053a0df249854fda3e4cfe18e4882f06cd3b9f585188",
-    "source/src/trainers/tr_wd.py": "7fd4f32b207f36843811343f9237ad68979b734b6ce5005ce0b55c1f80b4daa9",
-    "source/src/trainers/ul_cb.py": "e5d500879c0596a2c669cd0a5823cee8987e1ed3a0202b735890ed56ed2bea38",
-    "source/src/trainers/ul_gd.py": "8fa1bbb06974529512193f8f068c3931be599d9ad0b7cf158eca5d5d94ba95c4",
-    "source/src/trainers/ul_me.py": "3524868904daa100a7157dba2254ac73220c59a1271297675f35941ccd0f55aa",
-    "source/src/trainers/ul_npo.py": "ee65164d6d1ff5bb6a07cb7e386e7cdaaece8f262946e32800fafcd58f58c7ce",
-    "source/src/trainers/ul_rmu.py": "f651c188283f60716d29331f72d99d39381b250f21308cb496868210a12ace85",
-    "source/src/trainers/utils.py": "0af6c8c9a0c1139014bb5792d3ce2e9bd9863777a9cff989dcd46846923b32b5"
+    "jobs/analysis-v1/misc/run_tar_compute_landscapes.sh": "ab954c18d651f3059a1bfcd9647556ed2fc031772e5a27abf7713f0a7148f478",
+    "jobs/analysis-v1/misc/tar_compute.py": "070a4f45a05e57a2aa498775982e0d83b755b204b0068db52713819e138ff088",
+    "jobs/analysis-v1/misc/tar_dynamics.py": "49fb1177ae7c9a3652913190918752e9b1eb29c3b3fef356e817247ad95692c7",
+    "jobs/analysis-v2/misc/run_tar_compute_landscapes.sh": "f4d95def32093e202260db41362861990771dcf157db0d4c903086a74b86eeeb",
+    "jobs/analysis-v2/misc/tar_compute.py": "070a4f45a05e57a2aa498775982e0d83b755b204b0068db52713819e138ff088",
+    "jobs/analysis-v2/misc/tar_compute_compare.py": "d5a751724b2daf88339b1c3baec0616bcc34bc27c0ba51d88af49ae1c2f02631",
+    "jobs/analysis-v2/misc/tar_dynamics.py": "29b6c32834575136b99fe090e342977f63bd603e0145359e0f55de43eb45d8ae",
+    "jobs/analysis-v3/misc/run_tar_compute_landscapes.sh": "7b2a340863a3fa48d96f75ee05bd59d8fe66a61e8954dde97c66f8d70df39038",
+    "jobs/analysis-v3/misc/tar_compute.py": "070a4f45a05e57a2aa498775982e0d83b755b204b0068db52713819e138ff088",
+    "jobs/analysis-v3/misc/tar_compute_compare.py": "b52cc8008a030006d4b4eecd2b16dd87d6a7c58ebb3273d92cbd0f74653fd4ba",
+    "jobs/analysis-v3/misc/tar_dynamics.py": "29b6c32834575136b99fe090e342977f63bd603e0145359e0f55de43eb45d8ae",
+    "jobs/analysis-v4/misc/run_tar_compute_landscapes.sh": "e0bb35fdb1011b0f9e05b96c50714512c085f00e836e1a4733dc5390a957ee61",
+    "jobs/analysis-v4/misc/tar_compute.py": "070a4f45a05e57a2aa498775982e0d83b755b204b0068db52713819e138ff088",
+    "jobs/analysis-v4/misc/tar_compute_compare.py": "c2efe96fc33d0e1be3c17c8d68d2427c304c8cb37c1a10bcb4246d731ca1a164",
+    "jobs/analysis-v4/misc/tar_dynamics.py": "c5abb6a8afcd4754dba1620bbacea21becf285017b67aaafe5d280ef13a2dfb7",
+    "jobs/analysis-v5/misc/run_tar_compute_landscapes.sh": "e0bb35fdb1011b0f9e05b96c50714512c085f00e836e1a4733dc5390a957ee61",
+    "jobs/analysis-v5/misc/tar_compute.py": "070a4f45a05e57a2aa498775982e0d83b755b204b0068db52713819e138ff088",
+    "jobs/analysis-v5/misc/tar_compute_compare.py": "c2efe96fc33d0e1be3c17c8d68d2427c304c8cb37c1a10bcb4246d731ca1a164",
+    "jobs/analysis-v5/misc/tar_dynamics.py": "0e1d5f1edcc47068fd63cb35f6aca10c3bad0806ee6ad477ec29225984aaeb1a",
+    "jobs/analysis-v6/misc/run_tar_compute_landscapes.sh": "4862fd402d703dc307ce5cf54fbdc36a0154fcd8e8b0ae2ae8ffcfdf2b5b9b1a",
+    "jobs/analysis-v6/misc/tar_compute.py": "070a4f45a05e57a2aa498775982e0d83b755b204b0068db52713819e138ff088",
+    "jobs/analysis-v6/misc/tar_compute_compare.py": "cf6451435be4b3af7e45fc8bde7c3d75dae62b2f5fab54e968aad3a5d7673af3",
+    "jobs/analysis-v6/misc/tar_dynamics.py": "0e1d5f1edcc47068fd63cb35f6aca10c3bad0806ee6ad477ec29225984aaeb1a",
+    "jobs/analysis-v7/misc/run_tar_compute_landscapes.sh": "4862fd402d703dc307ce5cf54fbdc36a0154fcd8e8b0ae2ae8ffcfdf2b5b9b1a",
+    "jobs/analysis-v7/misc/tar_compute.py": "070a4f45a05e57a2aa498775982e0d83b755b204b0068db52713819e138ff088",
+    "jobs/analysis-v7/misc/tar_compute_compare.py": "cf6451435be4b3af7e45fc8bde7c3d75dae62b2f5fab54e968aad3a5d7673af3",
+    "jobs/analysis-v7/misc/tar_dynamics.py": "75c64944cff83169c7498989188ca5a33dd151c42c6cd8f550bfb2bc3f74e143",
+    "jobs/comparison-v1/worker.sh": "355e8909205ecc6e433c1e0f3e29e8dfc04ae49fc62e0e8ef8a3af76c7673ef9",
+    "jobs/comparison-v2/worker.sh": "117f8c7245f1cdd4daf69366e00925136b110ed0972732136a9e779e2555f8e6",
+    "jobs/comparison-v3/misc/tar_compute_compare.py": "c2efe96fc33d0e1be3c17c8d68d2427c304c8cb37c1a10bcb4246d731ca1a164",
+    "jobs/comparison-v3/worker.sh": "7f075bc7858fb46a6123b1ef28c508895fd4060a8fe5198f8f96803ae2d02d69",
+    "jobs/comparison-v4/misc/tar_compute_compare.py": "ee6ac8c4f10fb142642a1bff162aa7ee635ad943bd30332657ce8da850e95402",
+    "jobs/comparison-v4/worker.sh": "7f075bc7858fb46a6123b1ef28c508895fd4060a8fe5198f8f96803ae2d02d69",
+    "jobs/comparison-v5/worker.sh": "766f14b55126cd6152409784b5849bf1f6df5131294a8c1aa18264e6c337f8ab",
+    "jobs/comparison-v6/misc/tar_compute_compare.py": "2fbb7e2c391cf815109d06aec2d1eebd9226322900cd1a45f7d1d96cc7b91013",
+    "jobs/comparison-v6/worker.sh": "7f075bc7858fb46a6123b1ef28c508895fd4060a8fe5198f8f96803ae2d02d69",
+    "jobs/evaluation-v1/misc/run_tar_compute_evaluation.sh": "c802fb3644a51305947be4a7ae504ab68946e103fc29db5fcc1a6ab79e51885d",
+    "jobs/evaluation-v1/misc/tar_compute_evaluation.py": "ec45cfabc936c79d5ece415ef5b8e9531759d950c702828e971164527d160fd7",
+    "jobs/evaluation-v2/misc/run_tar_compute_evaluation.sh": "c802fb3644a51305947be4a7ae504ab68946e103fc29db5fcc1a6ab79e51885d",
+    "jobs/evaluation-v2/misc/tar_compute_evaluation.py": "4b7213715844dfe11f2706b128bcfa2a6d3e7a9c076b123e391cda4dc054f56a",
+    "jobs/evaluation-v3/misc/run_tar_compute_evaluation.sh": "08bd5b1625c6e280353f566a4008f64d6b573342c8212503484ce08196eddc36",
+    "jobs/evaluation-v3/misc/tar_compute_evaluation.py": "4b7213715844dfe11f2706b128bcfa2a6d3e7a9c076b123e391cda4dc054f56a",
+    "jobs/training-v2/worker.sh": "d4f1ad204a69d76fd2eef5daabed9b5319fbaa57798d7340ef66dba6a18062c8",
+    "jobs/training-v3/worker.sh": "2caf709c65d66cced7888916d43dda2b39a698c5dccba7f17c4884301151f32c",
+    "jobs/validation-v2/tar_compute.py": "d22fbae902ef440fd1bd869f24ea2c60c376628d6bf3856e6f137528742b938f",
+    "lm_eval_tasks/mmlu_no_bio.yaml": "049885f5f05c0f60a43e9fd749b245028555fc173a08a36175452dab72e27a15",
+    "lm_eval_tasks/wmdp_bio_categorized_mcqa/_default_template_yaml": "011aa06daa186c8115ab1cd43f8c10d6b0e55996e811660ecc1e6117f6804d58",
+    "lm_eval_tasks/wmdp_bio_categorized_mcqa/_wmdp_bio_robust.yaml": "f211781013e5e45a4297a51aaa151a0e85d030cc811f35a665b2cdff9fdc0ae7",
+    "lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_bioweapons_and_bioterrorism.yaml": "e675c85f5300c61454055d7342b6c106b33673de89e19666e4725fab129edb1f",
+    "lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_dual_use_virology.yaml": "3b4a3aa09beeade354739b7363a264eec21a81e0c5c094519c73a70b76b7118f",
+    "lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_enhanced_potential_pandemic_pathogens.yaml": "4c1e6f5d7f22c57bdd4a93e7545dd2b248269d26a25e62a2664c46b48cf32f83",
+    "lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_expanding_access_to_threat_vectors.yaml": "d23724eeeafcc871289a87623e9bbe9cfaa849f2713c17c295271477ccfb2cf3",
+    "lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_reverse_genetics_and_easy_editing.yaml": "61e4e2b52a99ab63669c3b451bfcbbf1296d9913659e029e6d6af4b0f2cbd776",
+    "lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_viral_vector_research.yaml": "e4ffff6afa20543d405ad30ef8679a6b4e9691759b1fbc129e695695f6d5a95c",
+    "misc/reference_get_ll.py": "ffc0d86d6e51298bdf5595d4bee7a3d0f3e1ca95d5d76e613a73d3c154944c91",
+    "misc/run_tar_compute.sh": "2ec7fa812f5d75123860f773469f8baa74c29b3bbe31448e0cd5b25f733373d6",
+    "misc/tar_compute.py": "4f3c78b63cb01b9b710b443a8017b5f2dc67a3b1cde26c7fb4b4e67067e72ccb",
+    "misc/tar_dynamics.py": "cffdaa3edbc9a3b7dcd7f0e9f16a5fb81ecef4176202900da1ed5789c9c27358",
+    "misc/tar_dynamics_training.py": "8fbfd35bd251cbc831bb6dc2fdfdb9183caa33983993b2430d27e3cf858ed9a9",
+    "src/axolotl_plugins/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/axolotl_plugins/custom_trainer_args.py": "823315684e21dd0044c0553bff7ff36f05c8249762ba28c9139b5d229f1f2a12",
+    "src/data/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/data/_base_document_strategy.py": "ed7a7d4ae6a5259d047b6e8074a803a91ce39b397dbbb56b838fdfbf2358a509",
+    "src/data/authors_documents.py": "93dbdcf641f65c78b76f44a1bb2153358900e63bf9a4149baa821ec4e2804290",
+    "src/data/authors_documents_masked.py": "1cc66116d342700a50d4c7f782d1d51387de2bde97abd30c3493bb82ef85b632",
+    "src/data/beavertail_alignment.py": "bdd3193a94eb954dfbc6163647ff34947dbe1a388c954b87db0fcb5c48fd2f3a",
+    "src/data/beavertail_harmful_alignment.py": "7644cb422836685ad708fc21e45a398673ec79a218d1831865ed984d83315331",
+    "src/data/beavertail_harmful_mixed_attack.py": "e80a76fa5ba4380bb382c6de74b689802bfce2a74d26740c9d245eea858aea74",
+    "src/data/beavertail_harmful_relearn.py": "606afe5fc709912f79cb4964de1714783769cf9bb882a8dd3e2a5d15b1754004",
+    "src/data/beavertail_safe_alignment.py": "e466fa2dde9d49daa278e7688f108b68b130cf4b0ad829a823b3f3839a2fb1d4",
+    "src/data/beavertails_hh.py": "c9e3f0d6f4124fb4d2bbbc4b2a45cbe73cb934e1ffb232d30128306448f453ec",
+    "src/data/fixed_documents.py": "852ac6b999da34c6069da16e9f8c1e2404249d33743b6c2e4c6a22c48ea320e9",
+    "src/data/seam.py": "f4bc8ad2aaedb50cced3ce64480516819a91ded080942d60004c140394436d90",
+    "src/data/sst2_mixed_attack.py": "1279fb8a6979f83a4f53d8e4b773889357aaf37b8e9ece6db929b8b69a7a1d70",
+    "src/data/wikitext2.py": "09c18207ca958cbe9d7dd3c3e31e5f9f6fd33daa583e1fc984adb08e280aaee5",
+    "src/data/wikitext_di.py": "8ccdc0b4ec175c578558142dcc78175d00b031aa8e46de0de7b0cc1b0d3a35e0",
+    "src/data/wmdp_completion.py": "05120990f036cb0299f8f69eb37d8bd886217332f4fb5c9ef55290a95337f4f0",
+    "src/data/wmdp_di.py": "50166c6e6e040148c72b78f7e596a9de2b2a29e1d2184f041a56330a8e036236",
+    "src/data/wmdp_zephyr.py": "fd3e4b617389a5c6fe6b2678c317cdc545760eff22fb443bb199b3c55c9680fa",
+    "src/trainers/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/trainers/rl_bf16.py": "03886e657233377f2b54881e85a0cd547e6b2fe26efd9ee4f9c6047a64e40bdc",
+    "src/trainers/rl_cosim.py": "81c787dcd30e76d47578a9e51ddce0a93f86bfec74f6f4f103fb607464733320",
+    "src/trainers/rl_perturb.py": "382f3469cfcc837c878f279efc75e64093781aa833845faae587cb565edbbbec",
+    "src/trainers/tr_ao.py": "c610a569081a2ec0541c3c41c8df0e42866c77e364f9e1cfe3bc62815aaa4230",
+    "src/trainers/tr_booster.py": "2a044a9770a46420bea080920a9b2126e545c1be5bd1e1781d00b456817b124d",
+    "src/trainers/tr_gip.py": "c25d824fbb06d8c4f2c020dad69968a734baac41d0db397d1307e61685ec8f66",
+    "src/trainers/tr_sam.py": "1786aafc7b547b2717acdb06ab4af1d18fbd18c8b6af3f7533f6bc651909115b",
+    "src/trainers/tr_seam.py": "01edc546ce23510526708a5b52a066f65b4799e571f848281d5c58e599ef6ec2",
+    "src/trainers/tr_seam_legacy.py": "34bdabbea34dfa524a43b011f63da6b6cdf61a66f1a5adb01a4deb1e44e9b434",
+    "src/trainers/tr_seam_v1.py": "a35bed137db7455fcce5750eeab9d8b6b2521bfbdcc13dbc59fb3ba5871e52b5",
+    "src/trainers/tr_ssiuu.py": "c9b1061fc2d3a5a0a0ddccca43716829bf6ae9ac724e2b24ac6d62a7cab70fd2",
+    "src/trainers/tr_tar.py": "17af0ecc0a164edf2547053a0df249854fda3e4cfe18e4882f06cd3b9f585188",
+    "src/trainers/tr_wd.py": "7fd4f32b207f36843811343f9237ad68979b734b6ce5005ce0b55c1f80b4daa9",
+    "src/trainers/ul_cb.py": "e5d500879c0596a2c669cd0a5823cee8987e1ed3a0202b735890ed56ed2bea38",
+    "src/trainers/ul_gd.py": "8fa1bbb06974529512193f8f068c3931be599d9ad0b7cf158eca5d5d94ba95c4",
+    "src/trainers/ul_me.py": "3524868904daa100a7157dba2254ac73220c59a1271297675f35941ccd0f55aa",
+    "src/trainers/ul_npo.py": "ee65164d6d1ff5bb6a07cb7e386e7cdaaece8f262946e32800fafcd58f58c7ce",
+    "src/trainers/ul_rmu.py": "f651c188283f60716d29331f72d99d39381b250f21308cb496868210a12ace85",
+    "src/trainers/utils.py": "0af6c8c9a0c1139014bb5792d3ce2e9bd9863777a9cff989dcd46846923b32b5"
   },
   "cancelled_bundle_jobs": {
     "controls": "f3jJeUKn6nCP",
@@ -1076,6 +1107,30 @@
         "bootstrap-103"
       ],
       "source_version": "analysis-v2"
+    },
+    "tar-landscapes-v3-g05": {
+      "job_id": "f3jKoXoymco9",
+      "cases": [
+        "deep-lr1e-5",
+        "deep-lr1e-6"
+      ],
+      "source_version": "analysis-v3"
+    },
+    "tar-landscapes-v3-g06": {
+      "job_id": "f3jKoZox5SMd",
+      "cases": [
+        "deep-lr5e-6",
+        "long-lr5e-6"
+      ],
+      "source_version": "analysis-v3"
+    },
+    "tar-landscapes-v3-g07": {
+      "job_id": "f3jL2AKxx38T",
+      "cases": [
+        "long-lr1e-5",
+        "long-lr1e-6"
+      ],
+      "source_version": "analysis-v3"
     }
   },
   "evaluation_allocation_revisions": [
@@ -1086,5 +1141,420 @@
       "minutes": 90,
       "reason": "13 full benchmark groups; measured baseline wall times make60min tight."
     }
-  ]
+  ],
+  "evaluation_duration_updates": {
+    "long-lr1e-5": {
+      "job_id": "f3jKM6YzXgf9",
+      "duration_seconds": 5400,
+      "method": "Flux queued-jobspec update",
+      "reason": "Measured full-checkpoint evaluator timing; preserve existing launch and dependency."
+    },
+    "long-lr1e-6": {
+      "job_id": "f3jKM6Yp9mgj",
+      "duration_seconds": 5400,
+      "method": "Flux queued-jobspec update",
+      "reason": "Measured full-checkpoint evaluator timing; preserve existing launch and dependency."
+    },
+    "long-lr5e-6": {
+      "job_id": "f3jKM6Z9RcMD",
+      "duration_seconds": 5400,
+      "method": "Flux queued-jobspec update",
+      "reason": "Measured full-checkpoint evaluator timing; preserve existing launch and dependency."
+    },
+    "deep-lr1e-5": {
+      "job_id": "f3jKM6aVzxHV",
+      "duration_seconds": 5400,
+      "method": "Flux queued-jobspec update",
+      "reason": "Measured full-checkpoint evaluator timing; preserve existing launch and dependency."
+    },
+    "deep-lr1e-6": {
+      "job_id": "f3jKM6ZDsaCF",
+      "duration_seconds": 5400,
+      "method": "Flux queued-jobspec update",
+      "reason": "Measured full-checkpoint evaluator timing; preserve existing launch and dependency."
+    },
+    "deep-lr5e-6": {
+      "job_id": "f3jKM6XEEYDM",
+      "duration_seconds": 5400,
+      "method": "Flux queued-jobspec update",
+      "reason": "Measured full-checkpoint evaluator timing; preserve existing launch and dependency."
+    }
+  },
+  "evaluation_continuation_jobs": {
+    "baseline-lr1e-5": "f3jKWgybbo4j",
+    "baseline-lr1e-6": "f3jKWgz7FYhd",
+    "baseline-lr5e-6": "f3jKWgzhMGBZ",
+    "noise-1e-4": "f3jKWgymyi39",
+    "noise-1e-3": "f3jKWgzN5RX5",
+    "noise-1e-2": "f3jKWgzWyMD9",
+    "noise-1e-1": "f3jKWgzsjB9y",
+    "bootstrap-101": "f3jKWgyPjtoy",
+    "bootstrap-102": "f3jKWgyvsdjD",
+    "bootstrap-103": "f3jKWh12d6r3"
+  },
+  "evaluation_continuation_note": "30min afterany continuations reuse verified completed checkpoint groups; skip cases already complete. Running jobs cannot extend their duration without instance-owner privileges.",
+  "comparison_jobs": {
+    "partial-v1": "f3jKenkXYWCP",
+    "partial-v2": "f3jKoXoiwjyh",
+    "partial-v3": "f3jL2AKm68sh",
+    "tar-comparison-partial-v5": {
+      "job_id": "f3jLosXbb5D9",
+      "cases": [],
+      "source_version": "comparison-v5",
+      "minutes": 10,
+      "queue": "pdebug"
+    }
+  },
+  "analysis_continuation_jobs": {
+    "tar-landscape-cont-g00": {
+      "job_id": "f3jL2CN4Jq5Z",
+      "parent": "f3jKM4TqGNtf",
+      "cases": [
+        "baseline-lr1e-5",
+        "baseline-lr1e-6"
+      ],
+      "source_version": "analysis-v3"
+    },
+    "tar-landscape-cont-g01": {
+      "job_id": "f3jL2CMj2zR5",
+      "parent": "f3jKM4TgNTCb",
+      "cases": [
+        "baseline-lr5e-6",
+        "noise-1e-4"
+      ],
+      "source_version": "analysis-v3"
+    },
+    "tar-landscape-cont-g02": {
+      "job_id": "f3jL2CMeb2a3",
+      "parent": "f3jKM4TUWYwq",
+      "cases": [
+        "noise-1e-3",
+        "noise-1e-2"
+      ],
+      "source_version": "analysis-v3"
+    },
+    "tar-landscape-cont-g03": {
+      "job_id": "f3jL2CMuQuPV",
+      "parent": "f3jKM4U1eHs5",
+      "cases": [
+        "noise-1e-1",
+        "bootstrap-101"
+      ],
+      "source_version": "analysis-v3"
+    },
+    "tar-landscape-cont-g04": {
+      "job_id": "f3jL2CNEgk3y",
+      "parent": "f3jKM4TFAfQj",
+      "cases": [
+        "bootstrap-102",
+        "bootstrap-103"
+      ],
+      "source_version": "analysis-v3"
+    }
+  },
+  "analysis_allocation_note": "New groups remain120min. Queued60/90min duration trials didnot improve estimated start times; restored120min before execution. First10 cases have60min afterany continuations using the same geometry code and row caches if needed.",
+  "step_profiles_required": true,
+  "step_profiles_protocol": {
+    "updates": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "fractions_count": 25,
+    "fraction_range": [
+      -1,
+      2
+    ],
+    "grid_points": 17,
+    "first_update_radius": 1,
+    "orthogonal_random_radius": 125,
+    "basis": "Actual first saved update plus orthogonalized row0 of the shared random basis; each condition has its own plane.",
+    "interpretation": "Only saved endpoints are optimizer states. Segment interpolation and extrapolation are diagnostics, not a recorded continuous trajectory."
+  },
+  "step_profile_jobs": {
+    "pilot-v4": {
+      "job_id": "f3jL7phqdbuH",
+      "cases": [
+        "baseline-lr1e-5",
+        "baseline-lr1e-6"
+      ],
+      "source_version": "analysis-v4",
+      "state": "failed",
+      "reason": "Prototype incorrectly required every saved parameter to be BF16; actual checkpoints preserve FP32 embeddings, head, and norms. No profile points completed."
+    },
+    "pilot-v5": {
+      "job_id": "f3jLF3j3kLyD",
+      "cases": [
+        "baseline-lr1e-5",
+        "baseline-lr1e-6"
+      ],
+      "source_version": "analysis-v5",
+      "state": "numeric_complete_one_render_failed"
+    },
+    "tar-profile-cpu-repair-v1": {
+      "job_id": "f3jLdDKunitf",
+      "cases": [
+        "baseline-lr1e-5",
+        "baseline-lr1e-6"
+      ],
+      "kind": "render",
+      "source_version": "analysis-v6",
+      "numerical_source_version": "analysis-v5-identical"
+    },
+    "tar-profiles-v6-g01": {
+      "job_id": "f3jLdDLdJNnK",
+      "cases": [
+        "baseline-lr5e-6",
+        "noise-1e-4"
+      ],
+      "kind": "profiles",
+      "source_version": "analysis-v6",
+      "numerical_source_version": "analysis-v5-identical"
+    },
+    "tar-profiles-v6-g02": {
+      "job_id": "f3jLdDMhZrco",
+      "cases": [
+        "noise-1e-3",
+        "noise-1e-2"
+      ],
+      "kind": "profiles",
+      "source_version": "analysis-v6",
+      "numerical_source_version": "analysis-v5-identical"
+    },
+    "tar-profiles-v6-g03": {
+      "job_id": "f3jLdDMAS7hZ",
+      "cases": [
+        "noise-1e-1",
+        "bootstrap-101"
+      ],
+      "kind": "profiles",
+      "source_version": "analysis-v6",
+      "numerical_source_version": "analysis-v5-identical"
+    },
+    "tar-profiles-v6-g04": {
+      "job_id": "f3jLdDLAcbi7",
+      "cases": [
+        "bootstrap-102",
+        "bootstrap-103"
+      ],
+      "kind": "profiles",
+      "source_version": "analysis-v6",
+      "numerical_source_version": "analysis-v5-identical"
+    },
+    "tar-profiles-v6-g05": {
+      "job_id": "f3jLdDLPxVFD",
+      "cases": [
+        "deep-lr1e-5",
+        "deep-lr1e-6"
+      ],
+      "kind": "profiles",
+      "source_version": "analysis-v6",
+      "numerical_source_version": "analysis-v5-identical"
+    },
+    "tar-profiles-v6-g06": {
+      "job_id": "f3jLdDMUDy5h",
+      "cases": [
+        "deep-lr5e-6",
+        "long-lr5e-6"
+      ],
+      "kind": "profiles",
+      "source_version": "analysis-v6",
+      "numerical_source_version": "analysis-v5-identical"
+    },
+    "tar-profiles-v6-g07": {
+      "job_id": "f3jLdDLw6EAT",
+      "cases": [
+        "long-lr1e-5",
+        "long-lr1e-6"
+      ],
+      "kind": "profiles",
+      "source_version": "analysis-v6",
+      "numerical_source_version": "analysis-v5-identical"
+    }
+  },
+  "checkpoint_precision": {
+    "saved_F32_scalars": 262410240,
+    "saved_BF16_scalars": 6979321856,
+    "F32_modules": "Embedding, output head, normalization weights from Axolotl default policy.",
+    "geometry": "Raw saved parameter coordinates.",
+    "existing_visualizations": "Collaborator-compatible BF16 model evaluation; existing fixed/local slices center on the loaded evaluated model.",
+    "step_profiles": "Preserve raw saved anchors/updates, evaluate through the declared model dtype conversion, and report raw/evaluated movement and endpoint checks separately."
+  },
+  "utility_matching_decision": {
+    "band_percent": [
+      53.58729920432367,
+      54.51591352649753
+    ],
+    "selection_rule": "At most5pp below base and within0.5pp of the original defended MMLU; select by MMLU alone, earliest step breaks a tie.",
+    "candidates": {
+      "defense-500x16": {
+        "eligible_checkpoints": [],
+        "nearest_saved_step": 192,
+        "nearest_mmlu_percent": 54.60141119951959,
+        "nearest_difference_pp": 0.5854976730220613
+      },
+      "defense-125x64": {
+        "eligible_checkpoints": [],
+        "nearest_saved_step": 32,
+        "nearest_mmlu_percent": 54.714006905869994,
+        "nearest_difference_pp": 0.698093379372466
+      }
+    },
+    "decision": "No saved state meets the predeclared band. Report actual retained utility and fixed-budget comparisons; do not claim matched utility or interpolate checkpoints."
+  },
+  "analysis_debug_continuation_jobs": {
+    "tar-landscape-debug-g00-r1": {
+      "job_id": "f3jLNHiiojYs",
+      "cases": [
+        "baseline-lr1e-5",
+        "baseline-lr1e-6"
+      ],
+      "supersedes": "f3jL2CN4Jq5Z",
+      "source_version": "analysis-v3",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-debug-g01-r1": {
+      "job_id": "f3jLNHjBVWd5",
+      "cases": [
+        "baseline-lr5e-6",
+        "noise-1e-4"
+      ],
+      "supersedes": "f3jL2CMj2zR5",
+      "source_version": "analysis-v3",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-debug-g02-r1": {
+      "job_id": "f3jLNHiTyrjR",
+      "cases": [
+        "noise-1e-3",
+        "noise-1e-2"
+      ],
+      "supersedes": "f3jL2CMeb2a3",
+      "source_version": "analysis-v3",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-debug-g03-r1": {
+      "job_id": "f3jLNHix9d5y",
+      "cases": [
+        "noise-1e-1",
+        "bootstrap-101"
+      ],
+      "supersedes": "f3jL2CMuQuPV",
+      "source_version": "analysis-v3",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-debug-g04-r1": {
+      "job_id": "f3jLNHjYFLZu",
+      "cases": [
+        "bootstrap-102",
+        "bootstrap-103"
+      ],
+      "supersedes": "f3jL2CNEgk3y",
+      "source_version": "analysis-v3",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-debug-g00-r2": {
+      "job_id": "f3jLoknmUQNj",
+      "cases": [
+        "baseline-lr1e-5",
+        "baseline-lr1e-6"
+      ],
+      "source_version": "analysis-v7",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-debug-g01-r2": {
+      "job_id": "f3jLon79KQR5",
+      "cases": [
+        "baseline-lr5e-6",
+        "noise-1e-4"
+      ],
+      "source_version": "analysis-v7",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-debug-g02-r2": {
+      "job_id": "f3jLooVWSURD",
+      "cases": [
+        "noise-1e-3",
+        "noise-1e-2"
+      ],
+      "source_version": "analysis-v7",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-debug-g03-r2": {
+      "job_id": "f3jLopxdKEqV",
+      "cases": [
+        "noise-1e-1",
+        "bootstrap-101"
+      ],
+      "source_version": "analysis-v7",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-debug-g04-r2": {
+      "job_id": "f3jLorGEgcRV",
+      "cases": [
+        "bootstrap-102",
+        "bootstrap-103"
+      ],
+      "source_version": "analysis-v7",
+      "minutes": 30,
+      "queue": "pdebug"
+    }
+  },
+  "cancelled_analysis_continuations": [
+    "f3jL2CN4Jq5Z",
+    "f3jL2CMj2zR5",
+    "f3jL2CMeb2a3",
+    "f3jL2CMuQuPV",
+    "f3jL2CNEgk3y"
+  ],
+  "analysis_debug_note": "Batch continuations were queued with several-hour estimates after original allocations expired. Replaced queued jobs with30min pdebug allocations; identical frozen analysis code reuses completed geometry and row caches. No running job was canceled.",
+  "geometry_debug_jobs": {
+    "tar-geometry-debug-g06-r1": {
+      "job_id": "f3jLRdNzeTbm",
+      "cases": [
+        "deep-lr5e-6",
+        "long-lr5e-6"
+      ],
+      "supersedes": "f3jKoZox5SMd",
+      "source_version": "analysis-v3",
+      "geometry_only": true,
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-geometry-debug-g07-r1": {
+      "job_id": "f3jLRdPJSJyu",
+      "cases": [
+        "long-lr1e-5",
+        "long-lr1e-6"
+      ],
+      "supersedes": "f3jL2AKxx38T",
+      "source_version": "analysis-v3",
+      "geometry_only": true,
+      "minutes": 30,
+      "queue": "pdebug"
+    }
+  },
+  "cancelled_new_analysis_jobs": [
+    "f3jKoZox5SMd",
+    "f3jL2AKxx38T"
+  ],
+  "geometry_debug_followup": "Complete resumable geometry for these four cases, then submit full group mode for surfaces, broad frames, and reports. Geometry-only status is not complete analysis.",
+  "profile_rendering_note": "Both v5 pilot numeric caches validate. LR1e-6 segfaulted in Matplotlib after numerical completion; rendering is now a separate CPU process. Frozen v6 math is byte-identical to v5; cached numerical source identity is preserved.",
+  "profile_process_protocol": "Numerical values and CPU rendering run in separate processes; complete validated values are reused after rendering failures. Mathematical source bytes remain frozen v5.",
+  "landscape_transfer_protocol": "After geometry completes, full-landscape resumptions may use v7: bit-preserving bounded CPU materialization for basis transfers only. Existing cached values and directions stay unchanged. Incomplete geometry continues with v3; profile math remains frozen v5/v6.",
+  "comparison_report_source": "source/jobs/comparison-v6/misc/tar_compute_compare.py"
 }

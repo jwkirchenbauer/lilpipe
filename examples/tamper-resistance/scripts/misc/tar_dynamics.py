@@ -640,6 +640,35 @@ def geometry(study, settings):
     )
 
 
+def _basis_to_device(mapped, device, chunk_elements=4 * 1024 * 1024):
+    """Copy two FP32 basis rows through bounded, materialized CPU buffers."""
+    import time
+
+    import torch
+
+    if mapped.dtype != np.float32 or mapped.ndim != 2 or mapped.shape[0] != 2:
+        raise ValueError("Basis must be an FP32 array with shape (2, N)")
+    if type(chunk_elements) is not int or chunk_elements < 1:
+        raise ValueError("Basis chunk size must be a positive integer")
+    basis = torch.empty(mapped.shape, dtype=torch.float32, device=device)
+    for row in range(mapped.shape[0]):
+        started = time.perf_counter()
+        for start in range(0, mapped.shape[1], chunk_elements):
+            stop = min(start + chunk_elements, mapped.shape[1])
+            # HIP must receive ordinary CPU memory rather than a cold file mmap.
+            host = np.array(mapped[row, start:stop], copy=True)
+            basis[row, start:stop].copy_(torch.from_numpy(host), non_blocking=False)
+            del host
+        if basis.device.type == "cuda":
+            print(
+                f"Loaded direction {row + 1}/2 "
+                f"({mapped.shape[1] * 4 / 2**30:.1f} GiB in "
+                f"{time.perf_counter() - started:.1f} s)",
+                flush=True,
+            )
+    return basis
+
+
 def surfaces(study, settings):
     import pandas as pd
     import torch
@@ -935,7 +964,7 @@ def surfaces(study, settings):
             continue
         print("Loading visualization basis:", plane, flush=True)
         mapped = np.load(study / "geometry" / f"{plane}-basis.npy", mmap_mode="r")
-        basis = torch.from_numpy(mapped).to("cuda:0")
+        basis = _basis_to_device(mapped, "cuda:0")
         for i, c0 in enumerate(coordinates):
             for c1 in coordinates:
                 key = point_key(plane, c0, c1)
@@ -1823,7 +1852,7 @@ def random_frames(study, settings):
             for i in range(0, len(fixed_rows), 2)
         ]
     mapped = np.load(study / "geometry/random-basis.npy", mmap_mode="r")
-    basis = torch.from_numpy(mapped).to("cuda:0")
+    basis = _basis_to_device(mapped, "cuda:0")
     frames = [
         (
             "defense",
@@ -1989,6 +2018,751 @@ def random_frames(study, settings):
     )
 
 
+def _profile_file_identity(path):
+    path = Path(path)
+    metadata = path.stat()
+    return {
+        "path": str(path.absolute()),
+        "resolved": str(path.resolve()),
+        "size": metadata.st_size,
+        "mtime_ns": metadata.st_mtime_ns,
+    }
+
+
+def _profile_inner(first, second, chunk=1024 * 1024):
+    """Reduce global dot products in FP64 without a global FP64 parameter copy."""
+    values = []
+    for name, value in first.items():
+        left, right = value.reshape(-1), second[name].reshape(-1)
+        for start in range(0, left.numel(), chunk):
+            a, b = (
+                left[start : start + chunk].double(),
+                right[start : start + chunk].double(),
+            )
+            values.append(float((a * b).sum()))
+    return math.fsum(values)
+
+
+def _profile_interpolate(anchor, delta, fraction, dtype=None):
+    # .float() aliases an FP32 anchor; allocate before an in-place add.
+    value = anchor.to(dtype=delta.dtype, copy=True)
+    value.add_(delta, alpha=fraction)
+    return value.to(dtype=anchor.dtype if dtype is None else dtype)
+
+
+def _profile_update_statistics(before, after, dtype=None, chunk=1024 * 1024):
+    """Measure saved or evaluation-cast motion without global FP64 copies."""
+    terms, changed = [], 0
+    left, right = before.reshape(-1), after.reshape(-1)
+    for start in range(0, left.numel(), chunk):
+        a, b = left[start : start + chunk], right[start : start + chunk]
+        if dtype is not None:
+            a, b = a.to(dtype), b.to(dtype)
+        difference = b.double() - a.double()
+        terms.append(float(difference.square().sum()))
+        changed += int(difference.count_nonzero())
+    return math.fsum(terms), changed
+
+
+def _profile_first_plane(delta, random, norm=None):
+    """Normalize the actual first update and the projected first random vector."""
+    norm = math.sqrt(_profile_inner(delta, delta)) if norm is None else norm
+    proof = {
+        "first_update_l2": norm,
+        "shared_random_raw_norm": math.sqrt(_profile_inner(random, random)),
+    }
+    if norm == 0:
+        return {**proof, "status": "skipped_zero_first_update"}
+    for value in delta.values():
+        value.div_(norm)
+    dot = _profile_inner(delta, random)
+    for name, value in random.items():
+        value.add_(delta[name], alpha=-dot)
+    residual = math.sqrt(_profile_inner(random, random))
+    proof.update(shared_random_dot_q0=dot, orthogonal_completion_raw_norm=residual)
+    if residual < 1e-12:
+        return {**proof, "status": "skipped_parallel_shared_direction"}
+    for value in random.values():
+        value.div_(residual)
+    proof.update(
+        q0_norm=math.sqrt(_profile_inner(delta, delta)),
+        q1_norm=math.sqrt(_profile_inner(random, random)),
+        q0_dot_q1=_profile_inner(delta, random),
+        status="fitted",
+    )
+    np.testing.assert_allclose(
+        [proof["q0_norm"], proof["q1_norm"], proof["q0_dot_q1"]],
+        [1, 1, 0],
+        atol=1e-5,
+        rtol=0,
+    )
+    return proof
+
+
+def _profile_barrier(rows, field):
+    """A sampled segment barrier relative to its higher endpoint, in nats."""
+    selected = [row for row in rows if 0 <= row["fraction"] <= 1]
+    endpoints = [row[field] for row in selected if row["fraction"] in (0, 1)]
+    if len(endpoints) != 2:
+        return None
+    return max(row[field] for row in selected) - max(endpoints)
+
+
+def _profile_loss_limits(rows):
+    values = [row[field] for row in rows for field in ("probe_loss", "minibatch_loss")]
+    low, high = min(values), max(values)
+    margin = max((high - low) * 0.04, 1e-4)
+    return low - margin, high + margin
+
+
+class _ProfileCache:
+    fields = {
+        "profiles": (
+            "update_step",
+            "fraction",
+            "signed_displacement",
+            "probe_loss",
+            "minibatch_loss",
+        ),
+        "grid": ("c0", "c1", "probe_loss", "minibatch_loss"),
+    }
+
+    def __init__(self, study, protocol):
+        import csv
+
+        root = Path(study) / "surfaces"
+        root.mkdir(exist_ok=True)
+        self.path = root / "step-profiles.json"
+        self.paths = {
+            "profiles": root / "step-profiles.csv",
+            "grid": root / "first-update-grid.csv",
+        }
+        serialized = json.dumps(
+            protocol, sort_keys=True, separators=(",", ":"), default=str
+        )
+        identity = hashlib.sha256(serialized.encode()).hexdigest()
+        existing = json.loads(self.path.read_text()) if self.path.exists() else {}
+        self.metadata = (
+            existing
+            if existing.get("identity") == identity
+            else {
+                "identity": identity,
+                "protocol": json.loads(serialized),
+                "state": "partial",
+                "steps": {},
+            }
+        )
+        self.metadata["state"] = "partial"
+        self.rows = {name: [] for name in self.paths}
+        for name, path in self.paths.items():
+            if existing.get("identity") == identity and path.exists():
+                with path.open(newline="") as stream:
+                    reader = csv.DictReader(stream)
+                    if reader.fieldnames != list(self.fields[name]):
+                        raise ValueError(f"Profile cache columns differ: {path}")
+                    self.rows[name] = [
+                        {key: float(row[key]) for key in self.fields[name]}
+                        for row in reader
+                    ]
+                if any(
+                    not math.isfinite(value)
+                    for row in self.rows[name]
+                    for value in row.values()
+                ):
+                    raise ValueError(f"Nonfinite cached profile values: {path}")
+            else:
+                self._write(name)
+        self.save()
+
+    def _write(self, name):
+        import csv
+
+        path = self.paths[name]
+        temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
+        with temporary.open("w", newline="") as stream:
+            writer = csv.DictWriter(stream, fieldnames=self.fields[name])
+            writer.writeheader()
+            writer.writerows(self.rows[name])
+        temporary.replace(path)
+
+    def append(self, name, row):
+        self.rows[name].append(row)
+        self._write(name)
+
+    def save(self):
+        dump(self.path, self.metadata)
+
+
+def _profile_plots(study, cache):
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    rows = cache.rows["profiles"]
+    figure, axes = plt.subplots(2, 4, figsize=(15, 7), sharex=True, sharey=True)
+    limits = _profile_loss_limits(rows)
+    for step, axis in enumerate(axes.flat, 1):
+        selected = sorted(
+            (row for row in rows if row["update_step"] == step),
+            key=lambda row: row["fraction"],
+        )
+        for field, label in (
+            ("probe_loss", "Fixed 10"),
+            ("minibatch_loss", "This update's batch"),
+        ):
+            axis.plot(
+                [row["fraction"] for row in selected],
+                [row[field] for row in selected],
+                ".-",
+                label=label,
+            )
+        axis.axvspan(0, 1, color="0.8", alpha=0.3)
+        axis.set(
+            title=f"Update {step}; raw L2 {cache.metadata['steps'][str(step)]['update_l2']:.4g}",
+            xlabel="Interpolation fraction t",
+            ylabel="CE (nats)",
+            ylim=limits,
+        )
+        axis.grid(alpha=0.2)
+    axes.flat[0].legend(fontsize=8)
+    figure.suptitle(
+        "Saved optimizer update segments: only t=0 and t=1 are actual optimizer states\nShaded [0,1] is interpolation; extensions to -1 and 2 are extrapolation",
+        fontsize=11,
+    )
+    figure.tight_layout(rect=(0, 0, 1, 0.92))
+    for extension in ("png", "pdf"):
+        figure.savefig(
+            study / f"early-update-profiles.{extension}", dpi=180, bbox_inches="tight"
+        )
+    plt.close(figure)
+    proof = cache.metadata["first_update_plane"]
+    figure, axes = plt.subplots(1, 2, figsize=(12, 5))
+    if proof["status"] == "fitted":
+        grid = cache.rows["grid"]
+        limits = _profile_loss_limits(grid)
+        x, y = np.linspace(-1, 1, 17), np.linspace(-125, 125, 17)
+        for axis, field, label in zip(
+            axes, ("probe_loss", "minibatch_loss"), ("Fixed 10", "Actual first batch")
+        ):
+            values = np.full((17, 17), np.nan)
+            for row in grid:
+                values[np.argmin(abs(y - row["c1"])), np.argmin(abs(x - row["c0"]))] = (
+                    row[field]
+                )
+            image = axis.contourf(
+                x,
+                y,
+                values,
+                levels=np.linspace(*limits, 18),
+                vmin=limits[0],
+                vmax=limits[1],
+                cmap="viridis",
+            )
+            axis.scatter([0], [0], c="white", edgecolors="black", label="Actual start")
+            if proof["endpoint_in_window"]:
+                axis.scatter(
+                    [proof["first_update_l2"]],
+                    [0],
+                    marker="*",
+                    s=100,
+                    c="red",
+                    label="Actual update 1",
+                )
+            endpoint = cache.metadata["steps"]["1"]["actual_after"][field]
+            axis.set(
+                title=f"{label}; separately measured endpoint CE {endpoint:.4f}",
+                xlabel="Actual first-update direction c0 (L2)",
+                ylabel="Orthogonal shared-random direction c1 (L2)",
+                xlim=(-1, 1),
+                ylim=(-125, 125),
+            )
+            axis.legend(fontsize=8)
+            figure.colorbar(image, ax=axis, label="CE (nats)")
+        suffix = (
+            ""
+            if proof["endpoint_in_window"]
+            else f"; endpoint c0={proof['first_update_l2']:.4g} lies outside this window"
+        )
+        figure.suptitle(
+            "First-update plane: q0 +/-1, q1 +/-125 L2; q0 differs between conditions; shared absolute CE colors"
+            + suffix,
+            fontsize=10,
+        )
+    else:
+        for axis in axes:
+            axis.set_axis_off()
+            axis.text(0.5, 0.5, proof["status"], transform=axis.transAxes, ha="center")
+        figure.suptitle("First-update direction fit skipped; no direction was invented")
+    figure.tight_layout(rect=(0, 0, 1, 0.92))
+    for extension in ("png", "pdf"):
+        figure.savefig(
+            study / f"first-update-landscape.{extension}", dpi=180, bbox_inches="tight"
+        )
+    plt.close(figure)
+
+
+def step_profiles(study, settings):
+    """Measure saved early update segments and a plane containing update one."""
+    import csv
+    import torch
+    from datasets import load_dataset
+    from safetensors import safe_open
+    from transformers import (
+        AutoModelForCausalLM,
+        AutoTokenizer,
+        DataCollatorForLanguageModeling,
+    )
+
+    study = Path(study)
+    device = torch.device("cuda:0")
+    torch.backends.cuda.matmul.allow_tf32 = False
+    reference = Path(settings.get("attack_anchor", study / "models/defense"))
+    checkpoints = [reference] + [
+        study / "models/attack" / f"checkpoint-{step}" for step in range(1, 9)
+    ]
+    shared_path = Path(settings["shared_random_basis"])
+    fractions = np.linspace(-1, 2, 25).tolist()
+    fixed_indices, revision = settings.get("fixed_source_indices"), settings.get(
+        "forget_revision"
+    )
+    if fixed_indices is None or len(fixed_indices) != 10 or not revision:
+        raise ValueError(
+            "Step profiles require the frozen ten fixed indices and corpus revision"
+        )
+    records = []
+    with (study / "models/attack/observed-batches.jsonl").open() as stream:
+        for line in stream:
+            record = json.loads(line)
+            records.append(record)
+            if len(records) == 8:
+                break
+    if [record["step"] for record in records] != list(range(1, 9)):
+        raise ValueError("First eight recorded optimizer batches are required")
+    for record in records:
+        actual_hash = hashlib.sha256(
+            json.dumps(record["batch"], sort_keys=True).encode()
+        ).hexdigest()
+        if actual_hash != record["batch_sha256"]:
+            raise ValueError(
+                f"Recorded minibatch hash differs at update {record['step']}"
+            )
+
+    def mapping(path):
+        index = path / "model.safetensors.index.json"
+        return json.loads(index.read_text())["weight_map"] if index.exists() else None
+
+    input_files = [
+        shared_path,
+        shared_path.parent / "geometry.json",
+        study / "models/attack/observed-batches.jsonl",
+    ]
+    input_files.extend(
+        path
+        for path in sorted(reference.iterdir())
+        if path.is_file() and path.suffix in (".json", ".model", ".txt", ".jinja")
+    )
+    for path in checkpoints:
+        weights = mapping(path)
+        if weights is None:
+            input_files.append(path / "model.safetensors")
+        else:
+            input_files.extend(
+                path / filename for filename in sorted(set(weights.values()))
+            )
+        if (path / "model.safetensors.index.json").exists():
+            input_files.append(path / "model.safetensors.index.json")
+    protocol = {
+        "version": 2,
+        "source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "settings": settings,
+        "inputs": [_profile_file_identity(path) for path in input_files],
+        "batch_hashes": {
+            str(record["step"]): record["batch_sha256"] for record in records
+        },
+        "checkpoint_paths": {
+            str(step): str(path) for step, path in enumerate(checkpoints)
+        },
+        "fractions": fractions,
+        "grid_c0": np.linspace(-1, 1, 17).tolist(),
+        "grid_c1": np.linspace(-125, 125, 17).tolist(),
+        "fixed_source_indices": fixed_indices,
+        "forget_revision": revision,
+        "tokenizer_source": str(reference),
+        "torch_version": torch.__version__,
+        "precision": "Raw mixed-dtype saved anchors; FP32 interpolation/directions; copy into actual model evaluation dtypes, matching surfaces; chunked FP64 norms; eager attention",
+        "coordinate_convention": "signed_displacement/update_l2/q0 use raw saved displacement; evaluated_update_l2 measures separately cast endpoints",
+        "endpoint_convention": "Fractions 0 and 1 copy exact saved endpoints into model dtypes; interior points interpolate raw saved values. Arithmetic endpoint-cast roundoff is recorded separately.",
+        "evaluation_map": "Every raw point is cast into the evaluation parameter dtypes before CE. This map can be piecewise constant, so distinct raw updates can evaluate identically.",
+        "interpretation": "Only interpolation endpoints are saved optimizer states; q0 is condition-specific. Sampled barriers are not continuous-path or global barriers.",
+    }
+    cache = _ProfileCache(study, protocol)
+    cache.metadata.update(
+        source_sha256=protocol["source_sha256"],
+        fixed_source_indices=fixed_indices,
+        forget_revision=revision,
+    )
+    cache.save()
+    model = (
+        AutoModelForCausalLM.from_pretrained(
+            reference, dtype=torch.bfloat16, attn_implementation="eager"
+        )
+        .to(device)
+        .eval()
+    )
+    parameters = dict(model.named_parameters())
+    cache.metadata["evaluation_parameter_dtypes"] = {
+        name: str(parameter.dtype) for name, parameter in parameters.items()
+    }
+    evaluation_dtype_scalars = {}
+    for parameter in parameters.values():
+        dtype = str(parameter.dtype)
+        evaluation_dtype_scalars[dtype] = (
+            evaluation_dtype_scalars.get(dtype, 0) + parameter.numel()
+        )
+    cache.metadata["evaluation_dtype_scalars"] = evaluation_dtype_scalars
+    cache.save()
+    offsets, total = {}, 0
+    for name, parameter in parameters.items():
+        offsets[name], total = total, total + parameter.numel()
+    shared = np.load(shared_path, mmap_mode="r", allow_pickle=False)
+    if shared.dtype != np.float32 or shared.shape != (2, total):
+        raise ValueError("Shared random basis does not match the model")
+    source_metadata = json.loads((shared_path.parent / "geometry.json").read_text())
+    if (
+        source_metadata["names"] != list(parameters)
+        or source_metadata["offsets"] != offsets
+        or source_metadata["shapes"]
+        != {name: list(value.shape) for name, value in parameters.items()}
+    ):
+        raise ValueError("Shared random basis parameter layout differs")
+    tokenizer = AutoTokenizer.from_pretrained(reference)
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+    corpus = load_dataset(
+        "cais/wmdp-bio-forget-corpus", split="train", revision=revision
+    )
+    fixed_rows = [
+        tokenizer(corpus[index]["text"], max_length=512, truncation=True)
+        for index in fixed_indices
+    ]
+    cache.metadata["fixed_source_indices"] = fixed_indices
+    cache.metadata["forget_revision"] = revision
+    cache.metadata["fixed_text_sha256"] = [
+        hashlib.sha256(corpus[index]["text"].encode()).hexdigest()
+        for index in fixed_indices
+    ]
+    probe_path = study / "surfaces/probes.json"
+    if (
+        probe_path.exists()
+        and json.loads(probe_path.read_text()).get("fixed_source_indices")
+        != fixed_indices
+    ):
+        raise ValueError("Existing fixed probe indices differ from the frozen study")
+    collator = DataCollatorForLanguageModeling(tokenizer, mlm=False)
+    fixed = [
+        {
+            key: value.to(device)
+            for key, value in collator(fixed_rows[start : start + 2]).items()
+        }
+        for start in range(0, 10, 2)
+    ]
+    minibatches = [
+        {
+            key: torch.tensor(value, device=device)
+            for key, value in record["batch"].items()
+            if key in ("input_ids", "attention_mask", "labels")
+        }
+        for record in records
+    ]
+
+    @contextlib.contextmanager
+    def handles(path):
+        weights = mapping(path) or {name: "model.safetensors" for name in parameters}
+        with contextlib.ExitStack() as stack:
+            opened = {
+                filename: stack.enter_context(
+                    safe_open(path / filename, framework="pt", device="cpu")
+                )
+                for filename in set(weights.values())
+            }
+
+            def tensor(name):
+                value = opened[weights[name]].get_tensor(name)
+                if value.dtype not in (torch.bfloat16, torch.float32):
+                    raise ValueError(
+                        "Step profiles require saved BF16 or FP32 floating weights"
+                    )
+                return value.clone()
+
+            yield tensor
+
+    @torch.inference_mode()
+    def load(path, capture=False):
+        center = {}
+        with handles(path) as tensor:
+            for name, parameter in parameters.items():
+                value = tensor(name).to(device)
+                parameter.copy_(value)
+                if capture:
+                    center[name] = value
+        return center
+
+    @torch.inference_mode()
+    def losses(step):
+        return {
+            "probe_loss": float(
+                np.mean([float(model(**batch).loss) for batch in fixed])
+            ),
+            "minibatch_loss": float(model(**minibatches[step - 1]).loss),
+        }
+
+    @torch.inference_mode()
+    def put(center, first, c0, second=None, c1=0):
+        for name, parameter in parameters.items():
+            value = _profile_interpolate(
+                center[name], first[name], c0, dtype=first[name].dtype
+            )
+            if second is not None:
+                value.add_(second[name], alpha=c1)
+            parameter.copy_(value)
+
+    actual_rows = []
+    actual_path = study / "surfaces/actual-losses.csv"
+    if actual_path.exists():
+        with actual_path.open(newline="") as stream:
+            actual_rows = list(csv.DictReader(stream))
+    for step in range(1, 9):
+        center = load(checkpoints[step - 1], capture=True)
+        delta, mismatches, before_mismatches, changed, evaluated_changed = (
+            {},
+            0,
+            0,
+            0,
+            0,
+        )
+        raw_norm_terms, evaluated_norm_terms = [], []
+        saved_dtype_scalars = {"before": {}, "after": {}}
+        with handles(checkpoints[step]) as tensor:
+            for name, parameter in parameters.items():
+                after = tensor(name).to(device=device)
+                # .float() can alias either FP32 source. Subtract out of place.
+                delta[name] = after.float() - center[name].float()
+                raw_squared, raw_count = _profile_update_statistics(center[name], after)
+                evaluated_squared, evaluated_count = _profile_update_statistics(
+                    center[name], after, dtype=parameter.dtype
+                )
+                raw_norm_terms.append(raw_squared)
+                evaluated_norm_terms.append(evaluated_squared)
+                changed += raw_count
+                evaluated_changed += evaluated_count
+                for label, value in (("before", center[name]), ("after", after)):
+                    dtype = str(value.dtype)
+                    saved_dtype_scalars[label][dtype] = (
+                        saved_dtype_scalars[label].get(dtype, 0) + value.numel()
+                    )
+                before_mismatches += int(
+                    torch.count_nonzero(
+                        _profile_interpolate(
+                            center[name], delta[name], 0, dtype=parameter.dtype
+                        )
+                        != center[name].to(parameter.dtype)
+                    )
+                )
+                mismatches += int(
+                    torch.count_nonzero(
+                        _profile_interpolate(
+                            center[name], delta[name], 1, dtype=parameter.dtype
+                        )
+                        != after.to(parameter.dtype)
+                    )
+                )
+        norm = math.sqrt(math.fsum(raw_norm_terms))
+        evaluated_norm = math.sqrt(math.fsum(evaluated_norm_terms))
+        completed = {
+            (row["update_step"], row["fraction"]) for row in cache.rows["profiles"]
+        }
+        for fraction in fractions:
+            if (step, fraction) in completed:
+                continue
+            if fraction in (0, 1):
+                load(checkpoints[step - 1 if fraction == 0 else step])
+            else:
+                put(center, delta, fraction)
+            row = {
+                "update_step": step,
+                "fraction": fraction,
+                "signed_displacement": fraction * norm,
+                **losses(step),
+            }
+            if not all(math.isfinite(value) for value in row.values()):
+                raise ValueError("Nonfinite early-update loss")
+            cache.append("profiles", row)
+            print(f"Update {step} fraction {fraction:g}", flush=True)
+        selected = [row for row in cache.rows["profiles"] if row["update_step"] == step]
+        checks = cache.metadata["steps"].get(str(step), {})
+        if not checks:
+            load(checkpoints[step - 1])
+            before_loss = losses(step)
+            load(checkpoints[step])
+            after_loss = losses(step)
+            checks = {
+                "update_l2": norm,
+                "raw_update_l2": norm,
+                "evaluated_update_l2": evaluated_norm,
+                "changed_scalars": changed,
+                "changed_fraction": changed / total,
+                "raw_changed_scalars": changed,
+                "raw_changed_fraction": changed / total,
+                "evaluated_changed_scalars": evaluated_changed,
+                "evaluated_changed_fraction": evaluated_changed / total,
+                "saved_dtype_scalars": saved_dtype_scalars,
+                "t0_weights_exact": True,
+                "t1_weights_exact": True,
+                "arithmetic_t0_evaluated_cast_mismatches": before_mismatches,
+                "arithmetic_t1_evaluated_cast_mismatches": mismatches,
+                "actual_before": before_loss,
+                "actual_after": after_loss,
+                "endpoint_errors": {},
+                "sampled_barriers": {},
+            }
+            for fraction, expected in ((0, before_loss), (1, after_loss)):
+                row = next(row for row in selected if row["fraction"] == fraction)
+                for field in ("probe_loss", "minibatch_loss"):
+                    error = abs(row[field] - expected[field])
+                    checks["endpoint_errors"][f"t{fraction}_{field}"] = error
+                    if error > 1e-4:
+                        raise ValueError(
+                            "Interpolated and separately loaded endpoint CE differ"
+                        )
+            checks["sampled_barriers"] = {
+                field: _profile_barrier(selected, field)
+                for field in ("probe_loss", "minibatch_loss")
+            }
+            checks["recorded_train_before_ce_error"] = (
+                before_loss["minibatch_loss"] - records[step - 1]["loss_before_update"]
+            )
+            if "loss_after_update" in records[step - 1]:
+                checks["recorded_train_after_ce_error"] = (
+                    after_loss["minibatch_loss"]
+                    - records[step - 1]["loss_after_update"]
+                )
+            checks["training_ce_note"] = (
+                "Recorded CE uses the trainer's mixed parameter dtypes and training mode; this analysis evaluates cast saved endpoints in eval mode. Signed differences are diagnostic, not equality assertions."
+            )
+            cache.metadata["steps"][str(step)] = checks
+            cache.save()
+        for row in actual_rows:
+            if row.get("phase") == "attack" and int(row["step"]) in (step - 1, step):
+                endpoint = (
+                    checks["actual_before"]
+                    if int(row["step"]) == step - 1
+                    else checks["actual_after"]
+                )
+                error = abs(endpoint["probe_loss"] - float(row["probe_loss"]))
+                checks.setdefault("actual_losses_csv_errors", {})[row["step"]] = error
+                if error > 1e-4:
+                    raise ValueError(
+                        "Fixed-probe endpoint disagrees with actual-losses.csv"
+                    )
+        cache.save()
+        if step == 1:
+            previous_plane = cache.metadata.get("first_update_plane", {})
+            random = {}
+            if norm:
+                for name, parameter in parameters.items():
+                    random[name] = torch.empty_like(delta[name])
+                    flat = random[name].reshape(-1)
+                    offset = offsets[name]
+                    for start in range(0, flat.numel(), 1024 * 1024):
+                        stop = min(start + 1024 * 1024, flat.numel())
+                        host = np.array(
+                            shared[0, offset + start : offset + stop], copy=True
+                        )
+                        flat[start:stop].copy_(torch.from_numpy(host).to(device))
+                proof = _profile_first_plane(delta, random, norm=norm)
+            else:
+                proof = {"status": "skipped_zero_first_update", "first_update_l2": 0}
+            proof.update(
+                q0_radius=1.0,
+                q1_radius=125.0,
+                shared_random_row=0,
+                endpoint_coordinates=[norm, 0],
+                evaluated_first_update_l2=evaluated_norm,
+                endpoint_in_window=norm <= 1,
+                anchor=str(reference),
+                after_checkpoint=str(checkpoints[1]),
+                q0_definition="FP32 normalized raw saved first optimizer update; condition-specific; evaluations cast model parameters",
+                q1_definition="Shared random row 0 projected orthogonally to q0 and normalized",
+            )
+            cache.metadata["first_update_plane"] = proof
+            cache.save()
+            if proof["status"] == "fitted":
+                put(center, delta, norm, random, 0)
+                endpoint_mismatches = 0
+                with handles(checkpoints[1]) as tensor:
+                    for name, parameter in parameters.items():
+                        endpoint_mismatches += int(
+                            torch.count_nonzero(
+                                parameter
+                                != tensor(name).to(device=device, dtype=parameter.dtype)
+                            )
+                        )
+                proof["plane_endpoint_bf16_mismatches"] = endpoint_mismatches
+                proof["plane_endpoint_evaluated_cast_mismatches"] = endpoint_mismatches
+                plane_endpoint_loss = previous_plane.get("plane_endpoint_losses")
+                if plane_endpoint_loss is None:
+                    plane_endpoint_loss = losses(1)
+                proof["plane_endpoint_losses"] = plane_endpoint_loss
+                proof["plane_endpoint_ce_errors"] = {
+                    field: abs(
+                        plane_endpoint_loss[field] - checks["actual_after"][field]
+                    )
+                    for field in ("probe_loss", "minibatch_loss")
+                }
+                proof["endpoint_comparison_convention"] = (
+                    "Normalized FP32 raw-axis reconstruction cast into model evaluation dtypes, versus separately loaded saved endpoint cast into those same dtypes. Casting-boundary roundoff is measured, not silently replaced."
+                )
+                cache.save()
+                done = {(row["c0"], row["c1"]) for row in cache.rows["grid"]}
+                for c0 in protocol["grid_c0"]:
+                    for c1 in protocol["grid_c1"]:
+                        if (c0, c1) in done:
+                            continue
+                        put(center, delta, c0, random, c1)
+                        row = {"c0": c0, "c1": c1, **losses(1)}
+                        if not all(math.isfinite(value) for value in row.values()):
+                            raise ValueError("Nonfinite first-update landscape loss")
+                        cache.append("grid", row)
+                    print(f"First-update plane c0={c0:g}", flush=True)
+                grid_center = next(
+                    row
+                    for row in cache.rows["grid"]
+                    if row["c0"] == 0 and row["c1"] == 0
+                )
+                proof["center_errors"] = {
+                    field: abs(grid_center[field] - checks["actual_before"][field])
+                    for field in ("probe_loss", "minibatch_loss")
+                }
+                if max(proof["center_errors"].values()) > 1e-4:
+                    raise ValueError(
+                        "First-update landscape center disagrees with actual anchor"
+                    )
+                cache.save()
+            del random
+        del center, delta, after
+        gc.collect()
+        torch.cuda.empty_cache()
+    cache.metadata["state"] = "complete"
+    cache.metadata["endpoint_ce_tolerance"] = 1e-4
+    cache.metadata["source_sha256"] = protocol["source_sha256"]
+    cache.metadata["memory_note"] = (
+        "At most one raw mixed BF16/FP32 anchor, one FP32 update, and one FP32 random row; no global FP64 weights or second random row on GPU."
+    )
+    cache.save()
+    _profile_plots(study, cache)
+
+
 def main():
     import faulthandler
     import signal
@@ -1998,7 +2772,8 @@ def main():
     faulthandler.dump_traceback_later(300, repeat=True)
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "stage", choices=("geometry", "surfaces", "report", "random-frames")
+        "stage",
+        choices=("geometry", "surfaces", "report", "random-frames", "step-profiles"),
     )
     parser.add_argument("study", type=Path)
     args = parser.parse_args()
@@ -2008,6 +2783,7 @@ def main():
         "surfaces": surfaces,
         "report": report,
         "random-frames": random_frames,
+        "step-profiles": step_profiles,
     }[args.stage](args.study, settings)
 
 

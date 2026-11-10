@@ -33,11 +33,11 @@ FAMILIES = {
     "data": ["baseline-lr1e-5", "bootstrap-101", "bootstrap-102", "bootstrap-103"],
 }
 LABELS = {
-    "baseline-lr1e-6": "k16, 125; LR 1e-6",
+    "baseline-lr1e-6": "Baseline; LR 1e-6",
     "long-lr1e-6": "k16, 500; LR 1e-6",
     "deep-lr1e-6": "k64, 125; LR 1e-6",
-    "baseline-lr1e-5": "Clean; LR 1e-5",
-    "baseline-lr5e-6": "Clean; LR 5e-6",
+    "baseline-lr1e-5": "Baseline; LR 1e-5",
+    "baseline-lr5e-6": "Baseline; LR 5e-6",
 }
 
 
@@ -1538,7 +1538,7 @@ def first_update_figure(records, validations, family, names, output):
         differences, relative=True
     )
     absolute_norm, delta_norm = Normalize(*limits), Normalize(*delta_limits)
-    figure = plt.figure(figsize=(3.7 * len(names) + 0.8, 8.4))
+    figure = plt.figure(figsize=(3.7 * len(names) + 0.8, 9.3))
     for column, name in enumerate(names):
         record, grid = records.get(name), grids.get(name)
         proof = (
@@ -1643,9 +1643,9 @@ def first_update_figure(records, validations, family, names, output):
             axis.set(
                 xlim=(-1, 1),
                 ylim=(-125, 125),
-                xlabel="Raw saved-update q0 coefficient (L2)",
-                ylabel="Orthogonal random q1 coefficient (L2)",
             )
+            axis.set_xlabel("Raw update q0 (L2)", fontsize=8, labelpad=3)
+            axis.set_ylabel("Random q1 (L2)", fontsize=8, labelpad=3)
             axis.set_title(title, fontsize=8, pad=12)
             axis.tick_params(labelsize=7)
     top_bar = figure.add_axes((0.94, 0.57, 0.012, 0.25))
@@ -1665,7 +1665,7 @@ def first_update_figure(records, validations, family, names, output):
         fontsize=10,
     )
     figure.subplots_adjust(
-        left=0.04, right=0.90, bottom=0.09, top=0.85, wspace=0.3, hspace=0.3
+        left=0.04, right=0.90, bottom=0.09, top=0.85, wspace=0.3, hspace=0.5
     )
     save_figure(figure, output)
     plt.close(figure)

@@ -1,0 +1,194 @@
+{
+  "completed_utc": "2026-11-10T07:28:41.583927+00:00",
+  "description": "Checksums of current report, measurements, movies, and observations. Source/config checksums are in study.json. Large weight and basis files are verified by the geometry checks instead of rehashed here.",
+  "files": {
+    "actual-trajectory.csv": {
+      "sha256": "3ca0771b2f03b853559b226f9905330e71587e5761663e1e1aca905c6075d7ac",
+      "bytes": 1347
+    },
+    "attack-landscape-evolution.pdf": {
+      "sha256": "5638e800d9a5f10e64b4062dd6719d16ecc76d127f13ec6161935e9efa73e978",
+      "bytes": 38410
+    },
+    "attack-landscape-evolution.png": {
+      "sha256": "a05ee56cfa6746ca305ddd45754e36eaaa401539e78ae6e5c50be1d9a7c8561e",
+      "bytes": 788167
+    },
+    "attack-paths.pdf": {
+      "sha256": "85a091a22ffc45702015ae4ea5ca57bd64b09080fe2322f6035d2bc4c09757e1",
+      "bytes": 25900
+    },
+    "attack-paths.png": {
+      "sha256": "63e88ad1b62ca11c5371a6d20970c6bf693e140762ef300cb10953b62b35f609",
+      "bytes": 196184
+    },
+    "capability-scores.csv": {
+      "sha256": "65fb04dc1b9f4a8570a3af6ab69343dcfca96b42d29934f3bb37276dc646728b",
+      "bytes": 1261
+    },
+    "center-validation.json": {
+      "sha256": "2e1aa53ebf21f4d2ba045228a96aceae1da65c6a312e16847f94a7cfda1e50ad",
+      "bytes": 267
+    },
+    "defense-landscape-evolution.pdf": {
+      "sha256": "be9d2f2a036e6f7b8f381595362b6a55382fb87952b77ac712c59541b698f72b",
+      "bytes": 39615
+    },
+    "defense-landscape-evolution.png": {
+      "sha256": "f09575d4f789595fe1a444d32a4a13cc1ec945bf870c4eb91be33a6acda34a3c",
+      "bytes": 668608
+    },
+    "early-comparison.csv": {
+      "sha256": "a587ba5d6876992c04ee16504bf667d4a6a7bae898c1e0d2cbb83cf17fdabf8c",
+      "bytes": 368
+    },
+    "final-validation.json": {
+      "sha256": "c299d290d9cdd165eef2a1f913d82b6b32c60a89fa70908431e9e8507d2cbdfe",
+      "bytes": 658
+    },
+    "geometry/geometry.json": {
+      "sha256": "9bc62cf3bff0ec09c2ed8cab62bd246b03e1a75e1cf1a73a2216f40e7c7d1c39",
+      "bytes": 69195
+    },
+    "local-landscape-evolution.gif": {
+      "sha256": "acb81a9234edcab2b70dd6148c23615d6107eeaa91021acad33bfb1f18f8ec63",
+      "bytes": 466553
+    },
+    "local-minibatch-landscapes.pdf": {
+      "sha256": "1d61884f924722b355e4533b64707eee3c8dca4be566d175918d9203b76afce5",
+      "bytes": 26116
+    },
+    "local-minibatch-landscapes.png": {
+      "sha256": "d92f15e02b6cc9c8d45efd4fe5dbcc2b547305bfb23d0c7921a6878dff1b7350",
+      "bytes": 296573
+    },
+    "loss-and-capability.pdf": {
+      "sha256": "ee4b53d0f63873de09e034fb9a1ee38e18d08992cb839e99ec7a98a17a5ba7f7",
+      "bytes": 23848
+    },
+    "loss-and-capability.png": {
+      "sha256": "4ca529f66a6da01a8daa72c9e7eef81d22dd65b3ed9773828f3e69371088d12b",
+      "bytes": 172564
+    },
+    "minibatch-dynamics.pdf": {
+      "sha256": "f8d64e87ebbd94562c441772c1058995455577db23c14a09375eae67f037c3f3",
+      "bytes": 33526
+    },
+    "minibatch-dynamics.png": {
+      "sha256": "8f9ec0b0904fbf25c6e691cb86d77032760f4e265d15ac48caa349bb7b76ef63",
+      "bytes": 237938
+    },
+    "minibatch-landscapes.pdf": {
+      "sha256": "4370cf5c99f7c1086a60b4d7612ad371a5c045c2049dfbb00dacd7142f7a5e02",
+      "bytes": 33536
+    },
+    "minibatch-landscapes.png": {
+      "sha256": "b7f51ee8bbc9fe22b4d1d8d619302c5af5251a5f60c2c6a16ca974ffd2f981ec",
+      "bytes": 221383
+    },
+    "minibatch-recovery.csv": {
+      "sha256": "83ce5f1255a2cad10289c1b3ec63a19eb054d8f9ddf95fe30b6e287ffcf0c0ce",
+      "bytes": 816
+    },
+    "models/attack/observed-batches.jsonl": {
+      "sha256": "00544ed72a4ccef1c98ed9fa010cb3739c1af7252523fc8cb8e7219abeb213e3",
+      "bytes": 815981
+    },
+    "models/defense/observed-batches.jsonl": {
+      "sha256": "f0a8e913ebbaabaaf239099ae5e7c8d9592224165b406efa7f7e340d4b495169",
+      "bytes": 17289730
+    },
+    "observation-validation.json": {
+      "sha256": "d94a3f6a88fade283b57fb1f2ca75038601dd28766905a20957fd7b66801e09b",
+      "bytes": 6049
+    },
+    "projection-fidelity.pdf": {
+      "sha256": "3852975543ed4e36ea2bee058266de3155c319ce80651adb0279fc8bf2fb0a12",
+      "bytes": 26253
+    },
+    "projection-fidelity.png": {
+      "sha256": "bce322c4ee410d19bf22b641eb5d12322c04b86e73290c6c6ed6b21563ab56b9",
+      "bytes": 173796
+    },
+    "projection-quality.csv": {
+      "sha256": "692e3d954cd185c1b5c0f948980a878da8db6a319075704e7e07785bc6b08781",
+      "bytes": 6399
+    },
+    "random-landscape-evolution.gif": {
+      "sha256": "51f66b15a323bee483eaf657c7e45e3c4438d72735dafd6ef13e54f2092ec0bc",
+      "bytes": 213074
+    },
+    "random-landscape-evolution.pdf": {
+      "sha256": "b121d0c87626fb0eda31ff9a15ab752a6d6def5976cb2a947c1d8133924d3541",
+      "bytes": 44980
+    },
+    "random-landscape-evolution.png": {
+      "sha256": "0512c76f74881c2e3bbb905aac28ec6b74f31f58be308af40e6f5e9267ecbd1d",
+      "bytes": 930877
+    },
+    "report.md": {
+      "sha256": "e69bfb006561e003eb5b89b62d6c19c234a9839e5a28722e5cae5d5389f45bf0",
+      "bytes": 8615
+    },
+    "status.json": {
+      "sha256": "45e20cfe7a0920d6663180d832353cd9a7f46fc3845a1386a79b1df3bd1aed7f",
+      "bytes": 215
+    },
+    "study.json": {
+      "sha256": "fe2ea60a9a041246f4400b18d8bff3a1ece476bfa41bc31caf907b5a3d155899",
+      "bytes": 9575
+    },
+    "summary.json": {
+      "sha256": "9d90df319ba61810a532341f8a423dce58b332111dee2015f04b8aa55cc24827",
+      "bytes": 871
+    },
+    "surfaces/actual-losses.csv": {
+      "sha256": "f8132d9d6da25a412713cdea9c331ecbe12cf3b6c45002b0b967634afa575748",
+      "bytes": 1599
+    },
+    "surfaces/fixed-grids.csv": {
+      "sha256": "e685011b79210645dab23043fbb6a138901385583da077cef26b5c835fbed97f",
+      "bytes": 121353
+    },
+    "surfaces/local-grids.csv": {
+      "sha256": "c554c7145a872eb1da3d399d546745291b43024a315f2075f9eb850e7898ba05",
+      "bytes": 100906
+    },
+    "surfaces/minibatch-losses.npz": {
+      "sha256": "41ae2d99e0d1037679230188bb59693391088fa32ee6fc487eaca3cb0eefb639",
+      "bytes": 13924
+    },
+    "surfaces/probes.json": {
+      "sha256": "8927ffc1bcbf066d195fd910c312363edee9854f4906cb012c5cc8676b494ca8",
+      "bytes": 2499
+    },
+    "surfaces/projected-losses.csv": {
+      "sha256": "074250702b6874aa941c6c756bfbf1af493bc83196ecfad87feb5f6ac4cd347e",
+      "bytes": 5022
+    },
+    "surfaces/random-evolution-validation.json": {
+      "sha256": "4a3494f7dc563d07363db4722e7dea92e71a6fdf55d0dd963ae666d2f4646d42",
+      "bytes": 143
+    },
+    "surfaces/random-evolution.csv": {
+      "sha256": "e053bfb8ea01a36b4628eb3f4952e69f63ef7d9eaafc4a2d2e884f7345c39e0f",
+      "bytes": 26311
+    },
+    "surfaces/validation.json": {
+      "sha256": "e7724d3cb29498ad09269c423a6aec60a7e417e16c86fa015e0a0ca676a0f477",
+      "bytes": 212
+    },
+    "surfaces-and-checkpoints.pdf": {
+      "sha256": "286e433b83f71a432693ec028dfdee693713fcc547c22f76c5c74253539f6d37",
+      "bytes": 55231
+    },
+    "surfaces-and-checkpoints.png": {
+      "sha256": "cc2f1e67ed04c81c470ed51e243bdfc6bc7a22655ba77bda8231e9f129257848",
+      "bytes": 724177
+    },
+    "training-validation.json": {
+      "sha256": "55539f217af634b204bdfcd34331fb085cb081b8bfacf62a6019327a14f2fc21",
+      "bytes": 365
+    }
+  }
+}

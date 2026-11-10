@@ -2,6 +2,9 @@
 
 import copy
 import gc
+import json
+import os
+from collections import Counter
 from collections.abc import Mapping
 from functools import partial
 from types import MethodType
@@ -15,6 +18,50 @@ from trainers.ul_me import MaxEntTrainer
 from trainers.utils import BalancedSourceSamplerv2
 
 ROLE_FIELDS = ("input_ids", "attention_mask", "labels")
+
+
+def log_device_assignment(model, phase, *, accelerator=None, inputs=None):
+    """Report actual placement and check the configured layer map when debugging."""
+    parameter_devices = Counter()
+    for parameter in model.parameters():
+        parameter_devices[str(parameter.device)] += parameter.numel()
+    device_map = getattr(model, "hf_device_map", {})
+    for name, target in device_map.items():
+        expected = torch.device(f"cuda:{target}" if isinstance(target, int) else target)
+        module = model.get_submodule(name) if name else model
+        actual = {parameter.device for parameter in module.parameters()}
+        if actual and actual != {expected}:
+            raise RuntimeError(
+                f"{phase}: module {name!r} is on {actual}, expected {expected}"
+            )
+    report = {
+        "phase": phase,
+        "pid": os.getpid(),
+        "ranks": {
+            key: os.environ.get(key)
+            for key in ("RANK", "LOCAL_RANK", "WORLD_SIZE", "SLURM_PROCID")
+        },
+        "visible_devices": torch.cuda.device_count(),
+        "current_device": (
+            torch.cuda.current_device() if torch.cuda.is_available() else None
+        ),
+        "parameter_counts_by_device": dict(parameter_devices),
+        "hf_device_map": {key: str(value) for key, value in device_map.items()},
+    }
+    if accelerator is not None:
+        report["accelerator"] = {
+            "device": str(accelerator.device),
+            "process_index": accelerator.process_index,
+            "num_processes": accelerator.num_processes,
+            "distributed_type": str(accelerator.distributed_type),
+        }
+    if inputs is not None:
+        report["batch"] = {
+            key: {"device": str(value.device), "shape": list(value.shape)}
+            for key, value in inputs.items()
+            if isinstance(value, torch.Tensor)
+        }
+    print("TAR device check: " + json.dumps(report, sort_keys=True), flush=True)
 
 
 def adamw_attack_v1(
@@ -153,6 +200,12 @@ class TARBaseTrainer:
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
+        self._device_debug = os.environ.get("LILPIPE_DEVICE_DEBUG") == "1"
+        self._device_debug_batch_logged = False
+        if self._device_debug:
+            log_device_assignment(
+                self.model, "trainer_init", accelerator=self.accelerator
+            )
         self.defence_forget_batch_size = defence_forget_batch_size
         self.defence_retain_batch_size = defence_retain_batch_size
         self.attack_forget_batch_size = attack_forget_batch_size
@@ -198,6 +251,11 @@ class TARBaseTrainer:
 
     def _log_inner_loss(self, inner_step, loss):
         """Log attack losses on one curve against cumulative inner steps."""
+        if self._device_debug and self.inner_step_total == 0:
+            print(
+                f"TAR first inner backward completed; loss device: {loss.device}",
+                flush=True,
+            )
         if (
             not self._inner_loss_metric_defined
             and wandb.run is not None
@@ -211,6 +269,11 @@ class TARBaseTrainer:
         self.inner_step_total += 1
 
     def compute_loss(self, model, inputs, return_outputs=False, **kwargs):
+        debug_batch = self._device_debug and not self._device_debug_batch_logged
+        if debug_batch:
+            log_device_assignment(
+                model, "first_batch", accelerator=self.accelerator, inputs=inputs
+            )
         defence_forget_mask = (
             inputs["metadata_ids"] == self.metadata_to_idx["defence::forget"]
         )
@@ -234,6 +297,11 @@ class TARBaseTrainer:
         model_copy = copy.deepcopy(model)
         # deepcopy keeps accelerate's top-level forward wrapper bound to `model`
         model_copy.forward = MethodType(type(model_copy).forward, model_copy)
+        if debug_batch:
+            log_device_assignment(
+                model_copy, "copied_attack_model", inputs=inputs_attack_forget
+            )
+            self._device_debug_batch_logged = True
         with self.accelerator.autocast():  # the rebind skips accelerate's autocast
             model_attacked = self.sample_attack_fn(
                 model_copy, inputs_attack_forget, on_loss_backward=self._log_inner_loss

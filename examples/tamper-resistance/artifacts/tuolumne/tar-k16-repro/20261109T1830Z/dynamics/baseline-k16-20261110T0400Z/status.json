@@ -1,0 +1,7 @@
+{
+  "state": "complete",
+  "completed_utc": "2026-11-10T07:28:41.583927+00:00",
+  "report": "report.md",
+  "validation": "final-validation.json",
+  "recovered_analysis_attempt": "status/attempts/analysis-v1.json"
+}

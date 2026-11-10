@@ -1,0 +1,33 @@
+{
+  "state": "passed",
+  "completed_utc": "2026-11-10T07:28:41.583927+00:00",
+  "fixed_grid_points": 867,
+  "moving_grid_points": 1296,
+  "broad_grid_points": 648,
+  "independently_checked_centers": 27,
+  "maximum_center_loss_difference": 0,
+  "minibatch_matrix_shape": [
+    13,
+    128
+  ],
+  "movies": {
+    "random-landscape-evolution.gif": {
+      "frames": 8,
+      "size": [
+        700,
+        500
+      ],
+      "duration_ms": 8000
+    },
+    "local-landscape-evolution.gif": {
+      "frames": 16,
+      "size": [
+        700,
+        500
+      ],
+      "duration_ms": 16000
+    }
+  },
+  "report_links": "all targets exist",
+  "focused_tests": 3
+}

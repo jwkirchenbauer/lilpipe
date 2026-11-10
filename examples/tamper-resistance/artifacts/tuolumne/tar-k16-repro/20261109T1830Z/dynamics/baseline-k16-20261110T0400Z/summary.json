@@ -1,0 +1,32 @@
+{
+  "attack_plane_energy_fraction": 0.9817530443051254,
+  "radius": 0.7856669940234822,
+  "random_transverse_overlap": 0.9999999973831254,
+  "rerun_distance_from_original": {
+    "defense": 0.0,
+    "attack-16": 0.0,
+    "attack-32": 0.0,
+    "attack-48": 0.0,
+    "attack-64": 0.0,
+    "attack-80": 0.0,
+    "attack-96": 0.0,
+    "attack-112": 0.0,
+    "attack-128": 0.0
+  },
+  "planes": {
+    "random": {
+      "minimum_capture": 2.9757586545425394e-11,
+      "maximum_projection_loss_gap": 6.934678983688356
+    },
+    "attack": {
+      "minimum_capture": 0.3664388374686652,
+      "maximum_projection_loss_gap": 0.6755008697509766
+    },
+    "transverse": {
+      "minimum_capture": 9.448917486299815e-26,
+      "maximum_projection_loss_gap": 6.934647893905639
+    }
+  },
+  "actual_attack_start_loss": 11.23848934173584,
+  "actual_attack_end_loss": 4.3038414478302
+}

@@ -1,0 +1,16 @@
+{
+  "defense": {
+    "global_step": 125,
+    "observed_batches": 125,
+    "compared_metrics": 2500,
+    "max_metric_difference_from_original": 0.0,
+    "all_metrics_finite": true
+  },
+  "attack": {
+    "global_step": 128,
+    "observed_batches": 128,
+    "compared_metrics": 256,
+    "max_metric_difference_from_original": 0.0,
+    "all_metrics_finite": true
+  }
+}

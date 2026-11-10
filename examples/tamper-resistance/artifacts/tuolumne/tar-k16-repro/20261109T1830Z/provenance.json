@@ -1,0 +1,70 @@
+{
+  "repo_commit": "81e127701f32a100a3d400d74a18017312682e7e",
+  "reference_defense_eval_commit": "8e90c520",
+  "model_revision": "892b3d7a7b1cf10c7a701c60881cd93df615734c",
+  "optional_gpu_dependencies_excluded": [
+    "xformers",
+    "triton",
+    "fla-core",
+    "flash-linear-attention"
+  ],
+  "installer_source": "/p/vast1/kirchenb/llnl-tools/install_tuolumne_mm_uv_env.sh",
+  "installer_change": "Activate the new absolute prefix before invoking its Python or uv.",
+  "runtime_commit": "64ec3bfc",
+  "train_environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4",
+  "eval_environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+  "initial_install_failure": "v1 prefixes stopped before uv sync because a redundant bashrc source ran stty under set -e; retried fresh v2 prefixes.",
+  "attack_config_family": "collaborator_named_selected_configs",
+  "attack_learning_rates": [
+    "1e-5",
+    "1e-6",
+    "5e-6"
+  ],
+  "decision": "User selected collaborator named configs for all three attacks; preserve data.wmdp_zephyr.",
+  "train_runtime_commit": "2dc2cc14",
+  "eval_runtime_commit": "64ec3bfc",
+  "torchao_python_api_only": true,
+  "training_launch": "one process, four-GPU explicit layer map, torchrun=false; unset Flux rank shim before Axolotl",
+  "blas_workaround": {
+    "TORCH_BLAS_PREFER_CUBLASLT": "0",
+    "TORCH_BLAS_PREFER_HIPBLASLT": "0"
+  },
+  "blas_evidence": "training-threads.log: first backward in hipBLASLt TensileLite findAllSolutions; workaround confirmed by collaborator",
+  "device_diagnostics": "Opt-in LILPIPE_DEVICE_DEBUG=1; trainer init, first batch, copied attack model; check actual module placement against hf_device_map",
+  "runtime_source_sha256": {
+    "source/src/trainers/tr_tar.py": "17af0ecc0a164edf2547053a0df249854fda3e4cfe18e4882f06cd3b9f585188",
+    "source/jobs/validate-v5/run_tuolumne_tar.sh": "e027e4884b92953bfc5a65132c14176606f153cc9a3a0fb1ea4ecb9bef5cfaa3",
+    "source/jobs/validate-v5/tuolumne_tar_repro.py": "c5b86d01ad9a7fe904bde3bd60eec7c234e08dc5c23eb4a78c399cb28211197a",
+    "source/jobs/pipeline-v5/run_tuolumne_tar.sh": "ad16bbb0a1383f1c628cc55a5d60dd502091e468b434ec735a6d324220ca2930",
+    "source/jobs/pipeline-v5/tuolumne_tar_repro.py": "c5b86d01ad9a7fe904bde3bd60eec7c234e08dc5c23eb4a78c399cb28211197a"
+  },
+  "successful_smoke_job": "f3j8MicbQNvs",
+  "pipeline_job": "f3j8PtnfdGXy",
+  "smoke_validation": {
+    "global_step": 1,
+    "inner_steps": 16,
+    "all_inner_losses_finite": true,
+    "accelerator_processes": 1,
+    "device_map_checked": true,
+    "parameter_counts_by_device": {
+      "cuda:0": 1875968000,
+      "cuda:1": 1744896000,
+      "cuda:2": 1744896000,
+      "cuda:3": 1875972096
+    }
+  },
+  "completion": {
+    "job_id": "f3j8PtnfdGXy",
+    "node": "tuolumne1117",
+    "finished_utc": "2026-11-09T22:49:12Z",
+    "evaluated_model_states": 26,
+    "validation": "validation.json",
+    "artifact_sha256": {
+      "report.md": "54b457822d93478122616727f0691b660f9d42a537e3df839dd0e43e019f294c",
+      "comparison.csv": "88f0fbe6a56f48e9acfb20098be9b76298853164329c197f2d8d8567ed19f91e",
+      "trajectory.pdf": "3f154f2b0346aeeee5666752da6a323da6f3d9f41dabfce278d861606c1e3c5b",
+      "trajectory.png": "1ff46024645a6bf2bccb4f57fa36d0272a919c26ebe3099b8b2344cd733741e2",
+      "validation.json": "8f91a4c55cc7020db2078cf0e6849e8039134910b518459158c62224add9378c"
+    }
+  }
+}

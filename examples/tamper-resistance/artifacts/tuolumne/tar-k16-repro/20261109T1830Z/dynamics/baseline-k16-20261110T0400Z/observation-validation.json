@@ -1,0 +1,198 @@
+{
+  "comparisons": [
+    {
+      "batch_step": 1,
+      "checkpoint_step": 0,
+      "field": "loss_before_update",
+      "recorded_loss": 11.13290786743164,
+      "recomputed_loss": 11.133212089538574,
+      "absolute_difference": 0.00030422210693359375
+    },
+    {
+      "batch_step": 1,
+      "checkpoint_step": 1,
+      "field": "loss_after_update",
+      "recorded_loss": 11.041269302368164,
+      "recomputed_loss": 11.040581703186035,
+      "absolute_difference": 0.0006875991821289062
+    },
+    {
+      "batch_step": 2,
+      "checkpoint_step": 1,
+      "field": "loss_before_update",
+      "recorded_loss": 11.081231117248535,
+      "recomputed_loss": 11.07725715637207,
+      "absolute_difference": 0.003973960876464844
+    },
+    {
+      "batch_step": 2,
+      "checkpoint_step": 2,
+      "field": "loss_after_update",
+      "recorded_loss": 11.001643180847168,
+      "recomputed_loss": 10.99761962890625,
+      "absolute_difference": 0.004023551940917969
+    },
+    {
+      "batch_step": 3,
+      "checkpoint_step": 2,
+      "field": "loss_before_update",
+      "recorded_loss": 11.113269805908203,
+      "recomputed_loss": 11.107368469238281,
+      "absolute_difference": 0.005901336669921875
+    },
+    {
+      "batch_step": 4,
+      "checkpoint_step": 4,
+      "field": "loss_after_update",
+      "recorded_loss": 11.021225929260254,
+      "recomputed_loss": 11.015957832336426,
+      "absolute_difference": 0.005268096923828125
+    },
+    {
+      "batch_step": 5,
+      "checkpoint_step": 4,
+      "field": "loss_before_update",
+      "recorded_loss": 10.867195129394531,
+      "recomputed_loss": 10.863115310668945,
+      "absolute_difference": 0.0040798187255859375
+    },
+    {
+      "batch_step": 8,
+      "checkpoint_step": 8,
+      "field": "loss_after_update",
+      "recorded_loss": 10.801432609558105,
+      "recomputed_loss": 10.795426368713379,
+      "absolute_difference": 0.0060062408447265625
+    },
+    {
+      "batch_step": 9,
+      "checkpoint_step": 8,
+      "field": "loss_before_update",
+      "recorded_loss": 10.875459671020508,
+      "recomputed_loss": 10.86993408203125,
+      "absolute_difference": 0.0055255889892578125
+    },
+    {
+      "batch_step": 16,
+      "checkpoint_step": 16,
+      "field": "loss_after_update",
+      "recorded_loss": 10.561899185180664,
+      "recomputed_loss": 10.556302070617676,
+      "absolute_difference": 0.005597114562988281
+    },
+    {
+      "batch_step": 17,
+      "checkpoint_step": 16,
+      "field": "loss_before_update",
+      "recorded_loss": 10.581954002380371,
+      "recomputed_loss": 10.57657241821289,
+      "absolute_difference": 0.005381584167480469
+    },
+    {
+      "batch_step": 32,
+      "checkpoint_step": 32,
+      "field": "loss_after_update",
+      "recorded_loss": 9.73998737335205,
+      "recomputed_loss": 9.739404678344727,
+      "absolute_difference": 0.0005826950073242188
+    },
+    {
+      "batch_step": 33,
+      "checkpoint_step": 32,
+      "field": "loss_before_update",
+      "recorded_loss": 9.792378425598145,
+      "recomputed_loss": 9.790379524230957,
+      "absolute_difference": 0.0019989013671875
+    },
+    {
+      "batch_step": 48,
+      "checkpoint_step": 48,
+      "field": "loss_after_update",
+      "recorded_loss": 8.677644729614258,
+      "recomputed_loss": 8.679424285888672,
+      "absolute_difference": 0.0017795562744140625
+    },
+    {
+      "batch_step": 49,
+      "checkpoint_step": 48,
+      "field": "loss_before_update",
+      "recorded_loss": 8.560404777526855,
+      "recomputed_loss": 8.561986923217773,
+      "absolute_difference": 0.0015821456909179688
+    },
+    {
+      "batch_step": 64,
+      "checkpoint_step": 64,
+      "field": "loss_after_update",
+      "recorded_loss": 7.014692306518555,
+      "recomputed_loss": 7.02000617980957,
+      "absolute_difference": 0.005313873291015625
+    },
+    {
+      "batch_step": 65,
+      "checkpoint_step": 64,
+      "field": "loss_before_update",
+      "recorded_loss": 7.446353435516357,
+      "recomputed_loss": 7.448134422302246,
+      "absolute_difference": 0.0017809867858886719
+    },
+    {
+      "batch_step": 80,
+      "checkpoint_step": 80,
+      "field": "loss_after_update",
+      "recorded_loss": 4.953980445861816,
+      "recomputed_loss": 4.955790996551514,
+      "absolute_difference": 0.0018105506896972656
+    },
+    {
+      "batch_step": 81,
+      "checkpoint_step": 80,
+      "field": "loss_before_update",
+      "recorded_loss": 5.323062419891357,
+      "recomputed_loss": 5.327327251434326,
+      "absolute_difference": 0.00426483154296875
+    },
+    {
+      "batch_step": 96,
+      "checkpoint_step": 96,
+      "field": "loss_after_update",
+      "recorded_loss": 5.299449920654297,
+      "recomputed_loss": 5.3021559715271,
+      "absolute_difference": 0.0027060508728027344
+    },
+    {
+      "batch_step": 97,
+      "checkpoint_step": 96,
+      "field": "loss_before_update",
+      "recorded_loss": 4.5828328132629395,
+      "recomputed_loss": 4.582889556884766,
+      "absolute_difference": 5.6743621826171875e-05
+    },
+    {
+      "batch_step": 112,
+      "checkpoint_step": 112,
+      "field": "loss_after_update",
+      "recorded_loss": 4.670478820800781,
+      "recomputed_loss": 4.671873092651367,
+      "absolute_difference": 0.0013942718505859375
+    },
+    {
+      "batch_step": 113,
+      "checkpoint_step": 112,
+      "field": "loss_before_update",
+      "recorded_loss": 4.569719314575195,
+      "recomputed_loss": 4.570583343505859,
+      "absolute_difference": 0.0008640289306640625
+    },
+    {
+      "batch_step": 128,
+      "checkpoint_step": 128,
+      "field": "loss_after_update",
+      "recorded_loss": 4.497057914733887,
+      "recomputed_loss": 4.499307155609131,
+      "absolute_difference": 0.0022492408752441406
+    }
+  ],
+  "maximum_absolute_difference": 0.0060062408447265625,
+  "note": "All use eager attention. Training spans four GPUs with batch size one; analysis groups four minibatches per forward on one GPU in a separate locked evaluation environment. Small numerical differences are possible."
+}

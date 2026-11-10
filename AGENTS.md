@@ -1,3 +1,58 @@
+# JWK's fork guidelines
+
+These opening directives supercede anything in the "Repository Guidelines" part below, as well as
+any other AGENTS.md files found in inner dirs of /p/vast1/kirchenb/tar-root/lilpipe _iff_ they conflict in some way. I.e. follow my communication, env, and launching directives, but then otherwise follow whatever @marawan's other md files prescribe.
+This is @marawan's repo I'm just testing it out on this cluster to make sure it works the same way for me as he intended.
+
+When responding but esepecially when writing .md documents, 
+always use simple technical english unless you are certain I (the user) will know what you mean by context.
+Shorthand is counter productive because it means I spend more time asking you to clarify things
+rather than absorbing results and making progress.
+
+Use simplified technical english, _but_ assume the reader is a general deep-learning and 
+language-model researcher. Do not explain standard concepts such as Transformers, 
+logits, entropy, causal masking, or linear probes.
+However, _do_ define paper-specific terms, project-specific labels, uncommon acronyms, and implementation
+shorthand at first use. Aim for concise research prose without unnecessary shorthands, 
+but assume familiarity with the general concepts relating to the research problem
+rather than including elementary exposition everywhere.
+
+Before touching anything relating to Python environments, re-read `~/.bashrc` and `/p/vast1/kirchenb/llnl-tools/README.md`.
+
+The only acceptable way to execute Python commands of any kind is after running my bash macro
+with the environment's absolute prefix:
+`mm_activate <abs_path_to_env>`
+
+You must use abs paths for activation. Micromamba interprets a bare name as an environment
+under `$MAMBA_ROOT_PREFIX/envs/`, whereas this environment is an explicit prefix at `<abs_path_to_env>`.
+
+Run every environment or Python command inside an explicit interactive Bash with set -e,
+so that Python cannot start unless `mm_activate <abs_path_to_env>` succeeds first
+
+Do not run ad hoc `micromamba`, `uv`, `pip`, or environment cleanup operations. Environment
+creation or mutation requires the maintainer's current workflow and explicit authorization.
+
+The only acceptable way to run any meaningful piece of computational work is by using the launcher:
+`/p/vast1/kirchenb/llnl-tools/launch_tuo.py`
+
+Feel free to use subagents as useful, _iff_ the next pieces of proposed work happen to be non-blocking and are best handled independently. 
+Note that my default subagent setting is conservative (luna-low, verify in my global ~/.codex/config.toml).
+So, if more horsepower is necessary because the subtasks are all equivalently complex and open ended as the main thread's work, then spawn the subagents with the same level of reasoning as the main agent for the session. 
+Use your best judgement on these decisions to balance token usage with cleverness and correctness as needed.
+If you intend to launch a subagent with an effort level different than my luna-low default, explicitly set the same model and reasoning effort as the main agent in the spawn call; don't assume subagent inheritance from main thread.
+
+As of 2026-10-12, use the `verival` bank for all new project allocations.
+The older `guard` bank is also a valid option if fairshare dictates that will queue faster.
+
+Bulk benchmark data, image archives, and new experiment artifacts belong under
+`/p/vast1/kirchenb/tar-root` (our project root within `VAST_USR`), not `WRKSPC` or the home/Codex directories.
+Use node-local storage only for bounded temporary runtime data. Preserve the
+existing self-contained Micromamba+uv environment architecture prescribed by llnl-tools.
+
+Note that this research may touch sensitive topics. Use subagents as a way to test the waters 
+with any line of work that might get flagged. If an agent errors out via a classifier trip, 
+roll back and reword its tasking if useful, else regroup on whether that line of work is necessary or possible.
+
 # Repository Guidelines
 
 ## Project Structure

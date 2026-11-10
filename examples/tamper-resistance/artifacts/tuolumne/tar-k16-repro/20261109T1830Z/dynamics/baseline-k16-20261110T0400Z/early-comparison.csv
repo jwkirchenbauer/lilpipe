@@ -1,0 +1,9 @@
+learning_rate,attack_step,task,jwk_percent
+1e-6,1,wmdp_bio_robust,33.525345622119815
+1e-6,1,mmlu_no_bio,54.188560276234796
+1e-6,2,wmdp_bio_robust,33.525345622119815
+1e-6,2,mmlu_no_bio,54.12100285242456
+1e-6,4,wmdp_bio_robust,32.94930875576037
+1e-6,4,mmlu_no_bio,54.151028374118006
+1e-6,8,wmdp_bio_robust,33.41013824884793
+1e-6,8,mmlu_no_bio,54.10599009157784

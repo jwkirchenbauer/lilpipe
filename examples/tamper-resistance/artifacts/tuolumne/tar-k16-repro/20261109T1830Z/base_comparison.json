@@ -1,0 +1,14 @@
+{
+  "reference": {
+    "mmlu_no_bio": 58.58729920432367,
+    "wmdp_bio_robust": 55.18433179723502
+  },
+  "jwk": {
+    "wmdp_bio_robust": 54.83870967741935,
+    "mmlu_no_bio": 58.58729920432367
+  },
+  "difference_pp": {
+    "wmdp_bio_robust": -0.3456221198156655,
+    "mmlu_no_bio": 0.0
+  }
+}

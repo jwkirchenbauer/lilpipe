@@ -1,0 +1,23 @@
+{
+  "defense": {
+    "global_step": 125,
+    "inner_steps": 2000,
+    "finite_metrics_checked": 2500,
+    "all_finite": true
+  },
+  "attack-lr1e-5": {
+    "global_step": 128,
+    "finite_metrics_checked": 256,
+    "all_finite": true
+  },
+  "attack-lr1e-6": {
+    "global_step": 128,
+    "finite_metrics_checked": 256,
+    "all_finite": true
+  },
+  "attack-lr5e-6": {
+    "global_step": 128,
+    "finite_metrics_checked": 256,
+    "all_finite": true
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "state": "passed",
+  "evaluated_model_states": 26,
+  "trajectory_metric_rows": 54,
+  "named_configs_preserved": [
+    "defense",
+    "attack-lr1e-5",
+    "attack-lr1e-6",
+    "attack-lr5e-6"
+  ],
+  "evaluation": {
+    "limit": null,
+    "num_fewshot": 0,
+    "batch_size": 32,
+    "dtype": "bfloat16",
+    "all_samples_evaluated": true,
+    "task_hashes_match": true
+  },
+  "frozen_source_hashes_match": true,
+  "defense_difference_from_reference_pp": {
+    "wmdp_bio_robust": 1.7281105990783416,
+    "mmlu_no_bio": 0.5629785317519875
+  },
+  "defense_drop_from_local_base_pp": {
+    "wmdp_bio_robust": 21.774193548387096,
+    "mmlu_no_bio": 4.571385677826143
+  },
+  "training_validation": {
+    "defense": {
+      "global_step": 125,
+      "inner_steps": 2000,
+      "finite_metrics_checked": 2500,
+      "all_finite": true
+    },
+    "attack-lr1e-5": {
+      "global_step": 128,
+      "finite_metrics_checked": 256,
+      "all_finite": true
+    },
+    "attack-lr1e-6": {
+      "global_step": 128,
+      "finite_metrics_checked": 256,
+      "all_finite": true
+    },
+    "attack-lr5e-6": {
+      "global_step": 128,
+      "finite_metrics_checked": 256,
+      "all_finite": true
+    }
+  }
+}

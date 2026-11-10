@@ -1,0 +1,38 @@
+{
+  "model": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+  "model_revision": "892b3d7a7b1cf10c7a701c60881cd93df615734c",
+  "datasets": {
+    "cais/wmdp-bio-forget-corpus": {
+      "revision": "5a786ed1041e56fef2d4ed26c1239f12b73a68eb",
+      "config": null,
+      "split": "train",
+      "rows": 24453,
+      "fingerprint": "7c312551d14aa331"
+    },
+    "Salesforce/wikitext": {
+      "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+      "config": "wikitext-2-raw-v1",
+      "split": "test",
+      "rows": 4358,
+      "fingerprint": "a46124b21ac53738"
+    },
+    "EleutherAI/wmdp_bio_robust_mcqa": {
+      "revision": "6ec6af2c25473039c23acfa68f3ef1b5df77536c"
+    },
+    "cais/mmlu": {
+      "revision": "c30699e8356da336a370243923dbaf21066bb9fe"
+    }
+  },
+  "task_groups": [
+    "ConfigurableGroup(group=mmlu_no_bio,group_alias=None)",
+    "ConfigurableGroup(group=wmdp_bio_robust,group_alias=None)"
+  ],
+  "torch": "2.12.1+rocm7.2",
+  "hip": "7.2.53211",
+  "devices": [
+    "AMD Instinct MI300A",
+    "AMD Instinct MI300A",
+    "AMD Instinct MI300A",
+    "AMD Instinct MI300A"
+  ]
+}

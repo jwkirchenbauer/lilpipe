@@ -1,0 +1,9 @@
+{
+  "state": "passed",
+  "fixed_grid_points": 867,
+  "moving_grid_points": 1296,
+  "actual_checkpoints": 23,
+  "projected_checkpoints": 39,
+  "local_radius": 0.15713339880469646,
+  "radius": 0.7856669940234822
+}

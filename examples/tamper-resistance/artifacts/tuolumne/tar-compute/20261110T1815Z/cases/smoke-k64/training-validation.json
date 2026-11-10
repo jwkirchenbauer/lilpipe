@@ -1,0 +1,10 @@
+{
+  "state": "passed",
+  "case": "smoke-k64",
+  "updates": 1,
+  "model_checkpoints": 1,
+  "optimizer_checkpoints": [
+    1
+  ],
+  "training_elapsed_seconds": 43.694707290967926
+}

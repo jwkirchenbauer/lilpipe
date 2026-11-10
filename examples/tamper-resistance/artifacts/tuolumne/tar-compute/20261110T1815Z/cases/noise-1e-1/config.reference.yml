@@ -1,0 +1,80 @@
+base_model: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16
+tokenizer_type: AutoTokenizer
+plugins:
+  - axolotl_plugins.custom_trainer_args.CustomTrainerArgsPlugin
+trainer_cls: trainers.rl_perturb.GaussianTrainer
+custom_trainer_args:
+  gaussian_sigma: 1.0e-1
+  gaussian_seed: 42
+datasets:
+- path: cais/wmdp-bio-forget-corpus
+  split: train
+  type: data.wmdp_zephyr
+dataset_num_proc: 8
+dataset_prepared_path: artifacts/tamia/cache/axolotl/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-perturb-and-fft-sigma1e-1-lr1e-5-ms1000/prepared
+val_set_size: 0.0
+output_dir: artifacts/tamia/models/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-perturb-and-fft-sigma1e-1-lr1e-5-ms1000
+sequence_len: 512
+sample_packing: false
+pad_to_sequence_len: false
+remove_unused_columns: true
+train_on_inputs: true
+micro_batch_size: 1
+gradient_accumulation_steps: 1
+max_steps: 1000
+learning_rate: 1.0e-5
+optimizer: adamw_torch
+weight_decay: 0.0
+lr_scheduler: linear
+warmup_steps: 0
+max_grad_norm: 1.0
+bf16: true
+tf32: false
+gradient_checkpointing: false
+attn_implementation: eager
+device_map:
+  model.embed_tokens: 0
+  model.layers.0: 0
+  model.layers.1: 0
+  model.layers.2: 0
+  model.layers.3: 0
+  model.layers.4: 0
+  model.layers.5: 0
+  model.layers.6: 0
+  model.layers.7: 0
+  model.layers.8: 1
+  model.layers.9: 1
+  model.layers.10: 1
+  model.layers.11: 1
+  model.layers.12: 1
+  model.layers.13: 1
+  model.layers.14: 1
+  model.layers.15: 1
+  model.layers.16: 2
+  model.layers.17: 2
+  model.layers.18: 2
+  model.layers.19: 2
+  model.layers.20: 2
+  model.layers.21: 2
+  model.layers.22: 2
+  model.layers.23: 2
+  model.layers.24: 3
+  model.layers.25: 3
+  model.layers.26: 3
+  model.layers.27: 3
+  model.layers.28: 3
+  model.layers.29: 3
+  model.layers.30: 3
+  model.layers.31: 3
+  model.norm: 3
+  lm_head: 3
+seed: 1
+data_seed: 42
+eval_strategy: 'no'
+save_strategy: steps
+save_steps: 50
+save_total_limit: 21
+save_only_model: true
+logging_steps: 1
+wandb_project: lp-tamper-resistance
+wandb_name: z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16--relearn-perturb-and-fft-sigma1e-1-lr1e-5-ms1000

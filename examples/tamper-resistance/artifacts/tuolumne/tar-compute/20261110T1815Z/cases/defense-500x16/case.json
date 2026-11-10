@@ -1,0 +1,35 @@
+{
+  "name": "defense-500x16",
+  "role": "defense",
+  "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/defense-500x16",
+  "config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/defense-500x16/config.yml",
+  "reference_config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/configs/stages-wmdp/0_unlearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16/selected.yml",
+  "max_steps": 500,
+  "save_steps": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    96,
+    125,
+    192,
+    250,
+    375,
+    500
+  ],
+  "state_steps": [
+    125,
+    250,
+    375,
+    500
+  ],
+  "defense_reference": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+  "bootstrap_seed": null,
+  "inner_steps_per_update": 16,
+  "attack_learning_rate": null,
+  "gaussian_sigma": null,
+  "base_model": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c"
+}

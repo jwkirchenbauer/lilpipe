@@ -1,0 +1,9 @@
+{
+  "requested_sigma_per_scalar": 0.0001,
+  "seed": 42,
+  "floating_parameters": 7241732096,
+  "changed_parameters": 6855297144,
+  "changed_fraction": 0.9466377729972296,
+  "actual_l2_after_cast": 8.521176691659852,
+  "draw_l2_before_cast": 8.509882813907636
+}

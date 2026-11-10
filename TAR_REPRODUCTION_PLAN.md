@@ -74,5 +74,5 @@ the measured WMDP reduction.
 The same K16 defense and `1e-6` attack were repeated with intermediate checkpoints
 to study how the attacker leaves the defense.
 [Landscape dynamics, figures, and movies](examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/report.md)
-records the results. The compute extension and intervention experiments remain
-unstarted.
+records the baseline results. The follow-up compute and intervention experiments
+are described in the [compute-extension plan](TAR_COMPUTE_EXTENSION.md).

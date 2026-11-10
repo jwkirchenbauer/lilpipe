@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+import json
 from pathlib import Path
 
 import torch
@@ -18,6 +19,7 @@ def add_gaussian_parameter_noise(model, sigma, seed):
         raise ValueError("gaussian_sigma must be a finite non-negative number")
 
     generators = {}
+    total, changed, squared_actual, squared_draw = 0, 0, 0.0, 0.0
     with torch.no_grad():
         for parameter in model.parameters():
             if not parameter.is_floating_point():
@@ -32,13 +34,33 @@ def add_gaussian_parameter_noise(model, sigma, seed):
                 dtype=torch.float32,
                 device=parameter.device,
             )
-            parameter.copy_((parameter.float() + sigma * noise).to(parameter.dtype))
+            rounded = (parameter.float() + sigma * noise).to(parameter.dtype)
+            difference = rounded.float() - parameter.float()
+            total += parameter.numel()
+            changed += int(torch.count_nonzero(difference))
+            squared_actual += float(difference.double().square().sum())
+            squared_draw += float((sigma * noise).double().square().sum())
+            parameter.copy_(rounded)
+    return {
+        "requested_sigma_per_scalar": sigma,
+        "seed": seed,
+        "floating_parameters": total,
+        "changed_parameters": changed,
+        "changed_fraction": changed / total if total else 0.0,
+        "actual_l2_after_cast": math.sqrt(squared_actual),
+        "draw_l2_before_cast": math.sqrt(squared_draw),
+    }
 
 
 class GaussianNoiseMixin:
     def __init__(self, *args, gaussian_sigma=0.0, gaussian_seed=42, **kwargs):
         super().__init__(*args, **kwargs)
-        add_gaussian_parameter_noise(self.model, gaussian_sigma, gaussian_seed)
+        self.gaussian_applied_stats = add_gaussian_parameter_noise(
+            self.model, gaussian_sigma, gaussian_seed
+        )
+        target = Path(self.args.output_dir) / "noise.json"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(json.dumps(self.gaussian_applied_stats, indent=2) + "\n")
         self.gaussian_sigma = gaussian_sigma
         self.gaussian_seed = gaussian_seed
         self._save_perturbed_checkpoint = True

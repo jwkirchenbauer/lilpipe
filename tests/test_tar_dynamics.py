@@ -7,6 +7,7 @@ import importlib.util
 import math
 import os
 import tempfile
+import time
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
@@ -29,6 +30,8 @@ class ObservationTests(unittest.TestCase):
         )
         scope = {
             "TrainerCallback": object,
+            "os": os,
+            "time": time,
             "torch": torch,
             "math": math,
             "json": json,
@@ -55,6 +58,7 @@ class ObservationTests(unittest.TestCase):
             _dynamics_batch={"input_ids": torch.ones(1, 2)},
             _prepare_inputs=lambda batch: batch,
             accelerator=SimpleNamespace(autocast=contextlib.nullcontext),
+            _dynamics_started=time.perf_counter(),
         )
         with tempfile.TemporaryDirectory() as directory:
             callback = scope["DynamicsCallback"](trainer, [1, 4])

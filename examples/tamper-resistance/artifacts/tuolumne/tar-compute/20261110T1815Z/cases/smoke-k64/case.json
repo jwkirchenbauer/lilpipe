@@ -1,0 +1,20 @@
+{
+  "name": "smoke-k64",
+  "role": "defense",
+  "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/smoke-k64",
+  "config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/smoke-k64/config.yml",
+  "reference_config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/configs/stages-wmdp/0_unlearn/z7b-wmdp-bio--5pp--unlearn-fft-me-tar-k16/selected.yml",
+  "max_steps": 1,
+  "save_steps": [
+    1
+  ],
+  "state_steps": [
+    1
+  ],
+  "defense_reference": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+  "bootstrap_seed": null,
+  "inner_steps_per_update": 64,
+  "attack_learning_rate": null,
+  "gaussian_sigma": null,
+  "base_model": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c"
+}

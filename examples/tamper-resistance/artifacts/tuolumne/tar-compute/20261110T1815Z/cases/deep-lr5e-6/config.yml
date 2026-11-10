@@ -1,0 +1,76 @@
+base_model: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/defense-125x64/models/defense
+tokenizer_type: AutoTokenizer
+datasets:
+- path: cais/wmdp-bio-forget-corpus
+  split: train
+  type: data.wmdp_zephyr
+  revision: 5a786ed1041e56fef2d4ed26c1239f12b73a68eb
+dataset_num_proc: 8
+dataset_prepared_path: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cache/attack
+val_set_size: 0.0
+output_dir: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/deep-lr5e-6/models/attack
+sequence_len: 512
+sample_packing: false
+pad_to_sequence_len: false
+remove_unused_columns: true
+train_on_inputs: true
+micro_batch_size: 1
+gradient_accumulation_steps: 1
+max_steps: 1000
+learning_rate: 5.0e-06
+optimizer: adamw_torch
+weight_decay: 0.0
+lr_scheduler: linear
+warmup_steps: 0
+max_grad_norm: 1.0
+bf16: true
+tf32: false
+gradient_checkpointing: false
+attn_implementation: eager
+device_map:
+  model.embed_tokens: 0
+  model.layers.0: 0
+  model.layers.1: 0
+  model.layers.2: 0
+  model.layers.3: 0
+  model.layers.4: 0
+  model.layers.5: 0
+  model.layers.6: 0
+  model.layers.7: 0
+  model.layers.8: 1
+  model.layers.9: 1
+  model.layers.10: 1
+  model.layers.11: 1
+  model.layers.12: 1
+  model.layers.13: 1
+  model.layers.14: 1
+  model.layers.15: 1
+  model.layers.16: 2
+  model.layers.17: 2
+  model.layers.18: 2
+  model.layers.19: 2
+  model.layers.20: 2
+  model.layers.21: 2
+  model.layers.22: 2
+  model.layers.23: 2
+  model.layers.24: 3
+  model.layers.25: 3
+  model.layers.26: 3
+  model.layers.27: 3
+  model.layers.28: 3
+  model.layers.29: 3
+  model.layers.30: 3
+  model.layers.31: 3
+  model.norm: 3
+  lm_head: 3
+seed: 1
+data_seed: 42
+eval_strategy: 'no'
+save_strategy: steps
+save_steps: 1000
+save_total_limit: 29
+save_only_model: false
+logging_steps: 1
+wandb_project: jwk-tar-landscape-compute
+wandb_name: deep-lr5e-6
+trainer_cls: tar_dynamics_training.RecordedRelearnTrainer

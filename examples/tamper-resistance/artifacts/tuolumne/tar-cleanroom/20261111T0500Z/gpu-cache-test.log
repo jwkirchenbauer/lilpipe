@@ -1,0 +1,49 @@
+0: OUTPUT_DIR: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/geometry/cr-geometry-cache-test
+0: Logging to /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/geometry/cr-geometry-cache-test/logs
+0: Wed Nov 11 07:05:04 UTC 2026 Calling flux run...
+0: 0: FLUX_JOB_ID: fmCKbFD
+0: 0: SLURM_JOB_ID: 
+0: 0: SLURM_JOB_NODELIST: tuolumne1039
+0: 0: SLURM_NNODES: 1
+0: 0: SLURM_NTASKS: 1
+0: 0: SLURM_NTASKS_PER_NODE: 1
+0: 0: SLURM_CPUS_PER_TASK: 96
+0: 0: MASTER_ADDR: tuolumne1039
+0: 0: MASTER_PORT: 38895
+0: 0: LOCAL_RANK: 0
+0: 0: RANK: 0
+0: 0: WORLD_SIZE: 1
+0: 0: SLURM_NODEID: 0
+0: 0: SLURM_LOCALID: 0
+0: 0: SLURM_PROCID: 0
+0: 0: CUDA_VISIBLE_DEVICES:  (will be overwritten with 0,1,2,3)
+0: 0: HIP_VISIBLE_DEVICES:  (will be overwritten with 0,1,2,3)
+0: 0: ROCR_VISIBLE_DEVICES: 0,1,2,3 (will be overwritten with 0,1,2,3)
+0: 0: Wed Nov 11 07:05:05 UTC 2026 Loading modules
+0: 0: 
+0: 0: Lmod is automatically replacing "cce/20.0.0" with "gcc-native/13".
+0: 0: 
+0: 0: 
+0: 0: Due to MODULEPATH changes, the following have been reloaded:
+0: 0:   1) cray-libsci/25.09.0     2) cray-mpich/9.0.1
+0: 0: 
+0: 0: 
+0: 0: The following have been reloaded with a version change:
+0: 0:   1) libfabric/match_SHS => libfabric/2.1
+0: 0: 
+0: 0: stty: 'standard input': Inappropriate ioctl for device
+0: 0: Wed Nov 11 07:05:10 UTC 2026 Activated environment on 0
+0: 0: bash: cannot set terminal process group (3874066): Inappropriate ioctl for device
+0: 0: Wed Nov 11 07:05:10 UTC 2026 Launching python on 0...
+0: 0: bash: no job control in this shell
+0: 0: stty: 'standard input'0: : Inappropriate ioctl for device
+0: 0: 0bc17089c48ebf84c83cea5d3cade6db13cb02f58d17b730790dbbbdc71f328e  scripts/misc/tar_cleanroom_geometry.py
+0: 0: 04ed288050e6a7b3f0e5542e9a763275c74d8b1f0138218a9bec4c5ed736c17e  ../../tests/test_tar_cleanroom_geometry.py
+0: 0: test_device_cache_exact_parity_on_two_gpus (test_tar_cleanroom_geometry.GeometryTests.test_device_cache_exact_parity_on_two_gpus) ... 0: 0: {"two_gpu_cache_validation": [{"coordinates": [0, 0], "parameter_max_abs_difference": 0.0, "perturbation_relative_l2_difference": 0.0, "reference_perturbation_l2": 0.0, "ce_absolute_gaps": null}, {"coordinates": [1, 0], "parameter_max_abs_difference": 0.0, "perturbation_relative_l2_difference": 0.0, "reference_perturbation_l2": 1.0000000158009443, "ce_absolute_gaps": null}, {"coordinates": [-125, 125], "parameter_max_abs_difference": 0.0, "perturbation_relative_l2_difference": 0.0, "reference_perturbation_l2": 176.77669244272997, "ce_absolute_gaps": null}]}
+0: 0: ok
+0: 0: 
+0: 0: ----------------------------------------------------------------------
+0: 0: Ran 1 test in 3.733s
+0: 0: 
+0: 0: OK
+0: Wed Nov 11 07:05:27 UTC 2026 Job execution finished.

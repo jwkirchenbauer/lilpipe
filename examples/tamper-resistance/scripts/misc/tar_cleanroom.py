@@ -14,6 +14,7 @@ import json
 import math
 import os
 import random
+import re
 import shutil
 import tempfile
 import time
@@ -1325,12 +1326,43 @@ def local_project_candidate(
     raise RuntimeError("FP32 candidate could not satisfy the local radius tolerance")
 
 
-def local_projected_search(model, data, radius=0.75, steps=8, on_record=None):
+def validated_local_step_lengths(values=None):
+    lengths = LOCAL_STEP_LENGTHS if values is None else tuple(values)
+    if (
+        not lengths
+        or any(
+            not isinstance(value, (int, float))
+            or isinstance(value, bool)
+            or not math.isfinite(value)
+            or value <= 0
+            for value in lengths
+        )
+        or any(left >= right for left, right in zip(lengths, lengths[1:]))
+    ):
+        raise ValueError(
+            "Local step lengths must be positive, finite, unique, and ascending"
+        )
+    return lengths
+
+
+def validated_local_output_name(value):
+    if (
+        not isinstance(value, str)
+        or re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*", value) is None
+    ):
+        raise ValueError("Local output name must be a safe single path component")
+    return value
+
+
+def local_projected_search(
+    model, data, radius=0.75, steps=8, on_record=None, *, step_lengths=None
+):
     """Evaluation-only projected CE search. Heldout probes never select a point."""
     import torch
 
     if not math.isfinite(radius) or radius <= 0 or type(steps) is not int or steps < 1:
         raise ValueError("Local radius and number of steps must be positive")
+    step_lengths = validated_local_step_lengths(step_lengths)
     parameters = dict(model.named_parameters())
     if not parameters or any(
         p.dtype != torch.float32 or not p.requires_grad for p in parameters.values()
@@ -1436,7 +1468,7 @@ def local_projected_search(model, data, radius=0.75, steps=8, on_record=None):
             ]
             chosen, chosen_length = 0, 0.0
             if gradient_record["gradient_norm"] > 0:
-                for length in LOCAL_STEP_LENGTHS:
+                for length in step_lengths:
                     geometry = local_project_candidate(
                         parameters,
                         anchor,
@@ -1515,6 +1547,7 @@ def local_projected_search(model, data, radius=0.75, steps=8, on_record=None):
         return {
             "state": "complete",
             "steps": steps,
+            "candidate_step_lengths": [0.0, *step_lengths],
             "radius_l2": radius,
             "radius_tolerance_l2": tolerance,
             "final_ce": current["ce"],
@@ -1686,9 +1719,22 @@ def local_benchmark(run, study, model, tokenizer, target, checkpoint, name, anal
         raise
 
 
-def local_attack(run, study, data, name, radius=0.75, steps=8, benchmark=False):
+def local_attack(
+    run,
+    study,
+    data,
+    name,
+    radius=0.75,
+    steps=8,
+    benchmark=False,
+    *,
+    step_lengths=None,
+    output_name="local-search",
+):
     import sys
 
+    step_lengths = validated_local_step_lengths(step_lengths)
+    output_name = validated_local_output_name(output_name)
     if name not in {"control", *study["cases"]}:
         raise ValueError(f"Unknown local-search case: {name}")
     if not math.isfinite(radius) or radius <= 0 or steps < 1:
@@ -1702,14 +1748,15 @@ def local_attack(run, study, data, name, radius=0.75, steps=8, benchmark=False):
     )
     if not (checkpoint / "config.json").is_file():
         raise FileNotFoundError(f"Local-search anchor is missing: {checkpoint}")
-    target = run / "cases" / name / "local-search"
+    target = run / "cases" / name / output_name
     target.mkdir(parents=True, exist_ok=False)
     config = {
         "case": name,
         "checkpoint": str(checkpoint),
         "radius_l2": radius,
         "steps": steps,
-        "candidate_step_lengths": [0.0, *LOCAL_STEP_LENGTHS],
+        "candidate_step_lengths": [0.0, *step_lengths],
+        "output_name": output_name,
         "selection": "Minimum same forget8 mean CE, including the unchanged current point",
         "gradient": "Full forget8 token mean, accumulated in chunks of2; globally normalized",
         "anchor": "Unchanged initial defended checkpoint for every candidate and iteration",
@@ -1724,7 +1771,14 @@ def local_attack(run, study, data, name, radius=0.75, steps=8, benchmark=False):
         "scope": "Separate evaluation-only local counterexample search, not an ordinary attack variant or a robustness certificate",
     }
     dump(target / "config.json", config)
-    state = {"state": "running", "case": name, "radius_l2": radius, "steps": steps}
+    state = {
+        "state": "running",
+        "case": name,
+        "radius_l2": radius,
+        "steps": steps,
+        "output_name": output_name,
+        "candidate_step_lengths": [0.0, *step_lengths],
+    }
     dump(target / "search.json", state)
     started = time.monotonic()
     try:
@@ -1735,6 +1789,8 @@ def local_attack(run, study, data, name, radius=0.75, steps=8, benchmark=False):
             "checkpoint": str(checkpoint),
             "checkpoint_files": analysis.checkpoint_manifest(checkpoint),
             "selection_rows_sha256": digest(data["forget_train"]),
+            "local_output_name": output_name,
+            "candidate_step_lengths": [0.0, *step_lengths],
         }
         dump(target / "provenance.json", prov)
         model, tokenizer = runtime(study, checkpoint)
@@ -1745,7 +1801,9 @@ def local_attack(run, study, data, name, radius=0.75, steps=8, benchmark=False):
                 {**row, "elapsed_seconds": time.monotonic() - started},
             )
 
-        result = local_projected_search(model, data, radius, steps, on_record=record)
+        result = local_projected_search(
+            model, data, radius, steps, on_record=record, step_lengths=step_lengths
+        )
         final_checkpoint = target / f"checkpoint-{steps}"
         save_model(model, tokenizer, final_checkpoint)
         state.update(
@@ -1808,8 +1866,18 @@ def main():
     parser.add_argument("--resume-step", type=int, default=0)
     parser.add_argument("--local-radius", type=float, default=0.75)
     parser.add_argument("--local-steps", type=int, default=8)
+    parser.add_argument("--local-step-lengths", type=float, nargs="+")
+    parser.add_argument("--local-output-name", default="local-search")
     parser.add_argument("--benchmark", action="store_true")
     args = parser.parse_args()
+    if args.mode == "local-attack":
+        try:
+            args.local_step_lengths = validated_local_step_lengths(
+                args.local_step_lengths
+            )
+            args.local_output_name = validated_local_output_name(args.local_output_name)
+        except ValueError as error:
+            parser.error(str(error))
     if args.mode == "prepare":
         prepare(args)
         return
@@ -1846,6 +1914,8 @@ def main():
             args.local_radius,
             args.local_steps,
             args.benchmark,
+            step_lengths=args.local_step_lengths,
+            output_name=args.local_output_name,
         )
 
 

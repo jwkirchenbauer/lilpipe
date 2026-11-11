@@ -1,0 +1,9 @@
+{
+  "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/source/profiles/train-v2/tar_cleanroom.py",
+  "source_sha256": "dbaf4fca911537dbe068cd1e7cceda8eb2c9dd9cd388ffb2edd66e537d3055ba",
+  "study_sha256": "741284bd8402c2ab45e2b5bc18c4f06d7d13e14e57ccf3dbe801d9080f7da422",
+  "data_sha256": "04ad533bd4d58a00c8df8041d9662c9a106f6df9914012695745fbc7f9cb7eea",
+  "torch": "2.12.1+rocm7.2",
+  "hip": "7.2.53211",
+  "dtype": "float32"
+}

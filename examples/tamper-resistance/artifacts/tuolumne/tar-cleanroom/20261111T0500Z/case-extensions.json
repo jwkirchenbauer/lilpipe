@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "purpose": "Exploratory retention refresh after the fixed-cohort utility audit",
+  "study_sha256": "741284bd8402c2ab45e2b5bc18c4f06d7d13e14e57ccf3dbe801d9080f7da422",
+  "original_data_content_sha256": "04ad533bd4d58a00c8df8041d9662c9a106f6df9914012695745fbc7f9cb7eea",
+  "retain_stream": {
+    "path": "retain-refresh.json",
+    "content_sha256": "9a0d8fbb4550317c5afa1c7089c89f452b132b2da9d5df9ff52fe415bf3597bf",
+    "file_sha256": "ef2966014e7469364e796c6d96fb37fae9a3c928159716c30ed77565218deee4"
+  },
+  "cases": {
+    "full-maxent-terminal-fresh-retain": {
+      "name": "full-maxent-terminal-fresh-retain",
+      "mode": "full",
+      "objective": "maxent-terminal",
+      "attack_batch_size": 8,
+      "inner_steps": 4,
+      "outer_steps": 125,
+      "outer_learning_rate": 5e-06,
+      "retain_coefficient": 2.5,
+      "seed": 42,
+      "extends_case": "full-maxent-terminal",
+      "retain_stream": {
+        "path": "retain-refresh.json",
+        "content_sha256": "9a0d8fbb4550317c5afa1c7089c89f452b132b2da9d5df9ff52fe415bf3597bf",
+        "file_sha256": "ef2966014e7469364e796c6d96fb37fae9a3c928159716c30ed77565218deee4"
+      }
+    },
+    "full-ce-worst-fresh-retain": {
+      "name": "full-ce-worst-fresh-retain",
+      "mode": "full",
+      "objective": "ce-worst",
+      "attack_batch_size": 8,
+      "inner_steps": 4,
+      "outer_steps": 125,
+      "outer_learning_rate": 5e-06,
+      "retain_coefficient": 2.5,
+      "seed": 42,
+      "extends_case": "full-ce-worst",
+      "retain_stream": {
+        "path": "retain-refresh.json",
+        "content_sha256": "9a0d8fbb4550317c5afa1c7089c89f452b132b2da9d5df9ff52fe415bf3597bf",
+        "file_sha256": "ef2966014e7469364e796c6d96fb37fae9a3c928159716c30ed77565218deee4"
+      }
+    }
+  },
+  "content_sha256": "498c8c99f5220f99ebde157b307c6371516414fe6aa1cddbcfd535ac216abdd3"
+}

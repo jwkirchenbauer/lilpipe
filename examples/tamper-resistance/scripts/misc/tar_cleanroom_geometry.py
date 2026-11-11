@@ -33,6 +33,14 @@ import torch
 CHUNK = 1_000_000
 REFERENCE_STEPS = (1, 4, 16, 64)
 PLANE_ORDER = ("random", "random-step", "reference", "first", "fit")
+ATTACK_VARIANTS = ("full-same", "mini-same", "mini-reverse", "full-new")
+
+
+def geometry_folder(run, case, variant="full-same"):
+    if variant not in ATTACK_VARIANTS:
+        raise ValueError(f"Unknown attack variant {variant}")
+    folder = Path(run) / "geometry" / case
+    return folder if variant == "full-same" else folder / "attack-variants" / variant
 
 
 class CheckpointReader:
@@ -252,6 +260,7 @@ def reference_definition(control, source_path):
     """A fixed coordinate definition, independent of the target defender."""
     if (
         control["case"] != "control"
+        or control.get("attack_variant", "full-same") != "full-same"
         or tuple(control["trajectory_steps"]) != REFERENCE_STEPS
     ):
         raise ValueError("Reference requires control full-same states 1, 4, 16, 64")
@@ -321,7 +330,7 @@ def control_reference_axes(run, definition, specs):
         )
 
 
-def archive_augmentation(target, result, clean):
+def archive_augmentation(target, result, clean, run):
     """Keep the previous JSON bytes and every original numerical plane."""
     previous = json.loads(target.read_text())
     old_hash = hashlib.sha256(target.read_bytes()).hexdigest()
@@ -342,13 +351,13 @@ def archive_augmentation(target, result, clean):
             "augmentation_source_sha256": hashlib.sha256(
                 Path(__file__).read_bytes()
             ).hexdigest(),
-            **helper_source_provenance(target.parents[2], clean),
+            **helper_source_provenance(run, clean),
         }
     )
     result["planes"] = {
         name: result["planes"][name] for name in PLANE_ORDER if name in result["planes"]
     }
-    result.update(helper_source_provenance(target.parents[2], clean))
+    result.update(helper_source_provenance(run, clean))
     clean.dump(target, result)
 
 
@@ -385,7 +394,7 @@ def add_control_reference(target, args, clean, study, data):
     result["figure_state"] = (
         "Reference added from existing control fit; --plot-only refreshes the figure"
     )
-    archive_augmentation(target, result, clean)
+    archive_augmentation(target, result, clean, args.run.resolve())
 
 
 def projection_coordinates(readers, anchor, specs, axes):
@@ -591,24 +600,65 @@ def plot(result, folder, ce_limits=None):
     import numpy as np
 
     names = list(result["planes"])
+    groups = tuple(result.get("probes", {})) or (
+        "forget_train",
+        "forget_heldout_subset",
+    )
+    attack_variant = result.get("attack_variant", "full-same")
+    condition_title = f"{result['case']}: {attack_variant} attacker"
+    plane_titles = {
+        "random": "Broad random",
+        "random-step": "Random at first-update radius",
+        "reference": "Fixed control attack plane",
+        "first": "First-update plane",
+        "fit": "Fitted attack plane",
+    }
+    cohort_titles = {
+        "forget_train": "Forget training examples",
+        "forget_heldout_subset": "Held-out forget examples (8)",
+        "forget_new_attack": "Attacker forget examples (8; excluded from continuation)",
+    }
+
+    def panel_title(name, plane, group):
+        details = ""
+        radius = plane.get("scale_l2")
+        if name == "random":
+            details = f"Shared unit axes; displayed ±{max(abs(value) for value in plane['coordinates']):.4g} L2"
+        elif radius is not None:
+            scope = (
+                "Shared orientation; case radius"
+                if name == "random-step"
+                else (
+                    "Shared control axes; fixed radius"
+                    if name == "reference"
+                    else "Case-specific axes; radius"
+                )
+            )
+            details = f"{scope} = {radius:.4g} L2"
+        return "\n".join(
+            value
+            for value in (plane_titles.get(name, name), cohort_titles[group], details)
+            if value
+        )
+
     all_ce = [
         point[group]["ce"]
         for plane in result["planes"].values()
         for point in plane["grid"]
-        for group in ("forget_train", "forget_heldout_subset")
+        for group in groups
     ]
     vmin, vmax = ce_limits if ce_limits is not None else (min(all_ce), max(all_ce))
     fig, plots = plt.subplots(
-        2,
+        len(groups),
         len(names),
-        figsize=(5 * len(names), 8),
+        figsize=(5 * len(names), 4 * len(groups)),
         squeeze=False,
         constrained_layout=True,
     )
     for column, name in enumerate(names):
         plane = result["planes"][name]
         grid = plane["coordinates"]
-        for row, group in enumerate(("forget_train", "forget_heldout_subset")):
+        for row, group in enumerate(groups):
             values = np.array([point[group]["ce"] for point in plane["grid"]]).reshape(
                 len(grid), len(grid)
             )
@@ -629,19 +679,204 @@ def plot(result, folder, ce_limits=None):
                 )
                 ax.legend(loc="best", fontsize=8)
             ax.set(
-                title=f"{name}: {group}",
+                title=panel_title(name, plane, group),
                 xlabel=plane["axis_labels"][0],
                 ylabel=plane["axis_labels"][1],
             )
+            ax.title.set_fontsize(9)
     fig.colorbar(
         mesh, ax=plots.ravel().tolist(), label="Native FP32 next-token cross-entropy"
     )
     fig.suptitle(
-        f"{result['case']}: all planes anchored at final defender; one shared CE scale"
+        f"{condition_title}\nAll planes centered at defender; one shared CE scale"
     )
     fig.savefig(folder / "slices.png", dpi=180)
     fig.savefig(folder / "slices.pdf")
     plt.close(fig)
+
+    # Use the identical measured arrays, CE normalization, and height range.
+    # Facets connect grid nodes; they are not additional model evaluations.
+    # 3D text extents are not fully accounted for by constrained_layout.
+    # Reserve explicit row separation and a generous bottom margin instead.
+    surface_fig = plt.figure(
+        figsize=(5 * len(names), 7 * len(groups)), constrained_layout=False
+    )
+    surface_fig.subplots_adjust(
+        left=0.025, right=0.91, bottom=0.10, top=0.91, hspace=0.45, wspace=0.10
+    )
+    for column, name in enumerate(names):
+        plane = result["planes"][name]
+        grid = plane["coordinates"]
+        xx, yy = np.meshgrid(grid, grid)
+        for row, group in enumerate(groups):
+            values = np.array([point[group]["ce"] for point in plane["grid"]]).reshape(
+                len(grid), len(grid)
+            )
+            axis = surface_fig.add_subplot(
+                len(groups),
+                len(names),
+                row * len(names) + column + 1,
+                projection="3d",
+                computed_zorder=False,
+            )
+            surface = axis.plot_surface(
+                xx,
+                yy,
+                values,
+                cmap="viridis",
+                vmin=vmin,
+                vmax=vmax,
+                rstride=1,
+                cstride=1,
+                shade=False,
+                linewidth=0.3,
+                edgecolor=(0, 0, 0, 0.2),
+                antialiased=True,
+                zorder=0,
+            )
+            axis.scatter(
+                xx.ravel(),
+                yy.ravel(),
+                values.ravel(),
+                c="black",
+                s=3,
+                depthshade=False,
+                zorder=1,
+            )
+            measured = {
+                (point["x"], point["y"]): point[group]["ce"] for point in plane["grid"]
+            }
+            if (0, 0) in measured:
+                axis.scatter(
+                    [0],
+                    [0],
+                    [measured[(0, 0)]],
+                    facecolors="white",
+                    edgecolors="black",
+                    linewidths=1.0,
+                    marker="*",
+                    s=90,
+                    depthshade=False,
+                    label="Defender anchor",
+                    zorder=10,
+                )
+            if name == "first" and (1, 0) in measured:
+                axis.scatter(
+                    [1],
+                    [0],
+                    [measured[(1, 0)]],
+                    c="red",
+                    marker="x",
+                    s=50,
+                    depthshade=False,
+                    label="First-update point",
+                    linewidths=1.6,
+                    zorder=11,
+                )
+                axis.legend(loc="upper left", fontsize=7).set_zorder(20)
+            if name == "random":
+                labels_3d = ("Direction 1 (L2)", "Direction 2 (L2)")
+            elif name == "first":
+                labels_3d = (
+                    "First update\n(multiples)",
+                    "Orthogonal random\n(multiples)",
+                )
+            else:
+                labels_3d = ("Direction 1 (radii)", "Direction 2 (radii)")
+            axis.set(
+                title=panel_title(name, plane, group),
+                xlabel=labels_3d[0],
+                ylabel=labels_3d[1],
+                zlabel="CE (nats)",
+                xlim=(grid[0], grid[-1]),
+                ylim=(grid[0], grid[-1]),
+                zlim=(vmin, vmax),
+            )
+            axis.title.set_fontsize(9)
+            axis.view_init(elev=30, azim=-135)
+            axis.tick_params(labelsize=7)
+            axis.xaxis.label.set_size(8)
+            axis.yaxis.label.set_size(8)
+            axis.zaxis.label.set_size(8)
+            axis.xaxis.labelpad = 2
+            axis.yaxis.labelpad = 2
+            axis.zaxis.labelpad = 2
+    surface_fig.colorbar(
+        surface,
+        cax=surface_fig.add_axes([0.94, 0.17, 0.014, 0.66]),
+        label="Native FP32 next-token cross-entropy; same scale as heatmap",
+    )
+    surface_fig.suptitle(
+        f"{condition_title}\nMeasured grid nodes and connecting facets; no trajectory shown"
+    )
+    surface_fig.savefig(
+        folder / "slices-3d.png", dpi=180, bbox_inches="tight", pad_inches=0.2
+    )
+    surface_fig.savefig(folder / "slices-3d.pdf", bbox_inches="tight", pad_inches=0.2)
+    plt.close(surface_fig)
+
+    if {"random-step", "first"} <= result["planes"].keys():
+        random_radius = result["planes"]["random-step"]["scale_l2"]
+        first_radius = result["planes"]["first"]["scale_l2"]
+        if (
+            not math.isfinite(first_radius)
+            or first_radius <= 0
+            or not math.isclose(random_radius, first_radius, rel_tol=1e-10)
+        ):
+            raise ValueError(
+                "Matched-radius sections require equal positive first-update radii"
+            )
+        section_fig, section_axes = plt.subplots(
+            len(groups),
+            1,
+            figsize=(8, 3.5 * len(groups)),
+            sharex=True,
+            sharey=True,
+            constrained_layout=True,
+        )
+        for axis, group in zip(section_axes, groups):
+            for name, label, color in (
+                ("random-step", "Shared Gaussian direction", "#2878b5"),
+                ("first", "First-update direction", "#d62728"),
+            ):
+                points = sorted(
+                    (
+                        point
+                        for point in result["planes"][name]["grid"]
+                        if point["y"] == 0
+                    ),
+                    key=lambda point: point["x"],
+                )
+                axis.plot(
+                    [point["x"] * first_radius for point in points],
+                    [point[group]["ce"] for point in points],
+                    marker="o",
+                    markersize=4,
+                    color=color,
+                    label=label,
+                )
+                if name == "first":
+                    for point in points:
+                        if point["x"] in (0, 1):
+                            axis.scatter(
+                                [point["x"] * first_radius],
+                                [point[group]["ce"]],
+                                marker="*" if point["x"] == 0 else "x",
+                                c="black" if point["x"] == 0 else "red",
+                                s=70,
+                            )
+            axis.set(title=cohort_titles[group], ylabel="CE (nats)", ylim=(vmin, vmax))
+            axis.grid(alpha=0.2)
+            axis.legend(fontsize=8)
+        section_axes[-1].set_xlabel(
+            "Signed displacement along axis 1 (global parameter L2 units)"
+        )
+        section_fig.suptitle(
+            f"{condition_title}; y=0 sections at shared radius {first_radius:.4g} L2\nShared Gaussian orientation versus case-specific first update; lines connect measured nodes"
+        )
+        section_fig.savefig(folder / "matched-radius-sections.png", dpi=180)
+        section_fig.savefig(folder / "matched-radius-sections.pdf")
+        plt.close(section_fig)
     return {"ce_min": vmin, "ce_max": vmax}
 
 
@@ -649,10 +884,13 @@ def run_geometry(args):
     run = args.run.resolve()
     clean = load_cleanroom(run)
     study = clean.load_study(run)
+    variant = getattr(args, "attack_variant", "full-same")
+    if variant not in study.get("attack_variants", ATTACK_VARIANTS):
+        raise ValueError(f"Unknown attack variant {variant}")
     if args.case != "control" and args.case not in study["cases"]:
         raise ValueError(f"Unknown case {args.case}")
     data = clean.prepare_data(run, study)
-    folder = run / "geometry" / args.case
+    folder = geometry_folder(run, args.case, variant)
     folder.mkdir(parents=True, exist_ok=True)
     os.environ.setdefault("MPLCONFIGDIR", str(run / "cache/matplotlib"))
     target = folder / "geometry.json"
@@ -661,6 +899,8 @@ def run_geometry(args):
         additions.append("reference")
     augment = bool(additions)
     prior = json.loads(target.read_text()) if target.exists() else None
+    if prior is not None and prior.get("attack_variant", "full-same") != variant:
+        raise ValueError("Existing geometry refers to another attack variant")
     if augment and prior is None:
         raise FileNotFoundError(
             "--add-planes requires an existing complete geometry.json"
@@ -678,6 +918,10 @@ def run_geometry(args):
     )
     if augment and not plane_names:
         raise ValueError("All requested planes already exist")
+    if args.case == "control" and variant != "full-same" and "reference" in plane_names:
+        raise ValueError(
+            "The control reference is full-same; alternate control variants may request first/fit without reference"
+        )
     if (
         augment
         and args.case == "control"
@@ -704,7 +948,7 @@ def run_geometry(args):
         if args.case == "control"
         else run / "cases" / args.case / "defense-125"
     )
-    attack_folder = run / "cases" / args.case / "attacks/full-same"
+    attack_folder = run / "cases" / args.case / "attacks" / variant
     checkpoint_folders = [
         attack_folder / f"checkpoint-{step}" for step in args.trajectory_steps
     ]
@@ -729,6 +973,8 @@ def run_geometry(args):
         "forget_train": data["forget_train"],
         "forget_heldout_subset": data["forget_heldout"][:8],
     }
+    if variant == "full-new":
+        probes["forget_new_attack"] = data["forget_new_attack"]
 
     def evaluate():
         return {group: clean.evaluate(model, rows) for group, rows in probes.items()}
@@ -736,6 +982,7 @@ def run_geometry(args):
     result = {
         "schema": 3,
         "case": args.case,
+        "attack_variant": variant,
         "anchor": str(base_folder),
         "weight_dtype": "float32",
         "forward_dtype": "float32",
@@ -888,7 +1135,7 @@ def run_geometry(args):
                     {
                         "scale_l2": first_radius,
                         "actual_first_update_l2": first_radius,
-                        "radius_policy": "Per-axis L2 radius equals the actual first full-same update norm and first-plane radius",
+                        "radius_policy": f"Per-axis L2 radius equals the actual first {variant} update norm and first-plane radius",
                     },
                 )
             elif name == "first":
@@ -1092,16 +1339,19 @@ def run_geometry(args):
         )
         print(result["figure_state"], flush=True)
     if augment:
-        archive_augmentation(target, result, clean)
+        archive_augmentation(target, result, clean, run)
     else:
         clean.dump(target, result)
 
 
 def plot_saved(args):
     """Render complete numerical results in an existing plotting environment."""
-    folder = args.run.resolve() / "geometry" / args.case
+    variant = getattr(args, "attack_variant", "full-same")
+    folder = geometry_folder(args.run.resolve(), args.case, variant)
     path = folder / "geometry.json"
     result = json.loads(path.read_text())
+    if result.get("attack_variant", "full-same") != variant:
+        raise ValueError("Saved geometry refers to another attack variant")
     os.environ.setdefault("MPLCONFIGDIR", str(args.run.resolve() / "cache/matplotlib"))
     result["figure_ce_scale"] = plot(result, folder, args.ce_limits)
     result["figure_state"] = "complete"
@@ -1115,6 +1365,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run", type=Path)
     parser.add_argument("--case", required=True)
+    parser.add_argument(
+        "--attack-variant", choices=ATTACK_VARIANTS, default="full-same"
+    )
     parser.add_argument(
         "--planes",
         nargs="+",

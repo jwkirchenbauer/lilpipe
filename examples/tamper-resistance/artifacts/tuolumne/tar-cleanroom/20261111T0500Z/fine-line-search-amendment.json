@@ -1,0 +1,25 @@
+{
+  "created_utc": "2026-11-11 08:18:51 UTC",
+  "case": "full-ce-worst-fresh-retain",
+  "radius_l2": 0.75,
+  "steps": 8,
+  "step_lengths": [
+    0.000001,
+    0.000003,
+    0.00001,
+    0.00003,
+    0.0001,
+    0.0003,
+    0.001,
+    0.003,
+    0.01,
+    0.03,
+    0.1,
+    0.3,
+    0.75
+  ],
+  "reason": "Original declared coarse-grid monotone search accepts0 despite gradientnorm6689.55; smallest trial.001 raises CE12.2915→12.3830. Adam firstupdate also raises loss thenlaterdescends. Check an unsampled smaller step range before interpreting unchanged output.",
+  "adaptive": true,
+  "original_results": "Preserved in local-search; this run writes local-search-fine",
+  "benchmark": "Full WMDP group requested, separate from original study collector"
+}

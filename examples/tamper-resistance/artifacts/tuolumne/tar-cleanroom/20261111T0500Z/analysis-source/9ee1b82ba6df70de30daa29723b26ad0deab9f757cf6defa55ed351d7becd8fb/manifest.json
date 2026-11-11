@@ -1,0 +1,11 @@
+{
+  "sha256": "9ee1b82ba6df70de30daa29723b26ad0deab9f757cf6defa55ed351d7becd8fb",
+  "archive": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/analysis-source/9ee1b82ba6df70de30daa29723b26ad0deab9f757cf6defa55ed351d7becd8fb",
+  "executing_files": {
+    "tar_cleanroom_analysis.py": "c1db6ec9895f6404adf3e584fdf0496ad2b6438893af6f3fa97147ee881adf14",
+    "tar_cleanroom.py": "dbaf4fca911537dbe068cd1e7cceda8eb2c9dd9cd388ffb2edd66e537d3055ba"
+  },
+  "study_sha256": "741284bd8402c2ab45e2b5bc18c4f06d7d13e14e57ccf3dbe801d9080f7da422",
+  "original_source_manifest_sha256": "fcd00435726fff28371bae02283ac3a0209f735dae03ffcbac5706c81ea877b7",
+  "protocol_amendments_sha256": "0f2c09dd1d5a93fbfe48f107e6057d28ebf74faa50fa38da468bfa0fe3b48ff4"
+}

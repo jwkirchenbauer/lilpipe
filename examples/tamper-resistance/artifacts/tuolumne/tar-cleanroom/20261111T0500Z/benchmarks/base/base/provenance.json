@@ -1,0 +1,132 @@
+{
+  "source": {
+    "sha256": "79b0f4ee2ef7f781a2e362a294a5370c1e567cc6cac89009e6ad257094ae4ec0",
+    "archive": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/analysis-source/79b0f4ee2ef7f781a2e362a294a5370c1e567cc6cac89009e6ad257094ae4ec0",
+    "executing_files": {
+      "tar_cleanroom_analysis.py": "bd0dd11393f9d063b6c0ad93c059923819ad9b27861658e8ac406dc9996a7da9",
+      "tar_cleanroom.py": "dbaf4fca911537dbe068cd1e7cceda8eb2c9dd9cd388ffb2edd66e537d3055ba"
+    },
+    "study_sha256": "741284bd8402c2ab45e2b5bc18c4f06d7d13e14e57ccf3dbe801d9080f7da422",
+    "original_source_manifest_sha256": "fcd00435726fff28371bae02283ac3a0209f735dae03ffcbac5706c81ea877b7"
+  },
+  "checkpoint": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+  "checkpoint_files": {
+    "added_tokens.json": {
+      "bytes": 42,
+      "sha256": "d606246b713e31b1b43dfe913554dd47819089b9e44b9ebaa294eda2589a6b4c"
+    },
+    "all_results.json": {
+      "bytes": 728,
+      "sha256": "031c6853808a3809a92852c256595e476e4b94d3ba93febf37d1dc588d37bc67"
+    },
+    "config.json": {
+      "bytes": 638,
+      "sha256": "e8781201ac85df8fba859aeb7a53f16725f3ec32c05de51999259376f75338b8"
+    },
+    "eval_results.json": {
+      "bytes": 553,
+      "sha256": "1f53af4f42f35ffb8e2c84290d97ffa94cb80eb944956909ee660d2e57ed72dc"
+    },
+    "generation_config.json": {
+      "bytes": 111,
+      "sha256": "88b65735808f9b532ac786a0eaa791ab59a31dd243de934fc154e3a2692b4c1a"
+    },
+    "model-00001-of-00008.safetensors": {
+      "bytes": 1889587040,
+      "sha256": "a6ec4a0398df9d56786afa9cce026423ec48a07ddc5ed5eba087614cae2dd746"
+    },
+    "model-00002-of-00008.safetensors": {
+      "bytes": 1946243936,
+      "sha256": "1289796f16f33ef4c6b8a76b3d9e5169198a69daa0b5b660b5a3d5cae0dc1cf7"
+    },
+    "model-00003-of-00008.safetensors": {
+      "bytes": 1979781432,
+      "sha256": "6fc338de96c672840222ca19a12b44f09110048974bde8ab0f4c1da055d99c3f"
+    },
+    "model-00004-of-00008.safetensors": {
+      "bytes": 1946243984,
+      "sha256": "92d948413fd7ac6c4fd5f6c36902bb7a72d2cddca19628c88e6f3b3e5482ab37"
+    },
+    "model-00005-of-00008.safetensors": {
+      "bytes": 1979781448,
+      "sha256": "d0ce3cc66d224a0e6014a1df6b7e56da29f5db52da1866ad0cc07d7583fb7c31"
+    },
+    "model-00006-of-00008.safetensors": {
+      "bytes": 1946243984,
+      "sha256": "0b63ef55219d125eaeefabd2a33c358dced22b9c75d1d816bb7a871bd3773951"
+    },
+    "model-00007-of-00008.safetensors": {
+      "bytes": 1979781448,
+      "sha256": "b0e0a3c0b992925ff9a60f1234950af0bcc7ce3015c8a386a342489e76f5d09c"
+    },
+    "model-00008-of-00008.safetensors": {
+      "bytes": 815834680,
+      "sha256": "667dd6958d5137dcba514db514c7970d18c9cd5d95fbb0c82490d558bd2a246c"
+    },
+    "model.safetensors.index.json": {
+      "bytes": 23950,
+      "sha256": "7b57b6b93e91a44ad1bd030819d6411fb036c71ce6f80a87ab4286bf48fc836d"
+    },
+    "pytorch_model.bin.index.json": {
+      "bytes": 23950,
+      "sha256": "d2ea1c741eefb504b4ece1697f37453e24be42c21dc3178a0c567200213629eb"
+    },
+    "special_tokens_map.json": {
+      "bytes": 168,
+      "sha256": "9921edfd5322dd354ec44f825329e1c6c6b89b357bf3ce49377be325b23eaa34"
+    },
+    "tokenizer.json": {
+      "bytes": 1795303,
+      "sha256": "fc4f0bd70b3709312d9d1d9e5ba674794b6bc5abc17429897a540f93882f25fc"
+    },
+    "tokenizer.model": {
+      "bytes": 493443,
+      "sha256": "dadfd56d766715c61d2ef780a525ab43b8e6da4de6865bda3d95fdef5e134055"
+    },
+    "tokenizer_config.json": {
+      "bytes": 1431,
+      "sha256": "ba035f5706de233a42e4b7260abdd4afa2b0d17c26bc9449af6ef59010f409b8"
+    },
+    "train_results.json": {
+      "bytes": 195,
+      "sha256": "b17c436eab49a609e724d58948e129f130056b86b003a0a9017be5f1f2312879"
+    },
+    "trainer_state.json": {
+      "bytes": 309380,
+      "sha256": "e0b2c723416018a5959f38068cf31aed8617dfe392e6ca7c4d9e598f0cd6ebf6"
+    }
+  },
+  "frozen_task_files": {
+    "mmlu_no_bio.yaml": "049885f5f05c0f60a43e9fd749b245028555fc173a08a36175452dab72e27a15",
+    "wmdp_bio_categorized_mcqa/_default_template_yaml": "011aa06daa186c8115ab1cd43f8c10d6b0e55996e811660ecc1e6117f6804d58",
+    "wmdp_bio_categorized_mcqa/_wmdp_bio_robust.yaml": "f211781013e5e45a4297a51aaa151a0e85d030cc811f35a665b2cdff9fdc0ae7",
+    "wmdp_bio_categorized_mcqa/wmdp_bio_robust_bioweapons_and_bioterrorism.yaml": "e675c85f5300c61454055d7342b6c106b33673de89e19666e4725fab129edb1f",
+    "wmdp_bio_categorized_mcqa/wmdp_bio_robust_dual_use_virology.yaml": "3b4a3aa09beeade354739b7363a264eec21a81e0c5c094519c73a70b76b7118f",
+    "wmdp_bio_categorized_mcqa/wmdp_bio_robust_enhanced_potential_pandemic_pathogens.yaml": "4c1e6f5d7f22c57bdd4a93e7545dd2b248269d26a25e62a2664c46b48cf32f83",
+    "wmdp_bio_categorized_mcqa/wmdp_bio_robust_expanding_access_to_threat_vectors.yaml": "d23724eeeafcc871289a87623e9bbe9cfaa849f2713c17c295271477ccfb2cf3",
+    "wmdp_bio_categorized_mcqa/wmdp_bio_robust_reverse_genetics_and_easy_editing.yaml": "61e4e2b52a99ab63669c3b451bfcbbf1296d9913659e029e6d6af4b0f2cbd776",
+    "wmdp_bio_categorized_mcqa/wmdp_bio_robust_viral_vector_research.yaml": "e4ffff6afa20543d405ad30ef8679a6b4e9691759b1fbc129e695695f6d5a95c"
+  },
+  "python": "3.12.16 (main, Oct 26 2026, 11:37:43) [GCC 15.3.0]",
+  "executable": "/usr/WS2/kirchenb/lilpipe-tar-train-rocm72-v4/bin/python",
+  "platform": "Linux-4.18.0-553.174.1.1toss.t4.x86_64-x86_64-with-glibc2.28",
+  "packages": {
+    "torch": "2.12.1+rocm7.2",
+    "transformers": "5.14.1",
+    "accelerate": "1.13.0",
+    "lm_eval": "0.4.11",
+    "datasets": "4.8.4"
+  },
+  "harness_source_files": {
+    "/usr/WS2/kirchenb/lilpipe-tar-train-rocm72-v4/lib/python3.12/site-packages/lm_eval/models/huggingface.py": "316e1e7cebb5664072fcc56269be916018175664a5dc9c72cc664c157f720d90",
+    "/usr/WS2/kirchenb/lilpipe-tar-train-rocm72-v4/lib/python3.12/site-packages/lm_eval/evaluator.py": "7859a19ff2ab13cd095f9aaa603466c2eaa6a0d6236837838bbb41a0bc321834"
+  },
+  "launcher": {
+    "FLUX_JOB_ID": "fcQKrJb",
+    "CUDA_VISIBLE_DEVICES": "0,1,2,3"
+  },
+  "observed_logits_dtypes": [
+    "torch.float32"
+  ],
+  "all_parameters_fp32_after": true
+}

@@ -1,0 +1,59 @@
+{
+  "created_utc": "2026-11-11 08:27:53 UTC",
+  "geometry_ME": {
+    "superseded": {
+      "first": {
+        "key": "full-maxent-terminal-fresh-retain",
+        "job_id": "f3jQu9WtZZAf",
+        "exit_code": 0
+      },
+      "second": {
+        "key": "full-maxent-terminal-fresh-retain",
+        "job_id": "f3jQuqba7QRM",
+        "exit_code": 0
+      },
+      "reason": "Same full-same saved trajectory ready; no need to wait for other attack variants"
+    },
+    "first": {
+      "job_id": "f3jRCVwPr2t7",
+      "exit_code": 0
+    },
+    "second": {
+      "job_id": "f3jRChkcS6Hu",
+      "exit_code": 0
+    }
+  },
+  "geometry_CE": {
+    "superseded": {
+      "first": {
+        "key": "full-ce-worst-fresh-retain",
+        "job_id": "f3jQu9XCMQYo",
+        "exit_code": 0
+      },
+      "second": {
+        "key": "full-ce-worst-fresh-retain",
+        "job_id": "f3jQuqZwECPH",
+        "exit_code": 0
+      },
+      "reason": "Saved full-same states complete; begin geometry before other attackvariants finish"
+    },
+    "first": {
+      "job_id": "f3jRF3dQtNtP",
+      "exit_code": 0
+    },
+    "second": {
+      "job_id": "f3jRGGtKAGUX",
+      "exit_code": 0
+    }
+  },
+  "fine_search": {
+    "job_id": "f3jRHSVircPZ",
+    "exit_code": 0
+  },
+  "control_plot_v3": {
+    "job_id": "f3jR4HvX4fMh"
+  },
+  "control_plot_v4": {
+    "job_id": "f3jRAGGa5Myq"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "full-maxent-terminal-fresh-retain",
+  "mode": "full",
+  "objective": "maxent-terminal",
+  "attack_batch_size": 8,
+  "inner_steps": 4,
+  "outer_steps": 125,
+  "outer_learning_rate": 5e-06,
+  "retain_coefficient": 2.5,
+  "seed": 42,
+  "extends_case": "full-maxent-terminal",
+  "retain_stream": {
+    "path": "retain-refresh.json",
+    "content_sha256": "9a0d8fbb4550317c5afa1c7089c89f452b132b2da9d5df9ff52fe415bf3597bf",
+    "file_sha256": "ef2966014e7469364e796c6d96fb37fae9a3c928159716c30ed77565218deee4"
+  }
+}

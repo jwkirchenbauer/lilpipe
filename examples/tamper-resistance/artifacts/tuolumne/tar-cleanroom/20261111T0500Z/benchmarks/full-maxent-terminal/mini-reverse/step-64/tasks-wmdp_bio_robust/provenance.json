@@ -1,0 +1,109 @@
+{
+  "source": {
+    "sha256": "9ee1b82ba6df70de30daa29723b26ad0deab9f757cf6defa55ed351d7becd8fb",
+    "archive": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/analysis-source/9ee1b82ba6df70de30daa29723b26ad0deab9f757cf6defa55ed351d7becd8fb",
+    "executing_files": {
+      "tar_cleanroom_analysis.py": "c1db6ec9895f6404adf3e584fdf0496ad2b6438893af6f3fa97147ee881adf14",
+      "tar_cleanroom.py": "dbaf4fca911537dbe068cd1e7cceda8eb2c9dd9cd388ffb2edd66e537d3055ba"
+    },
+    "study_sha256": "741284bd8402c2ab45e2b5bc18c4f06d7d13e14e57ccf3dbe801d9080f7da422",
+    "original_source_manifest_sha256": "fcd00435726fff28371bae02283ac3a0209f735dae03ffcbac5706c81ea877b7",
+    "protocol_amendments_sha256": "0f2c09dd1d5a93fbfe48f107e6057d28ebf74faa50fa38da468bfa0fe3b48ff4"
+  },
+  "checkpoint": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/cases/full-maxent-terminal/attacks/mini-reverse/checkpoint-64",
+  "checkpoint_files": {
+    "chat_template.jinja": {
+      "bytes": 410,
+      "sha256": "66291cf0045c2425a3a667cf3cbb7af2b11f09e025c02f97245323ab79119362"
+    },
+    "checkpoint-complete.json": {
+      "bytes": 48,
+      "sha256": "be9c0b919255e934d23fde5612ab00b6e47fe505e8b6148bd0d7cb55c2a22de0"
+    },
+    "config.json": {
+      "bytes": 685,
+      "sha256": "48d7588f32c4f6db757479b41e58bec8b4bee92d2c970dde134c63172e929f0f"
+    },
+    "generation_config.json": {
+      "bytes": 163,
+      "sha256": "aaaf2a0bd3f0e54fa0939b08608f6ae3b99c0dfdbd03461b5710cb10e0be286e"
+    },
+    "model-00001-of-00008.safetensors": {
+      "bytes": 3900820960,
+      "sha256": "7eb459117f82a4619dd7efdf2144c56dacae8f48b27a0fec429c775b72c2e970"
+    },
+    "model-00002-of-00008.safetensors": {
+      "bytes": 3976352256,
+      "sha256": "bf2ee2b8a3c6eb7717c70f476631cd0e43ba46790b92408be1c1c3c7f1ba4753"
+    },
+    "model-00003-of-00008.safetensors": {
+      "bytes": 3875689080,
+      "sha256": "7c64ade68b302c4ce883554af41f66cd6faf51e1534fc64afbda55d7f86df078"
+    },
+    "model-00004-of-00008.safetensors": {
+      "bytes": 3976352296,
+      "sha256": "0c02de279afa76b2a702baee4f39c801e661ddd7783f9d7f2d4c8ff9ff9063d4"
+    },
+    "model-00005-of-00008.safetensors": {
+      "bytes": 3875689112,
+      "sha256": "c5d543e9d08a65e8ff6311ef1f60730ce2f7b02ca3b80f9d966a56bfb4a9ca1a"
+    },
+    "model-00006-of-00008.safetensors": {
+      "bytes": 3976352296,
+      "sha256": "1347a13c6d4c9b1c8daacca9ef8ed1696410afaf647f5124738b08b62af4e418"
+    },
+    "model-00007-of-00008.safetensors": {
+      "bytes": 3875689112,
+      "sha256": "ad91ca7ceecc6de262b0f9fc02ec2f50ecc9975d911133f524c29c4f57d2633d"
+    },
+    "model-00008-of-00008.safetensors": {
+      "bytes": 1510016944,
+      "sha256": "baafe8ffc0176592209e1ce6dd6a3d1a2b292d8d6c470805fe51f7f13009669f"
+    },
+    "model.safetensors.index.json": {
+      "bytes": 23986,
+      "sha256": "c6e6206db151b4f2dadc55a15d453f0756c0dc4191dc1d8e0f766363a8f0d5fc"
+    },
+    "tokenizer.json": {
+      "bytes": 3505751,
+      "sha256": "1d5b9634c23bdd4540f633d327120e1fa4b57a2a723a56d7a92debfc4d15c061"
+    },
+    "tokenizer_config.json": {
+      "bytes": 527,
+      "sha256": "eab29c608f4cc298909cf8772a145d422d16ab542489f7ac5984b9c2f223da22"
+    }
+  },
+  "frozen_task_files": {
+    "mmlu_no_bio.yaml": "049885f5f05c0f60a43e9fd749b245028555fc173a08a36175452dab72e27a15",
+    "wmdp_bio_categorized_mcqa/_default_template_yaml": "011aa06daa186c8115ab1cd43f8c10d6b0e55996e811660ecc1e6117f6804d58",
+    "wmdp_bio_categorized_mcqa/_wmdp_bio_robust.yaml": "f211781013e5e45a4297a51aaa151a0e85d030cc811f35a665b2cdff9fdc0ae7",
+    "wmdp_bio_categorized_mcqa/wmdp_bio_robust_bioweapons_and_bioterrorism.yaml": "e675c85f5300c61454055d7342b6c106b33673de89e19666e4725fab129edb1f",
+    "wmdp_bio_categorized_mcqa/wmdp_bio_robust_dual_use_virology.yaml": "3b4a3aa09beeade354739b7363a264eec21a81e0c5c094519c73a70b76b7118f",
+    "wmdp_bio_categorized_mcqa/wmdp_bio_robust_enhanced_potential_pandemic_pathogens.yaml": "4c1e6f5d7f22c57bdd4a93e7545dd2b248269d26a25e62a2664c46b48cf32f83",
+    "wmdp_bio_categorized_mcqa/wmdp_bio_robust_expanding_access_to_threat_vectors.yaml": "d23724eeeafcc871289a87623e9bbe9cfaa849f2713c17c295271477ccfb2cf3",
+    "wmdp_bio_categorized_mcqa/wmdp_bio_robust_reverse_genetics_and_easy_editing.yaml": "61e4e2b52a99ab63669c3b451bfcbbf1296d9913659e029e6d6af4b0f2cbd776",
+    "wmdp_bio_categorized_mcqa/wmdp_bio_robust_viral_vector_research.yaml": "e4ffff6afa20543d405ad30ef8679a6b4e9691759b1fbc129e695695f6d5a95c"
+  },
+  "python": "3.12.16 (main, Oct 26 2026, 11:37:43) [GCC 15.3.0]",
+  "executable": "/usr/WS2/kirchenb/lilpipe-tar-train-rocm72-v4/bin/python",
+  "platform": "Linux-4.18.0-553.174.1.1toss.t4.x86_64-x86_64-with-glibc2.28",
+  "packages": {
+    "torch": "2.12.1+rocm7.2",
+    "transformers": "5.14.1",
+    "accelerate": "1.13.0",
+    "lm_eval": "0.4.11",
+    "datasets": "4.8.4"
+  },
+  "harness_source_files": {
+    "/usr/WS2/kirchenb/lilpipe-tar-train-rocm72-v4/lib/python3.12/site-packages/lm_eval/models/huggingface.py": "316e1e7cebb5664072fcc56269be916018175664a5dc9c72cc664c157f720d90",
+    "/usr/WS2/kirchenb/lilpipe-tar-train-rocm72-v4/lib/python3.12/site-packages/lm_eval/evaluator.py": "7859a19ff2ab13cd095f9aaa603466c2eaa6a0d6236837838bbb41a0bc321834"
+  },
+  "launcher": {
+    "FLUX_JOB_ID": "fVnM4KH",
+    "CUDA_VISIBLE_DEVICES": "0,1,2,3"
+  },
+  "observed_logits_dtypes": [
+    "torch.float32"
+  ],
+  "all_parameters_fp32_after": true
+}

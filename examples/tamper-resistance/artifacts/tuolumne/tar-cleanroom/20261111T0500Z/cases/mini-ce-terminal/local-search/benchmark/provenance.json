@@ -1,0 +1,92 @@
+{
+  "source": {
+    "sha256": "99bc9c1b122ad36ea757a85a31f978aa354421b8bca137e80c8b8986dbca7d05",
+    "archive": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/analysis-source/99bc9c1b122ad36ea757a85a31f978aa354421b8bca137e80c8b8986dbca7d05",
+    "executing_files": {
+      "tar_cleanroom_analysis.py": "8ee04a30eefa1cf9793e785aa305736557e273f07fac3e97b867be163181369c",
+      "tar_cleanroom.py": "1faaf89e73b18d3b70b4fc12c2f6724df51931c3cb3828b9389d3d959f673fd6"
+    },
+    "study_sha256": "741284bd8402c2ab45e2b5bc18c4f06d7d13e14e57ccf3dbe801d9080f7da422",
+    "original_source_manifest_sha256": "fcd00435726fff28371bae02283ac3a0209f735dae03ffcbac5706c81ea877b7",
+    "protocol_amendments_sha256": "0f2c09dd1d5a93fbfe48f107e6057d28ebf74faa50fa38da468bfa0fe3b48ff4"
+  },
+  "checkpoint": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/cases/mini-ce-terminal/local-search/checkpoint-8",
+  "checkpoint_files": {
+    "chat_template.jinja": {
+      "bytes": 410,
+      "sha256": "66291cf0045c2425a3a667cf3cbb7af2b11f09e025c02f97245323ab79119362"
+    },
+    "checkpoint-complete.json": {
+      "bytes": 48,
+      "sha256": "be9c0b919255e934d23fde5612ab00b6e47fe505e8b6148bd0d7cb55c2a22de0"
+    },
+    "config.json": {
+      "bytes": 685,
+      "sha256": "48d7588f32c4f6db757479b41e58bec8b4bee92d2c970dde134c63172e929f0f"
+    },
+    "generation_config.json": {
+      "bytes": 163,
+      "sha256": "aaaf2a0bd3f0e54fa0939b08608f6ae3b99c0dfdbd03461b5710cb10e0be286e"
+    },
+    "model-00001-of-00008.safetensors": {
+      "bytes": 3900820960,
+      "sha256": "4be985dcb9f70226c9260428052a7d9421d09cd6b2f4af02dee9cf7c005973c0"
+    },
+    "model-00002-of-00008.safetensors": {
+      "bytes": 3976352256,
+      "sha256": "8f26bbf18c84f4b607c61ae2dcd2f736857c9a1f82e3186a74495b369f45ace4"
+    },
+    "model-00003-of-00008.safetensors": {
+      "bytes": 3875689080,
+      "sha256": "63fa364310d680334c189170fec0f789bf905cdfc42fbe410b2945df1ab96c0d"
+    },
+    "model-00004-of-00008.safetensors": {
+      "bytes": 3976352296,
+      "sha256": "4689ff349affdfde68e2b0b076f5941996b0a35db5ebc89521a7f329ae14a38f"
+    },
+    "model-00005-of-00008.safetensors": {
+      "bytes": 3875689112,
+      "sha256": "ecdefc09eb4e6a372aea82bcc42c359a31473e95119f128cc205410c4c1b4c01"
+    },
+    "model-00006-of-00008.safetensors": {
+      "bytes": 3976352296,
+      "sha256": "76d0937c5eebe3e90dfa2ce65a784ac8bc5e1b613029a9e714cc49c497cffe7d"
+    },
+    "model-00007-of-00008.safetensors": {
+      "bytes": 3875689112,
+      "sha256": "9bf2fb887e3bf59bdd4dbe53d6a56d880976f2562f333cf4606ed7af85cfcc57"
+    },
+    "model-00008-of-00008.safetensors": {
+      "bytes": 1510016944,
+      "sha256": "d678b39bb75abf880a2e50ff6c065306bb405573f43a82c28c36e452e2e1d41b"
+    },
+    "model.safetensors.index.json": {
+      "bytes": 23986,
+      "sha256": "c6e6206db151b4f2dadc55a15d453f0756c0dc4191dc1d8e0f766363a8f0d5fc"
+    },
+    "tokenizer.json": {
+      "bytes": 3505751,
+      "sha256": "1d5b9634c23bdd4540f633d327120e1fa4b57a2a723a56d7a92debfc4d15c061"
+    },
+    "tokenizer_config.json": {
+      "bytes": 527,
+      "sha256": "eab29c608f4cc298909cf8772a145d422d16ab542489f7ac5984b9c2f223da22"
+    }
+  },
+  "frozen_task_files": {
+    "mmlu_no_bio.yaml": "049885f5f05c0f60a43e9fd749b245028555fc173a08a36175452dab72e27a15",
+    "wmdp_bio_categorized_mcqa/_default_template_yaml": "011aa06daa186c8115ab1cd43f8c10d6b0e55996e811660ecc1e6117f6804d58",
+    "wmdp_bio_categorized_mcqa/_wmdp_bio_robust.yaml": "f211781013e5e45a4297a51aaa151a0e85d030cc811f35a665b2cdff9fdc0ae7",
+    "wmdp_bio_categorized_mcqa/wmdp_bio_robust_bioweapons_and_bioterrorism.yaml": "e675c85f5300c61454055d7342b6c106b33673de89e19666e4725fab129edb1f",
+    "wmdp_bio_categorized_mcqa/wmdp_bio_robust_dual_use_virology.yaml": "3b4a3aa09beeade354739b7363a264eec21a81e0c5c094519c73a70b76b7118f",
+    "wmdp_bio_categorized_mcqa/wmdp_bio_robust_enhanced_potential_pandemic_pathogens.yaml": "4c1e6f5d7f22c57bdd4a93e7545dd2b248269d26a25e62a2664c46b48cf32f83",
+    "wmdp_bio_categorized_mcqa/wmdp_bio_robust_expanding_access_to_threat_vectors.yaml": "d23724eeeafcc871289a87623e9bbe9cfaa849f2713c17c295271477ccfb2cf3",
+    "wmdp_bio_categorized_mcqa/wmdp_bio_robust_reverse_genetics_and_easy_editing.yaml": "61e4e2b52a99ab63669c3b451bfcbbf1296d9913659e029e6d6af4b0f2cbd776",
+    "wmdp_bio_categorized_mcqa/wmdp_bio_robust_viral_vector_research.yaml": "e4ffff6afa20543d405ad30ef8679a6b4e9691759b1fbc129e695695f6d5a95c"
+  },
+  "search_provenance": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/cases/mini-ce-terminal/local-search/provenance.json",
+  "observed_logits_dtypes": [
+    "torch.float32"
+  ],
+  "all_parameters_fp32_after": true
+}

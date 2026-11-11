@@ -44,12 +44,16 @@ elif [[ "$mode" == attack-bundle ]]; then
         fi
         python "$worker_dir/tar_cleanroom.py" attack "$run" --case "$name" --variant "$variant"
     done
-elif [[ "$mode" == benchmark-attacks ]]; then
+elif [[ "$mode" == benchmark-attacks || "$mode" == benchmark-all-trajectories ]]; then
     name=${1:?case required}
+    steps=(64)
+    if [[ "$mode" == benchmark-all-trajectories ]]; then steps=(1 4 16); fi
     for variant in full-same mini-same mini-reverse full-new; do
-        marker="$run/benchmarks/$name/$variant/step-64/tasks-wmdp_bio_robust/benchmark.json"
-        if [[ -f "$marker" ]] && rg -q '"state": "complete"' "$marker"; then continue; fi
-        python "$worker_dir/tar_cleanroom_analysis.py" benchmark "$run" --case "$name" --variant "$variant" --step 64 --tasks wmdp_bio_robust
+        for step in "${steps[@]}"; do
+            marker="$run/benchmarks/$name/$variant/step-$step/tasks-wmdp_bio_robust/benchmark.json"
+            if [[ -f "$marker" ]] && rg -q '"state": "complete"' "$marker"; then continue; fi
+            python "$worker_dir/tar_cleanroom_analysis.py" benchmark "$run" --case "$name" --variant "$variant" --step "$step" --tasks wmdp_bio_robust
+        done
     done
 elif [[ "$mode" == benchmark-defenses ]]; then
     name=${1:?case required}

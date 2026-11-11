@@ -1,0 +1,13 @@
+{
+  "purpose": "Measure capability at saved matched attack states to distinguish early recovery from later memorization or task degradation",
+  "requested_at_utc": "2026-11-11T07:10:03Z",
+  "selection": "All eight continuations under the attack batching they simulate; control full-same and mini-same",
+  "steps": [
+    1,
+    4,
+    16
+  ],
+  "task": "wmdp_bio_robust",
+  "completed_64_step_measurements": "Preserved; report all measured steps and strongest measured recovery, never replace endpoints with a selected best score",
+  "post_attack_mmlu": "Not planned in this amendment"
+}

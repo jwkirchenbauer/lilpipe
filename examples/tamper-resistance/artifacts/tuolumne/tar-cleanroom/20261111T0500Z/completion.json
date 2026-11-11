@@ -1,0 +1,47 @@
+{
+  "state": "complete",
+  "completed_utc": "2026-11-11T09:56:09Z",
+  "defense_continuations": 8,
+  "attack_trajectories": 36,
+  "regular_benchmark_points": 162,
+  "default_local_searches": 9,
+  "adaptive_fine_searches": 1,
+  "geometry_cases": 9,
+  "planes_per_case": 5,
+  "grid_records_per_plane": 81,
+  "additional_geometry": {
+    "case": "full-maxent-terminal-fresh-retain",
+    "attack_variant": "full-new",
+    "planes": 2,
+    "probe_cohorts": 3
+  },
+  "total_grid_records": 3807,
+  "geometry_all_case_ce_limits": [
+    0.0,
+    82.0
+  ],
+  "utility_passing_plot_cases": [
+    "control",
+    "full-maxent-terminal-fresh-retain",
+    "full-ce-worst-fresh-retain"
+  ],
+  "utility_passing_ce_limits": [
+    0.0,
+    32.0
+  ],
+  "matched_fidelity_states": [
+    {
+      "state": "outside tolerance",
+      "n": 4
+    },
+    {
+      "state": "verified",
+      "n": 4
+    }
+  ],
+  "tests": {
+    "cpu_and_plot_methods_passed": 71,
+    "multi_gpu_methods_passed_separately": 2
+  },
+  "interpretation": "Complete execution and evidence coverage; objective satisfaction, numerical fidelity, retained utility, and recovery remain separate outcomes."
+}

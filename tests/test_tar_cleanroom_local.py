@@ -1,8 +1,12 @@
 """CPU-only checks for norm-bounded local CE counterexample search."""
 
+import contextlib
+import io
 import math
 import unittest
+from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import patch
 
 import test_tar_cleanroom as fixtures
 
@@ -24,6 +28,15 @@ class ConstantLogitLM(torch.nn.Module):
         value = self.value * (0 if self.zero_gradient else 1)
         logit = value.expand_as(input_ids)
         return SimpleNamespace(logits=torch.stack((logit, -logit), -1))
+
+
+class NarrowLogitLM(ConstantLogitLM):
+    """CE decreases only in a narrow neighborhood of the initialization."""
+
+    def forward(self, input_ids, attention_mask=None, labels=None):
+        score = -((self.value - 1e-4) / 1e-4).square()
+        logit = score.expand_as(input_ids)
+        return SimpleNamespace(logits=torch.stack((logit, torch.zeros_like(logit)), -1))
 
 
 def cohort(label):
@@ -156,6 +169,121 @@ class LocalSearchTests(unittest.TestCase):
             CLEAN.local_projected_search(
                 ConstantLogitLM().double(), {"forget_train": cohort(0)}
             )
+
+    def test_fine_declared_grid_finds_descent_missed_by_default_grid(self):
+        data = {"forget_train": cohort(0)}
+        coarse = CLEAN.local_projected_search(NarrowLogitLM(), data, steps=1)
+        fine_grid = (3e-5, 1e-4, 0.001)
+        fine = CLEAN.local_projected_search(
+            NarrowLogitLM(), data, steps=1, step_lengths=fine_grid
+        )
+        self.assertEqual(coarse["trace"][1]["selected_step_length"], 0)
+        self.assertEqual(coarse["final_ce"], coarse["trace"][0]["ce"])
+        self.assertEqual(fine["trace"][1]["selected_step_length"], 1e-4)
+        self.assertLess(fine["final_ce"], coarse["final_ce"] - 0.5)
+        self.assertEqual(fine["candidate_step_lengths"], [0.0, *fine_grid])
+        self.assertEqual(
+            [row["step_length"] for row in fine["trace"][1]["candidates"]],
+            [0.0, *fine_grid],
+        )
+        self.assertEqual(fine["budget"]["candidate_forward_calls"], len(fine_grid))
+        self.assertEqual(
+            coarse["candidate_step_lengths"], [0.0, *CLEAN.LOCAL_STEP_LENGTHS]
+        )
+
+    def test_invalid_custom_grids_and_unsafe_output_names_are_rejected(self):
+        for values in (
+            (),
+            (math.nan,),
+            (math.inf,),
+            (0,),
+            (-0.1,),
+            (0.003, 0.001),
+            (0.001, 0.001),
+        ):
+            with self.subTest(values=values), self.assertRaises(ValueError):
+                CLEAN.local_projected_search(
+                    ConstantLogitLM(),
+                    {"forget_train": cohort(0)},
+                    steps=1,
+                    step_lengths=values,
+                )
+        for name in (
+            "",
+            ".",
+            "..",
+            "../escape",
+            "/absolute",
+            "a/b",
+            "a\\b",
+            "two words",
+            "-option",
+        ):
+            with self.subTest(name=name), self.assertRaises(ValueError):
+                CLEAN.local_attack(Path("/unused"), {}, {}, "control", output_name=name)
+        self.assertEqual(
+            CLEAN.validated_local_output_name("local-search-fine"), "local-search-fine"
+        )
+        self.assertEqual(CLEAN.validated_local_output_name("fine_2.0"), "fine_2.0")
+
+    def test_cli_validates_before_io_and_threads_declared_grid_and_output(self):
+        for option in (
+            ("--local-step-lengths", "nan"),
+            ("--local-output-name", "../escape"),
+        ):
+            with (
+                patch(
+                    "sys.argv",
+                    [
+                        "tar_cleanroom.py",
+                        "local-attack",
+                        "/unused",
+                        "--case",
+                        "control",
+                        *option,
+                    ],
+                ),
+                patch.object(CLEAN, "load_study") as load,
+                contextlib.redirect_stderr(io.StringIO()),
+            ):
+                with self.assertRaises(SystemExit) as error:
+                    CLEAN.main()
+                self.assertEqual(error.exception.code, 2)
+                load.assert_not_called()
+        study, data = {"fixture": "study"}, {"fixture": "data"}
+        with (
+            patch(
+                "sys.argv",
+                [
+                    "tar_cleanroom.py",
+                    "local-attack",
+                    "/unused",
+                    "--case",
+                    "control",
+                    "--local-step-lengths",
+                    "0.00003",
+                    "0.0001",
+                    "0.001",
+                    "--local-output-name",
+                    "local-search-fine",
+                ],
+            ),
+            patch.object(CLEAN, "load_study", return_value=study),
+            patch.object(CLEAN, "prepare_data", return_value=data),
+            patch.object(CLEAN, "local_attack") as attack,
+        ):
+            CLEAN.main()
+        attack.assert_called_once_with(
+            Path("/unused").resolve(),
+            study,
+            data,
+            "control",
+            0.75,
+            8,
+            False,
+            step_lengths=(3e-5, 1e-4, 0.001),
+            output_name="local-search-fine",
+        )
 
 
 if __name__ == "__main__":

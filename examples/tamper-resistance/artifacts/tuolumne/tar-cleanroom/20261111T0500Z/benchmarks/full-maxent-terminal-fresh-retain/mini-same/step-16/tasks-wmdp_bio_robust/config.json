@@ -1,0 +1,42 @@
+{
+  "point": {
+    "case": "full-maxent-terminal-fresh-retain",
+    "variant": "mini-same",
+    "step": 16,
+    "kind": "attack",
+    "checkpoint": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/cases/full-maxent-terminal-fresh-retain/attacks/mini-same/checkpoint-16",
+    "relative": "full-maxent-terminal-fresh-retain/mini-same/step-16",
+    "output": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/benchmarks/full-maxent-terminal-fresh-retain/mini-same/step-16"
+  },
+  "tasks": [
+    "wmdp_bio_robust"
+  ],
+  "expected_group_subtasks": {
+    "wmdp_bio_robust": [
+      "wmdp_bio_robust_bioweapons_and_bioterrorism",
+      "wmdp_bio_robust_dual_use_virology",
+      "wmdp_bio_robust_enhanced_potential_pandemic_pathogens",
+      "wmdp_bio_robust_expanding_access_to_threat_vectors",
+      "wmdp_bio_robust_reverse_genetics_and_easy_editing",
+      "wmdp_bio_robust_viral_vector_research"
+    ]
+  },
+  "task_include_path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/source/lm_eval_tasks",
+  "num_fewshot": 0,
+  "batch_size": 32,
+  "device": "cuda:0",
+  "dtype": "float32",
+  "mixed_precision_dtype": null,
+  "softmax_dtype": "float32",
+  "max_length": "model/tokenizer default, no additional context cap",
+  "apply_chat_template": false,
+  "limit": null,
+  "log_samples": false,
+  "bootstrap_iters": 0,
+  "seeds": {
+    "random": 0,
+    "numpy": 1234,
+    "torch": 1234,
+    "fewshot": 1234
+  }
+}

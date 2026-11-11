@@ -1,0 +1,14 @@
+{
+  "source/lm_eval_tasks/mmlu_no_bio.yaml": "049885f5f05c0f60a43e9fd749b245028555fc173a08a36175452dab72e27a15",
+  "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/_default_template_yaml": "011aa06daa186c8115ab1cd43f8c10d6b0e55996e811660ecc1e6117f6804d58",
+  "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/_wmdp_bio_robust.yaml": "f211781013e5e45a4297a51aaa151a0e85d030cc811f35a665b2cdff9fdc0ae7",
+  "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_bioweapons_and_bioterrorism.yaml": "e675c85f5300c61454055d7342b6c106b33673de89e19666e4725fab129edb1f",
+  "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_dual_use_virology.yaml": "3b4a3aa09beeade354739b7363a264eec21a81e0c5c094519c73a70b76b7118f",
+  "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_enhanced_potential_pandemic_pathogens.yaml": "4c1e6f5d7f22c57bdd4a93e7545dd2b248269d26a25e62a2664c46b48cf32f83",
+  "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_expanding_access_to_threat_vectors.yaml": "d23724eeeafcc871289a87623e9bbe9cfaa849f2713c17c295271477ccfb2cf3",
+  "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_reverse_genetics_and_easy_editing.yaml": "61e4e2b52a99ab63669c3b451bfcbbf1296d9913659e029e6d6af4b0f2cbd776",
+  "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_viral_vector_research.yaml": "e4ffff6afa20543d405ad30ef8679a6b4e9691759b1fbc129e695695f6d5a95c",
+  "source/run_tar_cleanroom.sh": "d7fe1fe72ba9662836d1902e4a1a037c8ad0a7f97e7c1a0ca0815cfb719bf877",
+  "source/tar_cleanroom.py": "b4fde1eae20ae24d93fe9af3b9adf5e09fbd1dcf1a2ed4a738ab1aa23cb22a53",
+  "source/tar_cleanroom_gradients.py": "16871068e36c561df9ef1e3793ad21346d2f00b0fd77028c8c2a830c07df52eb"
+}

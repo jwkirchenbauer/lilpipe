@@ -1,0 +1,69 @@
+{
+  "reason": "Split five-plane jobs into initial random/random-step/first and augmentation reference/fit to fit the one-hour debug queue, based on observed CPU preparation cost. Same frozen geometry-v2 code, coordinates, checkpoints, and cache checks. Superseded jobs canceled before execution.",
+  "superseded": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "full-maxent-terminal",
+        "job_id": "f3jQnyeZtayM",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "full-ce-terminal",
+        "job_id": "f3jQnydhV1Pd",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "full-ce-worst",
+        "job_id": "f3jQnycobSXZ",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "mini-maxent-terminal",
+        "job_id": "f3jQnydynsVR",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "mini-ce-terminal",
+        "job_id": "f3jQnyd5uJdM",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "mini-ce-worst",
+        "job_id": "f3jQnyeEckJs",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "full-maxent-terminal-fresh-retain",
+        "job_id": "f3jQnydLjBSo",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "full-ce-worst-fresh-retain",
+        "job_id": "f3jQnycXHaRm",
+        "exit_code": 0
+      }
+    }
+  ]
+}

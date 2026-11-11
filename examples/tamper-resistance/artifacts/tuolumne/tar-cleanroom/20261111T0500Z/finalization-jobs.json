@@ -1,0 +1,51 @@
+{
+  "report": {
+    "job_id": "f3jRikzaY8nB",
+    "exit_code": 0
+  },
+  "report_command": {
+    "name": "cr-report-final",
+    "target": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/source/profiles/analysis-v9/run_tar_cleanroom.sh report /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z",
+    "launcher": "python /p/vast1/kirchenb/llnl-tools/launch_tuo.py --environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2 --env_act_style=mm_activate --output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/report --qos=pdebug --bank=verival --run_name=cr-report-final --nodes=1 --tasks_per_node=1 --gpus_per_node=4 --torchrun=false --minutes=15 --pass_run_name=false --quiet_launch=true"
+  },
+  "canonical_plots": {
+    "job_id": "f3jRj9r2S3cs",
+    "exit_code": 0
+  },
+  "canonical_plot_command": {
+    "name": "cr-plots-final-canonical",
+    "target": "set -e; mm_activate /usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2; export MPLBACKEND=Agg MPLCONFIGDIR=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/cache/matplotlib TORCHAO_FORCE_SKIP_LOADING_SO_FILES=1 OMP_NUM_THREADS=8; unset LOCAL_RANK RANK WORLD_SIZE LOCAL_WORLD_SIZE; python /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/source/profiles/final-plots-v1/render.py /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z",
+    "parent": "f3jRikzaY8nB",
+    "launcher": "python /p/vast1/kirchenb/llnl-tools/launch_tuo.py --environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2 --env_act_style=mm_activate --output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/plots --qos=pdebug --bank=verival --run_name=cr-plots-final-canonical --nodes=1 --tasks_per_node=1 --gpus_per_node=4 --torchrun=false --minutes=15 --pass_run_name=false --quiet_launch=true --dependency=afterok:f3jRikzaY8nB"
+  },
+  "multi_gpu_unit": {
+    "job_id": "f3jRb5csBrCF",
+    "exit_code": 0
+  },
+  "additional_geometry": {
+    "job_id": "f3jRke5a38sH",
+    "exit_code": 0
+  },
+  "additional_geometry_command": {
+    "name": "cr-geometry-me-fresh-full-new",
+    "target": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/source/profiles/geometry-variant-v1/run_tar_cleanroom.sh geometry /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z --case full-maxent-terminal-fresh-retain --attack-variant full-new --planes first fit --cache-check-ce",
+    "launcher": "python /p/vast1/kirchenb/llnl-tools/launch_tuo.py --environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4 --env_act_style=mm_activate --output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/geometry --qos=pdebug --bank=verival --run_name=cr-geometry-me-fresh-full-new --nodes=1 --tasks_per_node=1 --gpus_per_node=4 --torchrun=false --minutes=55 --pass_run_name=false --quiet_launch=true"
+  },
+  "additional_plot": {
+    "submission": {
+      "job_id": "f3jRts7cuqmy",
+      "exit_code": 0
+    },
+    "command": {
+      "name": "cr-plots-final-strong-attacker",
+      "target": "set -e; mm_activate /usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2; export MPLBACKEND=Agg MPLCONFIGDIR=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/cache/matplotlib TORCHAO_FORCE_SKIP_LOADING_SO_FILES=1 OMP_NUM_THREADS=8; unset LOCAL_RANK RANK WORLD_SIZE LOCAL_WORLD_SIZE; python /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/source/profiles/final-plots-v2/render_additional.py /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z",
+      "parent": "f3jRke5a38sH",
+      "launcher": "python /p/vast1/kirchenb/llnl-tools/launch_tuo.py --environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2 --env_act_style=mm_activate --output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/plots --qos=pdebug --bank=verival --run_name=cr-plots-final-strong-attacker --nodes=1 --tasks_per_node=1 --gpus_per_node=4 --torchrun=false --minutes=15 --pass_run_name=false --quiet_launch=true --dependency=afterok:f3jRke5a38sH"
+    }
+  },
+  "seal_command": {
+    "name": "cr-seal-results",
+    "target": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/source/profiles/seal-v3/seal.sh /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z",
+    "launcher": "python /p/vast1/kirchenb/llnl-tools/launch_tuo.py --environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2 --env_act_style=mm_activate --output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/finalize --qos=pdebug --bank=verival --run_name=cr-seal-results --nodes=1 --tasks_per_node=1 --gpus_per_node=4 --torchrun=false --minutes=10 --pass_run_name=false --quiet_launch=true"
+  }
+}

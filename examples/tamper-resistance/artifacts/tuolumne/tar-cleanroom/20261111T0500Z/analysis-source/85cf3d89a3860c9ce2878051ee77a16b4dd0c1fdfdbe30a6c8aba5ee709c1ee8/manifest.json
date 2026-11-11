@@ -1,0 +1,18 @@
+{
+  "sha256": "85cf3d89a3860c9ce2878051ee77a16b4dd0c1fdfdbe30a6c8aba5ee709c1ee8",
+  "archive": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/analysis-source/85cf3d89a3860c9ce2878051ee77a16b4dd0c1fdfdbe30a6c8aba5ee709c1ee8",
+  "executing_files": {
+    "tar_cleanroom_analysis.py": "83998c10936c1d96b2590f275edf91476593e92a3fe67895b77398f9a4faec21",
+    "tar_cleanroom.py": "1faaf89e73b18d3b70b4fc12c2f6724df51931c3cb3828b9389d3d959f673fd6"
+  },
+  "study_sha256": "741284bd8402c2ab45e2b5bc18c4f06d7d13e14e57ccf3dbe801d9080f7da422",
+  "original_source_manifest_sha256": "fcd00435726fff28371bae02283ac3a0209f735dae03ffcbac5706c81ea877b7",
+  "executing_helper": {
+    "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/source/profiles/trajectory-v2/tar_cleanroom.py",
+    "sha256": "1faaf89e73b18d3b70b4fc12c2f6724df51931c3cb3828b9389d3d959f673fd6"
+  },
+  "protocol_amendments_sha256": "0f2c09dd1d5a93fbfe48f107e6057d28ebf74faa50fa38da468bfa0fe3b48ff4",
+  "case_extensions_sha256": "08db8e9928c5f8b75641763ff40c31daddbf0428858d56284c9e395e010406fc",
+  "retain_refresh_sha256": "ef2966014e7469364e796c6d96fb37fae9a3c928159716c30ed77565218deee4",
+  "attack_capability_trajectory_amendment_sha256": "75fa4c8e2d82a4967cc51de9c4a658a48cefc1e3f89d50863be1a29c82603a80"
+}

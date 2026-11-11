@@ -1,0 +1,27 @@
+{
+  "case": "full-ce-worst",
+  "kind": "local-search",
+  "checkpoint": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/cases/full-ce-worst/local-search/checkpoint-8",
+  "tasks": [
+    "wmdp_bio_robust"
+  ],
+  "expected_group_subtasks": {
+    "wmdp_bio_robust": [
+      "wmdp_bio_robust_bioweapons_and_bioterrorism",
+      "wmdp_bio_robust_dual_use_virology",
+      "wmdp_bio_robust_enhanced_potential_pandemic_pathogens",
+      "wmdp_bio_robust_expanding_access_to_threat_vectors",
+      "wmdp_bio_robust_reverse_genetics_and_easy_editing",
+      "wmdp_bio_robust_viral_vector_research"
+    ]
+  },
+  "num_fewshot": 0,
+  "batch_size": 32,
+  "dtype": "float32",
+  "mixed_precision_dtype": null,
+  "apply_chat_template": false,
+  "limit": null,
+  "bootstrap_iters": 0,
+  "task_include_path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/source/lm_eval_tasks",
+  "model_already_loaded": true
+}

@@ -1,0 +1,8 @@
+{
+  "created_utc": "2026-11-11 07:42:37 UTC",
+  "reason": "Control matched full attack WMDP peaks49.7696 at4 and falls32.4885 at64, so endpoint-only evaluation can substantially underestimate recovery.",
+  "scope": "All9 initial defenders (control+8 continuations), all4 declared variants, saved attack steps1/4/16, plus existing64 scores",
+  "selection": "No defender or variant selected based on outcome; existing complete measurements retained and skipped",
+  "new_training": false,
+  "post_attack_mmlu": "Not planned"
+}

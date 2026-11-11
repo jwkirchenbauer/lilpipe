@@ -1,0 +1,21 @@
+{
+  "comparison_cases": [
+    "control",
+    "full-maxent-terminal-fresh-retain",
+    "full-ce-worst-fresh-retain"
+  ],
+  "additional_attacker": {
+    "case": "full-maxent-terminal-fresh-retain",
+    "variant": "full-new"
+  },
+  "ce_scale": {
+    "ce_min": 0.0,
+    "ce_max": 32.0
+  },
+  "canonical_plot_source_sha256": "0fc320139065a03632fa4a0519e6089d9c04fe12453d900911a14447ac8f8363",
+  "variant_plot_source_sha256": "a649c5c687515a8af4517f3e80e5adc20288e7261351abfbeab3b8c00203f986",
+  "driver_sha256": "4f092852a782011e252f0f717f4cf82df9f87225cda169e449967db31d285f03",
+  "policy": "A single shared CE range across the three utility-passing models and the additional attacker view; measured native grids remain unchanged.",
+  "case": "full-maxent-terminal-fresh-retain",
+  "input_geometry_sha256": "4ba5d250cf011f542a44dbc70096aa40c2b552e06f7eacd567c1ac09babd29ab"
+}

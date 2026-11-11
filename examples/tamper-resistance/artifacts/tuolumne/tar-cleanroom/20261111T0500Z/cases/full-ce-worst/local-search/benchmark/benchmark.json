@@ -1,0 +1,20 @@
+{
+  "state": "complete",
+  "case": "full-ce-worst",
+  "requested_tasks": [
+    "wmdp_bio_robust"
+  ],
+  "scores_percent": {
+    "wmdp_bio_robust": 26.612903225806456
+  },
+  "completed_tasks": [
+    "wmdp_bio_robust"
+  ],
+  "seconds": 117.71619310695678,
+  "budget": {
+    "forward_calls": 28,
+    "forward_input_tokens": 123868,
+    "backward_calls": 0
+  },
+  "token_budget_scope": "All unmasked model input tokens including prompt context; separate from search supervised next-token budgets"
+}

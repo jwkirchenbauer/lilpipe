@@ -1,0 +1,90 @@
+{
+  "refresh_first": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "full-maxent-terminal-fresh-retain",
+        "exit_code": 0,
+        "job_id": "f3jQdHK8vYxw"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "full-ce-worst-fresh-retain",
+        "exit_code": 0,
+        "job_id": "f3jQdHJrcgs9"
+      }
+    }
+  ],
+  "refresh_second": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "full-maxent-terminal-fresh-retain",
+        "job_id": "f3jQhKXU7s5q",
+        "exit_code": 0,
+        "output": "age, giving a few seconds to check that you're sure...\nRemoving existing launch file: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/retention/cr-full-maxent-terminal-fresh-retain-b/launch.sh\nRemoving existing runner file: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/retention/cr-full-maxent-terminal-fresh-retain-b/subrunner.sh\nSubmission: flux batch --dependency=afterok:f3jQdHK8vYxw -q pdebug --bank=verival --job-name=cr-full-maxent-terminal-fresh-retain-b -t55 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/retention/cr-full-maxent-terminal-fresh-retain-b/launch.sh\nLaunched job_id=f3jQhKXU7s5q.\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "full-ce-worst-fresh-retain",
+        "job_id": "f3jQhKXBozz3",
+        "exit_code": 0,
+        "output": "f3jQcRWRXwMH    pdebug cr-ba-mi kirchenb  R      10:44      1 tuolumne1044\n      f3jQcRVWAPCs    pdebug cr-ba-mi kirchenb  R      10:44      1 tuolumne1045\n      f3jQcRV7vZyh    pdebug cr-ba-mi kirchenb  R      10:44      1 tuolumne1046\n      f3ixbcxhsnw1    pbatch advgame- kirchenb  R    7:44:08      6 tuolumne[2015-2016,2018,2021-2022,2039]\nWarning: You provided a custom dependency string: afterok:f3jQdHJrcgs9\nThis is advanced usage, giving a few seconds to check that you're sure...\nSubmission: flux batch --dependency=afterok:f3jQdHJrcgs9 -q pdebug --bank=verival --job-name=cr-full-ce-worst-fresh-retain-b -t55 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/retention/cr-full-ce-worst-fresh-retain-b/launch.sh\nLaunched job_id=f3jQhKXBozz3.\n"
+      }
+    }
+  ],
+  "endpoint": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "benchmark-attacks-full-maxent-terminal",
+        "exit_code": 0,
+        "job_id": "f3jQcRW7k5y9"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "benchmark-attacks-full-ce-terminal",
+        "exit_code": 0,
+        "job_id": "f3jQcRVoxEb1"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "benchmark-attacks-full-ce-worst",
+        "exit_code": 0,
+        "job_id": "f3jQcRWjKnjR"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "benchmark-attacks-mini-maxent-terminal",
+        "exit_code": 0,
+        "job_id": "f3jQcRV7vZyh"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "benchmark-attacks-mini-ce-terminal",
+        "exit_code": 0,
+        "job_id": "f3jQcRVWAPCs"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "benchmark-attacks-mini-ce-worst",
+        "exit_code": 0,
+        "job_id": "f3jQcRWRXwMH"
+      }
+    }
+  ]
+}

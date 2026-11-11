@@ -48,6 +48,7 @@ class AnalysisTests(unittest.TestCase):
             "case-extensions.json",
             "retain-refresh.json",
             "attack-capability-trajectory-amendment.json",
+            "fine-line-search-amendment.json",
         ):
             self.save(filename, {"provenance_fixture": filename})
         helper = self.run / "helper.py"
@@ -87,11 +88,21 @@ class AnalysisTests(unittest.TestCase):
             results[0]["attack_capability_trajectory_amendment_sha256"],
             ANALYSIS.sha256(self.run / "attack-capability-trajectory-amendment.json"),
         )
+        self.assertEqual(
+            results[0]["fine_line_search_amendment_sha256"],
+            ANALYSIS.sha256(self.run / "fine-line-search-amendment.json"),
+        )
 
     def local_record(
-        self, *, state="complete", last_step=4, distance=0.5, benchmark=False
+        self,
+        *,
+        state="complete",
+        last_step=4,
+        distance=0.5,
+        benchmark=False,
+        folder_name="local-search",
     ):
-        folder = self.run / "cases/control/local-search"
+        folder = self.run / "cases/control" / folder_name
         radius, tolerance = 0.5, 5e-7
         config = {
             "case": "control",
@@ -125,7 +136,7 @@ class AnalysisTests(unittest.TestCase):
                     "forget_heldout": {"ce": 13 - 0.25 * step},
                 }
             rows.append(row)
-        self.jsonl("cases/control/local-search/trace.jsonl", rows)
+        self.jsonl(f"cases/control/{folder_name}/trace.jsonl", rows)
         metadata = {
             "case": "control",
             "state": state,
@@ -344,6 +355,138 @@ class AnalysisTests(unittest.TestCase):
             if point["case"] == "full-ce-worst" and point["variant"] is None
         ]
         self.assertEqual(measured, [1, 2])
+
+    def test_all_attack_amendment_expands_expected_steps_and_variants_only_when_present(
+        self,
+    ):
+        before = ANALYSIS.expected_points(self.run, self.study)
+        attacked = [point for point in before if point["variant"] is not None]
+        self.assertEqual(len(attacked), 4)
+        self.assertEqual({point["step"] for point in attacked}, {4})
+        self.save(
+            "all-attack-capability-trajectory-amendment.json",
+            {"scope": "all four variants and all saved checkpoints"},
+        )
+        after = ANALYSIS.expected_points(self.run, self.study)
+        attacked = [point for point in after if point["variant"] is not None]
+        self.assertEqual(len(attacked), 32)
+        self.assertEqual(len({point["relative"] for point in attacked}), 32)
+        for case in ("control", "full-ce-worst"):
+            for variant in ANALYSIS.VARIANTS:
+                self.assertEqual(
+                    {
+                        point["step"]
+                        for point in attacked
+                        if point["case"] == case and point["variant"] == variant
+                    },
+                    {1, 4, 16, 64},
+                )
+        pending = [
+            record
+            for record in ANALYSIS.collect_report(self.run, self.study)["benchmarks"]
+            if record["point"]["variant"] is not None
+        ]
+        self.assertEqual(len(pending), 32)
+        self.assertTrue(
+            all(
+                record["state"] == "not run" and record["scores_percent"] is None
+                for record in pending
+            )
+        )
+
+    def test_peak_uses_only_validated_attacked_scores_and_explicit_noop(self):
+        self.benchmark_record("control", (0.60, 0.54))
+        self.benchmark_record("control", (0.50, 0.54), "full-same", 4)
+        self.benchmark_record("control", (0.55, 0.54), "mini-same", 1)
+        self.benchmark_record("full-ce-worst", (0.99, 0.54), step=1)
+        self.benchmark_record("full-ce-worst", (0.30, 0.54), step=2)
+        self.benchmark_record("full-ce-worst", (0.49, 0.54), "full-same", 1)
+        self.benchmark_record("full-ce-worst", (0.40, 0.54), "full-same", 4)
+        self.benchmark_record("full-ce-worst", (0.30, 0.54), "full-same", 64)
+        self.benchmark_record("full-ce-worst", (0.99, 0.54), "mini-same", 16)
+        invalid = ANALYSIS.benchmark_point(
+            self.run, self.study, "full-ce-worst", "mini-same", 16
+        )
+        ANALYSIS.dump(Path(invalid["output"]) / "results.json", {})
+        peaks = {
+            row["case"]: row
+            for row in ANALYSIS.collect_report(self.run, self.study)["peak_wmdp"]
+        }
+        self.assertAlmostEqual(peaks["control"]["peak_attacked_wmdp_percent"], 55)
+        self.assertEqual(peaks["control"]["peak_variant"], "mini-same")
+        self.assertEqual(peaks["control"]["peak_step"], 1)
+        self.assertEqual(peaks["control"]["max_including_noop_wmdp_percent"], 60)
+        self.assertEqual(peaks["control"]["max_including_noop_variant"], "no-op")
+        self.assertEqual(peaks["control"]["max_including_noop_step"], 0)
+        self.assertEqual(peaks["full-ce-worst"]["pre_attack_wmdp_percent"], 30)
+        self.assertEqual(peaks["full-ce-worst"]["peak_attacked_wmdp_percent"], 49)
+        self.assertEqual(peaks["full-ce-worst"]["peak_step"], 1)
+        self.assertEqual(peaks["full-ce-worst"]["max_including_noop_wmdp_percent"], 49)
+        self.assertEqual(peaks["full-ce-worst"]["validated_attack_points"], 3)
+
+    def test_noop_inclusive_max_stays_unknown_without_pre_attack_measurement(self):
+        self.benchmark_record("full-ce-worst", (0.4, 0.54), "full-same", 4)
+        row = next(
+            row
+            for row in ANALYSIS.collect_report(self.run, self.study)["peak_wmdp"]
+            if row["case"] == "full-ce-worst"
+        )
+        self.assertEqual(row["peak_attacked_wmdp_percent"], 40)
+        self.assertIsNone(row["pre_attack_wmdp_percent"])
+        self.assertIsNone(row["max_including_noop_wmdp_percent"])
+
+    def test_fine_grid_is_separate_and_waits_for_measured_positive_candidates(self):
+        original, _ = self.local_record()
+        original_trace = (original / "trace.jsonl").read_bytes()
+        fine, rows = self.local_record(
+            state="running", last_step=0, folder_name="local-search-fine"
+        )
+        summary = ANALYSIS.collect_report(self.run, self.study)
+        self.assertEqual(len(summary["local_searches"]), 1)
+        self.assertEqual(len(summary["fine_local_searches"]), 1)
+        self.assertEqual(ANALYSIS.fine_line_search_profiles(summary), [])
+        fine, rows = self.local_record(
+            state="running", last_step=1, folder_name="local-search-fine"
+        )
+        rows[1]["selected_step_length"] = 1e-4
+        rows[1]["candidates"] = [
+            {"step_length": 0.0, "ce": 12, "state": "cached current point"},
+            {"step_length": 1e-6, "ce": 11.99, "state": "complete"},
+            {"step_length": 1e-4, "ce": 11.8, "state": "complete"},
+            {"step_length": 0.001, "ce": 12.3, "state": "complete"},
+        ]
+        self.jsonl("cases/control/local-search-fine/trace.jsonl", rows)
+        summary = ANALYSIS.collect_report(self.run, self.study)
+        profile = ANALYSIS.fine_line_search_profiles(summary)[0]
+        self.assertEqual(profile["baseline_ce"], 12)
+        self.assertEqual(profile["ce_floor"], 10)
+        self.assertEqual(profile["selected_step_length"], 1e-4)
+        self.assertEqual(
+            [candidate["step_length"] for candidate in profile["candidates"]],
+            [1e-6, 1e-4, 0.001],
+        )
+        self.assertEqual((original / "trace.jsonl").read_bytes(), original_trace)
+        text = ANALYSIS.markdown_report(summary, [])
+        self.assertIn("Supplemental adaptive fine-grid diagnostic", text)
+        self.assertIn("no claim about off-grid values", text)
+        self.save("study.json", self.study)
+        self.save("source-manifest.json", {})
+        ANALYSIS.report(
+            self.run,
+            self.study,
+            SimpleNamespace(no_plots=True),
+            SimpleNamespace(__file__=str(SCRIPT.with_name("tar_cleanroom.py"))),
+        )
+        with (self.run / "report/local-searches.csv").open() as handle:
+            self.assertEqual(len(list(csv.DictReader(handle))), 1)
+        with (self.run / "report/local-search-fine.csv").open() as handle:
+            self.assertEqual(
+                list(csv.DictReader(handle))[0]["output_name"], "local-search-fine"
+            )
+        with (self.run / "report/local-search-fine-candidates.csv").open() as handle:
+            candidates = list(csv.DictReader(handle))
+        self.assertEqual(len(candidates), 3)
+        self.assertTrue(all(float(row["step_length"]) > 0 for row in candidates))
 
     def jsonl(self, relative, rows):
         path = self.run / relative

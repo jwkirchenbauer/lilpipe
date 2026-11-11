@@ -55,6 +55,10 @@ five percentage points. Recheck update parity at every evaluated defender.
 Benchmark the saved defense checkpoints at 32 and 125 updates on both original
 task groups. At attack endpoints, benchmark the full WMDP group; retained CE
 tracks attack-time utility, and post-attack MMLU is outside this initial plan.
+After observing a large early recovery peak in the control, also benchmark
+saved attack steps 1, 4, and 16 for all four variants and all nine defenders
+(the starting checkpoint plus eight continuations). Report every measured
+point and the strongest measured recovery; the attack family remains finite.
 
 Two diagnostic extensions address failures observed during these runs. Keep
 the six original continuations unchanged. Repeat full-batch terminal entropy
@@ -78,3 +82,16 @@ the first-update plane, and a plane fitted separately to each attack. Preserve
 physical axis scales and use common CE scales when comparing defenders. Projected
 saved states are reconstructions in a slice, not measurements of the actual
 off-plane trajectory.
+
+Completed 2026-11-11: eight continuations, 36 attack trajectories, 162 regular
+benchmark points, nine bounded searches plus one fine-grid followup, and native
+landscape grids for all nine defended starting points. The useful entropy
+continuation also has first-update and fitted views of its stronger new-data
+attacker, with that attacker's own loss measured alongside the defender probes.
+
+[Findings and figures](examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/findings.md)
+and the [complete evidence tables](examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/report/report.md)
+separate numerical fidelity, proxy-loss satisfaction, utility, and recovered
+benchmark capability. With the same four attack updates and optimizer, WMDP
+is 26.73% on matched data versus 51.96% after changing the eight examples;
+the defender passes the measured utility gate at MMLU 54.14%.

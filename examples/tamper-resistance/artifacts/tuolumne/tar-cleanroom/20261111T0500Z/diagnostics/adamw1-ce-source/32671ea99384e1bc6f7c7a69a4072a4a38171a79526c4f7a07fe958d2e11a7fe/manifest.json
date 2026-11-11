@@ -1,0 +1,9 @@
+{
+  "archive": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/diagnostics/adamw1-ce-source/32671ea99384e1bc6f7c7a69a4072a4a38171a79526c4f7a07fe958d2e11a7fe",
+  "sha256": "32671ea99384e1bc6f7c7a69a4072a4a38171a79526c4f7a07fe958d2e11a7fe",
+  "files": {
+    "tar_cleanroom_llm_gradients.py": "72cba0cbab7612cd1f4e4b4c6b87112f8827ab8df4f50491527c0278a0d99077",
+    "tar_cleanroom.py": "dbaf4fca911537dbe068cd1e7cceda8eb2c9dd9cd388ffb2edd66e537d3055ba",
+    "tar_cleanroom_gradients.py": "803342b6df98acdbdd5097cee5c7a466e792170a547ece47e719e2b53179d607"
+  }
+}

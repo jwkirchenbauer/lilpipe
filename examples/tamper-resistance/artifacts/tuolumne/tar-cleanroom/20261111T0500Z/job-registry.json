@@ -1,0 +1,103 @@
+{
+  "study": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z",
+  "submitted": [
+    {
+      "key": "full-maxent-terminal",
+      "exit_code": 0,
+      "job_id": "f3jPtyJAZEGP",
+      "last": "n/cr-full-maxent-terminal-a/subrunner.sh\nSubmission: flux batch -q pdebug --bank=verival --job-name=cr-full-maxent-terminal-a -t55 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main/cr-full-maxent-terminal-a/launch.sh\nLaunched job_id=f3jPtyJAZEGP.\n"
+    },
+    {
+      "key": "full-ce-terminal",
+      "exit_code": 0,
+      "job_id": "f3jPtyJLw9Eo",
+      "last": "launches/main/cr-full-ce-terminal-a/subrunner.sh\nSubmission: flux batch -q pdebug --bank=verival --job-name=cr-full-ce-terminal-a -t55 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main/cr-full-ce-terminal-a/launch.sh\nLaunched job_id=f3jPtyJLw9Eo.\n"
+    },
+    {
+      "key": "full-ce-worst",
+      "exit_code": 0,
+      "job_id": "f3jPtyL8iGxw",
+      "last": "11T0500Z/launches/main/cr-full-ce-worst-a/subrunner.sh\nSubmission: flux batch -q pdebug --bank=verival --job-name=cr-full-ce-worst-a -t55 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main/cr-full-ce-worst-a/launch.sh\nLaunched job_id=f3jPtyL8iGxw.\n"
+    },
+    {
+      "key": "mini-maxent-terminal",
+      "exit_code": 0,
+      "job_id": "f3jPtyLWx6C7",
+      "last": "n/cr-mini-maxent-terminal-a/subrunner.sh\nSubmission: flux batch -q pdebug --bank=verival --job-name=cr-mini-maxent-terminal-a -t55 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main/cr-mini-maxent-terminal-a/launch.sh\nLaunched job_id=f3jPtyLWx6C7.\n"
+    },
+    {
+      "key": "mini-ce-terminal",
+      "exit_code": 0,
+      "job_id": "f3jPtyHtFNAb",
+      "last": "launches/main/cr-mini-ce-terminal-a/subrunner.sh\nSubmission: flux batch -q pdebug --bank=verival --job-name=cr-mini-ce-terminal-a -t55 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main/cr-mini-ce-terminal-a/launch.sh\nLaunched job_id=f3jPtyHtFNAb.\n"
+    },
+    {
+      "key": "mini-ce-worst",
+      "exit_code": 0,
+      "job_id": "f3jPtyKmxT27",
+      "last": "11T0500Z/launches/main/cr-mini-ce-worst-a/subrunner.sh\nSubmission: flux batch -q pdebug --bank=verival --job-name=cr-mini-ce-worst-a -t55 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main/cr-mini-ce-worst-a/launch.sh\nLaunched job_id=f3jPtyKmxT27.\n"
+    },
+    {
+      "key": "benchmark-base",
+      "exit_code": 0,
+      "job_id": "f3jPtyK7Qmh9",
+      "last": "leanroom/20261111T0500Z/launches/main/cr-bench-base/subrunner.sh\nSubmission: flux batch -q pdebug --bank=verival --job-name=cr-bench-base -t55 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main/cr-bench-base/launch.sh\nLaunched job_id=f3jPtyK7Qmh9.\n"
+    },
+    {
+      "key": "benchmark-control",
+      "exit_code": 0,
+      "job_id": "f3jPtyKRCd5H",
+      "last": "20261111T0500Z/launches/main/cr-bench-control/subrunner.sh\nSubmission: flux batch -q pdebug --bank=verival --job-name=cr-bench-control -t55 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main/cr-bench-control/launch.sh\nLaunched job_id=f3jPtyKRCd5H.\n"
+    },
+    {
+      "key": "attack-control",
+      "exit_code": 0,
+      "job_id": "f3jPtyJocvK1",
+      "last": "61111T0500Z/launches/main/cr-attack-control/subrunner.sh\nSubmission: flux batch -q pdebug --bank=verival --job-name=cr-attack-control -t55 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main/cr-attack-control/launch.sh\nLaunched job_id=f3jPtyJocvK1.\n"
+    }
+  ],
+  "planned_second": [
+    {
+      "key": "full-maxent-terminal",
+      "name": "cr-full-maxent-terminal-b",
+      "parent": "f3jPtyJAZEGP",
+      "target": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/source/profiles/train-v2/run_tar_cleanroom.sh train /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z --case full-maxent-terminal --resume-step 64",
+      "launcher": "python /p/vast1/kirchenb/llnl-tools/launch_tuo.py --environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4 --env_act_style=mm_activate --output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main --qos=pdebug --bank=verival --run_name=cr-full-maxent-terminal-b --nodes=1 --tasks_per_node=1 --gpus_per_node=4 --torchrun=false --minutes=55 --pass_run_name=false --quiet_launch=true --dependency=afterok:f3jPtyJAZEGP"
+    },
+    {
+      "key": "full-ce-terminal",
+      "name": "cr-full-ce-terminal-b",
+      "parent": "f3jPtyJLw9Eo",
+      "target": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/source/profiles/train-v2/run_tar_cleanroom.sh train /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z --case full-ce-terminal --resume-step 64",
+      "launcher": "python /p/vast1/kirchenb/llnl-tools/launch_tuo.py --environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4 --env_act_style=mm_activate --output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main --qos=pdebug --bank=verival --run_name=cr-full-ce-terminal-b --nodes=1 --tasks_per_node=1 --gpus_per_node=4 --torchrun=false --minutes=55 --pass_run_name=false --quiet_launch=true --dependency=afterok:f3jPtyJLw9Eo"
+    },
+    {
+      "key": "full-ce-worst",
+      "name": "cr-full-ce-worst-b",
+      "parent": "f3jPtyL8iGxw",
+      "target": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/source/profiles/train-v2/run_tar_cleanroom.sh train /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z --case full-ce-worst --resume-step 64",
+      "launcher": "python /p/vast1/kirchenb/llnl-tools/launch_tuo.py --environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4 --env_act_style=mm_activate --output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main --qos=pdebug --bank=verival --run_name=cr-full-ce-worst-b --nodes=1 --tasks_per_node=1 --gpus_per_node=4 --torchrun=false --minutes=55 --pass_run_name=false --quiet_launch=true --dependency=afterok:f3jPtyL8iGxw"
+    },
+    {
+      "key": "mini-maxent-terminal",
+      "name": "cr-mini-maxent-terminal-b",
+      "parent": "f3jPtyLWx6C7",
+      "target": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/source/profiles/train-v2/run_tar_cleanroom.sh train /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z --case mini-maxent-terminal --resume-step 64",
+      "launcher": "python /p/vast1/kirchenb/llnl-tools/launch_tuo.py --environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4 --env_act_style=mm_activate --output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main --qos=pdebug --bank=verival --run_name=cr-mini-maxent-terminal-b --nodes=1 --tasks_per_node=1 --gpus_per_node=4 --torchrun=false --minutes=55 --pass_run_name=false --quiet_launch=true --dependency=afterok:f3jPtyLWx6C7"
+    },
+    {
+      "key": "mini-ce-terminal",
+      "name": "cr-mini-ce-terminal-b",
+      "parent": "f3jPtyHtFNAb",
+      "target": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/source/profiles/train-v2/run_tar_cleanroom.sh train /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z --case mini-ce-terminal --resume-step 64",
+      "launcher": "python /p/vast1/kirchenb/llnl-tools/launch_tuo.py --environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4 --env_act_style=mm_activate --output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main --qos=pdebug --bank=verival --run_name=cr-mini-ce-terminal-b --nodes=1 --tasks_per_node=1 --gpus_per_node=4 --torchrun=false --minutes=55 --pass_run_name=false --quiet_launch=true --dependency=afterok:f3jPtyHtFNAb"
+    },
+    {
+      "key": "mini-ce-worst",
+      "name": "cr-mini-ce-worst-b",
+      "parent": "f3jPtyKmxT27",
+      "target": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/source/profiles/train-v2/run_tar_cleanroom.sh train /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z --case mini-ce-worst --resume-step 64",
+      "launcher": "python /p/vast1/kirchenb/llnl-tools/launch_tuo.py --environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4 --env_act_style=mm_activate --output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main --qos=pdebug --bank=verival --run_name=cr-mini-ce-worst-b --nodes=1 --tasks_per_node=1 --gpus_per_node=4 --torchrun=false --minutes=55 --pass_run_name=false --quiet_launch=true --dependency=afterok:f3jPtyKmxT27"
+    }
+  ]
+}

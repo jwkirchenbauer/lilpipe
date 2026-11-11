@@ -1,0 +1,17 @@
+{
+  "created_utc": "2026-11-11 09:18:37 UTC",
+  "case": "full-maxent-terminal-fresh-retain",
+  "attack_variant": "full-new",
+  "planes": [
+    "first",
+    "fit"
+  ],
+  "reason": "Matched-full4 gives26.7281WMDP whilefull-new4 gives51.9585 withsamebudgetandverifiednumericalreplays; visualizewinningattackalongsideprotectedpath.",
+  "probe_groups": [
+    "forget_train",
+    "forget_heldout_subset",
+    "forget_new_attack"
+  ],
+  "scope": "Same end-of-defense model; no newtraining. Additionalattacker8 excludedfromthiscontinuation,earliertraininghistorynotruledout. Noextraallcasesplanes.",
+  "preservation": "Canonical geometryunchanged; separateattack-variants/full-newfolder"
+}

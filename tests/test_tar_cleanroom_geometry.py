@@ -676,6 +676,431 @@ class GeometryTests(unittest.TestCase):
             self.assertEqual(result["figure_ce_scale"], {"ce_min": 0, "ce_max": 10})
             self.assertTrue((folder / "slices.png").exists())
             self.assertTrue((folder / "slices.pdf").exists())
+            self.assertTrue((folder / "slices-3d.png").exists())
+            self.assertTrue((folder / "slices-3d.pdf").exists())
+
+    def test_full_new_routes_native_checkpoints_three_probes_and_augmentation_separately(
+        self,
+    ):
+        with tempfile.TemporaryDirectory() as temporary:
+            run = Path(temporary).resolve()
+            (run / "source").mkdir()
+            helper_path = run / "source/tar_cleanroom.py"
+            helper_path.write_text("# executing fixture helper\n")
+            (run / "case-extensions.json").write_text('{"fixture":"extension"}')
+            case = "defender"
+            center = torch.tensor([[0.1, 0.2, -0.3]], dtype=torch.float32)
+            base_folder = run / "cases" / case / "defense-125"
+            base_folder.mkdir(parents=True)
+            save_file({"weight": center}, base_folder / "model.safetensors")
+            study = {
+                "anchor": str(base_folder),
+                "cases": {case: {}},
+                "attack_variants": list(GEOMETRY.ATTACK_VARIANTS),
+            }
+            (run / "study.json").write_text(json.dumps(study))
+            for variant in ("full-same", "full-new"):
+                for step in GEOMETRY.REFERENCE_STEPS:
+                    t = step / 64
+                    delta = (
+                        torch.tensor([[0.1 * t, 0.02 * t * t, 0]])
+                        if variant == "full-same"
+                        else torch.tensor([[0, 0.3 * t, -0.1 * t * t]])
+                    )
+                    path = (
+                        run
+                        / "cases"
+                        / case
+                        / "attacks"
+                        / variant
+                        / f"checkpoint-{step}"
+                    )
+                    path.mkdir(parents=True)
+                    save_file({"weight": center + delta}, path / "model.safetensors")
+            data = {
+                group: [
+                    {
+                        "source_row": start + i,
+                        "source_text_sha256": str(start + i),
+                        "input_ids": [i, i + 1],
+                    }
+                    for i in range(count)
+                ]
+                for group, start, count in (
+                    ("forget_train", 0, 8),
+                    ("forget_heldout", 100, 32),
+                    ("forget_new_attack", 200, 8),
+                )
+            }
+            data["content_sha256"] = "variant-fixture"
+            model = torch.nn.Linear(3, 1, bias=False).float()
+            clean = SimpleNamespace(
+                __file__=str(helper_path),
+                load_study=lambda _: study,
+                prepare_data=lambda *_: data,
+                runtime=mock.Mock(return_value=(model, None)),
+                digest=lambda value: str(len(json.dumps(value))),
+                evaluate=lambda m, rows: {
+                    "ce": float(m.weight.detach().square().sum())
+                    + rows[0]["source_row"] / 100,
+                    "entropy": 0.5,
+                },
+                dump=lambda path, value: Path(path).write_text(
+                    json.dumps(value, allow_nan=False)
+                ),
+            )
+            canonical = GEOMETRY.geometry_folder(run, case)
+            canonical.mkdir(parents=True)
+            sentinels = {
+                "geometry.json": b'{"canonical":"unchanged"}',
+                "geometry-progress.json": b'{"progress":"unchanged"}',
+            }
+            for name, content in sentinels.items():
+                (canonical / name).write_bytes(content)
+            args = SimpleNamespace(
+                run=run,
+                case=case,
+                attack_variant="full-new",
+                planes=["first", "fit"],
+                trajectory_steps=list(GEOMETRY.REFERENCE_STEPS),
+                grid_size=3,
+                seed=42,
+                ce_limits=None,
+            )
+            with (
+                mock.patch.object(GEOMETRY, "load_cleanroom", return_value=clean),
+                mock.patch.object(
+                    GEOMETRY,
+                    "plot",
+                    side_effect=ModuleNotFoundError("No matplotlib", name="matplotlib"),
+                ),
+                contextlib.redirect_stdout(io.StringIO()),
+            ):
+                GEOMETRY.run_geometry(args)
+            folder = canonical / "attack-variants/full-new"
+            result = json.loads((folder / "geometry.json").read_text())
+            self.assertEqual(result["attack_variant"], "full-new")
+            self.assertEqual(
+                list(result["probes"]),
+                ["forget_train", "forget_heldout_subset", "forget_new_attack"],
+            )
+            self.assertEqual(len(result["probes"]["forget_new_attack"]), 8)
+            self.assertEqual(
+                result["probes"]["forget_new_attack"][0]["source_row"], 200
+            )
+            selected = run / "cases" / case / "attacks/full-new/checkpoint-1"
+            self.assertEqual(
+                result["checkpoint_files"]["1"], GEOMETRY.checkpoint_identity(selected)
+            )
+            with GEOMETRY.CheckpointReader(selected) as reader:
+                expected_radius = float(
+                    torch.linalg.vector_norm((reader.get("weight") - center).double())
+                )
+            self.assertAlmostEqual(
+                result["planes"]["first"]["scale_l2"], expected_radius, places=12
+            )
+            self.assertIn("forget_new_attack", result["planes"]["fit"]["grid"][0])
+            clean.runtime.assert_called_with(study, base_folder)
+            plotted = []
+            with (
+                mock.patch.object(GEOMETRY, "load_cleanroom", return_value=clean),
+                mock.patch.object(
+                    GEOMETRY,
+                    "plot",
+                    side_effect=lambda value, target, limits: plotted.append(
+                        (value["attack_variant"], target)
+                    )
+                    or {"ce_min": 0, "ce_max": 10},
+                ),
+            ):
+                GEOMETRY.plot_saved(args)
+            self.assertEqual(plotted, [("full-new", folder)])
+            previous = (folder / "geometry.json").read_bytes()
+            args.add_planes = ["random-step"]
+            with (
+                mock.patch.object(GEOMETRY, "load_cleanroom", return_value=clean),
+                mock.patch.object(
+                    GEOMETRY,
+                    "plot",
+                    side_effect=ModuleNotFoundError("No matplotlib", name="matplotlib"),
+                ),
+                contextlib.redirect_stdout(io.StringIO()),
+            ):
+                GEOMETRY.run_geometry(args)
+            updated = json.loads((folder / "geometry.json").read_text())
+            self.assertEqual(
+                Path(updated["augmentations"][-1]["previous_json"]).read_bytes(),
+                previous,
+            )
+            self.assertEqual(
+                updated["augmentations"][-1]["original_cleanroom_source"],
+                str(helper_path),
+            )
+            self.assertIn("case_extensions_sha256", updated["augmentations"][-1])
+            for name, content in sentinels.items():
+                self.assertEqual((canonical / name).read_bytes(), content)
+            args.case, args.add_planes, args.planes = "control", None, ["reference"]
+            clean.runtime.reset_mock()
+            with (
+                mock.patch.object(GEOMETRY, "load_cleanroom", return_value=clean),
+                self.assertRaisesRegex(ValueError, "control reference is full-same"),
+            ):
+                GEOMETRY.run_geometry(args)
+            clean.runtime.assert_not_called()
+
+    @unittest.skipUnless(
+        os.environ.get("TAR_CLEANROOM_TEST_PLOTS") == "1"
+        and importlib.util.find_spec("matplotlib"),
+        "requires explicit TAR_CLEANROOM_TEST_PLOTS=1 and existing plotting environment",
+    )
+    def test_five_plane_surfaces_share_heatmap_limits_and_sections_use_physical_radius(
+        self,
+    ):
+        import matplotlib
+
+        matplotlib.use("Agg")
+        from matplotlib.backends.backend_agg import FigureCanvasAgg
+        from matplotlib.figure import Figure
+
+        with tempfile.TemporaryDirectory() as temporary:
+            folder = Path(temporary)
+            result = {"case": "fixture", "planes": {}}
+            for column, name in enumerate(GEOMETRY.PLANE_ORDER):
+                extent = 125 if name == "random" else 1
+                coordinates = [-extent, 0, extent]
+                result["planes"][name] = {
+                    "coordinates": coordinates,
+                    "axis_labels": ["Axis 1", "Axis 2"],
+                    "scale_l2": 0.75,
+                    "grid": [
+                        {
+                            "x": x,
+                            "y": y,
+                            "forget_train": {
+                                "ce": column * 0.4
+                                + (x / extent) ** 2
+                                + 2 * (y / extent) ** 2
+                            },
+                            "forget_heldout_subset": {
+                                "ce": column * 0.4
+                                + (x / extent) ** 2
+                                + 2 * (y / extent) ** 2
+                                + 0.1
+                            },
+                        }
+                        for y in coordinates
+                        for x in coordinates
+                    ],
+                }
+            figures = {}
+            original_metadata = json.dumps(result, sort_keys=True)
+            original_save = Figure.savefig
+
+            def save(figure, filename, **kwargs):
+                figures[Path(filename).name] = figure
+                if str(filename).endswith(".png"):
+                    kwargs["dpi"] = 50
+                return original_save(figure, filename, **kwargs)
+
+            with (
+                mock.patch.object(Figure, "savefig", new=save),
+                mock.patch.dict(os.environ, {"MPLCONFIGDIR": str(folder / "cache")}),
+            ):
+                returned = GEOMETRY.plot(result, folder, ce_limits=[0, 10])
+            self.assertEqual(returned, {"ce_min": 0, "ce_max": 10})
+            self.assertEqual(json.dumps(result, sort_keys=True), original_metadata)
+            for stem in ("slices", "slices-3d", "matched-radius-sections"):
+                for suffix in ("png", "pdf"):
+                    self.assertTrue((folder / f"{stem}.{suffix}").is_file())
+            heatmap = figures["slices.png"]
+            surfaces = figures["slices-3d.png"]
+            self.assertEqual(
+                len(surfaces.axes), 11
+            )  # Ten panels and one shared colorbar.
+            for index, axis in enumerate(surfaces.axes[:10]):
+                human_planes = (
+                    "Broad random",
+                    "Random at first-update radius",
+                    "Fixed control attack plane",
+                    "First-update plane",
+                    "Fitted attack plane",
+                )
+                human_cohorts = (
+                    "Forget training examples",
+                    "Held-out forget examples (8)",
+                )
+                self.assertIn(human_planes[index // 2], axis.get_title())
+                self.assertIn(human_cohorts[index % 2], axis.get_title())
+                self.assertEqual(axis.get_zlim(), (0, 10))
+                self.assertEqual((axis.elev, axis.azim), (30, -135))
+                self.assertFalse(axis.computed_zorder)
+                self.assertEqual(axis.collections[0].get_zorder(), 0)
+                self.assertGreater(
+                    axis.collections[2].get_zorder(), axis.collections[0].get_zorder()
+                )
+                self.assertTrue(
+                    (axis.collections[2].get_facecolors()[0, :3] == [1, 1, 1]).all()
+                )
+                self.assertTrue(
+                    (axis.collections[2].get_edgecolors()[0, :3] == [0, 0, 0]).all()
+                )
+                name = GEOMETRY.PLANE_ORDER[index // 2]
+                expected_labels = (
+                    ("Direction 1 (L2)", "Direction 2 (L2)")
+                    if name == "random"
+                    else (
+                        ("First update\n(multiples)", "Orthogonal random\n(multiples)")
+                        if name == "first"
+                        else ("Direction 1 (radii)", "Direction 2 (radii)")
+                    )
+                )
+                self.assertEqual(
+                    (axis.get_xlabel(), axis.get_ylabel()), expected_labels
+                )
+                self.assertEqual(
+                    (
+                        heatmap.axes[index].get_xlabel(),
+                        heatmap.axes[index].get_ylabel(),
+                    ),
+                    ("Axis 1", "Axis 2"),
+                )
+                self.assertEqual(
+                    (axis.collections[0].norm.vmin, axis.collections[0].norm.vmax),
+                    (0, 10),
+                )
+                self.assertEqual(
+                    (
+                        heatmap.axes[index].collections[0].norm.vmin,
+                        heatmap.axes[index].collections[0].norm.vmax,
+                    ),
+                    (0, 10),
+                )
+                # Surface, measured nodes, anchor, and first marker only on first panels.
+                self.assertEqual(
+                    len(axis.collections),
+                    4 if index // 2 == list(GEOMETRY.PLANE_ORDER).index("first") else 3,
+                )
+                self.assertFalse(axis.lines)
+            canvas = FigureCanvasAgg(surfaces)
+            canvas.draw()
+            renderer = canvas.get_renderer()
+            self.assertGreaterEqual(surfaces.get_figheight(), 14)
+            for column in range(5):
+                top, bottom = surfaces.axes[2 * column : 2 * column + 2]
+                top_label_minimum = min(
+                    label.get_window_extent(renderer).y0
+                    for label in (top.xaxis.label, top.yaxis.label)
+                )
+                self.assertGreater(
+                    top_label_minimum, bottom.title.get_window_extent(renderer).y1
+                )
+            for axis in surfaces.axes[:10]:
+                for label in (axis.xaxis.label, axis.yaxis.label):
+                    bounds = label.get_window_extent(renderer)
+                    self.assertGreaterEqual(bounds.y0, surfaces.bbox.y0)
+                    self.assertLessEqual(bounds.y1, surfaces.bbox.y1)
+                    self.assertGreaterEqual(bounds.x0, surfaces.bbox.x0)
+                    self.assertLessEqual(bounds.x1, surfaces.bbox.x1)
+            for axis in figures["matched-radius-sections.png"].axes:
+                self.assertEqual(axis.get_ylim(), (0, 10))
+                self.assertEqual(len(axis.lines), 2)
+                for line in axis.lines:
+                    self.assertEqual(list(line.get_xdata()), [-0.75, 0, 0.75])
+                    self.assertEqual(len(line.get_ydata()), 3)
+            # The automatic scale also comes from all measured planes/groups.
+            with mock.patch.object(
+                Figure,
+                "savefig",
+                new=lambda figure, filename, **kwargs: figures.__setitem__(
+                    Path(filename).name, figure
+                ),
+            ):
+                automatic = GEOMETRY.plot(result, folder)
+            expected_min = min(
+                point[group]["ce"]
+                for plane in result["planes"].values()
+                for point in plane["grid"]
+                for group in ("forget_train", "forget_heldout_subset")
+            )
+            expected_max = max(
+                point[group]["ce"]
+                for plane in result["planes"].values()
+                for point in plane["grid"]
+                for group in ("forget_train", "forget_heldout_subset")
+            )
+            self.assertEqual(
+                automatic, {"ce_min": expected_min, "ce_max": expected_max}
+            )
+            self.assertTrue(
+                all(
+                    axis.get_zlim() == (expected_min, expected_max)
+                    for axis in figures["slices-3d.png"].axes[:10]
+                )
+            )
+            # The stronger new-data attacker gets a third row and contributes
+            # to the same global CE range, without changing legacy fixtures.
+            alternate = json.loads(json.dumps(result))
+            alternate["attack_variant"] = "full-new"
+            alternate["probes"] = {
+                "forget_train": [],
+                "forget_heldout_subset": [],
+                "forget_new_attack": [],
+            }
+            alternate["planes"] = {
+                name: alternate["planes"][name] for name in ("first", "fit")
+            }
+            for plane in alternate["planes"].values():
+                for point in plane["grid"]:
+                    point["forget_new_attack"] = {
+                        "ce": point["forget_train"]["ce"] + 20
+                    }
+            with mock.patch.object(
+                Figure,
+                "savefig",
+                new=lambda figure, filename, **kwargs: figures.__setitem__(
+                    Path(filename).name, figure
+                ),
+            ):
+                new_limits = GEOMETRY.plot(alternate, folder)
+            self.assertGreater(new_limits["ce_max"], 20)
+            self.assertEqual(len(figures["slices.png"].axes), 7)
+            alternate_surface = figures["slices-3d.png"]
+            self.assertEqual(len(alternate_surface.axes), 7)
+            self.assertIn("full-new", alternate_surface._suptitle.get_text())
+            self.assertIn(
+                "Attacker forget examples (8; excluded from continuation)",
+                alternate_surface.axes[2].get_title(),
+            )
+            self.assertIn(
+                "Attacker forget examples (8; excluded from continuation)",
+                alternate_surface.axes[5].get_title(),
+            )
+            self.assertTrue(
+                all(
+                    axis.get_zlim() == (new_limits["ce_min"], new_limits["ce_max"])
+                    for axis in alternate_surface.axes[:6]
+                )
+            )
+            alternate_canvas = FigureCanvasAgg(alternate_surface)
+            alternate_canvas.draw()
+            alternate_renderer = alternate_canvas.get_renderer()
+            for column in range(2):
+                panels = alternate_surface.axes[column * 3 : column * 3 + 3]
+                for upper, lower in zip(panels, panels[1:]):
+                    self.assertGreater(
+                        min(
+                            label.get_window_extent(alternate_renderer).y0
+                            for label in (upper.xaxis.label, upper.yaxis.label)
+                        ),
+                        lower.title.get_window_extent(alternate_renderer).y1,
+                    )
+            for axis in alternate_surface.axes[:6]:
+                for text in (axis.title, axis.xaxis.label, axis.yaxis.label):
+                    bounds = text.get_window_extent(alternate_renderer)
+                    self.assertGreaterEqual(bounds.x0, alternate_surface.bbox.x0)
+                    self.assertLessEqual(bounds.x1, alternate_surface.bbox.x1)
+                    self.assertGreaterEqual(bounds.y0, alternate_surface.bbox.y0)
+                    self.assertLessEqual(bounds.y1, alternate_surface.bbox.y1)
 
 
 if __name__ == "__main__":

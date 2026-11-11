@@ -1,0 +1,64 @@
+{
+  "source": {
+    "archive": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/diagnostics/sgd1-ce-source/32671ea99384e1bc6f7c7a69a4072a4a38171a79526c4f7a07fe958d2e11a7fe",
+    "sha256": "32671ea99384e1bc6f7c7a69a4072a4a38171a79526c4f7a07fe958d2e11a7fe",
+    "files": {
+      "tar_cleanroom_llm_gradients.py": "72cba0cbab7612cd1f4e4b4c6b87112f8827ab8df4f50491527c0278a0d99077",
+      "tar_cleanroom.py": "dbaf4fca911537dbe068cd1e7cceda8eb2c9dd9cd388ffb2edd66e537d3055ba",
+      "tar_cleanroom_gradients.py": "803342b6df98acdbdd5097cee5c7a466e792170a547ece47e719e2b53179d607"
+    }
+  },
+  "study_sha256": "741284bd8402c2ab45e2b5bc18c4f06d7d13e14e57ccf3dbe801d9080f7da422",
+  "original_source_manifest_sha256": "fcd00435726fff28371bae02283ac3a0209f735dae03ffcbac5706c81ea877b7",
+  "data_sha256": "d832511cf3c646d555dc59248e24efb5db3f8258b0c66e3f626a4175278b084d",
+  "checkpoint": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense",
+  "checkpoint_files": {
+    "README.md": {
+      "bytes": 4771,
+      "sha256": "8942baff4738408874f5ec621ac7e144b9e8cacc85b1aa6dd8a215d3eae561e8"
+    },
+    "chat_template.jinja": {
+      "bytes": 410,
+      "sha256": "66291cf0045c2425a3a667cf3cbb7af2b11f09e025c02f97245323ab79119362"
+    },
+    "config.json": {
+      "bytes": 685,
+      "sha256": "48d7588f32c4f6db757479b41e58bec8b4bee92d2c970dde134c63172e929f0f"
+    },
+    "debug.log": {
+      "bytes": 707861,
+      "sha256": "44fce90a40a14749919ac36324e2c3792dd9c2f4d1a7493208b0b1ec513cd17e"
+    },
+    "generation_config.json": {
+      "bytes": 163,
+      "sha256": "aaaf2a0bd3f0e54fa0939b08608f6ae3b99c0dfdbd03461b5710cb10e0be286e"
+    },
+    "model.safetensors": {
+      "bytes": 15008318632,
+      "sha256": "1f3e557293bfa359487155a3e84060bbb131e13b7b771ff2e4a62bbfdb455fb5"
+    },
+    "observed-batches.jsonl": {
+      "bytes": 17289730,
+      "sha256": "f0a8e913ebbaabaaf239099ae5e7c8d9592224165b406efa7f7e340d4b495169"
+    },
+    "tokenizer.json": {
+      "bytes": 3505751,
+      "sha256": "1d5b9634c23bdd4540f633d327120e1fa4b57a2a723a56d7a92debfc4d15c061"
+    },
+    "tokenizer_config.json": {
+      "bytes": 527,
+      "sha256": "eab29c608f4cc298909cf8772a145d422d16ab542489f7ac5984b9c2f223da22"
+    }
+  },
+  "python": "3.12.16 (main, Oct 26 2026, 11:37:43) [GCC 15.3.0]",
+  "executable": "/usr/WS2/kirchenb/lilpipe-tar-train-rocm72-v4/bin/python",
+  "packages": {
+    "torch": "2.12.1+rocm7.2",
+    "transformers": "5.14.1",
+    "datasets": "4.8.4"
+  },
+  "launcher": {
+    "FLUX_JOB_ID": "fYvhXyh",
+    "CUDA_VISIBLE_DEVICES": "0,1,2,3"
+  }
+}

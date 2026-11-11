@@ -1,0 +1,375 @@
+{
+  "driver_sha256": "093cf84dbbf49d843f822554a36066862f72fa0a1dd2097b3936fda79b281be1",
+  "plot_source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/source/profiles/geometry-plot-v4/tar_cleanroom_geometry.py",
+  "plot_source_sha256": "0fc320139065a03632fa4a0519e6089d9c04fe12453d900911a14447ac8f8363",
+  "all_cases": [
+    "control",
+    "full-maxent-terminal",
+    "full-ce-terminal",
+    "full-ce-worst",
+    "mini-maxent-terminal",
+    "mini-ce-terminal",
+    "mini-ce-worst",
+    "full-maxent-terminal-fresh-retain",
+    "full-ce-worst-fresh-retain"
+  ],
+  "all_case_ce_limits": [
+    0.0,
+    82.0
+  ],
+  "utility_gate_percent": 53.602311965170394,
+  "utility_passing_cases": [
+    "control",
+    "full-maxent-terminal-fresh-retain",
+    "full-ce-worst-fresh-retain"
+  ],
+  "utility_passing_ce_limits": [
+    0.0,
+    32.0
+  ],
+  "policy": "One shared full data range per declared comparison group; same measured grids and physical axes in both exports.",
+  "files": [
+    {
+      "file": "geometry/control/slices.png",
+      "sha256": "4f08a6b04c7529e380bd202fbb77bf736135ca191cdb23620db233b3697a2525"
+    },
+    {
+      "file": "geometry/control/slices.pdf",
+      "sha256": "db852403421ab794961535c198a43ff7a2416281bdd4860c3a5c9673b4db4b4a"
+    },
+    {
+      "file": "geometry/control/slices-3d.png",
+      "sha256": "3e8584a21ef78ebb4fed306a5999977059d6d7e364f98611c916fdd1b7e42945"
+    },
+    {
+      "file": "geometry/control/slices-3d.pdf",
+      "sha256": "39acb3d08639a2696053d1c58ae4a78300e4b55fe70d83818b62dedaea538243"
+    },
+    {
+      "file": "geometry/control/matched-radius-sections.png",
+      "sha256": "fd0331e05d52121a18ad012e171e592b53e60a96d22dcb04d1627aae289732dd"
+    },
+    {
+      "file": "geometry/control/matched-radius-sections.pdf",
+      "sha256": "7c55965cb4233e33630ab1892e85d13da1bf3e5ab0f197331946ff07ff79dcaf"
+    },
+    {
+      "file": "geometry/control/utility-comparison/slices.png",
+      "sha256": "52cfd9bc694924f206ab83ac3e5a19889c4f4197bbfa635877e983da663c4797"
+    },
+    {
+      "file": "geometry/control/utility-comparison/slices.pdf",
+      "sha256": "2c8fc01963721c478fad62def1d3bf4ff17cee73876ed1764da460e1ca30b59c"
+    },
+    {
+      "file": "geometry/control/utility-comparison/slices-3d.png",
+      "sha256": "c6030f8790e3ed137d8fd5b9ca20b5ffd73736f5bb14f93dca07fdb9fb7a56e4"
+    },
+    {
+      "file": "geometry/control/utility-comparison/slices-3d.pdf",
+      "sha256": "6c1f03a2c84abdba1b3c6aa78dc11e43d6761789eb18299595ed42f3c6f6b89c"
+    },
+    {
+      "file": "geometry/control/utility-comparison/matched-radius-sections.png",
+      "sha256": "c76515bfdb8e19d83bbe439a51b0d6b3ab930e7aeaac525386d81125d6a2b9f7"
+    },
+    {
+      "file": "geometry/control/utility-comparison/matched-radius-sections.pdf",
+      "sha256": "682bbe5838cca85d1b1ed79863fc6edc29066c0843d5a1b297605a75ebc292d4"
+    },
+    {
+      "file": "geometry/full-maxent-terminal/slices.png",
+      "sha256": "04db48723af5207a77e508552f1c50689a5e320bc6dd0327bdc8e968135a41c6"
+    },
+    {
+      "file": "geometry/full-maxent-terminal/slices.pdf",
+      "sha256": "e1b86665d7de2f83abf0a2383eeda68a5275d6f9d16c09dd6ec3ebeda1f758d7"
+    },
+    {
+      "file": "geometry/full-maxent-terminal/slices-3d.png",
+      "sha256": "eddc9c2614bafb66fd4354c9d19608717841d88576b86d0519eedf21b608bbfb"
+    },
+    {
+      "file": "geometry/full-maxent-terminal/slices-3d.pdf",
+      "sha256": "52d480d3ed6a21c159203b4eb08519902a0d384dc4086eb8db46c5989de9a811"
+    },
+    {
+      "file": "geometry/full-maxent-terminal/matched-radius-sections.png",
+      "sha256": "0ed60e84db8ceab37e7d3c10b2ad2ee2db99049371fc7d0003dddd0c84192529"
+    },
+    {
+      "file": "geometry/full-maxent-terminal/matched-radius-sections.pdf",
+      "sha256": "689db1ba04c5f60bf4dc39f876b3d47e1b8dff09334e108cf3ff3e199c031a09"
+    },
+    {
+      "file": "geometry/full-ce-terminal/slices.png",
+      "sha256": "78b827b596da026585ab1631f2a08229673e70eca369e1336245b15234e2b508"
+    },
+    {
+      "file": "geometry/full-ce-terminal/slices.pdf",
+      "sha256": "5d26ac9e6a4f73176c5f810503bcb955bac8a07079751d44e6499988b1df07a5"
+    },
+    {
+      "file": "geometry/full-ce-terminal/slices-3d.png",
+      "sha256": "dcab159f6080e0d8bef29e6c0e9990ab26b6c5b003970754f7a189915ecd99e5"
+    },
+    {
+      "file": "geometry/full-ce-terminal/slices-3d.pdf",
+      "sha256": "522d8ad9fd029f55159e28d130cd12fc2c7b177f5918172944989768134aaa1d"
+    },
+    {
+      "file": "geometry/full-ce-terminal/matched-radius-sections.png",
+      "sha256": "bd226e0f183911481e8a04c0cce8dd5bb8908c5c183e1be002dd58d1c7333362"
+    },
+    {
+      "file": "geometry/full-ce-terminal/matched-radius-sections.pdf",
+      "sha256": "7593497898a32d5892c607a157b4afbff0d70c53219e261e4bf03a4fb336e22c"
+    },
+    {
+      "file": "geometry/full-ce-worst/slices.png",
+      "sha256": "8e1117da335406abbf419eb4a5c80737eb58e665dd4c897e481c9324fd86408a"
+    },
+    {
+      "file": "geometry/full-ce-worst/slices.pdf",
+      "sha256": "a1b2cf3921d52fab9c5a5673c045e3acc1e0847065a0aac74a8e17febd2c6b2b"
+    },
+    {
+      "file": "geometry/full-ce-worst/slices-3d.png",
+      "sha256": "240fb6f743c0b2ef2f3b1c4aa97ef51117eacd2dd8c0fdc8f645bcaf4da0a961"
+    },
+    {
+      "file": "geometry/full-ce-worst/slices-3d.pdf",
+      "sha256": "9af1c1bf4c6ebd9a059fd7cfc87e34a3cd6d56bc743c549bc765e708ae63c692"
+    },
+    {
+      "file": "geometry/full-ce-worst/matched-radius-sections.png",
+      "sha256": "af3e045f6e217078338b237369018b50d0fd0c3577d79de6f85429cb6a64c1e3"
+    },
+    {
+      "file": "geometry/full-ce-worst/matched-radius-sections.pdf",
+      "sha256": "2242fd4ae281a03dd0fde0fb2941c4f04000c947b8b62a1c616e5e8966c27a1c"
+    },
+    {
+      "file": "geometry/mini-maxent-terminal/slices.png",
+      "sha256": "422eedefc04b0e0a799cee08ab2f169f04adb6df50f5404dd9243cb809612b81"
+    },
+    {
+      "file": "geometry/mini-maxent-terminal/slices.pdf",
+      "sha256": "2eff050739ac5672c30a170684a24bf6606f3fa3c302fc6266a094684bd58cb0"
+    },
+    {
+      "file": "geometry/mini-maxent-terminal/slices-3d.png",
+      "sha256": "94bbc738b357232fd6c5238409c3fc793b90c234134aaf7e8bdde29bea1c4674"
+    },
+    {
+      "file": "geometry/mini-maxent-terminal/slices-3d.pdf",
+      "sha256": "a1f2d142c1d6b78fc81a83bea59368bc928890ef8b8c02d21cf491486cb4a977"
+    },
+    {
+      "file": "geometry/mini-maxent-terminal/matched-radius-sections.png",
+      "sha256": "1a6835184cff3e34f2a0e3a409ac74f097f68be7741cec8dc6346e9e0d6bdf7d"
+    },
+    {
+      "file": "geometry/mini-maxent-terminal/matched-radius-sections.pdf",
+      "sha256": "59e54b0d3e0b577651c823548f07abb41eddd13b2df5cdcd394b03b804782cb3"
+    },
+    {
+      "file": "geometry/mini-ce-terminal/slices.png",
+      "sha256": "0cf292189afd198e26fb3ed278a5a664796611a795ee6ac930b60ceda0254e70"
+    },
+    {
+      "file": "geometry/mini-ce-terminal/slices.pdf",
+      "sha256": "bdd37da3219dff434ee6082f6c37f8eed9ead22d2e0c3e9750a308fbd6915156"
+    },
+    {
+      "file": "geometry/mini-ce-terminal/slices-3d.png",
+      "sha256": "b8a2900bc97ecf48ddd1787e15d6e3c52ad34c73d958d581785d3396e81d0459"
+    },
+    {
+      "file": "geometry/mini-ce-terminal/slices-3d.pdf",
+      "sha256": "8ab8c4bdc95c87af7b3e93bd9404cd2d6f92a2bec758b0b1ef360a5139468443"
+    },
+    {
+      "file": "geometry/mini-ce-terminal/matched-radius-sections.png",
+      "sha256": "aac3d717a526b0a57bb4326af66e36d5547c76bfe84c1a6c35cb50e72eabf428"
+    },
+    {
+      "file": "geometry/mini-ce-terminal/matched-radius-sections.pdf",
+      "sha256": "c93961a7dc612e472331c0223cdabad8662ece517b3039d2fe224d328c648382"
+    },
+    {
+      "file": "geometry/mini-ce-worst/slices.png",
+      "sha256": "9abb4c19e1dcf975a3e548e09f77265933e8134be5cb6ceb5dcc232d8cf415f6"
+    },
+    {
+      "file": "geometry/mini-ce-worst/slices.pdf",
+      "sha256": "e1b2d8caea9d30fce1ffb0ca4decbf57307f3eda997416b0d96d583966518cdc"
+    },
+    {
+      "file": "geometry/mini-ce-worst/slices-3d.png",
+      "sha256": "b7ba6a1266ae0f552b058924469930cc3a2f7e8184b6f7f277f8a8581a61decf"
+    },
+    {
+      "file": "geometry/mini-ce-worst/slices-3d.pdf",
+      "sha256": "b6b53fbcf4600acbba2e2ec0cf8666e3a1c65972283fa51c9e3f5c57075fc18d"
+    },
+    {
+      "file": "geometry/mini-ce-worst/matched-radius-sections.png",
+      "sha256": "7e20ef0cbb7bc43da8a43f2729440089cfd36e8b2315c65f3cd993d1512d05ae"
+    },
+    {
+      "file": "geometry/mini-ce-worst/matched-radius-sections.pdf",
+      "sha256": "4f8d7f1c05f0308d9e1febe98689b3fce9c5efe1af1beb5e9853ee593b070ad4"
+    },
+    {
+      "file": "geometry/full-maxent-terminal-fresh-retain/slices.png",
+      "sha256": "bf7c754857c64c970dd4af5ff302441aba756d22bc18d82ea4cc486e0e3538a6"
+    },
+    {
+      "file": "geometry/full-maxent-terminal-fresh-retain/slices.pdf",
+      "sha256": "705f4cd7b9dd7a2ffdb5242d674851f78fce02962ca00d724c1401b17bd64343"
+    },
+    {
+      "file": "geometry/full-maxent-terminal-fresh-retain/slices-3d.png",
+      "sha256": "4402ea294fd76caa610bbc134d1296b18815035aae843a0db52a27c3722d38fe"
+    },
+    {
+      "file": "geometry/full-maxent-terminal-fresh-retain/slices-3d.pdf",
+      "sha256": "dc42a151130c3ef8981f693bd8484c834a4327df794187c7f143ac39c2a9935c"
+    },
+    {
+      "file": "geometry/full-maxent-terminal-fresh-retain/matched-radius-sections.png",
+      "sha256": "da632af1a67e9c9cfdc7417aa2ec25e8eed472823532851d276180b6ea33e942"
+    },
+    {
+      "file": "geometry/full-maxent-terminal-fresh-retain/matched-radius-sections.pdf",
+      "sha256": "598a8cfa01e03e418b0f50f88e404bfced0c3302bf4ebaf1eee8b055a62fd857"
+    },
+    {
+      "file": "geometry/full-maxent-terminal-fresh-retain/utility-comparison/slices.png",
+      "sha256": "6369bd399f5ad9a3642fc4153b2891a22c64344a24dcc8d79845da16f33a7ffc"
+    },
+    {
+      "file": "geometry/full-maxent-terminal-fresh-retain/utility-comparison/slices.pdf",
+      "sha256": "ae2d807194ff5e89450beb9a36bc886f52a952efdf1c3cd19fca89ce85f4fc83"
+    },
+    {
+      "file": "geometry/full-maxent-terminal-fresh-retain/utility-comparison/slices-3d.png",
+      "sha256": "87e76091dd6d44a9d3d76c5050a946ba6bca9fc7b4d7167ef921af953b80d1e8"
+    },
+    {
+      "file": "geometry/full-maxent-terminal-fresh-retain/utility-comparison/slices-3d.pdf",
+      "sha256": "dda45ac5c32b90b3f6e9bf03d873a0436fefbd26c915b6089470e94a1dc92f02"
+    },
+    {
+      "file": "geometry/full-maxent-terminal-fresh-retain/utility-comparison/matched-radius-sections.png",
+      "sha256": "1c98171ec271e3fed870648d42e6c1fd6592aa760971f668650e4f833108d522"
+    },
+    {
+      "file": "geometry/full-maxent-terminal-fresh-retain/utility-comparison/matched-radius-sections.pdf",
+      "sha256": "d050364a385fc5d3b8dd1c954cd6fb2c4bfbe6da7b3a3185e2f3869756829446"
+    },
+    {
+      "file": "geometry/full-ce-worst-fresh-retain/slices.png",
+      "sha256": "b0f14b35d9e5df7e78d3f64c6c4f1674a6e5e44d11ed1b384c3f4b7dafc601c4"
+    },
+    {
+      "file": "geometry/full-ce-worst-fresh-retain/slices.pdf",
+      "sha256": "1cdf49945c8a46e8fccf5fa935d4fed5d3e0eb3ee86130be1beb00ef32ea5361"
+    },
+    {
+      "file": "geometry/full-ce-worst-fresh-retain/slices-3d.png",
+      "sha256": "5332f277409ec4f752cf6a099ea46f472a9d510acae3b26b8074245a44d80ab9"
+    },
+    {
+      "file": "geometry/full-ce-worst-fresh-retain/slices-3d.pdf",
+      "sha256": "5667fb2d96978adae559da74a7d0f68b7ee9a4de9bb0f81950c804e5c7ab597e"
+    },
+    {
+      "file": "geometry/full-ce-worst-fresh-retain/matched-radius-sections.png",
+      "sha256": "1e55e151da85b697f781f8c633f79a337954c7f99599453c4c568c2208bd8029"
+    },
+    {
+      "file": "geometry/full-ce-worst-fresh-retain/matched-radius-sections.pdf",
+      "sha256": "14f2d3a3b3fa0e972aa37f04bcad704ff8c77335456e1e1e10a480568f52285b"
+    },
+    {
+      "file": "geometry/full-ce-worst-fresh-retain/utility-comparison/slices.png",
+      "sha256": "4419e94dc0287387914281cda1b8aceccfa002d7b4e75a8263802321d8472f91"
+    },
+    {
+      "file": "geometry/full-ce-worst-fresh-retain/utility-comparison/slices.pdf",
+      "sha256": "a06468ea444d0faf11e3a7085dfedeac2f1fcb22b60f4a8dee3bf8ddccfaee62"
+    },
+    {
+      "file": "geometry/full-ce-worst-fresh-retain/utility-comparison/slices-3d.png",
+      "sha256": "c2d76c4e7ddd9d0cdd18c7ba8bb87204dc0cc454b907a60a777aed7f4f77c572"
+    },
+    {
+      "file": "geometry/full-ce-worst-fresh-retain/utility-comparison/slices-3d.pdf",
+      "sha256": "27cdf1a6f4a82d342a7473311c3fce3da1ee23747a626999f3e551024c586419"
+    },
+    {
+      "file": "geometry/full-ce-worst-fresh-retain/utility-comparison/matched-radius-sections.png",
+      "sha256": "9a4f1d8808e51b09d5cbb3ca1358b0f6a52d8f9c38ec3dacdbd9f825fbe3ca5e"
+    },
+    {
+      "file": "geometry/full-ce-worst-fresh-retain/utility-comparison/matched-radius-sections.pdf",
+      "sha256": "ea72d0d2d26bc226e29a71064c48d4ea1e8b7fe34c0f238f030b073a056423c5"
+    },
+    {
+      "file": "geometry/full-maxent-terminal-fresh-retain/attack-variants/full-new/slices.png",
+      "sha256": "32569a0a4df060a5a5d263fc2925e82d96322c3c2f8a25eb0660344cae44df87"
+    },
+    {
+      "file": "geometry/full-maxent-terminal-fresh-retain/attack-variants/full-new/slices.pdf",
+      "sha256": "de1241d000dbbae3f21aacb8e62ecdced525984c1e45df0aa5af97fee3e2614e"
+    },
+    {
+      "file": "geometry/full-maxent-terminal-fresh-retain/attack-variants/full-new/slices-3d.png",
+      "sha256": "97f6876577f8b4b9fcd458c5af90d33840385cfffb60bb83063562c8d8d5cfc8"
+    },
+    {
+      "file": "geometry/full-maxent-terminal-fresh-retain/attack-variants/full-new/slices-3d.pdf",
+      "sha256": "a5f9d439a16e534ed72cab76b1b62b54b08fc3a44f918d82ef03b03244f5b5a4"
+    },
+    {
+      "file": "geometry/full-maxent-terminal-fresh-retain/attack-variants/full-new/utility-comparison/slices.png",
+      "sha256": "566e24dc41ca10ddf367d0a096da4cc10c5373d63b86fcd2fb0cf6a4539f0258"
+    },
+    {
+      "file": "geometry/full-maxent-terminal-fresh-retain/attack-variants/full-new/utility-comparison/slices.pdf",
+      "sha256": "85384b5466504de5f6176ee3fb56b239967a060dc96817506ea20d42111d8ad3"
+    },
+    {
+      "file": "geometry/full-maxent-terminal-fresh-retain/attack-variants/full-new/utility-comparison/slices-3d.png",
+      "sha256": "595e6cff0237cc3e493fb3e5dbdba1ee5e844239e14ed192916799b58deebec6"
+    },
+    {
+      "file": "geometry/full-maxent-terminal-fresh-retain/attack-variants/full-new/utility-comparison/slices-3d.pdf",
+      "sha256": "151c3cc866dee19909990ae6aeddef74f2cf649eb7f3db6a4197b20d601e7167"
+    }
+  ],
+  "additional_driver_sha256": "4f092852a782011e252f0f717f4cf82df9f87225cda169e449967db31d285f03",
+  "additional_geometries": [
+    {
+      "case": "full-maxent-terminal-fresh-retain",
+      "attack_variant": "full-new",
+      "geometry": "geometry/full-maxent-terminal-fresh-retain/attack-variants/full-new/geometry.json",
+      "planes": [
+        "first",
+        "fit"
+      ],
+      "probe_groups": [
+        "forget_train",
+        "forget_heldout_subset",
+        "forget_new_attack"
+      ],
+      "full_range_ce_limits": [
+        0.0,
+        82.0
+      ],
+      "source_sha256": "a649c5c687515a8af4517f3e80e5adc20288e7261351abfbeab3b8c00203f986"
+    }
+  ]
+}

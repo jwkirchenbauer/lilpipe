@@ -1,0 +1,109 @@
+{
+  "checkpoint": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense",
+  "optimizer": {
+    "name": "sgd",
+    "lr": 0.01,
+    "weight_decay": 0.0,
+    "momentum": 0.0,
+    "dampening": 0.0,
+    "nesterov": false,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "max_grad_norm": 1.0
+  },
+  "steps": 1,
+  "inner_loss": "mean causal next-token CE",
+  "inner_scope": "one whole batch of all8 forget_train documents at every step",
+  "outer_loss": "negative mean CE",
+  "outer_scope": "first8 forget_heldout documents; terminal state only",
+  "fresh_optimizer_state_for_every_unroll": true,
+  "first_order_convention": "identity Jacobian through the complete optimizer update",
+  "forward_dtype": "float32",
+  "attention": "eager",
+  "amp": false,
+  "directions": [
+    "exact",
+    "first-order"
+  ],
+  "fd_epsilons_global_l2": [
+    0.03,
+    0.01,
+    0.003
+  ],
+  "data_content_sha256": "04ad533bd4d58a00c8df8041d9662c9a106f6df9914012695745fbc7f9cb7eea",
+  "inner_document_ids": [
+    {
+      "source_row": 12852,
+      "source_text_sha256": "05fa54c5c5bd1776eee8b9a97b98b7e722823c5afa751d1978e11ad26f285da7"
+    },
+    {
+      "source_row": 1913,
+      "source_text_sha256": "b2a963c1837a2f0e7bbc31c8572633f1d558b671b5781f593c9c4bb8e975c144"
+    },
+    {
+      "source_row": 5579,
+      "source_text_sha256": "e4a7c6015fa050034ac5f5de63cc69d78da332cf9ff247fa655c21e04e3d0276"
+    },
+    {
+      "source_row": 22880,
+      "source_text_sha256": "0d034e296b52856437f0ab2652ece44c76299b5c41f9fa4f7fd78009f3783e1d"
+    },
+    {
+      "source_row": 8931,
+      "source_text_sha256": "9ca43fa4af3604ae7eb12cc1ff6ed2d21525e7729ae0d70fc6d83a0d2492c350"
+    },
+    {
+      "source_row": 20890,
+      "source_text_sha256": "fcfe175b2250bd79c510874d3842f196bee733197fdc4184e73e8759dccef790"
+    },
+    {
+      "source_row": 13395,
+      "source_text_sha256": "4cdd6c6906410bf0ce57e3101e25d712011319f5f06ff7ed43236ee7cf68cd59"
+    },
+    {
+      "source_row": 16355,
+      "source_text_sha256": "cbaf162c4c7ec9c47ea3e36927c81041eac92098402b62b5b778e68f123194b1"
+    }
+  ],
+  "outer_document_ids": [
+    {
+      "source_row": 16584,
+      "source_text_sha256": "c55cc0ad7f54f8eaff2374300d1936a6c78c6ad2fe2f9a450ab484cc5404973e"
+    },
+    {
+      "source_row": 11958,
+      "source_text_sha256": "80a1fa1a501ad6986d9c52711a431d63d4f3725002e7b70e4f932cb0e7217645"
+    },
+    {
+      "source_row": 8745,
+      "source_text_sha256": "faa1a77bba96def685ccf71389f8f9a6d5bad71fb818d747f1e5fba84484df3b"
+    },
+    {
+      "source_row": 5423,
+      "source_text_sha256": "25afa2155d7079256128224efbc21fb23c278c0f4ec882d52650caea8e9a3469"
+    },
+    {
+      "source_row": 15271,
+      "source_text_sha256": "6fb23009b1cdf2e6cd5765cfae52f25608d3b0becba3cc5af3a8db512ab287bd"
+    },
+    {
+      "source_row": 13475,
+      "source_text_sha256": "c775771e641113bc7ba1d9db809b2f247b1273fa5e29ba338e6cc863b0bdaa51"
+    },
+    {
+      "source_row": 7985,
+      "source_text_sha256": "a734cf3b062d8146ac8ae57e68bc1713d33e11b439b3986a253144954db3b3fd"
+    },
+    {
+      "source_row": 4831,
+      "source_text_sha256": "2a7af078e7504452db7a1a170c70f805707b0b56ba85c021e40c30992294d199"
+    }
+  ],
+  "inner_valid_tokens_per_update": 2040,
+  "outer_valid_tokens": 2040,
+  "memory_policy": "sequential exact/FO meta-gradients; both completed maps on CPU; chunked shifts/dots; no saved gradient tensors",
+  "scope": "optional short-horizon derivative diagnostic; not a main-study robustness result"
+}

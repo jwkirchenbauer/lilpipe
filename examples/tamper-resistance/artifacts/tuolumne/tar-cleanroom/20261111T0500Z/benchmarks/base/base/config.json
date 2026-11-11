@@ -1,0 +1,33 @@
+{
+  "point": {
+    "case": "base",
+    "variant": null,
+    "step": 0,
+    "kind": "base",
+    "checkpoint": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+    "relative": "base/base",
+    "output": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/benchmarks/base/base"
+  },
+  "tasks": [
+    "wmdp_bio_robust",
+    "mmlu_no_bio"
+  ],
+  "task_include_path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/source/lm_eval_tasks",
+  "num_fewshot": 0,
+  "batch_size": 32,
+  "device": "cuda:0",
+  "dtype": "float32",
+  "mixed_precision_dtype": null,
+  "softmax_dtype": "float32",
+  "max_length": "model/tokenizer default, no additional context cap",
+  "apply_chat_template": false,
+  "limit": null,
+  "log_samples": false,
+  "bootstrap_iters": 0,
+  "seeds": {
+    "random": 0,
+    "numpy": 1234,
+    "torch": 1234,
+    "fewshot": 1234
+  }
+}

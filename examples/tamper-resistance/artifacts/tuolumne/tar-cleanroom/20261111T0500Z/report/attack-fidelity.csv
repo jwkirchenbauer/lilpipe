@@ -1,0 +1,37 @@
+case,variant,matched,state,fidelity_state,fidelity_steps,simulator_max_4step_relative_l2_error,simulator_endpoint_ce_gap,simulator_fidelity_verified,matched_fidelity_verified
+control,full-same,,complete,verified,"1,2,3,4",0.00010133713137128648,3.439188003540039e-05,True,
+control,mini-same,,complete,verified,"1,2,3,4",3.0122887206973687e-06,2.384185791015625e-07,True,
+control,mini-reverse,,complete,verified,"1,2,3,4",0.0,0.0,True,
+control,full-new,,complete,verified,"1,2,3,4",7.919507522126633e-05,2.9802322387695312e-06,True,
+full-maxent-terminal,full-same,True,complete,verified,"1,2,3,4",1.9386706514870117e-05,4.76837158203125e-07,True,True
+full-maxent-terminal,mini-same,False,complete,verified,"1,2,3,4",0.0,0.0,True,
+full-maxent-terminal,mini-reverse,False,complete,verified,"1,2,3,4",4.910988640800213e-06,8.58306884765625e-06,True,
+full-maxent-terminal,full-new,False,complete,verified,"1,2,3,4",4.3868965141365625e-05,3.0994415283203125e-06,True,
+full-ce-terminal,full-same,True,complete,outside tolerance,"1,2,3,4",0.2864210946473538,1.933579683303833,False,False
+full-ce-terminal,mini-same,False,complete,verified,"1,2,3,4",4.5010501151704234e-06,1.6689300537109375e-05,True,
+full-ce-terminal,mini-reverse,False,complete,verified,"1,2,3,4",9.455714048372191e-05,0.0009095668792724609,True,
+full-ce-terminal,full-new,False,complete,outside tolerance,"1,2,3,4",0.008686741978888914,0.013334274291992188,False,
+full-ce-worst,full-same,True,complete,outside tolerance,"1,2,3,4",0.5856086124178427,0.12292742729187012,False,False
+full-ce-worst,mini-same,False,complete,verified,"1,2,3,4",2.5911009298316656e-07,5.7220458984375e-06,True,
+full-ce-worst,mini-reverse,False,complete,verified,"1,2,3,4",2.409545423760171e-06,1.6927719116210938e-05,True,
+full-ce-worst,full-new,False,complete,outside tolerance,"1,2,3,4",0.2215796726074206,0.6440613269805908,False,
+mini-maxent-terminal,full-same,False,complete,verified,"1,2,3,4",4.055708120767796e-05,4.76837158203125e-07,True,
+mini-maxent-terminal,mini-same,True,complete,verified,"1,2,3,4",2.4237993200936667e-06,2.384185791015625e-07,True,True
+mini-maxent-terminal,mini-reverse,False,complete,verified,"1,2,3,4",0.0,0.0,True,
+mini-maxent-terminal,full-new,False,complete,verified,"1,2,3,4",9.36136663943089e-05,3.337860107421875e-06,True,
+mini-ce-terminal,full-same,False,complete,outside tolerance,"1,2,3,4",0.05370481556308945,0.00030732154846191406,False,
+mini-ce-terminal,mini-same,True,complete,outside tolerance,"1,2,3,4",0.005017439274546551,0.00463557243347168,False,False
+mini-ce-terminal,mini-reverse,False,complete,verified,"1,2,3,4",3.7201704709955485e-06,2.86102294921875e-06,True,
+mini-ce-terminal,full-new,False,complete,outside tolerance,"1,2,3,4",0.02031471076252869,0.020125865936279297,False,
+mini-ce-worst,full-same,False,complete,outside tolerance,"1,2,3,4",0.3504100091118119,0.2897169589996338,False,
+mini-ce-worst,mini-same,True,complete,verified,"1,2,3,4",0.0,0.0,True,True
+mini-ce-worst,mini-reverse,False,complete,verified,"1,2,3,4",0.0,0.0,True,
+mini-ce-worst,full-new,False,complete,outside tolerance,"1,2,3,4",0.29036000722054545,0.7508645057678223,False,
+full-maxent-terminal-fresh-retain,full-same,True,complete,verified,"1,2,3,4",0.0002977815566981023,3.170967102050781e-05,True,True
+full-maxent-terminal-fresh-retain,mini-same,False,complete,verified,"1,2,3,4",2.307431517163911e-06,0.0,True,
+full-maxent-terminal-fresh-retain,mini-reverse,False,complete,verified,"1,2,3,4",8.994353797365042e-07,0.0,True,
+full-maxent-terminal-fresh-retain,full-new,False,complete,verified,"1,2,3,4",0.00015265817240462697,2.586841583251953e-05,True,
+full-ce-worst-fresh-retain,full-same,True,complete,outside tolerance,"1,2,3,4",0.05610069229730788,0.01066899299621582,False,False
+full-ce-worst-fresh-retain,mini-same,False,complete,verified,"1,2,3,4",2.8484142992545e-07,9.5367431640625e-07,True,
+full-ce-worst-fresh-retain,mini-reverse,False,complete,verified,"1,2,3,4",3.4337688053914324e-06,4.76837158203125e-07,True,
+full-ce-worst-fresh-retain,full-new,False,complete,verified,"1,2,3,4",0.0006932660981321801,9.369850158691406e-05,True,

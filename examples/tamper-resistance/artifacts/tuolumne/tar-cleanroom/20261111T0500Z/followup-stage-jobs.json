@@ -1,0 +1,80 @@
+[
+  {
+    "key": "attack-full-maxent-terminal",
+    "exit_code": 0,
+    "job_id": "f3jQGP2uQ4co",
+    "last": "nb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/followup/cr-at-full-maxent-terminal/launch.sh\nLaunched job_id=f3jQGP2uQ4co.\n"
+  },
+  {
+    "key": "benchmark-defense-full-maxent-terminal",
+    "exit_code": 0,
+    "job_id": "f3jQGP6jnCtX",
+    "last": "nb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/followup/cr-bd-full-maxent-terminal/launch.sh\nLaunched job_id=f3jQGP6jnCtX.\n"
+  },
+  {
+    "key": "attack-full-ce-terminal",
+    "exit_code": 0,
+    "job_id": "f3jQGP4HTPqR",
+    "last": "rchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/followup/cr-at-full-ce-terminal/launch.sh\nLaunched job_id=f3jQGP4HTPqR.\n"
+  },
+  {
+    "key": "benchmark-defense-full-ce-terminal",
+    "exit_code": 0,
+    "job_id": "f3jQGP3pmcmD",
+    "last": "rchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/followup/cr-bd-full-ce-terminal/launch.sh\nLaunched job_id=f3jQGP3pmcmD.\n"
+  },
+  {
+    "key": "attack-full-ce-worst",
+    "exit_code": 0,
+    "job_id": "f3jQGP17cvtf",
+    "last": "/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/followup/cr-at-full-ce-worst/launch.sh\nLaunched job_id=f3jQGP17cvtf.\n"
+  },
+  {
+    "key": "benchmark-defense-full-ce-worst",
+    "exit_code": 0,
+    "job_id": "f3jQGP4vX5t3",
+    "last": "/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/followup/cr-bd-full-ce-worst/launch.sh\nLaunched job_id=f3jQGP4vX5t3.\n"
+  },
+  {
+    "key": "attack-mini-maxent-terminal",
+    "exit_code": 0,
+    "job_id": "f3jQGP3R3pFh",
+    "last": "nb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/followup/cr-at-mini-maxent-terminal/launch.sh\nLaunched job_id=f3jQGP3R3pFh.\n"
+  },
+  {
+    "key": "benchmark-defense-mini-maxent-terminal",
+    "exit_code": 0,
+    "job_id": "f3jQGP6P2Nwh",
+    "last": "nb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/followup/cr-bd-mini-maxent-terminal/launch.sh\nLaunched job_id=f3jQGP6P2Nwh.\n"
+  },
+  {
+    "key": "attack-mini-ce-terminal",
+    "exit_code": 0,
+    "job_id": "f3jQGP5vLbsV",
+    "last": "rchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/followup/cr-at-mini-ce-terminal/launch.sh\nLaunched job_id=f3jQGP5vLbsV.\n"
+  },
+  {
+    "key": "benchmark-defense-mini-ce-terminal",
+    "exit_code": 0,
+    "job_id": "f3jQGP2REJGF",
+    "last": "rchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/followup/cr-bd-mini-ce-terminal/launch.sh\nLaunched job_id=f3jQGP2REJGF.\n"
+  },
+  {
+    "key": "attack-mini-ce-worst",
+    "exit_code": 0,
+    "job_id": "f3jQGP1z2WUP",
+    "last": "/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/followup/cr-at-mini-ce-worst/launch.sh\nLaunched job_id=f3jQGP1z2WUP.\n"
+  },
+  {
+    "key": "benchmark-defense-mini-ce-worst",
+    "exit_code": 0,
+    "job_id": "f3jQGP5TepoH",
+    "last": "/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/followup/cr-bd-mini-ce-worst/launch.sh\nLaunched job_id=f3jQGP5TepoH.\n"
+  },
+  {
+    "key": "benchmark-attack-control",
+    "exit_code": 0,
+    "job_id": "f3jQGP1XLjQB",
+    "last": "/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/followup/cr-ba-control/launch.sh\nLaunched job_id=f3jQGP1XLjQB.\n"
+  }
+]

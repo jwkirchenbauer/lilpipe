@@ -1,0 +1,29 @@
+{
+  "recorded_utc": "2026-11-11 05:29:53 UTC",
+  "reason": "Execution refinements declared before final defense or attack outcomes",
+  "benchmark_scope": {
+    "pre_attack_tasks": [
+      "wmdp_bio_robust",
+      "mmlu_no_bio"
+    ],
+    "post_attack_tasks": [
+      "wmdp_bio_robust"
+    ]
+  },
+  "post_attack_utility": "Retained-data CE is measured throughout attacks; post-attack MMLU is outside the initial plan and cannot be inferred.",
+  "native_utility_calibration": "Report original utility floor and nativeFP32 base MMLU minus5percentagepoints; same task definitions and FP32 benchmark settings.",
+  "training_chunks": {
+    "boundaries": [
+      64,
+      125
+    ],
+    "optimizer_state": "Outer Adam moments and CPU/GPU RNG restored; uninterrupted/resumed equivalence checked.",
+    "engineering_checkpoints": [
+      32,
+      64,
+      96,
+      125
+    ]
+  },
+  "numeric_fidelity": "Independent full-batch GEMM and chunked accumulation can differ in FP32; record displacement-relative numerical error at every evaluated defender."
+}

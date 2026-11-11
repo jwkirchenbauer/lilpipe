@@ -1,0 +1,544 @@
+{
+  "state": "complete",
+  "started_utc": "2026-11-11T05:38:21.832772+00:00",
+  "settings": {
+    "checkpoint": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense",
+    "optimizer": {
+      "name": "sgd",
+      "lr": 0.01,
+      "weight_decay": 0.0,
+      "momentum": 0.0,
+      "dampening": 0.0,
+      "nesterov": false,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "max_grad_norm": 1.0
+    },
+    "steps": 1,
+    "inner_loss": "mean causal next-token CE",
+    "inner_scope": "one whole batch of all8 forget_train documents at every step",
+    "outer_loss": "negative mean CE",
+    "outer_scope": "first8 forget_heldout documents; terminal state only",
+    "fresh_optimizer_state_for_every_unroll": true,
+    "first_order_convention": "identity Jacobian through the complete optimizer update",
+    "forward_dtype": "float32",
+    "attention": "eager",
+    "amp": false,
+    "directions": [
+      "exact",
+      "first-order"
+    ],
+    "fd_epsilons_global_l2": [
+      0.03,
+      0.01,
+      0.003
+    ],
+    "data_content_sha256": "04ad533bd4d58a00c8df8041d9662c9a106f6df9914012695745fbc7f9cb7eea",
+    "inner_document_ids": [
+      {
+        "source_row": 12852,
+        "source_text_sha256": "05fa54c5c5bd1776eee8b9a97b98b7e722823c5afa751d1978e11ad26f285da7"
+      },
+      {
+        "source_row": 1913,
+        "source_text_sha256": "b2a963c1837a2f0e7bbc31c8572633f1d558b671b5781f593c9c4bb8e975c144"
+      },
+      {
+        "source_row": 5579,
+        "source_text_sha256": "e4a7c6015fa050034ac5f5de63cc69d78da332cf9ff247fa655c21e04e3d0276"
+      },
+      {
+        "source_row": 22880,
+        "source_text_sha256": "0d034e296b52856437f0ab2652ece44c76299b5c41f9fa4f7fd78009f3783e1d"
+      },
+      {
+        "source_row": 8931,
+        "source_text_sha256": "9ca43fa4af3604ae7eb12cc1ff6ed2d21525e7729ae0d70fc6d83a0d2492c350"
+      },
+      {
+        "source_row": 20890,
+        "source_text_sha256": "fcfe175b2250bd79c510874d3842f196bee733197fdc4184e73e8759dccef790"
+      },
+      {
+        "source_row": 13395,
+        "source_text_sha256": "4cdd6c6906410bf0ce57e3101e25d712011319f5f06ff7ed43236ee7cf68cd59"
+      },
+      {
+        "source_row": 16355,
+        "source_text_sha256": "cbaf162c4c7ec9c47ea3e36927c81041eac92098402b62b5b778e68f123194b1"
+      }
+    ],
+    "outer_document_ids": [
+      {
+        "source_row": 16584,
+        "source_text_sha256": "c55cc0ad7f54f8eaff2374300d1936a6c78c6ad2fe2f9a450ab484cc5404973e"
+      },
+      {
+        "source_row": 11958,
+        "source_text_sha256": "80a1fa1a501ad6986d9c52711a431d63d4f3725002e7b70e4f932cb0e7217645"
+      },
+      {
+        "source_row": 8745,
+        "source_text_sha256": "faa1a77bba96def685ccf71389f8f9a6d5bad71fb818d747f1e5fba84484df3b"
+      },
+      {
+        "source_row": 5423,
+        "source_text_sha256": "25afa2155d7079256128224efbc21fb23c278c0f4ec882d52650caea8e9a3469"
+      },
+      {
+        "source_row": 15271,
+        "source_text_sha256": "6fb23009b1cdf2e6cd5765cfae52f25608d3b0becba3cc5af3a8db512ab287bd"
+      },
+      {
+        "source_row": 13475,
+        "source_text_sha256": "c775771e641113bc7ba1d9db809b2f247b1273fa5e29ba338e6cc863b0bdaa51"
+      },
+      {
+        "source_row": 7985,
+        "source_text_sha256": "a734cf3b062d8146ac8ae57e68bc1713d33e11b439b3986a253144954db3b3fd"
+      },
+      {
+        "source_row": 4831,
+        "source_text_sha256": "2a7af078e7504452db7a1a170c70f805707b0b56ba85c021e40c30992294d199"
+      }
+    ],
+    "inner_valid_tokens_per_update": 2040,
+    "outer_valid_tokens": 2040,
+    "memory_policy": "sequential exact/FO meta-gradients; both completed maps on CPU; chunked shifts/dots; no saved gradient tensors",
+    "scope": "optional short-horizon derivative diagnostic; not a main-study robustness result"
+  },
+  "result": {
+    "optimizer": {
+      "name": "sgd",
+      "lr": 0.01,
+      "weight_decay": 0.0,
+      "momentum": 0.0,
+      "dampening": 0.0,
+      "nesterov": false,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "max_grad_norm": 1.0
+    },
+    "steps": 1,
+    "exact_outer_loss": -9.757719039916992,
+    "first_order_outer_loss": -9.757719039916992,
+    "exact_first_order_outer_loss_abs_difference": 0.0,
+    "meta_inner_losses": {
+      "exact": [
+        11.173993110656738
+      ],
+      "first-order": [
+        11.173993110656738
+      ]
+    },
+    "baseline_replay": {
+      "outer_loss": -9.757719039916992,
+      "outer_ce": 9.757719039916992,
+      "outer_entropy": 10.222834587097168,
+      "inner_losses": [
+        11.173993110656738
+      ],
+      "attack_update_l2": 0.010000002220214133
+    },
+    "exact_baseline_replay_abs_difference": 0.0,
+    "exact_gradient_norm": 120.39496038314572,
+    "first_order_gradient_norm": 116.77205024288018,
+    "gradient_dot_product": 13968.948221482358,
+    "gradient_cosine": 0.9936112359328167,
+    "gradient_difference_l2": 13.883866918846625,
+    "first_order_relative_l2_error": 0.11531933624682059,
+    "first_order_to_exact_norm_ratio": 0.969908124652926,
+    "finite_differences": [
+      {
+        "direction": "exact",
+        "state": "complete",
+        "epsilon_global_l2": 0.03,
+        "plus": {
+          "outer_loss": -8.259946823120117,
+          "outer_ce": 8.259946823120117,
+          "outer_entropy": 6.1556854248046875,
+          "inner_losses": [
+            7.956727504730225
+          ],
+          "parameter_shift": {
+            "requested_signed_l2_step": 0.03,
+            "realized_l2_step": 0.030000000919874478,
+            "projection_along_unit_gradient": 0.030000000060493713,
+            "absolute_direction_cosine": 0.9999999713539754,
+            "changed_parameter_fraction": 0.958902068862173
+          }
+        },
+        "minus": {
+          "outer_loss": -20.714214324951172,
+          "outer_ce": 20.714214324951172,
+          "outer_entropy": 6.931509971618652,
+          "inner_losses": [
+            18.139591217041016
+          ],
+          "parameter_shift": {
+            "requested_signed_l2_step": -0.03,
+            "realized_l2_step": 0.030000000936814885,
+            "projection_along_unit_gradient": -0.03000000007742349,
+            "absolute_direction_cosine": 0.9999999713536211,
+            "changed_parameter_fraction": 0.9589021536485185
+          }
+        },
+        "finite_difference": 207.57112503051758,
+        "projected_span_finite_difference": 207.57112455339043,
+        "exact_directional_derivative": 120.39496038314572,
+        "first_order_directional_derivative": 116.02602116423715,
+        "exact_absolute_error": 87.17616464737186,
+        "first_order_absolute_error": 91.54510386628043,
+        "exact_relative_error": 0.41998213689189684,
+        "first_order_relative_error": 0.44103005103827064
+      },
+      {
+        "direction": "exact",
+        "state": "complete",
+        "epsilon_global_l2": 0.01,
+        "plus": {
+          "outer_loss": -8.72214126586914,
+          "outer_ce": 8.72214126586914,
+          "outer_entropy": 9.857625007629395,
+          "inner_losses": [
+            9.70254898071289
+          ],
+          "parameter_shift": {
+            "requested_signed_l2_step": 0.01,
+            "realized_l2_step": 0.010000002091763936,
+            "projection_along_unit_gradient": 0.009999999534440768,
+            "absolute_direction_cosine": 0.9999997442677367,
+            "changed_parameter_fraction": 0.9232919872433789
+          }
+        },
+        "minus": {
+          "outer_loss": -11.089588165283203,
+          "outer_ce": 11.089588165283203,
+          "outer_entropy": 10.227337837219238,
+          "inner_losses": [
+            13.000056266784668
+          ],
+          "parameter_shift": {
+            "requested_signed_l2_step": -0.01,
+            "realized_l2_step": 0.010000002162105134,
+            "projection_along_unit_gradient": -0.009999999604741383,
+            "absolute_direction_cosine": 0.9999997442636802,
+            "changed_parameter_fraction": 0.9232922511305229
+          }
+        },
+        "finite_difference": 118.37234497070312,
+        "projected_span_finite_difference": 118.37235006555473,
+        "exact_directional_derivative": 120.39496038314572,
+        "first_order_directional_derivative": 116.02602116423715,
+        "exact_absolute_error": 2.0226154124425904,
+        "first_order_absolute_error": 2.346323806465975,
+        "exact_relative_error": 0.016799834528005205,
+        "first_order_relative_error": 0.019821553818560277
+      },
+      {
+        "direction": "exact",
+        "state": "complete",
+        "epsilon_global_l2": 0.003,
+        "plus": {
+          "outer_loss": -9.432122230529785,
+          "outer_ce": 9.432122230529785,
+          "outer_entropy": 10.16665267944336,
+          "inner_losses": [
+            10.698393821716309
+          ],
+          "parameter_shift": {
+            "requested_signed_l2_step": 0.003,
+            "realized_l2_step": 0.0030000064992210806,
+            "projection_along_unit_gradient": 0.0029999991529179684,
+            "absolute_direction_cosine": 0.9999975512376009,
+            "changed_parameter_fraction": 0.8293550330752252
+          }
+        },
+        "minus": {
+          "outer_loss": -10.131134986877441,
+          "outer_ce": 10.131134986877441,
+          "outer_entropy": 10.253679275512695,
+          "inner_losses": [
+            11.680533409118652
+          ],
+          "parameter_shift": {
+            "requested_signed_l2_step": -0.003,
+            "realized_l2_step": 0.0030000064991623923,
+            "projection_along_unit_gradient": -0.0029999991527861797,
+            "absolute_direction_cosine": 0.9999975512132341,
+            "changed_parameter_fraction": 0.829355217699564
+          }
+        },
+        "finite_difference": 116.5021260579427,
+        "projected_span_finite_difference": 116.50215895613015,
+        "exact_directional_derivative": 120.39496038314572,
+        "first_order_directional_derivative": 116.02602116423715,
+        "exact_absolute_error": 3.8928343252030118,
+        "first_order_absolute_error": 0.4761048937055534,
+        "exact_relative_error": 0.03233386441437773,
+        "first_order_relative_error": 0.004086662705784109
+      },
+      {
+        "direction": "first-order",
+        "state": "complete",
+        "epsilon_global_l2": 0.03,
+        "plus": {
+          "outer_loss": -8.151939392089844,
+          "outer_ce": 8.151939392089844,
+          "outer_entropy": 6.450538635253906,
+          "inner_losses": [
+            7.90946626663208
+          ],
+          "parameter_shift": {
+            "requested_signed_l2_step": 0.03,
+            "realized_l2_step": 0.029999998438968084,
+            "projection_along_unit_gradient": 0.02999999538576982,
+            "absolute_direction_cosine": 0.9999998982267192,
+            "changed_parameter_fraction": 0.9581660706328344
+          }
+        },
+        "minus": {
+          "outer_loss": -14.207527160644531,
+          "outer_ce": 14.207527160644531,
+          "outer_entropy": 9.551153182983398,
+          "inner_losses": [
+            17.476781845092773
+          ],
+          "parameter_shift": {
+            "requested_signed_l2_step": -0.03,
+            "realized_l2_step": 0.029999998623323112,
+            "projection_along_unit_gradient": -0.02999999557011671,
+            "absolute_direction_cosine": 0.9999998982264485,
+            "changed_parameter_fraction": 0.9581662134163544
+          }
+        },
+        "finite_difference": 100.9264628092448,
+        "projected_span_finite_difference": 100.92647802242013,
+        "exact_directional_derivative": 119.62578538637992,
+        "first_order_directional_derivative": 116.77205024288018,
+        "exact_absolute_error": 18.69932257713512,
+        "first_order_absolute_error": 15.845587433635387,
+        "exact_relative_error": 0.15631514992138262,
+        "first_order_relative_error": 0.1356967476436128
+      },
+      {
+        "direction": "first-order",
+        "state": "complete",
+        "epsilon_global_l2": 0.01,
+        "plus": {
+          "outer_loss": -8.689977645874023,
+          "outer_ce": 8.689977645874023,
+          "outer_entropy": 9.820207595825195,
+          "inner_losses": [
+            9.699868202209473
+          ],
+          "parameter_shift": {
+            "requested_signed_l2_step": 0.01,
+            "realized_l2_step": 0.010000001294062463,
+            "projection_along_unit_gradient": 0.009999998019572787,
+            "absolute_direction_cosine": 0.9999996725510748,
+            "changed_parameter_fraction": 0.9222521350505369
+          }
+        },
+        "minus": {
+          "outer_loss": -11.04964542388916,
+          "outer_ce": 11.04964542388916,
+          "outer_entropy": 10.23197078704834,
+          "inner_losses": [
+            12.942831039428711
+          ],
+          "parameter_shift": {
+            "requested_signed_l2_step": -0.01,
+            "realized_l2_step": 0.01000000125853059,
+            "projection_along_unit_gradient": -0.00999999798401066,
+            "absolute_direction_cosine": 0.9999996725480481,
+            "changed_parameter_fraction": 0.9222526934804742
+          }
+        },
+        "finite_difference": 117.98338890075684,
+        "projected_span_finite_difference": 117.98341247629997,
+        "exact_directional_derivative": 119.62578538637992,
+        "first_order_directional_derivative": 116.77205024288018,
+        "exact_absolute_error": 1.642396485623081,
+        "first_order_absolute_error": 1.2113386578766523,
+        "exact_relative_error": 0.013729452060174957,
+        "first_order_relative_error": 0.010267027156641385
+      },
+      {
+        "direction": "first-order",
+        "state": "complete",
+        "epsilon_global_l2": 0.003,
+        "plus": {
+          "outer_loss": -9.40860366821289,
+          "outer_ce": 9.40860366821289,
+          "outer_entropy": 10.161006927490234,
+          "inner_losses": [
+            10.701841354370117
+          ],
+          "parameter_shift": {
+            "requested_signed_l2_step": 0.003,
+            "realized_l2_step": 0.003000006291863026,
+            "projection_along_unit_gradient": 0.002999998757772632,
+            "absolute_direction_cosine": 0.9999974886418024,
+            "changed_parameter_fraction": 0.8281517971802087
+          }
+        },
+        "minus": {
+          "outer_loss": -10.125689506530762,
+          "outer_ce": 10.125689506530762,
+          "outer_entropy": 10.253430366516113,
+          "inner_losses": [
+            11.67230224609375
+          ],
+          "parameter_shift": {
+            "requested_signed_l2_step": -0.003,
+            "realized_l2_step": 0.0030000063223450326,
+            "projection_along_unit_gradient": -0.0029999987880949914,
+            "absolute_direction_cosine": 0.9999974885886123,
+            "changed_parameter_fraction": 0.8281516860189576
+          }
+        },
+        "finite_difference": 119.51430638631184,
+        "projected_span_finite_difference": 119.51435527031997,
+        "exact_directional_derivative": 119.62578538637992,
+        "first_order_directional_derivative": 116.77205024288018,
+        "exact_absolute_error": 0.11147900006807276,
+        "first_order_absolute_error": 2.7422561434316606,
+        "exact_relative_error": 0.0009318977485331126,
+        "first_order_relative_error": 0.022945003207965196
+      }
+    ],
+    "negative_gradient_step_profiles": [
+      {
+        "gradient": "exact",
+        "requested_step_global_l2": 0.03,
+        "baseline_outer_loss": -9.757719039916992,
+        "outer_loss_after_step_and_fresh_attack": -20.714214324951172,
+        "objective_change": -10.95649528503418,
+        "reduces_objective": true,
+        "first_order_predicted_change": -3.480780634927114,
+        "exact_predicted_change": -3.6118488114943714,
+        "parameter_shift": {
+          "requested_signed_l2_step": -0.03,
+          "realized_l2_step": 0.030000000936814885,
+          "projection_along_unit_gradient": -0.03000000007742349,
+          "absolute_direction_cosine": 0.9999999713536211,
+          "changed_parameter_fraction": 0.9589021536485185
+        },
+        "reuses_minus_side_finite_difference_evaluation": true
+      },
+      {
+        "gradient": "exact",
+        "requested_step_global_l2": 0.01,
+        "baseline_outer_loss": -9.757719039916992,
+        "outer_loss_after_step_and_fresh_attack": -11.089588165283203,
+        "objective_change": -1.331869125366211,
+        "reduces_objective": true,
+        "first_order_predicted_change": -1.1602602116423715,
+        "exact_predicted_change": -1.2039496038314572,
+        "parameter_shift": {
+          "requested_signed_l2_step": -0.01,
+          "realized_l2_step": 0.010000002162105134,
+          "projection_along_unit_gradient": -0.009999999604741383,
+          "absolute_direction_cosine": 0.9999997442636802,
+          "changed_parameter_fraction": 0.9232922511305229
+        },
+        "reuses_minus_side_finite_difference_evaluation": true
+      },
+      {
+        "gradient": "exact",
+        "requested_step_global_l2": 0.003,
+        "baseline_outer_loss": -9.757719039916992,
+        "outer_loss_after_step_and_fresh_attack": -10.131134986877441,
+        "objective_change": -0.3734159469604492,
+        "reduces_objective": true,
+        "first_order_predicted_change": -0.3480780634927115,
+        "exact_predicted_change": -0.36118488114943714,
+        "parameter_shift": {
+          "requested_signed_l2_step": -0.003,
+          "realized_l2_step": 0.0030000064991623923,
+          "projection_along_unit_gradient": -0.0029999991527861797,
+          "absolute_direction_cosine": 0.9999975512132341,
+          "changed_parameter_fraction": 0.829355217699564
+        },
+        "reuses_minus_side_finite_difference_evaluation": true
+      },
+      {
+        "gradient": "first-order",
+        "requested_step_global_l2": 0.03,
+        "baseline_outer_loss": -9.757719039916992,
+        "outer_loss_after_step_and_fresh_attack": -14.207527160644531,
+        "objective_change": -4.449808120727539,
+        "reduces_objective": true,
+        "first_order_predicted_change": -3.5031615072864053,
+        "exact_predicted_change": -3.5887735615913976,
+        "parameter_shift": {
+          "requested_signed_l2_step": -0.03,
+          "realized_l2_step": 0.029999998623323112,
+          "projection_along_unit_gradient": -0.02999999557011671,
+          "absolute_direction_cosine": 0.9999998982264485,
+          "changed_parameter_fraction": 0.9581662134163544
+        },
+        "reuses_minus_side_finite_difference_evaluation": true
+      },
+      {
+        "gradient": "first-order",
+        "requested_step_global_l2": 0.01,
+        "baseline_outer_loss": -9.757719039916992,
+        "outer_loss_after_step_and_fresh_attack": -11.04964542388916,
+        "objective_change": -1.291926383972168,
+        "reduces_objective": true,
+        "first_order_predicted_change": -1.1677205024288018,
+        "exact_predicted_change": -1.1962578538637991,
+        "parameter_shift": {
+          "requested_signed_l2_step": -0.01,
+          "realized_l2_step": 0.01000000125853059,
+          "projection_along_unit_gradient": -0.00999999798401066,
+          "absolute_direction_cosine": 0.9999996725480481,
+          "changed_parameter_fraction": 0.9222526934804742
+        },
+        "reuses_minus_side_finite_difference_evaluation": true
+      },
+      {
+        "gradient": "first-order",
+        "requested_step_global_l2": 0.003,
+        "baseline_outer_loss": -9.757719039916992,
+        "outer_loss_after_step_and_fresh_attack": -10.125689506530762,
+        "objective_change": -0.36797046661376953,
+        "reduces_objective": true,
+        "first_order_predicted_change": -0.3503161507286406,
+        "exact_predicted_change": -0.35887735615913974,
+        "parameter_shift": {
+          "requested_signed_l2_step": -0.003,
+          "realized_l2_step": 0.0030000063223450326,
+          "projection_along_unit_gradient": -0.0029999987880949914,
+          "absolute_direction_cosine": 0.9999974885886123,
+          "changed_parameter_fraction": 0.8281516860189576
+        },
+        "reuses_minus_side_finite_difference_evaluation": true
+      }
+    ],
+    "interpretation": [
+      "The exact gradient differentiates every functional optimizer operation, including global clipping.",
+      "The first-order gradient uses an identity Jacobian through the complete optimizer update.",
+      "Finite differences and step profiles rerun the attack from each perturbed initialization with fresh optimizer state.",
+      "The outer loss is evaluated after the attack; negative-gradient steps therefore test the meta-objective directly.",
+      "FP32 perturbations can differ from the requested radius; realized L2, projection, and changed fraction are reported.",
+      "There is no automatic pass threshold for actual-model finite differences or a claim that the first-order approximation is exact."
+    ],
+    "peak_accelerator_memory_bytes": {
+      "0": 58286176768,
+      "1": 54563346944,
+      "2": 54563346944,
+      "3": 58260769280
+    }
+  },
+  "seconds": 202.90119313285686,
+  "completed_utc": "2026-11-11T05:41:44.738530+00:00"
+}

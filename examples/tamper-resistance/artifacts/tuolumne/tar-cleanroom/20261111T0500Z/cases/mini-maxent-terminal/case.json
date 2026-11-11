@@ -1,0 +1,11 @@
+{
+  "name": "mini-maxent-terminal",
+  "mode": "mini",
+  "objective": "maxent-terminal",
+  "attack_batch_size": 2,
+  "inner_steps": 4,
+  "outer_steps": 125,
+  "outer_learning_rate": 5e-06,
+  "retain_coefficient": 2.5,
+  "seed": 42
+}

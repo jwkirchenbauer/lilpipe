@@ -1,0 +1,134 @@
+{
+  "first": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "full-maxent-terminal",
+        "job_id": "f3jQu9VS4G71",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "full-ce-terminal",
+        "job_id": "f3jQu9UvQWU7",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "full-ce-worst",
+        "job_id": "f3jQu9VCiNZu",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "mini-maxent-terminal",
+        "job_id": "f3jQu9VpJ5LB",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "mini-ce-terminal",
+        "job_id": "f3jQu9WXojDq",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "mini-ce-worst",
+        "job_id": "f3jQu9WB3uH1",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "full-maxent-terminal-fresh-retain",
+        "job_id": "f3jQu9WtZZAf",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "full-ce-worst-fresh-retain",
+        "job_id": "f3jQu9XCMQYo",
+        "exit_code": 0
+      }
+    }
+  ],
+  "second": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "full-maxent-terminal",
+        "job_id": "f3jQuqZCEZDH",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "full-ce-terminal",
+        "job_id": "f3jQuqadFrzb",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "full-ce-worst",
+        "job_id": "f3jQuqaz1gwR",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "mini-maxent-terminal",
+        "job_id": "f3jQuqaHz2L7",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "mini-ce-terminal",
+        "job_id": "f3jQuqbGKZ3D",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "mini-ce-worst",
+        "job_id": "f3jQuqZYzPA7",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "full-maxent-terminal-fresh-retain",
+        "job_id": "f3jQuqba7QRM",
+        "exit_code": 0
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "key": "full-ce-worst-fresh-retain",
+        "job_id": "f3jQuqZwECPH",
+        "exit_code": 0
+      }
+    }
+  ]
+}

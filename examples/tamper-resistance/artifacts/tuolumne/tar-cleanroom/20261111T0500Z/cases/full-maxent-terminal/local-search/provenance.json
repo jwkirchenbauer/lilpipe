@@ -1,0 +1,90 @@
+{
+  "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/source/profiles/analysis-v5/tar_cleanroom.py",
+  "source_sha256": "1faaf89e73b18d3b70b4fc12c2f6724df51931c3cb3828b9389d3d959f673fd6",
+  "study_sha256": "741284bd8402c2ab45e2b5bc18c4f06d7d13e14e57ccf3dbe801d9080f7da422",
+  "data_sha256": "04ad533bd4d58a00c8df8041d9662c9a106f6df9914012695745fbc7f9cb7eea",
+  "torch": "2.12.1+rocm7.2",
+  "hip": "7.2.53211",
+  "dtype": "float32",
+  "case_extensions_sha256": "08db8e9928c5f8b75641763ff40c31daddbf0428858d56284c9e395e010406fc",
+  "retain_stream": {
+    "path": "retain-refresh.json",
+    "content_sha256": "9a0d8fbb4550317c5afa1c7089c89f452b132b2da9d5df9ff52fe415bf3597bf",
+    "file_sha256": "ef2966014e7469364e796c6d96fb37fae9a3c928159716c30ed77565218deee4"
+  },
+  "executing_source": {
+    "sha256": "99bc9c1b122ad36ea757a85a31f978aa354421b8bca137e80c8b8986dbca7d05",
+    "archive": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/analysis-source/99bc9c1b122ad36ea757a85a31f978aa354421b8bca137e80c8b8986dbca7d05",
+    "executing_files": {
+      "tar_cleanroom_analysis.py": "8ee04a30eefa1cf9793e785aa305736557e273f07fac3e97b867be163181369c",
+      "tar_cleanroom.py": "1faaf89e73b18d3b70b4fc12c2f6724df51931c3cb3828b9389d3d959f673fd6"
+    },
+    "study_sha256": "741284bd8402c2ab45e2b5bc18c4f06d7d13e14e57ccf3dbe801d9080f7da422",
+    "original_source_manifest_sha256": "fcd00435726fff28371bae02283ac3a0209f735dae03ffcbac5706c81ea877b7",
+    "protocol_amendments_sha256": "0f2c09dd1d5a93fbfe48f107e6057d28ebf74faa50fa38da468bfa0fe3b48ff4"
+  },
+  "checkpoint": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/cases/full-maxent-terminal/defense-125",
+  "checkpoint_files": {
+    "chat_template.jinja": {
+      "bytes": 410,
+      "sha256": "66291cf0045c2425a3a667cf3cbb7af2b11f09e025c02f97245323ab79119362"
+    },
+    "checkpoint-complete.json": {
+      "bytes": 48,
+      "sha256": "be9c0b919255e934d23fde5612ab00b6e47fe505e8b6148bd0d7cb55c2a22de0"
+    },
+    "config.json": {
+      "bytes": 685,
+      "sha256": "48d7588f32c4f6db757479b41e58bec8b4bee92d2c970dde134c63172e929f0f"
+    },
+    "generation_config.json": {
+      "bytes": 163,
+      "sha256": "aaaf2a0bd3f0e54fa0939b08608f6ae3b99c0dfdbd03461b5710cb10e0be286e"
+    },
+    "model-00001-of-00008.safetensors": {
+      "bytes": 3900820960,
+      "sha256": "ad8717ec3346f46e305234dd1626240293b8598b373cccfafccc5a736f5d4a3f"
+    },
+    "model-00002-of-00008.safetensors": {
+      "bytes": 3976352256,
+      "sha256": "054217a5813f3548ffb6bfddee292a49754408dc05e4b41df92d207aacccffb4"
+    },
+    "model-00003-of-00008.safetensors": {
+      "bytes": 3875689080,
+      "sha256": "9d9fdbbe630754f61e834747426dbd4c3d4f7eefbbfe6baf751f51a268ed6d5e"
+    },
+    "model-00004-of-00008.safetensors": {
+      "bytes": 3976352296,
+      "sha256": "71913548ed830a6761716ffff46c71868066bbac0e255015c6b6f09a97eee79d"
+    },
+    "model-00005-of-00008.safetensors": {
+      "bytes": 3875689112,
+      "sha256": "07206e28e3d25aa78e338cec602c3dd60cf249535818a230d8fcbbcb3e291ddc"
+    },
+    "model-00006-of-00008.safetensors": {
+      "bytes": 3976352296,
+      "sha256": "ebb0a9dfaf1411f6ad443b04c8709c4544c5ef77eadedc46d2f6a339edde812b"
+    },
+    "model-00007-of-00008.safetensors": {
+      "bytes": 3875689112,
+      "sha256": "52cf21175422b1298ec43a5eab90b00c453d819129ecb70abc50056e47166a8f"
+    },
+    "model-00008-of-00008.safetensors": {
+      "bytes": 1510016944,
+      "sha256": "8381f134aefab1329f5ad740099515e315f9179b433553b14b76be31f0bcb6f2"
+    },
+    "model.safetensors.index.json": {
+      "bytes": 23986,
+      "sha256": "c6e6206db151b4f2dadc55a15d453f0756c0dc4191dc1d8e0f766363a8f0d5fc"
+    },
+    "tokenizer.json": {
+      "bytes": 3505751,
+      "sha256": "1d5b9634c23bdd4540f633d327120e1fa4b57a2a723a56d7a92debfc4d15c061"
+    },
+    "tokenizer_config.json": {
+      "bytes": 527,
+      "sha256": "eab29c608f4cc298909cf8772a145d422d16ab542489f7ac5984b9c2f223da22"
+    }
+  },
+  "selection_rows_sha256": "da5236c4eef4d4f28ddbe3d372793b9470aaba1723887a4fc85461b05e307dbc"
+}

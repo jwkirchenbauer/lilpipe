@@ -1,0 +1,20 @@
+{
+  "state": "complete",
+  "case": "full-maxent-terminal-fresh-retain",
+  "requested_tasks": [
+    "wmdp_bio_robust"
+  ],
+  "scores_percent": {
+    "wmdp_bio_robust": 26.26728110599078
+  },
+  "completed_tasks": [
+    "wmdp_bio_robust"
+  ],
+  "seconds": 127.07474553096108,
+  "budget": {
+    "forward_calls": 28,
+    "forward_input_tokens": 123868,
+    "backward_calls": 0
+  },
+  "token_budget_scope": "All unmasked model input tokens including prompt context; separate from search supervised next-token budgets"
+}

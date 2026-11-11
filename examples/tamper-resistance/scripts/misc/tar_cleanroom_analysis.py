@@ -70,6 +70,11 @@ def declaration_hashes(run):
                 "attack_capability_trajectory_amendment_sha256",
                 "attack-capability-trajectory-amendment.json",
             ),
+            (
+                "all_attack_capability_trajectory_amendment_sha256",
+                "all-attack-capability-trajectory-amendment.json",
+            ),
+            ("fine_line_search_amendment_sha256", "fine-line-search-amendment.json"),
         )
     }
 
@@ -140,7 +145,12 @@ def benchmark_point(run, study, case, variant=None, step=None):
     if variant is not None:
         if case == "base":
             raise ValueError("Base-model attack trajectories are not declared")
-        if variant not in study.get("attack_variants", VARIANTS):
+        variants = (
+            VARIANTS
+            if (run / "all-attack-capability-trajectory-amendment.json").is_file()
+            else study.get("attack_variants", VARIANTS)
+        )
+        if variant not in variants:
             raise ValueError(f"Unknown attack variant: {variant}")
         selected = study["attack"]["steps"] if step is None else step
         checkpoint = (
@@ -600,9 +610,13 @@ def expected_points(run, study):
     for case, settings in study["cases"].items():
         for step in study.get("defense_checkpoints", [settings["outer_steps"]]):
             points.append(benchmark_point(run, study, case, step=step))
+    expanded = (run / "all-attack-capability-trajectory-amendment.json").is_file()
+    variants = VARIANTS if expanded else study.get("attack_variants", VARIANTS)
+    steps = (1, 4, 16, 64) if expanded else (study["attack"]["steps"],)
     for case in ("control", *study["cases"]):
-        for variant in study.get("attack_variants", VARIANTS):
-            points.append(benchmark_point(run, study, case, variant))
+        for variant in variants:
+            for step in steps:
+                points.append(benchmark_point(run, study, case, variant, step))
     return points
 
 
@@ -852,10 +866,12 @@ def local_benchmark_measurement(
     return answer
 
 
-def collect_local_searches(run, study, warnings):
+def collect_local_searches(run, study, warnings, folder_name="local-search"):
     """Collect only searches that exist; their budgets and radius are independent."""
     records = []
-    for folder in sorted((run / "cases").glob("*/local-search")):
+    if folder_name not in {"local-search", "local-search-fine"}:
+        raise ValueError("Unsupported local-search report folder")
+    for folder in sorted((run / "cases").glob(f"*/{folder_name}")):
         if not folder.is_dir():
             continue
         case = folder.parent.name
@@ -994,6 +1010,7 @@ def collect_local_searches(run, study, warnings):
         records.append(
             {
                 "case": case,
+                "output_name": folder_name,
                 "state": state,
                 "execution_state": execution,
                 "steps_requested": steps,
@@ -1027,6 +1044,9 @@ def collect_local_searches(run, study, warnings):
                 "benchmark": measurement,
                 "provenance_file": str(folder / "provenance.json"),
                 "provenance": read_json(folder / "provenance.json", {}),
+                "candidate_step_lengths": config.get(
+                    "candidate_step_lengths", metadata.get("candidate_step_lengths")
+                ),
                 "search_file": str(folder / "search.json"),
                 "error": metadata.get("error"),
                 "validation_errors": errors,
@@ -1147,7 +1167,7 @@ def collect_report(run, study, helper=None):
             if utility is not None and native_gate is not None
             else None
         )
-    return {
+    summary = {
         "generated_utc": utc_now(),
         "study": str(run / "study.json"),
         **declaration_hashes(run),
@@ -1173,9 +1193,14 @@ def collect_report(run, study, helper=None):
         "outer_trajectory": outer_rows,
         "benchmarks": benchmarks,
         "local_searches": collect_local_searches(run, study, warnings),
+        "fine_local_searches": collect_local_searches(
+            run, study, warnings, "local-search-fine"
+        ),
         "warnings": warnings,
         "limitations": study.get("limitations", []),
     }
+    summary["peak_wmdp"] = peak_wmdp(summary)
+    return summary
 
 
 def write_csv(path, rows, fields):
@@ -1354,6 +1379,187 @@ def capability_paths(summary):
     return paths
 
 
+def peak_wmdp(summary):
+    """Observed ordinary-attack maxima, with the option to leave the model alone."""
+    cases = ("control", *summary.get("case_modes", {}))
+    anchors = summary.get("attack_anchor_steps", {})
+    fidelity = {
+        (row["case"], row["variant"]): row.get("fidelity_state")
+        for row in summary.get("attacks", [])
+    }
+    output = []
+    for case in cases:
+        before, attacked = None, []
+        for record in summary["benchmarks"]:
+            point = record["point"]
+            score = (record.get("scores_percent") or {}).get(TASKS[0])
+            if (
+                point["case"] != case
+                or record.get("task_states", {}).get(TASKS[0]) != "complete"
+                or not finite_number(score)
+            ):
+                continue
+            variant = point.get("variant")
+            if variant is None and (
+                (case == "control" and point["kind"] == "anchor")
+                or (case in anchors and point["step"] == anchors[case])
+            ):
+                before = score
+            elif variant in VARIANTS and point["step"] > 0:
+                attacked.append((score, variant, point["step"]))
+        best = (
+            min(
+                attacked,
+                key=lambda value: (-value[0], value[2], VARIANTS.index(value[1])),
+            )
+            if attacked
+            else None
+        )
+        inclusive = (
+            None
+            if before is None
+            else ((before, "no-op", 0) if best is None or before >= best[0] else best)
+        )
+        output.append(
+            {
+                "case": case,
+                "pre_attack_wmdp_percent": before,
+                "peak_attacked_wmdp_percent": best[0] if best else None,
+                "peak_variant": best[1] if best else None,
+                "peak_step": best[2] if best else None,
+                "peak_fidelity_state": fidelity.get((case, best[1])) if best else None,
+                "validated_attack_points": len(attacked),
+                "max_including_noop_wmdp_percent": inclusive[0] if inclusive else None,
+                "max_including_noop_variant": inclusive[1] if inclusive else None,
+                "max_including_noop_step": inclusive[2] if inclusive else None,
+            }
+        )
+    return output
+
+
+def fine_line_search_profiles(summary):
+    """First-iteration observations only; zero is a baseline, not a log-x point."""
+    original_floors = {
+        row["case"]: row.get("ce_floor") for row in summary.get("local_searches", [])
+    }
+    profiles = []
+    for search in summary.get("fine_local_searches", []):
+        first = next((row for row in search["trace"] if row.get("step") == 1), None)
+        if first is None:
+            continue
+        initial = next((row for row in search["trace"] if row.get("step") == 0), {})
+        floor = search.get("ce_floor")
+        source = "fine local-search metadata"
+        if floor is None:
+            floor = original_floors.get(search["case"])
+            source = "original local-search metadata for the same defender"
+        profiles.append(
+            {
+                "case": search["case"],
+                "state": search["state"],
+                "iteration": 1,
+                "baseline_ce": initial.get("ce"),
+                "ce_floor": floor,
+                "ce_floor_source": source if floor is not None else None,
+                "selected_step_length": first.get("selected_step_length"),
+                "candidates": [
+                    candidate
+                    for candidate in first.get("candidates", [])
+                    if finite_number(candidate.get("step_length"))
+                    and candidate["step_length"] > 0
+                ],
+            }
+        )
+    return profiles
+
+
+def fine_search_sections(summary):
+    rows = summary.get("fine_local_searches", [])
+    if not rows:
+        return []
+    return [
+        "## Supplemental adaptive fine-grid diagnostic",
+        "This attacker grid was expanded after inspecting the coarse-grid result. The original "
+        "local-search results and plots remain separate. The supplemental run restarts from the "
+        "same defender and uses the declared radius; its extra candidate evaluations have their "
+        "own budget. A coarse-grid no-motion result is not a certificate. Candidate markers "
+        "show measured requested step lengths only; the plots make no claim about off-grid values.",
+        table(
+            (
+                "Case",
+                "State",
+                "Iteration",
+                "Radius",
+                "Strict ball",
+                "Start CE",
+                "Latest CE",
+                "Heldout CE",
+                "WMDP (%)",
+                "WMDP state",
+                "FW",
+                "BW",
+            ),
+            [
+                (
+                    row["case"],
+                    row["state"],
+                    row["last_step"],
+                    row["radius_l2"],
+                    row["strictly_feasible"],
+                    row["start_train_ce"],
+                    row["end_train_ce"],
+                    row["heldout_ce"],
+                    row["wmdp_percent"],
+                    row["benchmark_state"],
+                    (row["budget"] or {}).get("forward_calls"),
+                    (row["budget"] or {}).get("backward_calls"),
+                )
+                for row in rows
+            ],
+        ),
+    ]
+
+
+def peak_wmdp_sections(summary):
+    return [
+        "## Peak observed WMDP recovery",
+        "These maxima use validated observed scores from the four ordinary attack variants, "
+        "excluding the separate local searches. Pre-attack means the actual attack-anchor "
+        "defender. The no-op-inclusive maximum explicitly permits no attack and is unavailable "
+        "without a measured pre-attack score. An earlier checkpoint can exceed step64. This "
+        "finite checkpoint grid is not exhaustive; numerical fidelity and utility are reported "
+        "separately and do not filter these capability maxima. Tied peaks use the smaller step, "
+        "then declared variant order, solely as a reporting convention.",
+        table(
+            (
+                "Case",
+                "Pre-attack (%)",
+                "Peak attacked (%)",
+                "Variant",
+                "Step",
+                "Validated points",
+                "Max including no-op (%)",
+                "Max source",
+                "Max step",
+            ),
+            [
+                (
+                    row["case"],
+                    row["pre_attack_wmdp_percent"],
+                    row["peak_attacked_wmdp_percent"],
+                    row["peak_variant"],
+                    row["peak_step"],
+                    row["validated_attack_points"],
+                    row["max_including_noop_wmdp_percent"],
+                    row["max_including_noop_variant"],
+                    row["max_including_noop_step"],
+                )
+                for row in summary.get("peak_wmdp", [])
+            ],
+        ),
+    ]
+
+
 def markdown_report(summary, plots):
     utility = summary["utility"]
     sections = [
@@ -1399,8 +1605,11 @@ def markdown_report(summary, plots):
         ),
         "## Attack progress and heldout probes",
         "Matched means full-same for full-batch defenders and mini-same for minibatch defenders. "
-        "The unchanged control has no matched training regime. Full-new uses documents never "
-        "used by the defense; heldout forget documents are never used for updates.",
+        "The unchanged control has no matched training regime. Full-new uses documents excluded "
+        "from this defense continuation; earlier use during base-model training or the original "
+        "K16 defense is not ruled out. Heldout forget documents are excluded from main defense and "
+        "external-attack updates. The separate short exact-gradient diagnostic uses the "
+        "first eight heldout documents as its outer target; it does not update these defenders.",
         table(
             (
                 "Case",
@@ -1502,7 +1711,9 @@ def markdown_report(summary, plots):
                 for r in summary["benchmarks"]
             ],
         ),
+        *peak_wmdp_sections(summary),
         *local_search_sections(summary),
+        *fine_search_sections(summary),
         "## Interpretation",
         "Primary objective contrasts are within each simulated attack regime: terminal CE floor "
         "versus terminal entropy, then worst-trajectory CE floor versus terminal CE floor. "
@@ -1534,6 +1745,8 @@ def markdown_report(summary, plots):
         "[defense probes](defense-probes.csv), [attack probes](attack-probes.csv). "
         "[Simulator/attacker fidelity](attack-fidelity.csv). "
         "[Local-search evidence](local-searches.csv), [local-search trajectory](local-search-trajectory.csv). "
+        "[Peak WMDP](peak-wmdp.csv), [supplemental fine search](local-search-fine.csv), "
+        "[first-iteration fine candidates](local-search-fine-candidates.csv). "
         "Raw results and execution provenance remain beside each benchmark."
     )
     return "\n\n".join(sections) + "\n"
@@ -1753,6 +1966,82 @@ def plot_report(target, summary):
         plots.append(
             ("Separate norm-bounded search: measured train and heldout CE", filename)
         )
+    fine_profiles = fine_line_search_profiles(summary)
+    if fine_profiles:
+        figure, axes = plt.subplots(
+            len(fine_profiles), 2, figsize=(14, 3.5 * len(fine_profiles)), squeeze=False
+        )
+        for row_index, profile in enumerate(fine_profiles):
+            measured = [
+                candidate
+                for candidate in profile["candidates"]
+                if finite_number(candidate.get("ce"))
+            ]
+            for col, limit in enumerate((None, 0.001)):
+                points = (
+                    measured
+                    if limit is None
+                    else [
+                        candidate
+                        for candidate in measured
+                        if candidate["step_length"] <= limit
+                    ]
+                )
+                axis = axes[row_index, col]
+                if points:
+                    axis.plot(
+                        [candidate["step_length"] for candidate in points],
+                        [candidate["ce"] for candidate in points],
+                        "o",
+                        label="Measured first-iteration candidate",
+                        markersize=4,
+                    )
+                    axis.set_xscale("log")
+                else:
+                    axis.text(
+                        0.5,
+                        0.5,
+                        "No measured candidates in this range",
+                        transform=axis.transAxes,
+                        ha="center",
+                    )
+                if finite_number(profile["baseline_ce"]):
+                    axis.axhline(
+                        profile["baseline_ce"],
+                        color="#666666",
+                        linestyle="--",
+                        label="Measured initial CE",
+                    )
+                if finite_number(profile["ce_floor"]):
+                    axis.axhline(
+                        profile["ce_floor"],
+                        color="black",
+                        linestyle=":",
+                        label="Saved mean-CE floor",
+                    )
+                scope = (
+                    "full positive grid" if limit is None else "requested steps ≤0.001"
+                )
+                axis.set_title(
+                    f"{profile['case']} ({profile['state']})\nAdaptive fine grid: {scope}",
+                    fontsize=9,
+                )
+                axis.set_xlabel(
+                    "Requested normalized step length, global L2 (log scale)"
+                )
+                axis.set_ylabel("Train CE, nats")
+                axis.grid(alpha=0.2)
+                axis.legend(fontsize=7)
+        figure.tight_layout()
+        filename = "local-search-fine-first-iteration.png"
+        figure.savefig(target / filename, dpi=160)
+        plt.close(figure)
+        plots.append(
+            (
+                "Supplemental adaptive fine grid: first-iteration measured candidates",
+                filename,
+            )
+        )
     paths = capability_paths(summary)
     for mode in ("full", "mini"):
         group = [path for path in paths if path["mode"] == mode]
@@ -1903,6 +2192,22 @@ def report(run, study, args, helper):
             "matched_fidelity_verified",
         ),
     )
+    write_csv(
+        target / "peak-wmdp.csv",
+        summary["peak_wmdp"],
+        (
+            "case",
+            "pre_attack_wmdp_percent",
+            "peak_attacked_wmdp_percent",
+            "peak_variant",
+            "peak_step",
+            "peak_fidelity_state",
+            "validated_attack_points",
+            "max_including_noop_wmdp_percent",
+            "max_including_noop_variant",
+            "max_including_noop_step",
+        ),
+    )
     local_rows = []
     local_trajectory = []
     for search in summary["local_searches"]:
@@ -2002,6 +2307,94 @@ def report(run, study, args, helper):
             "gradient_forward_calls",
             "candidate_forward_calls",
             "probe_forward_calls",
+        ),
+    )
+    fine_rows = [
+        {
+            **search,
+            **{
+                f"search_{key}": value
+                for key, value in (search["budget"] or {}).items()
+            },
+            **{
+                f"benchmark_{key}": value
+                for key, value in (search["benchmark"].get("budget") or {}).items()
+            },
+        }
+        for search in summary["fine_local_searches"]
+    ]
+    write_csv(
+        target / "local-search-fine.csv",
+        fine_rows,
+        (
+            "case",
+            "output_name",
+            "state",
+            "execution_state",
+            "steps_requested",
+            "last_step",
+            "radius_l2",
+            "radius_tolerance_l2",
+            "distance_l2",
+            "strictly_feasible",
+            "feasible_with_tolerance",
+            "monotone_recorded_ce",
+            "ce_floor",
+            "strict_radius_counterexample",
+            "radius_tolerance_counterexample",
+            "start_train_ce",
+            "end_train_ce",
+            "heldout_ce",
+            "latest_probe_step",
+            "wmdp_percent",
+            "benchmark_state",
+            "search_forward_calls",
+            "search_backward_calls",
+            "search_forward_valid_tokens",
+            "search_backward_valid_tokens",
+            "search_candidate_forward_calls",
+            "search_probe_forward_calls",
+            "benchmark_forward_calls",
+            "benchmark_forward_input_tokens",
+            "search_file",
+            "provenance_file",
+            "error",
+        ),
+    )
+    candidate_rows = [
+        {
+            "case": profile["case"],
+            "search_state": profile["state"],
+            "iteration": profile["iteration"],
+            "baseline_ce": profile["baseline_ce"],
+            "ce_floor": profile["ce_floor"],
+            "ce_floor_source": profile["ce_floor_source"],
+            "selected_step_length": profile["selected_step_length"],
+            **candidate,
+        }
+        for profile in fine_line_search_profiles(summary)
+        for candidate in profile["candidates"]
+    ]
+    write_csv(
+        target / "local-search-fine-candidates.csv",
+        candidate_rows,
+        (
+            "case",
+            "search_state",
+            "iteration",
+            "step_length",
+            "state",
+            "ce",
+            "entropy",
+            "distance_l2",
+            "within_strict_radius",
+            "within_radius_tolerance",
+            "baseline_ce",
+            "ce_floor",
+            "ce_floor_source",
+            "selected_step_length",
+            "forward_calls",
+            "forward_valid_tokens",
         ),
     )
     for kind in ("defenses", "attacks"):

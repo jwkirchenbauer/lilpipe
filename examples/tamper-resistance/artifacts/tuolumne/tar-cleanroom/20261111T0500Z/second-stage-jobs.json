@@ -1,0 +1,38 @@
+[
+  {
+    "key": "full-maxent-terminal",
+    "exit_code": 0,
+    "job_id": "f3jPvcBW1Eg7",
+    "last": "00Z/launches/main/cr-full-maxent-terminal-b/subrunner.sh\nSubmission: flux batch --dependency=afterok:f3jPtyJAZEGP -q pdebug --bank=verival --job-name=cr-full-maxent-terminal-b -t55 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main/cr-full-maxent-terminal-b/launch.sh\nLaunched job_id=f3jPvcBW1Eg7.\n"
+  },
+  {
+    "key": "full-ce-terminal",
+    "exit_code": 0,
+    "job_id": "f3jPvcArwYdV",
+    "last": "dvanced usage, giving a few seconds to check that you're sure...\nSubmission: flux batch --dependency=afterok:f3jPtyJLw9Eo -q pdebug --bank=verival --job-name=cr-full-ce-terminal-b -t55 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main/cr-full-ce-terminal-b/launch.sh\nLaunched job_id=f3jPvcArwYdV.\n"
+  },
+  {
+    "key": "full-ce-worst",
+    "exit_code": 0,
+    "job_id": "f3jPvcBxh1kK",
+    "last": "s is advanced usage, giving a few seconds to check that you're sure...\nSubmission: flux batch --dependency=afterok:f3jPtyL8iGxw -q pdebug --bank=verival --job-name=cr-full-ce-worst-b -t55 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main/cr-full-ce-worst-b/launch.sh\nLaunched job_id=f3jPvcBxh1kK.\n"
+  },
+  {
+    "key": "mini-maxent-terminal",
+    "exit_code": 0,
+    "job_id": "f3jPvcBDhNaK",
+    "last": "usage, giving a few seconds to check that you're sure...\nSubmission: flux batch --dependency=afterok:f3jPtyLWx6C7 -q pdebug --bank=verival --job-name=cr-mini-maxent-terminal-b -t55 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main/cr-mini-maxent-terminal-b/launch.sh\nLaunched job_id=f3jPvcBDhNaK.\n"
+  },
+  {
+    "key": "mini-ce-terminal",
+    "exit_code": 0,
+    "job_id": "f3jPvcBjM8DD",
+    "last": "dvanced usage, giving a few seconds to check that you're sure...\nSubmission: flux batch --dependency=afterok:f3jPtyHtFNAb -q pdebug --bank=verival --job-name=cr-mini-ce-terminal-b -t55 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main/cr-mini-ce-terminal-b/launch.sh\nLaunched job_id=f3jPvcBjM8DD.\n"
+  },
+  {
+    "key": "mini-ce-worst",
+    "exit_code": 0,
+    "job_id": "f3jPvcCGUs8T",
+    "last": "s is advanced usage, giving a few seconds to check that you're sure...\nSubmission: flux batch --dependency=afterok:f3jPtyKmxT27 -q pdebug --bank=verival --job-name=cr-mini-ce-worst-b -t55 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-cleanroom/20261111T0500Z/launches/main/cr-mini-ce-worst-b/launch.sh\nLaunched job_id=f3jPvcCGUs8T.\n"
+  }
+]

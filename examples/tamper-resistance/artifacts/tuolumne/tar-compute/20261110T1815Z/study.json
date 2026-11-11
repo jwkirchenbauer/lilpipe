@@ -929,6 +929,10 @@
     "source/jobs/analysis-v7/misc/tar_compute.py": "070a4f45a05e57a2aa498775982e0d83b755b204b0068db52713819e138ff088",
     "source/jobs/analysis-v7/misc/tar_compute_compare.py": "cf6451435be4b3af7e45fc8bde7c3d75dae62b2f5fab54e968aad3a5d7673af3",
     "source/jobs/analysis-v7/misc/tar_dynamics.py": "75c64944cff83169c7498989188ca5a33dd151c42c6cd8f550bfb2bc3f74e143",
+    "source/jobs/analysis-v8/misc/run_tar_compute_landscapes.sh": "4862fd402d703dc307ce5cf54fbdc36a0154fcd8e8b0ae2ae8ffcfdf2b5b9b1a",
+    "source/jobs/analysis-v8/misc/tar_compute.py": "070a4f45a05e57a2aa498775982e0d83b755b204b0068db52713819e138ff088",
+    "source/jobs/analysis-v8/misc/tar_compute_compare.py": "cf6451435be4b3af7e45fc8bde7c3d75dae62b2f5fab54e968aad3a5d7673af3",
+    "source/jobs/analysis-v8/misc/tar_dynamics.py": "e8ab333af2f9106204ba0bb17a66d7a0adb21e80dd2970d16fb9aa8f1c953054",
     "source/jobs/comparison-v1/worker.sh": "355e8909205ecc6e433c1e0f3e29e8dfc04ae49fc62e0e8ef8a3af76c7673ef9",
     "source/jobs/comparison-v2/worker.sh": "117f8c7245f1cdd4daf69366e00925136b110ed0972732136a9e779e2555f8e6",
     "source/jobs/comparison-v3/misc/tar_compute_compare.py": "c2efe96fc33d0e1be3c17c8d68d2427c304c8cb37c1a10bcb4246d731ca1a164",
@@ -946,6 +950,7 @@
     "source/jobs/evaluation-v2/misc/tar_compute_evaluation.py": "4b7213715844dfe11f2706b128bcfa2a6d3e7a9c076b123e391cda4dc054f56a",
     "source/jobs/evaluation-v3/misc/run_tar_compute_evaluation.sh": "08bd5b1625c6e280353f566a4008f64d6b573342c8212503484ce08196eddc36",
     "source/jobs/evaluation-v3/misc/tar_compute_evaluation.py": "4b7213715844dfe11f2706b128bcfa2a6d3e7a9c076b123e391cda4dc054f56a",
+    "source/jobs/finalize-v1/seal_artifacts.py": "ce82f85e577842bc9fa9b82415d0483e835ebcaae5861a36b948e1a19a64d560",
     "source/jobs/profile-repair-v2/worker.sh": "319ae69f970bcf68f7f4609271825eb6f13311520da59a8bdd2eb799caf15f4e",
     "source/jobs/training-v2/worker.sh": "d4f1ad204a69d76fd2eef5daabed9b5319fbaa57798d7340ef66dba6a18062c8",
     "source/jobs/training-v3/worker.sh": "2caf709c65d66cced7888916d43dda2b39a698c5dccba7f17c4884301151f32c",
@@ -1215,6 +1220,27 @@
       "minutes": 10,
       "queue": "pdebug",
       "geometry_only": false
+    },
+    "tar-comparison-partial-v7-r2": {
+      "job_id": "f3jM7XoXoxNs",
+      "cases": [],
+      "afterany": "f3jM6BdriDLB",
+      "source_version": "comparison-v7",
+      "minutes": 10,
+      "queue": "pdebug"
+    },
+    "tar-comparison-all-profiles-v7": {
+      "job_id": "f3jMGg2ReGD5",
+      "source_version": "comparison-v7",
+      "afterany": "f3jMF7c9nkvB"
+    },
+    "tar-comparison-progress-v7-r3": {
+      "job_id": "f3jMPtGX4rtP",
+      "cases": [],
+      "afterany": null,
+      "source_version": "comparison-v7",
+      "minutes": 10,
+      "queue": "pdebug"
     }
   },
   "analysis_continuation_jobs": {
@@ -1402,6 +1428,17 @@
       "source_version": "analysis-v6",
       "numerical_source_version": "analysis-v5-identical",
       "cache_validation": "All six numerically complete/comparable, including first plane, before submission; no numerical rerun."
+    },
+    "tar-profile-cpu-repair-v3": {
+      "job_id": "f3jMF7c9nkvB",
+      "cases": [
+        "bootstrap-101",
+        "noise-1e-2"
+      ],
+      "afterany": null,
+      "source_version": "analysis-v6",
+      "minutes": 10,
+      "queue": "pdebug"
     }
   },
   "checkpoint_precision": {
@@ -1551,6 +1588,145 @@
       "minutes": 30,
       "queue": "pdebug",
       "geometry_only": false
+    },
+    "tar-landscape-debug-g00-r3": {
+      "job_id": "f3jM7CgZbBAX",
+      "cases": [
+        "baseline-lr1e-5",
+        "baseline-lr1e-6"
+      ],
+      "afterany": "f3jLoknmUQNj",
+      "source_version": "analysis-v7",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-debug-g01-r3": {
+      "job_id": "f3jM7GiKTwHy",
+      "cases": [
+        "baseline-lr5e-6",
+        "noise-1e-4"
+      ],
+      "afterany": "f3jLon79KQR5",
+      "source_version": "analysis-v7",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-debug-g02-r3": {
+      "job_id": "f3jM7LQvuyM9",
+      "cases": [
+        "noise-1e-3",
+        "noise-1e-2"
+      ],
+      "afterany": "f3jLooVWSURD",
+      "source_version": "analysis-v7",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-debug-g03-r3": {
+      "job_id": "f3jM7Q61QkVd",
+      "cases": [
+        "noise-1e-1"
+      ],
+      "afterany": "f3jLopxdKEqV",
+      "source_version": "analysis-v7",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-debug-g04-r3": {
+      "job_id": "f3jM7U2khwPV",
+      "cases": [
+        "bootstrap-102",
+        "bootstrap-103"
+      ],
+      "afterany": "f3jLorGEgcRV",
+      "source_version": "analysis-v7",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-debug-g05-r3": {
+      "job_id": "f3jMF3Yc8s4b",
+      "cases": [
+        "deep-lr1e-5",
+        "deep-lr1e-6"
+      ],
+      "afterany": "f3jLxZquVHH1",
+      "source_version": "analysis-v7",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-debug-g06-r1": {
+      "job_id": "f3jMF4uMriK1",
+      "cases": [
+        "deep-lr5e-6",
+        "long-lr5e-6"
+      ],
+      "afterany": null,
+      "source_version": "analysis-v7",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-debug-g07-r1": {
+      "job_id": "f3jMF6EdbHDR",
+      "cases": [
+        "long-lr1e-5",
+        "long-lr1e-6"
+      ],
+      "afterany": null,
+      "source_version": "analysis-v7",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-bootstrap-r4": {
+      "job_id": "f3jMPdK6u4kf",
+      "cases": [
+        "bootstrap-102",
+        "bootstrap-103"
+      ],
+      "afterany": "f3jM7U2khwPV",
+      "source_version": "analysis-v8",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-deep-low-r4": {
+      "job_id": "f3jMPh16mQ3Z",
+      "cases": [
+        "deep-lr1e-6"
+      ],
+      "afterany": "f3jMF3Yc8s4b",
+      "source_version": "analysis-v8",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-debug-g06-r2": {
+      "job_id": "f3jMPkwzxWdV",
+      "cases": [
+        "deep-lr5e-6",
+        "long-lr5e-6"
+      ],
+      "afterany": "f3jMF4uMriK1",
+      "source_version": "analysis-v8",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-long-low-r2": {
+      "job_id": "f3jMPpdcb2hD",
+      "cases": [
+        "long-lr1e-6"
+      ],
+      "afterany": "f3jMF6EdbHDR",
+      "source_version": "analysis-v8",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-long-high-r2": {
+      "job_id": "f3jMPrYF3SMd",
+      "cases": [
+        "long-lr1e-5"
+      ],
+      "afterany": null,
+      "source_version": "analysis-v8",
+      "minutes": 30,
+      "queue": "pdebug"
     }
   },
   "cancelled_analysis_continuations": [
@@ -1620,5 +1796,7 @@
   "profile_process_protocol": "Numerical values and CPU rendering run in separate processes; complete validated values are reused after rendering failures. Mathematical source bytes remain frozen v5.",
   "landscape_transfer_protocol": "After geometry completes, full-landscape resumptions may use v7: bit-preserving bounded CPU materialization for basis transfers only. Existing cached values and directions stay unchanged. Incomplete geometry continues with v3; profile math remains frozen v5/v6.",
   "comparison_report_source": "source/jobs/comparison-v7/misc/tar_compute_compare.py",
-  "source_registry_path_repair": "2026-11-10T23:25Z: source checksum keys restored to run-relative paths, matching validators. SHA values and frozen math unchanged; completed profile grids revalidated before rendering."
+  "source_registry_path_repair": "2026-11-10T23:25Z: source checksum keys restored to run-relative paths, matching validators. SHA values and frozen math unchanged; completed profile grids revalidated before rendering.",
+  "landscape_cache_skip_protocol": "Full-landscape resumes may use v8 after geometry completes: same v7 math/transfer helper, skipping a completed reference plane only when its fixed grid, projected states, and exact entire local-frame lattice are already cached. Profile math stays frozen v5/v6.",
+  "landscape_native_crash_recovery": "long-lr1e-5 v7 analysis failed139 at final actual checkpoint forward; bulk checkpoints unchanged, full analysis retried on a fresh allocation with v8, no training rerun."
 }

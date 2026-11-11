@@ -195,6 +195,85 @@ class BasisTransferTests(unittest.TestCase):
 
 
 class RecoveryTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        path = MISC / "tar_dynamics.py"
+        surfaces = next(
+            node
+            for node in ast.parse(path.read_text()).body
+            if isinstance(node, ast.FunctionDef) and node.name == "surfaces"
+        )
+        complete = next(
+            node
+            for node in surfaces.body
+            if isinstance(node, ast.Assign)
+            and any(
+                isinstance(target, ast.Name) and target.id == "local_frames_done"
+                for target in node.targets
+            )
+        )
+        planes = next(
+            node
+            for node in surfaces.body
+            if isinstance(node, ast.For)
+            and isinstance(node.target, ast.Name)
+            and node.target.id == "plane"
+        )
+        skip = next(
+            node
+            for node in planes.body
+            if isinstance(node, ast.If)
+            and any(isinstance(item, ast.Continue) for item in node.body)
+        )
+        result = ast.Assign(
+            targets=[ast.Name(id="skip", ctx=ast.Store())], value=skip.test
+        )
+        module = ast.fix_missing_locations(
+            ast.Module(body=[complete, result], type_ignores=[])
+        )
+        cls.cache_check = compile(module, str(path), "exec")
+
+    def setUp(self):
+        self.coordinates = np.linspace(-0.15713339880469646, 0.15713339880469646, 9)
+        self.settings = {"defense_frames": [0, 125], "attack_frames": [0, 1000]}
+        self.local = {
+            (phase, step, round(float(c0), 10), round(float(c1), 10))
+            for phase in ("defense", "attack")
+            for step in self.settings[phase + "_frames"]
+            for c0 in self.coordinates
+            for c1 in self.coordinates
+        }
+
+    def skip_plane(self, plane, grid_done=True, projections_done=True):
+        scope = {
+            "settings": self.settings,
+            "local_coords": self.coordinates,
+            "completed_local": self.local,
+            "plane": plane,
+            "local_plane": "reference",
+            "grid_done": grid_done,
+            "projections_done": projections_done,
+        }
+        exec(self.cache_check, scope)
+        return scope["skip"]
+
+    def test_complete_local_lattice_allows_local_and_nonlocal_plane_skip(self):
+        self.assertTrue(self.skip_plane("reference"))
+        self.assertTrue(self.skip_plane("random"))
+
+    def test_single_missing_local_point_requires_only_local_plane_basis(self):
+        coordinate = round(float(self.coordinates[-1]), 10)
+        self.local.remove(("attack", 1000, coordinate, coordinate))
+        self.local.add(("attack", 999, coordinate, coordinate))
+        self.assertFalse(self.skip_plane("reference"))
+        self.assertTrue(self.skip_plane("random"))
+
+    def test_missing_fixed_grid_or_projection_still_requires_basis(self):
+        for plane in ("reference", "random"):
+            with self.subTest(plane=plane):
+                self.assertFalse(self.skip_plane(plane, grid_done=False))
+                self.assertFalse(self.skip_plane(plane, projections_done=False))
+
     def test_partial_surface_cache_preserves_coordinates_and_missing_fields(self):
         import pandas as pd
 

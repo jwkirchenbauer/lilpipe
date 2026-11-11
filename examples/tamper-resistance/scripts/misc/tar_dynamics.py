@@ -945,6 +945,16 @@ def surfaces(study, settings):
         )
         for row in local_points
     }
+    local_frames_done = all(
+        (phase, step, round(float(c0), 10), round(float(c1), 10)) in completed_local
+        for phase, steps in (
+            ("defense", settings["defense_frames"]),
+            ("attack", settings["attack_frames"]),
+        )
+        for step in steps
+        for c0 in local_coords
+        for c1 in local_coords
+    )
     for plane in settings["planes"]:
         plane_radius = settings.get("plane_radii", {}).get(plane, radius)
         coordinates = np.linspace(
@@ -959,7 +969,11 @@ def surfaces(study, settings):
             (plane, step) in completed_projections
             for step in [0] + settings["attack_steps"]
         )
-        if plane != local_plane and grid_done and projections_done:
+        if (
+            grid_done
+            and projections_done
+            and (plane != local_plane or local_frames_done)
+        ):
             print("Reusing completed plane:", plane, flush=True)
             continue
         print("Loading visualization basis:", plane, flush=True)

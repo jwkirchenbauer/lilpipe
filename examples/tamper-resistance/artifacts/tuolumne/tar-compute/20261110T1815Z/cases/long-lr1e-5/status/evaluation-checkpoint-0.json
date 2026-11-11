@@ -1,0 +1,13 @@
+{
+  "state": "complete",
+  "step": 0,
+  "tasks": {
+    "wmdp_bio_robust": [
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/long-lr1e-5/evals/checkpoint-0/attempt-20261110T210542-a8892f9b/__p__vast1__kirchenb__tar-root__lilpipe__examples__tamper-resistance__artifacts__tuolumne__tar-compute__20261110T1815Z__cases__long-lr1e-5__models__defense/results_2026-11-10T13-09-21.618713.json"
+    ],
+    "mmlu_no_bio": [
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/long-lr1e-5/evals/checkpoint-0/attempt-20261110T210542-a8892f9b/__p__vast1__kirchenb__tar-root__lilpipe__examples__tamper-resistance__artifacts__tuolumne__tar-compute__20261110T1815Z__cases__long-lr1e-5__models__defense/results_2026-11-10T13-09-21.618713.json"
+    ]
+  },
+  "rejected": []
+}

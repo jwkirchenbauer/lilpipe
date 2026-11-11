@@ -1,0 +1,70 @@
+{
+  "comparisons": [
+    {
+      "batch_step": 1,
+      "checkpoint_step": 0,
+      "field": "loss_before_update",
+      "recorded_loss": 11.489840507507324,
+      "recomputed_loss": 11.482369422912598,
+      "absolute_difference": 0.0074710845947265625
+    },
+    {
+      "batch_step": 1,
+      "checkpoint_step": 1,
+      "field": "loss_after_update",
+      "recorded_loss": 11.228296279907227,
+      "recomputed_loss": 11.222979545593262,
+      "absolute_difference": 0.005316734313964844
+    },
+    {
+      "batch_step": 2,
+      "checkpoint_step": 1,
+      "field": "loss_before_update",
+      "recorded_loss": 11.259889602661133,
+      "recomputed_loss": 11.254231452941895,
+      "absolute_difference": 0.005658149719238281
+    },
+    {
+      "batch_step": 8,
+      "checkpoint_step": 8,
+      "field": "loss_after_update",
+      "recorded_loss": 10.714183807373047,
+      "recomputed_loss": 10.711172103881836,
+      "absolute_difference": 0.0030117034912109375
+    },
+    {
+      "batch_step": 9,
+      "checkpoint_step": 8,
+      "field": "loss_before_update",
+      "recorded_loss": 10.76401138305664,
+      "recomputed_loss": 10.76049518585205,
+      "absolute_difference": 0.0035161972045898438
+    },
+    {
+      "batch_step": 32,
+      "checkpoint_step": 32,
+      "field": "loss_after_update",
+      "recorded_loss": 7.90118932723999,
+      "recomputed_loss": 7.903207778930664,
+      "absolute_difference": 0.002018451690673828
+    },
+    {
+      "batch_step": 128,
+      "checkpoint_step": 128,
+      "field": "loss_after_update",
+      "recorded_loss": 1.6524593830108643,
+      "recomputed_loss": 1.651705265045166,
+      "absolute_difference": 0.0007541179656982422
+    },
+    {
+      "batch_step": 1000,
+      "checkpoint_step": 1000,
+      "field": "loss_after_update",
+      "recorded_loss": 2.267199754714966,
+      "recomputed_loss": 2.2672574520111084,
+      "absolute_difference": 5.7697296142578125e-05
+    }
+  ],
+  "maximum_absolute_difference": 0.0074710845947265625,
+  "note": "All use eager attention. Training spans four GPUs with batch size one; analysis groups four minibatches per forward on one GPU in a separate locked evaluation environment. Small numerical differences are possible."
+}

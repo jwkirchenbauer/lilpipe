@@ -1,0 +1,12 @@
+{
+  "state": "passed",
+  "case": "defense-125x64",
+  "updates": 125,
+  "model_checkpoints": 9,
+  "optimizer_checkpoints": [
+    32,
+    64,
+    125
+  ],
+  "training_elapsed_seconds": 2757.9975454820087
+}

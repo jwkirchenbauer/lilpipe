@@ -1,0 +1,17 @@
+[
+  {
+    "kind": "fixed",
+    "count": 3,
+    "maximum_absolute_difference": 0.0
+  },
+  {
+    "kind": "moving",
+    "count": 15,
+    "maximum_absolute_difference": 0.0
+  },
+  {
+    "kind": "broad-random",
+    "count": 8,
+    "maximum_absolute_difference": 0.0
+  }
+]

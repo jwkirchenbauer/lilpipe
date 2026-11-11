@@ -1,0 +1,117 @@
+{
+  "coverage": [
+    {
+      "case": "defense-500x16",
+      "measured_task_checkpoints": 26,
+      "expected_task_checkpoints": 26,
+      "complete": true
+    },
+    {
+      "case": "defense-125x64",
+      "measured_task_checkpoints": 18,
+      "expected_task_checkpoints": 18,
+      "complete": true
+    },
+    {
+      "case": "baseline-lr1e-5",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "baseline-lr1e-6",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "baseline-lr5e-6",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "long-lr1e-5",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "long-lr1e-6",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "long-lr5e-6",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "deep-lr1e-5",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "deep-lr1e-6",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "deep-lr5e-6",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "noise-1e-4",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "noise-1e-3",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "noise-1e-2",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "noise-1e-1",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "bootstrap-101",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "bootstrap-102",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "bootstrap-103",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    }
+  ],
+  "rejected": [],
+  "utility_references": {
+    "defended": 54.01591352649753,
+    "base": 58.58729920432367
+  }
+}

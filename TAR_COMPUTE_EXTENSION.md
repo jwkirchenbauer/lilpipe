@@ -17,10 +17,13 @@ Also visualize our completed defense checkpoint with the repository's
 [loss-grid computation](examples/tamper-resistance/scripts/analysis/loss-landscapes/get_ll.py)
 and [3D plotter](examples/tamper-resistance/scripts/analysis/loss-landscapes/plot_ll_3d.py).
 
-Started 2026-11-10. Landscape shape and attack dynamics are the primary outcomes;
+Completed 2026-11-11 (UTC): all 18 scientific cases and 16 trajectory analyses.
+Landscape shape and attack dynamics are the primary outcomes;
 WMDP and MMLU measure recovered capability and retained utility alongside them.
 Artifacts: `examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/`.
-Live [measurements and figures](examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/report.md) show coverage explicitly.
+The [findings](examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/findings.md)
+and [measurements and figures](examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/report.md)
+record the outcome and complete coverage.
 
 The defense LR remains `5e-6`. Use linear decay over each defense horizon and
 warmup `48/500 = 12/125`; the two 8,000-inner-update conditions then align LR

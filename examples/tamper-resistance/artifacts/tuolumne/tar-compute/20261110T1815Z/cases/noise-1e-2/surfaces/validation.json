@@ -1,0 +1,15 @@
+{
+  "state": "passed",
+  "fixed_grid_points": 867,
+  "moving_grid_points": 648,
+  "actual_checkpoints": 29,
+  "projected_checkpoints": 42,
+  "local_radius": 0.15713339880469646,
+  "radius": 9.45353314506443,
+  "plane_radii": {
+    "random": 1.0,
+    "reference": 1.0,
+    "attack": 9.45353314506443
+  },
+  "local_plane": "reference"
+}

@@ -1,0 +1,12 @@
+{
+  "state": "passed",
+  "case": "deep-lr5e-6",
+  "updates": 1000,
+  "model_checkpoints": 26,
+  "optimizer_checkpoints": [
+    128,
+    512,
+    1000
+  ],
+  "training_elapsed_seconds": 1137.6525740349898
+}

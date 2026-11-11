@@ -1330,7 +1330,7 @@ def surface_figure(records, validations, family, names, kind, output):
         low, high = color_limits(all_values)
         cmap = "viridis"
     norm = Normalize(low, high)
-    figure = plt.figure(figsize=(3.7 * len(names) + 0.7, 8.5))
+    figure = plt.figure(figsize=(3.7 * len(names) + 0.7, 9.3 if delta else 8.5))
     for row, step in enumerate((0, 1000)):
         for column, name in enumerate(names):
             axis = figure.add_subplot(
@@ -1413,7 +1413,12 @@ def surface_figure(records, validations, family, names, kind, output):
         y=0.98,
     )
     figure.subplots_adjust(
-        left=0.035, right=0.90, bottom=0.08, top=0.87, wspace=0.25, hspace=0.30
+        left=0.035,
+        right=0.90,
+        bottom=0.08,
+        top=0.87,
+        wspace=0.25,
+        hspace=0.5 if delta else 0.3,
     )
     save_figure(figure, output)
     plt.close(figure)

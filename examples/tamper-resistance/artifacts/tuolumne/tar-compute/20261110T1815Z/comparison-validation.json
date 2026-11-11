@@ -1,0 +1,219 @@
+{
+  "coverage": "complete",
+  "complete_scientific_cases": 18,
+  "expected_scientific_cases": 18,
+  "comparability": {
+    "baseline-lr1e-5": {
+      "issues": [],
+      "shared_probes_verified": true,
+      "local_comparable": true,
+      "broad_comparable": true
+    },
+    "baseline-lr1e-6": {
+      "issues": [],
+      "shared_probes_verified": true,
+      "local_comparable": true,
+      "broad_comparable": true
+    },
+    "baseline-lr5e-6": {
+      "issues": [],
+      "shared_probes_verified": true,
+      "local_comparable": true,
+      "broad_comparable": true
+    },
+    "long-lr1e-5": {
+      "issues": [],
+      "shared_probes_verified": true,
+      "local_comparable": true,
+      "broad_comparable": true
+    },
+    "long-lr1e-6": {
+      "issues": [],
+      "shared_probes_verified": true,
+      "local_comparable": true,
+      "broad_comparable": true
+    },
+    "long-lr5e-6": {
+      "issues": [],
+      "shared_probes_verified": true,
+      "local_comparable": true,
+      "broad_comparable": true
+    },
+    "deep-lr1e-5": {
+      "issues": [],
+      "shared_probes_verified": true,
+      "local_comparable": true,
+      "broad_comparable": true
+    },
+    "deep-lr1e-6": {
+      "issues": [],
+      "shared_probes_verified": true,
+      "local_comparable": true,
+      "broad_comparable": true
+    },
+    "deep-lr5e-6": {
+      "issues": [],
+      "shared_probes_verified": true,
+      "local_comparable": true,
+      "broad_comparable": true
+    },
+    "noise-1e-4": {
+      "issues": [],
+      "shared_probes_verified": true,
+      "local_comparable": true,
+      "broad_comparable": true
+    },
+    "noise-1e-3": {
+      "issues": [],
+      "shared_probes_verified": true,
+      "local_comparable": true,
+      "broad_comparable": true
+    },
+    "noise-1e-2": {
+      "issues": [],
+      "shared_probes_verified": true,
+      "local_comparable": true,
+      "broad_comparable": true
+    },
+    "noise-1e-1": {
+      "issues": [],
+      "shared_probes_verified": true,
+      "local_comparable": true,
+      "broad_comparable": true
+    },
+    "bootstrap-101": {
+      "issues": [],
+      "shared_probes_verified": true,
+      "local_comparable": true,
+      "broad_comparable": true
+    },
+    "bootstrap-102": {
+      "issues": [],
+      "shared_probes_verified": true,
+      "local_comparable": true,
+      "broad_comparable": true
+    },
+    "bootstrap-103": {
+      "issues": [],
+      "shared_probes_verified": true,
+      "local_comparable": true,
+      "broad_comparable": true
+    }
+  },
+  "step_profiles_required": true,
+  "step_profile_comparability": {
+    "baseline-lr1e-5": {
+      "step_profiles_complete": true,
+      "step_profiles_comparable": true,
+      "first_update_plane_comparable": true,
+      "first_update_plane_status": "fitted",
+      "issues": []
+    },
+    "baseline-lr1e-6": {
+      "step_profiles_complete": true,
+      "step_profiles_comparable": true,
+      "first_update_plane_comparable": true,
+      "first_update_plane_status": "fitted",
+      "issues": []
+    },
+    "baseline-lr5e-6": {
+      "step_profiles_complete": true,
+      "step_profiles_comparable": true,
+      "first_update_plane_comparable": true,
+      "first_update_plane_status": "fitted",
+      "issues": []
+    },
+    "long-lr1e-5": {
+      "step_profiles_complete": true,
+      "step_profiles_comparable": true,
+      "first_update_plane_comparable": true,
+      "first_update_plane_status": "fitted",
+      "issues": []
+    },
+    "long-lr1e-6": {
+      "step_profiles_complete": true,
+      "step_profiles_comparable": true,
+      "first_update_plane_comparable": true,
+      "first_update_plane_status": "fitted",
+      "issues": []
+    },
+    "long-lr5e-6": {
+      "step_profiles_complete": true,
+      "step_profiles_comparable": true,
+      "first_update_plane_comparable": true,
+      "first_update_plane_status": "fitted",
+      "issues": []
+    },
+    "deep-lr1e-5": {
+      "step_profiles_complete": true,
+      "step_profiles_comparable": true,
+      "first_update_plane_comparable": true,
+      "first_update_plane_status": "fitted",
+      "issues": []
+    },
+    "deep-lr1e-6": {
+      "step_profiles_complete": true,
+      "step_profiles_comparable": true,
+      "first_update_plane_comparable": true,
+      "first_update_plane_status": "fitted",
+      "issues": []
+    },
+    "deep-lr5e-6": {
+      "step_profiles_complete": true,
+      "step_profiles_comparable": true,
+      "first_update_plane_comparable": true,
+      "first_update_plane_status": "fitted",
+      "issues": []
+    },
+    "noise-1e-4": {
+      "step_profiles_complete": true,
+      "step_profiles_comparable": true,
+      "first_update_plane_comparable": true,
+      "first_update_plane_status": "fitted",
+      "issues": []
+    },
+    "noise-1e-3": {
+      "step_profiles_complete": true,
+      "step_profiles_comparable": true,
+      "first_update_plane_comparable": true,
+      "first_update_plane_status": "fitted",
+      "issues": []
+    },
+    "noise-1e-2": {
+      "step_profiles_complete": true,
+      "step_profiles_comparable": true,
+      "first_update_plane_comparable": true,
+      "first_update_plane_status": "fitted",
+      "issues": []
+    },
+    "noise-1e-1": {
+      "step_profiles_complete": true,
+      "step_profiles_comparable": true,
+      "first_update_plane_comparable": true,
+      "first_update_plane_status": "fitted",
+      "issues": []
+    },
+    "bootstrap-101": {
+      "step_profiles_complete": true,
+      "step_profiles_comparable": true,
+      "first_update_plane_comparable": true,
+      "first_update_plane_status": "fitted",
+      "issues": []
+    },
+    "bootstrap-102": {
+      "step_profiles_complete": true,
+      "step_profiles_comparable": true,
+      "first_update_plane_comparable": true,
+      "first_update_plane_status": "fitted",
+      "issues": []
+    },
+    "bootstrap-103": {
+      "step_profiles_complete": true,
+      "step_profiles_comparable": true,
+      "first_update_plane_comparable": true,
+      "first_update_plane_status": "fitted",
+      "issues": []
+    }
+  },
+  "note": "Coverage describes measurements; study.json state is never changed here."
+}

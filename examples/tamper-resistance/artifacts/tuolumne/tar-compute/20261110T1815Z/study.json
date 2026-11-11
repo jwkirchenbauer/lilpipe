@@ -1,5 +1,5 @@
 {
-  "state": "running",
+  "state": "complete",
   "baseline_commit": "6d76898f3fb26b598f9404c199f61de952a2fcc2",
   "original_run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z",
   "baseline_dynamics": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z",
@@ -944,6 +944,8 @@
     "source/jobs/comparison-v6/worker.sh": "7f075bc7858fb46a6123b1ef28c508895fd4060a8fe5198f8f96803ae2d02d69",
     "source/jobs/comparison-v7/misc/tar_compute_compare.py": "4e7c899d7dcc1496288fbd3c1ca7511aee5e4621ef976153b30c7571849227a3",
     "source/jobs/comparison-v7/worker.sh": "7f075bc7858fb46a6123b1ef28c508895fd4060a8fe5198f8f96803ae2d02d69",
+    "source/jobs/comparison-v8/misc/tar_compute_compare.py": "3b3bc112d820c3ee9e47dad0c7a9ea1340cf0be7bbcde8d3453a1bbb6b07bd0e",
+    "source/jobs/comparison-v8/worker.sh": "7f075bc7858fb46a6123b1ef28c508895fd4060a8fe5198f8f96803ae2d02d69",
     "source/jobs/evaluation-v1/misc/run_tar_compute_evaluation.sh": "c802fb3644a51305947be4a7ae504ab68946e103fc29db5fcc1a6ab79e51885d",
     "source/jobs/evaluation-v1/misc/tar_compute_evaluation.py": "ec45cfabc936c79d5ece415ef5b8e9531759d950c702828e971164527d160fd7",
     "source/jobs/evaluation-v2/misc/run_tar_compute_evaluation.sh": "c802fb3644a51305947be4a7ae504ab68946e103fc29db5fcc1a6ab79e51885d",
@@ -951,9 +953,11 @@
     "source/jobs/evaluation-v3/misc/run_tar_compute_evaluation.sh": "08bd5b1625c6e280353f566a4008f64d6b573342c8212503484ce08196eddc36",
     "source/jobs/evaluation-v3/misc/tar_compute_evaluation.py": "4b7213715844dfe11f2706b128bcfa2a6d3e7a9c076b123e391cda4dc054f56a",
     "source/jobs/finalize-v1/seal_artifacts.py": "ce82f85e577842bc9fa9b82415d0483e835ebcaae5861a36b948e1a19a64d560",
+    "source/jobs/finalize-v1/worker.sh": "fbade60ae10e29d83e36772087ee80b5caa07d2d1db2e97708ed92b440437a1c",
     "source/jobs/profile-repair-v2/worker.sh": "319ae69f970bcf68f7f4609271825eb6f13311520da59a8bdd2eb799caf15f4e",
     "source/jobs/training-v2/worker.sh": "d4f1ad204a69d76fd2eef5daabed9b5319fbaa57798d7340ef66dba6a18062c8",
     "source/jobs/training-v3/worker.sh": "2caf709c65d66cced7888916d43dda2b39a698c5dccba7f17c4884301151f32c",
+    "source/jobs/validation-progress-v1/worker.sh": "f50896ea6e206744f814a55c79fc4f4b3f7cf02c4ce0644a0b9390456dbd8981",
     "source/jobs/validation-v2/tar_compute.py": "d22fbae902ef440fd1bd869f24ea2c60c376628d6bf3856e6f137528742b938f",
     "source/lm_eval_tasks/mmlu_no_bio.yaml": "049885f5f05c0f60a43e9fd749b245028555fc173a08a36175452dab72e27a15",
     "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/_default_template_yaml": "011aa06daa186c8115ab1cd43f8c10d6b0e55996e811660ecc1e6117f6804d58",
@@ -1239,6 +1243,28 @@
       "cases": [],
       "afterany": null,
       "source_version": "comparison-v7",
+      "minutes": 10,
+      "queue": "pdebug"
+    },
+    "tar-progress-grid-validation-v1": {
+      "job_id": "f3jMXbDsLkkX",
+      "cases": [],
+      "afterany": null,
+      "source_version": "validation-progress-v1",
+      "minutes": 10,
+      "queue": "pdebug"
+    },
+    "tar-comparison-local-complete-v8": {
+      "job_id": "f3jMofcyT6Qf",
+      "cases": [],
+      "afterany": null,
+      "source_version": "comparison-v8",
+      "minutes": 10,
+      "queue": "pdebug"
+    },
+    "tar-comparison-final-v8": {
+      "job_id": "f3jMvwbDGz3q",
+      "source_version": "comparison-v8",
       "minutes": 10,
       "queue": "pdebug"
     }
@@ -1727,6 +1753,47 @@
       "source_version": "analysis-v8",
       "minutes": 30,
       "queue": "pdebug"
+    },
+    "tar-landscape-long-high-r3": {
+      "job_id": "f3jMXZkssvjy",
+      "cases": [
+        "long-lr1e-5"
+      ],
+      "afterany": "f3jMPrYF3SMd",
+      "source_version": "analysis-v8",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-debug-g06-r3": {
+      "job_id": "f3jMfS5i2YPq",
+      "cases": [
+        "deep-lr5e-6",
+        "long-lr5e-6"
+      ],
+      "afterany": "f3jMPkwzxWdV",
+      "source_version": "analysis-v8",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-long-low-r3": {
+      "job_id": "f3jMfVoKJ6ST",
+      "cases": [
+        "long-lr1e-6"
+      ],
+      "afterany": "f3jMPpdcb2hD",
+      "source_version": "analysis-v8",
+      "minutes": 30,
+      "queue": "pdebug"
+    },
+    "tar-landscape-long-high-r4": {
+      "job_id": "f3jMoeG3MLBq",
+      "cases": [
+        "long-lr1e-5"
+      ],
+      "afterany": "f3jMXZkssvjy",
+      "source_version": "analysis-v8",
+      "minutes": 30,
+      "queue": "pdebug"
     }
   },
   "cancelled_analysis_continuations": [
@@ -1795,8 +1862,18 @@
   "profile_rendering_note": "Both v5 pilot numeric caches validate. LR1e-6 segfaulted in Matplotlib after numerical completion; rendering is now a separate CPU process. Frozen v6 math is byte-identical to v5; cached numerical source identity is preserved.",
   "profile_process_protocol": "Numerical values and CPU rendering run in separate processes; complete validated values are reused after rendering failures. Mathematical source bytes remain frozen v5.",
   "landscape_transfer_protocol": "After geometry completes, full-landscape resumptions may use v7: bit-preserving bounded CPU materialization for basis transfers only. Existing cached values and directions stay unchanged. Incomplete geometry continues with v3; profile math remains frozen v5/v6.",
-  "comparison_report_source": "source/jobs/comparison-v7/misc/tar_compute_compare.py",
+  "comparison_report_source": "source/jobs/comparison-v8/misc/tar_compute_compare.py",
   "source_registry_path_repair": "2026-11-10T23:25Z: source checksum keys restored to run-relative paths, matching validators. SHA values and frozen math unchanged; completed profile grids revalidated before rendering.",
   "landscape_cache_skip_protocol": "Full-landscape resumes may use v8 after geometry completes: same v7 math/transfer helper, skipping a completed reference plane only when its fixed grid, projected states, and exact entire local-frame lattice are already cached. Profile math stays frozen v5/v6.",
-  "landscape_native_crash_recovery": "long-lr1e-5 v7 analysis failed139 at final actual checkpoint forward; bulk checkpoints unchanged, full analysis retried on a fresh allocation with v8, no training rerun."
+  "landscape_native_crash_recovery": "long-lr1e-5 v7 analysis failed139 at final actual checkpoint forward; bulk checkpoints unchanged, full analysis retried on a fresh allocation with v8, no training rerun.",
+  "artifact_finalizer_source": "source/jobs/finalize-v1/seal_artifacts.py",
+  "completed_utc": "2026-11-11T01:16:33.523555+00:00",
+  "final_validation": {
+    "scientific_cases": 18,
+    "attack_trajectories": 16,
+    "evaluation_task_checkpoints": 540,
+    "focused_tests": 88,
+    "figure_review": "Shared scales, physical coordinates, complete lattices, direct update paths, and mixed/evaluated precision checked; final independent review found no figure issues.",
+    "seal_run_name": "tar-artifact-seal-v1"
+  }
 }

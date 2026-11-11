@@ -1,0 +1,10 @@
+{
+  "state": "complete",
+  "step": 64,
+  "tasks": {
+    "wmdp_bio_robust": [
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/deep-lr1e-5/evals/checkpoint-64/attempt-20261110T212832-94386f70/__p__vast1__kirchenb__tar-root__lilpipe__examples__tamper-resistance__artifacts__tuolumne__tar-compute__20261110T1815Z__cases__deep-lr1e-5__models__attack__checkpoint-64/results_2026-11-10T13-30-49.556484.json"
+    ]
+  },
+  "rejected": []
+}

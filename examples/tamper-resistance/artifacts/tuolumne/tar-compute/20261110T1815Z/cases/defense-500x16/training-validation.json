@@ -1,0 +1,13 @@
+{
+  "state": "passed",
+  "case": "defense-500x16",
+  "updates": 500,
+  "model_checkpoints": 13,
+  "optimizer_checkpoints": [
+    125,
+    250,
+    375,
+    500
+  ],
+  "training_elapsed_seconds": 3820.6276931639295
+}

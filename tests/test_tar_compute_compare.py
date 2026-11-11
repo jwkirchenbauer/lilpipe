@@ -492,6 +492,135 @@ class AggregateFixtureTests(unittest.TestCase):
             self.assertIn("Incomplete observation JSON", result["issues"][0])
 
 
+class DefenseSummaryTests(unittest.TestCase):
+    def fixture(self, root):
+        folder = root / "cases/defender"
+        model = folder / "models/defense"
+        model.mkdir(parents=True)
+        alias = root / "cases/attacker/models/defense"
+        alias.parent.mkdir(parents=True)
+        alias.symlink_to(model, target_is_directory=True)
+        metrics = dict.fromkeys(
+            [
+                "fixed_ce_start",
+                "fixed_ce_final",
+                "heldout_ce_start",
+                "heldout_ce_final",
+                "defense_ce_source_case",
+                "latest_actual_step",
+                "initial_mmlu",
+                "actual_displacement",
+            ]
+        )
+        metrics.update(
+            case="defender",
+            role="defense",
+            first_measured_mmlu=58.5,
+            final_mmlu=54,
+            final_wmdp=39,
+            peak_measured_wmdp=55,
+            wall_hours=1,
+            allocated_gpu_hours=4,
+            measured_evaluation_points=4,
+            expected_evaluation_points=4,
+        )
+        records = {
+            "defender": {
+                "folder": folder,
+                "case": {"role": "defense", "save_steps": [1, 500], "max_steps": 500},
+                "metrics": metrics,
+            },
+            "attacker": {
+                "case": {"role": "attack"},
+                "settings": {"defense_checkpoint_root": str(alias)},
+                "actual": [
+                    {
+                        "phase": "defense",
+                        "step": 0,
+                        "probe_loss": 1,
+                        "heldout_loss": 1.1,
+                    },
+                    {
+                        "phase": "defense",
+                        "step": 1,
+                        "probe_loss": 2,
+                        "heldout_loss": 2.1,
+                    },
+                    {
+                        "phase": "defense",
+                        "step": 500,
+                        "probe_loss": 11.5,
+                        "heldout_loss": 11.6,
+                    },
+                    {
+                        "phase": "attack",
+                        "step": 1,
+                        "probe_loss": 10,
+                        "heldout_loss": 10.1,
+                    },
+                ],
+                "metrics": {},
+            },
+        }
+        return records, {"attacker": {"shared_probes_verified": True}}
+
+    def test_defense_ce_uses_same_model_verified_probes_and_first_saved_step(self):
+        with tempfile.TemporaryDirectory() as directory:
+            records, validations = self.fixture(Path(directory))
+            COMPARE.attach_defense_ce(records, validations)
+            metrics = records["defender"]["metrics"]
+            self.assertEqual(metrics["fixed_ce_start"], 2)
+            self.assertEqual(metrics["heldout_ce_start"], 2.1)
+            self.assertEqual(metrics["fixed_ce_final"], 11.5)
+            self.assertEqual(metrics["heldout_ce_final"], 11.6)
+            self.assertEqual(metrics["defense_ce_source_case"], "attacker")
+            self.assertEqual(metrics["latest_actual_step"], 500)
+
+    def test_unverified_wrong_model_or_missing_endpoint_does_not_fill_cells(self):
+        with tempfile.TemporaryDirectory() as directory:
+            original, valid = self.fixture(Path(directory))
+            for reason in ("unverified", "wrong_model", "missing_start"):
+                with self.subTest(reason=reason):
+                    records, validations = copy.deepcopy(original), copy.deepcopy(valid)
+                    if reason == "unverified":
+                        validations["attacker"]["shared_probes_verified"] = False
+                    elif reason == "wrong_model":
+                        records["attacker"]["settings"][
+                            "defense_checkpoint_root"
+                        ] = directory
+                    else:
+                        records["attacker"]["actual"] = [
+                            row
+                            for row in records["attacker"]["actual"]
+                            if row["phase"] != "defense" or row["step"] != 1
+                        ]
+                    COMPARE.attach_defense_ce(records, validations)
+                    self.assertIsNone(records["defender"]["metrics"]["fixed_ce_start"])
+
+    def test_conflicting_verified_traces_are_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            records, validations = self.fixture(Path(directory))
+            records["other"] = copy.deepcopy(records["attacker"])
+            records["other"]["actual"][1]["probe_loss"] += 0.1
+            validations["other"] = {"shared_probes_verified": True}
+            with self.assertRaisesRegex(ValueError, "Conflicting shared-probe"):
+                COMPARE.attach_defense_ce(records, validations)
+
+    def test_table_distinguishes_not_applicable_from_missing_measurements(self):
+        with tempfile.TemporaryDirectory() as directory:
+            records, validations = self.fixture(Path(directory))
+            COMPARE.attach_defense_ce(records, validations)
+            metrics = records["defender"]["metrics"]
+            row = COMPARE.summary_table_row(metrics)
+            self.assertNotIn("pending", row)
+            self.assertEqual(row.split("|")[6].strip(), "N/A")
+            metrics.update(role="attack", actual_displacement=0.4)
+            metrics["fixed_ce_start"] = None
+            row = COMPARE.summary_table_row(metrics)
+            self.assertIn("pending / 11.500", row)
+            self.assertEqual(row.split("|")[6].strip(), "0.400")
+
+
 class StepProfileTests(unittest.TestCase):
     def test_profile_values_reuses_complete_numbers_despite_failed_external_plot_status(
         self,

@@ -20,10 +20,10 @@ The shared 32-document probe is attack-held-out: its token sequences exclude the
 
 [Full case summary](case-summary.csv) · [Comparability checks](comparison-validation.json) · [Evaluation report](evaluation-report.md) · [Measured WMDP budget maxima](max-observed-wmdp.csv) · [Exploratory utility matching](utility-matching.csv)
 
-| Case | Fixed CE start / final | Attack-held-out CE start / final | Initial / final MMLU | Final / peak measured WMDP | Final displacement | Wall / GPU hours | Evaluation coverage |
+| Case | Fixed CE start / final | Attack-held-out CE start / final | Initial / final MMLU | Final / peak measured WMDP | Final attack displacement | Wall / GPU hours | Evaluation coverage |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| defense-500x16 (defense; first saved state) | pending / pending | pending / pending | 58.50 / 54.92 | 39.40 / 55.30 | pending | 1.13 / 4.50 | 26/26 |
-| defense-125x64 (defense; first saved state) | pending / pending | pending / pending | 58.50 / 53.06 | 34.45 / 55.30 | pending | 0.83 / 3.32 | 18/18 |
+| defense-500x16 (defense; first saved state) | 1.949 / 11.520 | 2.028 / 11.522 | 58.50 / 54.92 | 39.40 / 55.30 | N/A | 1.13 / 4.50 | 26/26 |
+| defense-125x64 (defense; first saved state) | 1.949 / 11.303 | 2.028 / 11.262 | 58.50 / 53.06 | 34.45 / 55.30 | N/A | 0.83 / 3.32 | 18/18 |
 | baseline-lr1e-5 | 11.238 / 1.961 | 11.193 / 2.020 | 54.02 / 55.40 | 52.88 / 54.03 | 9.236 | 0.39 / 1.58 | 31/31 |
 | baseline-lr1e-6 | 11.238 / 1.949 | 11.193 / 2.020 | 54.02 / 58.06 | 53.57 / 53.69 | 0.939 | 0.39 / 1.54 | 31/31 |
 | baseline-lr5e-6 | 11.238 / 1.850 | 11.193 / 1.927 | 54.02 / 56.97 | 56.34 / 56.45 | 3.681 | 0.37 / 1.50 | 31/31 |
@@ -40,6 +40,8 @@ The shared 32-document probe is attack-held-out: its token sequences exclude the
 | bootstrap-101 | 11.238 / 1.940 | 11.193 / 2.013 | 54.02 / 56.65 | 53.92 / 55.53 | 9.197 | 0.36 / 1.45 | 31/31 |
 | bootstrap-102 | 11.238 / 1.844 | 11.193 / 2.015 | 54.02 / 56.76 | 54.72 / 55.41 | 9.161 | 0.37 / 1.47 | 31/31 |
 | bootstrap-103 | 11.238 / 1.913 | 11.193 / 2.021 | 54.02 / 56.68 | 53.69 / 56.80 | 9.177 | 0.40 / 1.59 | 31/31 |
+
+Defense rows span the first saved defense checkpoint through the final one. Their CE values come from the matching shared-probe defense trace; the source case is recorded in case-summary.csv. N/A means attack displacement does not apply to a defense row. Pending is reserved for an unavailable measurement.
 
 ## Strongest measured attacks at fixed budgets
 

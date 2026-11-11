@@ -221,6 +221,7 @@ def collect_case(run, name, case):
         "fixed_ce_final": at_step(actual, maximum, "probe_loss", phase=phase),
         "heldout_ce_start": at_step(actual, start, "heldout_loss", phase=phase),
         "heldout_ce_final": at_step(actual, maximum, "heldout_loss", phase=phase),
+        "defense_ce_source_case": None,
         "actual_displacement": at_step(positions, maximum, "distance"),
         "latest_geometry_step": max(geometry.get("steps", []), default=None),
         "attack_rank": geometry.get("attack_rank"),
@@ -1682,6 +1683,66 @@ def display(value, digits=3):
     return f"{float(value):.{digits}f}"
 
 
+def attach_defense_ce(records, validations):
+    """Reuse verified defense-phase measurements from the same checkpoint root."""
+    for record in records.values():
+        case, metrics = record["case"], record["metrics"]
+        if case["role"] != "defense":
+            continue
+        root = (Path(record["folder"]) / "models/defense").resolve()
+        start, final = min(case["save_steps"]), case["max_steps"]
+        candidates = []
+        for name, source in records.items():
+            source_root = source.get("settings", {}).get("defense_checkpoint_root")
+            if (
+                source["case"]["role"] != "attack"
+                or not validations.get(name, {}).get("shared_probes_verified")
+                or not source_root
+                or Path(source_root).resolve() != root
+            ):
+                continue
+            values = {
+                f"{label}_ce_{endpoint}": at_step(
+                    source["actual"], step, field, phase="defense"
+                )
+                for label, field in (
+                    ("fixed", "probe_loss"),
+                    ("heldout", "heldout_loss"),
+                )
+                for endpoint, step in (("start", start), ("final", final))
+            }
+            if all(value is not None for value in values.values()):
+                candidates.append((name, values))
+        if not candidates:
+            continue
+        name, values = candidates[0]
+        if any(
+            not math.isclose(value, other[key], rel_tol=0, abs_tol=1e-5)
+            for _, other in candidates[1:]
+            for key, value in values.items()
+        ):
+            raise ValueError(
+                f"Conflicting shared-probe defense traces: {metrics['case']}"
+            )
+        metrics.update(values)
+        metrics.update(defense_ce_source_case=name, latest_actual_step=final)
+
+
+def summary_table_row(metrics):
+    defense = metrics["role"] == "defense"
+    initial = metrics["first_measured_mmlu"] if defense else metrics["initial_mmlu"]
+    label = metrics["case"] + (" (defense; first saved state)" if defense else "")
+    displacement = "N/A" if defense else display(metrics["actual_displacement"])
+    return (
+        f"| {label} | {display(metrics['fixed_ce_start'])} / {display(metrics['fixed_ce_final'])}"
+        f" | {display(metrics['heldout_ce_start'])} / {display(metrics['heldout_ce_final'])}"
+        f" | {display(initial, 2)} / {display(metrics['final_mmlu'], 2)}"
+        f" | {display(metrics['final_wmdp'], 2)} / {display(metrics['peak_measured_wmdp'], 2)}"
+        f" | {displacement} | {display(metrics['wall_hours'], 2)} / {display(metrics['allocated_gpu_hours'], 2)}"
+        f" | {metrics['measured_evaluation_points']}/{metrics['expected_evaluation_points']} |"
+    )
+
+
 def relative_link(path, root):
     return os.path.relpath(Path(path), Path(root)).replace(os.sep, "/")
 
@@ -1729,6 +1790,7 @@ def report(run):
         name: validate_comparability(record, program, probes)
         for name, record in attacks.items()
     }
+    attach_defense_ce(records, validations)
     baseline = attacks.get("baseline-lr1e-5")
     reference = {}
     if baseline is not None:
@@ -1858,22 +1920,14 @@ def report(run):
         "",
         "[Full case summary](case-summary.csv) · [Comparability checks](comparison-validation.json) · [Evaluation report](evaluation-report.md) · [Measured WMDP budget maxima](max-observed-wmdp.csv) · [Exploratory utility matching](utility-matching.csv)",
         "",
-        "| Case | Fixed CE start / final | Attack-held-out CE start / final | Initial / final MMLU | Final / peak measured WMDP | Final displacement | Wall / GPU hours | Evaluation coverage |",
+        "| Case | Fixed CE start / final | Attack-held-out CE start / final | Initial / final MMLU | Final / peak measured WMDP | Final attack displacement | Wall / GPU hours | Evaluation coverage |",
         "|---|---:|---:|---:|---:|---:|---:|---:|",
     ]
-    for name, record in records.items():
-        m = record["metrics"]
-        initial = (
-            m["initial_mmlu"] if m["role"] == "attack" else m["first_measured_mmlu"]
-        )
-        label = name + (
-            " (defense; first saved state)" if m["role"] == "defense" else ""
-        )
-        lines.append(
-            f"| {label} | {display(m['fixed_ce_start'])} / {display(m['fixed_ce_final'])} | {display(m['heldout_ce_start'])} / {display(m['heldout_ce_final'])} | {display(initial, 2)} / {display(m['final_mmlu'], 2)} | {display(m['final_wmdp'], 2)} / {display(m['peak_measured_wmdp'], 2)} | {display(m['actual_displacement'])} | {display(m['wall_hours'], 2)} / {display(m['allocated_gpu_hours'], 2)} | {m['measured_evaluation_points']}/{m['expected_evaluation_points']} |"
-        )
+    lines.extend(summary_table_row(record["metrics"]) for record in records.values())
     lines.extend(
         [
+            "",
+            "Defense rows span the first saved defense checkpoint through the final one. Their CE values come from the matching shared-probe defense trace; the source case is recorded in case-summary.csv. N/A means attack displacement does not apply to a defense row. Pending is reserved for an unavailable measurement.",
             "",
             "## Strongest measured attacks at fixed budgets",
             "",

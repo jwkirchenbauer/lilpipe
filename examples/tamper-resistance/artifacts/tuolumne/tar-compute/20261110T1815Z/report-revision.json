@@ -1,0 +1,8 @@
+{
+  "reason": "Fill defense-summary CE from verified matching defense traces and mark attack displacement N/A; no new measurements.",
+  "parent_commit": "325077b2",
+  "prior_manifest": "revisions/defense-summary-fix/artifact-manifest.json",
+  "prior_manifest_sha256": "629f6c8aea15b497871fa6bf4f21e9f1f9a45a4b5a6f6bf50eda367cd2f1515b",
+  "job_name": "tar-report-defense-summary-fix-v1",
+  "updated_utc": "2026-11-11T03:43:07.317694+00:00"
+}

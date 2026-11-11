@@ -2045,6 +2045,7 @@ evaluation-verification.json
 findings.md
 max-observed-wmdp.csv
 probes.json
+report-revision.json
 report.md
 source/jobs/analysis-v1/misc/run_tar_compute_landscapes.sh
 source/jobs/analysis-v1/misc/tar_compute.py
@@ -2090,6 +2091,8 @@ source/jobs/comparison-v7/misc/tar_compute_compare.py
 source/jobs/comparison-v7/worker.sh
 source/jobs/comparison-v8/misc/tar_compute_compare.py
 source/jobs/comparison-v8/worker.sh
+source/jobs/comparison-v9/misc/tar_compute_compare.py
+source/jobs/comparison-v9/worker.sh
 source/jobs/evaluation-v1/misc/run_tar_compute_evaluation.sh
 source/jobs/evaluation-v1/misc/tar_compute_evaluation.py
 source/jobs/evaluation-v2/misc/run_tar_compute_evaluation.sh
@@ -2099,6 +2102,7 @@ source/jobs/evaluation-v3/misc/tar_compute_evaluation.py
 source/jobs/finalize-v1/seal_artifacts.py
 source/jobs/finalize-v1/worker.sh
 source/jobs/profile-repair-v2/worker.sh
+source/jobs/report-fix-v1/worker.sh
 source/jobs/training-v2/worker.sh
 source/jobs/training-v3/worker.sh
 source/jobs/validation-progress-v1/worker.sh

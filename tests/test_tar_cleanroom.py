@@ -187,6 +187,13 @@ def test_saved_outer_optimizer_resume_matches_uninterrupted_training_exactly():
                 "learning_rate",
                 "gradient_norm_before_clip",
                 "simulated_path",
+                "retain_ce_before_update",
+                "retain_batch_sha256",
+                "retain_tokens",
+                "retain_source_rows",
+                "retain_pool_indices",
+                "retain_epoch",
+                "retain_stream_content_sha256",
             ):
                 assert left[key] == right[key]
 

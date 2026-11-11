@@ -27,6 +27,10 @@ if [[ "$mode" == benchmark || "$mode" == report ]]; then
 elif [[ "$mode" == geometry || "$mode" == geometry-plot ]]; then
     if [[ "$mode" == geometry-plot ]]; then set -- --plot-only "$@"; fi
     python "$worker_dir/tar_cleanroom_geometry.py" "$run" "$@"
+elif [[ "$mode" == geometry-test ]]; then
+    export TAR_CLEANROOM_TEST_POINT_CACHE_GPU=1
+    sha256sum scripts/misc/tar_cleanroom_geometry.py ../../tests/test_tar_cleanroom_geometry.py
+    python -m unittest discover -s ../../tests -p test_tar_cleanroom_geometry.py -k device_cache_exact_parity_on_two_gpus -v
 elif [[ "$mode" == gradients ]]; then
     python "$worker_dir/tar_cleanroom_gradients.py" "$@"
 elif [[ "$mode" == llm-gradients ]]; then
@@ -43,12 +47,24 @@ elif [[ "$mode" == attack-bundle ]]; then
 elif [[ "$mode" == benchmark-attacks ]]; then
     name=${1:?case required}
     for variant in full-same mini-same mini-reverse full-new; do
+        marker="$run/benchmarks/$name/$variant/step-64/tasks-wmdp_bio_robust/benchmark.json"
+        if [[ -f "$marker" ]] && rg -q '"state": "complete"' "$marker"; then continue; fi
         python "$worker_dir/tar_cleanroom_analysis.py" benchmark "$run" --case "$name" --variant "$variant" --step 64 --tasks wmdp_bio_robust
     done
 elif [[ "$mode" == benchmark-defenses ]]; then
     name=${1:?case required}
     for step in 32 125; do
+        marker="$run/benchmarks/$name/defense-$step/benchmark.json"
+        if [[ -f "$marker" ]] && rg -q '"state": "complete"' "$marker"; then continue; fi
         python "$worker_dir/tar_cleanroom_analysis.py" benchmark "$run" --case "$name" --step "$step"
+    done
+elif [[ "$mode" == benchmark-trajectory ]]; then
+    name=${1:?case required}
+    variant=${2:?attack variant required}
+    for step in 1 4 16; do
+        marker="$run/benchmarks/$name/$variant/step-$step/tasks-wmdp_bio_robust/benchmark.json"
+        if [[ -f "$marker" ]] && rg -q '"state": "complete"' "$marker"; then continue; fi
+        python "$worker_dir/tar_cleanroom_analysis.py" benchmark "$run" --case "$name" --variant "$variant" --step "$step" --tasks wmdp_bio_robust
     done
 else
     python "$worker_dir/tar_cleanroom.py" "$mode" "$run" "$@"

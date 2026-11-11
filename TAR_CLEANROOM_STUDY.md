@@ -55,3 +55,26 @@ five percentage points. Recheck update parity at every evaluated defender.
 Benchmark the saved defense checkpoints at 32 and 125 updates on both original
 task groups. At attack endpoints, benchmark the full WMDP group; retained CE
 tracks attack-time utility, and post-attack MMLU is outside this initial plan.
+
+Two diagnostic extensions address failures observed during these runs. Keep
+the six original continuations unchanged. Repeat full-batch terminal entropy
+and worst-path CE with a shared, refreshed retain-data stream: 311 distinct
+eligible excerpts from the same source split, eight per outer call, with the
+original held-out retain examples excluded. This changes the retain-data
+policy while preserving the forget data, update counts, and retain-token budget.
+The first retain batch is identical to the original condition.
+
+Separately search for low forget CE inside a fixed parameter ball of radius
+0.75 around each final defender and the starting checkpoint. Use eight full-batch
+normalized-gradient steps with a declared line-search grid and projection onto
+the original ball. Select candidates using training forget CE only; measure
+held-out loss and WMDP separately. A feasible low-CE point disproves the stated
+mean-CE floor at that radius. An unsuccessful search provides no certificate.
+Its line-search compute differs from the ordinary AdamW attack.
+
+For geometry, compare the shared broad random plane, the same random directions
+at the actual first-update radius, a literal fixed control-trajectory plane,
+the first-update plane, and a plane fitted separately to each attack. Preserve
+physical axis scales and use common CE scales when comparing defenders. Projected
+saved states are reconstructions in a slice, not measurements of the actual
+off-plane trajectory.

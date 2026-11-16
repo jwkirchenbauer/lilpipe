@@ -1,0 +1,15 @@
+{
+  "state": "passed",
+  "population_size": 24432,
+  "every_prepared_row_identical": true,
+  "compared_components": [
+    "input_ids",
+    "attention_mask",
+    "labels"
+  ],
+  "source_positions_identical": true,
+  "control_fingerprint": "ac3bb6b604881ed8",
+  "short_fingerprint": "a1781deb8cc3cc77",
+  "long_fingerprint": "b8d0398898b6dc9f",
+  "interpretation": "Axolotl regenerated a model-specific cache entry; its cache key includes the tokenizer source path. All prepared row token/label hashes and source positions match the original compute control exactly. Actual optimizer batch order is validated separately against each schedule control."
+}

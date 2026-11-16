@@ -1,0 +1,5 @@
+adapter_keys ['actual', 'analysis', 'broad', 'case', 'first_update_grid', 'folder', 'geometry', 'local', 'metrics', 'name', 'probes', 'scores', 'settings', 'step_profile_rows', 'step_profile_state', 'step_profiles', 'trace']
+adapter_validation_exception KeyError "'declarations'"
+checkpoint_record_keys ['actual', 'broad', 'broad_frames', 'case', 'declarations', 'folder', 'geometry', 'local', 'local_frames', 'name', 'probes', 'projection', 'save_steps', 'schedule_steps', 'scores', 'settings']
+proper_validation_result {"broad_frames": [0, 128], "heldout_matches_root": true, "issues": [], "local_frames": [0, 1, 8, 32, 128], "physical_comparable": true}
+step_profiles_comparable True

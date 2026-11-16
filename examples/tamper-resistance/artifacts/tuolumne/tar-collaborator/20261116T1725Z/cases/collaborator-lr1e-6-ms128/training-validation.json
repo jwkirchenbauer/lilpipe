@@ -1,0 +1,10 @@
+{
+  "state": "passed",
+  "case": "collaborator-lr1e-6-ms128",
+  "updates": 128,
+  "model_checkpoints": 20,
+  "optimizer_checkpoints": [
+    128
+  ],
+  "training_elapsed_seconds": 575.4846708700061
+}

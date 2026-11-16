@@ -1,0 +1,51 @@
+{
+  "state": "passed",
+  "points": 648,
+  "center_ce": 15.520809173583984,
+  "center_maximum_disagreement": 0.0,
+  "common_scales": "Within each radius across the two checkpoint rows; radii have separate scales to preserve small-scale relief.",
+  "loss_range_by_radius": {
+    "0.1": {
+      "min": 15.512552833557129,
+      "max": 15.523604393005373
+    },
+    "1.0": {
+      "min": 15.49182720184326,
+      "max": 15.53761386871338
+    },
+    "10.0": {
+      "min": 15.282377243041992,
+      "max": 15.700027465820312
+    },
+    "100.0": {
+      "min": 11.202158546447754,
+      "max": 19.23071975708008
+    },
+    "125.0": {
+      "min": 11.07115364074707,
+      "max": 18.808373641967773
+    },
+    "200.0": {
+      "min": 11.122134971618651,
+      "max": 18.975883865356444
+    },
+    "500.0": {
+      "min": 11.07115364074707,
+      "max": 15.520809173583984
+    },
+    "1000.0": {
+      "min": 11.580326080322266,
+      "max": 25.139635467529292
+    }
+  },
+  "artifacts": {
+    "comparison-large-radii.pdf": "6d3b8735a4a82a27c531be96d99b4a74393ea6e2c1c115c0d24980b689ae3314",
+    "comparison-large-radii.png": "b50edc9f97e081b7930906dae1239de2a5e679d2aeb83e7b47bbd53db8deddd3",
+    "comparison-small-radii.pdf": "d9fa6ffffd879e7b385eb4f8956318127556ff1aaf13ecd44a45c257563d2c09",
+    "comparison-small-radii.png": "1a1897bb9c84c9ac5db6ea6cf4e7504e5491292544db37e6e35143089ceae856",
+    "grid.csv": "6d5e8ccb8c8680e328f4512e8bd668ffbec42c57270e2e55d1f4e86557d31577",
+    "landscape-3d.pdf": "1ea46813727653b77fb029af88f088e858bd9b9a883af449dc66bc7b9a74cb40",
+    "landscape-3d.png": "82465bbb92ae4d04d0a07e34464df2213bb5361fbc77a7d1cee6bf03d3f9f5d9",
+    "trajectory.csv": "96bdb33f2a6e12604115a552743c7bdab9a967708f859b27c208842aaa2bd2a4"
+  }
+}

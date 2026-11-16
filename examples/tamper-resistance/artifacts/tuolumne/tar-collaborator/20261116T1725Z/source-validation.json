@@ -1,0 +1,16 @@
+{
+  "state": "passed",
+  "profile_manifests": {
+    "source/profiles/analysis-launch-v1/manifest.sha256": "35fd63ea09314cb52ff310dca0d0e373adbbdbacc302b72020f683b47c4efe3b",
+    "source/profiles/analysis-v1/manifest.sha256": "712b485ca1862a1d7ae56d596b3355dc3e1593b0d58d3160670a7084c9d8c28b",
+    "source/profiles/analysis-v2/manifest.sha256": "48aeeeff33caf88a30e2cf21cc1e1f9295901c807ed88458badbff5ee39d06e6",
+    "source/profiles/analysis-v3/manifest.sha256": "a7d3787d66bc5f9438e326db17baaf5aa890d47823e52a77b8d15ae5c4d3a6ee",
+    "source/profiles/audit-v1/manifest.sha256": "9234f4bd412f8305d30a6a201d03afb40a935f9c337af49748833d9daf02a8c5",
+    "source/profiles/report-v1/manifest.sha256": "2d097a09ff90fe7b7fc74a30d1a98b0a6f117849069b6c93fd2ffebc62e9666f",
+    "source/profiles/seal-v1/manifest.sha256": "c57cc3aa20f935d0cbeccd1bdbad9775a714774686e124fed7c64aff9e383f8a",
+    "source/profiles/seal-v2/manifest.sha256": "ca896b5185ced72fddd0dd0d42e12dd66cfccd46f1da4fc3e3223767185a3f70",
+    "source/profiles/seal-v3/manifest.sha256": "c8501a89a9d0c8fc464252087b4c2100fb649c82f80943a2e28cd80340294bcb",
+    "source/profiles/seal-v4/manifest.sha256": "6d279b05c29cb39ab10cf3b76cda7c93bf57529956a130d6570f67e4c0383a74",
+    "source/profiles/static-v1/manifest.sha256": "74006ed0e593a7bc0d75c947cb27eb42a23716bbb46e90c15b61066a5442d929"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "collaborator-lr1e-6-ms128": {
+    "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/cases/collaborator-lr1e-6-ms128/models/attack/checkpoint-128/model.safetensors",
+    "size": 15008318632,
+    "sha256": "2bf374e2a55099e58645b9b7a971e52ad10c592e2061c16de43f8cdde319c136"
+  },
+  "collaborator-lr1e-6-ms1000": {
+    "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/cases/collaborator-lr1e-6-ms1000/models/attack/checkpoint-1000/model.safetensors",
+    "size": 15008318632,
+    "sha256": "56d2e61566f9a39aacd0830ade5806c20e6a342627f79beccc87511b25f4943b"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "coverage": [
+    {
+      "case": "collaborator-lr1e-6-ms128",
+      "measured_task_checkpoints": 23,
+      "expected_task_checkpoints": 23,
+      "complete": true
+    },
+    {
+      "case": "collaborator-lr1e-6-ms1000",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    }
+  ],
+  "rejected": [],
+  "utility_references": {
+    "defended": 54.01591352649753,
+    "base": 58.58729920432367
+  }
+}

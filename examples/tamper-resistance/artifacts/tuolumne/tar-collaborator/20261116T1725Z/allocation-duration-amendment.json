@@ -1,0 +1,8 @@
+{
+  "job_id": "f3kVDL13rBTm",
+  "original_duration_minutes": 55,
+  "updated_duration_minutes": 35,
+  "command": "flux update --verbose --wait f3kVDL13rBTm duration=35m",
+  "reason": "The retry reuses all actual checkpoint/minibatch losses, completed random/reference grid rows and most local frames. A shorter pending request can fit more scheduler gaps. No code, data, model, probe, grid, or numerical setting is changed.",
+  "recovery": "If the allocation expires, completed numerical rows remain cached for a further resume."
+}

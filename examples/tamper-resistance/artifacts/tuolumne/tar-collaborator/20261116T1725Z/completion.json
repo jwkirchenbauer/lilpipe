@@ -1,0 +1,29 @@
+{
+  "state": "complete",
+  "completed_utc": "2026-11-16T20:51:49.331857+00:00",
+  "cases": {
+    "collaborator-lr1e-6-ms128": {
+      "benchmark_groups": 23,
+      "fixed-grids.csv": 867,
+      "local-grids.csv": 486,
+      "random-evolution.csv": 243,
+      "first-update-grid.csv": 289
+    },
+    "collaborator-lr1e-6-ms1000": {
+      "benchmark_groups": 31,
+      "fixed-grids.csv": 867,
+      "local-grids.csv": 648,
+      "random-evolution.csv": 324,
+      "first-update-grid.csv": 289
+    }
+  },
+  "benchmark_groups": 54,
+  "focus_test_methods_passed": 50,
+  "full_training_updates": [
+    128,
+    1000
+  ],
+  "profile_cached_measurements_reused_after_adapter_fix": true,
+  "grid_records": 4013,
+  "prior_rejected_evaluation_artifacts": []
+}

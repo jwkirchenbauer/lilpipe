@@ -342,6 +342,331 @@ def validate_case(folder):
     print(json.dumps(summary))
 
 
+def prepare_checkpoint_comparison(
+    run, example, original, baseline, compute, checkpoint, *, model_id, revision
+):
+    """Reuse the original attacks and physical reference frames for a supplied model."""
+    if not checkpoint.is_absolute() or not (checkpoint / "model.safetensors").is_file():
+        raise ValueError("A downloaded absolute checkpoint with weights is required")
+    if len(revision) != 40 or any(c not in "0123456789abcdef" for c in revision):
+        raise ValueError("Pin the supplied checkpoint to a full Hub commit")
+    if (run / "study.json").exists():
+        raise FileExistsError("Use a new directory for a new comparison")
+    run.mkdir(parents=True, exist_ok=True)
+    for name in ("source/misc", "cases", "logs", "status", "cache"):
+        (run / name).mkdir(parents=True, exist_ok=True)
+    shutil.copytree(
+        example / "src",
+        run / "source/src",
+        ignore=shutil.ignore_patterns("__pycache__"),
+    )
+    for filename in (
+        "tar_compute.py",
+        "tar_dynamics.py",
+        "tar_dynamics_training.py",
+        "tar_compute_compare.py",
+        "tar_compute_evaluation.py",
+        "run_tar_compute.sh",
+        "run_tar_compute_landscapes.sh",
+        "run_tar_compute_evaluation.sh",
+    ):
+        shutil.copy2(
+            example / "scripts/misc" / filename, run / "source/misc" / filename
+        )
+    shutil.copy2(
+        baseline / "source/misc/reference_get_ll.py",
+        run / "source/misc/reference_get_ll.py",
+    )
+    shutil.copytree(compute / "source/lm_eval_tasks", run / "source/lm_eval_tasks")
+    shutil.copytree(
+        compute / "cache/attack",
+        run / "cache/attack",
+        copy_function=os.link,
+        ignore=shutil.ignore_patterns("*.lock"),
+    )
+    probes = json.loads((compute / "probes.json").read_text())
+    probes["expected_order_sha256_by_horizon"] = {}
+    for maximum, control in (
+        (128, baseline),
+        (1000, compute / "cases/baseline-lr1e-6"),
+    ):
+        records = [
+            json.loads(line)
+            for line in (control / "models/attack/observed-batches.jsonl")
+            .read_text()
+            .splitlines()
+        ]
+        if [row["step"] for row in records] != list(range(1, maximum + 1)):
+            raise ValueError(f"Incomplete attack-order control for horizon {maximum}")
+        probes["expected_order_sha256_by_horizon"][str(maximum)] = hashlib.sha256(
+            json.dumps([row["batch_sha256"] for row in records]).encode()
+        ).hexdigest()
+    dump(run / "probes.json", probes)
+    original_config = yaml.safe_load((original / "configs/defense.yml").read_text())
+    revisions = {d["path"]: d["revision"] for d in original_config["datasets"]}
+    cases = {}
+    program = {
+        "state": "prepared",
+        "kind": "supplied-checkpoint-comparison",
+        "baseline_commit": subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=example, text=True
+        ).strip(),
+        "original_run": str(original),
+        "baseline_dynamics": str(baseline),
+        "base_model": original_config["base_model"],
+        "supplied_checkpoint": {
+            "model_id": model_id,
+            "revision": revision,
+            "path": str(checkpoint),
+        },
+        "comparison_controls": {
+            "reproduced-1000": {
+                "folder": str(compute / "cases/baseline-lr1e-6"),
+                "schedule_steps": 1000,
+            },
+            "reproduced-128": {
+                "folder": str(baseline),
+                "schedule_steps": 128,
+                "fixed_source_indices": probes["fixed_source_indices"],
+                "forget_revision": probes["forget_revision"],
+                "scores_file": str(baseline / "capability-scores.csv"),
+                "provenance_note": "The legacy fixed probe is the first ten qualifying documents at the pinned original corpus revision; verified against its source and document hashes.",
+            },
+        },
+        "shared_probes": str(run / "probes.json"),
+        "profile_reference_case": "collaborator-lr1e-6-ms1000",
+        "cases": cases,
+        "bundles": {"attacks": []},
+        "jobs": {},
+        "attack_schedule": "Independent named LR1e-6 linear schedules over 128 and 1000 updates; no warmup. Their prefixes are different experiments.",
+        "analysis": "Same compute-study fixed/held-out probes and physical random/reference bases; only the supplied defense endpoint is available. No defense history is inferred.",
+    }
+    for maximum in (128, 1000):
+        name = f"collaborator-lr1e-6-ms{maximum}"
+        folder = run / "cases" / name
+        for child in (
+            "models",
+            "models/defense-history",
+            "logs",
+            "status",
+            "geometry",
+            "surfaces",
+            "cache",
+        ):
+            (folder / child).mkdir(parents=True, exist_ok=True)
+        (folder / "models/defense").symlink_to(checkpoint, target_is_directory=True)
+        (folder / "models/defense-history/checkpoint-125").symlink_to(
+            checkpoint, target_is_directory=True
+        )
+        (folder / "source").symlink_to(run / "source", target_is_directory=True)
+        reference_path = (
+            example
+            / "configs/stages-wmdp/2_relearn"
+            / f"{DEFENSE}--relearn-fft-lr1e-6-ms{maximum}/selected.yml"
+        )
+        reference = yaml.safe_load(reference_path.read_text())
+        shutil.copy2(reference_path, folder / "config.reference.yml")
+        config = case_config(
+            reference,
+            base_model=checkpoint,
+            output=folder / "models/attack",
+            prepared=run / "cache/attack",
+            role="attack",
+            steps=maximum,
+        )
+        for dataset in config["datasets"]:
+            dataset["revision"] = revisions[dataset["path"]]
+        config["wandb_name"] = name
+        config["wandb_project"] = "jwk-tar-collaborator-checkpoint"
+        (folder / "config.yml").write_text(yaml.safe_dump(config, sort_keys=False))
+        saves = [step for step in ATTACK_STEPS if step <= maximum]
+        state_saves = [step for step in (128, 512, 1000) if step <= maximum]
+        case = {
+            "name": name,
+            "role": "attack",
+            "folder": str(folder),
+            "config": str(folder / "config.yml"),
+            "reference_config": str(reference_path),
+            "max_steps": maximum,
+            "save_steps": saves,
+            "state_steps": state_saves,
+            "defense_reference": str(checkpoint),
+            "bootstrap_seed": None,
+            "inner_steps_per_update": None,
+            "attack_learning_rate": config["learning_rate"],
+            "gaussian_sigma": None,
+            "base_model": program["base_model"],
+            "end_defense_only": True,
+        }
+        cases[name] = case
+        program["bundles"]["attacks"].append(name)
+        dump(folder / "case.json", case)
+        exports = {
+            "TAR_CASE_NAME": name,
+            "TAR_CASE_ROLE": "attack",
+            "TAR_CASE_CONFIG": str(folder / "config.yml"),
+            "DYNAMICS_SAVE_STEPS": ",".join(map(str, saves)),
+            "DYNAMICS_STATE_STEPS": ",".join(map(str, state_saves)),
+            "DYNAMICS_SOURCE_MANIFEST": str(folder / "source-dataset.json"),
+        }
+        (folder / "runtime.sh").write_text(
+            "\n".join(
+                f"export {key}={shlex.quote(value)}" for key, value in exports.items()
+            )
+            + "\n"
+        )
+        settings = analysis_settings(run, program, case, probes)
+        if maximum == 128:
+            settings["attack_steps"] = json.loads(
+                (baseline / "study.json").read_text()
+            )["attack_steps"]
+        dump(folder / "study.json", settings)
+    program["source_sha256"] = {
+        str(p.relative_to(run)): hashlib.sha256(p.read_bytes()).hexdigest()
+        for p in (run / "source").rglob("*")
+        if p.is_file()
+    }
+    dump(run / "study.json", program)
+    print(f"Prepared two independent original-protocol attacks at {run}")
+
+
+def checkpoint_file_identity(checkpoint, metadata, *, model_id, revision):
+    """Check downloaded bytes against the pinned Hub blob declarations."""
+    if metadata.get("sha") != revision or metadata.get("id") != model_id:
+        raise ValueError("Hub metadata does not match the declared checkpoint revision")
+    expected = {
+        item["rfilename"]: item.get("lfs", {})
+        for item in metadata["siblings"]
+        if item["rfilename"].endswith(".safetensors")
+    }
+    if not expected:
+        raise ValueError("Pinned Hub metadata has no weight blobs")
+    identities = {}
+    for filename, declaration in expected.items():
+        if Path(filename).name != filename:
+            raise ValueError("Only checkpoint-root weight files are supported")
+        path = checkpoint / filename
+        if path.stat().st_size != declaration.get("size"):
+            raise ValueError(f"Downloaded weight size differs: {filename}")
+        with path.open("rb") as stream:
+            digest = hashlib.file_digest(stream, "sha256").hexdigest()
+        if digest != declaration.get("sha256"):
+            raise ValueError(f"Downloaded weight hash differs: {filename}")
+        identities[filename] = {"size": path.stat().st_size, "sha256": digest}
+    return identities
+
+
+def verify_checkpoint_comparison(run):
+    """Validate model provenance, parameter layout, and exact probe token IDs."""
+    if not os.environ.get("FLUX_JOB_ID"):
+        raise ValueError("Verify checkpoint bytes through launch_tuo.py")
+    import torch
+    from datasets import load_dataset
+    from safetensors import safe_open
+    from transformers import AutoTokenizer
+
+    program = json.loads((run / "study.json").read_text())
+    supplied = program["supplied_checkpoint"]
+    checkpoint = Path(supplied["path"])
+    metadata = json.loads((run / "input/hub-metadata.json").read_text())
+    weights = checkpoint_file_identity(
+        checkpoint,
+        metadata,
+        model_id=supplied["model_id"],
+        revision=supplied["revision"],
+    )
+    reference = json.loads(
+        (Path(program["baseline_dynamics"]) / "geometry/geometry.json").read_text()
+    )
+    shapes, dtype_scalars = {}, {}
+    for filename in weights:
+        with safe_open(checkpoint / filename, framework="pt", device="cpu") as handle:
+            for name in handle.keys():
+                tensor = handle.get_slice(name)
+                shape, dtype = tensor.get_shape(), tensor.get_dtype()
+                shapes[name] = shape
+                dtype_scalars[dtype] = dtype_scalars.get(dtype, 0) + math.prod(shape)
+    if shapes != reference["shapes"]:
+        raise ValueError(
+            "Supplied checkpoint parameter layout differs from fixed bases"
+        )
+    tokenizer = AutoTokenizer.from_pretrained(checkpoint, local_files_only=True)
+    base_tokenizer = AutoTokenizer.from_pretrained(
+        program["base_model"], local_files_only=True
+    )
+    if tokenizer.get_vocab() != base_tokenizer.get_vocab():
+        raise ValueError("Supplied checkpoint has different token-to-ID assignments")
+    probes = json.loads((run / "probes.json").read_text())
+    corpus = load_dataset(
+        "cais/wmdp-bio-forget-corpus", split="train", revision=probes["forget_revision"]
+    )
+    tokens = []
+    for index in probes["fixed_source_indices"] + probes["heldout_source_indices"]:
+        text = corpus[index]["text"]
+        actual = tokenizer(text, max_length=512, truncation=True)
+        expected = base_tokenizer(text, max_length=512, truncation=True)
+        if actual != expected:
+            raise ValueError(f"Probe tokenization differs at source row {index}")
+        tokens.append(
+            {
+                "source_index": index,
+                "text_sha256": hashlib.sha256(text.encode()).hexdigest(),
+                "input_ids_sha256": hashlib.sha256(
+                    json.dumps(actual["input_ids"], separators=(",", ":")).encode()
+                ).hexdigest(),
+            }
+        )
+    for filename in (
+        "training_config.yml",
+        "eval_results.json",
+        "config.json",
+        "tokenizer_config.json",
+        "README.md",
+    ):
+        shutil.copy2(checkpoint / filename, run / "input" / filename)
+    published = yaml.safe_load((checkpoint / "training_config.yml").read_text())
+    original = yaml.safe_load(
+        (Path(program["original_run"]) / "configs/defense.yml").read_text()
+    )
+    scientific_keys = (
+        "trainer_cls",
+        "custom_trainer_args",
+        "datasets",
+        "micro_batch_size",
+        "max_steps",
+        "learning_rate",
+        "warmup_steps",
+        "seed",
+        "data_seed",
+        "sequence_len",
+        "bf16",
+    )
+    result = {
+        "state": "passed",
+        "checkpoint": supplied,
+        "weight_files": weights,
+        "parameter_count": sum(dtype_scalars.values()),
+        "stored_dtype_scalars": dtype_scalars,
+        "parameter_layout_matches_shared_bases": True,
+        "vocabulary_identical": True,
+        "probe_tokenization_identical": True,
+        "probe_token_identities": tokens,
+        "defense_config_comparison": {
+            key: {"supplied": published.get(key), "reproduction": original.get(key)}
+            for key in scientific_keys
+        },
+        "torch": torch.__version__,
+        "hip": torch.version.hip,
+        "visible_gpus": torch.cuda.device_count(),
+        "flux_job_id": os.environ["FLUX_JOB_ID"],
+        "interpretation": "A multi-factor defense-checkpoint contrast under fixed attacks and probes; no intermediate collaborator defense states are available.",
+    }
+    if result["visible_gpus"] != 4:
+        raise ValueError("Expected one outer process with all four GPUs visible")
+    dump(run / "input-validation.json", result)
+    print(json.dumps(result, indent=2), flush=True)
+
+
 def matrix_positions(maximum, count=128):
     if maximum < 1 or count < 1:
         raise ValueError("Matrix timeline and sample count must be positive")
@@ -393,7 +718,7 @@ def analysis_settings(run, program, case, probes):
         for step in (1, 2, 4, 8, 16, 32, 48, 64, 96, 128, 256, 512, 1000)
         if step in case["save_steps"]
     ]
-    return {
+    settings = {
         "case_name": case["name"],
         "original_run": program["original_run"],
         "base_model": program["base_model"],
@@ -439,6 +764,23 @@ def analysis_settings(run, program, case, probes):
         "path_label_steps": [0, 1, 8, 32, 128, 512, 1000],
         "capability_scores_file": str(folder / "evaluation-scores.csv"),
     }
+    if case.get("end_defense_only"):
+        settings.update(
+            defense_checkpoint_root=str(folder / "models/defense-history"),
+            defense_steps=[125],
+            defense_frames=[125],
+            broad_defense_frames=[125],
+        )
+    for key in (
+        "attack_frames",
+        "broad_attack_frames",
+        "minibatch_surface_steps",
+        "matrix_steps",
+        "minibatch_comparison_steps",
+        "path_label_steps",
+    ):
+        settings[key] = [step for step in settings[key] if step <= case["max_steps"]]
+    return settings
 
 
 def prepare_analysis(run):
@@ -580,6 +922,14 @@ def main():
     p.add_argument("folder", type=Path)
     p = sub.add_parser("prepare-analysis")
     p.add_argument("run", type=Path)
+    p = sub.add_parser("prepare-checkpoint-comparison")
+    p.add_argument("run", type=Path)
+    for name in ("example", "original", "baseline", "compute", "checkpoint"):
+        p.add_argument(f"--{name}", type=Path, required=True)
+    p.add_argument("--model-id", required=True)
+    p.add_argument("--revision", required=True)
+    p = sub.add_parser("verify-checkpoint-comparison")
+    p.add_argument("run", type=Path)
     args = parser.parse_args()
     if args.stage == "prepare":
         prepare(args.run, args.example, args.original, args.baseline)
@@ -588,6 +938,19 @@ def main():
         print("\n".join(study["bundles"][args.bundle]))
     elif args.stage == "prepare-analysis":
         prepare_analysis(args.run)
+    elif args.stage == "prepare-checkpoint-comparison":
+        prepare_checkpoint_comparison(
+            args.run,
+            args.example,
+            args.original,
+            args.baseline,
+            args.compute,
+            args.checkpoint,
+            model_id=args.model_id,
+            revision=args.revision,
+        )
+    elif args.stage == "verify-checkpoint-comparison":
+        verify_checkpoint_comparison(args.run)
     else:
         validate_case(args.folder)
 

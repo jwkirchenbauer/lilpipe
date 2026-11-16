@@ -44,13 +44,14 @@ def profile_identity(metadata):
     ).hexdigest()
 
 
-def profile_fixture(root):
-    folder = root / "cases/baseline-lr1e-5"
+def profile_fixture(root, name="baseline-lr1e-5"):
+    folder = root / "cases" / name
     anchor = folder / "models/defense"
     shared = root / "baseline/geometry/random-basis.npy"
-    shared.parent.mkdir(parents=True)
-    shared.write_bytes(b"the report must never load this basis array")
-    write_json(shared.parent / "geometry.json", {})
+    shared.parent.mkdir(parents=True, exist_ok=True)
+    if not shared.exists():
+        shared.write_bytes(b"the report must never load this basis array")
+        write_json(shared.parent / "geometry.json", {})
     checkpoints = {
         str(step): (
             anchor if step == 0 else folder / "models/attack" / f"checkpoint-{step}"
@@ -64,7 +65,7 @@ def profile_fixture(root):
     write_json(anchor / "tokenizer.json", {})
     write_json(anchor / "tokenizer_config.json", {})
     source = root / "source/jobs/profiles/tar_dynamics.py"
-    source.parent.mkdir(parents=True)
+    source.parent.mkdir(parents=True, exist_ok=True)
     source.write_text("# frozen profile source\n")
     source_sha = hashlib.sha256(source.read_bytes()).hexdigest()
     probes = {
@@ -234,7 +235,7 @@ def profile_fixture(root):
         for y in COMPARE.PROFILE_C1
     ]
     record = {
-        "name": "baseline-lr1e-5",
+        "name": name,
         "folder": folder,
         "analysis": folder,
         "case": case,
@@ -1418,6 +1419,492 @@ class ComparabilityTests(unittest.TestCase):
             self.assertIn("different", record["metrics"]["observed_order_sha256"])
             self.assertTrue(
                 any("data order differs" in issue for issue in result["issues"])
+            )
+
+
+class SharedProfileReferenceTests(unittest.TestCase):
+    def fixture(self, root):
+        reference, program, probes = profile_fixture(root, "collaborator-lr1e-6-ms1000")
+        current, _, _ = profile_fixture(root, "collaborator-lr1e-6-ms128")
+        current["case"]["max_steps"] = 128
+        current["case"]["save_steps"][-1] = 128
+        for record in (reference, current):
+            write_profile_adapter_fixture(root, record, program, probes)
+        program = {
+            **program,
+            "cases": {
+                record["name"]: record["case"] for record in (reference, current)
+            },
+            "profile_reference_case": reference["name"],
+        }
+        write_json(root / "study.json", program)
+        return reference, current, program, probes
+
+    def test_declared_attack_reference_reuses_complete_cache_without_model_work(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            reference, current, _, _ = self.fixture(root)
+            for name in (reference["name"], current["name"]):
+                _, _, validation = COMPARE._profile_adapter_record(root, name)
+                self.assertTrue(
+                    validation["step_profiles_comparable"], validation["issues"]
+                )
+            with (
+                patch.object(
+                    COMPARE,
+                    "__file__",
+                    str(root / "source/jobs/profiles/tar_compute_compare.py"),
+                ),
+                patch.object(
+                    COMPARE.runpy,
+                    "run_path",
+                    side_effect=AssertionError(
+                        "Complete cache must not run numerical code"
+                    ),
+                ),
+            ):
+                result = COMPARE.profile_values(root, current["name"])
+            self.assertTrue(result["reused"])
+
+    def test_explicit_missing_or_nonattack_reference_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            reference, current, program, _ = self.fixture(root)
+            program["profile_reference_case"] = "missing"
+            write_json(root / "study.json", program)
+            with self.assertRaisesRegex(ValueError, "declared attack case"):
+                COMPARE._profile_adapter_record(root, current["name"])
+            program["profile_reference_case"] = reference["name"]
+            program["cases"][reference["name"]]["role"] = "defense"
+            write_json(root / "study.json", program)
+            with self.assertRaisesRegex(ValueError, "declared attack case"):
+                COMPARE._profile_adapter_record(root, current["name"])
+            self.assertEqual(
+                COMPARE._profile_reference_case({"cases": {}}),
+                ("baseline-lr1e-5", None),
+            )
+
+    def test_reference_still_requires_its_own_verified_frozen_source(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            reference, current, _, _ = self.fixture(root)
+            metadata = reference["step_profiles"]
+            metadata["source_sha256"] = metadata["protocol"]["source_sha256"] = "0" * 64
+            profile_identity(metadata)
+            write_json(reference["folder"] / "surfaces/step-profiles.json", metadata)
+            _, _, validation = COMPARE._profile_adapter_record(root, current["name"])
+            self.assertTrue(validation["step_profiles_complete"])
+            self.assertFalse(validation["step_profiles_comparable"])
+            self.assertTrue(
+                any(
+                    "shared profile reference" in issue
+                    for issue in validation["issues"]
+                )
+            )
+
+
+class CheckpointReportTests(unittest.TestCase):
+    def test_cli_selects_checkpoint_report_and_explicit_partial_mode(self):
+        with (
+            patch.object(
+                COMPARE, "checkpoint_report", return_value={"coverage": "partial"}
+            ) as report,
+            patch("builtins.print"),
+        ):
+            COMPARE.main(["checkpoint-report", "/fixture/run", "--allow-partial"])
+        report.assert_called_once_with(Path("/fixture/run"), True)
+
+    def test_absolute_and_center_relative_grids_keep_one_physical_scale(self):
+        with tempfile.TemporaryDirectory() as directory:
+            _, program, probes, records = self.fixture(Path(directory))
+            pairs = COMPARE.checkpoint_pairs(
+                records, list(program["cases"]), list(program["comparison_controls"])
+            )
+            checked = {
+                name: COMPARE.checkpoint_validation(record, program, probes)
+                for name, record in records.items()
+            }
+            absolute = COMPARE.checkpoint_surface_data(
+                pairs[0], checked, "local-reference"
+            )
+            relative = COMPARE.checkpoint_surface_data(pairs[0], checked, "local-delta")
+            first, second = [record["name"] for record in pairs[0]["records"]]
+            self.assertEqual(absolute["radius"], COMPARE.LOCAL_RADIUS)
+            np.testing.assert_allclose(
+                absolute["grids"][first, 0]["values"]
+                - absolute["grids"][second, 0]["values"],
+                2,
+            )
+            np.testing.assert_allclose(
+                relative["grids"][first, 0]["values"],
+                relative["grids"][second, 0]["values"],
+                atol=1e-12,
+            )
+            self.assertLess(absolute["limits"][0], 3)
+            self.assertGreater(absolute["limits"][1], 10)
+            self.assertEqual(relative["limits"][0], -relative["limits"][1])
+
+    def fixture(self, root):
+        run, baseline = root / "run", root / "legacy"
+        run.mkdir()
+        probes = {
+            "fixed_source_indices": list(range(10)),
+            "forget_revision": "pinned",
+            "heldout_sha256": [str(i) for i in range(32)],
+        }
+        write_json(run / "probes.json", probes)
+
+        def add(folder, name, horizon, legacy=False, shift=0):
+            folder.mkdir(parents=True, exist_ok=True)
+            planes = (
+                ["random", "attack", "transverse"]
+                if legacy
+                else ["random", "reference", "attack"]
+            )
+            geometry = {
+                "names": ["weight"],
+                "shapes": {"weight": [2]},
+                "offsets": {"weight": 0},
+                "steps": [1, horizon],
+                "radius": 5 * COMPARE.LOCAL_RADIUS,
+                "attack_rank": 2,
+                "attack_plane_energy_fraction": 0.9,
+                "gram": np.eye(4 if legacy else 6).tolist(),
+                "basis_actual_gram": np.eye(6).tolist(),
+                "planes": {
+                    plane: [
+                        {"step": step, "distance": step / horizon}
+                        for step in (1, horizon)
+                    ]
+                    for plane in planes
+                },
+            }
+            write_json(folder / "geometry/geometry.json", geometry)
+            if legacy:
+                for name_ in ("random", "attack"):
+                    (folder / f"geometry/{name_}-basis.npy").write_bytes(
+                        b"never load large basis data"
+                    )
+            else:
+                for name_, source in (("random", "random"), ("reference", "attack")):
+                    (folder / f"geometry/{name_}-basis.npy").symlink_to(
+                        baseline / f"geometry/{source}-basis.npy"
+                    )
+                (folder / "geometry/attack-basis.npy").write_bytes(
+                    b"private fitted directions"
+                )
+            settings = {
+                "attack_steps": [1, horizon],
+                "attack_max_steps": horizon,
+                "actual_attack_steps": [1, horizon],
+                "attack_learning_rate": "1e-6",
+                "attack_frames": [0, 1, horizon],
+                "broad_attack_frames": [0, horizon],
+                "local_surface_points": 3,
+                "broad_points": 3,
+                "local_plane": "reference",
+                "local_radius": COMPARE.LOCAL_RADIUS,
+                "broad_radius": 125,
+                "forget_revision": "pinned",
+                "fixed_source_indices": list(range(10)),
+                "state": "complete",
+            }
+            observed = {"fixed_documents": 10, **copy.deepcopy(probes)}
+            if legacy:
+                for key in (
+                    "local_plane",
+                    "local_radius",
+                    "broad_radius",
+                    "forget_revision",
+                    "fixed_source_indices",
+                    "broad_attack_frames",
+                ):
+                    settings.pop(key)
+                settings["broad_random_frames"] = {
+                    "radius": 125,
+                    "attack_steps": [0, horizon],
+                }
+                observed.pop("fixed_source_indices")
+                observed["heldout_sha256"] = [f"old-{i}" for i in range(32)]
+            else:
+                write_json(
+                    folder / "case.json",
+                    {
+                        "name": name,
+                        "role": "attack",
+                        "max_steps": horizon,
+                        "save_steps": [1, horizon],
+                        "attack_learning_rate": 1e-6,
+                    },
+                )
+            write_json(folder / "study.json", settings)
+            write_json(folder / "surfaces/probes.json", observed)
+            for stage in ("train", "evaluation", "analysis"):
+                write_json(folder / f"status/{stage}.json", {"state": "complete"})
+            centers = {
+                step: 10 + shift - 5 * step / horizon for step in (0, 1, horizon)
+            }
+            write_csv(
+                folder / "surfaces/actual-losses.csv",
+                [
+                    {
+                        "phase": "attack",
+                        "step": step,
+                        "probe_loss": center,
+                        "heldout_loss": center + 1,
+                    }
+                    for step, center in centers.items()
+                ],
+            )
+            projection = [
+                {
+                    "plane": plane,
+                    "step": step,
+                    "c0": 0,
+                    "c1": 0,
+                    "distance": step / horizon,
+                    "captured_fraction": 0.5,
+                    "off_plane_distance": 0.1,
+                    "probe_loss": center,
+                    "projected_loss": center + 0.25,
+                    "loss_gap": 0.25,
+                }
+                for plane in planes
+                for step, center in centers.items()
+            ]
+            write_csv(folder / "projection-quality.csv", projection)
+            for kind, frames, radius in (
+                ("local-grids", (0, 1, horizon), COMPARE.LOCAL_RADIUS),
+                ("random-evolution", (0, horizon), 125),
+            ):
+                write_csv(
+                    folder / f"surfaces/{kind}.csv",
+                    [
+                        {
+                            "phase": "attack",
+                            "step": step,
+                            "c0": x,
+                            "c1": y,
+                            "probe_loss": centers[step] + x * x + 0.01 * y * y,
+                        }
+                        for step in frames
+                        for x in np.linspace(-radius, radius, 3)
+                        for y in np.linspace(-radius, radius, 3)
+                    ],
+                )
+            scores = [
+                {
+                    "learning_rate": 1e-6,
+                    "attack_step": step,
+                    "task": task,
+                    "jwk_percent": 30 + step / horizon + shift,
+                }
+                for step in centers
+                for task in (
+                    ("wmdp_bio_robust", "mmlu_no_bio")
+                    if step in (0, horizon)
+                    else ("wmdp_bio_robust",)
+                )
+            ]
+            write_csv(
+                folder
+                / ("capability-scores.csv" if legacy else "evaluation-scores.csv"),
+                scores,
+            )
+            return {"name": name, "role": "attack", "max_steps": horizon}
+
+        add(baseline, "reproduced-128", 128, legacy=True)
+        old_long = root / "old-compute/cases/baseline-lr1e-6"
+        add(old_long, "reproduced-1000", 1000)
+        cases = {}
+        for horizon in (128, 1000):
+            name = f"collaborator-lr1e-6-ms{horizon}"
+            cases[name] = add(run / "cases" / name, name, horizon, shift=-2)
+        controls = {
+            "reproduced-128": {
+                "folder": str(baseline),
+                "schedule_steps": 128,
+                "fixed_source_indices": list(range(10)),
+                "forget_revision": "pinned",
+                "scores_file": str(baseline / "capability-scores.csv"),
+                "provenance_note": "Audited frozen legacy fixed10",
+            },
+            "reproduced-1000": {"folder": str(old_long), "schedule_steps": 1000},
+        }
+        program = {
+            "cases": cases,
+            "comparison_controls": controls,
+            "baseline_dynamics": str(baseline),
+            "supplied_checkpoint": {"model_id": "supplied", "revision": "aa62e-test"},
+        }
+        write_json(run / "study.json", program)
+        records = {
+            name: COMPARE.checkpoint_record(
+                name, value["folder"], value["schedule_steps"], value
+            )
+            for name, value in controls.items()
+        }
+        records.update(
+            {
+                name: COMPARE.checkpoint_record(
+                    name, run / "cases" / name, value["max_steps"]
+                )
+                for name, value in cases.items()
+            }
+        )
+        return run, program, probes, records
+
+    def test_legacy_control_requires_declared_fixed_provenance_and_same_physical_axes(
+        self,
+    ):
+        with tempfile.TemporaryDirectory() as directory:
+            run, program, probes, records = self.fixture(Path(directory))
+            with patch.object(
+                COMPARE.np,
+                "load",
+                side_effect=AssertionError("basis arrays must not load"),
+            ):
+                for record in records.values():
+                    validation = COMPARE.checkpoint_validation(record, program, probes)
+                    self.assertEqual(validation["issues"], [])
+                self.assertFalse(
+                    COMPARE.checkpoint_validation(
+                        records["reproduced-128"], program, probes
+                    )["heldout_matches_root"]
+                )
+                records["reproduced-128"]["declarations"] = {}
+                self.assertFalse(
+                    COMPARE.checkpoint_validation(
+                        records["reproduced-128"], program, probes
+                    )["physical_comparable"]
+                )
+                record = records["collaborator-lr1e-6-ms128"]
+                target = record["folder"] / "geometry/reference-basis.npy"
+                target.unlink()
+                target.write_bytes(b"different directions")
+                self.assertFalse(
+                    COMPARE.checkpoint_validation(record, program, probes)[
+                        "physical_comparable"
+                    ]
+                )
+
+    def test_pairing_matches_schedule_and_intersects_declared_frames(self):
+        with tempfile.TemporaryDirectory() as directory:
+            _, program, _, records = self.fixture(Path(directory))
+            records["reproduced-128"]["local_frames"] = [0, 8, 128]
+            records["collaborator-lr1e-6-ms128"]["local_frames"] = [0, 1, 8, 32, 128]
+            pairs = COMPARE.checkpoint_pairs(
+                records, list(program["cases"]), list(program["comparison_controls"])
+            )
+            self.assertEqual(len(pairs), 2)
+            self.assertEqual(pairs[0]["local_frames"], [0, 8, 128])
+            for pair in pairs:
+                self.assertEqual(
+                    {record["schedule_steps"] for record in pair["records"]},
+                    {pair["schedule_steps"]},
+                )
+            with self.assertRaisesRegex(ValueError, "No schedule-matched"):
+                COMPARE.checkpoint_pairs(
+                    records, ["collaborator-lr1e-6-ms1000"], ["reproduced-128"]
+                )
+
+    def test_final_report_rejects_missing_endpoints_and_partial_uses_separate_paths(
+        self,
+    ):
+        with tempfile.TemporaryDirectory() as directory:
+            run, _, _, records = self.fixture(Path(directory))
+            record = records["collaborator-lr1e-6-ms128"]
+            rows = [row for row in record["actual"] if float(row["step"]) != 128]
+            write_csv(record["folder"] / "surfaces/actual-losses.csv", rows)
+            pending = COMPARE.checkpoint_record(record["name"], record["folder"], 128)
+            self.assertIsNone(COMPARE.checkpoint_metrics(pending)["final_probe_loss"])
+            with (
+                patch.object(COMPARE, "checkpoint_surface_figure") as surface,
+                patch.object(COMPARE, "checkpoint_trajectory_figure"),
+            ):
+                with self.assertRaisesRegex(ValueError, "incomplete"):
+                    COMPARE.checkpoint_report(run)
+                surface.assert_not_called()
+                self.assertFalse((run / "checkpoint-report.md").exists())
+                result = COMPARE.checkpoint_report(run, allow_partial=True)
+            self.assertEqual(result["coverage"], "partial")
+            self.assertTrue((run / "checkpoint-report.partial.md").exists())
+            self.assertFalse((run / "checkpoint-comparison-summary.csv").exists())
+
+    def test_complete_report_preserves_measured_offsets_and_default_outputs(self):
+        with tempfile.TemporaryDirectory() as directory:
+            run, _, _, _ = self.fixture(Path(directory))
+            with (
+                patch.object(COMPARE, "checkpoint_surface_figure"),
+                patch.object(COMPARE, "checkpoint_trajectory_figure"),
+            ):
+                result = COMPARE.checkpoint_report(run)
+            self.assertEqual(result["coverage"], "complete")
+            rows = {
+                row["case"]: row
+                for row in COMPARE.read_rows(run / "checkpoint-comparison-summary.csv")
+            }
+            self.assertEqual(float(rows["reproduced-128"]["initial_probe_loss"]), 10)
+            self.assertEqual(
+                float(rows["collaborator-lr1e-6-ms128"]["initial_probe_loss"]), 8
+            )
+            text = (run / "checkpoint-report.md").read_text()
+            self.assertIn("multi-factor", text)
+            self.assertIn("aa62e-test", text)
+            self.assertIn("authors_documents", text)
+            self.assertFalse((run / "report.md").exists())
+            self.assertFalse((run / "case-summary.csv").exists())
+
+    def test_stale_geometry_cache_inputs_prevent_a_final_comparison(self):
+        with tempfile.TemporaryDirectory() as directory:
+            _, program, probes, records = self.fixture(Path(directory))
+            record = records["collaborator-lr1e-6-ms128"]
+            source = record["folder"] / "raw-checkpoint"
+            source.write_bytes(b"immutable weights")
+            protocol = {
+                "settings": record["settings"],
+                "inputs": [
+                    {
+                        "path": str(source),
+                        "resolved": str(source.resolve()),
+                        "size": source.stat().st_size,
+                        "mtime_ns": source.stat().st_mtime_ns,
+                    }
+                ],
+            }
+            identity = hashlib.sha256(
+                json.dumps(protocol, sort_keys=True, separators=(",", ":")).encode()
+            ).hexdigest()
+            write_json(
+                record["folder"] / "geometry/progress-protocol.json",
+                {"identity": identity, "protocol": protocol},
+            )
+            write_json(
+                record["folder"] / "geometry/gram-progress.json",
+                {
+                    "identity": identity,
+                    "completed_parameters": 1,
+                    "gram": record["geometry"]["gram"],
+                },
+            )
+            write_json(
+                record["folder"] / "geometry/basis-progress.json",
+                {
+                    "identity": identity,
+                    "completed_parameters": 1,
+                    "actual_gram": record["geometry"]["basis_actual_gram"],
+                    "actual_cross": np.zeros((2, 6)).tolist(),
+                    "coefficient_identity": "a" * 64,
+                    "owned_files": {},
+                },
+            )
+            self.assertEqual(
+                COMPARE.checkpoint_validation(record, program, probes)["issues"], []
+            )
+            source.write_bytes(b"different immutable weights")
+            validation = COMPARE.checkpoint_validation(record, program, probes)
+            self.assertTrue(
+                any("input identity changed" in issue for issue in validation["issues"])
             )
 
 

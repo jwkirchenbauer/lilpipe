@@ -1,0 +1,113 @@
+{
+  "coverage": "complete",
+  "cases": {
+    "reproduced-1000": {
+      "issues": [],
+      "physical_comparable": true,
+      "heldout_matches_root": true,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ]
+    },
+    "reproduced-128": {
+      "issues": [],
+      "physical_comparable": true,
+      "heldout_matches_root": false,
+      "local_frames": [
+        0,
+        1,
+        4,
+        8,
+        16,
+        48,
+        128
+      ],
+      "broad_frames": [
+        0,
+        16,
+        48,
+        128
+      ]
+    },
+    "collaborator-lr1e-6-ms128": {
+      "issues": [],
+      "physical_comparable": true,
+      "heldout_matches_root": true,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128
+      ],
+      "broad_frames": [
+        0,
+        128
+      ]
+    },
+    "collaborator-lr1e-6-ms1000": {
+      "issues": [],
+      "physical_comparable": true,
+      "heldout_matches_root": true,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ]
+    }
+  },
+  "pairs": [
+    {
+      "name": "reproduced-128--collaborator-lr1e-6-ms128",
+      "schedule_steps": 128,
+      "local_frames": [
+        0,
+        1,
+        8,
+        128
+      ],
+      "broad_frames": [
+        0,
+        128
+      ]
+    },
+    {
+      "name": "reproduced-1000--collaborator-lr1e-6-ms1000",
+      "schedule_steps": 1000,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ]
+    }
+  ]
+}

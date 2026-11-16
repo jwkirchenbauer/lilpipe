@@ -1,0 +1,9 @@
+{
+  "reason": "The reusable profile adapter assumed that every run contained a case named baseline-lr1e-5. This two-schedule external-checkpoint comparison does not contain that case.",
+  "profile_reference_case": "collaborator-lr1e-6-ms1000",
+  "adapter_source_profile": "source/profiles/analysis-v2",
+  "numerical_source_unchanged": true,
+  "cached_numerical_measurements_reused": true,
+  "old_study_implementation_audit": "profile-implementation-validation.json",
+  "checks_retained": "Each reference/cache must pass frozen source, protocol, input identity, probe, lattice, norm, and endpoint validation. The two new caches then share the declared reference's text and source identities."
+}

@@ -19,7 +19,9 @@ export TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=8 AXOLOTL_DO_NOT_TRACK=1
 export WANDB_MODE=offline LILPIPE_DEVICE_DEBUG=1
 unset LOCAL_RANK RANK WORLD_SIZE LOCAL_WORLD_SIZE
 mkdir -p "$run/logs" "$run/status"
-if [[ "$mode" == bundle ]]; then
+if [[ "$mode" == verify ]]; then
+    python "$source_root/misc/tar_compute.py" verify-checkpoint-comparison "$run"
+elif [[ "$mode" == bundle ]]; then
     python "$source_root/misc/tar_compute.py" list "$run" "$name" > "$run/status/bundle-$name.cases"
     mapfile -t cases < "$run/status/bundle-$name.cases"
     (( ${#cases[@]} > 0 ))
@@ -51,6 +53,11 @@ import torch
 from accelerate import PartialState
 from accelerate.utils import DistributedType
 case = json.loads((Path(sys.argv[1]) / "case.json").read_text())
+program = json.loads((Path(sys.argv[2]) / "study.json").read_text())
+if program.get("kind") == "supplied-checkpoint-comparison":
+    validation = json.loads((Path(sys.argv[2]) / "input-validation.json").read_text())
+    assert validation["state"] == "passed"
+    assert validation["checkpoint"] == program["supplied_checkpoint"]
 if case["role"] == "attack":
     defended = Path(case["defense_reference"])
     assert (defended / "model.safetensors").exists() or (defended / "model.safetensors.index.json").exists()

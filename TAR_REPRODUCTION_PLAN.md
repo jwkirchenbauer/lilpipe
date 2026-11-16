@@ -76,3 +76,6 @@ to study how the attacker leaves the defense.
 [Landscape dynamics, figures, and movies](examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/report.md)
 records the baseline results. The follow-up compute and intervention experiments
 are described in the [compute-extension plan](TAR_COMPUTE_EXTENSION.md).
+
+The [collaborator-checkpoint comparison](TAR_COLLABORATOR_CHECKPOINT.md) applies
+these attacks and landscape views directly to the uploaded defense endpoint.

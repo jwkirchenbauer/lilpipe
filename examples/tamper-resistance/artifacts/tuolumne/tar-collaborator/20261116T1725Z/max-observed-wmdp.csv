@@ -1,0 +1,9 @@
+case,learning_rate,budget,max_observed_wmdp_percent,observed_peak_step,measured_checkpoints,expected_checkpoints,complete_through_budget
+collaborator-lr1e-6-ms128,1e-06,128,42.97235023041475,40,21,21,True
+collaborator-lr1e-6-ms128,1e-06,256,42.97235023041475,40,21,21,True
+collaborator-lr1e-6-ms128,1e-06,512,42.97235023041475,40,21,21,True
+collaborator-lr1e-6-ms128,1e-06,1000,42.97235023041475,40,21,21,True
+collaborator-lr1e-6-ms1000,1e-06,128,44.815668202764975,80,21,21,True
+collaborator-lr1e-6-ms1000,1e-06,256,46.08294930875576,256,23,23,True
+collaborator-lr1e-6-ms1000,1e-06,512,46.08294930875576,256,25,25,True
+collaborator-lr1e-6-ms1000,1e-06,1000,46.08294930875576,256,27,27,True

@@ -1,0 +1,98 @@
+[
+  {
+    "name": "collab-final-report",
+    "env": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+    "minutes": 15,
+    "target": [
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/report-v1/run.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z"
+    ],
+    "argv": [
+      "python",
+      "/p/vast1/kirchenb/llnl-tools/launch_tuo.py",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+      "--env_act_style=mm_activate",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/launches",
+      "--qos=pbatch",
+      "--bank=verival",
+      "--run_name=collab-final-report",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=4",
+      "--torchrun=false",
+      "--minutes=15",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--dependency=afterany:f3kVDL13rBTm"
+    ],
+    "dependency": "f3kVDL13rBTm",
+    "job_id": "f3kVEeDySYTR",
+    "outcome": "Canceled while pending; superseded by f3kVY52UmyVR"
+  },
+  {
+    "name": "collab-analysis-debug-retry-1000",
+    "env": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+    "minutes": 35,
+    "target": [
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v3/run_tar_compute_landscapes.sh",
+      "case",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z",
+      "collaborator-lr1e-6-ms1000"
+    ],
+    "argv": [
+      "python",
+      "/p/vast1/kirchenb/llnl-tools/launch_tuo.py",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+      "--env_act_style=mm_activate",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/launches",
+      "--qos=pdebug",
+      "--bank=guard",
+      "--run_name=collab-analysis-debug-retry-1000",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=4",
+      "--torchrun=false",
+      "--minutes=35",
+      "--pass_run_name=false",
+      "--quiet_launch=true"
+    ],
+    "job_id": "f3kVXAMfoph5",
+    "outcome": "Allocated14.9s; rejected by exclusive analysis lock before preflight/measurement. Original sampler started during replacement preflight. See queue-replacement-attempt.json."
+  },
+  {
+    "name": "collab-final-report-debug",
+    "outcome": "Complete in 71.6 seconds; refreshed native plots and wrote ten final paired PNGs and PDFs with complete comparison coverage.",
+    "env": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+    "minutes": 15,
+    "target": [
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/report-v1/run.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z"
+    ],
+    "argv": [
+      "python",
+      "/p/vast1/kirchenb/llnl-tools/launch_tuo.py",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+      "--env_act_style=mm_activate",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/launches",
+      "--qos=pdebug",
+      "--bank=guard",
+      "--run_name=collab-final-report-debug",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=4",
+      "--torchrun=false",
+      "--minutes=15",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--dependency=afterany:f3kVDL13rBTm"
+    ],
+    "dependency": "f3kVDL13rBTm",
+    "job_id": "f3kVY52UmyVR"
+  }
+]

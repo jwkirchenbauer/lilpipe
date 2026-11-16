@@ -1,0 +1,11 @@
+{
+  "failed_job": "f3kUp9D88tZD",
+  "retry_job": "f3kVDL13rBTm",
+  "failed_stage": "1000-step surfaces",
+  "exit_code": 139,
+  "observed": "Process stopped while producing a scheduled asynchronous Python stack dump. No explicit HIP or device error was recorded. This does not establish the cause of the segmentation fault.",
+  "operational_change": "analysis-v3 wraps the unchanged numerical entry point and suppresses periodic faulthandler.dump_traceback_later calls. Fatal-fault reporting and the manual SIGUSR1 handler remain enabled.",
+  "numerical_tar_dynamics_sha256": "e8ab333af2f9106204ba0bb17a66d7a0adb21e80dd2970d16fb9aa8f1c953054",
+  "cache_policy": "Reuse completed stages and validated grid rows. No training, benchmark or first-update measurement is repeated.",
+  "wrapper_test": "logs/trace-wrapper-test.log: main execution, argv forwarding and fatal-fault reporting pass."
+}

@@ -32,6 +32,185 @@ def functions(path, names, scope):
 
 
 class ConfigTests(unittest.TestCase):
+    def test_supplied_checkpoint_reuses_attacks_and_does_not_invent_defense_history(
+        self,
+    ):
+        import yaml
+
+        spec = importlib.util.spec_from_file_location(
+            "tar_compute", MISC / "tar_compute.py"
+        )
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory).resolve()
+            original, baseline, compute, checkpoint, run = [
+                root / name
+                for name in ("original", "baseline", "compute", "checkpoint", "run")
+            ]
+            for path in (
+                original / "configs",
+                baseline / "source/misc",
+                baseline / "models/attack",
+                compute / "source/lm_eval_tasks",
+                compute / "cache/attack",
+                checkpoint,
+                compute / "cases/baseline-lr1e-6/models/attack",
+            ):
+                path.mkdir(parents=True)
+            (original / "configs/defense.yml").write_text(
+                "base_model: /original/base\ndatasets:\n- path: cais/wmdp-bio-forget-corpus\n  revision: frozen-forget\n"
+            )
+            (baseline / "source/misc/reference_get_ll.py").write_text(
+                "# frozen reference\n"
+            )
+            (baseline / "study.json").write_text(
+                json.dumps({"attack_steps": [1, 4, 16, 128]})
+            )
+            (compute / "source/lm_eval_tasks/frozen.yaml").write_text("task: frozen\n")
+            (compute / "cache/attack/prepared.arrow").write_bytes(
+                b"original prepared inputs"
+            )
+            probes = {
+                "fixed_source_indices": list(range(10)),
+                "heldout_source_indices": list(range(1000, 1032)),
+                "forget_revision": "frozen-forget",
+                "expected_nonbootstrap_order_sha256": "original-order",
+            }
+            (compute / "probes.json").write_text(json.dumps(probes))
+            for maximum, folder in (
+                (128, baseline),
+                (1000, compute / "cases/baseline-lr1e-6"),
+            ):
+                (folder / "models/attack/observed-batches.jsonl").write_text(
+                    "\n".join(
+                        json.dumps({"step": step, "batch_sha256": str(step)})
+                        for step in range(1, maximum + 1)
+                    )
+                    + "\n"
+                )
+            (checkpoint / "model.safetensors").write_bytes(b"model fixture")
+            with patch.object(
+                module.subprocess, "check_output", return_value="test-commit\n"
+            ):
+                module.prepare_checkpoint_comparison(
+                    run,
+                    EXAMPLE,
+                    original,
+                    baseline,
+                    compute,
+                    checkpoint,
+                    model_id="test/supplied",
+                    revision="a" * 40,
+                )
+            program = json.loads((run / "study.json").read_text())
+            self.assertEqual(len(program["cases"]), 2)
+            self.assertEqual(
+                program["profile_reference_case"], "collaborator-lr1e-6-ms1000"
+            )
+            for name, case in program["cases"].items():
+                folder = run / "cases" / name
+                config = yaml.safe_load((folder / "config.yml").read_text())
+                reference = yaml.safe_load(
+                    (folder / "config.reference.yml").read_text()
+                )
+                for key in (
+                    "learning_rate",
+                    "max_steps",
+                    "warmup_steps",
+                    "lr_scheduler",
+                    "optimizer",
+                    "weight_decay",
+                    "max_grad_norm",
+                    "sequence_len",
+                    "seed",
+                    "data_seed",
+                    "micro_batch_size",
+                    "gradient_accumulation_steps",
+                    "bf16",
+                    "device_map",
+                ):
+                    self.assertEqual(config[key], reference[key])
+                self.assertEqual(config["datasets"][0]["revision"], "frozen-forget")
+                self.assertEqual(config["base_model"], str(checkpoint))
+                self.assertEqual((folder / "models/defense").resolve(), checkpoint)
+                history = folder / "models/defense-history"
+                self.assertEqual(
+                    [path.name for path in history.iterdir()], ["checkpoint-125"]
+                )
+                self.assertEqual((history / "checkpoint-125").resolve(), checkpoint)
+                settings = json.loads((folder / "study.json").read_text())
+                self.assertEqual(settings["defense_steps"], [125])
+                self.assertEqual(settings["defense_frames"], [125])
+                self.assertEqual(settings["broad_defense_frames"], [125])
+                self.assertEqual(
+                    settings["fixed_source_indices"], probes["fixed_source_indices"]
+                )
+                self.assertEqual(
+                    settings["heldout_source_indices"], probes["heldout_source_indices"]
+                )
+                self.assertEqual(
+                    settings["shared_random_basis"],
+                    str(baseline / "geometry/random-basis.npy"),
+                )
+                for key in (
+                    "attack_frames",
+                    "broad_attack_frames",
+                    "matrix_steps",
+                    "minibatch_surface_steps",
+                ):
+                    self.assertLessEqual(max(settings[key]), case["max_steps"])
+                if case["max_steps"] == 128:
+                    self.assertEqual(settings["attack_steps"], [1, 4, 16, 128])
+                self.assertFalse((folder / "status/train.json").exists())
+            self.assertEqual(
+                (compute / "cache/attack/prepared.arrow").stat().st_ino,
+                (run / "cache/attack/prepared.arrow").stat().st_ino,
+            )
+            frozen = (run / "study.json").read_bytes()
+            with self.assertRaises(FileExistsError):
+                module.prepare_checkpoint_comparison(
+                    run,
+                    EXAMPLE,
+                    original,
+                    baseline,
+                    compute,
+                    checkpoint,
+                    model_id="test/supplied",
+                    revision="a" * 40,
+                )
+            self.assertEqual((run / "study.json").read_bytes(), frozen)
+
+    def test_pinned_checkpoint_identity_rejects_wrong_revision_and_changed_bytes(self):
+        spec = importlib.util.spec_from_file_location(
+            "tar_compute", MISC / "tar_compute.py"
+        )
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        with tempfile.TemporaryDirectory() as directory:
+            checkpoint = Path(directory)
+            weights = checkpoint / "model.safetensors"
+            weights.write_bytes(b"original")
+            declaration = {"size": 8, "sha256": hashlib.sha256(b"original").hexdigest()}
+            metadata = {
+                "sha": "a" * 40,
+                "id": "test/model",
+                "siblings": [{"rfilename": weights.name, "lfs": declaration}],
+            }
+            result = module.checkpoint_file_identity(
+                checkpoint, metadata, model_id="test/model", revision="a" * 40
+            )
+            self.assertEqual(result[weights.name], declaration)
+            with self.assertRaisesRegex(ValueError, "revision"):
+                module.checkpoint_file_identity(
+                    checkpoint, metadata, model_id="test/model", revision="b" * 40
+                )
+            weights.write_bytes(b"changed!")
+            with self.assertRaisesRegex(ValueError, "hash"):
+                module.checkpoint_file_identity(
+                    checkpoint, metadata, model_id="test/model", revision="a" * 40
+                )
+
     def test_compute_changes_preserve_unrelated_settings(self):
         import yaml
 

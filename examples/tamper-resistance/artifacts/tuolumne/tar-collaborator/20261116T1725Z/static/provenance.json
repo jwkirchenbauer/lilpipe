@@ -1,0 +1,42 @@
+{
+  "checkpoint": {
+    "model_id": "mremila/z7b-wmdp-bio-5pp-unlearn-fft-me-tar-k16",
+    "revision": "aa62e643db200fec5997d0b7f66c668bf0ecdac8",
+    "path": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--mremila--z7b-wmdp-bio-5pp-unlearn-fft-me-tar-k16/snapshots/aa62e643db200fec5997d0b7f66c668bf0ecdac8"
+  },
+  "original_static": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/loss-landscape/defense-step125-random-seed42-v3",
+  "radii": [
+    1000,
+    500,
+    200,
+    125,
+    100,
+    10,
+    1,
+    0.1
+  ],
+  "n_pts": 9,
+  "seed": 42,
+  "probe_documents": 10,
+  "batch_size": 2,
+  "max_seq_len": 512,
+  "document_sha256": [
+    "ec96196329ae432cd296903a5a453d11cc4c4f7dec325079e68c86d85fb6dd4c",
+    "d75431e865efa620c40de958f294d8271618baf51a2c76f8aae09ae237691648",
+    "d0ba27eda2ba13f62d40a6b018e12a731edc5d6beb1f47d987310383e2261080",
+    "445f5a8523cdf0d0bf4e3c734b13884bedad1584d11fe332a1d2f7ac4657612d",
+    "d0fc0923deb4dc74a39c7254c2bf4093d28f495a893bf9405dae4f255d07fb1a",
+    "91656d19ae5830707b0dbb5d85fbb62b05831b95404f49c0874bc7da1891403f",
+    "443a72bb9bc6bd75b370784d9db5c873c6674f290907f922b7a1b165c94ad967",
+    "94652942beb60f1990b68d719d7492716791fa0d46681215774df3a39cd476e6",
+    "5f10d7c8b601f143d736004f4a718c8bd8ff28fa37b90771cfcce6bce71e23af",
+    "223bcae919bb2b8a925c683127fb9bde75fc5b9ff715dc30b1112b8c2f211650"
+  ],
+  "dataset_revision": "5a786ed1041e56fef2d4ed26c1239f12b73a68eb",
+  "get_ll_source_sha256": "ffc0d86d6e51298bdf5595d4bee7a3d0f3e1ca95d5d76e613a73d3c154944c91",
+  "torch": "2.12.1+rocm7.2",
+  "hip": "7.2.53211",
+  "gpu": "AMD Instinct MI300A",
+  "flux_job_id": "fVKfHF5",
+  "convention": "Original seed42 globally normalized BF16 random directions, original perturbation arithmetic and default attention. Dynamic views separately use shared FP32 orthonormal bases and eager attention."
+}

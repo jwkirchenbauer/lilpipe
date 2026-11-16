@@ -1,0 +1,44 @@
+bash: cannot set terminal process group (3938510): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+{
+  "reproduced-1000": {
+    "issues": [],
+    "physical_comparable": true,
+    "heldout_matches_root": true,
+    "local_frames": [
+      0,
+      1,
+      8,
+      32,
+      128,
+      512,
+      1000
+    ],
+    "broad_frames": [
+      0,
+      128,
+      1000
+    ]
+  },
+  "reproduced-128": {
+    "issues": [],
+    "physical_comparable": true,
+    "heldout_matches_root": false,
+    "local_frames": [
+      0,
+      1,
+      4,
+      8,
+      16,
+      48,
+      128
+    ],
+    "broad_frames": [
+      0,
+      16,
+      48,
+      128
+    ]
+  }
+}

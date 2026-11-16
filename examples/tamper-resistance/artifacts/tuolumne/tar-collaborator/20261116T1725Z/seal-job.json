@@ -1,0 +1,29 @@
+{
+  "name": "collab-seal",
+  "env": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+  "minutes": 15,
+  "target": [
+    "bash",
+    "-i",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/seal-v4/seal.sh",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z"
+  ],
+  "argv": [
+    "python",
+    "/p/vast1/kirchenb/llnl-tools/launch_tuo.py",
+    "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+    "--env_act_style=mm_activate",
+    "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/launches",
+    "--qos=pdebug",
+    "--bank=guard",
+    "--run_name=collab-seal",
+    "--nodes=1",
+    "--tasks_per_node=1",
+    "--gpus_per_node=4",
+    "--torchrun=false",
+    "--minutes=15",
+    "--pass_run_name=false",
+    "--quiet_launch=true"
+  ],
+  "job_id": "f3kVncHMxwFd"
+}

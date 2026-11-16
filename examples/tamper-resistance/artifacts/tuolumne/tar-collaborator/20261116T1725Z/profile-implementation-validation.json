@@ -1,0 +1,23 @@
+{
+  "state": "passed",
+  "old_source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/source/jobs/analysis-v6/misc/tar_dynamics.py",
+  "new_source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py",
+  "old_module_sha256": "0e1d5f1edcc47068fd63cb35f6aca10c3bad0806ee6ad477ec29225984aaeb1a",
+  "new_module_sha256": "e8ab333af2f9106204ba0bb17a66d7a0adb21e80dd2970d16fb9aa8f1c953054",
+  "profile_call_graph_ast_identical": true,
+  "canonical_ast_sha256": {
+    "_ProfileCache": "8897bf01425a38c704988c0cc0339b3ed72a2be649bab5fea424b67eb74ed6dd",
+    "_profile_barrier": "f0e31651c3e886a670d06d8ebca10dd9d853a293b48815ab24790ccd514de22e",
+    "_profile_file_identity": "eaf592fc835a92b53bb3d0aefb67627efb5b66e0ff1e335c89f2db26bab23f04",
+    "_profile_first_plane": "0813ad540ec112db84647dcee4275f1a95ad3490cdab673ca5b48a5f2cd5a2cb",
+    "_profile_inner": "6392be911cbe1008cb3579e4e7d4ce652c7d85e4dcc8eb63331db1718b218634",
+    "_profile_interpolate": "e85ef7e28466cecdcd34a3402fa8fab063743032e292d3a7cd984376390631a7",
+    "_profile_loss_limits": "5d18dc036f33ce503c395b7891fe88d3dd6a023ca914c25294d622b521635a76",
+    "_profile_plots": "24fcff4c868e7ffc15bcb07bf57f0ef6602acf495c77cc848627315cb59c5a61",
+    "_profile_update_statistics": "b9f6d4d6bb46cd9a2e88250f534276d43b56e175f028fef431cc6591b02cb5cc",
+    "dump": "e74b4168a10ab67cf9fa671f11a6cdef38735b60e37c25312100ec27e5b22775",
+    "step_profiles": "a80be857d675d7b30a98df2d23c64e63d2176ebcbd9a4ea992960522b5ed48c8"
+  },
+  "fixed_probe_texts_and_revision_identical": true,
+  "interpretation": "Full numerical-module files differ, but the profile entry point and every locally called helper/class have exactly equal syntax trees. Full source identities remain separately checked for each cached run. This audit does not replace native endpoint/protocol/input validation."
+}

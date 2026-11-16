@@ -1,0 +1,15 @@
+{
+  "state": "passed",
+  "scope": "Linked 128- and 1000-step case-root figures, first-update diagnostics, original static radius comparisons, and all ten final paired composite PNGs",
+  "review": "Independent read-only review by geometry_extension and parent inspection; no material presentation defect found in linked files. Numerical endpoint, peak-score, update-norm and capture claims match saved CSV/JSON data.",
+  "final_comparison_coverage": "complete; all four case issue lists are empty",
+  "limits_checked": [
+    "Shared CE and color scales in matched static comparisons; original standalone radius overview uses per-panel scaling.",
+    "Static and dynamic direction/attention conventions differ and are documented.",
+    "Projected paths are distinguished from actual checkpoint losses.",
+    "Reference moving slices do not contain the full actual attack trajectory.",
+    "First-update endpoints reproduce separately measured probe and batch CE; interpolated segments are not extra optimizer states.",
+    "Defense step125 denotes the supplied final checkpoint, with no observed defense history."
+  ],
+  "excluded_intermediates": "renderings-v2 and renderings-v6 are excluded from curated output and links."
+}

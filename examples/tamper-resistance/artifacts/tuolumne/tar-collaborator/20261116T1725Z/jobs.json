@@ -1,0 +1,122 @@
+[
+  {
+    "name": "collab-verify",
+    "job_id": "f3kUFz5h3XKd",
+    "argv": [
+      "python",
+      "/p/vast1/kirchenb/llnl-tools/launch_tuo.py",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4",
+      "--env_act_style=mm_activate",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/launches",
+      "--qos=pdebug",
+      "--bank=verival",
+      "--run_name=collab-verify",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=4",
+      "--torchrun=false",
+      "--minutes=10",
+      "--pass_run_name=false",
+      "--quiet_launch=true"
+    ],
+    "target": [
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/misc/run_tar_compute.sh",
+      "verify",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z",
+      "supplied"
+    ]
+  },
+  {
+    "name": "collab-attack-128",
+    "env": "/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4",
+    "minutes": 25,
+    "target": [
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/misc/run_tar_compute.sh",
+      "case",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z",
+      "collaborator-lr1e-6-ms128"
+    ],
+    "argv": [
+      "python",
+      "/p/vast1/kirchenb/llnl-tools/launch_tuo.py",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4",
+      "--env_act_style=mm_activate",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/launches",
+      "--qos=pdebug",
+      "--bank=verival",
+      "--run_name=collab-attack-128",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=4",
+      "--torchrun=false",
+      "--minutes=25",
+      "--pass_run_name=false",
+      "--quiet_launch=true"
+    ],
+    "job_id": "f3kUHCpMU4Xq"
+  },
+  {
+    "name": "collab-attack-1000",
+    "env": "/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4",
+    "minutes": 55,
+    "target": [
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/misc/run_tar_compute.sh",
+      "case",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z",
+      "collaborator-lr1e-6-ms1000"
+    ],
+    "argv": [
+      "python",
+      "/p/vast1/kirchenb/llnl-tools/launch_tuo.py",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4",
+      "--env_act_style=mm_activate",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/launches",
+      "--qos=pdebug",
+      "--bank=verival",
+      "--run_name=collab-attack-1000",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=4",
+      "--torchrun=false",
+      "--minutes=55",
+      "--pass_run_name=false",
+      "--quiet_launch=true"
+    ],
+    "job_id": "f3kUHCpcHwMH"
+  },
+  {
+    "name": "collab-static",
+    "env": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+    "minutes": 30,
+    "target": [
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/static-v1/static.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z"
+    ],
+    "argv": [
+      "python",
+      "/p/vast1/kirchenb/llnl-tools/launch_tuo.py",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+      "--env_act_style=mm_activate",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/launches",
+      "--qos=pdebug",
+      "--bank=verival",
+      "--run_name=collab-static",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=4",
+      "--torchrun=false",
+      "--minutes=30",
+      "--pass_run_name=false",
+      "--quiet_launch=true"
+    ],
+    "job_id": "f3kUHCpqdptP"
+  }
+]

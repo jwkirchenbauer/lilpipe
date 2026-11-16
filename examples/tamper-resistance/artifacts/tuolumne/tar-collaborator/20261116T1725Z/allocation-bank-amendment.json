@@ -1,0 +1,14 @@
+{
+  "original_bank": "verival",
+  "updated_bank": "guard",
+  "affected_jobs": ["f3kVDL13rBTm", "f3kVEeDySYTR"],
+  "reason": "After more than thirty minutes pending, the user's fair-share data and aggregate pending queue showed substantially fewer higher-priority requested nodes at guard's priority. Root AGENTS.md explicitly permits guard when fair-share favors it.",
+  "observed_retry_priority_before_after": [29414, 30499],
+  "aggregate_nodes_above_old_priority": 411,
+  "aggregate_nodes_above_approximate_guard_priority": 76,
+  "commands": [
+    "flux update --verbose --wait f3kVDL13rBTm bank=guard",
+    "flux update --verbose --wait f3kVEeDySYTR bank=guard"
+  ],
+  "scope": "Pending allocation accounting only; existing job IDs, dependencies, workers, inputs, numerical settings and caches are unchanged. The final seal allocation also uses this permitted fallback."
+}

@@ -1,0 +1,11 @@
+{
+  "running_sampler_job": "f3kVDL13rBTm",
+  "replacement_job": "f3kVXAMfoph5",
+  "outcome": "The original batch job started during replacement preflight. A guard correctly rejected canceling the running job, but the replacement was inadvertently submitted after the guard's nonzero return. It obtained a debug allocation and exited at the exclusive analysis lock before model preflight or measurement. A cancellation attempt found it already inactive.",
+  "replacement_allocated_seconds": 14.913974046707153,
+  "replacement_worker_exit_code": 1,
+  "outer_launcher_reported_complete": true,
+  "experiment_settings_changed": false,
+  "duplicate_numerical_measurements": false,
+  "evidence": "launches/collab-analysis-debug-retry-1000/logs/flux-f3kVXAMfoph5.out"
+}

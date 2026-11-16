@@ -1,0 +1,10 @@
+bash: cannot set terminal process group (431565): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+reformatted /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v3/test_trace_payload.py
+reformatted /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v3/trace_runner.py
+
+All done! ✨ 🍰 ✨
+2 files reformatted.
+Periodic asynchronous stack dumping disabled for this retry; fatal-fault reporting remains enabled.
+Trace wrapper preserves arguments, main execution, and fatal-fault reporting.

@@ -1,0 +1,62 @@
+0: OUTPUT_DIR: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/launches/collab-eval-128
+0: Logging to /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/launches/collab-eval-128/logs
+0: Mon Nov 16 17:53:33 UTC 2026 Calling flux run...
+0: 0: FLUX_JOB_ID: fVjP5kb
+0: 0: SLURM_JOB_ID: 
+0: 0: SLURM_JOB_NODELIST: tuolumne1035
+0: 0: SLURM_NNODES: 1
+0: 0: SLURM_NTASKS: 1
+0: 0: SLURM_NTASKS_PER_NODE: 1
+0: 0: SLURM_CPUS_PER_TASK: 96
+0: 0: MASTER_ADDR: tuolumne1035
+0: 0: MASTER_PORT: 52419
+0: 0: LOCAL_RANK: 0
+0: 0: RANK: 0
+0: 0: WORLD_SIZE: 1
+0: 0: SLURM_NODEID: 0
+0: 0: SLURM_LOCALID: 0
+0: 0: SLURM_PROCID: 0
+0: 0: CUDA_VISIBLE_DEVICES:  (will be overwritten with 0,1,2,3)
+0: 0: HIP_VISIBLE_DEVICES:  (will be overwritten with 0,1,2,3)
+0: 0: ROCR_VISIBLE_DEVICES: 0,1,2,3 (will be overwritten with 0,1,2,3)
+0: 0: Mon Nov 16 17:53:34 UTC 2026 Loading modules
+0: 0: 
+0: 0: Lmod is automatically replacing "cce/20.0.0" with "gcc-native/13".
+0: 0: 
+0: 0: 
+0: 0: Due to MODULEPATH changes, the following have been reloaded:
+0: 0:   1) cray-libsci/25.09.0     2) cray-mpich/9.0.1
+0: 0: 
+0: 0: 
+0: 0: The following have been reloaded with a version change:
+0: 0:   1) libfabric/match_SHS => libfabric/2.1
+0: 0: 
+0: 0: stty: 'standard input': Inappropriate ioctl for device
+0: 0: Mon Nov 16 17:53:39 UTC 2026 Activated environment on 0
+0: 0: Mon Nov 16 17:53:39 UTC 2026 Launching python on 0...
+0: 0: bash: cannot set terminal process group (2285708): Inappropriate ioctl for device
+0: 0: bash: no job control in this shell
+0: 0: stty: 'standard input': Inappropriate ioctl for device
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 0: wmdp_bio_robust,mmlu_no_bio
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 1: wmdp_bio_robust
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 2: wmdp_bio_robust
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 3: wmdp_bio_robust
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 4: wmdp_bio_robust
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 5: wmdp_bio_robust
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 6: wmdp_bio_robust
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 7: wmdp_bio_robust
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 8: wmdp_bio_robust
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 12: wmdp_bio_robust
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 16: wmdp_bio_robust
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 24: wmdp_bio_robust
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 32: wmdp_bio_robust
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 40: wmdp_bio_robust
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 48: wmdp_bio_robust
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 56: wmdp_bio_robust
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 64: wmdp_bio_robust
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 80: wmdp_bio_robust
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 96: wmdp_bio_robust
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 112: wmdp_bio_robust
+0: 0: Evaluating collaborator-lr1e-6-ms128 checkpoint 128: wmdp_bio_robust,mmlu_no_bio
+0: 0: Wrote 42 measured task scores to /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/evaluation-scores.csv
+0: Mon Nov 16 18:44:15 UTC 2026 Job execution finished.

@@ -1,0 +1,10 @@
+{
+  "wmdp_bio_robust": {
+    "accuracy": 0.4228110599078341,
+    "standard_error": 0.016764128945013997
+  },
+  "mmlu_no_bio": {
+    "accuracy": 0.5361056898363609,
+    "standard_error": 0.004115995765942037
+  }
+}

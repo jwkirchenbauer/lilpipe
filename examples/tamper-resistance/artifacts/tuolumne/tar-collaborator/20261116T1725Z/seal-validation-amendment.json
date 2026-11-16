@@ -1,0 +1,10 @@
+{
+  "unused_draft": "source/profiles/seal-v2",
+  "corrected_profile": "source/profiles/seal-v3",
+  "final_profile": "source/profiles/seal-v4",
+  "additional_curation_correction": "Exclude the active seal allocation's stdout from its own manifest because that log continues growing after digest generation. Completed earlier allocation logs remain curated; the artifact manifest is independently re-read by sha256sum --check.",
+  "issue": "The profile adapter record uses collect_case fields and cannot be passed directly to checkpoint_validation, which requires checkpoint_record fields. A metadata-only call reproduced KeyError('declarations').",
+  "correction": "Validate early profiles via the profile adapter, then separately construct checkpoint_record(name, folder, max_steps) for the paired-checkpoint validator.",
+  "preflight": "On the completed 128-step real case the corrected record validates with no issues, physical comparison true, held-out identities matched, and all declared local and broad frames present. Center records pass. See logs/seal-record-preflight.log.",
+  "measurement_effect": "None. The unused draft had not run; no training, evaluation, grid or plotting code was changed."
+}

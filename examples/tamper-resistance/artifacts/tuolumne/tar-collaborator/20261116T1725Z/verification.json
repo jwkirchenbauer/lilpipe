@@ -1,0 +1,33 @@
+{
+  "focused_tests": [
+    {
+      "suite": "test_tar_compute.py",
+      "methods_passed": 10,
+      "evidence": "logs/prepare-tests-v2.log (explicit profile reference declaration); initial preparation tests in logs/prepare-tests.log",
+      "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4"
+    },
+    {
+      "suite": "test_tar_compute_compare.py",
+      "methods_passed": 40,
+      "elapsed_seconds": 5.514,
+      "evidence": "Independent review agent tool output; no dedicated log file was saved.",
+      "command": "bash -ic 'set -e; mm_activate /usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2; cd /p/vast1/kirchenb/tar-root/lilpipe; python -m unittest discover -s tests -p test_tar_compute_compare.py -v'"
+    }
+  ],
+  "formatting": {
+    "state": "passed",
+    "evidence": "Parent formatted tar_compute.py/test_tar_compute.py; independent review reported comparer/test left unchanged by Black and git diff --check clean."
+  },
+  "input_evidence": [
+    "input-validation.json",
+    "prepared-data-validation.json",
+    "logs/control-schema-preflight.log"
+  ],
+  "additional_checks": {
+    "maintained_source_and_test_formatting": "logs/final-format-check.log",
+    "trace_wrapper_main_argv_and_fatal_reporting": "logs/trace-wrapper-test.log",
+    "final_seal_record_schema_and_real_128_validation": "logs/seal-record-preflight.log",
+    "seal_profile": "source/profiles/seal-v4/manifest.sha256"
+  },
+  "interpretation": "Unit tests cover new provenance/configuration/frame handling and report validation. Actual-model numerical and benchmark checks are recorded separately as jobs finish."
+}

@@ -17,10 +17,12 @@ export TORCHAO_FORCE_SKIP_LOADING_SO_FILES=1 PYTHONUNBUFFERED=1
 export TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=8 MPLBACKEND=Agg
 export CUDA_VISIBLE_DEVICES=${TAR_ANALYSIS_GPU:-0} HIP_VISIBLE_DEVICES=${TAR_ANALYSIS_GPU:-0}
 unset LOCAL_RANK RANK WORLD_SIZE LOCAL_WORLD_SIZE
-if [[ "$mode" == compare ]]; then
+if [[ "$mode" == compare || "$mode" == checkpoint-compare ]]; then
     exec 9>"$run/status/comparison-report.lock"
     flock 9
-    python "$code_dir/tar_compute_compare.py" report "$run"
+    command=report
+    if [[ "$mode" == checkpoint-compare ]]; then command=checkpoint-report; fi
+    python "$code_dir/tar_compute_compare.py" "$command" "$run"
 elif [[ "$mode" == prepare ]]; then
     trap 'result=$?; if (( result != 0 )); then printf "{\"state\":\"failed\",\"exit_code\":%d}\n" "$result" > "$run/status/probes.json"; fi' EXIT
     printf '{"state":"running"}\n' > "$run/status/probes.json"
@@ -73,7 +75,10 @@ case = json.loads((folder / "case.json").read_text())
 if case["bootstrap_seed"] is None:
     records = [json.loads(line) for line in (folder / "models/attack/observed-batches.jsonl").read_text().splitlines()]
     order = hashlib.sha256(json.dumps([r["batch_sha256"] for r in records]).encode()).hexdigest()
-    assert order == probes["expected_nonbootstrap_order_sha256"], "Attack data order differs from clean control"
+    expected = probes.get("expected_order_sha256_by_horizon", {}).get(
+        str(case["max_steps"]), probes["expected_nonbootstrap_order_sha256"]
+    )
+    assert order == expected, "Attack data order differs from clean control"
 signature = hashlib.sha256((folder / "study.json").read_bytes()).hexdigest()
 registry = folder / "status/analysis-input.json"
 if registry.exists():

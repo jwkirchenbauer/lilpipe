@@ -686,13 +686,17 @@ def _validate_step_profiles(record, program, probes, reference, *, require_statu
         issues.append("Fixed-text identities are missing")
     if reference.get("state") != "complete":
         shared_issues.append(
-            "Completed baseline-lr1e-5 profiles are pending for common text/source identities"
+            "Completed shared profile reference is pending for common text/source identities"
         )
     else:
         if text != reference.get("fixed_text_sha256"):
-            shared_issues.append("Fixed-text identities differ from baseline-lr1e-5")
+            shared_issues.append(
+                "Fixed-text identities differ from the shared profile reference"
+            )
         if source != reference.get("source_sha256"):
-            shared_issues.append("Profile source code differs from baseline-lr1e-5")
+            shared_issues.append(
+                "Profile source code differs from the shared profile reference"
+            )
     for key, expected in (
         ("fractions", PROFILE_FRACTIONS),
         ("grid_c0", PROFILE_C0),
@@ -1791,7 +1795,8 @@ def report(run):
         for name, record in attacks.items()
     }
     attach_defense_ce(records, validations)
-    baseline = attacks.get("baseline-lr1e-5")
+    reference_name, _ = _profile_reference_case(program)
+    baseline = attacks.get(reference_name)
     reference = {}
     if baseline is not None:
         checked = validate_step_profiles(
@@ -2057,20 +2062,35 @@ def report(run):
     return validation_output
 
 
+def _profile_reference_case(program):
+    """Resolve a declared attack reference while retaining the original default."""
+    name = program.get("profile_reference_case", "baseline-lr1e-5")
+    case = program.get("cases", {}).get(name) if isinstance(name, str) else None
+    valid = (
+        isinstance(name, str)
+        and Path(name).name == name
+        and isinstance(case, dict)
+        and case.get("role") == "attack"
+    )
+    if not valid and "profile_reference_case" in program:
+        raise ValueError("Shared profile reference must name a declared attack case")
+    return name, case if valid else None
+
+
 def _profile_adapter_record(run, name):
     run = Path(run).resolve()
     program, probes = read_json(run / "study.json"), read_json(run / "probes.json")
     case = program.get("cases", {}).get(name)
     if not case or case.get("role") != "attack" or Path(name).name != name:
         raise ValueError(f"Unknown attack case: {name}")
+    reference_name, reference_case = _profile_reference_case(program)
     record = collect_case(run, name, case)
     reference = {}
-    baseline_case = program.get("cases", {}).get("baseline-lr1e-5")
-    if baseline_case:
+    if reference_case is not None:
         baseline = (
             record
-            if name == "baseline-lr1e-5"
-            else collect_case(run, "baseline-lr1e-5", baseline_case)
+            if name == reference_name
+            else collect_case(run, reference_name, reference_case)
         )
         checked = validate_step_profiles(
             baseline, program, probes, baseline["step_profiles"], require_status=False
@@ -2170,6 +2190,759 @@ def profile_report(run, name):
     return {"state": "complete", "case": name, "stage": "profile-report"}
 
 
+def checkpoint_record(name, folder, schedule_steps, declarations=None):
+    """Read either a compute-study case or an older standalone dynamics study."""
+    folder = Path(folder).resolve()
+    declarations = declarations or {}
+    settings = read_json(folder / "study.json")
+    case = read_json(folder / "case.json")
+    steps = case.get(
+        "save_steps",
+        settings.get("actual_attack_steps", settings.get("attack_steps", [])),
+    )
+    scores_file = Path(
+        declarations.get("scores_file", folder / "evaluation-scores.csv")
+    )
+    if not scores_file.exists() and "scores_file" not in declarations:
+        scores_file = folder / "capability-scores.csv"
+    rate = number(
+        case.get("attack_learning_rate", settings.get("attack_learning_rate"))
+    )
+    scores = [
+        row
+        for row in read_rows(scores_file)
+        if number(row.get("learning_rate")) in (None, rate)
+    ]
+    return {
+        "name": name,
+        "folder": folder,
+        "schedule_steps": int(schedule_steps),
+        "declarations": declarations,
+        "case": case,
+        "settings": settings,
+        "geometry": read_json(folder / "geometry/geometry.json"),
+        "probes": read_json(folder / "surfaces/probes.json"),
+        "actual": read_rows(folder / "surfaces/actual-losses.csv"),
+        "projection": read_rows(folder / "projection-quality.csv"),
+        "local": read_rows(folder / "surfaces/local-grids.csv"),
+        "broad": read_rows(folder / "surfaces/random-evolution.csv"),
+        "scores": scores,
+        "save_steps": steps,
+        "local_frames": settings.get("attack_frames", [0, int(schedule_steps)]),
+        "broad_frames": settings.get(
+            "broad_attack_frames",
+            settings.get("broad_random_frames", {}).get(
+                "attack_steps", [0, int(schedule_steps)]
+            ),
+        ),
+    }
+
+
+def checkpoint_validation(record, program, probes):
+    """Validate identities and every declared numerical frame before a final report."""
+    folder, settings, geom = record["folder"], record["settings"], record["geometry"]
+    declarations, observed = record["declarations"], record["probes"]
+    issues, physical = [], []
+    horizon = record["schedule_steps"]
+    if not settings or not geom or not record["save_steps"]:
+        issues.append("Missing settings, geometry, or saved-checkpoint declaration")
+    if (
+        settings.get("attack_max_steps", horizon) != horizon
+        or record["case"].get("max_steps", horizon) != horizon
+    ):
+        issues.append("Case horizon differs from declared schedule")
+    fixed = observed.get(
+        "fixed_source_indices", declarations.get("fixed_source_indices")
+    )
+    revision = settings.get("forget_revision", declarations.get("forget_revision"))
+    if (
+        observed.get("fixed_documents") != 10
+        or fixed != probes.get("fixed_source_indices")
+        or not revision
+        or revision != probes.get("forget_revision")
+    ):
+        physical.append(
+            "Fixed ten-document identities or corpus revision differ or are unverified"
+        )
+    if record["case"] and (
+        len(observed.get("heldout_sha256", [])) != 32
+        or observed.get("heldout_sha256") != probes.get("heldout_sha256")
+    ):
+        issues.append("Shared attack-held-out32 identities differ or are incomplete")
+    baseline = Path(program["baseline_dynamics"]).resolve()
+    local_plane = settings.get("local_plane", "attack")
+    if (
+        local_plane not in geom.get("planes", {})
+        or type(geom.get("attack_rank")) is not int
+    ):
+        issues.append("Fitted rank or local-reference projection plane is missing")
+    expected = {
+        "random": baseline / "geometry/random-basis.npy",
+        "reference": baseline / "geometry/attack-basis.npy",
+    }
+    for label, actual in (
+        ("random", folder / "geometry/random-basis.npy"),
+        ("reference", folder / "geometry" / f"{local_plane}-basis.npy"),
+    ):
+        if not actual.exists() or actual.resolve() != expected[label].resolve():
+            physical.append(
+                f"{label} physical basis differs from the shared baseline source"
+            )
+    source_layout = read_json(baseline / "geometry/geometry.json")
+    for key in ("names", "shapes", "offsets"):
+        if not source_layout.get(key) or geom.get(key) != source_layout[key]:
+            physical.append(f"Parameter layout {key} differs or is missing")
+    radius = number(settings.get("local_radius"))
+    if radius is None and number(geom.get("radius")) is not None:
+        radius = 0.2 * geom["radius"]
+    broad_radius = settings.get(
+        "broad_radius", settings.get("broad_random_frames", {}).get("radius")
+    )
+    if (
+        radius is None
+        or not math.isclose(radius, LOCAL_RADIUS, abs_tol=1e-12, rel_tol=0)
+        or number(broad_radius) != 125
+    ):
+        physical.append("Local reference or broad random physical extent differs")
+    if (
+        horizon not in geom.get("steps", [])
+        or number(geom.get("attack_plane_energy_fraction")) is None
+    ):
+        issues.append("Final fitted geometry is missing")
+    if at_step(geom.get("planes", {}).get("attack", []), horizon, "distance") is None:
+        issues.append("Final raw attack displacement is missing")
+    for step in [0, *record["save_steps"]]:
+        if (
+            at_step(record["actual"], step, "probe_loss", phase="attack") is None
+            or at_step(record["actual"], step, "heldout_loss", phase="attack") is None
+        ):
+            issues.append(f"Missing actual CE at attack {step}")
+        tasks = (
+            ("wmdp_bio_robust", "mmlu_no_bio")
+            if step in (0, 128, 512, horizon)
+            else ("wmdp_bio_robust",)
+        )
+        for task in tasks:
+            if at_step(record["scores"], step, "jwk_percent", task=task) is None:
+                issues.append(f"Missing {task} at attack {step}")
+    expected_projection = {
+        (plane, step)
+        for plane in geom.get("planes", {})
+        for step in [0, *geom.get("steps", [])]
+    }
+    measured_projection = set()
+    for row in record["projection"]:
+        step = number(row.get("step"))
+        if step is None or any(
+            number(row.get(key)) is None
+            for key in (
+                "distance",
+                "captured_fraction",
+                "off_plane_distance",
+                "projected_loss",
+                "probe_loss",
+                "loss_gap",
+            )
+        ):
+            issues.append("Nonfinite or incomplete projection-quality row")
+            continue
+        key = (row.get("plane"), step)
+        if key in measured_projection:
+            issues.append("Projection-quality rows are duplicated")
+        measured_projection.add(key)
+        if (
+            float(row["distance"]) < 0
+            or not 0 <= float(row["captured_fraction"]) <= 1
+            or float(row["off_plane_distance"]) < 0
+        ):
+            issues.append("Invalid geometric projection range")
+        actual = at_step(record["actual"], step, "probe_loss", phase="attack")
+        distance = (
+            0
+            if step == 0
+            else at_step(
+                geom.get("planes", {}).get(row.get("plane"), []), step, "distance"
+            )
+        )
+        if distance is None or not math.isclose(
+            float(row["distance"]), distance, abs_tol=1e-8, rel_tol=1e-8
+        ):
+            issues.append(
+                f"Projection displacement differs from geometry at attack {step}"
+            )
+        if (
+            actual is None
+            or abs(float(row["probe_loss"]) - actual) > 1e-4
+            or abs(
+                float(row["projected_loss"])
+                - float(row["probe_loss"])
+                - float(row["loss_gap"])
+            )
+            > 1e-4
+        ):
+            issues.append(f"Projection CE is inconsistent at attack {step}")
+    if not expected_projection or not expected_projection <= measured_projection:
+        issues.append("Projection-quality coverage is incomplete")
+    for kind, frames, half_width in (
+        ("local", record["local_frames"], LOCAL_RADIUS),
+        ("broad", record["broad_frames"], 125),
+    ):
+        if not {0, horizon} <= set(frames):
+            issues.append(f"{kind} frame declaration omits start or final attack state")
+        points = int(
+            settings.get(
+                "local_surface_points" if kind == "local" else "broad_points", 9
+            )
+        )
+        for step in frames:
+            grid = surface_grid(record[kind], step, half_width, points)
+            row_count = sum(
+                row.get("phase") == "attack" and number(row.get("step")) == step
+                for row in record[kind]
+            )
+            if (
+                grid["issues"]
+                or grid["measured"] != grid["expected"]
+                or row_count != grid["expected"]
+            ):
+                issues.append(f"Incomplete or invalid {kind} frame at attack {step}")
+                continue
+            center = at_step(record["actual"], step, "probe_loss", phase="attack")
+            if (
+                center is None
+                or abs(grid["values"][points // 2, points // 2] - center) > 1e-4
+            ):
+                issues.append(f"{kind} center CE differs from actual attack {step}")
+    progress = read_json(folder / "geometry/progress-protocol.json")
+    if progress:
+        protocol = progress.get("protocol", {})
+        identity = hashlib.sha256(
+            json.dumps(
+                protocol, sort_keys=True, separators=(",", ":"), default=str
+            ).encode()
+        ).hexdigest()
+        if progress.get("identity") != identity or protocol.get("settings") != settings:
+            issues.append("Geometry progress settings or identity is stale")
+        for stage in ("gram", "basis"):
+            state = read_json(folder / "geometry" / f"{stage}-progress.json")
+            if state.get("identity") != identity or state.get(
+                "completed_parameters"
+            ) != len(geom.get("names", [])):
+                issues.append(f"Geometry {stage} progress is incomplete or stale")
+            key = "gram" if stage == "gram" else "actual_gram"
+            final = geom.get("gram" if stage == "gram" else "basis_actual_gram")
+            saved, expected_array = np.asarray(state.get(key, [])), np.asarray(final)
+            if (
+                not saved.size
+                or saved.shape != expected_array.shape
+                or not np.array_equal(saved, expected_array)
+            ):
+                issues.append(
+                    f"Geometry {stage} accumulator differs from final geometry"
+                )
+            if stage == "basis":
+                cross = np.asarray(state.get("actual_cross", []))
+                if (
+                    cross.shape
+                    != (len(geom.get("steps", [])), 2 * len(geom.get("planes", {})))
+                    or not np.isfinite(cross).all()
+                    or not _digest(state.get("coefficient_identity"))
+                ):
+                    issues.append(
+                        "Geometry basis coefficient/cross state is incomplete"
+                    )
+                for entry in state.get("owned_files", {}).values():
+                    path = Path(entry["path"])
+                    stat = path.stat() if path.exists() else None
+                    if (
+                        stat is None
+                        or path.is_symlink()
+                        or stat.st_size != entry.get("size")
+                        or stat.st_ino != entry.get("inode")
+                    ):
+                        issues.append(
+                            "Owned fitted basis identity differs from its completed cache"
+                        )
+        for entry in protocol.get("inputs", []):
+            if not isinstance(entry.get("path"), str):
+                issues.append("Geometry cache has an invalid input identity")
+                continue
+            path = Path(entry["path"])
+            stat = path.stat() if path.exists() else None
+            if (
+                stat is None
+                or str(path.resolve()) != entry.get("resolved")
+                or stat.st_size != entry.get("size")
+                or stat.st_mtime_ns != entry.get("mtime_ns")
+            ):
+                issues.append(f"Geometry cache input identity changed: {path}")
+    for stage in ("train", "evaluation", "analysis"):
+        state = read_json(folder / "status" / f"{stage}.json").get("state")
+        if state != "complete" and not (
+            not record["case"] and settings.get("state") == "complete"
+        ):
+            issues.append(f"{stage} status is not complete")
+    return {
+        "issues": list(dict.fromkeys(physical + issues)),
+        "physical_comparable": not physical,
+        "heldout_matches_root": observed.get("heldout_sha256")
+        == probes.get("heldout_sha256")
+        and bool(probes.get("heldout_sha256")),
+        "local_frames": record["local_frames"],
+        "broad_frames": record["broad_frames"],
+    }
+
+
+def checkpoint_pairs(records, case_names, control_names):
+    """Schedules define the comparison; a 128-step prefix is not a 1000-step control."""
+    pairs = []
+    for name in case_names:
+        matches = [
+            control
+            for control in control_names
+            if records[control]["schedule_steps"] == records[name]["schedule_steps"]
+        ]
+        if not matches:
+            raise ValueError(f"No schedule-matched reproduced control for {name}")
+        for control in matches:
+            pair = [records[control], records[name]]
+            pairs.append(
+                {
+                    "name": f"{control}--{name}",
+                    "records": pair,
+                    "schedule_steps": records[name]["schedule_steps"],
+                    "local_frames": sorted(
+                        set(pair[0]["local_frames"]) & set(pair[1]["local_frames"])
+                    ),
+                    "broad_frames": sorted(
+                        set(pair[0]["broad_frames"]) & set(pair[1]["broad_frames"])
+                    ),
+                }
+            )
+    return pairs
+
+
+def checkpoint_metrics(record):
+    rows, scores, geom = record["actual"], record["scores"], record["geometry"]
+    horizon = record["schedule_steps"]
+    result = {
+        "case": record["name"],
+        "folder": str(record["folder"]),
+        "schedule_steps": horizon,
+        "latest_actual_step": max(
+            (
+                number(row.get("step"))
+                for row in rows
+                if row.get("phase") == "attack" and number(row.get("step")) is not None
+            ),
+            default=None,
+        ),
+    }
+    for label, step in (("initial", 0), ("final", horizon)):
+        for field in ("probe_loss", "heldout_loss"):
+            result[f"{label}_{field}"] = at_step(rows, step, field, phase="attack")
+        for task in ("wmdp_bio_robust", "mmlu_no_bio"):
+            result[f"{label}_{task}"] = at_step(scores, step, "jwk_percent", task=task)
+    result["fitted_energy_fraction"] = number(geom.get("attack_plane_energy_fraction"))
+    result["attack_rank"] = geom.get("attack_rank")
+    result["final_raw_displacement"] = at_step(
+        geom.get("planes", {}).get("attack", []), horizon, "distance"
+    )
+    result["reference_fitted_overlap"] = plane_overlap(geom)[0]
+    initial_utility = result["initial_mmlu_no_bio"]
+    result["initial_drop_from_base_pp"] = (
+        BASE_MMLU - initial_utility if initial_utility is not None else None
+    )
+    result["initial_within_5pp_base"] = (
+        BASE_MMLU - initial_utility <= 5 if initial_utility is not None else None
+    )
+    peaks = [
+        (number(row.get("jwk_percent")), number(row.get("attack_step")))
+        for row in scores
+        if row.get("task") == "wmdp_bio_robust"
+        and number(row.get("jwk_percent")) is not None
+        and number(row.get("attack_step")) is not None
+        and 0 <= float(row["attack_step"]) <= horizon
+    ]
+    peak = max(peaks, key=lambda row: (row[0], -row[1])) if peaks else (None, None)
+    result["peak_measured_wmdp"], result["peak_measured_wmdp_step"] = peak
+    for label, plane in (
+        ("reference", record["settings"].get("local_plane", "attack")),
+        ("fitted", "attack"),
+    ):
+        selected = [row for row in record["projection"] if row.get("plane") == plane]
+        result[f"{label}_minimum_capture"] = min(
+            (
+                float(row["captured_fraction"])
+                for row in selected
+                if number(row.get("distance")) is not None
+                and float(row["distance"]) > 0
+                and number(row.get("captured_fraction")) is not None
+            ),
+            default=None,
+        )
+        result[f"{label}_maximum_ce_gap"] = max(
+            (
+                abs(float(row["loss_gap"]))
+                for row in selected
+                if number(row.get("loss_gap")) is not None
+            ),
+            default=None,
+        )
+    return result
+
+
+def checkpoint_surface_data(pair, validations, kind):
+    """Keep physical grids and height offsets before choosing one shared scale."""
+    broad, delta = kind.startswith("broad"), kind.endswith("delta")
+    frames, radius = pair["broad_frames" if broad else "local_frames"], (
+        125 if broad else LOCAL_RADIUS
+    )
+    grids, values = {}, []
+    for record in pair["records"]:
+        for step in frames:
+            if not validations[record["name"]]["physical_comparable"]:
+                continue
+            points = int(
+                record["settings"].get(
+                    "broad_points" if broad else "local_surface_points", 9
+                )
+            )
+            grid = surface_grid(
+                record["broad" if broad else "local"], step, radius, points
+            )
+            center = at_step(record["actual"], step, "probe_loss", phase="attack")
+            if grid["issues"] or grid["measured"] != grid["expected"] or center is None:
+                continue
+            grid["center"] = center
+            if delta:
+                grid["values"] = grid["values"] - center
+            grids[record["name"], step] = grid
+            values.extend(grid["values"].ravel().tolist())
+    low, high = color_limits(values, relative=delta)
+    return {
+        "broad": broad,
+        "delta": delta,
+        "frames": frames,
+        "radius": radius,
+        "grids": grids,
+        "limits": (low, high),
+    }
+
+
+def checkpoint_surface_figure(pair, validations, kind, output):
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.cm import ScalarMappable
+    from matplotlib.colors import Normalize
+
+    data = checkpoint_surface_data(pair, validations, kind)
+    broad, delta, frames, radius, grids = (
+        data[key] for key in ("broad", "delta", "frames", "radius", "grids")
+    )
+    low, high = data["limits"]
+    cmap, norm = "coolwarm" if delta else "viridis", Normalize(low, high)
+    figure = plt.figure(figsize=(9.2, 3.2 * max(len(frames), 1) + 1.0))
+    for row, step in enumerate(frames):
+        for column, record in enumerate(pair["records"]):
+            axis = figure.add_subplot(
+                len(frames), 2, 2 * row + column + 1, projection=None if delta else "3d"
+            )
+            grid = grids.get((record["name"], step))
+            label = record.get("label", "Reproduced" if column == 0 else "Supplied")
+            if grid is None:
+                method = axis.text if delta else axis.text2D
+                method(
+                    0.5,
+                    0.5,
+                    "Pending or unverified numerical frame",
+                    transform=axis.transAxes,
+                    ha="center",
+                    fontsize=8,
+                )
+                axis.set_axis_off()
+                continue
+            coordinates = grid["coordinates"]
+            x, y = np.meshgrid(coordinates, coordinates)
+            if delta:
+                axis.contourf(
+                    x,
+                    y,
+                    grid["values"],
+                    levels=np.linspace(low, high, 17),
+                    cmap=cmap,
+                    norm=norm,
+                )
+                axis.set_aspect("equal")
+            else:
+                axis.plot_surface(x, y, grid["values"], cmap=cmap, norm=norm)
+                axis.view_init(elev=27, azim=-58)
+                axis.set_zlim(low, high)
+                axis.set_box_aspect((1, 1, 0.8))
+                if column == 0:
+                    axis.set_zlabel("Fixed-10 CE", labelpad=6)
+            axis.set(
+                title=f"{label}, attack {step}; center CE {grid['center']:.3f}",
+                xlabel="c0 (global L2)",
+                ylabel="c1 (global L2)",
+                xlim=(-radius, radius),
+                ylim=(-radius, radius),
+            )
+            axis.tick_params(labelsize=7)
+    color_axis = figure.add_axes((0.93, 0.15, 0.014, 0.7))
+    figure.colorbar(
+        ScalarMappable(norm=norm, cmap=cmap),
+        cax=color_axis,
+        label="Center-relative CE" if delta else "Fixed-10 CE",
+    )
+    direction = (
+        "shared random" if broad else "shared original-baseline attack reference"
+    )
+    figure.suptitle(
+        f"{pair['schedule_steps']}-step schedules; {direction}; half-width {radius:.6g} global L2\nSame physical directions/camera; common {'symmetric color' if delta else 'absolute CE/z/color'} scale",
+        fontsize=10,
+    )
+    figure.subplots_adjust(
+        left=0.07, right=0.87, top=0.9, bottom=0.06, hspace=0.38, wspace=0.25
+    )
+    save_figure(figure, output)
+    plt.close(figure)
+
+
+def checkpoint_trajectory_figure(pair, validations, output):
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    figure, axes = plt.subplots(1, 4, figsize=(16, 4.2))
+    same_heldout = pair["records"][0]["probes"].get("heldout_sha256") == pair[
+        "records"
+    ][1]["probes"].get("heldout_sha256") and bool(
+        pair["records"][0]["probes"].get("heldout_sha256")
+    )
+    for color, record in zip(("C0", "C1"), pair["records"]):
+        label = record["name"]
+        for field, style in (("probe_loss", "-"), ("heldout_loss", "--")):
+            if field == "heldout_loss" and not same_heldout:
+                continue
+            rows = sorted(
+                (number(row.get("step")), number(row.get(field)))
+                for row in record["actual"]
+                if row.get("phase") == "attack"
+                and number(row.get("step")) is not None
+                and number(row.get(field)) is not None
+            )
+            if rows and validations[record["name"]]["physical_comparable"]:
+                axes[0].plot(
+                    *zip(*rows),
+                    linestyle=style,
+                    marker=".",
+                    color=color,
+                    label=label if field == "probe_loss" else None,
+                )
+        for axis, task in zip(axes[1:3], ("wmdp_bio_robust", "mmlu_no_bio")):
+            rows = sorted(
+                (float(row["attack_step"]), float(row["jwk_percent"]))
+                for row in record["scores"]
+                if row.get("task") == task
+                and number(row.get("attack_step")) is not None
+                and number(row.get("jwk_percent")) is not None
+            )
+            if rows:
+                axis.plot(*zip(*rows), ".-", color=color, label=label)
+        for plane, style in (
+            (record["settings"].get("local_plane", "attack"), "-"),
+            ("attack", "--"),
+        ):
+            rows = sorted(
+                (float(row["step"]), abs(float(row["loss_gap"])))
+                for row in record["projection"]
+                if row.get("plane") == plane
+                and number(row.get("step")) is not None
+                and number(row.get("loss_gap")) is not None
+            )
+            if rows:
+                axes[3].plot(
+                    *zip(*rows),
+                    linestyle=style,
+                    color=color,
+                    label=f"{label}: {'reference' if style == '-' else 'fitted'}",
+                )
+    for axis, label in zip(
+        axes,
+        (
+            "Actual CE (nats)",
+            "WMDP-Bio robust (%)",
+            "MMLU-no-bio (%)",
+            "Absolute projection CE gap",
+        ),
+    ):
+        axis.set(xlabel="Attack update", ylabel=label, xlim=(0, pair["schedule_steps"]))
+        axis.set_xscale("symlog", linthresh=16)
+        axis.grid(alpha=0.2)
+        if axis.get_legend_handles_labels()[0]:
+            axis.legend(fontsize=6)
+    note = (
+        "Dashed actual CE: identical attack-held-out32"
+        if same_heldout
+        else "Different attack-held-out32: held-out CE is not overlaid"
+    )
+    figure.suptitle(
+        f"Matched {pair['schedule_steps']}-step schedules; measured checkpoints only\n{note}; projection gaps are reference solid / condition-fitted dashed",
+        fontsize=10,
+    )
+    figure.tight_layout(rect=(0, 0, 1, 0.88))
+    save_figure(figure, output)
+    plt.close(figure)
+
+
+def checkpoint_report(run, allow_partial=False):
+    """Compare supplied checkpoints to reproduced controls without changing study reports."""
+    run = Path(run).resolve()
+    program, probes = read_json(run / "study.json"), read_json(run / "probes.json")
+    controls = program.get("comparison_controls", {})
+    if not controls or not program.get("cases") or not program.get("baseline_dynamics"):
+        raise ValueError(
+            "Checkpoint report needs cases, comparison_controls, baseline_dynamics, and shared probes"
+        )
+    records, case_names = {}, []
+    for name, declaration in controls.items():
+        records[name] = checkpoint_record(
+            name, declaration["folder"], declaration["schedule_steps"], declaration
+        )
+        records[name]["label"] = declaration.get("label", "Reproduced")
+    for name, case in program["cases"].items():
+        if case.get("role") != "attack":
+            continue
+        if name in records:
+            raise ValueError("Comparison control and case names must be distinct")
+        records[name] = checkpoint_record(name, run / "cases" / name, case["max_steps"])
+        records[name]["label"] = case.get("label", "Supplied checkpoint")
+        case_names.append(name)
+    if not case_names:
+        raise ValueError("No attack cases to compare")
+    pairs = checkpoint_pairs(records, case_names, list(controls))
+    validations = {
+        name: checkpoint_validation(record, program, probes)
+        for name, record in records.items()
+    }
+    complete = all(not value["issues"] for value in validations.values())
+    result = {
+        "coverage": "complete" if complete else "partial",
+        "cases": validations,
+        "pairs": [
+            {key: value for key, value in pair.items() if key != "records"}
+            for pair in pairs
+        ],
+    }
+    (run / "checkpoint-comparison-validation.json").write_text(
+        json.dumps(result, indent=2) + "\n"
+    )
+    if not complete and not allow_partial:
+        raise ValueError(
+            "Checkpoint comparison is incomplete: "
+            + "; ".join(
+                f"{name}: {', '.join(value['issues'])}"
+                for name, value in validations.items()
+                if value["issues"]
+            )
+        )
+    suffix = "" if complete else ".partial"
+    output = run / "checkpoint-comparisons" / ("final" if complete else "partial")
+    output.mkdir(parents=True, exist_ok=True)
+    metrics = [checkpoint_metrics(record) for record in records.values()]
+    summary_path = run / f"checkpoint-comparison-summary{suffix}.csv"
+    with summary_path.open("w", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=list(metrics[0]))
+        writer.writeheader()
+        writer.writerows(metrics)
+    supplied = program.get("supplied_checkpoint", {})
+    contrast = program.get(
+        "checkpoint_contrast_note",
+        f"This is a multi-factor defense checkpoint contrast. The supplied collaborator HF checkpoint {supplied.get('model_id', '')}, revision {supplied.get('revision', 'unspecified')}, used outer defense LR 1e-5, inner LR 1e-5, and retain coefficient 4, compared with reproduced settings 5e-6, 1e-6, and 2.5. Sampling/batching also differs (OPTML authors_documents). Differences cannot be attributed to a single hyperparameter. This compares the supplied checkpoint against the original reproduced K16 checkpoints.",
+    )
+    lines = [
+        "# Supplied and reproduced defense checkpoint comparison",
+        "",
+        f"Coverage: **{result['coverage']}**. Only exact measured endpoints are shown; pending values are not final measurements.",
+        "",
+        contrast,
+        "",
+        "Attack learning-rate schedules are matched by their declared 128 or 1000 update horizon. These horizons have different learning-rate decay and remain separate comparisons. Shared reference and random directions retain the original baseline's exact physical axes: local half-width 0.1571333988 and broad random half-width 125 global L2. The figures show translated slices through the same fixed forget CE objective. Geometry uses raw saved coordinates; CE uses each saved analysis's evaluation casting convention.",
+        "",
+        f"[Summary CSV]({summary_path.name}) · [Validation](checkpoint-comparison-validation.json)",
+        "",
+        "| Checkpoint / attack schedule | Fixed CE initial / final | WMDP initial / final | MMLU initial / final | Raw endpoint L2 | Fitted energy fraction | Minimum reference / fitted capture fraction | Maximum reference / fitted CE gap |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|",
+    ]
+    for row in metrics:
+        reference_capture = (
+            "N/A"
+            if row["attack_rank"] == 0
+            else display(row["reference_minimum_capture"])
+        )
+        fitted_capture = (
+            "N/A" if row["attack_rank"] == 0 else display(row["fitted_minimum_capture"])
+        )
+        lines.append(
+            f"| {row['case']} ({row['schedule_steps']}) | {display(row['initial_probe_loss'])} / {display(row['final_probe_loss'])} | {display(row['initial_wmdp_bio_robust'], 2)} / {display(row['final_wmdp_bio_robust'], 2)} | {display(row['initial_mmlu_no_bio'], 2)} / {display(row['final_mmlu_no_bio'], 2)} | {display(row['final_raw_displacement'])} | {display(row['fitted_energy_fraction'])} | {reference_capture} / {fitted_capture} | {display(row['reference_maximum_ce_gap'])} / {display(row['fitted_maximum_ce_gap'])} |"
+        )
+    for pair in pairs:
+        lines.extend(
+            [
+                "",
+                f"## Matched {pair['schedule_steps']}-step schedule: {pair['name']}",
+                "",
+                f"Common local frames: {pair['local_frames']}; common broad frames: {pair['broad_frames']}. All panels in each figure share physical bounds, CE/color limits, and camera orientation.",
+                "",
+            ]
+        )
+        for kind in ("local-reference", "local-delta", "broad-random", "broad-delta"):
+            path = output / f"{pair['name']}-{kind}"
+            checkpoint_surface_figure(pair, validations, kind, path)
+            lines.append(
+                f"- {kind}: [PNG]({relative_link(path.with_suffix('.png'), run)}) · [PDF]({relative_link(path.with_suffix('.pdf'), run)})"
+            )
+        path = output / f"{pair['name']}-trajectories"
+        checkpoint_trajectory_figure(pair, validations, path)
+        lines.append(
+            f"- Actual/projection/capability trajectories: [PNG]({relative_link(path.with_suffix('.png'), run)}) · [PDF]({relative_link(path.with_suffix('.pdf'), run)})"
+        )
+    lines.extend(
+        [
+            "",
+            "## Scope and limits",
+            "",
+            "The initial attack state is each defense endpoint. The collaborator provides a supplied final checkpoint (reported 125 defense updates), with no observed training history. No intermediate defense history was reconstructed. The ten fixed probe documents, corpus revision, physical basis, and parameter layout are checked. Attack-held-out means excluded from recorded attacker batches, with no claim about defense or pretraining exposure. Those 32-document CE curves are overlaid only when their content hashes agree; the earlier 128-step set can differ. Fitted energy sums squared raw displacements over selected checkpoints, not centered PCA or an equal-time average. It does not guarantee high capture at every state or accurate projected CE. N/A capture means a recorded rank-zero trajectory. Only the declared LR 1e-6 attacks are compared; this is not a maximum over attacker learning rates or optimizer seeds.",
+            "",
+            f"Starting utility must be assessed alongside WMDP. The original base MMLU reference is {BASE_MMLU:.6f}%; a five percentage point utility-drop budget requires at least {BASE_MMLU - 5:.6f}%. The CSV records initial utility drops without forcing a defender selection. One defender checkpoint and one attack optimizer seed do not establish variation across seeds.",
+            "",
+        ]
+    )
+    for name, record in records.items():
+        if record["declarations"].get("provenance_note"):
+            lines.append(
+                f"- {name} fixed-probe provenance: {record['declarations']['provenance_note']}"
+            )
+        for stem in ("early-update-profiles", "first-update-landscape"):
+            image = record["folder"] / f"{stem}.png"
+            if (
+                read_json(record["folder"] / "status/step-profiles.json").get("state")
+                == "complete"
+                and image.exists()
+            ):
+                lines.append(
+                    f"- {name}: [{stem}]({relative_link(image, run)}) (existing profile adapter output; first-update q0 differs between conditions)"
+                )
+        for issue in validations[name]["issues"]:
+            lines.append(f"- {name}: {issue}.")
+    (run / f"checkpoint-report{suffix}.md").write_text("\n".join(lines) + "\n")
+    return result
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
@@ -2177,6 +2950,12 @@ def main(argv=None):
         "report", help="Write a measured cross-condition report"
     )
     command.add_argument("run", type=Path)
+    checkpoint = commands.add_parser(
+        "checkpoint-report",
+        help="Compare supplied checkpoints to schedule-matched reproduced controls",
+    )
+    checkpoint.add_argument("run", type=Path)
+    checkpoint.add_argument("--allow-partial", action="store_true")
     for name, help_text in (
         ("profile-values", "Validate/reuse or measure early profiles without plotting"),
         ("profile-report", "Render a complete early-profile numerical cache on CPU"),
@@ -2187,6 +2966,8 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if args.command == "report":
         result = report(args.run)
+    elif args.command == "checkpoint-report":
+        result = checkpoint_report(args.run, args.allow_partial)
     elif args.command == "profile-values":
         result = profile_values(args.run, args.case)
     else:

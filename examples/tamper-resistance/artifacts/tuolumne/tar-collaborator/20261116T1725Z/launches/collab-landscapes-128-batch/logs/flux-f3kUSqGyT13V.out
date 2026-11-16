@@ -1,0 +1,614 @@
+0: OUTPUT_DIR: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/launches/collab-landscapes-128-batch
+0: Logging to /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/launches/collab-landscapes-128-batch/logs
+0: Mon Nov 16 18:00:21 UTC 2026 Calling flux run...
+0: 0: FLUX_JOB_ID: fXea9tT
+0: 0: SLURM_JOB_ID: 
+0: 0: SLURM_JOB_NODELIST: tuolumne1355
+0: 0: SLURM_NNODES: 1
+0: 0: SLURM_NTASKS: 1
+0: 0: SLURM_NTASKS_PER_NODE: 1
+0: 0: SLURM_CPUS_PER_TASK: 96
+0: 0: MASTER_ADDR: tuolumne1355
+0: 0: MASTER_PORT: 34133
+0: 0: LOCAL_RANK: 0
+0: 0: RANK: 0
+0: 0: WORLD_SIZE: 1
+0: 0: SLURM_NODEID: 0
+0: 0: SLURM_LOCALID: 0
+0: 0: SLURM_PROCID: 0
+0: 0: CUDA_VISIBLE_DEVICES:  (will be overwritten with 0,1,2,3)
+0: 0: HIP_VISIBLE_DEVICES:  (will be overwritten with 0,1,2,3)
+0: 0: ROCR_VISIBLE_DEVICES: 0,1,2,3 (will be overwritten with 0,1,2,3)
+0: 0: Mon Nov 16 18:00:21 UTC 2026 Loading modules
+0: 0: 
+0: 0: Lmod is automatically replacing "cce/20.0.0" with "gcc-native/13".
+0: 0: 
+0: 0: 
+0: 0: Due to MODULEPATH changes, the following have been reloaded:
+0: 0:   1) cray-libsci/25.09.0     2) cray-mpich/9.0.1
+0: 0: 
+0: 0: 
+0: 0: The following have been reloaded with a version change:
+0: 0:   1) libfabric/match_SHS => libfabric/2.1
+0: 0: 
+0: 0: stty: 'standard input'0: 0: : Inappropriate ioctl for device
+0: 0: Mon Nov 16 18:00:26 UTC 2026 Activated environment on 0
+0: 0: bash: cannot set terminal process group (2128154): Inappropriate ioctl for device
+0: 0: Mon Nov 16 18:00:26 UTC 2026 Launching python on 0...
+0: 0: bash: no job control in this shell
+0: 0: stty: 'standard input'0: : Inappropriate ioctl for device
+0: 0: bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+0: 0: bash: no job control in this shell
+0: 0: stty: 'standard input'0: : Inappropriate ioctl for device
+0: 0: Landscape GPU assignment: {'physical_gpu_requested': '0', 'logical_device': 0, 'visible_devices': 1, 'device': "_CudaDeviceProperties(name='AMD Instinct MI300A', major=9, minor=4, gcnArchName='gfx942:sramecc+:xnack-', total_memory=131072MB, multi_processor_count=228, uuid=38346566-6139-6534-3063-643661373765, pci_bus_id=2, pci_device_id=0, pci_domain_id=0, L2_cache_size=4MB)"}
+0: 0: Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]0: 0: Loading weights:   0%|          | 1/291 [00:00<02:54,  1.66it/s]0: 0: Loading weights:  36%|███▋      | 106/291 [00:00<00:00, 202.46it/s]0: 0: Loading weights: 100%|██████████| 291/291 [00:00<00:00, 370.62it/s]
+0: 0: Computing FP64 trajectory Gram matrix
+0: 0: Gram: model.embed_tokens.weight
+0: 0: Gram: model.layers.0.self_attn.q_proj.weight
+0: 0: Gram: model.layers.0.self_attn.k_proj.weight
+0: 0: Gram: model.layers.0.self_attn.v_proj.weight
+0: 0: Gram: model.layers.0.self_attn.o_proj.weight
+0: 0: Gram: model.layers.0.mlp.gate_proj.weight
+0: 0: Gram: model.layers.0.mlp.up_proj.weight
+0: 0: Gram: model.layers.0.mlp.down_proj.weight
+0: 0: Gram: model.layers.0.input_layernorm.weight
+0: 0: Gram: model.layers.0.post_attention_layernorm.weight
+0: 0: Gram: model.layers.1.self_attn.q_proj.weight
+0: 0: Gram: model.layers.1.self_attn.k_proj.weight
+0: 0: Gram: model.layers.1.self_attn.v_proj.weight
+0: 0: Gram: model.layers.1.self_attn.o_proj.weight
+0: 0: Gram: model.layers.1.mlp.gate_proj.weight
+0: 0: Gram: model.layers.1.mlp.up_proj.weight
+0: 0: Gram: model.layers.1.mlp.down_proj.weight
+0: 0: Gram: model.layers.1.input_layernorm.weight
+0: 0: Gram: model.layers.1.post_attention_layernorm.weight
+0: 0: Gram: model.layers.2.self_attn.q_proj.weight
+0: 0: Gram: model.layers.2.self_attn.k_proj.weight
+0: 0: Gram: model.layers.2.self_attn.v_proj.weight
+0: 0: Gram: model.layers.2.self_attn.o_proj.weight
+0: 0: Gram: model.layers.2.mlp.gate_proj.weight
+0: 0: Gram: model.layers.2.mlp.up_proj.weight
+0: 0: Gram: model.layers.2.mlp.down_proj.weight
+0: 0: Gram: model.layers.2.input_layernorm.weight
+0: 0: Gram: model.layers.2.post_attention_layernorm.weight
+0: 0: Gram: model.layers.3.self_attn.q_proj.weight
+0: 0: Gram: model.layers.3.self_attn.k_proj.weight
+0: 0: Gram: model.layers.3.self_attn.v_proj.weight
+0: 0: Gram: model.layers.3.self_attn.o_proj.weight
+0: 0: Gram: model.layers.3.mlp.gate_proj.weight
+0: 0: Gram: model.layers.3.mlp.up_proj.weight
+0: 0: Gram: model.layers.3.mlp.down_proj.weight
+0: 0: Gram: model.layers.3.input_layernorm.weight
+0: 0: Gram: model.layers.3.post_attention_layernorm.weight
+0: 0: Gram: model.layers.4.self_attn.q_proj.weight
+0: 0: Gram: model.layers.4.self_attn.k_proj.weight
+0: 0: Gram: model.layers.4.self_attn.v_proj.weight
+0: 0: Gram: model.layers.4.self_attn.o_proj.weight
+0: 0: Gram: model.layers.4.mlp.gate_proj.weight
+0: 0: Gram: model.layers.4.mlp.up_proj.weight
+0: 0: Gram: model.layers.4.mlp.down_proj.weight
+0: 0: Gram: model.layers.4.input_layernorm.weight
+0: 0: Gram: model.layers.4.post_attention_layernorm.weight
+0: 0: Gram: model.layers.5.self_attn.q_proj.weight
+0: 0: Gram: model.layers.5.self_attn.k_proj.weight
+0: 0: Gram: model.layers.5.self_attn.v_proj.weight
+0: 0: Gram: model.layers.5.self_attn.o_proj.weight
+0: 0: Gram: model.layers.5.mlp.gate_proj.weight
+0: 0: Gram: model.layers.5.mlp.up_proj.weight
+0: 0: Gram: model.layers.5.mlp.down_proj.weight
+0: 0: Gram: model.layers.5.input_layernorm.weight
+0: 0: Gram: model.layers.5.post_attention_layernorm.weight
+0: 0: Gram: model.layers.6.self_attn.q_proj.weight
+0: 0: Gram: model.layers.6.self_attn.k_proj.weight
+0: 0: Gram: model.layers.6.self_attn.v_proj.weight
+0: 0: Gram: model.layers.6.self_attn.o_proj.weight
+0: 0: Gram: model.layers.6.mlp.gate_proj.weight
+0: 0: Gram: model.layers.6.mlp.up_proj.weight
+0: 0: Timeout (0:05:00)!
+0: 0: Thread 0x00001553693a4700 (most recent call first):
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 359 in wait
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 655 in wait
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/tqdm/_monitor.py", line 69 in run
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 1075 in _bootstrap_inner
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 1032 in _bootstrap
+0: 0: 
+0: 0: Thread 0x00001555555206c0 (most recent call first):
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 370 in blocks
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 406 in geometry
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 2795 in main
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 2805 in <module>
+0: 0: Gram: model.layers.6.mlp.down_proj.weight
+0: 0: Gram: model.layers.6.input_layernorm.weight
+0: 0: Gram: model.layers.6.post_attention_layernorm.weight
+0: 0: Gram: model.layers.7.self_attn.q_proj.weight
+0: 0: Gram: model.layers.7.self_attn.k_proj.weight
+0: 0: Gram: model.layers.7.self_attn.v_proj.weight
+0: 0: Gram: model.layers.7.self_attn.o_proj.weight
+0: 0: Gram: model.layers.7.mlp.gate_proj.weight
+0: 0: Gram: model.layers.7.mlp.up_proj.weight
+0: 0: Gram: model.layers.7.mlp.down_proj.weight
+0: 0: Gram: model.layers.7.input_layernorm.weight
+0: 0: Gram: model.layers.7.post_attention_layernorm.weight
+0: 0: Gram: model.layers.8.self_attn.q_proj.weight
+0: 0: Gram: model.layers.8.self_attn.k_proj.weight
+0: 0: Gram: model.layers.8.self_attn.v_proj.weight
+0: 0: Gram: model.layers.8.self_attn.o_proj.weight
+0: 0: Gram: model.layers.8.mlp.gate_proj.weight
+0: 0: Gram: model.layers.8.mlp.up_proj.weight
+0: 0: Gram: model.layers.8.mlp.down_proj.weight
+0: 0: Gram: model.layers.8.input_layernorm.weight
+0: 0: Gram: model.layers.8.post_attention_layernorm.weight
+0: 0: Gram: model.layers.9.self_attn.q_proj.weight
+0: 0: Gram: model.layers.9.self_attn.k_proj.weight
+0: 0: Gram: model.layers.9.self_attn.v_proj.weight
+0: 0: Gram: model.layers.9.self_attn.o_proj.weight
+0: 0: Gram: model.layers.9.mlp.gate_proj.weight
+0: 0: Gram: model.layers.9.mlp.up_proj.weight
+0: 0: Gram: model.layers.9.mlp.down_proj.weight
+0: 0: Gram: model.layers.9.input_layernorm.weight
+0: 0: Gram: model.layers.9.post_attention_layernorm.weight
+0: 0: Gram: model.layers.10.self_attn.q_proj.weight
+0: 0: Gram: model.layers.10.self_attn.k_proj.weight
+0: 0: Gram: model.layers.10.self_attn.v_proj.weight
+0: 0: Gram: model.layers.10.self_attn.o_proj.weight
+0: 0: Gram: model.layers.10.mlp.gate_proj.weight
+0: 0: Gram: model.layers.10.mlp.up_proj.weight
+0: 0: Gram: model.layers.10.mlp.down_proj.weight
+0: 0: Gram: model.layers.10.input_layernorm.weight
+0: 0: Gram: model.layers.10.post_attention_layernorm.weight
+0: 0: Gram: model.layers.11.self_attn.q_proj.weight
+0: 0: Gram: model.layers.11.self_attn.k_proj.weight
+0: 0: Gram: model.layers.11.self_attn.v_proj.weight
+0: 0: Gram: model.layers.11.self_attn.o_proj.weight
+0: 0: Gram: model.layers.11.mlp.gate_proj.weight
+0: 0: Gram: model.layers.11.mlp.up_proj.weight
+0: 0: Gram: model.layers.11.mlp.down_proj.weight
+0: 0: Gram: model.layers.11.input_layernorm.weight
+0: 0: Gram: model.layers.11.post_attention_layernorm.weight
+0: 0: Gram: model.layers.12.self_attn.q_proj.weight
+0: 0: Gram: model.layers.12.self_attn.k_proj.weight
+0: 0: Gram: model.layers.12.self_attn.v_proj.weight
+0: 0: Gram: model.layers.12.self_attn.o_proj.weight
+0: 0: Gram: model.layers.12.mlp.gate_proj.weight
+0: 0: Gram: model.layers.12.mlp.up_proj.weight
+0: 0: Gram: model.layers.12.mlp.down_proj.weight
+0: 0: Gram: model.layers.12.input_layernorm.weight
+0: 0: Gram: model.layers.12.post_attention_layernorm.weight
+0: 0: Gram: model.layers.13.self_attn.q_proj.weight
+0: 0: Gram: model.layers.13.self_attn.k_proj.weight
+0: 0: Gram: model.layers.13.self_attn.v_proj.weight
+0: 0: Gram: model.layers.13.self_attn.o_proj.weight
+0: 0: Gram: model.layers.13.mlp.gate_proj.weight
+0: 0: Gram: model.layers.13.mlp.up_proj.weight
+0: 0: Gram: model.layers.13.mlp.down_proj.weight
+0: 0: Gram: model.layers.13.input_layernorm.weight
+0: 0: Gram: model.layers.13.post_attention_layernorm.weight
+0: 0: Gram: model.layers.14.self_attn.q_proj.weight
+0: 0: Gram: model.layers.14.self_attn.k_proj.weight
+0: 0: Gram: model.layers.14.self_attn.v_proj.weight
+0: 0: Gram: model.layers.14.self_attn.o_proj.weight
+0: 0: Gram: model.layers.14.mlp.gate_proj.weight
+0: 0: Gram: model.layers.14.mlp.up_proj.weight
+0: 0: Gram: model.layers.14.mlp.down_proj.weight
+0: 0: Gram: model.layers.14.input_layernorm.weight
+0: 0: Gram: model.layers.14.post_attention_layernorm.weight
+0: 0: Gram: model.layers.15.self_attn.q_proj.weight
+0: 0: Gram: model.layers.15.self_attn.k_proj.weight
+0: 0: Gram: model.layers.15.self_attn.v_proj.weight
+0: 0: Gram: model.layers.15.self_attn.o_proj.weight
+0: 0: Gram: model.layers.15.mlp.gate_proj.weight
+0: 0: Gram: model.layers.15.mlp.up_proj.weight
+0: 0: Gram: model.layers.15.mlp.down_proj.weight
+0: 0: Gram: model.layers.15.input_layernorm.weight
+0: 0: Gram: model.layers.15.post_attention_layernorm.weight
+0: 0: Gram: model.layers.16.self_attn.q_proj.weight
+0: 0: Gram: model.layers.16.self_attn.k_proj.weight
+0: 0: Gram: model.layers.16.self_attn.v_proj.weight
+0: 0: Gram: model.layers.16.self_attn.o_proj.weight
+0: 0: Gram: model.layers.16.mlp.gate_proj.weight
+0: 0: Gram: model.layers.16.mlp.up_proj.weight
+0: 0: Gram: model.layers.16.mlp.down_proj.weight
+0: 0: Timeout (0:05:00)!
+0: 0: Thread 0x00001553693a4700 (most recent call first):
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 359 in wait
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 655 in wait
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/tqdm/_monitor.py", line 69 in run
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 1075 in _bootstrap_inner
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 1032 in _bootstrap
+0: 0: 
+0: 0: Thread 0x00001555555206c0 (most recent call first):
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 370 in blocks
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 406 in geometry
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 2795 in main
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 2805 in <module>
+0: 0: Gram: model.layers.16.input_layernorm.weight
+0: 0: Gram: model.layers.16.post_attention_layernorm.weight
+0: 0: Gram: model.layers.17.self_attn.q_proj.weight
+0: 0: Gram: model.layers.17.self_attn.k_proj.weight
+0: 0: Gram: model.layers.17.self_attn.v_proj.weight
+0: 0: Gram: model.layers.17.self_attn.o_proj.weight
+0: 0: Gram: model.layers.17.mlp.gate_proj.weight
+0: 0: Gram: model.layers.17.mlp.up_proj.weight
+0: 0: Gram: model.layers.17.mlp.down_proj.weight
+0: 0: Gram: model.layers.17.input_layernorm.weight
+0: 0: Gram: model.layers.17.post_attention_layernorm.weight
+0: 0: Gram: model.layers.18.self_attn.q_proj.weight
+0: 0: Gram: model.layers.18.self_attn.k_proj.weight
+0: 0: Gram: model.layers.18.self_attn.v_proj.weight
+0: 0: Gram: model.layers.18.self_attn.o_proj.weight
+0: 0: Gram: model.layers.18.mlp.gate_proj.weight
+0: 0: Gram: model.layers.18.mlp.up_proj.weight
+0: 0: Gram: model.layers.18.mlp.down_proj.weight
+0: 0: Gram: model.layers.18.input_layernorm.weight
+0: 0: Gram: model.layers.18.post_attention_layernorm.weight
+0: 0: Gram: model.layers.19.self_attn.q_proj.weight
+0: 0: Gram: model.layers.19.self_attn.k_proj.weight
+0: 0: Gram: model.layers.19.self_attn.v_proj.weight
+0: 0: Gram: model.layers.19.self_attn.o_proj.weight
+0: 0: Gram: model.layers.19.mlp.gate_proj.weight
+0: 0: Gram: model.layers.19.mlp.up_proj.weight
+0: 0: Gram: model.layers.19.mlp.down_proj.weight
+0: 0: Gram: model.layers.19.input_layernorm.weight
+0: 0: Gram: model.layers.19.post_attention_layernorm.weight
+0: 0: Gram: model.layers.20.self_attn.q_proj.weight
+0: 0: Gram: model.layers.20.self_attn.k_proj.weight
+0: 0: Gram: model.layers.20.self_attn.v_proj.weight
+0: 0: Gram: model.layers.20.self_attn.o_proj.weight
+0: 0: Gram: model.layers.20.mlp.gate_proj.weight
+0: 0: Gram: model.layers.20.mlp.up_proj.weight
+0: 0: Gram: model.layers.20.mlp.down_proj.weight
+0: 0: Gram: model.layers.20.input_layernorm.weight
+0: 0: Gram: model.layers.20.post_attention_layernorm.weight
+0: 0: Gram: model.layers.21.self_attn.q_proj.weight
+0: 0: Gram: model.layers.21.self_attn.k_proj.weight
+0: 0: Gram: model.layers.21.self_attn.v_proj.weight
+0: 0: Gram: model.layers.21.self_attn.o_proj.weight
+0: 0: Gram: model.layers.21.mlp.gate_proj.weight
+0: 0: Gram: model.layers.21.mlp.up_proj.weight
+0: 0: Gram: model.layers.21.mlp.down_proj.weight
+0: 0: Gram: model.layers.21.input_layernorm.weight
+0: 0: Gram: model.layers.21.post_attention_layernorm.weight
+0: 0: Gram: model.layers.22.self_attn.q_proj.weight
+0: 0: Gram: model.layers.22.self_attn.k_proj.weight
+0: 0: Gram: model.layers.22.self_attn.v_proj.weight
+0: 0: Gram: model.layers.22.self_attn.o_proj.weight
+0: 0: Gram: model.layers.22.mlp.gate_proj.weight
+0: 0: Gram: model.layers.22.mlp.up_proj.weight
+0: 0: Gram: model.layers.22.mlp.down_proj.weight
+0: 0: Gram: model.layers.22.input_layernorm.weight
+0: 0: Gram: model.layers.22.post_attention_layernorm.weight
+0: 0: Gram: model.layers.23.self_attn.q_proj.weight
+0: 0: Gram: model.layers.23.self_attn.k_proj.weight
+0: 0: Gram: model.layers.23.self_attn.v_proj.weight
+0: 0: Gram: model.layers.23.self_attn.o_proj.weight
+0: 0: Gram: model.layers.23.mlp.gate_proj.weight
+0: 0: Gram: model.layers.23.mlp.up_proj.weight
+0: 0: Gram: model.layers.23.mlp.down_proj.weight
+0: 0: Gram: model.layers.23.input_layernorm.weight
+0: 0: Gram: model.layers.23.post_attention_layernorm.weight
+0: 0: Gram: model.layers.24.self_attn.q_proj.weight
+0: 0: Gram: model.layers.24.self_attn.k_proj.weight
+0: 0: Gram: model.layers.24.self_attn.v_proj.weight
+0: 0: Gram: model.layers.24.self_attn.o_proj.weight
+0: 0: Gram: model.layers.24.mlp.gate_proj.weight
+0: 0: Gram: model.layers.24.mlp.up_proj.weight
+0: 0: Gram: model.layers.24.mlp.down_proj.weight
+0: 0: Gram: model.layers.24.input_layernorm.weight
+0: 0: Gram: model.layers.24.post_attention_layernorm.weight
+0: 0: Gram: model.layers.25.self_attn.q_proj.weight
+0: 0: Gram: model.layers.25.self_attn.k_proj.weight
+0: 0: Gram: model.layers.25.self_attn.v_proj.weight
+0: 0: Gram: model.layers.25.self_attn.o_proj.weight
+0: 0: Gram: model.layers.25.mlp.gate_proj.weight
+0: 0: Gram: model.layers.25.mlp.up_proj.weight
+0: 0: Gram: model.layers.25.mlp.down_proj.weight
+0: 0: Gram: model.layers.25.input_layernorm.weight
+0: 0: Gram: model.layers.25.post_attention_layernorm.weight
+0: 0: Gram: model.layers.26.self_attn.q_proj.weight
+0: 0: Gram: model.layers.26.self_attn.k_proj.weight
+0: 0: Gram: model.layers.26.self_attn.v_proj.weight
+0: 0: Gram: model.layers.26.self_attn.o_proj.weight
+0: 0: Gram: model.layers.26.mlp.gate_proj.weight
+0: 0: Gram: model.layers.26.mlp.up_proj.weight
+0: 0: Gram: model.layers.26.mlp.down_proj.weight
+0: 0: Gram: model.layers.26.input_layernorm.weight
+0: 0: Gram: model.layers.26.post_attention_layernorm.weight
+0: 0: Gram: model.layers.27.self_attn.q_proj.weight
+0: 0: Timeout (0:05:00)!
+0: 0: Thread 0x00001553693a4700 (most recent call first):
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 359 in wait
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 655 in wait
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/tqdm/_monitor.py", line 69 in run
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 1075 in _bootstrap_inner
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 1032 in _bootstrap
+0: 0: 
+0: 0: Thread 0x00001555555206c0 (most recent call first):
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 378 in blocks
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 406 in geometry
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 2795 in main
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 2805 in <module>
+0: 0: Gram: model.layers.27.self_attn.k_proj.weight
+0: 0: Gram: model.layers.27.self_attn.v_proj.weight
+0: 0: Gram: model.layers.27.self_attn.o_proj.weight
+0: 0: Gram: model.layers.27.mlp.gate_proj.weight
+0: 0: Gram: model.layers.27.mlp.up_proj.weight
+0: 0: Gram: model.layers.27.mlp.down_proj.weight
+0: 0: Gram: model.layers.27.input_layernorm.weight
+0: 0: Gram: model.layers.27.post_attention_layernorm.weight
+0: 0: Gram: model.layers.28.self_attn.q_proj.weight
+0: 0: Gram: model.layers.28.self_attn.k_proj.weight
+0: 0: Gram: model.layers.28.self_attn.v_proj.weight
+0: 0: Gram: model.layers.28.self_attn.o_proj.weight
+0: 0: Gram: model.layers.28.mlp.gate_proj.weight
+0: 0: Gram: model.layers.28.mlp.up_proj.weight
+0: 0: Gram: model.layers.28.mlp.down_proj.weight
+0: 0: Gram: model.layers.28.input_layernorm.weight
+0: 0: Gram: model.layers.28.post_attention_layernorm.weight
+0: 0: Gram: model.layers.29.self_attn.q_proj.weight
+0: 0: Gram: model.layers.29.self_attn.k_proj.weight
+0: 0: Gram: model.layers.29.self_attn.v_proj.weight
+0: 0: Gram: model.layers.29.self_attn.o_proj.weight
+0: 0: Gram: model.layers.29.mlp.gate_proj.weight
+0: 0: Gram: model.layers.29.mlp.up_proj.weight
+0: 0: Gram: model.layers.29.mlp.down_proj.weight
+0: 0: Gram: model.layers.29.input_layernorm.weight
+0: 0: Gram: model.layers.29.post_attention_layernorm.weight
+0: 0: Gram: model.layers.30.self_attn.q_proj.weight
+0: 0: Gram: model.layers.30.self_attn.k_proj.weight
+0: 0: Gram: model.layers.30.self_attn.v_proj.weight
+0: 0: Gram: model.layers.30.self_attn.o_proj.weight
+0: 0: Gram: model.layers.30.mlp.gate_proj.weight
+0: 0: Gram: model.layers.30.mlp.up_proj.weight
+0: 0: Gram: model.layers.30.mlp.down_proj.weight
+0: 0: Gram: model.layers.30.input_layernorm.weight
+0: 0: Gram: model.layers.30.post_attention_layernorm.weight
+0: 0: Gram: model.layers.31.self_attn.q_proj.weight
+0: 0: Gram: model.layers.31.self_attn.k_proj.weight
+0: 0: Gram: model.layers.31.self_attn.v_proj.weight
+0: 0: Gram: model.layers.31.self_attn.o_proj.weight
+0: 0: Gram: model.layers.31.mlp.gate_proj.weight
+0: 0: Gram: model.layers.31.mlp.up_proj.weight
+0: 0: Gram: model.layers.31.mlp.down_proj.weight
+0: 0: Gram: model.layers.31.input_layernorm.weight
+0: 0: Gram: model.layers.31.post_attention_layernorm.weight
+0: 0: Gram: model.norm.weight
+0: 0: Gram: lm_head.weight
+0: 0: Constructing and saving 3 visualization planes
+0: 0: Timeout (0:05:00)!
+0: 0: Thread 0x00001553693a4700 (most recent call first):
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 359 in wait
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 655 in wait
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/tqdm/_monitor.py", line 69 in run
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 1075 in _bootstrap_inner
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 1032 in _bootstrap
+0: 0: 
+0: 0: Thread 0x00001555555206c0 (most recent call first):
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 560 in geometry
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 2795 in main
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 2805 in <module>
+0: 0: Timeout (0:05:00)!
+0: 0: Thread 0x00001553693a4700 (most recent call first):
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 359 in wait
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 655 in wait
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/tqdm/_monitor.py", line 69 in run
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 1075 in _bootstrap_inner
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 1032 in _bootstrap
+0: 0: 
+0: 0: Thread 0x00001555555206c0 (most recent call first):
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 560 in geometry
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 2795 in main
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 2805 in <module>
+0: 0: {
+0: 0:   "radius": 0.6851579514244127,
+0: 0:   "attack_plane_energy_fraction": 0.9911664245601591,
+0: 0:   "random_transverse_overlap": null,
+0: 0:   "rerun_distance_from_original": {}
+0: 0: }
+0: 0: Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]0: 0: Loading weights:   0%|          | 1/291 [00:00<00:32,  9.03it/s]0: 0: Loading weights: 100%|██████████| 291/291 [00:00<00:00, 2509.98it/s]
+0: 0: Using the latest cached version of the dataset since cais/wmdp-bio-forget-corpus couldn't be found on the Hugging Face Hub (offline mode is enabled).
+0: 0: Found the latest cached dataset configuration 'default' at /p/vast1/kirchenb/tar-root/cache/huggingface/datasets/cais___wmdp-bio-forget-corpus/default/0.0.0/5a786ed1041e56fef2d4ed26c1239f12b73a68eb (last modified on Mon Nov 16 09:35:54 2026).
+0: 0: Map:   0%|          | 0/10 [00:00<?, ? examples/s]0: 0: Map: 100%|██████████| 10/10 [00:00<00:00, 68.65 examples/s]0: 0: Map: 100%|██████████| 10/10 [00:00<00:00, 63.91 examples/s]
+0: 0: Using the latest cached version of the dataset since cais/wmdp-bio-forget-corpus couldn't be found on the Hugging Face Hub (offline mode is enabled).
+0: 0: Found the latest cached dataset configuration 'default' at /p/vast1/kirchenb/tar-root/cache/huggingface/datasets/cais___wmdp-bio-forget-corpus/default/0.0.0/5a786ed1041e56fef2d4ed26c1239f12b73a68eb (last modified on Mon Nov 16 10:27:03 2026).
+0: 0: Loading actual checkpoint: defense 0
+0: 0: Actual checkpoint: {'phase': 'defense', 'step': 0, 'probe_loss': 1.9492044687271117, 'heldout_loss': 2.027974396944046}
+0: 0: Loading actual checkpoint: defense 125
+0: 0: Actual checkpoint: 0: 0: {'phase': 'defense', 'step': 125, 'probe_loss': 15.515752601623536, 'heldout_loss': 15.79961222410202}
+0: 0: Loading actual checkpoint: attack 0
+0: 0: Actual checkpoint: 0: 0: {'phase': 'attack', 'step': 0, 'probe_loss': 15.515752601623536, 'heldout_loss': 15.79961222410202, 'next_batch_loss': 16.12152671813965}
+0: 0: Loading actual checkpoint: attack 1
+0: 0: Actual checkpoint: {'phase': 'attack', 'step': 1, 'probe_loss': 14.703784370422364, 'heldout_loss': 14.55835908651352, 'last_batch_loss': 13.058601379394531, 'next_batch_loss': 14.044065475463867}
+0: 0: Loading actual checkpoint: attack 2
+0: 0: Actual checkpoint: 0: {'phase': 'attack', 'step': 2, 'probe_loss': 14.168266296386719, 'heldout_loss': 13.87995558977127, 'last_batch_loss': 12.439885139465332, 'next_batch_loss': 13.820499420166016}
+0: 0: Loading actual checkpoint: attack 3
+0: 0: Actual checkpoint: 0: 0: {'phase': 'attack', 'step': 3, 'probe_loss': 13.75092658996582, 'heldout_loss': 13.48138290643692, 'last_batch_loss': 12.787317276000977, 'next_batch_loss': 14.249408721923828}
+0: 0: Loading actual checkpoint: attack 4
+0: 0: Actual checkpoint: 0: 0: {'phase': 'attack', 'step': 4, 'probe_loss': 13.377612686157226, 'heldout_loss': 13.183207631111145, 'last_batch_loss': 13.292902946472168, 'next_batch_loss': 13.236966133117676}
+0: 0: Loading actual checkpoint: attack 5
+0: 0: Actual checkpoint: 0: 0: {'phase': 'attack', 'step': 5, 'probe_loss': 13.087191009521485, 'heldout_loss': 12.959962010383606, 'last_batch_loss': 12.842123031616211, 'next_batch_loss': 12.929880142211914}
+0: 0: Loading actual checkpoint: attack 6
+0: 0: Actual checkpoint: 0: {'phase': 'attack', 'step': 6, 'probe_loss': 12.853906631469727, 'heldout_loss': 12.786153972148895, 'last_batch_loss': 12.579346656799316, 'next_batch_loss': 12.694575309753418}
+0: 0: Loading actual checkpoint: attack 7
+0: 0: Actual checkpoint: 0: 0: {'phase': 'attack', 'step': 7, 'probe_loss': 12.667513275146485, 'heldout_loss': 12.654344499111176, 'last_batch_loss': 12.381321907043457, 'next_batch_loss': 13.004947662353516}
+0: 0: Loading actual checkpoint: attack 8
+0: 0: Actual checkpoint: {'phase': 'attack', 'step': 8, 'probe_loss': 12.513483619689941, 'heldout_loss': 12.549530744552612, 'last_batch_loss': 12.674430847167969, 'next_batch_loss': 11.87036418914795}
+0: 0: Loading actual checkpoint: attack 12
+0: 0: Actual checkpoint: 0: 0: {'phase': 'attack', 'step': 12, 'probe_loss': 12.109429550170898, 'heldout_loss': 12.289413869380951, 'last_batch_loss': 12.22533893585205, 'next_batch_loss': 12.603169441223145}
+0: 0: Loading actual checkpoint: attack 16
+0: 0: Actual checkpoint: 0: 0: {'phase': 'attack', 'step': 16, 'probe_loss': 11.905594444274902, 'heldout_loss': 12.13871705532074, 'last_batch_loss': 12.359898567199707, 'next_batch_loss': 12.191121101379395}
+0: 0: Loading actual checkpoint: attack 24
+0: 0: Timeout (0:05:00)!
+0: 0: Thread 0x00001553693bb700 (most recent call first):
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 359 in wait
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 655 in wait
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/tqdm/_monitor.py", line 69 in run
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 1075 in _bootstrap_inner
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 1032 in _bootstrap
+0: 0: 
+0: 0: Thread 0x00001555555206c0 (most recent call first):
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 833 in load
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124 in decorate_context
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 886 in surfaces
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 2795 in main
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 2805 in <module>
+0: 0: Actual checkpoint: 0: 0: {'phase': 'attack', 'step': 24, 'probe_loss': 11.545956802368163, 'heldout_loss': 11.743759870529175, 'last_batch_loss': 11.818588256835938, 'next_batch_loss': 12.051870346069336}
+0: 0: Loading actual checkpoint: attack 32
+0: 0: Actual checkpoint: 0: 0: {'phase': 'attack', 'step': 32, 'probe_loss': 11.248108863830566, 'heldout_loss': 11.373726487159729, 'last_batch_loss': 10.909728050231934, 'next_batch_loss': 11.811737060546875}
+0: 0: Loading actual checkpoint: attack 40
+0: 0: Actual checkpoint: 0: 0: {'phase': 'attack', 'step': 40, 'probe_loss': 11.02148666381836, 'heldout_loss': 11.109215378761292, 'last_batch_loss': 10.945934295654297, 'next_batch_loss': 11.020699501037598}
+0: 0: Loading actual checkpoint: attack 48
+0: 0: Actual checkpoint: {'phase': 'attack', 'step': 48, 'probe_loss': 10.839635276794434, 'heldout_loss': 10.923655927181244, 'last_batch_loss': 11.165060043334961, 'next_batch_loss': 10.962030410766602}
+0: 0: Loading actual checkpoint: attack 56
+0: 0: Actual checkpoint: 0: {'phase': 'attack', 'step': 56, 'probe_loss': 10.70127830505371, 'heldout_loss': 10.756375849246979, 'last_batch_loss': 10.506086349487305, 'next_batch_loss': 11.328780174255371}
+0: 0: Loading actual checkpoint: attack 64
+0: 0: Actual checkpoint: 0: 0: {'phase': 'attack', 'step': 64, 'probe_loss': 10.562816619873047, 'heldout_loss': 10.593552708625793, 'last_batch_loss': 10.584543228149414, 'next_batch_loss': 10.65740966796875}
+0: 0: Loading actual checkpoint: attack 80
+0: 0: Actual checkpoint: 0: 0: {'phase': 'attack', 'step': 80, 'probe_loss': 10.38794174194336, 'heldout_loss': 10.394066214561462, 'last_batch_loss': 10.176860809326172, 'next_batch_loss': 10.154797554016113}
+0: 0: Loading actual checkpoint: attack 96
+0: 0: Actual checkpoint: {'phase': 'attack', 'step': 96, 'probe_loss': 10.289927291870118, 'heldout_loss': 10.281014859676361, 'last_batch_loss': 10.521195411682129, 'next_batch_loss': 10.538683891296387}
+0: 0: Loading actual checkpoint: attack 112
+0: 0: Actual checkpoint: {'phase': 'attack', 'step': 112, 'probe_loss': 10.253511238098145, 'heldout_loss': 10.23746633529663, 'last_batch_loss': 10.162191390991211, 'next_batch_loss': 10.411153793334961}
+0: 0: Loading actual checkpoint: attack 128
+0: 0: Actual checkpoint: 0: 0: {'phase': 'attack', 'step': 128, 'probe_loss': 10.245897102355958, 'heldout_loss': 10.226398766040802, 'last_batch_loss': 10.035785675048828}
+0: 0: Loading visualization basis: random
+0: 0: Loaded direction 1/2 (27.0 GiB in 39.6 s)
+0: 0: Loaded direction 2/2 (27.0 GiB in 39.4 s)
+0: 0: Timeout (0:05:00)!
+0: 0: Thread 0x00001553693bb700 (most recent call first):
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 359 in wait
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 655 in wait
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/tqdm/_monitor.py", line 69 in run
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 1075 in _bootstrap_inner
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 1032 in _bootstrap
+0: 0: 
+0: 0: Thread 0x00001555555206c0 (most recent call first):
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/transformers/models/mistral/modeling_mistral.py", line 319 in forward
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/transformers/modeling_rope_utils.py", line 128 in wrapper
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124 in decorate_context
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789 in _call_impl
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778 in _wrapped_call_impl
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/transformers/models/mistral/modeling_mistral.py", line 382 in forward
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/transformers/utils/output_capturing.py", line 262 in wrapper
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/transformers/utils/generic.py", line 1040 in wrapper
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789 in _call_impl
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778 in _wrapped_call_impl
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/transformers/models/mistral/modeling_mistral.py", line 447 in forward
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/transformers/utils/generic.py", line 911 in wrapper
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789 in _call_impl
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778 in _wrapped_call_impl
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 793 in loss
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124 in decorate_context
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 988 in surfaces
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 2795 in main
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 2805 in <module>
+0: 0: Surface: random 1 /0: 0:  17
+0: 0: Surface: random 2 / 17
+0: 0: Surface: random 3 / 17
+0: 0: Surface: random 4 / 17
+0: 0: Surface: random 5 / 17
+0: 0: Surface: random 6 / 17
+0: 0: Surface: random 7 / 17
+0: 0: Surface: random 8 / 17
+0: 0: Surface: random 9 / 17
+0: 0: Surface: random 10 / 17
+0: 0: Surface: random 11 / 17
+0: 0: Surface: random 12 / 17
+0: 0: Surface: random 13 / 17
+0: 0: Surface: random 14 / 17
+0: 0: Surface: random 15 / 17
+0: 0: Surface: random 16 / 17
+0: 0: Timeout (0:05:00)!
+0: 0: Thread 0x00001553693bb700 (most recent call first):
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 359 in wait
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 655 in wait
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/tqdm/_monitor.py", line 69 in run
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 1075 in _bootstrap_inner
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 1032 in _bootstrap
+0: 0: 
+0: 0: Thread 0x00001555555206c0 (most recent call first):
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 793 in loss
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124 in decorate_context
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 988 in surfaces
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 2795 in main
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 2805 in <module>
+0: 0: Surface: random 17 / 17
+0: 0: Loading visualization basis: reference
+0: 0: Loaded direction 1/2 (27.0 GiB in 37.7 s)
+0: 0: Loaded direction 2/2 (27.0 GiB in 35.7 s)
+0: 0: Surface: reference 10: 0:  / 17
+0: 0: Surface: reference 2 / 17
+0: 0: Surface: reference 3 / 17
+0: 0: Surface: reference 4 / 17
+0: 0: Surface: reference 5 / 17
+0: 0: Surface: reference 6 / 17
+0: 0: Surface: reference 7 / 17
+0: 0: Surface: reference 8 / 17
+0: 0: Timeout (0:05:00)!
+0: 0: Thread 0x00001553693bb700 (most recent call first):
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 359 in wait
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 655 in wait
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/tqdm/_monitor.py", line 69 in run
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 1075 in _bootstrap_inner
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 1032 in _bootstrap
+0: 0: 
+0: 0: Thread 0x00001555555206c0 (most recent call first):
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 793 in loss
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124 in decorate_context
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 988 in surfaces
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 2795 in main
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 2805 in <module>
+0: 0: Surface: reference 9 / 17
+0: 0: Surface: reference 10 / 17
+0: 0: Surface: reference 11 / 17
+0: 0: Surface: reference 12 / 17
+0: 0: Surface: reference 13 / 17
+0: 0: Surface: reference 14 / 17
+0: 0: Surface: reference 15 / 17
+0: 0: Surface: reference 160: 0:  / 17
+0: 0: Surface: reference 17 / 17
+0: 0: Loading local frame: defense 125
+0: 0: Local row: defense 125 -0.15713339880469646
+0: 0: Local row: defense 125 -0.11785004910352234
+0: 0: Local row: defense 125 -0.07856669940234823
+0: 0: Local row: defense 125 -0.039283349701174114
+0: 0: Local row: defense 125 0.0
+0: 0: Local row: defense 125 0.039283349701174114
+0: 0: Timeout (0:05:00)!
+0: 0: Thread 0x00001553693bb700 (most recent call first):
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 359 in wait
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 655 in wait
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/tqdm/_monitor.py", line 69 in run
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 1075 in _bootstrap_inner
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/threading.py", line 1032 in _bootstrap
+0: 0: 
+0: 0: Thread 0x00001555555206c0 (most recent call first):
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 793 in loss
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124 in decorate_context
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 1071 in surfaces
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 2795 in main
+0: 0:   File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_dynamics.py", line 2805 in <module>
+0: 0: Local row: defense 125 0.07856669940234823
+0: 0: Local row: defense 125 0.11785004910352237
+0: 0: Local row: defense 125 0.15713339880469646
+0: 0: Local frame: defense 125
+0: 0: Loading local frame: attack 0
+0: 0: Local row: attack 0 -0.15713339880469646
+0: 0: Local row: attack 0 -0.11785004910352234
+0: 0: Local row: attack 0 -0.07856669940234823
+0: 0: Local row: attack 0 -0.039283349701174114
+0: 0: Local row: attack 0 0.0
+0: 0: Local row: attack 0 0.039283349701174114
+0: 0: Local row: attack 0 0.07856669940234823
+0: 0: Local row: attack 0 0.11785004910352237
+0: 0: Local row: attack 0 0.15713339880469646
+0: 0: Local frame: attack 0
+0: 0: Loading local frame: attack 1
+0: 0: Local row: attack 1 -0.15713339880469646
+0: 0: Local row: attack 1 -0.11785004910352234
+0: 0: Local row: attack 1 -0.07856669940234823
+0: 0: Local row: attack 1 -0.039283349701174114
+0: 0: Local row: attack 1 0.0
+0: 0: Local row: attack 1 0.039283349701174114
+0: Nov 16 10:55:13.003390 PST 2026 broker.err[0]: rc2.0: /var/tmp/kirchenb/jobtmp-0-f3kUSqGyT13V/script Alarm clock (rc=142) 3292.3s
+0: 3291.640s: job.exception fXea9tT type=timeout severity=0 resource allocation expired
+0: 0: Local row: attack 1 0.07856669940234823

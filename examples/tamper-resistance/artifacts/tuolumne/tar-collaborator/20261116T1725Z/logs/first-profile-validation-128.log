@@ -1,0 +1,233 @@
+bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+Landscape GPU assignment: {'physical_gpu_requested': '0', 'logical_device': 0, 'visible_devices': 1, 'device': "_CudaDeviceProperties(name='AMD Instinct MI300A', major=9, minor=4, gcnArchName='gfx942:sramecc+:xnack-', total_memory=131072MB, multi_processor_count=228, uuid=63653532-3065-3135-6134-646133346636, pci_bus_id=2, pci_device_id=0, pci_domain_id=0, L2_cache_size=4MB)"}
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:01<05:02,  1.04s/it]Loading weights:  36%|███▌      | 104/291 [00:01<00:01, 123.79it/s]Loading weights: 100%|██████████| 291/291 [00:01<00:00, 248.71it/s]
+Using the latest cached version of the dataset since cais/wmdp-bio-forget-corpus couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'default' at /p/vast1/kirchenb/tar-root/cache/huggingface/datasets/cais___wmdp-bio-forget-corpus/default/0.0.0/5a786ed1041e56fef2d4ed26c1239f12b73a68eb (last modified on Mon Nov 16 09:35:54 2026).
+Update 1 fraction -1
+Update 1 fraction -0.875
+Update 1 fraction -0.75
+Update 1 fraction -0.625
+Update 1 fraction -0.5
+Update 1 fraction -0.375
+Update 1 fraction -0.25
+Update 1 fraction -0.125
+Update 1 fraction 0
+Update 1 fraction 0.125
+Update 1 fraction 0.25
+Update 1 fraction 0.375
+Update 1 fraction 0.5
+Update 1 fraction 0.625
+Update 1 fraction 0.75
+Update 1 fraction 0.875
+Update 1 fraction 1
+Update 1 fraction 1.125
+Update 1 fraction 1.25
+Update 1 fraction 1.375
+Update 1 fraction 1.5
+Update 1 fraction 1.625
+Update 1 fraction 1.75
+Update 1 fraction 1.875
+Update 1 fraction 2
+First-update plane c0=-1
+First-update plane c0=-0.875
+First-update plane c0=-0.75
+First-update plane c0=-0.625
+First-update plane c0=-0.5
+First-update plane c0=-0.375
+First-update plane c0=-0.25
+First-update plane c0=-0.125
+First-update plane c0=0
+First-update plane c0=0.125
+First-update plane c0=0.25
+First-update plane c0=0.375
+First-update plane c0=0.5
+First-update plane c0=0.625
+First-update plane c0=0.75
+First-update plane c0=0.875
+First-update plane c0=1
+Update 2 fraction -1
+Update 2 fraction -0.875
+Update 2 fraction -0.75
+Update 2 fraction -0.625
+Update 2 fraction -0.5
+Update 2 fraction -0.375
+Update 2 fraction -0.25
+Update 2 fraction -0.125
+Update 2 fraction 0
+Update 2 fraction 0.125
+Update 2 fraction 0.25
+Update 2 fraction 0.375
+Update 2 fraction 0.5
+Update 2 fraction 0.625
+Update 2 fraction 0.75
+Update 2 fraction 0.875
+Update 2 fraction 1
+Update 2 fraction 1.125
+Update 2 fraction 1.25
+Update 2 fraction 1.375
+Update 2 fraction 1.5
+Update 2 fraction 1.625
+Update 2 fraction 1.75
+Update 2 fraction 1.875
+Update 2 fraction 2
+Update 3 fraction -1
+Update 3 fraction -0.875
+Update 3 fraction -0.75
+Update 3 fraction -0.625
+Update 3 fraction -0.5
+Update 3 fraction -0.375
+Update 3 fraction -0.25
+Update 3 fraction -0.125
+Update 3 fraction 0
+Update 3 fraction 0.125
+Update 3 fraction 0.25
+Update 3 fraction 0.375
+Update 3 fraction 0.5
+Update 3 fraction 0.625
+Update 3 fraction 0.75
+Update 3 fraction 0.875
+Update 3 fraction 1
+Update 3 fraction 1.125
+Update 3 fraction 1.25
+Update 3 fraction 1.375
+Update 3 fraction 1.5
+Update 3 fraction 1.625
+Update 3 fraction 1.75
+Update 3 fraction 1.875
+Update 3 fraction 2
+Update 4 fraction -1
+Update 4 fraction -0.875
+Update 4 fraction -0.75
+Update 4 fraction -0.625
+Update 4 fraction -0.5
+Update 4 fraction -0.375
+Update 4 fraction -0.25
+Update 4 fraction -0.125
+Update 4 fraction 0
+Update 4 fraction 0.125
+Update 4 fraction 0.25
+Update 4 fraction 0.375
+Update 4 fraction 0.5
+Update 4 fraction 0.625
+Update 4 fraction 0.75
+Update 4 fraction 0.875
+Update 4 fraction 1
+Update 4 fraction 1.125
+Update 4 fraction 1.25
+Update 4 fraction 1.375
+Update 4 fraction 1.5
+Update 4 fraction 1.625
+Update 4 fraction 1.75
+Update 4 fraction 1.875
+Update 4 fraction 2
+Update 5 fraction -1
+Update 5 fraction -0.875
+Update 5 fraction -0.75
+Update 5 fraction -0.625
+Update 5 fraction -0.5
+Update 5 fraction -0.375
+Update 5 fraction -0.25
+Update 5 fraction -0.125
+Update 5 fraction 0
+Update 5 fraction 0.125
+Update 5 fraction 0.25
+Update 5 fraction 0.375
+Update 5 fraction 0.5
+Update 5 fraction 0.625
+Update 5 fraction 0.75
+Update 5 fraction 0.875
+Update 5 fraction 1
+Update 5 fraction 1.125
+Update 5 fraction 1.25
+Update 5 fraction 1.375
+Update 5 fraction 1.5
+Update 5 fraction 1.625
+Update 5 fraction 1.75
+Update 5 fraction 1.875
+Update 5 fraction 2
+Update 6 fraction -1
+Update 6 fraction -0.875
+Update 6 fraction -0.75
+Update 6 fraction -0.625
+Update 6 fraction -0.5
+Update 6 fraction -0.375
+Update 6 fraction -0.25
+Update 6 fraction -0.125
+Update 6 fraction 0
+Update 6 fraction 0.125
+Update 6 fraction 0.25
+Update 6 fraction 0.375
+Update 6 fraction 0.5
+Update 6 fraction 0.625
+Update 6 fraction 0.75
+Update 6 fraction 0.875
+Update 6 fraction 1
+Update 6 fraction 1.125
+Update 6 fraction 1.25
+Update 6 fraction 1.375
+Update 6 fraction 1.5
+Update 6 fraction 1.625
+Update 6 fraction 1.75
+Update 6 fraction 1.875
+Update 6 fraction 2
+Update 7 fraction -1
+Update 7 fraction -0.875
+Update 7 fraction -0.75
+Update 7 fraction -0.625
+Update 7 fraction -0.5
+Update 7 fraction -0.375
+Update 7 fraction -0.25
+Update 7 fraction -0.125
+Update 7 fraction 0
+Update 7 fraction 0.125
+Update 7 fraction 0.25
+Update 7 fraction 0.375
+Update 7 fraction 0.5
+Update 7 fraction 0.625
+Update 7 fraction 0.75
+Update 7 fraction 0.875
+Update 7 fraction 1
+Update 7 fraction 1.125
+Update 7 fraction 1.25
+Update 7 fraction 1.375
+Update 7 fraction 1.5
+Update 7 fraction 1.625
+Update 7 fraction 1.75
+Update 7 fraction 1.875
+Update 7 fraction 2
+Update 8 fraction -1
+Update 8 fraction -0.875
+Update 8 fraction -0.75
+Update 8 fraction -0.625
+Update 8 fraction -0.5
+Update 8 fraction -0.375
+Update 8 fraction -0.25
+Update 8 fraction -0.125
+Update 8 fraction 0
+Update 8 fraction 0.125
+Update 8 fraction 0.25
+Update 8 fraction 0.375
+Update 8 fraction 0.5
+Update 8 fraction 0.625
+Update 8 fraction 0.75
+Update 8 fraction 0.875
+Update 8 fraction 1
+Update 8 fraction 1.125
+Update 8 fraction 1.25
+Update 8 fraction 1.375
+Update 8 fraction 1.5
+Update 8 fraction 1.625
+Update 8 fraction 1.75
+Update 8 fraction 1.875
+Update 8 fraction 2
+Traceback (most recent call last):
+  File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_compute_compare.py", line 2964, in <module>
+    main()
+  File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_compute_compare.py", line 2952, in main
+    result = profile_values(args.run, args.case)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v1/tar_compute_compare.py", line 2127, in profile_values
+    raise ValueError(
+ValueError: Numerical step-profile cache did not validate: Completed baseline-lr1e-5 profiles are pending for common text/source identities

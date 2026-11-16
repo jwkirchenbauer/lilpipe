@@ -1,0 +1,13 @@
+bash: cannot set terminal process group (2973382): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+      f3kWb6ZVFRif    pbatch evogrpo- kirchenb  D      00:00      1 
+      f3kWfKiAmST9    pdebug tar-defe kirchenb  R      00:00      1 tuolumne1024
+      f3kWd14Npkib    pdebug tar-modu kirchenb  R      00:09      1 tuolumne1025
+      f3kWaYbQqbpb    pdebug evogrpo- kirchenb  R      02:29      1 tuolumne1040
+      f3kWUVVrxMsu    pdebug tar-stru kirchenb  R      23:45      1 tuolumne1046
+Removing existing launch file: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/launches/tar-defense-anchor-sensitivity/launch.sh
+Removing existing runner file: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/launches/tar-defense-anchor-sensitivity/subrunner.sh
+Submission: flux batch -q pdebug --bank=verival --job-name=tar-defense-anchor-sensitivity -t5 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/launches/tar-defense-anchor-sensitivity/launch.sh
+Launched job_id=f3kWfKiAmST9.

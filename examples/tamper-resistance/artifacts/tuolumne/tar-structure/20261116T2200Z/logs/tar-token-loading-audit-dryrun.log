@@ -1,0 +1,7 @@
+bash: cannot set terminal process group (3057527): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+      f3kWiQweXXyR    pdebug advgame- kirchenb  R      04:52      1 tuolumne1016
+Submission: flux batch -q pdebug --bank=verival --job-name=tar-token-loading-audit -t10 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/launches/tar-token-loading-audit/launch.sh
+No jobs were launched. You can inspect the files created at /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/launches/tar-token-loading-audit/launch.sh

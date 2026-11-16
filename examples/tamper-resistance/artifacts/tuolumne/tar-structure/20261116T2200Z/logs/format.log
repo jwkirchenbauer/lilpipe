@@ -1,0 +1,7 @@
+bash: cannot set terminal process group (2734105): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+reformatted scripts/misc/tar_basis_structure.py
+
+All done! ✨ 🍰 ✨
+1 file reformatted.

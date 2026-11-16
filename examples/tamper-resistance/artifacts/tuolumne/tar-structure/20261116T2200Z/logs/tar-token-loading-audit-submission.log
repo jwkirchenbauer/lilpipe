@@ -1,0 +1,10 @@
+bash: cannot set terminal process group (3064569): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+      f3kWm3JQgit7    pdebug tar-toke kirchenb  R      00:00      1 tuolumne1025
+      f3kWiQweXXyR    pdebug advgame- kirchenb  R      05:45      1 tuolumne1016
+Removing existing launch file: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/launches/tar-token-loading-audit/launch.sh
+Removing existing runner file: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/launches/tar-token-loading-audit/subrunner.sh
+Submission: flux batch -q pdebug --bank=verival --job-name=tar-token-loading-audit -t10 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/launches/tar-token-loading-audit/launch.sh
+Launched job_id=f3kWm3JQgit7.

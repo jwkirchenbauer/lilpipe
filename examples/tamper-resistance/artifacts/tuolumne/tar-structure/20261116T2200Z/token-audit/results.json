@@ -1,0 +1,2055 @@
+{
+  "state": "complete",
+  "input_signature": "cb82fec975ca2f791c5b52860a9b900182f889ccdd61c8b71d67aa366186fa9b",
+  "source_sha256": "75f89a3c7183a4d36f03353b1cc61abdb0ea26ab1609f4b40e419f1e77b8787b",
+  "helper_sha256": "6ab38451a8ab3da906cce6a74424dc0526b1a332c043604e8fd11c3a2b20c78f",
+  "chunk_rows": 128,
+  "gpu": "AMD Instinct MI300A",
+  "flux_job_id": "fWoeZb5",
+  "loading": {
+    "local-defense-attack-defense-1": {
+      "snapshot": {
+        "name": "defense-1",
+        "step": 1,
+        "anchor": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-1",
+        "inspect": true
+      },
+      "observation_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/observed-batches.jsonl",
+      "batch_sha256": "ba271c3db2541bb82992ccd3fd24847dadd75907c479baf48bd9d2c0a9cbc5cf",
+      "roles": [
+        0,
+        1
+      ],
+      "matrices": {
+        "embedding": {
+          "before": {
+            "shape": [
+              32000,
+              4096
+            ],
+            "saved_dtype": "BF16"
+          },
+          "after": {
+            "shape": [
+              32000,
+              4096
+            ],
+            "saved_dtype": "F32"
+          },
+          "selected_batch_rows": [
+            0,
+            2,
+            4,
+            5,
+            9,
+            14,
+            15,
+            20
+          ],
+          "unique_all_input_ids": 966,
+          "scopes": {
+            "all": {
+              "rows": 32000,
+              "scalars": 131072000,
+              "raw_l2": 0.0,
+              "raw_changed_rows": 0,
+              "raw_changed_scalars": 0,
+              "raw_changed_fraction": 0.0,
+              "load_offset_l2": 0.0,
+              "load_offset_changed_rows": 0,
+              "load_offset_changed_scalars": 0,
+              "load_offset_changed_fraction": 0.0,
+              "adjusted_l2": 0.0,
+              "adjusted_changed_rows": 0,
+              "adjusted_changed_scalars": 0,
+              "adjusted_changed_fraction": 0.0,
+              "evaluated_l2": 0.0,
+              "evaluated_changed_rows": 0,
+              "evaluated_changed_scalars": 0,
+              "evaluated_changed_fraction": 0.0,
+              "raw_minus_offset_residual_l2": 0.0,
+              "raw_equals_offset_exactly": true,
+              "maximum_raw_minus_offset_residual": 0.0
+            },
+            "seen_all_input": {
+              "rows": 966,
+              "scalars": 3956736,
+              "raw_l2": 0.0,
+              "raw_changed_rows": 0,
+              "raw_changed_scalars": 0,
+              "raw_changed_fraction": 0.0,
+              "load_offset_l2": 0.0,
+              "load_offset_changed_rows": 0,
+              "load_offset_changed_scalars": 0,
+              "load_offset_changed_fraction": 0.0,
+              "adjusted_l2": 0.0,
+              "adjusted_changed_rows": 0,
+              "adjusted_changed_scalars": 0,
+              "adjusted_changed_fraction": 0.0,
+              "evaluated_l2": 0.0,
+              "evaluated_changed_rows": 0,
+              "evaluated_changed_scalars": 0,
+              "evaluated_changed_fraction": 0.0,
+              "raw_minus_offset_residual_l2": 0.0,
+              "raw_equals_offset_exactly": true,
+              "maximum_raw_minus_offset_residual": 0.0
+            },
+            "unseen_all_input": {
+              "rows": 31034,
+              "scalars": 127115264,
+              "raw_l2": 0.0,
+              "raw_changed_rows": 0,
+              "raw_changed_scalars": 0,
+              "raw_changed_fraction": 0.0,
+              "load_offset_l2": 0.0,
+              "load_offset_changed_rows": 0,
+              "load_offset_changed_scalars": 0,
+              "load_offset_changed_fraction": 0.0,
+              "adjusted_l2": 0.0,
+              "adjusted_changed_rows": 0,
+              "adjusted_changed_scalars": 0,
+              "adjusted_changed_fraction": 0.0,
+              "evaluated_l2": 0.0,
+              "evaluated_changed_rows": 0,
+              "evaluated_changed_scalars": 0,
+              "evaluated_changed_fraction": 0.0,
+              "raw_minus_offset_residual_l2": 0.0,
+              "raw_equals_offset_exactly": true,
+              "maximum_raw_minus_offset_residual": 0.0
+            }
+          }
+        },
+        "head": {
+          "before": {
+            "shape": [
+              32000,
+              4096
+            ],
+            "saved_dtype": "BF16"
+          },
+          "after": {
+            "shape": [
+              32000,
+              4096
+            ],
+            "saved_dtype": "F32"
+          },
+          "selected_batch_rows": [
+            0,
+            2,
+            4,
+            5,
+            9,
+            14,
+            15,
+            20
+          ],
+          "unique_all_input_ids": 966,
+          "scopes": {
+            "all": {
+              "rows": 32000,
+              "scalars": 131072000,
+              "raw_l2": 0.0,
+              "raw_changed_rows": 0,
+              "raw_changed_scalars": 0,
+              "raw_changed_fraction": 0.0,
+              "load_offset_l2": 0.0,
+              "load_offset_changed_rows": 0,
+              "load_offset_changed_scalars": 0,
+              "load_offset_changed_fraction": 0.0,
+              "adjusted_l2": 0.0,
+              "adjusted_changed_rows": 0,
+              "adjusted_changed_scalars": 0,
+              "adjusted_changed_fraction": 0.0,
+              "evaluated_l2": 0.0,
+              "evaluated_changed_rows": 0,
+              "evaluated_changed_scalars": 0,
+              "evaluated_changed_fraction": 0.0,
+              "raw_minus_offset_residual_l2": 0.0,
+              "raw_equals_offset_exactly": true,
+              "maximum_raw_minus_offset_residual": 0.0
+            },
+            "seen_all_input": {
+              "rows": 966,
+              "scalars": 3956736,
+              "raw_l2": 0.0,
+              "raw_changed_rows": 0,
+              "raw_changed_scalars": 0,
+              "raw_changed_fraction": 0.0,
+              "load_offset_l2": 0.0,
+              "load_offset_changed_rows": 0,
+              "load_offset_changed_scalars": 0,
+              "load_offset_changed_fraction": 0.0,
+              "adjusted_l2": 0.0,
+              "adjusted_changed_rows": 0,
+              "adjusted_changed_scalars": 0,
+              "adjusted_changed_fraction": 0.0,
+              "evaluated_l2": 0.0,
+              "evaluated_changed_rows": 0,
+              "evaluated_changed_scalars": 0,
+              "evaluated_changed_fraction": 0.0,
+              "raw_minus_offset_residual_l2": 0.0,
+              "raw_equals_offset_exactly": true,
+              "maximum_raw_minus_offset_residual": 0.0
+            },
+            "unseen_all_input": {
+              "rows": 31034,
+              "scalars": 127115264,
+              "raw_l2": 0.0,
+              "raw_changed_rows": 0,
+              "raw_changed_scalars": 0,
+              "raw_changed_fraction": 0.0,
+              "load_offset_l2": 0.0,
+              "load_offset_changed_rows": 0,
+              "load_offset_changed_scalars": 0,
+              "load_offset_changed_fraction": 0.0,
+              "adjusted_l2": 0.0,
+              "adjusted_changed_rows": 0,
+              "adjusted_changed_scalars": 0,
+              "adjusted_changed_fraction": 0.0,
+              "evaluated_l2": 0.0,
+              "evaluated_changed_rows": 0,
+              "evaluated_changed_scalars": 0,
+              "evaluated_changed_fraction": 0.0,
+              "raw_minus_offset_residual_l2": 0.0,
+              "raw_equals_offset_exactly": true,
+              "maximum_raw_minus_offset_residual": 0.0
+            }
+          }
+        }
+      }
+    },
+    "local-defense-attack-attack-1": {
+      "snapshot": {
+        "name": "attack-1",
+        "step": 1,
+        "anchor": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense",
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-1",
+        "inspect": true
+      },
+      "observation_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/observed-batches.jsonl",
+      "batch_sha256": "28421b063b8ace4afe8b677611c69ba9d9c4a6bea5480322756e83244162d9e6",
+      "roles": "all attacker rows",
+      "matrices": {
+        "embedding": {
+          "before": {
+            "shape": [
+              32000,
+              4096
+            ],
+            "saved_dtype": "F32"
+          },
+          "after": {
+            "shape": [
+              32000,
+              4096
+            ],
+            "saved_dtype": "F32"
+          },
+          "selected_batch_rows": [
+            0
+          ],
+          "unique_all_input_ids": 230,
+          "scopes": {
+            "all": {
+              "rows": 32000,
+              "scalars": 131072000,
+              "raw_l2": 0.033249395795485144,
+              "raw_changed_rows": 13883,
+              "raw_changed_scalars": 56854238,
+              "raw_changed_fraction": 0.4337634124755859,
+              "load_offset_l2": 0.03323706916487009,
+              "load_offset_changed_rows": 13882,
+              "load_offset_changed_scalars": 56850138,
+              "load_offset_changed_fraction": 0.4337321319580078,
+              "adjusted_l2": 0.0008993641816165898,
+              "adjusted_changed_rows": 230,
+              "adjusted_changed_scalars": 942078,
+              "adjusted_changed_fraction": 0.007187484741210937,
+              "evaluated_l2": 0.000505587421237885,
+              "evaluated_changed_rows": 230,
+              "evaluated_changed_scalars": 134076,
+              "evaluated_changed_fraction": 0.001022918701171875,
+              "raw_minus_offset_residual_l2": 0.0008993641816165898,
+              "raw_equals_offset_exactly": false,
+              "maximum_raw_minus_offset_residual": 1.000240445137024e-06
+            },
+            "seen_all_input": {
+              "rows": 230,
+              "scalars": 942080,
+              "raw_l2": 0.003978030170809745,
+              "raw_changed_rows": 230,
+              "raw_changed_scalars": 942069,
+              "raw_changed_fraction": 0.9999883237092392,
+              "load_offset_l2": 0.003873650725788979,
+              "load_offset_changed_rows": 229,
+              "load_offset_changed_scalars": 937969,
+              "load_offset_changed_fraction": 0.9956362516983696,
+              "adjusted_l2": 0.0008993641816165898,
+              "adjusted_changed_rows": 230,
+              "adjusted_changed_scalars": 942078,
+              "adjusted_changed_fraction": 0.9999978770380434,
+              "evaluated_l2": 0.000505587421237885,
+              "evaluated_changed_rows": 230,
+              "evaluated_changed_scalars": 134076,
+              "evaluated_changed_fraction": 0.14231912364130433,
+              "raw_minus_offset_residual_l2": 0.0008993641816165898,
+              "raw_equals_offset_exactly": false,
+              "maximum_raw_minus_offset_residual": 1.000240445137024e-06
+            },
+            "unseen_all_input": {
+              "rows": 31770,
+              "scalars": 130129920,
+              "raw_l2": 0.033010567955201145,
+              "raw_changed_rows": 13653,
+              "raw_changed_scalars": 55912169,
+              "raw_changed_fraction": 0.42966420789315785,
+              "load_offset_l2": 0.033010567955201145,
+              "load_offset_changed_rows": 13653,
+              "load_offset_changed_scalars": 55912169,
+              "load_offset_changed_fraction": 0.42966420789315785,
+              "adjusted_l2": 0.0,
+              "adjusted_changed_rows": 0,
+              "adjusted_changed_scalars": 0,
+              "adjusted_changed_fraction": 0.0,
+              "evaluated_l2": 0.0,
+              "evaluated_changed_rows": 0,
+              "evaluated_changed_scalars": 0,
+              "evaluated_changed_fraction": 0.0,
+              "raw_minus_offset_residual_l2": 0.0,
+              "raw_equals_offset_exactly": true,
+              "maximum_raw_minus_offset_residual": 0.0
+            }
+          }
+        },
+        "head": {
+          "before": {
+            "shape": [
+              32000,
+              4096
+            ],
+            "saved_dtype": "F32"
+          },
+          "after": {
+            "shape": [
+              32000,
+              4096
+            ],
+            "saved_dtype": "F32"
+          },
+          "selected_batch_rows": [
+            0
+          ],
+          "unique_all_input_ids": 230,
+          "scopes": {
+            "all": {
+              "rows": 32000,
+              "scalars": 131072000,
+              "raw_l2": 0.08126899773074597,
+              "raw_changed_rows": 32000,
+              "raw_changed_scalars": 131070111,
+              "raw_changed_fraction": 0.9999855880737305,
+              "load_offset_l2": 0.0805870860941437,
+              "load_offset_changed_rows": 32000,
+              "load_offset_changed_scalars": 131069930,
+              "load_offset_changed_fraction": 0.9999842071533203,
+              "adjusted_l2": 0.010512636121574593,
+              "adjusted_changed_rows": 32000,
+              "adjusted_changed_scalars": 131071495,
+              "adjusted_changed_fraction": 0.9999961471557617,
+              "evaluated_l2": 0.004118591384626166,
+              "evaluated_changed_rows": 32000,
+              "evaluated_changed_scalars": 9286273,
+              "evaluated_changed_fraction": 0.07084864044189453,
+              "raw_minus_offset_residual_l2": 0.010512636121574593,
+              "raw_equals_offset_exactly": false,
+              "maximum_raw_minus_offset_residual": 1.000240445137024e-06
+            },
+            "seen_all_input": {
+              "rows": 230,
+              "scalars": 942080,
+              "raw_l2": 0.006178326684276205,
+              "raw_changed_rows": 230,
+              "raw_changed_scalars": 942066,
+              "raw_changed_fraction": 0.9999851392663044,
+              "load_offset_l2": 0.006102649743041063,
+              "load_offset_changed_rows": 230,
+              "load_offset_changed_scalars": 942059,
+              "load_offset_changed_fraction": 0.9999777088994565,
+              "adjusted_l2": 0.0009682720679453248,
+              "adjusted_changed_rows": 230,
+              "adjusted_changed_scalars": 942080,
+              "adjusted_changed_fraction": 1.0,
+              "evaluated_l2": 0.00046781000656856805,
+              "evaluated_changed_rows": 230,
+              "evaluated_changed_scalars": 96401,
+              "evaluated_changed_fraction": 0.10232782778532609,
+              "raw_minus_offset_residual_l2": 0.0009682720679453248,
+              "raw_equals_offset_exactly": false,
+              "maximum_raw_minus_offset_residual": 1.000240445137024e-06
+            },
+            "unseen_all_input": {
+              "rows": 31770,
+              "scalars": 130129920,
+              "raw_l2": 0.08103380943496581,
+              "raw_changed_rows": 31770,
+              "raw_changed_scalars": 130128045,
+              "raw_changed_fraction": 0.9999855913228871,
+              "load_offset_l2": 0.08035568499651216,
+              "load_offset_changed_rows": 31770,
+              "load_offset_changed_scalars": 130127871,
+              "load_offset_changed_fraction": 0.9999842541976511,
+              "adjusted_l2": 0.010467949533078185,
+              "adjusted_changed_rows": 31770,
+              "adjusted_changed_scalars": 130129415,
+              "adjusted_changed_fraction": 0.9999961192629643,
+              "evaluated_l2": 0.004091937046347511,
+              "evaluated_changed_rows": 31770,
+              "evaluated_changed_scalars": 9189872,
+              "evaluated_changed_fraction": 0.07062074579005351,
+              "raw_minus_offset_residual_l2": 0.010467949533078185,
+              "raw_equals_offset_exactly": false,
+              "maximum_raw_minus_offset_residual": 1.000240445137024e-06
+            }
+          }
+        }
+      }
+    },
+    "collaborator-attack-attack-1": {
+      "snapshot": {
+        "name": "attack-1",
+        "step": 1,
+        "anchor": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/cases/collaborator-lr1e-6-ms1000/models/defense",
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/cases/collaborator-lr1e-6-ms1000/models/attack/checkpoint-1",
+        "inspect": true
+      },
+      "observation_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/cases/collaborator-lr1e-6-ms1000/models/attack/observed-batches.jsonl",
+      "batch_sha256": "28421b063b8ace4afe8b677611c69ba9d9c4a6bea5480322756e83244162d9e6",
+      "roles": "all attacker rows",
+      "matrices": {
+        "embedding": {
+          "before": {
+            "shape": [
+              32000,
+              4096
+            ],
+            "saved_dtype": "F32"
+          },
+          "after": {
+            "shape": [
+              32000,
+              4096
+            ],
+            "saved_dtype": "F32"
+          },
+          "selected_batch_rows": [
+            0
+          ],
+          "unique_all_input_ids": 230,
+          "scopes": {
+            "all": {
+              "rows": 32000,
+              "scalars": 131072000,
+              "raw_l2": 0.03449101069749065,
+              "raw_changed_rows": 13905,
+              "raw_changed_scalars": 56953513,
+              "raw_changed_fraction": 0.4345208206176758,
+              "load_offset_l2": 0.03447762004343945,
+              "load_offset_changed_rows": 13902,
+              "load_offset_changed_scalars": 56941230,
+              "load_offset_changed_fraction": 0.43442710876464846,
+              "adjusted_l2": 0.000962379701473675,
+              "adjusted_changed_rows": 230,
+              "adjusted_changed_scalars": 942080,
+              "adjusted_changed_fraction": 0.0071875,
+              "evaluated_l2": 0.0006069075755613651,
+              "evaluated_changed_rows": 230,
+              "evaluated_changed_scalars": 165261,
+              "evaluated_changed_fraction": 0.0012608413696289062,
+              "raw_minus_offset_residual_l2": 0.000962379701473675,
+              "raw_equals_offset_exactly": false,
+              "maximum_raw_minus_offset_residual": 1.000240445137024e-06
+            },
+            "seen_all_input": {
+              "rows": 230,
+              "scalars": 942080,
+              "raw_l2": 0.00400646087489955,
+              "raw_changed_rows": 230,
+              "raw_changed_scalars": 942065,
+              "raw_changed_fraction": 0.999984077785326,
+              "load_offset_l2": 0.0038894978682940604,
+              "load_offset_changed_rows": 227,
+              "load_offset_changed_scalars": 929782,
+              "load_offset_changed_fraction": 0.9869459069293478,
+              "adjusted_l2": 0.000962379701473675,
+              "adjusted_changed_rows": 230,
+              "adjusted_changed_scalars": 942080,
+              "adjusted_changed_fraction": 1.0,
+              "evaluated_l2": 0.0006069075755613651,
+              "evaluated_changed_rows": 230,
+              "evaluated_changed_scalars": 165261,
+              "evaluated_changed_fraction": 0.17542140794836958,
+              "raw_minus_offset_residual_l2": 0.000962379701473675,
+              "raw_equals_offset_exactly": false,
+              "maximum_raw_minus_offset_residual": 1.000240445137024e-06
+            },
+            "unseen_all_input": {
+              "rows": 31770,
+              "scalars": 130129920,
+              "raw_l2": 0.034257526037242,
+              "raw_changed_rows": 13675,
+              "raw_changed_scalars": 56011448,
+              "raw_changed_fraction": 0.4304271300558703,
+              "load_offset_l2": 0.034257526037242,
+              "load_offset_changed_rows": 13675,
+              "load_offset_changed_scalars": 56011448,
+              "load_offset_changed_fraction": 0.4304271300558703,
+              "adjusted_l2": 0.0,
+              "adjusted_changed_rows": 0,
+              "adjusted_changed_scalars": 0,
+              "adjusted_changed_fraction": 0.0,
+              "evaluated_l2": 0.0,
+              "evaluated_changed_rows": 0,
+              "evaluated_changed_scalars": 0,
+              "evaluated_changed_fraction": 0.0,
+              "raw_minus_offset_residual_l2": 0.0,
+              "raw_equals_offset_exactly": true,
+              "maximum_raw_minus_offset_residual": 0.0
+            }
+          }
+        },
+        "head": {
+          "before": {
+            "shape": [
+              32000,
+              4096
+            ],
+            "saved_dtype": "F32"
+          },
+          "after": {
+            "shape": [
+              32000,
+              4096
+            ],
+            "saved_dtype": "F32"
+          },
+          "selected_batch_rows": [
+            0
+          ],
+          "unique_all_input_ids": 230,
+          "scopes": {
+            "all": {
+              "rows": 32000,
+              "scalars": 131072000,
+              "raw_l2": 0.08064403724222535,
+              "raw_changed_rows": 32000,
+              "raw_changed_scalars": 131070137,
+              "raw_changed_fraction": 0.9999857864379883,
+              "load_offset_l2": 0.08047804771845075,
+              "load_offset_changed_rows": 32000,
+              "load_offset_changed_scalars": 131070077,
+              "load_offset_changed_fraction": 0.9999853286743164,
+              "adjusted_l2": 0.00517622443600409,
+              "adjusted_changed_rows": 32000,
+              "adjusted_changed_scalars": 131019834,
+              "adjusted_changed_fraction": 0.9996020050048828,
+              "evaluated_l2": 0.0015565590630404887,
+              "evaluated_changed_rows": 31999,
+              "evaluated_changed_scalars": 3205283,
+              "evaluated_changed_fraction": 0.024454368591308593,
+              "raw_minus_offset_residual_l2": 0.00517622443600409,
+              "raw_equals_offset_exactly": false,
+              "maximum_raw_minus_offset_residual": 1.000240445137024e-06
+            },
+            "seen_all_input": {
+              "rows": 230,
+              "scalars": 942080,
+              "raw_l2": 0.006139182844059252,
+              "raw_changed_rows": 230,
+              "raw_changed_scalars": 942068,
+              "raw_changed_fraction": 0.9999872622282608,
+              "load_offset_l2": 0.0060640458126080266,
+              "load_offset_changed_rows": 230,
+              "load_offset_changed_scalars": 942063,
+              "load_offset_changed_fraction": 0.9999819548233696,
+              "adjusted_l2": 0.0009632666850913334,
+              "adjusted_changed_rows": 230,
+              "adjusted_changed_scalars": 942080,
+              "adjusted_changed_fraction": 1.0,
+              "evaluated_l2": 0.00046501173260956566,
+              "evaluated_changed_rows": 230,
+              "evaluated_changed_scalars": 95941,
+              "evaluated_changed_fraction": 0.10183954653532609,
+              "raw_minus_offset_residual_l2": 0.0009632666850913334,
+              "raw_equals_offset_exactly": false,
+              "maximum_raw_minus_offset_residual": 1.000240445137024e-06
+            },
+            "unseen_all_input": {
+              "rows": 31770,
+              "scalars": 130129920,
+              "raw_l2": 0.08041001913152762,
+              "raw_changed_rows": 31770,
+              "raw_changed_scalars": 130128069,
+              "raw_changed_fraction": 0.9999857757539542,
+              "load_offset_l2": 0.0802492586442755,
+              "load_offset_changed_rows": 31770,
+              "load_offset_changed_scalars": 130128014,
+              "load_offset_changed_fraction": 0.9999853530994256,
+              "adjusted_l2": 0.005085805413627129,
+              "adjusted_changed_rows": 31770,
+              "adjusted_changed_scalars": 130077754,
+              "adjusted_changed_fraction": 0.9995991237065235,
+              "evaluated_l2": 0.0014854764236664727,
+              "evaluated_changed_rows": 31769,
+              "evaluated_changed_scalars": 3109342,
+              "evaluated_changed_fraction": 0.023894135952746302,
+              "raw_minus_offset_residual_l2": 0.005085805413627129,
+              "raw_equals_offset_exactly": false,
+              "maximum_raw_minus_offset_residual": 1.000240445137024e-06
+            }
+          }
+        }
+      }
+    }
+  },
+  "basis": {
+    "local-defense-attack": {
+      "basis": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/geometry/attack-basis.npy",
+      "geometry": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/geometry/geometry.json",
+      "attack_eigenvalues": [
+        3.9182784636507506,
+        0.39461632202825636,
+        0.09510236062342758,
+        0.03976751400056121,
+        0.021226364950293078,
+        0.012976345829521877,
+        0.007242627867731731,
+        0.004551972744181725,
+        0.00436424864745721,
+        0.0026804482915910592,
+        0.0010878411016262055,
+        0.0002019619350385369,
+        5.2570144006398196e-05
+      ],
+      "matrices": {
+        "embedding": {
+          "shape": [
+            32000,
+            4096
+          ],
+          "observed_batches": 1000,
+          "methods": {
+            "pc1": {
+              "axis_weights": [
+                1.0,
+                0.0
+              ],
+              "rows": {
+                "energy": 0.007329491353286326,
+                "coordinates": 32000,
+                "nonzero": 16615,
+                "count_for_90_percent": 10603,
+                "top10_fraction": 0.0067383733409238904,
+                "top100_fraction": 0.0354302993114803,
+                "top20_ids": [
+                  13,
+                  1,
+                  28723,
+                  7559,
+                  2372,
+                  5919,
+                  9008,
+                  1729,
+                  5580,
+                  9278,
+                  18520,
+                  8324,
+                  20869,
+                  12337,
+                  11739,
+                  1479,
+                  5379,
+                  14214,
+                  1759,
+                  21716
+                ],
+                "fraction_in_unseen_all_input": 0.08895825113452967
+              },
+              "columns": {
+                "energy": 0.007329491353286326,
+                "coordinates": 4096,
+                "nonzero": 4096,
+                "count_for_90_percent": 3667,
+                "top10_fraction": 0.005549310011727397,
+                "top100_fraction": 0.031832485368224556,
+                "top20_ids": [
+                  3178,
+                  1387,
+                  2702,
+                  1004,
+                  2078,
+                  3876,
+                  2960,
+                  2290,
+                  3680,
+                  138,
+                  3641,
+                  3423,
+                  3296,
+                  2788,
+                  4072,
+                  34,
+                  3034,
+                  291,
+                  3240,
+                  1007
+                ]
+              }
+            },
+            "pc2": {
+              "axis_weights": [
+                0.0,
+                1.0
+              ],
+              "rows": {
+                "energy": 0.021843466352316012,
+                "coordinates": 32000,
+                "nonzero": 16615,
+                "count_for_90_percent": 9277,
+                "top10_fraction": 0.010175599541752216,
+                "top100_fraction": 0.04109957270264229,
+                "top20_ids": [
+                  1,
+                  13,
+                  2372,
+                  5919,
+                  7559,
+                  9008,
+                  5648,
+                  8324,
+                  7858,
+                  9278,
+                  5580,
+                  6096,
+                  12337,
+                  7827,
+                  18520,
+                  7024,
+                  20869,
+                  10795,
+                  21716,
+                  7167
+                ],
+                "fraction_in_unseen_all_input": 0.03854535307457981
+              },
+              "columns": {
+                "energy": 0.021843466352316016,
+                "coordinates": 4096,
+                "nonzero": 4096,
+                "count_for_90_percent": 3673,
+                "top10_fraction": 0.0038258595080466746,
+                "top100_fraction": 0.028059763213159342,
+                "top20_ids": [
+                  3178,
+                  1387,
+                  2702,
+                  1004,
+                  2078,
+                  3876,
+                  2960,
+                  3680,
+                  2290,
+                  3641,
+                  3423,
+                  138,
+                  2788,
+                  3296,
+                  3034,
+                  4072,
+                  34,
+                  1517,
+                  3565,
+                  3240
+                ]
+              }
+            },
+            "uniform_plane": {
+              "axis_weights": [
+                0.5,
+                0.5
+              ],
+              "rows": {
+                "energy": 0.01458647885280117,
+                "coordinates": 32000,
+                "nonzero": 16615,
+                "count_for_90_percent": 9779,
+                "top10_fraction": 0.009207672011998317,
+                "top100_fraction": 0.03930619833280232,
+                "top20_ids": [
+                  1,
+                  13,
+                  2372,
+                  5919,
+                  7559,
+                  9008,
+                  8324,
+                  5648,
+                  7858,
+                  5580,
+                  9278,
+                  6096,
+                  12337,
+                  18520,
+                  20869,
+                  7827,
+                  28723,
+                  7024,
+                  1729,
+                  21716
+                ],
+                "fraction_in_unseen_all_input": 0.05121122343826766
+              },
+              "columns": {
+                "energy": 0.01458647885280117,
+                "coordinates": 4096,
+                "nonzero": 4096,
+                "count_for_90_percent": 3673,
+                "top10_fraction": 0.004258464390135853,
+                "top100_fraction": 0.028935167485683908,
+                "top20_ids": [
+                  3178,
+                  1387,
+                  2702,
+                  1004,
+                  2078,
+                  3876,
+                  2960,
+                  2290,
+                  3680,
+                  3641,
+                  138,
+                  3423,
+                  3296,
+                  2788,
+                  4072,
+                  3034,
+                  34,
+                  1517,
+                  3240,
+                  291
+                ]
+              }
+            },
+            "variance_plane": {
+              "axis_weights": [
+                0.9085031419410966,
+                0.09149685805890331
+              ],
+              "rows": {
+                "energy": 0.008657474463643015,
+                "coordinates": 32000,
+                "nonzero": 16615,
+                "count_for_90_percent": 10571,
+                "top10_fraction": 0.007436889774413107,
+                "top100_fraction": 0.03643604151223626,
+                "top20_ids": [
+                  13,
+                  1,
+                  2372,
+                  7559,
+                  5919,
+                  28723,
+                  9008,
+                  8324,
+                  5580,
+                  9278,
+                  1729,
+                  18520,
+                  20869,
+                  12337,
+                  5648,
+                  5379,
+                  1479,
+                  6096,
+                  21716,
+                  3110
+                ],
+                "fraction_in_unseen_all_input": 0.07732025566256524
+              },
+              "columns": {
+                "energy": 0.008657474463643015,
+                "coordinates": 4096,
+                "nonzero": 4096,
+                "count_for_90_percent": 3669,
+                "top10_fraction": 0.005150724857139117,
+                "top100_fraction": 0.030916087516698096,
+                "top20_ids": [
+                  3178,
+                  1387,
+                  2702,
+                  1004,
+                  2078,
+                  3876,
+                  2960,
+                  2290,
+                  3680,
+                  138,
+                  3641,
+                  3423,
+                  3296,
+                  2788,
+                  4072,
+                  34,
+                  3034,
+                  291,
+                  1517,
+                  3240
+                ]
+              }
+            },
+            "variance_full": {
+              "axis_weights": [
+                0.8703129166225061,
+                0.08765065713355841
+              ],
+              "rows": {
+                "energy": 0.008293545176893331,
+                "coordinates": 32000,
+                "nonzero": 16615,
+                "count_for_90_percent": 10571,
+                "top10_fraction": 0.007436889774413107,
+                "top100_fraction": 0.036436041512236256,
+                "top20_ids": [
+                  13,
+                  1,
+                  2372,
+                  7559,
+                  5919,
+                  28723,
+                  9008,
+                  8324,
+                  5580,
+                  9278,
+                  1729,
+                  18520,
+                  20869,
+                  12337,
+                  5648,
+                  5379,
+                  1479,
+                  6096,
+                  21716,
+                  3110
+                ],
+                "fraction_in_unseen_all_input": 0.07732025566256526
+              },
+              "columns": {
+                "energy": 0.008293545176893333,
+                "coordinates": 4096,
+                "nonzero": 4096,
+                "count_for_90_percent": 3669,
+                "top10_fraction": 0.005150724857139115,
+                "top100_fraction": 0.030916087516698085,
+                "top20_ids": [
+                  3178,
+                  1387,
+                  2702,
+                  1004,
+                  2078,
+                  3876,
+                  2960,
+                  2290,
+                  3680,
+                  138,
+                  3641,
+                  3423,
+                  3296,
+                  2788,
+                  4072,
+                  34,
+                  3034,
+                  291,
+                  1517,
+                  3240
+                ]
+              }
+            }
+          }
+        },
+        "head": {
+          "shape": [
+            32000,
+            4096
+          ],
+          "observed_batches": 1000,
+          "methods": {
+            "pc1": {
+              "axis_weights": [
+                1.0,
+                0.0
+              ],
+              "rows": {
+                "energy": 0.29550199468076865,
+                "coordinates": 32000,
+                "nonzero": 32000,
+                "count_for_90_percent": 25537,
+                "top10_fraction": 0.0022957286348478587,
+                "top100_fraction": 0.01266928646271352,
+                "top20_ids": [
+                  2,
+                  1247,
+                  531,
+                  774,
+                  7299,
+                  23597,
+                  11940,
+                  22478,
+                  1385,
+                  995,
+                  4772,
+                  2476,
+                  2067,
+                  589,
+                  26457,
+                  22557,
+                  376,
+                  8784,
+                  12383,
+                  17317
+                ],
+                "fraction_in_unseen_all_input": 0.571564507903976
+              },
+              "columns": {
+                "energy": 0.2955019946807686,
+                "coordinates": 4096,
+                "nonzero": 4096,
+                "count_for_90_percent": 2901,
+                "top10_fraction": 0.009738676077031477,
+                "top100_fraction": 0.07735457475816654,
+                "top20_ids": [
+                  2816,
+                  2763,
+                  1008,
+                  3703,
+                  777,
+                  4061,
+                  2410,
+                  776,
+                  352,
+                  2900,
+                  1315,
+                  3973,
+                  1627,
+                  2510,
+                  3103,
+                  3115,
+                  1109,
+                  1997,
+                  1212,
+                  3246
+                ]
+              }
+            },
+            "pc2": {
+              "axis_weights": [
+                0.0,
+                1.0
+              ],
+              "rows": {
+                "energy": 0.39179771108044253,
+                "coordinates": 32000,
+                "nonzero": 32000,
+                "count_for_90_percent": 21763,
+                "top10_fraction": 0.005924234088625817,
+                "top100_fraction": 0.034708333182776496,
+                "top20_ids": [
+                  2,
+                  23597,
+                  774,
+                  7299,
+                  2476,
+                  531,
+                  2067,
+                  4772,
+                  22557,
+                  1247,
+                  1385,
+                  22478,
+                  17317,
+                  8784,
+                  12828,
+                  589,
+                  3604,
+                  8789,
+                  22143,
+                  3504
+                ],
+                "fraction_in_unseen_all_input": 0.5412301963679619
+              },
+              "columns": {
+                "energy": 0.39179771108044253,
+                "coordinates": 4096,
+                "nonzero": 4096,
+                "count_for_90_percent": 3193,
+                "top10_fraction": 0.012974634858665447,
+                "top100_fraction": 0.08765736807043344,
+                "top20_ids": [
+                  1375,
+                  53,
+                  1977,
+                  2408,
+                  1434,
+                  1981,
+                  3424,
+                  3110,
+                  1661,
+                  4011,
+                  2949,
+                  2232,
+                  2304,
+                  899,
+                  1966,
+                  1268,
+                  493,
+                  3510,
+                  301,
+                  3964
+                ]
+              }
+            },
+            "uniform_plane": {
+              "axis_weights": [
+                0.5,
+                0.5
+              ],
+              "rows": {
+                "energy": 0.34364985288060557,
+                "coordinates": 32000,
+                "nonzero": 32000,
+                "count_for_90_percent": 24370,
+                "top10_fraction": 0.004337881123841264,
+                "top100_fraction": 0.02500727006315621,
+                "top20_ids": [
+                  2,
+                  1247,
+                  774,
+                  23597,
+                  531,
+                  7299,
+                  2476,
+                  2067,
+                  4772,
+                  1385,
+                  22557,
+                  22478,
+                  589,
+                  8784,
+                  17317,
+                  12828,
+                  3604,
+                  11940,
+                  8789,
+                  26457
+                ],
+                "fraction_in_unseen_all_input": 0.554272322664571
+              },
+              "columns": {
+                "energy": 0.34364985288060557,
+                "coordinates": 4096,
+                "nonzero": 4096,
+                "count_for_90_percent": 3289,
+                "top10_fraction": 0.008999209011143585,
+                "top100_fraction": 0.06185542321602912,
+                "top20_ids": [
+                  53,
+                  1375,
+                  2763,
+                  2816,
+                  3424,
+                  1977,
+                  1434,
+                  2232,
+                  2408,
+                  1661,
+                  1981,
+                  2304,
+                  3110,
+                  2949,
+                  4011,
+                  899,
+                  1966,
+                  408,
+                  3510,
+                  3121
+                ]
+              }
+            },
+            "variance_plane": {
+              "axis_weights": [
+                0.9085031419410966,
+                0.09149685805890331
+              ],
+              "rows": {
+                "energy": 0.30431275017587,
+                "coordinates": 32000,
+                "nonzero": 32000,
+                "count_for_90_percent": 25410,
+                "top10_fraction": 0.0026987414988687607,
+                "top100_fraction": 0.015052145889692241,
+                "top20_ids": [
+                  2,
+                  1247,
+                  774,
+                  531,
+                  7299,
+                  23597,
+                  22478,
+                  1385,
+                  11940,
+                  2476,
+                  2067,
+                  4772,
+                  22557,
+                  589,
+                  26457,
+                  995,
+                  8784,
+                  376,
+                  17317,
+                  12383
+                ],
+                "fraction_in_unseen_all_input": 0.5679911043155824
+              },
+              "columns": {
+                "energy": 0.30431275017587,
+                "coordinates": 4096,
+                "nonzero": 4096,
+                "count_for_90_percent": 3064,
+                "top10_fraction": 0.009070275903572799,
+                "top100_fraction": 0.07141330787062723,
+                "top20_ids": [
+                  2816,
+                  2763,
+                  1008,
+                  777,
+                  3703,
+                  4061,
+                  2410,
+                  776,
+                  1315,
+                  352,
+                  2510,
+                  2900,
+                  1627,
+                  3115,
+                  3246,
+                  3973,
+                  3103,
+                  1109,
+                  1997,
+                  1030
+                ]
+              }
+            },
+            "variance_full": {
+              "axis_weights": [
+                0.8703129166225061,
+                0.08765065713355841
+              ],
+              "rows": {
+                "energy": 0.2915205296980129,
+                "coordinates": 32000,
+                "nonzero": 32000,
+                "count_for_90_percent": 25410,
+                "top10_fraction": 0.0026987414988687603,
+                "top100_fraction": 0.015052145889692241,
+                "top20_ids": [
+                  2,
+                  1247,
+                  774,
+                  531,
+                  7299,
+                  23597,
+                  22478,
+                  1385,
+                  11940,
+                  2476,
+                  2067,
+                  4772,
+                  22557,
+                  589,
+                  26457,
+                  995,
+                  8784,
+                  376,
+                  17317,
+                  12383
+                ],
+                "fraction_in_unseen_all_input": 0.5679911043155824
+              },
+              "columns": {
+                "energy": 0.2915205296980129,
+                "coordinates": 4096,
+                "nonzero": 4096,
+                "count_for_90_percent": 3064,
+                "top10_fraction": 0.009070275903572799,
+                "top100_fraction": 0.07141330787062723,
+                "top20_ids": [
+                  2816,
+                  2763,
+                  1008,
+                  777,
+                  3703,
+                  4061,
+                  2410,
+                  776,
+                  1315,
+                  352,
+                  2510,
+                  2900,
+                  1627,
+                  3115,
+                  3246,
+                  3973,
+                  3103,
+                  1109,
+                  1997,
+                  1030
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "collaborator-attack": {
+      "basis": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/cases/collaborator-lr1e-6-ms1000/geometry/attack-basis.npy",
+      "geometry": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/cases/collaborator-lr1e-6-ms1000/geometry/geometry.json",
+      "attack_eigenvalues": [
+        19.262478300016372,
+        0.5300503929265157,
+        0.09578026288468025,
+        0.04190989514161376,
+        0.018122091118710174,
+        0.008401911893863735,
+        0.005632053390212486,
+        0.0028856441168876616,
+        0.0018416519242104832,
+        0.0007337953035235325,
+        0.0005488563223194913,
+        0.00019699140423505825,
+        7.176144034121734e-05
+      ],
+      "matrices": {
+        "embedding": {
+          "shape": [
+            32000,
+            4096
+          ],
+          "observed_batches": 1000,
+          "methods": {
+            "pc1": {
+              "axis_weights": [
+                1.0,
+                0.0
+              ],
+              "rows": {
+                "energy": 0.0014843328557444463,
+                "coordinates": 32000,
+                "nonzero": 16583,
+                "count_for_90_percent": 10226,
+                "top10_fraction": 0.013990972494315192,
+                "top100_fraction": 0.04723332386753079,
+                "top20_ids": [
+                  13,
+                  7692,
+                  449,
+                  13213,
+                  10375,
+                  28723,
+                  25334,
+                  4765,
+                  2725,
+                  12337,
+                  1,
+                  11747,
+                  7454,
+                  22361,
+                  11795,
+                  1087,
+                  9278,
+                  10097,
+                  15022,
+                  7170
+                ],
+                "fraction_in_unseen_all_input": 0.06091775673015977
+              },
+              "columns": {
+                "energy": 0.0014843328557444463,
+                "coordinates": 4096,
+                "nonzero": 4096,
+                "count_for_90_percent": 3669,
+                "top10_fraction": 0.004526237205564424,
+                "top100_fraction": 0.030043049606676697,
+                "top20_ids": [
+                  3178,
+                  1387,
+                  2702,
+                  1004,
+                  3876,
+                  2078,
+                  3680,
+                  2290,
+                  3423,
+                  2960,
+                  3641,
+                  138,
+                  3296,
+                  53,
+                  2788,
+                  2976,
+                  4072,
+                  34,
+                  3160,
+                  980
+                ]
+              }
+            },
+            "pc2": {
+              "axis_weights": [
+                0.0,
+                1.0
+              ],
+              "rows": {
+                "energy": 0.014472680517696316,
+                "coordinates": 32000,
+                "nonzero": 16583,
+                "count_for_90_percent": 11643,
+                "top10_fraction": 0.003952321386052839,
+                "top100_fraction": 0.022732879543528452,
+                "top20_ids": [
+                  13,
+                  12337,
+                  449,
+                  10375,
+                  9278,
+                  10795,
+                  1,
+                  15747,
+                  22361,
+                  5580,
+                  2725,
+                  7858,
+                  1479,
+                  7024,
+                  28211,
+                  4493,
+                  4166,
+                  9008,
+                  14214,
+                  11747
+                ],
+                "fraction_in_unseen_all_input": 0.15617349212892026
+              },
+              "columns": {
+                "energy": 0.014472680517696316,
+                "coordinates": 4096,
+                "nonzero": 4096,
+                "count_for_90_percent": 3658,
+                "top10_fraction": 0.007766998850258973,
+                "top100_fraction": 0.0365570852455488,
+                "top20_ids": [
+                  3178,
+                  1387,
+                  2702,
+                  1004,
+                  3876,
+                  2078,
+                  3680,
+                  2290,
+                  3423,
+                  3641,
+                  2960,
+                  138,
+                  3296,
+                  2788,
+                  4072,
+                  34,
+                  3034,
+                  3240,
+                  291,
+                  3565
+                ]
+              }
+            },
+            "uniform_plane": {
+              "axis_weights": [
+                0.5,
+                0.5
+              ],
+              "rows": {
+                "energy": 0.007978506686720382,
+                "coordinates": 32000,
+                "nonzero": 16583,
+                "count_for_90_percent": 11635,
+                "top10_fraction": 0.004674894725694385,
+                "top100_fraction": 0.0244187499610441,
+                "top20_ids": [
+                  13,
+                  449,
+                  12337,
+                  10375,
+                  7692,
+                  1,
+                  9278,
+                  10795,
+                  2725,
+                  22361,
+                  13213,
+                  15747,
+                  5580,
+                  11747,
+                  28211,
+                  7858,
+                  4166,
+                  7024,
+                  1479,
+                  28723
+                ],
+                "fraction_in_unseen_all_input": 0.14731273514128654
+              },
+              "columns": {
+                "energy": 0.007978506686720382,
+                "coordinates": 4096,
+                "nonzero": 4096,
+                "count_for_90_percent": 3660,
+                "top10_fraction": 0.007465341636291837,
+                "top100_fraction": 0.03592999970259246,
+                "top20_ids": [
+                  3178,
+                  1387,
+                  2702,
+                  1004,
+                  3876,
+                  2078,
+                  3680,
+                  2290,
+                  3423,
+                  3641,
+                  2960,
+                  138,
+                  3296,
+                  2788,
+                  4072,
+                  34,
+                  3034,
+                  3240,
+                  291,
+                  3565
+                ]
+              }
+            },
+            "variance_plane": {
+              "axis_weights": [
+                0.9732196728801253,
+                0.026780327119874655
+              ],
+              "rows": {
+                "energy": 0.0018321650548781768,
+                "coordinates": 32000,
+                "nonzero": 16583,
+                "count_for_90_percent": 10961,
+                "top10_fraction": 0.011717713331999783,
+                "top100_fraction": 0.041440775497713404,
+                "top20_ids": [
+                  13,
+                  7692,
+                  449,
+                  13213,
+                  10375,
+                  28723,
+                  25334,
+                  2725,
+                  12337,
+                  4765,
+                  1,
+                  11747,
+                  7454,
+                  22361,
+                  11795,
+                  9278,
+                  1087,
+                  10097,
+                  15022,
+                  1259
+                ],
+                "fraction_in_unseen_all_input": 0.08106851492128883
+              },
+              "columns": {
+                "energy": 0.0018321650548781766,
+                "coordinates": 4096,
+                "nonzero": 4096,
+                "count_for_90_percent": 3669,
+                "top10_fraction": 0.005210929744300726,
+                "top100_fraction": 0.03134966527779015,
+                "top20_ids": [
+                  3178,
+                  1387,
+                  2702,
+                  1004,
+                  3876,
+                  2078,
+                  3680,
+                  2290,
+                  3423,
+                  2960,
+                  3641,
+                  138,
+                  3296,
+                  2788,
+                  4072,
+                  53,
+                  34,
+                  3034,
+                  980,
+                  2976
+                ]
+              }
+            },
+            "variance_full": {
+              "axis_weights": [
+                0.9646358076145745,
+                0.026544122770363218
+              ],
+              "rows": {
+                "energy": 0.0018160052315478665,
+                "coordinates": 32000,
+                "nonzero": 16583,
+                "count_for_90_percent": 10961,
+                "top10_fraction": 0.011717713331999786,
+                "top100_fraction": 0.041440775497713404,
+                "top20_ids": [
+                  13,
+                  7692,
+                  449,
+                  13213,
+                  10375,
+                  28723,
+                  25334,
+                  2725,
+                  12337,
+                  4765,
+                  1,
+                  11747,
+                  7454,
+                  22361,
+                  11795,
+                  9278,
+                  1087,
+                  10097,
+                  15022,
+                  1259
+                ],
+                "fraction_in_unseen_all_input": 0.08106851492128883
+              },
+              "columns": {
+                "energy": 0.0018160052315478667,
+                "coordinates": 4096,
+                "nonzero": 4096,
+                "count_for_90_percent": 3669,
+                "top10_fraction": 0.005210929744300724,
+                "top100_fraction": 0.031349665277790144,
+                "top20_ids": [
+                  3178,
+                  1387,
+                  2702,
+                  1004,
+                  3876,
+                  2078,
+                  3680,
+                  2290,
+                  3423,
+                  2960,
+                  3641,
+                  138,
+                  3296,
+                  2788,
+                  4072,
+                  53,
+                  34,
+                  3034,
+                  980,
+                  2976
+                ]
+              }
+            }
+          }
+        },
+        "head": {
+          "shape": [
+            32000,
+            4096
+          ],
+          "observed_batches": 1000,
+          "methods": {
+            "pc1": {
+              "axis_weights": [
+                1.0,
+                0.0
+              ],
+              "rows": {
+                "energy": 0.8578972344655683,
+                "coordinates": 32000,
+                "nonzero": 32000,
+                "count_for_90_percent": 22778,
+                "top10_fraction": 0.0007456964829564315,
+                "top100_fraction": 0.0068950088339007655,
+                "top20_ids": [
+                  3546,
+                  6841,
+                  5405,
+                  2163,
+                  8431,
+                  11780,
+                  5455,
+                  2655,
+                  5099,
+                  1876,
+                  1171,
+                  6906,
+                  7255,
+                  13053,
+                  3698,
+                  984,
+                  11129,
+                  6945,
+                  877,
+                  14405
+                ],
+                "fraction_in_unseen_all_input": 0.7208184691397043
+              },
+              "columns": {
+                "energy": 0.8578972344655683,
+                "coordinates": 4096,
+                "nonzero": 4096,
+                "count_for_90_percent": 2938,
+                "top10_fraction": 0.005158981372738017,
+                "top100_fraction": 0.04645749902531836,
+                "top20_ids": [
+                  2661,
+                  3072,
+                  1125,
+                  1030,
+                  722,
+                  684,
+                  3307,
+                  457,
+                  535,
+                  2960,
+                  3482,
+                  1799,
+                  3398,
+                  2649,
+                  396,
+                  2869,
+                  578,
+                  2875,
+                  16,
+                  23
+                ]
+              }
+            },
+            "pc2": {
+              "axis_weights": [
+                0.0,
+                1.0
+              ],
+              "rows": {
+                "energy": 0.5378140443625772,
+                "coordinates": 32000,
+                "nonzero": 32000,
+                "count_for_90_percent": 24558,
+                "top10_fraction": 0.0016010374558855709,
+                "top100_fraction": 0.01184248582187839,
+                "top20_ids": [
+                  486,
+                  954,
+                  28927,
+                  302,
+                  28725,
+                  28808,
+                  304,
+                  28723,
+                  272,
+                  325,
+                  21013,
+                  461,
+                  1939,
+                  264,
+                  297,
+                  1040,
+                  931,
+                  5046,
+                  3054,
+                  376
+                ],
+                "fraction_in_unseen_all_input": 0.5941467280346361
+              },
+              "columns": {
+                "energy": 0.5378140443625772,
+                "coordinates": 4096,
+                "nonzero": 4096,
+                "count_for_90_percent": 3292,
+                "top10_fraction": 0.015124156163244758,
+                "top100_fraction": 0.09119865927781451,
+                "top20_ids": [
+                  1692,
+                  2543,
+                  15,
+                  1628,
+                  969,
+                  211,
+                  2748,
+                  801,
+                  2431,
+                  3984,
+                  3266,
+                  4016,
+                  345,
+                  848,
+                  244,
+                  983,
+                  1417,
+                  2018,
+                  623,
+                  329
+                ]
+              }
+            },
+            "uniform_plane": {
+              "axis_weights": [
+                0.5,
+                0.5
+              ],
+              "rows": {
+                "energy": 0.6978556394140727,
+                "coordinates": 32000,
+                "nonzero": 32000,
+                "count_for_90_percent": 24504,
+                "top10_fraction": 0.0009398545222960933,
+                "top100_fraction": 0.0076160406497934215,
+                "top20_ids": [
+                  954,
+                  28927,
+                  272,
+                  28723,
+                  376,
+                  486,
+                  302,
+                  28725,
+                  304,
+                  877,
+                  461,
+                  3546,
+                  28935,
+                  1939,
+                  1040,
+                  711,
+                  3054,
+                  28808,
+                  1104,
+                  5046
+                ],
+                "fraction_in_unseen_all_input": 0.6720076280842638
+              },
+              "columns": {
+                "energy": 0.6978556394140728,
+                "coordinates": 4096,
+                "nonzero": 4096,
+                "count_for_90_percent": 3284,
+                "top10_fraction": 0.006581096117687864,
+                "top100_fraction": 0.04657918994075906,
+                "top20_ids": [
+                  1692,
+                  2543,
+                  15,
+                  4016,
+                  1628,
+                  211,
+                  2431,
+                  969,
+                  2748,
+                  623,
+                  329,
+                  345,
+                  1977,
+                  801,
+                  244,
+                  1082,
+                  3266,
+                  1375,
+                  3482,
+                  3984
+                ]
+              }
+            },
+            "variance_plane": {
+              "axis_weights": [
+                0.9732196728801253,
+                0.026780327119874655
+              ],
+              "rows": {
+                "energy": 0.8493253019290372,
+                "coordinates": 32000,
+                "nonzero": 32000,
+                "count_for_90_percent": 22886,
+                "top10_fraction": 0.0007453643537030357,
+                "top100_fraction": 0.006887397635815287,
+                "top20_ids": [
+                  3546,
+                  6841,
+                  5405,
+                  2163,
+                  8431,
+                  5455,
+                  5099,
+                  11780,
+                  2655,
+                  1876,
+                  877,
+                  6906,
+                  1171,
+                  984,
+                  3698,
+                  7255,
+                  5589,
+                  6945,
+                  11129,
+                  13053
+                ],
+                "fraction_in_unseen_all_input": 0.7186703730997044
+              },
+              "columns": {
+                "energy": 0.8493253019290372,
+                "coordinates": 4096,
+                "nonzero": 4096,
+                "count_for_90_percent": 2966,
+                "top10_fraction": 0.005114652313760483,
+                "top100_fraction": 0.04600926355588949,
+                "top20_ids": [
+                  2661,
+                  3072,
+                  1125,
+                  1030,
+                  722,
+                  684,
+                  3307,
+                  457,
+                  3482,
+                  535,
+                  2960,
+                  1799,
+                  3398,
+                  2649,
+                  396,
+                  2869,
+                  578,
+                  2871,
+                  23,
+                  2875
+                ]
+              }
+            },
+            "variance_full": {
+              "axis_weights": [
+                0.9646358076145745,
+                0.026544122770363218
+              ],
+              "rows": {
+                "energy": 0.8418341936401893,
+                "coordinates": 32000,
+                "nonzero": 32000,
+                "count_for_90_percent": 22886,
+                "top10_fraction": 0.0007453643537030357,
+                "top100_fraction": 0.006887397635815286,
+                "top20_ids": [
+                  3546,
+                  6841,
+                  5405,
+                  2163,
+                  8431,
+                  5455,
+                  5099,
+                  11780,
+                  2655,
+                  1876,
+                  877,
+                  6906,
+                  1171,
+                  984,
+                  3698,
+                  7255,
+                  5589,
+                  6945,
+                  11129,
+                  13053
+                ],
+                "fraction_in_unseen_all_input": 0.7186703730997045
+              },
+              "columns": {
+                "energy": 0.8418341936401893,
+                "coordinates": 4096,
+                "nonzero": 4096,
+                "count_for_90_percent": 2966,
+                "top10_fraction": 0.005114652313760483,
+                "top100_fraction": 0.04600926355588949,
+                "top20_ids": [
+                  2661,
+                  3072,
+                  1125,
+                  1030,
+                  722,
+                  684,
+                  3307,
+                  457,
+                  3482,
+                  535,
+                  2960,
+                  1799,
+                  3398,
+                  2649,
+                  396,
+                  2869,
+                  578,
+                  2871,
+                  23,
+                  2875
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "methods": [
+    "pc1",
+    "pc2",
+    "uniform_plane",
+    "variance_plane",
+    "variance_full"
+  ],
+  "definitions": {
+    "raw": "saved_after - raw_source_anchor, including any load conversion",
+    "load_offset": "BF16(raw_source_anchor) - raw_source_anchor, candidate loading map",
+    "adjusted": "saved_after - BF16(raw_source_anchor); not a direct capture of training memory",
+    "evaluated": "BF16(saved_after) - BF16(raw_source_anchor)",
+    "unseen": "Absent from every input_id in the first actual batch, including padding IDs; defense includes only outer roles 0/1 and excludes stopped inner role 2",
+    "basis": "Saved native raw-displacement PC1/PC2. Uniform plane uses equal 0.5 weights; variance_plane weights by the first two eigenvalues normalized by their sum; variance_full divides by the full native spectrum sum. The latter describes only the contribution of the first two axes.",
+    "eigenvalues": "Native eigenvalues sum squared displacements over selected snapshots without centering. Variance weighting here denotes this uncentered trajectory-energy weighting, not centered statistical variance.",
+    "concentration": "90% counts and top 10/100 fractions normalize within the named tensor and method; hidden columns are parameter coordinates",
+    "decoded_tokens": "Only the top 20 rows per tensor/case by uniform-plane energy are decoded. Frequencies describe all recorded attack batches; target frequencies use shifted nonmasked labels.",
+    "interpretation": "Algebraic agreement with a candidate BF16 loading map is measured, not assumed causal. Input embeddings and untied output head have different gradient support; output softmax can update classes absent from input IDs. No semantic biology-token inference is made."
+  }
+}

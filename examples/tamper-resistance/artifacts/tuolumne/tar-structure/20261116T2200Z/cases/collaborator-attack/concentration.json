@@ -1,0 +1,311 @@
+{
+  "state": "complete",
+  "views": {
+    "collaborator-attack-raw-plane": {
+      "precision": "raw",
+      "dimensions": 2,
+      "energy": 2.0000000001420473,
+      "coordinates": 7241732096,
+      "nonzero_coordinates": 1052773734,
+      "nonzero_fraction": 0.1453759570284993,
+      "effective_support_fraction": 0.015451299249136944,
+      "energy_targets": {
+        "0.5": {
+          "coordinate_fraction_lower": 0.006823146361254179,
+          "coordinate_fraction_upper": 0.006824948968672812
+        },
+        "0.9": {
+          "coordinate_fraction_lower": 0.023927261006480623,
+          "coordinate_fraction_upper": 0.023950415135600176
+        },
+        "0.99": {
+          "coordinate_fraction_lower": 0.0708803743628574,
+          "coordinate_fraction_upper": 0.07100218140961176
+        },
+        "0.999": {
+          "coordinate_fraction_lower": 0.1266545998721243,
+          "coordinate_fraction_upper": 0.12866674169217981
+        }
+      },
+      "top_fractions": {
+        "1e-06": {
+          "energy_fraction_lower": 0.002267970317265165,
+          "energy_fraction_upper": 0.002269470191443477
+        },
+        "1e-05": {
+          "energy_fraction_lower": 0.007087695985725076,
+          "energy_fraction_upper": 0.007098334802261053
+        },
+        "0.0001": {
+          "energy_fraction_lower": 0.02975856324352,
+          "energy_fraction_upper": 0.029792660971971013
+        },
+        "0.001": {
+          "energy_fraction_lower": 0.14048907252749357,
+          "energy_fraction_upper": 0.1405457939625344
+        },
+        "0.01": {
+          "energy_fraction_lower": 0.6342023598143786,
+          "energy_fraction_upper": 0.6343065383203931
+        },
+        "0.1": {
+          "energy_fraction_lower": 0.99636677684263,
+          "energy_fraction_upper": 0.9964100250644533
+        },
+        "0.5": {
+          "energy_fraction_lower": 1.0,
+          "energy_fraction_upper": 1.0
+        },
+        "1.0": {
+          "energy_fraction_lower": 1.0,
+          "energy_fraction_upper": 1.0
+        }
+      }
+    },
+    "attack-1-raw-displacement": {
+      "precision": "raw",
+      "dimensions": 1,
+      "energy": 0.011830744239015308,
+      "coordinates": 7241732096,
+      "nonzero_coordinates": 1034779574,
+      "nonzero_fraction": 0.14289117027286397,
+      "effective_support_fraction": 0.00017904903331139623,
+      "energy_targets": {
+        "0.5": {
+          "coordinate_fraction_lower": 0.0013698458971548235,
+          "coordinate_fraction_upper": 0.0013738731104807774
+        },
+        "0.9": {
+          "coordinate_fraction_lower": 0.04205085081346815,
+          "coordinate_fraction_upper": 0.043621897608513795
+        },
+        "0.99": {
+          "coordinate_fraction_lower": 0.11882355886588158,
+          "coordinate_fraction_upper": 0.1212525011088176
+        },
+        "0.999": {
+          "coordinate_fraction_lower": 0.1355728494212443,
+          "coordinate_fraction_upper": 0.1355777588820651
+        }
+      },
+      "top_fractions": {
+        "1e-06": {
+          "energy_fraction_lower": 0.05743202916539722,
+          "energy_fraction_upper": 0.05748160875338477
+        },
+        "1e-05": {
+          "energy_fraction_lower": 0.15679229854625515,
+          "energy_fraction_upper": 0.15685617396506596
+        },
+        "0.0001": {
+          "energy_fraction_lower": 0.24011345944711815,
+          "energy_fraction_upper": 0.24020445653050465
+        },
+        "0.001": {
+          "energy_fraction_lower": 0.4544962725394943,
+          "energy_fraction_upper": 0.45500766069377285
+        },
+        "0.01": {
+          "energy_fraction_lower": 0.8140599744849478,
+          "energy_fraction_upper": 0.8140925613656056
+        },
+        "0.1": {
+          "energy_fraction_lower": 0.979016620558292,
+          "energy_fraction_upper": 0.979397719019986
+        },
+        "0.5": {
+          "energy_fraction_lower": 1.0,
+          "energy_fraction_upper": 1.0
+        },
+        "1.0": {
+          "energy_fraction_lower": 1.0,
+          "energy_fraction_upper": 1.0
+        }
+      }
+    },
+    "attack-1-evaluated-displacement": {
+      "precision": "evaluated",
+      "dimensions": 1,
+      "energy": 0.0018445485023526385,
+      "coordinates": 7241732096,
+      "nonzero_coordinates": 849862500,
+      "nonzero_fraction": 0.11735624692184139,
+      "effective_support_fraction": 0.08403371278444234,
+      "energy_targets": {
+        "0.5": {
+          "coordinate_fraction_lower": 0.03394680302186092,
+          "coordinate_fraction_upper": 0.035909796379189333
+        },
+        "0.9": {
+          "coordinate_fraction_lower": 0.08803641650208872,
+          "coordinate_fraction_upper": 0.08979213665735696
+        },
+        "0.99": {
+          "coordinate_fraction_lower": 0.11294923978916549,
+          "coordinate_fraction_upper": 0.11577459216740403
+        },
+        "0.999": {
+          "coordinate_fraction_lower": 0.11621424803395544,
+          "coordinate_fraction_upper": 0.11621729909959928
+        }
+      },
+      "top_fractions": {
+        "1e-06": {
+          "energy_fraction_lower": 1.3924292205403716e-05,
+          "energy_fraction_upper": 1.4729472400933425e-05
+        },
+        "1e-05": {
+          "energy_fraction_lower": 0.0001392390766267504,
+          "energy_fraction_upper": 0.00014729065621800564
+        },
+        "0.0001": {
+          "energy_fraction_lower": 0.0013923792299856436,
+          "energy_fraction_upper": 0.0014728943588060706
+        },
+        "0.001": {
+          "energy_fraction_lower": 0.013923778840860932,
+          "energy_fraction_upper": 0.014728929350791056
+        },
+        "0.01": {
+          "energy_fraction_lower": 0.13923777110418653,
+          "energy_fraction_upper": 0.14728927520284957
+        },
+        "0.1": {
+          "energy_fraction_lower": 0.9407823237561506,
+          "energy_fraction_upper": 0.9432196109305288
+        },
+        "0.5": {
+          "energy_fraction_lower": 1.0,
+          "energy_fraction_upper": 1.0
+        },
+        "1.0": {
+          "energy_fraction_lower": 1.0,
+          "energy_fraction_upper": 1.0
+        }
+      }
+    },
+    "attack-1000-raw-displacement": {
+      "precision": "raw",
+      "dimensions": 1,
+      "energy": 7.890981143020239,
+      "coordinates": 7241732096,
+      "nonzero_coordinates": 1039622184,
+      "nonzero_fraction": 0.14355987907564816,
+      "effective_support_fraction": 0.012534954752999107,
+      "energy_targets": {
+        "0.5": {
+          "coordinate_fraction_lower": 0.004593418474894103,
+          "coordinate_fraction_upper": 0.004603679555946942
+        },
+        "0.9": {
+          "coordinate_fraction_lower": 0.012855637403574009,
+          "coordinate_fraction_upper": 0.012864740198199125
+        },
+        "0.99": {
+          "coordinate_fraction_lower": 0.029561283566157486,
+          "coordinate_fraction_upper": 0.029568430337028585
+        },
+        "0.999": {
+          "coordinate_fraction_lower": 0.059018154542899014,
+          "coordinate_fraction_upper": 0.05904504037593163
+        }
+      },
+      "top_fractions": {
+        "1e-06": {
+          "energy_fraction_lower": 0.0003412028943150675,
+          "energy_fraction_upper": 0.0003456024769431648
+        },
+        "1e-05": {
+          "energy_fraction_lower": 0.0024639695849371338,
+          "energy_fraction_upper": 0.002479844592075283
+        },
+        "0.0001": {
+          "energy_fraction_lower": 0.018860635503742968,
+          "energy_fraction_upper": 0.01890375745705778
+        },
+        "0.001": {
+          "energy_fraction_lower": 0.14521721600104703,
+          "energy_fraction_upper": 0.14551789432964166
+        },
+        "0.01": {
+          "energy_fraction_lower": 0.8154253239802495,
+          "energy_fraction_upper": 0.815479180102156
+        },
+        "0.1": {
+          "energy_fraction_lower": 0.999869395482067,
+          "energy_fraction_upper": 0.9998706953118845
+        },
+        "0.5": {
+          "energy_fraction_lower": 1.0,
+          "energy_fraction_upper": 1.0
+        },
+        "1.0": {
+          "energy_fraction_lower": 1.0,
+          "energy_fraction_upper": 1.0
+        }
+      }
+    },
+    "attack-1000-evaluated-displacement": {
+      "precision": "evaluated",
+      "dimensions": 1,
+      "energy": 7.885932803923983,
+      "coordinates": 7241732096,
+      "nonzero_coordinates": 1005642902,
+      "nonzero_fraction": 0.13886773062973026,
+      "effective_support_fraction": 0.01253541910931271,
+      "energy_targets": {
+        "0.5": {
+          "coordinate_fraction_lower": 0.004584183253387229,
+          "coordinate_fraction_upper": 0.004594185280394001
+        },
+        "0.9": {
+          "coordinate_fraction_lower": 0.012844096932469566,
+          "coordinate_fraction_upper": 0.012863953507953687
+        },
+        "0.99": {
+          "coordinate_fraction_lower": 0.029533106605549857,
+          "coordinate_fraction_upper": 0.02953674675678033
+        },
+        "0.999": {
+          "coordinate_fraction_lower": 0.057590644678827956,
+          "coordinate_fraction_upper": 0.05759814937511878
+        }
+      },
+      "top_fractions": {
+        "1e-06": {
+          "energy_fraction_lower": 0.00027837230698425354,
+          "energy_fraction_upper": 0.0002812918369282137
+        },
+        "1e-05": {
+          "energy_fraction_lower": 0.0023679903626437353,
+          "energy_fraction_upper": 0.0023944818607803554
+        },
+        "0.0001": {
+          "energy_fraction_lower": 0.018475214846809543,
+          "energy_fraction_upper": 0.018657324748123757
+        },
+        "0.001": {
+          "energy_fraction_lower": 0.14400577644141097,
+          "energy_fraction_upper": 0.1451596383423162
+        },
+        "0.01": {
+          "energy_fraction_lower": 0.8158704924366295,
+          "energy_fraction_upper": 0.8159762517157332
+        },
+        "0.1": {
+          "energy_fraction_lower": 0.9998805361084514,
+          "energy_fraction_upper": 0.999882395046977
+        },
+        "0.5": {
+          "energy_fraction_lower": 1.0,
+          "energy_fraction_upper": 1.0
+        },
+        "1.0": {
+          "energy_fraction_lower": 1.0,
+          "energy_fraction_upper": 1.0
+        }
+      }
+    }
+  },
+  "histogram_note": "Exact nonzero counts and bin masses; energy-covering coordinate fractions are bounded by logarithmic bin edges, not exact global sorts. Basis energies sum squared entries across the whole fitted plane and are invariant to orthogonal changes of basis within that plane."
+}

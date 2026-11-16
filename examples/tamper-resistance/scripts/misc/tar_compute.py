@@ -6,6 +6,7 @@ import hashlib
 import json
 import math
 import os
+import re
 import shlex
 import shutil
 import subprocess
@@ -45,6 +46,28 @@ ATTACK_STEPS = [
     1000,
 ]
 DEFENSE_STEPS = [1, 2, 4, 8, 16, 32, 64, 96, 125]
+HPARAM_MATRIX = {
+    "R": {
+        "retain_coefficient": 4.0,
+        "inner_learning_rate": 1e-6,
+        "outer_learning_rate": 5e-6,
+    },
+    "I": {
+        "retain_coefficient": 2.5,
+        "inner_learning_rate": 1e-5,
+        "outer_learning_rate": 5e-6,
+    },
+    "O": {
+        "retain_coefficient": 2.5,
+        "inner_learning_rate": 1e-6,
+        "outer_learning_rate": 1e-5,
+    },
+    "RIO": {
+        "retain_coefficient": 4.0,
+        "inner_learning_rate": 1e-5,
+        "outer_learning_rate": 1e-5,
+    },
+}
 
 
 def dump(path, value):
@@ -292,6 +315,70 @@ def prepare(run, example, original, baseline):
     print(f"Prepared {len(cases)} cases at {run}")
 
 
+def validate_hparam_input_order(folder, case, records):
+    """Require the fixed-sampler study to replay its matching frozen batches."""
+    study_path = Path(folder).resolve().parents[1] / "study.json"
+    if not study_path.is_file():
+        return None
+    program = json.loads(study_path.read_text())
+    if program.get("kind") != "fixed-sampler-hparam-study":
+        return None
+    defense = case["role"] == "defense"
+    maximum = 125 if defense else 1000
+    reference = (
+        Path(program["baseline_dynamics"]) / "models/defense/observed-batches.jsonl"
+        if defense
+        else Path(program["compute_study"])
+        / "cases/baseline-lr1e-6/models/attack/observed-batches.jsonl"
+    )
+    control = [json.loads(line) for line in reference.read_text().splitlines()]
+    steps = list(range(1, maximum + 1))
+    if (
+        case["max_steps"] != maximum
+        or [row["step"] for row in control] != steps
+        or [row["step"] for row in records] != steps
+    ):
+        raise ValueError(
+            "Hparam input-order validation requires complete matched horizons"
+        )
+    required = {"input_ids", "attention_mask", "labels"}
+    if defense:
+        required.add("metadata_ids")
+    signature = hashlib.sha256()
+    for actual, expected in zip(records, control):
+        batches = [actual.get("batch"), expected.get("batch")]
+        if any(
+            not isinstance(batch, dict) or not required <= batch.keys()
+            for batch in batches
+        ):
+            raise ValueError(
+                f"Missing canonical batch tensors at {case['role']} step {actual['step']}"
+            )
+        canonical = [
+            json.dumps(batch, sort_keys=True, separators=(",", ":"), allow_nan=False)
+            for batch in batches
+        ]
+        if canonical[0] != canonical[1]:
+            raise ValueError(
+                f"Hparam {case['role']} batch/order differs from frozen control at step {actual['step']}"
+            )
+        signature.update(
+            json.dumps(
+                [actual["step"], batches[0]],
+                sort_keys=True,
+                separators=(",", ":"),
+                allow_nan=False,
+            ).encode()
+            + b"\n"
+        )
+    return {
+        "state": "passed",
+        "reference_observations": str(reference),
+        "batches": maximum,
+        "canonical_step_batch_sha256": signature.hexdigest(),
+    }
+
+
 def validate_case(folder):
     case = json.loads((folder / "case.json").read_text())
     model = folder / "models" / ("defense" if case["role"] == "defense" else "attack")
@@ -330,6 +417,7 @@ def validate_case(folder):
             assert (model / "checkpoint-0/model.safetensors").exists()
             noise = json.loads((model / "noise.json").read_text())
             assert math.isfinite(noise["actual_l2_after_cast"])
+    input_order = validate_hparam_input_order(folder, case, records)
     summary = {
         "state": "passed",
         "case": case["name"],
@@ -338,8 +426,338 @@ def validate_case(folder):
         "optimizer_checkpoints": case["state_steps"],
         "training_elapsed_seconds": records[-1]["elapsed_seconds"],
     }
+    if input_order is not None:
+        summary["input_order_validation"] = input_order
     dump(folder / "training-validation.json", summary)
     print(json.dumps(summary))
+
+
+def hparam_matrix(matrix=None):
+    """Validate named subsets of the three declared two-level factors."""
+    matrix = copy.deepcopy(HPARAM_MATRIX if matrix is None else matrix)
+    levels = {
+        "retain_coefficient": (2.5, 4.0),
+        "inner_learning_rate": (1e-6, 1e-5),
+        "outer_learning_rate": (5e-6, 1e-5),
+    }
+    if not isinstance(matrix, dict) or not matrix:
+        raise ValueError("The hparam matrix must be a nonempty named JSON object")
+    names, configurations = set(), set()
+    for name, values in matrix.items():
+        if (
+            not isinstance(name, str)
+            or re.fullmatch(r"[A-Za-z][A-Za-z0-9_-]*", name) is None
+            or name.lower() in names
+        ):
+            raise ValueError("Hparam names must be unique safe case identifiers")
+        names.add(name.lower())
+        if not isinstance(values, dict) or set(values) != set(levels):
+            raise ValueError(f"{name}: specify exactly {', '.join(levels)}")
+        for field, allowed in levels.items():
+            value = values[field]
+            if (
+                type(value) not in (int, float)
+                or not math.isfinite(value)
+                or value not in allowed
+            ):
+                raise ValueError(f"{name}: {field} must be one of {allowed}")
+        configuration = tuple(values[field] for field in levels)
+        if configuration == (2.5, 1e-6, 5e-6):
+            raise ValueError("Reuse the existing B control instead of rerunning it")
+        if configuration in configurations:
+            raise ValueError("Hparam matrix contains duplicate scientific conditions")
+        configurations.add(configuration)
+    return matrix
+
+
+def prepare_hparam_study(run, example, original, baseline, compute, matrix=None):
+    """Prepare fixed-sampler contrasts without running training or analysis."""
+    matrix = hparam_matrix(matrix)
+    run, example, original, baseline, compute = (
+        Path(path).resolve() for path in (run, example, original, baseline, compute)
+    )
+    if run.exists():
+        raise FileExistsError("Use a new directory for a new hparam study")
+    defense_source = original / "configs/defense.yml"
+    control = compute / "cases/baseline-lr1e-6"
+    attack_source = control / "config.yml"
+    defense = yaml.safe_load(defense_source.read_text())
+    attack = yaml.safe_load(attack_source.read_text())
+    expected_defense = {
+        "max_steps": 125,
+        "warmup_steps": 12,
+        "learning_rate": 5e-6,
+        "seed": 42,
+        "data_seed": 42,
+        "micro_batch_size": 24,
+        "gradient_accumulation_steps": 1,
+        "sequence_len": 512,
+        "bf16": True,
+        "lr_scheduler": "linear",
+        "weight_decay": 0.0,
+        "attn_implementation": "eager",
+        "optimizer": "adamw_torch",
+        "sample_packing": False,
+        "pad_to_sequence_len": False,
+        "remove_unused_columns": False,
+        "train_on_inputs": True,
+        "tf32": False,
+        "gradient_checkpointing": False,
+        "max_grad_norm": 1.0,
+    }
+    expected_inner = {
+        "forget_coefficient": 1.0,
+        "retain_coefficient": 2.5,
+        "defence_forget_batch_size": 4,
+        "defence_retain_batch_size": 4,
+        "attack_forget_batch_size": 16,
+        "attack_forget_batch_size_per_iteration": 1,
+        "attack_epochs": 1,
+        "attack_learning_rate": 1e-6,
+    }
+    expected_attack = {
+        "max_steps": 1000,
+        "warmup_steps": 0,
+        "learning_rate": 1e-6,
+        "seed": 1,
+        "data_seed": 42,
+        "micro_batch_size": 1,
+        "gradient_accumulation_steps": 1,
+        "sequence_len": 512,
+        "bf16": True,
+        "lr_scheduler": "linear",
+        "weight_decay": 0.0,
+        "attn_implementation": "eager",
+        "optimizer": "adamw_torch",
+        "sample_packing": False,
+        "pad_to_sequence_len": False,
+        "remove_unused_columns": True,
+        "train_on_inputs": True,
+        "tf32": False,
+        "gradient_checkpointing": False,
+        "max_grad_norm": 1.0,
+    }
+    for label, actual, expected in (
+        ("frozen defense", defense, expected_defense),
+        ("frozen inner attack", defense.get("custom_trainer_args", {}), expected_inner),
+        ("completed attack control", attack, expected_attack),
+    ):
+        if any(actual.get(key) != value for key, value in expected.items()):
+            raise ValueError(f"The {label} differs from the original BF16 K16 protocol")
+    if not Path(defense["base_model"]).is_absolute():
+        raise ValueError("The frozen defense must pin an absolute base-model snapshot")
+    revisions = {
+        dataset["path"]: dataset.get("revision") for dataset in defense["datasets"]
+    }
+    if not all(revisions.values()) or any(
+        dataset.get("revision") != revisions.get(dataset["path"])
+        for dataset in defense["datasets"] + attack["datasets"]
+    ):
+        raise ValueError("Frozen defense and attack dataset revisions must agree")
+    if (
+        json.loads((control / "training-validation.json").read_text()).get("state")
+        != "passed"
+    ):
+        raise ValueError("The reused B attack must have passed training validation")
+    probes = json.loads((compute / "probes.json").read_text())
+    if (
+        len(probes.get("fixed_source_indices", [])) != 10
+        or len(probes.get("heldout_source_indices", [])) != 32
+        or probes.get("forget_revision") != revisions.get("cais/wmdp-bio-forget-corpus")
+    ):
+        raise ValueError(
+            "The existing fixed10 and attack-held-out32 probes are required"
+        )
+    records = [
+        json.loads(line)
+        for line in (control / "models/attack/observed-batches.jsonl")
+        .read_text()
+        .splitlines()
+    ]
+    order = hashlib.sha256(
+        json.dumps([row["batch_sha256"] for row in records]).encode()
+    ).hexdigest()
+    if [row["step"] for row in records] != list(range(1, 1001)) or order != probes.get(
+        "expected_order_sha256_by_horizon", {}
+    ).get("1000", probes.get("expected_nonbootstrap_order_sha256")):
+        raise ValueError("The reused B attack order must match the frozen probes")
+
+    run.mkdir(parents=True)
+    for child in ("source/misc", "cases", "logs", "status", "cache"):
+        (run / child).mkdir(parents=True, exist_ok=True)
+    shutil.copytree(
+        example / "src",
+        run / "source/src",
+        ignore=shutil.ignore_patterns("__pycache__"),
+    )
+    for filename in (
+        "tar_compute.py",
+        "tar_dynamics.py",
+        "tar_dynamics_training.py",
+        "tar_compute_compare.py",
+        "tar_compute_evaluation.py",
+        "run_tar_compute.sh",
+        "run_tar_compute_landscapes.sh",
+        "run_tar_compute_evaluation.sh",
+    ):
+        shutil.copy2(
+            example / "scripts/misc" / filename, run / "source/misc" / filename
+        )
+    shutil.copy2(
+        baseline / "source/misc/reference_get_ll.py",
+        run / "source/misc/reference_get_ll.py",
+    )
+    shutil.copytree(compute / "source/lm_eval_tasks", run / "source/lm_eval_tasks")
+    cache_sources = {
+        "defense": original / "cache/axolotl/defense",
+        "attack": compute / "cache/attack",
+    }
+    for role, source in cache_sources.items():
+        shutil.copytree(
+            source,
+            run / "cache" / role,
+            copy_function=os.link,
+            ignore=shutil.ignore_patterns("*.lock"),
+        )
+    shutil.copy2(compute / "probes.json", run / "probes.json")
+    dump(run / "matrix.json", matrix)
+    cases = {}
+    program = {
+        "state": "prepared",
+        "kind": "fixed-sampler-hparam-study",
+        "baseline_commit": subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=example, text=True
+        ).strip(),
+        "original_run": str(original),
+        "baseline_dynamics": str(baseline),
+        "compute_study": str(compute),
+        "base_model": defense["base_model"],
+        "hparam_matrix": matrix,
+        "matrix_file": str(run / "matrix.json"),
+        "matrix_sha256": hashlib.sha256((run / "matrix.json").read_bytes()).hexdigest(),
+        "comparison_controls": {
+            "reproduced-1000": {
+                "folder": str(control),
+                "schedule_steps": 1000,
+                "label": "B: retain 2.5, inner 1e-6, outer 5e-6",
+            }
+        },
+        "checkpoint_contrast_note": "Controlled hyperparameter contrasts in the original BF16 pathway with the local metadata sampler: retain coefficient 2.5 or 4, inner LR 1e-6 or 1e-5, and outer LR 5e-6 or 1e-5. Explicit case labels and matrix.json identify each condition. The existing B control is reused. All conditions retain K16, 125 defense updates, and matched LR1e-6 attacks over 1000 updates. Joint changes can interact; this is one defense/attacker seed. The uploaded checkpoint's legacy OPTML data pipeline is not a factorial condition and is not reproduced by changing these three values alone.",
+        "checkpoint_report_title": "Controlled TAR hyperparameter comparison",
+        "defense_history_note": "Each new defender has nine saved checkpoints across its 125 defense updates. The analysis uses this observed defense history and the subsequent independent attack. The original B control reuses its completed saved trajectory.",
+        "defense_schedule": "125 linear updates, warmup 12, 16 simulated inner steps per update (2000 total); seed/data seed 42/42. Inner AdamW resets each outer update and retains its original default weight decay 0.01.",
+        "attack_schedule": "Fresh independent LR1e-6 1000-update linear attacks, no warmup, seed/data seed 1/42, and the reused control's exact prepared data order.",
+        "analysis": "Exact frozen fixed10 and attack-held-out32, original physical random/reference bases, and each new defense's real saved history.",
+        "shared_probes": str(run / "probes.json"),
+        "prepared_cache_sources": {
+            role: str(path) for role, path in cache_sources.items()
+        },
+        "cases": cases,
+        "bundles": {"defenses": [], "attacks": [], "all": []},
+        "jobs": {},
+    }
+    for condition, values in matrix.items():
+        stem = f"hparam-{condition.lower()}"
+        defended = run / "cases" / f"{stem}-defense/models/defense"
+        label = f"{condition}: retain {values['retain_coefficient']:g}, inner {values['inner_learning_rate']:g}, outer {values['outer_learning_rate']:g}"
+        program["bundles"][stem] = []
+        for role, reference, source, maximum, saves, state_saves in (
+            ("defense", defense, defense_source, 125, DEFENSE_STEPS, [32, 64, 125]),
+            ("attack", attack, attack_source, 1000, ATTACK_STEPS, [128, 512, 1000]),
+        ):
+            name = f"{stem}-defense" if role == "defense" else f"{stem}-lr1e-6"
+            folder = run / "cases" / name
+            for child in ("models", "logs", "status", "geometry", "surfaces", "cache"):
+                (folder / child).mkdir(parents=True)
+            (folder / "source").symlink_to(run / "source", target_is_directory=True)
+            if role == "attack":
+                (folder / "models/defense").symlink_to(
+                    defended, target_is_directory=True
+                )
+            config = case_config(
+                reference,
+                base_model=defense["base_model"] if role == "defense" else defended,
+                output=folder / "models" / role,
+                prepared=run / "cache" / role,
+                role=role,
+                steps=maximum,
+            )
+            if role == "defense":
+                config["learning_rate"] = values["outer_learning_rate"]
+                config["custom_trainer_args"]["retain_coefficient"] = values[
+                    "retain_coefficient"
+                ]
+                config["custom_trainer_args"]["attack_learning_rate"] = values[
+                    "inner_learning_rate"
+                ]
+            config["wandb_name"] = name
+            config["wandb_project"] = "jwk-tar-fixed-sampler-hparams"
+            shutil.copy2(source, folder / "config.reference.yml")
+            (folder / "config.yml").write_text(yaml.safe_dump(config, sort_keys=False))
+            case = {
+                "name": name,
+                "label": label,
+                "condition": condition,
+                "defense_hyperparameters": values,
+                "role": role,
+                "folder": str(folder),
+                "config": str(folder / "config.yml"),
+                "reference_config": str(source),
+                "max_steps": maximum,
+                "save_steps": list(saves),
+                "state_steps": state_saves,
+                "defense_reference": (
+                    defense["base_model"] if role == "defense" else str(defended)
+                ),
+                "bootstrap_seed": None,
+                "inner_steps_per_update": 16 if role == "defense" else None,
+                "attack_learning_rate": (
+                    None if role == "defense" else config["learning_rate"]
+                ),
+                "gaussian_sigma": None,
+                "base_model": defense["base_model"],
+            }
+            cases[name] = case
+            program["bundles"]["defenses" if role == "defense" else "attacks"].append(
+                name
+            )
+            program["bundles"]["all"].append(name)
+            program["bundles"][stem].append(name)
+            dump(folder / "case.json", case)
+            exports = {
+                "TAR_CASE_NAME": name,
+                "TAR_CASE_ROLE": role,
+                "TAR_CASE_CONFIG": str(folder / "config.yml"),
+                "DYNAMICS_SAVE_STEPS": ",".join(map(str, saves)),
+                "DYNAMICS_STATE_STEPS": ",".join(map(str, state_saves)),
+            }
+            if role == "attack":
+                exports["DYNAMICS_SOURCE_MANIFEST"] = str(
+                    folder / "source-dataset.json"
+                )
+                settings = analysis_settings(run, program, case, probes)
+                settings.update(
+                    defense_checkpoint_root=str(defended),
+                    defense_steps=list(DEFENSE_STEPS),
+                    defense_frames=[0, 8, 16, 32, 64, 125],
+                    broad_defense_frames=[0, 8, 32, 125],
+                )
+                dump(folder / "study.json", settings)
+            (folder / "runtime.sh").write_text(
+                "\n".join(
+                    f"export {key}={shlex.quote(value)}"
+                    for key, value in exports.items()
+                )
+                + "\n"
+            )
+    program["profile_reference_case"] = program["bundles"]["attacks"][0]
+    program["source_sha256"] = {
+        str(path.relative_to(run)): hashlib.sha256(path.read_bytes()).hexdigest()
+        for path in (run / "source").rglob("*")
+        if path.is_file()
+    }
+    dump(run / "study.json", program)
+    print(f"Prepared {len(matrix)} fresh defense/attack pairs; reused B at {control}")
 
 
 def prepare_checkpoint_comparison(
@@ -928,6 +1346,15 @@ def main():
         p.add_argument(f"--{name}", type=Path, required=True)
     p.add_argument("--model-id", required=True)
     p.add_argument("--revision", required=True)
+    p = sub.add_parser("prepare-hparam-study")
+    p.add_argument("run", type=Path)
+    for name in ("example", "original", "baseline", "compute"):
+        p.add_argument(f"--{name}", type=Path, required=True)
+    p.add_argument(
+        "--matrix",
+        type=Path,
+        help="JSON file mapping condition names to the three factor values",
+    )
     p = sub.add_parser("verify-checkpoint-comparison")
     p.add_argument("run", type=Path)
     args = parser.parse_args()
@@ -951,6 +1378,15 @@ def main():
         )
     elif args.stage == "verify-checkpoint-comparison":
         verify_checkpoint_comparison(args.run)
+    elif args.stage == "prepare-hparam-study":
+        prepare_hparam_study(
+            args.run,
+            args.example,
+            args.original,
+            args.baseline,
+            args.compute,
+            json.loads(args.matrix.read_text()) if args.matrix is not None else None,
+        )
     else:
         validate_case(args.folder)
 

@@ -1,0 +1,52 @@
+reformatted /p/vast1/kirchenb/tar-root/lilpipe/tests/test_tar_hparam_prepare.py
+reformatted scripts/misc/tar_compute.py
+
+All done! ✨ 🍰 ✨
+2 files reformatted.
+All done! ✨ 🍰 ✨
+2 files would be left unchanged.
+test_changed_tensors_reject_even_when_stored_hashes_are_identical (test_tar_hparam_prepare.HparamInputOrderTests.test_changed_tensors_reject_even_when_stored_hashes_are_identical) ... ok
+test_exact_batches_pass_for_both_roles_despite_changed_training_metrics (test_tar_hparam_prepare.HparamInputOrderTests.test_exact_batches_pass_for_both_roles_despite_changed_training_metrics) ... ok
+test_incomplete_frozen_controls_reject_before_publishing_pass (test_tar_hparam_prepare.HparamInputOrderTests.test_incomplete_frozen_controls_reject_before_publishing_pass) ... ok
+test_nonhparam_and_standalone_legacy_validation_do_not_require_batches (test_tar_hparam_prepare.HparamInputOrderTests.test_nonhparam_and_standalone_legacy_validation_do_not_require_batches) ... ok
+test_reordered_batches_reject_with_sequential_step_numbers (test_tar_hparam_prepare.HparamInputOrderTests.test_reordered_batches_reject_with_sequential_step_numbers) ... ok
+test_baseline_order_mismatch_rejected_before_preparation (test_tar_hparam_prepare.HparamPreparationTests.test_baseline_order_mismatch_rejected_before_preparation) ... ok
+test_cli_loads_matrix_from_a_saved_json_file (test_tar_hparam_prepare.HparamPreparationTests.test_cli_loads_matrix_from_a_saved_json_file) ... ok
+test_custom_matrix_can_add_a_pairwise_condition (test_tar_hparam_prepare.HparamPreparationTests.test_custom_matrix_can_add_a_pairwise_condition) ... ok
+test_frozen_config_drift_rejected_before_preparation (test_tar_hparam_prepare.HparamPreparationTests.test_frozen_config_drift_rejected_before_preparation) ... ok
+test_immutable_cache_links_source_snapshots_and_matrix_provenance (test_tar_hparam_prepare.HparamPreparationTests.test_immutable_cache_links_source_snapshots_and_matrix_provenance) ... ok
+test_invalid_matrix_rejected_before_any_directory_is_created (test_tar_hparam_prepare.HparamPreparationTests.test_invalid_matrix_rejected_before_any_directory_is_created) ... ok
+test_only_requested_scientific_values_change_in_fresh_defense_attack_pairs (test_tar_hparam_prepare.HparamPreparationTests.test_only_requested_scientific_values_change_in_fresh_defense_attack_pairs) ... ok
+test_reuses_only_external_B_and_keeps_real_defense_history_and_shared_probes (test_tar_hparam_prepare.HparamPreparationTests.test_reuses_only_external_B_and_keeps_real_defense_history_and_shared_probes) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.982s
+
+OK
+{"state": "passed", "case": "defense", "updates": 125, "model_checkpoints": 1, "optimizer_checkpoints": [125], "training_elapsed_seconds": 250.0, "input_order_validation": {"state": "passed", "reference_observations": "/var/tmp/kirchenb/tmpvg2tr1pn/defense/frozen-baseline/models/defense/observed-batches.jsonl", "batches": 125, "canonical_step_batch_sha256": "9d65bb327454a0d84f80132453f0ece77583f54629f2b99fc9082a1463944840"}}
+{"state": "passed", "case": "attack", "updates": 1000, "model_checkpoints": 1, "optimizer_checkpoints": [1000], "training_elapsed_seconds": 2000.0, "input_order_validation": {"state": "passed", "reference_observations": "/var/tmp/kirchenb/tmpvg2tr1pn/attack/frozen-compute/cases/baseline-lr1e-6/models/attack/observed-batches.jsonl", "batches": 1000, "canonical_step_batch_sha256": "889ac7dd9f0365676b8caae789adbfddfdd549a18d29db99a59fa173a503a688"}}
+{"state": "passed", "case": "supplied-checkpoint-comparison", "updates": 125, "model_checkpoints": 1, "optimizer_checkpoints": [125], "training_elapsed_seconds": 250.0}
+{"state": "passed", "case": "None", "updates": 125, "model_checkpoints": 1, "optimizer_checkpoints": [125], "training_elapsed_seconds": 250.0}
+Prepared 1 fresh defense/attack pairs; reused B at /tmp/kirchenb/tmpkz4d7gqy/compute/cases/baseline-lr1e-6
+Prepared 4 fresh defense/attack pairs; reused B at /tmp/kirchenb/tmpbs5vcfpi/compute/cases/baseline-lr1e-6
+Prepared 4 fresh defense/attack pairs; reused B at /tmp/kirchenb/tmpttas51n_/compute/cases/baseline-lr1e-6
+Prepared 4 fresh defense/attack pairs; reused B at /tmp/kirchenb/tmpak1u3uky/compute/cases/baseline-lr1e-6
+test_compute_changes_preserve_unrelated_settings (test_tar_compute.ConfigTests.test_compute_changes_preserve_unrelated_settings) ... ok
+test_pinned_checkpoint_identity_rejects_wrong_revision_and_changed_bytes (test_tar_compute.ConfigTests.test_pinned_checkpoint_identity_rejects_wrong_revision_and_changed_bytes) ... ok
+test_supplied_checkpoint_reuses_attacks_and_does_not_invent_defense_history (test_tar_compute.ConfigTests.test_supplied_checkpoint_reuses_attacks_and_does_not_invent_defense_history) ... ok
+test_validator_counts_zero_based_inner_updates (test_tar_compute.ConfigTests.test_validator_counts_zero_based_inner_updates) ... ok
+test_bootstrap_is_reproducible_and_preserves_source_identities (test_tar_compute.DatasetTests.test_bootstrap_is_reproducible_and_preserves_source_identities) ... ok
+test_matrix_positions_and_common_reference_settings (test_tar_compute.LandscapeSamplingTests.test_matrix_positions_and_common_reference_settings) ... ok
+test_shared_probes_exclude_every_observed_cohort_and_stay_frozen (test_tar_compute.LandscapeSamplingTests.test_shared_probes_exclude_every_observed_cohort_and_stay_frozen) ... ok
+test_sparse_future_batches_are_distinct_from_unseen_content (test_tar_compute.LandscapeSamplingTests.test_sparse_future_batches_are_distinct_from_unseen_content) ... ok
+test_noise_measurement_records_cast_displacement_and_preserves_global_rng (test_tar_compute.NoiseTests.test_noise_measurement_records_cast_displacement_and_preserves_global_rng) ... ok
+test_selected_checkpoints_keep_optimizer_state (test_tar_compute.StateSaveTests.test_selected_checkpoints_keep_optimizer_state) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.328s
+
+OK
+Prepared two independent original-protocol attacks at /tmp/kirchenb/tmpl41_80t8/run
+{"state": "passed", "case": "test", "updates": 1, "model_checkpoints": 1, "optimizer_checkpoints": [1], "training_elapsed_seconds": 1.0}
+Frozen common probes and materialized sixteen landscape analyses
+Frozen common probes and materialized sixteen landscape analyses

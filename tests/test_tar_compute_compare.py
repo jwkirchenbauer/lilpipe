@@ -1855,6 +1855,28 @@ class CheckpointReportTests(unittest.TestCase):
             self.assertFalse((run / "report.md").exists())
             self.assertFalse((run / "case-summary.csv").exists())
 
+    def test_controlled_hparam_report_uses_observed_defense_history_note(self):
+        with tempfile.TemporaryDirectory() as directory:
+            run, program, _, _ = self.fixture(Path(directory))
+            program.update(
+                checkpoint_report_title="Controlled TAR hyperparameter comparison",
+                checkpoint_contrast_note="Fixed-sampler parameter contrasts.",
+                defense_history_note="Nine actual saved defense checkpoints are available.",
+            )
+            write_json(run / "study.json", program)
+            with (
+                patch.object(COMPARE, "checkpoint_surface_figure"),
+                patch.object(COMPARE, "checkpoint_trajectory_figure"),
+            ):
+                result = COMPARE.checkpoint_report(run)
+            self.assertEqual(result["coverage"], "complete")
+            text = (run / "checkpoint-report.md").read_text()
+            self.assertTrue(
+                text.startswith("# Controlled TAR hyperparameter comparison")
+            )
+            self.assertIn("Nine actual saved defense checkpoints", text)
+            self.assertNotIn("no observed training history", text)
+
     def test_stale_geometry_cache_inputs_prevent_a_final_comparison(self):
         with tempfile.TemporaryDirectory() as directory:
             _, program, probes, records = self.fixture(Path(directory))

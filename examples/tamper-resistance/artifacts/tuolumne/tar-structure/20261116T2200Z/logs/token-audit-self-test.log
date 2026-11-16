@@ -1,0 +1,20 @@
+/usr/WS2/kirchenb/lilpipe-tar-eval-rocm72-v2/bin/python: No module named black
+reformatted artifacts/tuolumne/tar-structure/20261116T2200Z/source/token-audit-v1/audit_tokens.py
+
+All done! ✨ 🍰 ✨
+1 file reformatted.
+All done! ✨ 🍰 ✨
+1 file would be left unchanged.
+PASS: mixed source dtype loading, exact unseen-row residual, immutable anchors, outer-only all-ID support, variance weights, concentration, authorized reads
+reformatted artifacts/tuolumne/tar-structure/20261116T2200Z/source/token-audit-v1/audit_tokens.py
+
+All done! ✨ 🍰 ✨
+1 file reformatted.
+All done! ✨ 🍰 ✨
+1 file would be left unchanged.
+PASS: mixed source dtype loading, exact unseen-row residual, immutable anchors, outer-only all-ID support, variance weights, concentration, authorized reads
+All done! ✨ 🍰 ✨
+1 file would be left unchanged.
+PASS: mixed source dtype loading, exact unseen-row residual, immutable anchors, outer-only all-ID support, variance weights, concentration, authorized reads
+75f89a3c7183a4d36f03353b1cc61abdb0ea26ab1609f4b40e419f1e77b8787b  artifacts/tuolumne/tar-structure/20261116T2200Z/source/token-audit-v1/audit_tokens.py
+5c399281d04d97dd5cfebd3695e54028c9cb5a95f7afbedf375ef2a3de565a70  artifacts/tuolumne/tar-structure/20261116T2200Z/source/token-audit-v1/run.sh

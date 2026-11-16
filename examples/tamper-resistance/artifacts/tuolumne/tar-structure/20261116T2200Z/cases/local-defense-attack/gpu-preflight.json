@@ -1,0 +1,6 @@
+{
+  "state": "passed",
+  "fp64_gram": true,
+  "fp64_weighted_histogram": true,
+  "visible_devices": 1
+}

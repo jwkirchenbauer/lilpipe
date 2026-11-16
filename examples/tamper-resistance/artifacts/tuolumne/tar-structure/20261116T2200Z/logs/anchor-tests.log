@@ -1,0 +1,2 @@
+PASS transformed anchor span preserves full observed span
+PASS late-interval transform returns an orthonormal restricted span

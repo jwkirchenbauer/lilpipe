@@ -1,0 +1,104 @@
+{
+  "state": "passed",
+  "native_endpoint_checks": [
+    {
+      "case": "local-defense-attack",
+      "step": 0,
+      "errors": {
+        "fixed": 0.0,
+        "heldout": 0.0
+      },
+      "probe_sha256": {
+        "fixed": "d7540e8573498757af327819bcd6ae9d67c2c2d64550902596c97c2ae4ba932f",
+        "heldout": "97d0fdcd1ed98a8266c93722b160daa39d581ccd3eec227cd8efbdf67eefd9a4"
+      }
+    },
+    {
+      "case": "local-defense-attack",
+      "step": 1,
+      "errors": {
+        "fixed": 0.0,
+        "heldout": 0.0
+      },
+      "probe_sha256": {
+        "fixed": "d7540e8573498757af327819bcd6ae9d67c2c2d64550902596c97c2ae4ba932f",
+        "heldout": "97d0fdcd1ed98a8266c93722b160daa39d581ccd3eec227cd8efbdf67eefd9a4"
+      }
+    },
+    {
+      "case": "local-defense-attack",
+      "step": 0,
+      "errors": {
+        "fixed": 0.0,
+        "heldout": 0.0
+      },
+      "probe_sha256": {
+        "fixed": "d7540e8573498757af327819bcd6ae9d67c2c2d64550902596c97c2ae4ba932f",
+        "heldout": "97d0fdcd1ed98a8266c93722b160daa39d581ccd3eec227cd8efbdf67eefd9a4"
+      }
+    },
+    {
+      "case": "local-defense-attack",
+      "step": 1000,
+      "errors": {
+        "fixed": 0.0,
+        "heldout": 0.0
+      },
+      "probe_sha256": {
+        "fixed": "d7540e8573498757af327819bcd6ae9d67c2c2d64550902596c97c2ae4ba932f",
+        "heldout": "97d0fdcd1ed98a8266c93722b160daa39d581ccd3eec227cd8efbdf67eefd9a4"
+      }
+    },
+    {
+      "case": "collaborator-attack",
+      "step": 0,
+      "errors": {
+        "fixed": 0.0,
+        "heldout": 0.0
+      },
+      "probe_sha256": {
+        "fixed": "d7540e8573498757af327819bcd6ae9d67c2c2d64550902596c97c2ae4ba932f",
+        "heldout": "97d0fdcd1ed98a8266c93722b160daa39d581ccd3eec227cd8efbdf67eefd9a4"
+      }
+    },
+    {
+      "case": "collaborator-attack",
+      "step": 1,
+      "errors": {
+        "fixed": 0.0,
+        "heldout": 0.0
+      },
+      "probe_sha256": {
+        "fixed": "d7540e8573498757af327819bcd6ae9d67c2c2d64550902596c97c2ae4ba932f",
+        "heldout": "97d0fdcd1ed98a8266c93722b160daa39d581ccd3eec227cd8efbdf67eefd9a4"
+      }
+    },
+    {
+      "case": "collaborator-attack",
+      "step": 0,
+      "errors": {
+        "fixed": 0.0,
+        "heldout": 0.0
+      },
+      "probe_sha256": {
+        "fixed": "d7540e8573498757af327819bcd6ae9d67c2c2d64550902596c97c2ae4ba932f",
+        "heldout": "97d0fdcd1ed98a8266c93722b160daa39d581ccd3eec227cd8efbdf67eefd9a4"
+      }
+    },
+    {
+      "case": "collaborator-attack",
+      "step": 1000,
+      "errors": {
+        "fixed": 0.0,
+        "heldout": 0.0
+      },
+      "probe_sha256": {
+        "fixed": "d7540e8573498757af327819bcd6ae9d67c2c2d64550902596c97c2ae4ba932f",
+        "heldout": "97d0fdcd1ed98a8266c93722b160daa39d581ccd3eec227cd8efbdf67eefd9a4"
+      }
+    }
+  ],
+  "interpretation": "Frozen checkpoint composites; this does not train module-constrained attackers or measure partial-composite benchmark recovery. Values can interact and need not sum to the full checkpoint effect.",
+  "source_sha256": "6e2d359774f88af2a90d3e451be6539dbe08a39b3de5f946d142ddaca12381ec",
+  "flux_job_id": "fbtg6fh"
+}

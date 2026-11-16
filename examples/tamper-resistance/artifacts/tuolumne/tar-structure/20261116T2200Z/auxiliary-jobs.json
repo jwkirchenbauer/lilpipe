@@ -1,0 +1,89 @@
+[
+  {
+    "name": "tar-defense-anchor-sensitivity",
+    "env": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+    "minutes": 5,
+    "target": [
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/source/anchor-v1/run.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z"
+    ],
+    "argv": [
+      "python",
+      "/p/vast1/kirchenb/llnl-tools/launch_tuo.py",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+      "--env_act_style=mm_activate",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/launches",
+      "--qos=pdebug",
+      "--bank=verival",
+      "--run_name=tar-defense-anchor-sensitivity",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=4",
+      "--torchrun=false",
+      "--minutes=5",
+      "--pass_run_name=false",
+      "--quiet_launch=true"
+    ],
+    "job_id": "f3kWfKiAmST9"
+  },
+  {
+    "name": "tar-module-replay",
+    "env": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+    "minutes": 15,
+    "target": [
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/source/replay-v1/run.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z"
+    ],
+    "argv": [
+      "python",
+      "/p/vast1/kirchenb/llnl-tools/launch_tuo.py",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+      "--env_act_style=mm_activate",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/launches",
+      "--qos=pdebug",
+      "--bank=verival",
+      "--run_name=tar-module-replay",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=4",
+      "--torchrun=false",
+      "--minutes=15",
+      "--pass_run_name=false",
+      "--quiet_launch=true"
+    ],
+    "job_id": "f3kWd14Npkib"
+  },
+  {
+    "name": "tar-token-loading-audit",
+    "env": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+    "minutes": 10,
+    "target": [
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/source/token-audit-v1/run.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z"
+    ],
+    "argv": [
+      "python",
+      "/p/vast1/kirchenb/llnl-tools/launch_tuo.py",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+      "--env_act_style=mm_activate",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/launches",
+      "--qos=pdebug",
+      "--bank=verival",
+      "--run_name=tar-token-loading-audit",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=4",
+      "--torchrun=false",
+      "--minutes=10",
+      "--pass_run_name=false",
+      "--quiet_launch=true"
+    ],
+    "job_id": "f3kWm3JQgit7"
+  }
+]

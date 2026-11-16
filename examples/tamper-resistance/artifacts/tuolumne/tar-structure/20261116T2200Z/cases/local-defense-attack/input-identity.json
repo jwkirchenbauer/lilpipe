@@ -1,0 +1,458 @@
+{
+  "signature": "9c65e67113bfe1e49de9a100705790be134639323413002067ab05566ba42354",
+  "declaration": {
+    "job": {
+      "name": "local-defense-attack",
+      "layout": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/geometry/geometry.json",
+      "snapshots": [
+        {
+          "name": "defense-1",
+          "step": 1,
+          "anchor": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-1",
+          "inspect": true
+        },
+        {
+          "name": "defense-2",
+          "step": 2,
+          "anchor": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-2",
+          "inspect": false
+        },
+        {
+          "name": "defense-4",
+          "step": 4,
+          "anchor": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-4",
+          "inspect": false
+        },
+        {
+          "name": "defense-8",
+          "step": 8,
+          "anchor": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-8",
+          "inspect": false
+        },
+        {
+          "name": "defense-16",
+          "step": 16,
+          "anchor": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-16",
+          "inspect": false
+        },
+        {
+          "name": "defense-32",
+          "step": 32,
+          "anchor": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-32",
+          "inspect": true
+        },
+        {
+          "name": "defense-64",
+          "step": 64,
+          "anchor": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-64",
+          "inspect": false
+        },
+        {
+          "name": "defense-96",
+          "step": 96,
+          "anchor": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-96",
+          "inspect": false
+        },
+        {
+          "name": "defense-125",
+          "step": 125,
+          "anchor": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-125",
+          "inspect": true
+        },
+        {
+          "name": "attack-1",
+          "step": 1,
+          "anchor": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-1",
+          "inspect": true
+        },
+        {
+          "name": "attack-2",
+          "step": 2,
+          "anchor": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-2",
+          "inspect": false
+        },
+        {
+          "name": "attack-4",
+          "step": 4,
+          "anchor": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-4",
+          "inspect": false
+        },
+        {
+          "name": "attack-8",
+          "step": 8,
+          "anchor": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-8",
+          "inspect": false
+        },
+        {
+          "name": "attack-16",
+          "step": 16,
+          "anchor": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-16",
+          "inspect": false
+        },
+        {
+          "name": "attack-32",
+          "step": 32,
+          "anchor": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-32",
+          "inspect": true
+        },
+        {
+          "name": "attack-48",
+          "step": 48,
+          "anchor": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-48",
+          "inspect": false
+        },
+        {
+          "name": "attack-64",
+          "step": 64,
+          "anchor": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-64",
+          "inspect": false
+        },
+        {
+          "name": "attack-96",
+          "step": 96,
+          "anchor": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-96",
+          "inspect": false
+        },
+        {
+          "name": "attack-128",
+          "step": 128,
+          "anchor": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-128",
+          "inspect": true
+        },
+        {
+          "name": "attack-256",
+          "step": 256,
+          "anchor": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-256",
+          "inspect": false
+        },
+        {
+          "name": "attack-512",
+          "step": 512,
+          "anchor": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-512",
+          "inspect": false
+        },
+        {
+          "name": "attack-1000",
+          "step": 1000,
+          "anchor": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-1000",
+          "inspect": true
+        },
+        {
+          "name": "defense-anchor-equality",
+          "anchor": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-125",
+          "inspect": false,
+          "include_capture": false
+        }
+      ],
+      "groups": [
+        {
+          "name": "local-defense",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "name": "local-attack",
+          "indices": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21
+          ],
+          "native_geometry": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/geometry/geometry.json"
+        }
+      ],
+      "external_bases": [
+        {
+          "name": "collaborator-attack",
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/cases/collaborator-lr1e-6-ms1000/geometry/attack-basis.npy"
+        }
+      ],
+      "overlap_only": [
+        "collaborator-attack"
+      ],
+      "require_zero_snapshots": [
+        22
+      ],
+      "phase_pairs": [
+        {
+          "name": "local-defense-to-attack",
+          "defense_endpoint": 8,
+          "attack_endpoint": 21,
+          "defense_group": "local-defense",
+          "attack_group": "local-attack"
+        }
+      ],
+      "intervals": [
+        {
+          "name": "attack-512-to-1000",
+          "start": 20,
+          "end": 21
+        }
+      ],
+      "tokenizer": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+      "observations": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/observed-batches.jsonl",
+      "defense_observations": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/observed-batches.jsonl",
+      "chunk_elements": 1048576
+    },
+    "files": [
+      {
+        "path": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c/model-00001-of-00008.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/blobs/a6ec4a0398df9d56786afa9cce026423ec48a07ddc5ed5eba087614cae2dd746",
+        "size": 1889587040,
+        "mtime_ns": 1794250662806060970
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c/model-00002-of-00008.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/blobs/1289796f16f33ef4c6b8a76b3d9e5169198a69daa0b5b660b5a3d5cae0dc1cf7",
+        "size": 1946243936,
+        "mtime_ns": 1794250704397529654
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c/model-00003-of-00008.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/blobs/6fc338de96c672840222ca19a12b44f09110048974bde8ab0f4c1da055d99c3f",
+        "size": 1979781432,
+        "mtime_ns": 1794250599651628401
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c/model-00004-of-00008.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/blobs/92d948413fd7ac6c4fd5f6c36902bb7a72d2cddca19628c88e6f3b3e5482ab37",
+        "size": 1946243984,
+        "mtime_ns": 1794250637882635966
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c/model-00005-of-00008.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/blobs/d0ce3cc66d224a0e6014a1df6b7e56da29f5db52da1866ad0cc07d7583fb7c31",
+        "size": 1979781448,
+        "mtime_ns": 1794250613306574121
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c/model-00006-of-00008.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/blobs/0b63ef55219d125eaeefabd2a33c358dced22b9c75d1d816bb7a871bd3773951",
+        "size": 1946243984,
+        "mtime_ns": 1794250600479228540
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c/model-00007-of-00008.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/blobs/b0e0a3c0b992925ff9a60f1234950af0bcc7ce3015c8a386a342489e76f5d09c",
+        "size": 1979781448,
+        "mtime_ns": 1794250621436432625
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c/model-00008-of-00008.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/blobs/667dd6958d5137dcba514db514c7970d18c9cd5d95fbb0c82490d558bd2a246c",
+        "size": 815834680,
+        "mtime_ns": 1794250597808531515
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c/model.safetensors.index.json",
+        "resolved": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/blobs/fbc869b880f0c7287847c72de41d71522f62b685",
+        "size": 23950,
+        "mtime_ns": 1794250598181935196
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/cases/collaborator-lr1e-6-ms1000/geometry/attack-basis.npy",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/cases/collaborator-lr1e-6-ms1000/geometry/attack-basis.npy",
+        "size": 57933856896,
+        "mtime_ns": 1794854237112672156
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/geometry/geometry.json",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/geometry/geometry.json",
+        "size": 72219,
+        "mtime_ns": 1794342866232315321
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-1/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-1/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794335942584831787
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-1000/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-1000/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794337091361037667
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-128/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-128/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794336488555479488
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-16/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-16/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794336195943025503
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-2/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-2/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794335969226991305
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-256/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-256/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794336642223598435
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-32/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-32/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794336251310514500
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-4/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-4/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794336027027183177
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-48/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-48/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794336302751796915
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-512/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-512/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794336798490033417
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-64/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-64/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794336360974331164
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-8/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-8/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794336137267946476
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-96/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-96/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794336426298635473
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/observed-batches.jsonl",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/observed-batches.jsonl",
+        "size": 6474395,
+        "mtime_ns": 1794337069909154624
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-1/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-1/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794283530788339402
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-125/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-125/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794284565732626234
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-16/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-16/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794283747214406148
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-2/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-2/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794283566518065697
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-32/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-32/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794283879869098821
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-4/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-4/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794283607559820551
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-64/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-64/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794284113589821345
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-8/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-8/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794283662561374953
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-96/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/checkpoint-96/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794284348584937837
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/observed-batches.jsonl",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/observed-batches.jsonl",
+        "size": 17289730,
+        "mtime_ns": 1794284547292087123
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense/model.safetensors",
+        "resolved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense/model.safetensors",
+        "size": 15008318632,
+        "mtime_ns": 1794257262005208644
+      }
+    ],
+    "source_sha256": "6ab38451a8ab3da906cce6a74424dc0526b1a332c043604e8fd11c3a2b20c78f"
+  }
+}

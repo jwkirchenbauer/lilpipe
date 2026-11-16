@@ -1,0 +1,320 @@
+{
+  "state": "complete",
+  "input": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/cases/local-defense-attack/gram.npz",
+  "cache_scope": "small aggregate Gram and per-parameter Gram caches only; no checkpoint tensors opened",
+  "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/source/anchor-v1/analyze_anchor.py",
+  "definitions": {
+    "start_anchor": "Uncentered saved displacement snapshots D0..D8 from the original phase start.",
+    "endpoint_anchor": "Nine vectors -D8 and D_i-D8 for i=0..7, including the original phase-start base point.",
+    "late_intervals": "Only D6-D5, D7-D6, D8-D7 (32->64, 64->96, 96->125); not the whole defense trajectory.",
+    "attack": "Uncentered local K16 attack displacement snapshots D9..D21 (13 saved updates).",
+    "interpretation": "These are parameter-displacement subspaces, not protected-loss subspaces or a robustness guarantee.",
+    "full_span_invariance": "The full observed defense span is expected to be invariant under start/end anchoring because the endpoint transform is invertible; late intervals are a restricted local subspace."
+  },
+  "spectra": {
+    "raw": {
+      "start-defense-plane": {
+        "rank": 8,
+        "used_rank": 2,
+        "eigenvalues": [
+          12.136580110296867,
+          0.7077730589671372,
+          0.1498308960823229,
+          0.06096395095735491,
+          0.023282080263665902,
+          0.00242498793168727,
+          0.0010097394293373573,
+          2.4045829777212295e-05,
+          0.0
+        ],
+        "captured_snapshot_energy": 0.9818424003705409,
+        "snapshot_count": 9
+      },
+      "endpoint-defense-plane": {
+        "rank": 8,
+        "used_rank": 2,
+        "eigenvalues": [
+          21.005870771952246,
+          0.774815561722818,
+          0.1501898476474715,
+          0.07906985673041979,
+          0.019151350626655,
+          0.004367754217820992,
+          0.0007850744919865113,
+          1.6947914349847358e-05,
+          0.0
+        ],
+        "captured_snapshot_energy": 0.9884915241461716,
+        "snapshot_count": 9
+      },
+      "late-interval-plane": {
+        "rank": 3,
+        "used_rank": 2,
+        "eigenvalues": [
+          0.8557129948801694,
+          0.11467029797555196,
+          0.005280697563158004
+        ],
+        "captured_snapshot_energy": 0.994587585874835,
+        "snapshot_count": 3
+      },
+      "start-defense-span": {
+        "rank": 8,
+        "used_rank": 8,
+        "eigenvalues": [
+          12.136580110296867,
+          0.7077730589671372,
+          0.1498308960823229,
+          0.06096395095735491,
+          0.023282080263665902,
+          0.00242498793168727,
+          0.0010097394293373573,
+          2.4045829777212295e-05,
+          0.0
+        ],
+        "captured_snapshot_energy": 1.0,
+        "snapshot_count": 9
+      },
+      "endpoint-defense-span": {
+        "rank": 8,
+        "used_rank": 8,
+        "eigenvalues": [
+          21.005870771952246,
+          0.774815561722818,
+          0.1501898476474715,
+          0.07906985673041979,
+          0.019151350626655,
+          0.004367754217820992,
+          0.0007850744919865113,
+          1.6947914349847358e-05,
+          0.0
+        ],
+        "captured_snapshot_energy": 1.0,
+        "snapshot_count": 9
+      },
+      "late-interval-span": {
+        "rank": 3,
+        "used_rank": 3,
+        "eigenvalues": [
+          0.8557129948801694,
+          0.11467029797555196,
+          0.005280697563158004
+        ],
+        "captured_snapshot_energy": 1.0,
+        "snapshot_count": 3
+      },
+      "local-attack-plane": {
+        "rank": 13,
+        "used_rank": 2,
+        "eigenvalues": [
+          3.918278463650766,
+          0.39461632202826885,
+          0.09510236062343383,
+          0.03976751400056626,
+          0.02122636495030037,
+          0.01297634582952998,
+          0.007242627867734318,
+          0.004551972744194,
+          0.004364248647473159,
+          0.0026804482915974755,
+          0.0010878411016266832,
+          0.00020196193503869937,
+          5.257014400619535e-05
+        ],
+        "captured_snapshot_energy": 0.9579635737560515,
+        "snapshot_count": 13
+      },
+      "local-attack-span": {
+        "rank": 13,
+        "used_rank": 13,
+        "eigenvalues": [
+          3.918278463650766,
+          0.39461632202826885,
+          0.09510236062343383,
+          0.03976751400056626,
+          0.02122636495030037,
+          0.01297634582952998,
+          0.007242627867734318,
+          0.004551972744194,
+          0.004364248647473159,
+          0.0026804482915974755,
+          0.0010878411016266832,
+          0.00020196193503869937,
+          5.257014400619535e-05
+        ],
+        "captured_snapshot_energy": 1.0,
+        "snapshot_count": 13
+      }
+    },
+    "evaluated": {
+      "start-defense-plane": {
+        "rank": 8,
+        "used_rank": 2,
+        "eigenvalues": [
+          12.146539145145285,
+          0.7136469822108404,
+          0.1559235273139821,
+          0.06779809682833353,
+          0.024176901158231442,
+          0.00534250204569331,
+          0.0010109612935550593,
+          2.289298590980724e-05,
+          0.0
+        ],
+        "captured_snapshot_energy": 0.9806111069717955,
+        "snapshot_count": 9
+      },
+      "endpoint-defense-plane": {
+        "rank": 8,
+        "used_rank": 2,
+        "eigenvalues": [
+          21.07272650555199,
+          0.783991311819347,
+          0.15735757885328697,
+          0.08797447612037718,
+          0.01983688872098083,
+          0.009548962935558134,
+          0.0007859071143110442,
+          1.6091632992864588e-05,
+          0.0
+        ],
+        "captured_snapshot_energy": 0.9875511952822417,
+        "snapshot_count": 9
+      },
+      "late-interval-plane": {
+        "rank": 3,
+        "used_rank": 2,
+        "eigenvalues": [
+          0.8682131695175817,
+          0.12812298702732655,
+          0.011475322301460722
+        ],
+        "captured_snapshot_energy": 0.9886136221482649,
+        "snapshot_count": 3
+      },
+      "start-defense-span": {
+        "rank": 8,
+        "used_rank": 8,
+        "eigenvalues": [
+          12.146539145145285,
+          0.7136469822108404,
+          0.1559235273139821,
+          0.06779809682833353,
+          0.024176901158231442,
+          0.00534250204569331,
+          0.0010109612935550593,
+          2.289298590980724e-05,
+          0.0
+        ],
+        "captured_snapshot_energy": 1.0,
+        "snapshot_count": 9
+      },
+      "endpoint-defense-span": {
+        "rank": 8,
+        "used_rank": 8,
+        "eigenvalues": [
+          21.07272650555199,
+          0.783991311819347,
+          0.15735757885328697,
+          0.08797447612037718,
+          0.01983688872098083,
+          0.009548962935558134,
+          0.0007859071143110442,
+          1.6091632992864588e-05,
+          0.0
+        ],
+        "captured_snapshot_energy": 1.0,
+        "snapshot_count": 9
+      },
+      "late-interval-span": {
+        "rank": 3,
+        "used_rank": 3,
+        "eigenvalues": [
+          0.8682131695175817,
+          0.12812298702732655,
+          0.011475322301460722
+        ],
+        "captured_snapshot_energy": 1.0,
+        "snapshot_count": 3
+      },
+      "local-attack-plane": {
+        "rank": 13,
+        "used_rank": 2,
+        "eigenvalues": [
+          3.862406549632897,
+          0.39193098817850625,
+          0.09188950028905678,
+          0.03693836015219056,
+          0.02213900600966635,
+          0.016000161506014198,
+          0.008563396831961766,
+          0.007834337981420636,
+          0.006638504955287786,
+          0.005074686486813653,
+          0.002279153808976161,
+          0.0005366299364624381,
+          0.00010118278552261594
+        ],
+        "captured_snapshot_energy": 0.9555300682088683,
+        "snapshot_count": 13
+      },
+      "local-attack-span": {
+        "rank": 13,
+        "used_rank": 13,
+        "eigenvalues": [
+          3.862406549632897,
+          0.39193098817850625,
+          0.09188950028905678,
+          0.03693836015219056,
+          0.02213900600966635,
+          0.016000161506014198,
+          0.008563396831961766,
+          0.007834337981420636,
+          0.006638504955287786,
+          0.005074686486813653,
+          0.002279153808976161,
+          0.0005366299364624381,
+          0.00010118278552261594
+        ],
+        "captured_snapshot_energy": 1.0,
+        "snapshot_count": 13
+      }
+    }
+  },
+  "start_endpoint_full_span_invariance": [
+    {
+      "precision": "raw",
+      "start_rank": 8,
+      "endpoint_rank": 8,
+      "mean_cosine_squared": 0.9999999999999902,
+      "angles_degrees": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.9090959104164224e-06,
+        2.091309789151873e-06,
+        1.5812109207457903e-05
+      ],
+      "verified": true
+    },
+    {
+      "precision": "evaluated",
+      "start_rank": 8,
+      "endpoint_rank": 8,
+      "mean_cosine_squared": 0.9999999999999976,
+      "angles_degrees": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.4787793334710982e-06,
+        1.7075472925031877e-06,
+        7.778248095798993e-06
+      ],
+      "verified": true
+    }
+  ]
+}

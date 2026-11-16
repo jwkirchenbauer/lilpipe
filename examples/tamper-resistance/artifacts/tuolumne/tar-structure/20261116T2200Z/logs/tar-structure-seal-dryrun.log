@@ -1,0 +1,15 @@
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+      f3kWt1WnmWWB    pbatch tar-hpar kirchenb  S      00:00      1 
+      f3kWt42r2kkX    pbatch tar-hpar kirchenb  S      00:00      1 
+      f3kWt6Qvjs5H    pbatch tar-hpar kirchenb  S      00:00      1 
+      f3kWt8prC5gs    pbatch tar-hpar kirchenb  S      00:00      1 
+      f3kWucZmM3K5    pbatch tar-hpar kirchenb  D      00:00      1 
+      f3kWuh6P1pbq    pbatch tar-hpar kirchenb  D      00:00      1 
+      f3kWumXM3LcP    pbatch tar-hpar kirchenb  D      00:00      1 
+      f3kWur6uChJo    pbatch tar-hpar kirchenb  D      00:00      1 
+      f3kWwGrBRmcb    pdebug evogrpo- kirchenb  R      00:12      1 tuolumne1010
+      f3kWujVJeXDy    pdebug advgame- kirchenb  R      03:15      1 tuolumne1015
+Removing existing launch file: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/launches/tar-structure-seal/launch.sh
+Removing existing runner file: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/launches/tar-structure-seal/subrunner.sh
+Submission: flux batch -q pdebug --bank=verival --job-name=tar-structure-seal -t5 -N1 -n1 -g1 -c8 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/launches/tar-structure-seal/launch.sh
+No jobs were launched. You can inspect the files created at /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/launches/tar-structure-seal/launch.sh

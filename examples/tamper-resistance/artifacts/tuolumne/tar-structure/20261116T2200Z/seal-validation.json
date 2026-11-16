@@ -1,0 +1,102 @@
+{
+  "state": "complete",
+  "completed_utc": "2026-11-16T23:17:55.797721+00:00",
+  "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z",
+  "flux_job_id": "faHGsuy",
+  "case_states": {
+    "local-defense-attack": {
+      "scan": "complete",
+      "structure": "complete",
+      "analysis": "complete",
+      "report": "complete"
+    },
+    "collaborator-attack": {
+      "scan": "complete",
+      "structure": "complete",
+      "analysis": "complete",
+      "report": "complete"
+    }
+  },
+  "token_audit": "complete",
+  "module_replay": "passed",
+  "anchor_full_span_invariance": "passed",
+  "source_manifests": {
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/source/anchor-v1/manifest.sha256": {
+      "sha256": "7c0b4054e6d40a4ec92be0b0a55ac2ea1661e8161f8d127b134256ce34f58136",
+      "members": [
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/source/anchor-v1/analyze_anchor.py",
+          "sha256": "37b0c72d97ceb2c98a14f10fe4bcefd1d6e601e7e379d8c8c7c55b1eed35451b"
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/source/anchor-v1/run.sh",
+          "sha256": "d5c9e65ef0a52a79b76d11af4b3e125d9a32474ca7b7ca73fb80a12fc0636742"
+        }
+      ]
+    },
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/source/replay-v1/manifest.sha256": {
+      "sha256": "41de39247111cfdeabf0efcc92b446ed3a5eda33540f9e0d078b597080a30c7d",
+      "members": [
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/source/replay-v1/replay.py",
+          "sha256": "6e2d359774f88af2a90d3e451be6539dbe08a39b3de5f946d142ddaca12381ec"
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/source/replay-v1/run.sh",
+          "sha256": "0f968b4063b57b053a8a16737f6565ac4ad7ccdc7c89a98a4cd73398cafd62a4"
+        }
+      ]
+    },
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/source/seal-v1/manifest.sha256": {
+      "sha256": "09e5c8ed6de1aea819f52cdc3fc11e09a9dbc174d7355d8dff6608db36bef9d7",
+      "members": [
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/source/seal-v1/seal.py",
+          "sha256": "9e06cda07be3519a2a4a990a2e00fdf88a66789005c28f8bf524457866fa1847"
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/source/seal-v1/run.sh",
+          "sha256": "7bf23fb5ce0e8fa3bf1e749730ab4931bd0e5967f5d25c5731346677c1dd29ad"
+        }
+      ]
+    },
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/source/token-audit-v1/manifest.sha256": {
+      "sha256": "63c00844a8345bfbbefdab6c110272b012a485763fefa2859210455a37dda4df",
+      "members": [
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/source/token-audit-v1/audit_tokens.py",
+          "sha256": "75f89a3c7183a4d36f03353b1cc61abdb0ea26ab1609f4b40e419f1e77b8787b"
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/source/token-audit-v1/run.sh",
+          "sha256": "5c399281d04d97dd5cfebd3695e54028c9cb5a95f7afbedf375ef2a3de565a70"
+        }
+      ]
+    },
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/source/v1/manifest.sha256": {
+      "sha256": "6ebf2df560480be5f8ea94112b77cce764a71b8eb6da10426548dd0628bb1479",
+      "members": [
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/source/v1/tar_basis_structure.py",
+          "sha256": "6ab38451a8ab3da906cce6a74424dc0526b1a332c043604e8fd11c3a2b20c78f"
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/source/v1/run_structure.sh",
+          "sha256": "6c885fd0171521bde856aea13bb23f7a98efc8cf349d743ae4bf0d6ae9617efb"
+        }
+      ]
+    }
+  },
+  "curated_payload_files": 140,
+  "curated_payload_bytes": 69285737,
+  "excluded_classes": [
+    "model checkpoints and optimizer state",
+    "cache directories and per-parameter scan/structure caches",
+    "native basis NPY files",
+    "coordinate-histograms NPZ files",
+    "token-audit/arrays.npz",
+    "launch job stdout and worker stdout logs",
+    "token-audit-values.log and module-replay.log"
+  ],
+  "manifest_self_hash": "intentionally omitted; the manifest is listed but cannot hash itself"
+}

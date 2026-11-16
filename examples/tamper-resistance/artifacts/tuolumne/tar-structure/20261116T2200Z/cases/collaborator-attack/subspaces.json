@@ -1,0 +1,28 @@
+{
+  "state": "complete",
+  "spectra": {},
+  "coefficients": {
+    "collaborator-attack-raw-plane": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ]
+  },
+  "overlaps": [],
+  "native_validations": [],
+  "endpoint_reversal": [],
+  "anchor_continuity_verified": false
+}

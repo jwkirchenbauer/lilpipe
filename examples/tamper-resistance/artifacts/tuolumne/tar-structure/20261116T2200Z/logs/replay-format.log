@@ -1,0 +1,7 @@
+bash: cannot set terminal process group (2913317): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+reformatted /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/source/replay-v1/replay.py
+
+All done! ✨ 🍰 ✨
+1 file reformatted.

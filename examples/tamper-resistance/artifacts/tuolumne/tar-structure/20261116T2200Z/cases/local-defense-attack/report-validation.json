@@ -1,0 +1,9 @@
+{
+  "state": "passed",
+  "observed_batches": 1000,
+  "views": 20,
+  "planes": 4,
+  "independent_input_output_matrices": true,
+  "parameters": 7241732096,
+  "storage_precision_note": "Raw means dequantized saved mixed BF16/FP32 tensors; evaluated means individually BF16-cast saved weights before subtraction. Zero saved motion does not identify zero optimizer or gradient motion."
+}

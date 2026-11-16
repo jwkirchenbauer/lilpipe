@@ -1,0 +1,10 @@
+{
+  "kind": "TAR basis structure and defense-attack overlap",
+  "prior_comparison": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z",
+  "cases": [
+    "local-defense-attack",
+    "collaborator-attack"
+  ],
+  "method": "Uncentered PCA on saved phase displacements, FP64 Gram, FP32 basis coordinates, plane energy summed across axes; separate BF16-evaluated trajectory PCA. Exact coordinate zeros and concentration histogram bounds. Defense trajectory is local only.",
+  "hparam_runs_gate": "Complete and interpret this analysis before launching any hyperparameter follow-up training."
+}

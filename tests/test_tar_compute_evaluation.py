@@ -207,6 +207,51 @@ class PlanningTests(unittest.TestCase):
         self.assertEqual(EVAL.select_cases(study), ["baseline-lr1e-5"])
         self.assertEqual(EVAL.select_cases(study, cases=["smoke-k64"]), ["smoke-k64"])
 
+    def test_declared_evaluation_cases_scope_default_and_report_coverage(self):
+        with tempfile.TemporaryDirectory() as directory:
+            run = Path(directory)
+            study = fixture_study(run)
+            study["evaluation_cases"] = ["baseline-lr1e-5", "noise-1e-3"]
+            (run / "study.json").write_text(json.dumps(study))
+            self.assertEqual(EVAL.select_cases(study), study["evaluation_cases"])
+            EVAL.report(run)
+            coverage = json.loads((run / "evaluation-verification.json").read_text())[
+                "coverage"
+            ]
+            self.assertEqual(
+                [row["case"] for row in coverage], study["evaluation_cases"]
+            )
+            self.assertNotIn(
+                "defense-125x64", (run / "evaluation-report.md").read_text()
+            )
+
+    def test_invalid_declared_evaluation_cases_are_rejected(self):
+        for selection in (
+            None,
+            "attack",
+            {},
+            [],
+            [1],
+            ["missing"],
+            ["../attack"],
+            ["attack", "attack"],
+        ):
+            with self.subTest(selection=selection), self.assertRaises(ValueError):
+                EVAL.select_cases(
+                    {"cases": {"attack": {}}, "evaluation_cases": selection}
+                )
+
+    def test_explicit_cases_and_bundles_override_default_evaluation_scope(self):
+        study = {
+            "cases": {"attack": {}, "defense": {}},
+            "evaluation_cases": ["attack"],
+            "bundles": {"defenses": ["defense"]},
+        }
+        self.assertEqual(EVAL.select_cases(study, cases=["defense"]), ["defense"])
+        self.assertEqual(EVAL.select_cases(study, bundle="defenses"), ["defense"])
+        study["evaluation_cases"] = None
+        self.assertEqual(EVAL.select_cases(study, cases=["attack"]), ["attack"])
+
     def test_attack_step_zero_uses_perturbed_model_for_noise_only(self):
         folder = Path("/study/cases/noise")
         case = {"role": "attack", "gaussian_sigma": 0.001}

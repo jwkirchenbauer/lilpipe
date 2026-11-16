@@ -53,15 +53,18 @@ def load_study(run):
 def select_cases(study, cases=None, bundle=None):
     if cases is not None and bundle is not None:
         raise ValueError("Choose cases or one bundle")
-    names = (
-        study.get("bundles", {})[bundle]
-        if bundle is not None
-        else (
-            [name for name in study["cases"] if not name.startswith("smoke-")]
-            if cases is None
-            else cases
-        )
-    )
+    if bundle is not None:
+        names = study.get("bundles", {})[bundle]
+    elif cases is not None:
+        names = cases
+    elif "evaluation_cases" in study:
+        names = study["evaluation_cases"]
+        if not isinstance(names, list) or any(
+            not isinstance(name, str) for name in names
+        ):
+            raise ValueError("evaluation_cases must be a list of declared case names")
+    else:
+        names = [name for name in study["cases"] if not name.startswith("smoke-")]
     if not names:
         raise ValueError("No cases selected")
     if len(set(names)) != len(names):

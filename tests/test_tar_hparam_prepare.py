@@ -214,6 +214,7 @@ class HparamPreparationTests(unittest.TestCase):
         )
         self.assertEqual(len(program["bundles"]["defenses"]), 4)
         self.assertEqual(len(program["bundles"]["attacks"]), 4)
+        self.assertEqual(program["evaluation_cases"], program["bundles"]["attacks"])
         self.assertEqual(program["jobs"], {})
         self.assertIn("local metadata sampler", program["checkpoint_contrast_note"])
         self.assertEqual(

@@ -751,6 +751,7 @@ def prepare_hparam_study(run, example, original, baseline, compute, matrix=None)
                 + "\n"
             )
     program["profile_reference_case"] = program["bundles"]["attacks"][0]
+    program["evaluation_cases"] = list(program["bundles"]["attacks"])
     program["source_sha256"] = {
         str(path.relative_to(run)): hashlib.sha256(path.read_bytes()).hexdigest()
         for path in (run / "source").rglob("*")

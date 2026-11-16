@@ -16,4 +16,6 @@ Compare end-defense shape and attack dynamics using the existing common random/r
 
 These single-change contrasts estimate effects at B, and the joint condition tests their combined effect. They do not identify all interactions. One seed is a screening study. RIO keeps our sampler, so it does not reproduce the collaborator's legacy data pipeline merely by matching these values.
 
+Benchmark coverage includes each defended endpoint as attack step zero, WMDP through the saved attack milestones, and MMLU at attack steps 0, 128, 512, and 1000. Intermediate defense checkpoints receive CE and landscape analysis; they do not repeat the full benchmarks.
+
 Exact configurations and execution evidence: [study directory](examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/).

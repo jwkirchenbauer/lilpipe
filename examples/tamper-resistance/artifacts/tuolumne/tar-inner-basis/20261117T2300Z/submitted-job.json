@@ -1,0 +1,12 @@
+{
+  "job_id": "f3kiCDSHPFio",
+  "submitted_utc": "2026-11-17 23:08:58 UTC",
+  "stage": "all",
+  "minutes": 100,
+  "qos": "pbatch",
+  "bank": "guard",
+  "scientific_status": "status/all.json",
+  "training_status": "status/train.json",
+  "validation": "replay-validation.json",
+  "new_attacks": []
+}

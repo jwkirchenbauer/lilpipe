@@ -1,0 +1,10 @@
+{
+  "state": "passed",
+  "checks": [
+    "same pinned base checkpoint",
+    "original B hyperparameters/cache/device map/seeds/schedule unchanged",
+    "only observer class and output labels changed",
+    "all existing reference checkpoints present"
+  ],
+  "reference_config_sha256": "5fbbf696138a3ad124945b809d08ef13bc65f0158c61fa0bacc98013f9805d73"
+}

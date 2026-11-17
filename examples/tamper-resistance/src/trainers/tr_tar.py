@@ -119,8 +119,9 @@ def adamw_attack(
     attack_epochs=1,
     attack_learning_rate=2e-5,
     on_loss_backward=None,
+    on_step_end=None,
 ):
-    """Run AdamW epochs over already-selected attack rows, retaining partial batches."""
+    """Run AdamW on selected rows, calling on_step_end with the completed step count."""
     if attack_forget_batch_size_per_iteration < 1 or attack_epochs < 0:
         raise ValueError("attack batch size must be positive and epochs nonnegative")
     n_samples = len(inputs["input_ids"])
@@ -144,6 +145,8 @@ def adamw_attack(
                 on_loss_backward(inner_step, loss.detach())
             optimizer.step()
             inner_step += 1
+            if on_step_end is not None:
+                on_step_end(inner_step)
     return model
 
 

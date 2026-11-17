@@ -1,0 +1,9 @@
+test_intervals_and_full_rank_normalization (__main__.TestInnerGeometry.test_intervals_and_full_rank_normalization) ... ok
+test_projection_matches_dense_svd_at_both_normalizations (__main__.TestInnerGeometry.test_projection_matches_dense_svd_at_both_normalizations) ... ok
+test_report_resumes_from_atomic_per_call_results (__main__.TestInnerGeometry.test_report_resumes_from_atomic_per_call_results) ... ok
+test_spec_and_family_validation (__main__.TestInnerGeometry.test_spec_and_family_validation) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 2.591s
+
+OK

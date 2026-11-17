@@ -1,0 +1,60 @@
+{
+  "kind": "fixed-sampler-hparam-study",
+  "purpose": "observation-only inner-versus-existing-actual trajectory comparison",
+  "baseline_dynamics": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z",
+  "compute_study": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z",
+  "base_model": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+  "cases": {
+    "baseline-inner-recording": {
+      "name": "baseline-inner-recording",
+      "role": "defense",
+      "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/cases/baseline-inner-recording",
+      "config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/cases/baseline-inner-recording/config.yml",
+      "max_steps": 125,
+      "save_steps": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        125
+      ],
+      "state_steps": [
+        32,
+        64,
+        96,
+        125
+      ],
+      "inner_steps_per_update": 16,
+      "defense_reference": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c"
+    }
+  },
+  "outer_calls": [
+    1,
+    32,
+    64,
+    96,
+    125
+  ],
+  "inner_steps": [
+    1,
+    2,
+    4,
+    8,
+    12,
+    16
+  ],
+  "existing_actual_case": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6",
+  "new_attacks": [],
+  "allowed_config_changes": [
+    "output_dir",
+    "trainer_cls",
+    "wandb_name"
+  ],
+  "recording": "Transient inner iterates only; persist aggregate Grams/cross-Grams, not inner checkpoints, deltas or basis arrays.",
+  "anchor_convention": "Inner call t starts at outer state t-1; the archived actual attack starts at final outer state125. Report anchor-gap norms; no same-state causal claim.",
+  "precision": "Raw saved-parameter and BF16-cast endpoint displacements reported separately."
+}

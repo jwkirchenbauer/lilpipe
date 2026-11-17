@@ -1,0 +1,18 @@
+bash: cannot set terminal process group (3219221): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+      f3kWujVJeXDy    pdebug advgame- kirchenb  S      00:00      1 
+      f3kWt1WnmWWB    pbatch tar-hpar kirchenb  S      00:00      1 
+      f3kWt42r2kkX    pbatch tar-hpar kirchenb  S      00:00      1 
+      f3kWt6Qvjs5H    pbatch tar-hpar kirchenb  S      00:00      1 
+      f3kWt8prC5gs    pbatch tar-hpar kirchenb  S      00:00      1 
+      f3kWucZmM3K5    pbatch tar-hpar kirchenb  D      00:00      1 
+      f3kWuh6P1pbq    pbatch tar-hpar kirchenb  D      00:00      1 
+      f3kWumXM3LcP    pbatch tar-hpar kirchenb  D      00:00      1 
+Warning: You provided a custom dependency string: afterok:f3kWt6Qvjs5H
+This is advanced usage, giving a few seconds to check that you're sure...
+Removing existing launch file: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/hparam-o-lr1e-6/launch.sh
+Removing existing runner file: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/hparam-o-lr1e-6/subrunner.sh
+Submission: flux batch --dependency=afterok:f3kWt6Qvjs5H -q pbatch --bank=verival --job-name=tar-hparam-o-lr1e-6 -t55 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/hparam-o-lr1e-6/launch.sh
+Launched job_id=f3kWumXM3LcP.

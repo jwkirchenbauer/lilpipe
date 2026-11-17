@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/p/vast1/kirchenb/llnl-tools/launch_tuo.py", line 1233, in <module>
+    parse_and_execute()
+  File "/p/vast1/kirchenb/llnl-tools/launch_tuo.py", line 1212, in parse_and_execute
+    launch_object.execute(
+  File "/p/vast1/kirchenb/llnl-tools/launch_tuo.py", line 713, in execute
+    launch_file, runner_file, batch_command = self.sbatch_repr(
+                                              ^^^^^^^^^^^^^^^^^
+  File "/p/vast1/kirchenb/llnl-tools/launch_tuo.py", line 622, in sbatch_repr
+    launch_file, runner_file, batch_command = assemble_launch_file(
+                                              ^^^^^^^^^^^^^^^^^^^^^
+  File "/p/vast1/kirchenb/llnl-tools/launch_tuo.py", line 243, in assemble_launch_file
+    raise NotImplementedError("gpus_per_task is not reliably implemented right now, please unset and do manual device placement in your code based on LOCAL_RANK.")
+NotImplementedError: gpus_per_task is not reliably implemented right now, please unset and do manual device placement in your code based on LOCAL_RANK.

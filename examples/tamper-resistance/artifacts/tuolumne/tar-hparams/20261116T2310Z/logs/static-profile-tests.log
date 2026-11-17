@@ -1,0 +1,17 @@
+reformatted artifacts/tuolumne/tar-hparams/20261116T2310Z/source/planning-v1/test_static.py
+reformatted artifacts/tuolumne/tar-hparams/20261116T2310Z/source/planning-v1/prepare_static.py
+reformatted artifacts/tuolumne/tar-hparams/20261116T2310Z/source/planning-v1/static_report.py
+reformatted artifacts/tuolumne/tar-hparams/20261116T2310Z/source/planning-v1/static_worker.py
+reformatted artifacts/tuolumne/tar-hparams/20261116T2310Z/source/planning-v1/prepare_operations.py
+
+All done! ✨ 🍰 ✨
+5 files reformatted.
+test_complete_grid_and_measured_centers (test_static.StaticTests.test_complete_grid_and_measured_centers) ... ok
+test_partial_duplicate_or_changed_center_rejected (test_static.StaticTests.test_partial_duplicate_or_changed_center_rejected) ... ok
+test_protocol_reuse_and_stale_input_rejection (test_static.StaticTests.test_protocol_reuse_and_stale_input_rejection) ... ok
+test_shared_absolute_and_symmetric_delta_limits (test_static.StaticTests.test_shared_absolute_and_symmetric_delta_limits) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.009s
+
+OK

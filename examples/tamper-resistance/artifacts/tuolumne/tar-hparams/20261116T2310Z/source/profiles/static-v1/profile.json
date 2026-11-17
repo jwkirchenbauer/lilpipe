@@ -1,0 +1,13 @@
+{
+  "original_source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/static-v1",
+  "unchanged_source_files": {
+    "get_ll.py": "ffc0d86d6e51298bdf5595d4bee7a3d0f3e1ca95d5d76e613a73d3c154944c91",
+    "plot_ll_2d.py": "e39cbb65d9383b11723c08fc4b942abc0a89aba7e394f83e10f0ba8d82c5036d",
+    "plot_ll_3d.py": "c5c3290f321dafd866242c976e80320482898b250a63305a442b0fb0ec10a61b"
+  },
+  "entry": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-v1/run.sh",
+  "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+  "points_per_case": 648,
+  "static_convention": "Original BF16 seed42 directions and arithmetic/default attention. Separate from dynamics FP32 orthonormal/eager convention.",
+  "renderer": "CPU child process after numerical process exits"
+}

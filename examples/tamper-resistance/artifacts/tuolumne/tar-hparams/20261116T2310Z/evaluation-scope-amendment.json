@@ -1,0 +1,16 @@
+{
+  "time_utc": "2026-11-16T23:19:36.293785+00:00",
+  "changed_fields": [
+    "evaluation_cases"
+  ],
+  "evaluation_cases": [
+    "hparam-r-lr1e-6",
+    "hparam-i-lr1e-6",
+    "hparam-o-lr1e-6",
+    "hparam-rio-lr1e-6"
+  ],
+  "before_sha256": "b23bd1bed7a81f6ead2b34711ca8899ca3da9490b1638b1df5f706d2dd49d6ec",
+  "after_sha256": "be3797aa59e5137226bc2622046969fe41d919bb858f711f010c9cbc1d119d95",
+  "training_configs_and_frozen_sources_changed": false,
+  "reason": "Attack step zero benchmarks the paired defense endpoint. Native CE and landscapes cover defense checkpoint histories; repeated defense benchmarks are outside this prespecified scope."
+}

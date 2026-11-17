@@ -1,0 +1,4 @@
+bash: cannot set terminal process group (3391956): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+{"state": "passed", "existing_B_cached_validation": {"issues": [], "physical_comparable": true, "heldout_matches_root": true, "local_frames": [0, 1, 8, 32, 128, 512, 1000], "broad_frames": [0, 128, 1000]}, "baseline_defense_history_frames": [0, 8, 32, 125]}

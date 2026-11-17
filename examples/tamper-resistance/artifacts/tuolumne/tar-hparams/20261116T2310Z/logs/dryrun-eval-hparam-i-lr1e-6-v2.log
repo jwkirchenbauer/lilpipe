@@ -1,0 +1,7 @@
+bash: cannot set terminal process group (3354057): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+Warning: You provided a custom dependency string: afterok:f3kX4Cq3TJKR
+This is advanced usage, giving a few seconds to check that you're sure...
+Submission: flux batch --dependency=afterok:f3kX4Cq3TJKR -q pbatch --bank=verival --job-name=tar-eval-hparam-i-lr1e-6-v2 -t180 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/eval-hparam-i-lr1e-6-v2/launch.sh
+No jobs were launched. You can inspect the files created at /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/eval-hparam-i-lr1e-6-v2/launch.sh

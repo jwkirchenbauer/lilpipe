@@ -1,0 +1,148 @@
+{
+  "state": "passed",
+  "created_utc": "2026-11-16T23:22:19.838506+00:00",
+  "source_comparison": {
+    "trainers/tr_tar.py": {
+      "original": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/source/src/trainers/tr_tar.py",
+      "frozen": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/tr_tar.py",
+      "sha256": "17af0ecc0a164edf2547053a0df249854fda3e4cfe18e4882f06cd3b9f585188",
+      "byte_identical": true
+    },
+    "trainers/ul_me.py": {
+      "original": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/source/src/trainers/ul_me.py",
+      "frozen": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/ul_me.py",
+      "sha256": "3524868904daa100a7157dba2254ac73220c59a1271297675f35941ccd0f55aa",
+      "byte_identical": true
+    },
+    "trainers/utils.py": {
+      "original": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/source/src/trainers/utils.py",
+      "frozen": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/utils.py",
+      "sha256": "0af6c8c9a0c1139014bb5792d3ce2e9bd9863777a9cff989dcd46846923b32b5",
+      "byte_identical": true
+    },
+    "axolotl_plugins/custom_trainer_args.py": {
+      "original": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/source/src/axolotl_plugins/custom_trainer_args.py",
+      "frozen": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/axolotl_plugins/custom_trainer_args.py",
+      "sha256": "823315684e21dd0044c0553bff7ff36f05c8249762ba28c9139b5d229f1f2a12",
+      "byte_identical": true
+    },
+    "data/__init__.py": {
+      "original": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/source/src/data/__init__.py",
+      "frozen": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/data/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_identical": true
+    },
+    "recorder": {
+      "original": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/source/misc/tar_dynamics_training.py",
+      "frozen": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/misc/tar_dynamics_training.py",
+      "sha256": "8fbfd35bd251cbc831bb6dc2fdfdb9183caa33983993b2430d27e3cf858ed9a9",
+      "byte_identical": true
+    }
+  },
+  "configurations": {
+    "hparam-r-defense": {
+      "config_sha256": "ec2c3938c122d82f0bd4f80799bce73c81b3be79ce541f21bf230a9c72003cd9",
+      "case_sha256": "2a1afb726ced88bbd5ae5966004868649a4c476875c2526aef8843946ea06087",
+      "only_requested_scientific_changes": true,
+      "optimizer_state_milestones": [
+        32,
+        64,
+        125
+      ]
+    },
+    "hparam-r-lr1e-6": {
+      "config_sha256": "dd8be5eefbca0badfc911d8201f97677b4a83b02b1156a23355dcc4ef670f488",
+      "case_sha256": "30db89e9a2145b33628d966409c46e3d7058f364e87389f63a49467e6952fd32",
+      "only_requested_scientific_changes": true,
+      "optimizer_state_milestones": [
+        128,
+        512,
+        1000
+      ]
+    },
+    "hparam-i-defense": {
+      "config_sha256": "717de796fb29524946ce287c834f4bedbedf2ec3385a36c510f027cf770cc426",
+      "case_sha256": "01d8b9c35b75ba43fe44ebe504718dec19b57f4f85998b64a6c7512b49419581",
+      "only_requested_scientific_changes": true,
+      "optimizer_state_milestones": [
+        32,
+        64,
+        125
+      ]
+    },
+    "hparam-i-lr1e-6": {
+      "config_sha256": "76da9b371e4e37815c86de3745f4215349cc5b2af9a3d23db174dbaa94e93519",
+      "case_sha256": "61c8e5fffe3995dafb863a6e9a8c1352b027e7d90e5d6df2158bb3ca24e27854",
+      "only_requested_scientific_changes": true,
+      "optimizer_state_milestones": [
+        128,
+        512,
+        1000
+      ]
+    },
+    "hparam-o-defense": {
+      "config_sha256": "7b359b677b785bf90dc90cc59ea3b4efefac166c0ae95bb208337e34d4d9138f",
+      "case_sha256": "fe441950cd23e03fba62d17e4b26d79c27128c30d23d8fd8ef6d0002f8c9756b",
+      "only_requested_scientific_changes": true,
+      "optimizer_state_milestones": [
+        32,
+        64,
+        125
+      ]
+    },
+    "hparam-o-lr1e-6": {
+      "config_sha256": "7e046bc5e32efafd7b9ffcb88b84f252e1d3ee47510c1d20bcbc7f38b4c52b69",
+      "case_sha256": "ea4b406c9c19ece81258ae4e6936ff661d5a57389bc6e1bfb865a6e1ce648cc0",
+      "only_requested_scientific_changes": true,
+      "optimizer_state_milestones": [
+        128,
+        512,
+        1000
+      ]
+    },
+    "hparam-rio-defense": {
+      "config_sha256": "10211244bdf197473f16efa59fbd30a5b165362ec504f4ddbb91a5d3bba1997e",
+      "case_sha256": "0d231812cd811b070be2e3d52620429a673d6a8212ff16197bc0cab04635a55a",
+      "only_requested_scientific_changes": true,
+      "optimizer_state_milestones": [
+        32,
+        64,
+        125
+      ]
+    },
+    "hparam-rio-lr1e-6": {
+      "config_sha256": "e1a228a247c56be79a53d5286e6c3f32d47d42b5639ba6eaa8be4b44e3cf3853",
+      "case_sha256": "41fda1a3f5efe32bd3d37d07e46ee5349c5776f316c32612bcd8ebf1d2fdfadb",
+      "only_requested_scientific_changes": true,
+      "optimizer_state_milestones": [
+        128,
+        512,
+        1000
+      ]
+    }
+  },
+  "cache_links": {
+    "defense": {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/cache/axolotl/defense",
+      "arrow_files": 8,
+      "all_same_inodes": true
+    },
+    "attack": {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cache/attack",
+      "arrow_files": 32,
+      "all_same_inodes": true
+    }
+  },
+  "optional_attack_branch": "sample_attack_fn defaults to None in byte-identical B source; absent from every hparam config. The original AdamW branch remains active.",
+  "numerical_source": {
+    "sha256": "e8ab333af2f9106204ba0bb17a66d7a0adb21e80dd2970d16fb9aa8f1c953054",
+    "byte_identical_to": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v3/tar_dynamics.py",
+    "precision": "Original mixed saved trainer weights; unchanged BF16 eager dynamics evaluation. No precision policy was changed."
+  },
+  "post_training_batch_guard": {
+    "enabled_for_kind": "fixed-sampler-hparam-study",
+    "source_sha256": "b882187c89fe60ab06b416ce50aad7e329eaaef0b3b220046c30ed59c99d4e66",
+    "required": "125 outer defense batches and 1000 attack batches match frozen step+canonical tensors before passed training validation"
+  },
+  "probes_sha256": "073225fe3139c3021ac5bf831b2398a1d78b0e8c52210104a36cd732a9b52209"
+}

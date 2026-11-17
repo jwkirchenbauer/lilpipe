@@ -1,0 +1,16 @@
+bash: cannot set terminal process group (3337595): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+test_defense_training_guard_does_not_require_benchmark_evaluation (__main__.AggregateTests.test_defense_training_guard_does_not_require_benchmark_evaluation) ... ok
+test_failed_input_guard_is_rejected (__main__.AggregateTests.test_failed_input_guard_is_rejected) ... ok
+test_global_limits_and_shared_axes_cover_all_conditions_and_frames (__main__.AggregateTests.test_global_limits_and_shared_axes_cover_all_conditions_and_frames) ... ok
+test_mismatched_physical_axes_are_rejected (__main__.AggregateTests.test_mismatched_physical_axes_are_rejected) ... ok
+test_missing_condition_frame_is_rejected (__main__.AggregateTests.test_missing_condition_frame_is_rejected) ... ok
+test_missing_grid_point_is_rejected (__main__.AggregateTests.test_missing_grid_point_is_rejected) ... ok
+test_nonfinite_or_wrong_shaped_grid_is_rejected (__main__.AggregateTests.test_nonfinite_or_wrong_shaped_grid_is_rejected) ... ok
+test_wrong_physical_grid_coordinate_is_rejected (__main__.AggregateTests.test_wrong_physical_grid_coordinate_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.002s
+
+OK

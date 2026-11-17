@@ -1,0 +1,134 @@
+[
+  {
+    "case": "hparam-r-lr1e-6",
+    "job_id": "f3kWucZmM3K5",
+    "after_defense": "f3kWt1WnmWWB",
+    "argv": [
+      "python",
+      "/p/vast1/kirchenb/llnl-tools/launch_tuo.py",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4",
+      "--env_act_style=mm_activate",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches",
+      "--sub_output_dir_name=hparam-r-lr1e-6",
+      "--qos=pbatch",
+      "--bank=verival",
+      "--run_name=tar-hparam-r-lr1e-6",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=4",
+      "--torchrun=false",
+      "--minutes=55",
+      "--dependency=afterok:f3kWt1WnmWWB",
+      "--pass_run_name=false",
+      "--quiet_launch=true"
+    ],
+    "target": [
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/misc/run_tar_compute.sh",
+      "case",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z",
+      "hparam-r-lr1e-6"
+    ],
+    "launch_directory": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/hparam-r-lr1e-6"
+  },
+  {
+    "case": "hparam-i-lr1e-6",
+    "job_id": "f3kWuh6P1pbq",
+    "after_defense": "f3kWt42r2kkX",
+    "argv": [
+      "python",
+      "/p/vast1/kirchenb/llnl-tools/launch_tuo.py",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4",
+      "--env_act_style=mm_activate",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches",
+      "--sub_output_dir_name=hparam-i-lr1e-6",
+      "--qos=pbatch",
+      "--bank=verival",
+      "--run_name=tar-hparam-i-lr1e-6",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=4",
+      "--torchrun=false",
+      "--minutes=55",
+      "--dependency=afterok:f3kWt42r2kkX",
+      "--pass_run_name=false",
+      "--quiet_launch=true"
+    ],
+    "target": [
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/misc/run_tar_compute.sh",
+      "case",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z",
+      "hparam-i-lr1e-6"
+    ],
+    "launch_directory": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/hparam-i-lr1e-6"
+  },
+  {
+    "case": "hparam-o-lr1e-6",
+    "job_id": "f3kWumXM3LcP",
+    "after_defense": "f3kWt6Qvjs5H",
+    "argv": [
+      "python",
+      "/p/vast1/kirchenb/llnl-tools/launch_tuo.py",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4",
+      "--env_act_style=mm_activate",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches",
+      "--sub_output_dir_name=hparam-o-lr1e-6",
+      "--qos=pbatch",
+      "--bank=verival",
+      "--run_name=tar-hparam-o-lr1e-6",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=4",
+      "--torchrun=false",
+      "--minutes=55",
+      "--dependency=afterok:f3kWt6Qvjs5H",
+      "--pass_run_name=false",
+      "--quiet_launch=true"
+    ],
+    "target": [
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/misc/run_tar_compute.sh",
+      "case",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z",
+      "hparam-o-lr1e-6"
+    ],
+    "launch_directory": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/hparam-o-lr1e-6"
+  },
+  {
+    "case": "hparam-rio-lr1e-6",
+    "job_id": "f3kWur6uChJo",
+    "after_defense": "f3kWt8prC5gs",
+    "argv": [
+      "python",
+      "/p/vast1/kirchenb/llnl-tools/launch_tuo.py",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4",
+      "--env_act_style=mm_activate",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches",
+      "--sub_output_dir_name=hparam-rio-lr1e-6",
+      "--qos=pbatch",
+      "--bank=verival",
+      "--run_name=tar-hparam-rio-lr1e-6",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=4",
+      "--torchrun=false",
+      "--minutes=55",
+      "--dependency=afterok:f3kWt8prC5gs",
+      "--pass_run_name=false",
+      "--quiet_launch=true"
+    ],
+    "target": [
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/misc/run_tar_compute.sh",
+      "case",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z",
+      "hparam-rio-lr1e-6"
+    ],
+    "launch_directory": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/hparam-rio-lr1e-6"
+  }
+]

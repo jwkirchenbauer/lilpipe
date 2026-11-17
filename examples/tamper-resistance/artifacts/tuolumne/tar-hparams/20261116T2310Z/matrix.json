@@ -1,0 +1,22 @@
+{
+  "R": {
+    "retain_coefficient": 4.0,
+    "inner_learning_rate": 1e-06,
+    "outer_learning_rate": 5e-06
+  },
+  "I": {
+    "retain_coefficient": 2.5,
+    "inner_learning_rate": 1e-05,
+    "outer_learning_rate": 5e-06
+  },
+  "O": {
+    "retain_coefficient": 2.5,
+    "inner_learning_rate": 1e-06,
+    "outer_learning_rate": 1e-05
+  },
+  "RIO": {
+    "retain_coefficient": 4.0,
+    "inner_learning_rate": 1e-05,
+    "outer_learning_rate": 1e-05
+  }
+}

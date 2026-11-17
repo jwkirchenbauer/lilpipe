@@ -1,0 +1,11 @@
+{
+  "entry": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/landscapes-v1/run.sh",
+  "worker": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/landscapes-v1/run_tar_compute_landscapes.sh",
+  "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+  "canonical_source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source",
+  "inputs_manifest": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/operational-inputs.sha256",
+  "numerical_sha256": "e8ab333af2f9106204ba0bb17a66d7a0adb21e80dd2970d16fb9aa8f1c953054",
+  "trace_wrapper_sha256": "28a679f2ade245644b3ce3a2cc071633dbf5be07824bc06c8a1bf76809c4d4e1",
+  "trace_source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/source/profiles/analysis-v3",
+  "trace_note": "Only periodic asynchronous stack dumps are suppressed; fatal-fault reporting remains enabled. No root cause is inferred."
+}

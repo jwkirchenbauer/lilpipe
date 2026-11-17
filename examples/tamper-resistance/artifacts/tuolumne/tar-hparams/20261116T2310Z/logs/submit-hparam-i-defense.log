@@ -1,0 +1,8 @@
+bash: cannot set terminal process group (3191219): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+      f3kWt1WnmWWB    pbatch tar-hpar kirchenb  S      00:00      1 
+      f3kWt42r2kkX    pbatch tar-hpar kirchenb  S      00:00      1 
+Submission: flux batch -q pbatch --bank=verival --job-name=tar-hparam-i-defense -t120 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/hparam-i-defense/tar-hparam-i-defense/launch.sh
+Launched job_id=f3kWt42r2kkX.

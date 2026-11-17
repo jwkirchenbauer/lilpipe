@@ -1,0 +1,9 @@
+Verified frozen manifest, Python syntax and Bash syntax: training-v1
+Verified frozen manifest, Python syntax and Bash syntax: evaluation-v1
+Verified frozen manifest, Python syntax and Bash syntax: landscapes-v1
+Verified frozen manifest, Python syntax and Bash syntax: static-v1
+Operational evaluator defaults to exactly four attack cases; defense endpoint is attack step0.
+Verified 10 launcher dry runs only: operational-dryrun-plan.json
+Verified 5 launcher dry runs only: static-dryrun-plan.json
+Verified 5 launcher dry runs only: static-dryrun-plan-v2.json
+Static v2 dependencies match replacement defenses; frozen scientific inputs unchanged.

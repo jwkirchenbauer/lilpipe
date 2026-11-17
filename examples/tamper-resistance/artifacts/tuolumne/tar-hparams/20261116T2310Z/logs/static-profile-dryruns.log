@@ -1,0 +1,7 @@
+DRY RUN ONLY: static-r
+DRY RUN ONLY: static-i
+DRY RUN ONLY: static-o
+DRY RUN ONLY: static-rio
+DRY RUN ONLY: static-comparison
+Periodic asynchronous stack dumping disabled for this retry; fatal-fault reporting remains enabled.
+Trace wrapper preserves arguments, main execution, and fatal-fault reporting.

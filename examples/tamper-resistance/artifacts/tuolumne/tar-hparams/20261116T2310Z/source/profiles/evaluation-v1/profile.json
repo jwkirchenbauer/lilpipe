@@ -1,0 +1,7 @@
+{
+  "entry": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/run.sh",
+  "worker": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/misc/run_tar_compute_evaluation.sh",
+  "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+  "canonical_source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source",
+  "inputs_manifest": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/operational-inputs.sha256"
+}

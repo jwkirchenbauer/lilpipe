@@ -1,0 +1,27 @@
+reformatted artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v2/test_seal.py
+reformatted artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v2/seal.py
+
+All done! ✨ 🍰 ✨
+2 files reformatted.
+test_complete_five_condition_coverage_requires_all_matrices (test_seal.AggregateTests.test_complete_five_condition_coverage_requires_all_matrices) ... ok
+test_cli_requires_an_allocation_even_for_verify (test_seal.CurationTests.test_cli_requires_an_allocation_even_for_verify) ... ok
+test_excludes_weights_arrays_caches_large_and_live_logs (test_seal.CurationTests.test_excludes_weights_arrays_caches_large_and_live_logs) ... ok
+test_mutation_during_hashing_rejected_and_manifest_paths_cannot_escape (test_seal.CurationTests.test_mutation_during_hashing_rejected_and_manifest_paths_cannot_escape) ... ok
+test_repository_relative_bundle_hashes_both_roots_and_detects_tampering (test_seal.CurationTests.test_repository_relative_bundle_hashes_both_roots_and_detects_tampering) ... ok
+test_required_broken_or_model_link_fails_before_publication (test_seal.CurationTests.test_required_broken_or_model_link_fails_before_publication) ... ok
+test_verify_refuses_symlinks_before_opening_a_target (test_seal.CurationTests.test_verify_refuses_symlinks_before_opening_a_target) ... ok
+test_declared_unpacked_size_and_fake_huge_shape_rejected_before_array_view (test_seal.LossMatrixTests.test_declared_unpacked_size_and_fake_huge_shape_rejected_before_array_view) ... ok
+test_exact_tiny_ce_matrix_is_curated_hashed_and_verifiable (test_seal.LossMatrixTests.test_exact_tiny_ce_matrix_is_curated_hashed_and_verifiable) ... ok
+test_large_allowlisted_archive_rejected_before_zip_read (test_seal.LossMatrixTests.test_large_allowlisted_archive_rejected_before_zip_read) ... ok
+test_schema_shape_dtype_finite_and_axis_mismatches_rejected (test_seal.LossMatrixTests.test_schema_shape_dtype_finite_and_axis_mismatches_rejected) ... ok
+test_similar_filenames_elsewhere_and_other_npz_stay_excluded (test_seal.LossMatrixTests.test_similar_filenames_elsewhere_and_other_npz_stay_excluded) ... ok
+test_symlink_at_allowlisted_path_is_rejected (test_seal.LossMatrixTests.test_symlink_at_allowlisted_path_is_rejected) ... ok
+test_manifest_checks_source_hash_and_rejects_tensor_members_without_reading (test_seal.SourceTests.test_manifest_checks_source_hash_and_rejects_tensor_members_without_reading) ... ok
+test_both_roles_require_actual_tensors_but_ignore_metrics (test_seal.TrainingTests.test_both_roles_require_actual_tensors_but_ignore_metrics) ... ok
+test_changed_reordered_or_missing_batch_rejects_stale_passed_proof (test_seal.TrainingTests.test_changed_reordered_or_missing_batch_rejects_stale_passed_proof) ... ok
+test_pending_status_failed_guard_wrong_reference_and_checkpoint_gaps_reject (test_seal.TrainingTests.test_pending_status_failed_guard_wrong_reference_and_checkpoint_gaps_reject) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.299s
+
+OK

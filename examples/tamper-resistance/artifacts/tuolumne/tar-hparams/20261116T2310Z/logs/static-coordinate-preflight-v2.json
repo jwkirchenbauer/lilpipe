@@ -1,0 +1,166 @@
+{
+  "B": {
+    "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/loss-landscape/defense-step125-random-seed42-v3/grid.csv",
+    "rows": 648,
+    "exact_float64_keys_equal": true,
+    "fp32_keys_bitwise_equal": true,
+    "fp32_unique_keys": 648,
+    "maximum_decimal_difference": 0.0,
+    "examples": []
+  },
+  "R": {
+    "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/static/cases/hparam-r-defense/grid.csv",
+    "rows": 648,
+    "exact_float64_keys_equal": false,
+    "fp32_keys_bitwise_equal": true,
+    "fp32_unique_keys": 648,
+    "maximum_decimal_difference": 6.245004513516506e-17,
+    "examples": [
+      {
+        "field": "c0",
+        "B": "-0.1000000014901161",
+        "case": "-0.10000000149011612",
+        "absolute_difference": 1.3877787807814457e-17,
+        "fp32": -0.10000000149011612
+      },
+      {
+        "field": "c1",
+        "B": "-0.1000000014901161",
+        "case": "-0.10000000149011612",
+        "absolute_difference": 1.3877787807814457e-17,
+        "fp32": -0.10000000149011612
+      },
+      {
+        "field": "c0",
+        "B": "-0.1000000014901161",
+        "case": "-0.10000000149011612",
+        "absolute_difference": 1.3877787807814457e-17,
+        "fp32": -0.10000000149011612
+      }
+    ]
+  },
+  "I": {
+    "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/static/cases/hparam-i-defense/grid.csv",
+    "rows": 648,
+    "exact_float64_keys_equal": false,
+    "fp32_keys_bitwise_equal": true,
+    "fp32_unique_keys": 648,
+    "maximum_decimal_difference": 6.245004513516506e-17,
+    "examples": [
+      {
+        "field": "c0",
+        "B": "-0.1000000014901161",
+        "case": "-0.10000000149011612",
+        "absolute_difference": 1.3877787807814457e-17,
+        "fp32": -0.10000000149011612
+      },
+      {
+        "field": "c1",
+        "B": "-0.1000000014901161",
+        "case": "-0.10000000149011612",
+        "absolute_difference": 1.3877787807814457e-17,
+        "fp32": -0.10000000149011612
+      },
+      {
+        "field": "c0",
+        "B": "-0.1000000014901161",
+        "case": "-0.10000000149011612",
+        "absolute_difference": 1.3877787807814457e-17,
+        "fp32": -0.10000000149011612
+      }
+    ]
+  },
+  "O": {
+    "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/static/cases/hparam-o-defense/grid.csv",
+    "rows": 648,
+    "exact_float64_keys_equal": false,
+    "fp32_keys_bitwise_equal": true,
+    "fp32_unique_keys": 648,
+    "maximum_decimal_difference": 6.245004513516506e-17,
+    "examples": [
+      {
+        "field": "c0",
+        "B": "-0.1000000014901161",
+        "case": "-0.10000000149011612",
+        "absolute_difference": 1.3877787807814457e-17,
+        "fp32": -0.10000000149011612
+      },
+      {
+        "field": "c1",
+        "B": "-0.1000000014901161",
+        "case": "-0.10000000149011612",
+        "absolute_difference": 1.3877787807814457e-17,
+        "fp32": -0.10000000149011612
+      },
+      {
+        "field": "c0",
+        "B": "-0.1000000014901161",
+        "case": "-0.10000000149011612",
+        "absolute_difference": 1.3877787807814457e-17,
+        "fp32": -0.10000000149011612
+      }
+    ]
+  },
+  "RIO": {
+    "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/static/cases/hparam-rio-defense/grid.csv",
+    "rows": 648,
+    "exact_float64_keys_equal": false,
+    "fp32_keys_bitwise_equal": true,
+    "fp32_unique_keys": 648,
+    "maximum_decimal_difference": 6.245004513516506e-17,
+    "examples": [
+      {
+        "field": "c0",
+        "B": "-0.1000000014901161",
+        "case": "-0.10000000149011612",
+        "absolute_difference": 1.3877787807814457e-17,
+        "fp32": -0.10000000149011612
+      },
+      {
+        "field": "c1",
+        "B": "-0.1000000014901161",
+        "case": "-0.10000000149011612",
+        "absolute_difference": 1.3877787807814457e-17,
+        "fp32": -0.10000000149011612
+      },
+      {
+        "field": "c0",
+        "B": "-0.1000000014901161",
+        "case": "-0.10000000149011612",
+        "absolute_difference": 1.3877787807814457e-17,
+        "fp32": -0.10000000149011612
+      }
+    ]
+  },
+  "HF": {
+    "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/static/grid.csv",
+    "rows": 648,
+    "exact_float64_keys_equal": false,
+    "fp32_keys_bitwise_equal": true,
+    "fp32_unique_keys": 648,
+    "maximum_decimal_difference": 6.245004513516506e-17,
+    "examples": [
+      {
+        "field": "c0",
+        "B": "-0.1000000014901161",
+        "case": "-0.10000000149011612",
+        "absolute_difference": 1.3877787807814457e-17,
+        "fp32": -0.10000000149011612
+      },
+      {
+        "field": "c1",
+        "B": "-0.1000000014901161",
+        "case": "-0.10000000149011612",
+        "absolute_difference": 1.3877787807814457e-17,
+        "fp32": -0.10000000149011612
+      },
+      {
+        "field": "c0",
+        "B": "-0.1000000014901161",
+        "case": "-0.10000000149011612",
+        "absolute_difference": 1.3877787807814457e-17,
+        "fp32": -0.10000000149011612
+      }
+    ]
+  }
+}

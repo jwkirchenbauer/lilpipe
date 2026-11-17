@@ -1,0 +1,41 @@
+{
+  "state": "passed",
+  "api": "main-HR frozen tar_compute.py prepare-hparam-study",
+  "new_core_matches_main_hr": true,
+  "core_source_file_count": 58,
+  "core_source_sha256": "e8d7ea7051685d42e15252fc30c98df4e2204cd9675dbb9f0e60078046667f32",
+  "static_worker_sha256": "87af17a660d4d58de8b676ca236990b254491ca6085f3bf2d0a4c2dc72c83264",
+  "probes_byte_identical_to_main_hr": true,
+  "prepared_cache_sources": {
+    "defense": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/cache/axolotl/defense",
+    "attack": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cache/attack"
+  },
+  "planned_training_cases": [
+    "hparam-ri-defense",
+    "hparam-ro-defense",
+    "hparam-io-defense"
+  ],
+  "planned_attacks": [],
+  "planned_benchmark_evaluations": [],
+  "operational_input_manifest_sha256": "d1a39741b33729b8e6c8ad4bfbeeccd447a7c5672d3c99c8921c049a9c0b6fe7",
+  "prepared_caches_same_inodes_as_declared_source": {
+    "defense": {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/cache/axolotl/defense",
+      "arrow_files": 8,
+      "same_inodes_as_declared_source": true,
+      "byte_hashes_skipped": true
+    },
+    "attack": {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cache/attack",
+      "arrow_files": 32,
+      "same_inodes_as_declared_source": true,
+      "byte_hashes_skipped": true
+    }
+  },
+  "source_provenance_sha256": "d0c233ba7f44aac2fb5d16b71bec7b19f48d9e3111feee3908c5e081a5cf56eb",
+  "dryruns": {
+    "defense": "dryruns-complete-not-submitted",
+    "static": "dryruns-complete-not-submitted",
+    "submissions_authorized": false
+  }
+}

@@ -1,0 +1,15 @@
+# Endpoint factorial execution
+
+This extension measures the three missing RI, RO, and IO defense endpoints and their original static radius series. The five existing B/R/I/O/RIO cells are reused. `execution-plan.json` is the executed scope; the generated attack configurations are future configurations, with no attack or benchmark jobs planned here.
+
+The eight-cell shape metrics and contrast definitions were frozen before any new pair results. The report compares center CE, maximum immediate-neighbor CE minus center, and center minus mean perimeter CE. These are finite-grid, one-seed descriptions rather than statistical or full-space barrier claims. See `source/comparison-v1/README.md` and its 18 passing tests.
+
+Actual training uses the byte-identical canonical `source/misc/run_tar_compute.sh case RUN CASE` entrypoint, as the four main defenses did. `logs/canonical-prelaunch-validation.log` records source/input-manifest verification and acceptance of the exact three planned 125x16 defense cases. `defense-submitted-jobs.json` and `static-submitted-jobs.json` contain the actual IDs and commands.
+
+The extra metadata wrapper drafts training-v1 and training-v2 were never submitted. Parent review found an irrelevant evaluation-scope requirement in v1 and an argv mismatch in v2. The corrected v3 metadata CLI passed five tests plus exact real-argv smoke checks but remains audit-only. None of these drafts changed core training, configs, study inputs, or model results.
+
+Training requests use 55-minute pdebug/verival allocations. The tested launcher pattern requests one outer Flux task and an exclusive node while explicitly exposing all four GPUs; the canonical training worker verifies one process, four visible GPUs, hipBLAS/rocBLAS selection, and the manual layer map. Each defense must pass the original exact 125-batch input/order check before its dependent static measurement can run.
+
+Static workers are byte-identical to the main study's numerical worker and use the same seed42 directions, fixed10 data, eight radii and 9x9 grids. After all three new static statuses and validations pass, run the frozen comparison-v1 report through launch_tuo.py. It requires all eight complete caches and rejects mismatched coordinate bits, data, sources, versions, checkpoint identities, or batch-order proofs. Preserve the original control and all sealed main-study artifacts.
+
+All three defenses passed the exact 125-batch proof. The first static invocations supplied an extra run path to this fixed-run wrapper and exited at argument parsing without model work. Corrected commands in static-corrected-submissions-v3.json call run.sh case CASE; unchanged numerical workers produced 648 validated points each. The full-factorial report job f3kYg1jkwi2b completed at 02:58 UTC. Its own complete status, validation.json, 16 PNG/PDF pairs, grid metrics and exact contrasts are under static/full-factorial. Parent findings.md identifies the joint inner/outer-LR effect and the conditional retain effect without claiming attack robustness. No extension attacks or benchmarks were submitted.

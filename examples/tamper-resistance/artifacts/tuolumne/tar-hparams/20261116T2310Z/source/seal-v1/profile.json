@@ -1,0 +1,17 @@
+{
+  "state": "prepared-not-executed-on-real-studies",
+  "prepared_utc": "2026-11-17T02:55:21.918261+00:00",
+  "entry": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v1/run.sh",
+  "modes": [
+    "check",
+    "seal",
+    "verify"
+  ],
+  "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+  "allocation_required_for_all_modes": true,
+  "tests": 11,
+  "test_log": "tests-final.log",
+  "no_launcher_calls": true,
+  "no_real_study_seal_outputs_created": true,
+  "source_and_reports_owned_by_others_changed": false
+}

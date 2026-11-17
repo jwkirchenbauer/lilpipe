@@ -1,0 +1,9 @@
+bash: cannot set terminal process group (3906911): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+Warning: You provided a custom dependency string: afterok:f3kYBnZpKRf5
+This is advanced usage, giving a few seconds to check that you're sure...
+Removing existing launch file: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/launches/static-ro-dependent-v2/launch.sh
+Removing existing runner file: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/launches/static-ro-dependent-v2/subrunner.sh
+Submission: flux batch --dependency=afterok:f3kYBnZpKRf5 -q pdebug --bank=verival --job-name=tar-factorial-static-ro-v1-dependent -t30 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/launches/static-ro-dependent-v2/launch.sh
+Launched job_id=f3kYCfbBTpBq.

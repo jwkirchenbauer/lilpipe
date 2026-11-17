@@ -1,0 +1,27 @@
+0: OUTPUT_DIR: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/landscapes-o-rio-chunk1-v2
+0: Logging to /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/landscapes-o-rio-chunk1-v2/logs
+0: Tue Nov 17 02:23:31 UTC 2026 Calling flux run...
+0: 0: Tue Nov 17 02:23:32 UTC 2026 Loading modules
+0: 0: 
+0: 0: Lmod is automatically replacing "cce/20.0.0" with "gcc-native/13".
+0: 0: 
+0: 0: 
+0: 0: Due to MODULEPATH changes, the following have been reloaded:
+0: 0:   1) cray-libsci/25.09.0     2) cray-mpich/9.0.1
+0: 0: 
+0: 0: 
+0: 0: The following have been reloaded with a version change:
+0: 0:   1) libfabric/match_SHS => libfabric/2.1
+0: 0: 
+0: 0: stty: 'standard input'0: : Inappropriate ioctl for device
+0: 0: Tue Nov 17 02:23:37 UTC 2026 Activated environment on 0
+0: 0: bash: cannot set terminal process group (3001940): Inappropriate ioctl for device
+0: 0: Tue Nov 17 02:23:37 UTC 2026 Launching python on 0...
+0: 0: bash: no job control in this shell
+0: 0: stty: 'standard input': Inappropriate ioctl for device
+0: 0: Operational metadata gate passed: hparam-o-lr1e-6, hparam-rio-lr1e-6
+0: 0: bash: cannot set terminal process group (3001940): Inappropriate ioctl for device
+0: 0: bash: no job control in this shell
+0: 0: stty: 'standard input'0: : Inappropriate ioctl for device
+0: Nov 16 18:53:24.004985 PST 2026 broker.err[0]: rc2.0: /var/tmp/kirchenb/jobtmp-0-f3kYQMaZnJLf/script Alarm clock (rc=142) 1792.4s
+0: 1791.805s: job.exception fX8vQFZ type=timeout severity=0 resource allocation expired

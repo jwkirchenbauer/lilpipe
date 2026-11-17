@@ -1,0 +1,30 @@
+{
+  "state": "prepared-not-executed-on-real-studies",
+  "version": 4,
+  "prepared_utc": "2026-11-17T08:20:03.037140+00:00",
+  "predecessors_preserved": [
+    "source/seal-v1",
+    "source/seal-v2",
+    "source/seal-v3"
+  ],
+  "entry": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v4/run.sh",
+  "modes": [
+    "check",
+    "seal",
+    "verify"
+  ],
+  "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+  "allocation_required_for_all_modes": true,
+  "only_curation_changes": [
+    "Permit bounded source logs containing seal in filename; live sealing launch logs remain excluded",
+    "Retain empty __init__.py only under source with existing symlink/directory/format/size exclusions"
+  ],
+  "requirements_byte_identical_to_v3": true,
+  "tests": 19,
+  "test_log": "tests.log",
+  "format_log": "format-check.log",
+  "equivalence_proof": "equivalence.json",
+  "metadata_only_source_manifest_audit": "source-manifest-curation-audit.json",
+  "real_study_checks_seals_or_verifications_run": false,
+  "launcher_invoked": false
+}

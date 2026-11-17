@@ -1,0 +1,12 @@
+Periodic asynchronous stack dumping disabled for this retry; fatal-fault reporting remains enabled.
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:01<08:04,  1.67s/it]Loading weights:   3%|▎         | 9/291 [00:01<00:41,  6.81it/s]Loading weights:  22%|██▏       | 64/291 [00:01<00:03, 61.43it/s]Loading weights:  38%|███▊      | 110/291 [00:01<00:01, 111.17it/s]Loading weights:  56%|█████▋    | 164/291 [00:02<00:00, 175.10it/s]Loading weights: 100%|██████████| 291/291 [00:02<00:00, 138.91it/s]
+Computing FP64 trajectory Gram matrix
+Resuming Gram after 291/291 parameters
+Resuming bases after 96/291 parameters
+Constructing and saving 3 visualization planes
+{
+  "radius": 1.2309829180695677,
+  "attack_plane_energy_fraction": 0.9587369027437997,
+  "random_transverse_overlap": null,
+  "rerun_distance_from_original": {}
+}

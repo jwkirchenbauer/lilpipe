@@ -1,0 +1,200 @@
+0: OUTPUT_DIR: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/checkpoint-report-final-v2
+0: Logging to /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/checkpoint-report-final-v2/logs
+0: Tue Nov 17 07:19:37 UTC 2026 Calling flux run...
+0: 0: Tue Nov 17 07:19:37 UTC 2026 Loading modules
+0: 0: 
+0: 0: Lmod is automatically replacing "cce/20.0.0" with "gcc-native/13".
+0: 0: 
+0: 0: 
+0: 0: Due to MODULEPATH changes, the following have been reloaded:
+0: 0:   1) cray-libsci/25.09.0     2) cray-mpich/9.0.1
+0: 0: 
+0: 0: 
+0: 0: The following have been reloaded with a version change:
+0: 0:   1) libfabric/match_SHS => libfabric/2.1
+0: 0: 
+0: 0: stty: 'standard input': Inappropriate ioctl for device
+0: 0: Tue Nov 17 07:19:43 UTC 2026 Activated environment on 0
+0: 0: Tue Nov 17 07:19:43 UTC 2026 Launching python on 0...
+0: 0: bash: cannot set terminal process group (1786598): Inappropriate ioctl for device
+0: 0: bash: no job control in this shell
+0: 0: stty: 'standard input': Inappropriate ioctl for device
+0: 0: Operational metadata gate passed: hparam-r-defense, hparam-r-lr1e-6, hparam-i-defense, hparam-i-lr1e-6, hparam-o-defense, hparam-o-lr1e-6, hparam-rio-defense, hparam-rio-lr1e-6
+0: 0: bash: cannot set terminal process group (1786598): Inappropriate ioctl for device
+0: 0: bash: no job control in this shell
+0: 0: stty: 'standard input': Inappropriate ioctl for device
+0: 0: {
+0: 0:   "coverage": "complete",
+0: 0:   "cases": {
+0: 0:     "reproduced-1000": {
+0: 0:       "issues": [],
+0: 0:       "physical_comparable": true,
+0: 0:       "heldout_matches_root": true,
+0: 0:       "local_frames": [
+0: 0:         0,
+0: 0:         1,
+0: 0:         8,
+0: 0:         32,
+0: 0:         128,
+0: 0:         512,
+0: 0:         1000
+0: 0:       ],
+0: 0:       "broad_frames": [
+0: 0:         0,
+0: 0:         128,
+0: 0:         1000
+0: 0:       ]
+0: 0:     },
+0: 0:     "hparam-r-lr1e-6": {
+0: 0:       "issues": [],
+0: 0:       "physical_comparable": true,
+0: 0:       "heldout_matches_root": true,
+0: 0:       "local_frames": [
+0: 0:         0,
+0: 0:         1,
+0: 0:         8,
+0: 0:         32,
+0: 0:         128,
+0: 0:         512,
+0: 0:         1000
+0: 0:       ],
+0: 0:       "broad_frames": [
+0: 0:         0,
+0: 0:         128,
+0: 0:         1000
+0: 0:       ]
+0: 0:     },
+0: 0:     "hparam-i-lr1e-6": {
+0: 0:       "issues": [],
+0: 0:       "physical_comparable": true,
+0: 0:       "heldout_matches_root": true,
+0: 0:       "local_frames": [
+0: 0:         0,
+0: 0:         1,
+0: 0:         8,
+0: 0:         32,
+0: 0:         128,
+0: 0:         512,
+0: 0:         1000
+0: 0:       ],
+0: 0:       "broad_frames": [
+0: 0:         0,
+0: 0:         128,
+0: 0:         1000
+0: 0:       ]
+0: 0:     },
+0: 0:     "hparam-o-lr1e-6": {
+0: 0:       "issues": [],
+0: 0:       "physical_comparable": true,
+0: 0:       "heldout_matches_root": true,
+0: 0:       "local_frames": [
+0: 0:         0,
+0: 0:         1,
+0: 0:         8,
+0: 0:         32,
+0: 0:         128,
+0: 0:         512,
+0: 0:         1000
+0: 0:       ],
+0: 0:       "broad_frames": [
+0: 0:         0,
+0: 0:         128,
+0: 0:         1000
+0: 0:       ]
+0: 0:     },
+0: 0:     "hparam-rio-lr1e-6": {
+0: 0:       "issues": [],
+0: 0:       "physical_comparable": true,
+0: 0:       "heldout_matches_root": true,
+0: 0:       "local_frames": [
+0: 0:         0,
+0: 0:         1,
+0: 0:         8,
+0: 0:         32,
+0: 0:         128,
+0: 0:         512,
+0: 0:         1000
+0: 0:       ],
+0: 0:       "broad_frames": [
+0: 0:         0,
+0: 0:         128,
+0: 0:         1000
+0: 0:       ]
+0: 0:     }
+0: 0:   },
+0: 0:   "pairs": [
+0: 0:     {
+0: 0:       "name": "reproduced-1000--hparam-r-lr1e-6",
+0: 0:       "schedule_steps": 1000,
+0: 0:       "local_frames": [
+0: 0:         0,
+0: 0:         1,
+0: 0:         8,
+0: 0:         32,
+0: 0:         128,
+0: 0:         512,
+0: 0:         1000
+0: 0:       ],
+0: 0:       "broad_frames": [
+0: 0:         0,
+0: 0:         128,
+0: 0:         1000
+0: 0:       ]
+0: 0:     },
+0: 0:     {
+0: 0:       "name": "reproduced-1000--hparam-i-lr1e-6",
+0: 0:       "schedule_steps": 1000,
+0: 0:       "local_frames": [
+0: 0:         0,
+0: 0:         1,
+0: 0:         8,
+0: 0:         32,
+0: 0:         128,
+0: 0:         512,
+0: 0:         1000
+0: 0:       ],
+0: 0:       "broad_frames": [
+0: 0:         0,
+0: 0:         128,
+0: 0:         1000
+0: 0:       ]
+0: 0:     },
+0: 0:     {
+0: 0:       "name": "reproduced-1000--hparam-o-lr1e-6",
+0: 0:       "schedule_steps": 1000,
+0: 0:       "local_frames": [
+0: 0:         0,
+0: 0:         1,
+0: 0:         8,
+0: 0:         32,
+0: 0:         128,
+0: 0:         512,
+0: 0:         1000
+0: 0:       ],
+0: 0:       "broad_frames": [
+0: 0:         0,
+0: 0:         128,
+0: 0:         1000
+0: 0:       ]
+0: 0:     },
+0: 0:     {
+0: 0:       "name": "reproduced-1000--hparam-rio-lr1e-6",
+0: 0:       "schedule_steps": 1000,
+0: 0:       "local_frames": [
+0: 0:         0,
+0: 0:         1,
+0: 0:         8,
+0: 0:         32,
+0: 0:         128,
+0: 0:         512,
+0: 0:         1000
+0: 0:       ],
+0: 0:       "broad_frames": [
+0: 0:         0,
+0: 0:         128,
+0: 0:         1000
+0: 0:       ]
+0: 0:     }
+0: 0:   ]
+0: 0: }
+0: Tue Nov 17 07:20:13 UTC 2026 Job execution finished.

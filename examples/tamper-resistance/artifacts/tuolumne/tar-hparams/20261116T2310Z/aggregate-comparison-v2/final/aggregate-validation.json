@@ -1,0 +1,68 @@
+{
+  "state": "complete",
+  "conditions": [
+    "B",
+    "R",
+    "I",
+    "O",
+    "RIO"
+  ],
+  "control": "reproduced-1000",
+  "numeric_validation_rows": 5,
+  "figures": [
+    {
+      "figure": "end-defense-fixed-random",
+      "plane": "random",
+      "frames": "attack-start/defense-endpoint",
+      "color_min": 6.6248688354492185,
+      "color_max": 14.741498600006103,
+      "panels": 5,
+      "status": "complete"
+    },
+    {
+      "figure": "end-defense-fixed-reference",
+      "plane": "reference",
+      "frames": "attack-start/defense-endpoint",
+      "color_min": 2.08558349609375,
+      "color_max": 16.517576026916505,
+      "panels": 5,
+      "status": "complete"
+    },
+    {
+      "figure": "end-defense-fixed-attack",
+      "plane": "attack",
+      "frames": "attack-start/defense-endpoint",
+      "color_min": 1.113974287033081,
+      "color_max": 22.95458962726593,
+      "panels": 5,
+      "status": "complete"
+    },
+    {
+      "figure": "broad-random-r125",
+      "plane": "shared-random",
+      "frames": "0;128;1000",
+      "color_min": 1.3906671466827392,
+      "color_max": 16.478487616539002,
+      "panels": 15,
+      "status": "complete"
+    },
+    {
+      "figure": "local-reference-matched-attack",
+      "plane": "shared-reference",
+      "frames": "0;1;8;32;128;512;1000",
+      "color_min": 1.4351288795471193,
+      "color_max": 15.142194986343384,
+      "panels": 35,
+      "status": "complete"
+    },
+    {
+      "figure": "defense-history-local-reference",
+      "plane": "shared-reference",
+      "frames": "0;8;32;125",
+      "color_min": 1.4298378353118897,
+      "color_max": 15.142398488044739,
+      "panels": 20,
+      "status": "complete"
+    }
+  ]
+}

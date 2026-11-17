@@ -1,0 +1,421 @@
+{
+  "state": "prepared",
+  "kind": "fixed-sampler-hparam-study",
+  "baseline_commit": "a04d7658b30765d73dbcd24943ce42fc0113ab2b",
+  "original_run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z",
+  "baseline_dynamics": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z",
+  "compute_study": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z",
+  "base_model": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+  "hparam_matrix": {
+    "RI": {
+      "retain_coefficient": 4.0,
+      "inner_learning_rate": 1e-05,
+      "outer_learning_rate": 5e-06
+    },
+    "RO": {
+      "retain_coefficient": 4.0,
+      "inner_learning_rate": 1e-06,
+      "outer_learning_rate": 1e-05
+    },
+    "IO": {
+      "retain_coefficient": 2.5,
+      "inner_learning_rate": 1e-05,
+      "outer_learning_rate": 1e-05
+    }
+  },
+  "matrix_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/matrix.json",
+  "matrix_sha256": "da9a193606c2a11d37f85ddc2a5c7b73c48c6f39625a819eb9a219c66934ba16",
+  "comparison_controls": {
+    "reproduced-1000": {
+      "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6",
+      "schedule_steps": 1000,
+      "label": "B: retain 2.5, inner 1e-6, outer 5e-6"
+    }
+  },
+  "checkpoint_contrast_note": "Controlled hyperparameter contrasts in the original BF16 pathway with the local metadata sampler: retain coefficient 2.5 or 4, inner LR 1e-6 or 1e-5, and outer LR 5e-6 or 1e-5. Explicit case labels and matrix.json identify each condition. The existing B control is reused. All conditions retain K16, 125 defense updates, and matched LR1e-6 attacks over 1000 updates. Joint changes can interact; this is one defense/attacker seed. The uploaded checkpoint's legacy OPTML data pipeline is not a factorial condition and is not reproduced by changing these three values alone.",
+  "checkpoint_report_title": "Controlled TAR hyperparameter comparison",
+  "defense_history_note": "Each new defender has nine saved checkpoints across its 125 defense updates. The analysis uses this observed defense history and the subsequent independent attack. The original B control reuses its completed saved trajectory.",
+  "defense_schedule": "125 linear updates, warmup 12, 16 simulated inner steps per update (2000 total); seed/data seed 42/42. Inner AdamW resets each outer update and retains its original default weight decay 0.01.",
+  "attack_schedule": "Fresh independent LR1e-6 1000-update linear attacks, no warmup, seed/data seed 1/42, and the reused control's exact prepared data order.",
+  "analysis": "Exact frozen fixed10 and attack-held-out32, original physical random/reference bases, and each new defense's real saved history.",
+  "shared_probes": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/probes.json",
+  "prepared_cache_sources": {
+    "defense": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/cache/axolotl/defense",
+    "attack": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cache/attack"
+  },
+  "cases": {
+    "hparam-ri-defense": {
+      "name": "hparam-ri-defense",
+      "label": "RI: retain 4, inner 1e-05, outer 5e-06",
+      "condition": "RI",
+      "defense_hyperparameters": {
+        "retain_coefficient": 4.0,
+        "inner_learning_rate": 1e-05,
+        "outer_learning_rate": 5e-06
+      },
+      "role": "defense",
+      "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense",
+      "config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/config.yml",
+      "reference_config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/configs/defense.yml",
+      "max_steps": 125,
+      "save_steps": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        125
+      ],
+      "state_steps": [
+        32,
+        64,
+        125
+      ],
+      "defense_reference": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+      "bootstrap_seed": null,
+      "inner_steps_per_update": 16,
+      "attack_learning_rate": null,
+      "gaussian_sigma": null,
+      "base_model": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c"
+    },
+    "hparam-ri-lr1e-6": {
+      "name": "hparam-ri-lr1e-6",
+      "label": "RI: retain 4, inner 1e-05, outer 5e-06",
+      "condition": "RI",
+      "defense_hyperparameters": {
+        "retain_coefficient": 4.0,
+        "inner_learning_rate": 1e-05,
+        "outer_learning_rate": 5e-06
+      },
+      "role": "attack",
+      "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-lr1e-6",
+      "config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-lr1e-6/config.yml",
+      "reference_config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/config.yml",
+      "max_steps": 1000,
+      "save_steps": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        12,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64,
+        80,
+        96,
+        112,
+        128,
+        192,
+        256,
+        384,
+        512,
+        768,
+        1000
+      ],
+      "state_steps": [
+        128,
+        512,
+        1000
+      ],
+      "defense_reference": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/models/defense",
+      "bootstrap_seed": null,
+      "inner_steps_per_update": null,
+      "attack_learning_rate": 1e-06,
+      "gaussian_sigma": null,
+      "base_model": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c"
+    },
+    "hparam-ro-defense": {
+      "name": "hparam-ro-defense",
+      "label": "RO: retain 4, inner 1e-06, outer 1e-05",
+      "condition": "RO",
+      "defense_hyperparameters": {
+        "retain_coefficient": 4.0,
+        "inner_learning_rate": 1e-06,
+        "outer_learning_rate": 1e-05
+      },
+      "role": "defense",
+      "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-defense",
+      "config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-defense/config.yml",
+      "reference_config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/configs/defense.yml",
+      "max_steps": 125,
+      "save_steps": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        125
+      ],
+      "state_steps": [
+        32,
+        64,
+        125
+      ],
+      "defense_reference": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+      "bootstrap_seed": null,
+      "inner_steps_per_update": 16,
+      "attack_learning_rate": null,
+      "gaussian_sigma": null,
+      "base_model": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c"
+    },
+    "hparam-ro-lr1e-6": {
+      "name": "hparam-ro-lr1e-6",
+      "label": "RO: retain 4, inner 1e-06, outer 1e-05",
+      "condition": "RO",
+      "defense_hyperparameters": {
+        "retain_coefficient": 4.0,
+        "inner_learning_rate": 1e-06,
+        "outer_learning_rate": 1e-05
+      },
+      "role": "attack",
+      "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-lr1e-6",
+      "config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-lr1e-6/config.yml",
+      "reference_config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/config.yml",
+      "max_steps": 1000,
+      "save_steps": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        12,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64,
+        80,
+        96,
+        112,
+        128,
+        192,
+        256,
+        384,
+        512,
+        768,
+        1000
+      ],
+      "state_steps": [
+        128,
+        512,
+        1000
+      ],
+      "defense_reference": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-defense/models/defense",
+      "bootstrap_seed": null,
+      "inner_steps_per_update": null,
+      "attack_learning_rate": 1e-06,
+      "gaussian_sigma": null,
+      "base_model": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c"
+    },
+    "hparam-io-defense": {
+      "name": "hparam-io-defense",
+      "label": "IO: retain 2.5, inner 1e-05, outer 1e-05",
+      "condition": "IO",
+      "defense_hyperparameters": {
+        "retain_coefficient": 2.5,
+        "inner_learning_rate": 1e-05,
+        "outer_learning_rate": 1e-05
+      },
+      "role": "defense",
+      "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-defense",
+      "config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-defense/config.yml",
+      "reference_config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/configs/defense.yml",
+      "max_steps": 125,
+      "save_steps": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        96,
+        125
+      ],
+      "state_steps": [
+        32,
+        64,
+        125
+      ],
+      "defense_reference": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+      "bootstrap_seed": null,
+      "inner_steps_per_update": 16,
+      "attack_learning_rate": null,
+      "gaussian_sigma": null,
+      "base_model": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c"
+    },
+    "hparam-io-lr1e-6": {
+      "name": "hparam-io-lr1e-6",
+      "label": "IO: retain 2.5, inner 1e-05, outer 1e-05",
+      "condition": "IO",
+      "defense_hyperparameters": {
+        "retain_coefficient": 2.5,
+        "inner_learning_rate": 1e-05,
+        "outer_learning_rate": 1e-05
+      },
+      "role": "attack",
+      "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-lr1e-6",
+      "config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-lr1e-6/config.yml",
+      "reference_config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/config.yml",
+      "max_steps": 1000,
+      "save_steps": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        12,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64,
+        80,
+        96,
+        112,
+        128,
+        192,
+        256,
+        384,
+        512,
+        768,
+        1000
+      ],
+      "state_steps": [
+        128,
+        512,
+        1000
+      ],
+      "defense_reference": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-defense/models/defense",
+      "bootstrap_seed": null,
+      "inner_steps_per_update": null,
+      "attack_learning_rate": 1e-06,
+      "gaussian_sigma": null,
+      "base_model": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c"
+    }
+  },
+  "bundles": {
+    "defenses": [
+      "hparam-ri-defense",
+      "hparam-ro-defense",
+      "hparam-io-defense"
+    ],
+    "attacks": [
+      "hparam-ri-lr1e-6",
+      "hparam-ro-lr1e-6",
+      "hparam-io-lr1e-6"
+    ],
+    "all": [
+      "hparam-ri-defense",
+      "hparam-ri-lr1e-6",
+      "hparam-ro-defense",
+      "hparam-ro-lr1e-6",
+      "hparam-io-defense",
+      "hparam-io-lr1e-6"
+    ],
+    "hparam-ri": [
+      "hparam-ri-defense",
+      "hparam-ri-lr1e-6"
+    ],
+    "hparam-ro": [
+      "hparam-ro-defense",
+      "hparam-ro-lr1e-6"
+    ],
+    "hparam-io": [
+      "hparam-io-defense",
+      "hparam-io-lr1e-6"
+    ]
+  },
+  "jobs": {},
+  "profile_reference_case": "hparam-ri-lr1e-6",
+  "source_sha256": {
+    "source/lm_eval_tasks/mmlu_no_bio.yaml": "049885f5f05c0f60a43e9fd749b245028555fc173a08a36175452dab72e27a15",
+    "source/misc/reference_get_ll.py": "ffc0d86d6e51298bdf5595d4bee7a3d0f3e1ca95d5d76e613a73d3c154944c91",
+    "source/misc/run_tar_compute.sh": "7030c584dd6ad163234aca49984dbad1e9f3e08319ec017bd1fd7206437d8b1b",
+    "source/misc/run_tar_compute_evaluation.sh": "08bd5b1625c6e280353f566a4008f64d6b573342c8212503484ce08196eddc36",
+    "source/misc/run_tar_compute_landscapes.sh": "02eed3c09ba88aed423ed58347416e5607e594b0fc88dbc162faa9882dfdee0a",
+    "source/misc/tar_compute.py": "b882187c89fe60ab06b416ce50aad7e329eaaef0b3b220046c30ed59c99d4e66",
+    "source/misc/tar_compute_compare.py": "813cbfe259ff19c86b74d7a8384eb6946b15337eeadd924c34e68c0f62e41f78",
+    "source/misc/tar_compute_evaluation.py": "4b7213715844dfe11f2706b128bcfa2a6d3e7a9c076b123e391cda4dc054f56a",
+    "source/misc/tar_dynamics.py": "e8ab333af2f9106204ba0bb17a66d7a0adb21e80dd2970d16fb9aa8f1c953054",
+    "source/misc/tar_dynamics_training.py": "8fbfd35bd251cbc831bb6dc2fdfdb9183caa33983993b2430d27e3cf858ed9a9",
+    "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/_default_template_yaml": "011aa06daa186c8115ab1cd43f8c10d6b0e55996e811660ecc1e6117f6804d58",
+    "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/_wmdp_bio_robust.yaml": "f211781013e5e45a4297a51aaa151a0e85d030cc811f35a665b2cdff9fdc0ae7",
+    "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_bioweapons_and_bioterrorism.yaml": "e675c85f5300c61454055d7342b6c106b33673de89e19666e4725fab129edb1f",
+    "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_dual_use_virology.yaml": "3b4a3aa09beeade354739b7363a264eec21a81e0c5c094519c73a70b76b7118f",
+    "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_enhanced_potential_pandemic_pathogens.yaml": "4c1e6f5d7f22c57bdd4a93e7545dd2b248269d26a25e62a2664c46b48cf32f83",
+    "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_expanding_access_to_threat_vectors.yaml": "d23724eeeafcc871289a87623e9bbe9cfaa849f2713c17c295271477ccfb2cf3",
+    "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_reverse_genetics_and_easy_editing.yaml": "61e4e2b52a99ab63669c3b451bfcbbf1296d9913659e029e6d6af4b0f2cbd776",
+    "source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_viral_vector_research.yaml": "e4ffff6afa20543d405ad30ef8679a6b4e9691759b1fbc129e695695f6d5a95c",
+    "source/src/axolotl_plugins/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source/src/axolotl_plugins/custom_trainer_args.py": "823315684e21dd0044c0553bff7ff36f05c8249762ba28c9139b5d229f1f2a12",
+    "source/src/data/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source/src/data/_base_document_strategy.py": "ed7a7d4ae6a5259d047b6e8074a803a91ce39b397dbbb56b838fdfbf2358a509",
+    "source/src/data/authors_documents.py": "93dbdcf641f65c78b76f44a1bb2153358900e63bf9a4149baa821ec4e2804290",
+    "source/src/data/authors_documents_masked.py": "1cc66116d342700a50d4c7f782d1d51387de2bde97abd30c3493bb82ef85b632",
+    "source/src/data/beavertail_alignment.py": "bdd3193a94eb954dfbc6163647ff34947dbe1a388c954b87db0fcb5c48fd2f3a",
+    "source/src/data/beavertail_harmful_alignment.py": "7644cb422836685ad708fc21e45a398673ec79a218d1831865ed984d83315331",
+    "source/src/data/beavertail_harmful_mixed_attack.py": "e80a76fa5ba4380bb382c6de74b689802bfce2a74d26740c9d245eea858aea74",
+    "source/src/data/beavertail_harmful_relearn.py": "606afe5fc709912f79cb4964de1714783769cf9bb882a8dd3e2a5d15b1754004",
+    "source/src/data/beavertail_safe_alignment.py": "e466fa2dde9d49daa278e7688f108b68b130cf4b0ad829a823b3f3839a2fb1d4",
+    "source/src/data/beavertails_hh.py": "c9e3f0d6f4124fb4d2bbbc4b2a45cbe73cb934e1ffb232d30128306448f453ec",
+    "source/src/data/fixed_documents.py": "852ac6b999da34c6069da16e9f8c1e2404249d33743b6c2e4c6a22c48ea320e9",
+    "source/src/data/seam.py": "f4bc8ad2aaedb50cced3ce64480516819a91ded080942d60004c140394436d90",
+    "source/src/data/sst2_mixed_attack.py": "1279fb8a6979f83a4f53d8e4b773889357aaf37b8e9ece6db929b8b69a7a1d70",
+    "source/src/data/wikitext2.py": "09c18207ca958cbe9d7dd3c3e31e5f9f6fd33daa583e1fc984adb08e280aaee5",
+    "source/src/data/wikitext_di.py": "8ccdc0b4ec175c578558142dcc78175d00b031aa8e46de0de7b0cc1b0d3a35e0",
+    "source/src/data/wmdp_completion.py": "05120990f036cb0299f8f69eb37d8bd886217332f4fb5c9ef55290a95337f4f0",
+    "source/src/data/wmdp_di.py": "50166c6e6e040148c72b78f7e596a9de2b2a29e1d2184f041a56330a8e036236",
+    "source/src/data/wmdp_zephyr.py": "fd3e4b617389a5c6fe6b2678c317cdc545760eff22fb443bb199b3c55c9680fa",
+    "source/src/trainers/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source/src/trainers/rl_bf16.py": "03886e657233377f2b54881e85a0cd547e6b2fe26efd9ee4f9c6047a64e40bdc",
+    "source/src/trainers/rl_cosim.py": "81c787dcd30e76d47578a9e51ddce0a93f86bfec74f6f4f103fb607464733320",
+    "source/src/trainers/rl_perturb.py": "382f3469cfcc837c878f279efc75e64093781aa833845faae587cb565edbbbec",
+    "source/src/trainers/tr_ao.py": "c610a569081a2ec0541c3c41c8df0e42866c77e364f9e1cfe3bc62815aaa4230",
+    "source/src/trainers/tr_booster.py": "2a044a9770a46420bea080920a9b2126e545c1be5bd1e1781d00b456817b124d",
+    "source/src/trainers/tr_gip.py": "c25d824fbb06d8c4f2c020dad69968a734baac41d0db397d1307e61685ec8f66",
+    "source/src/trainers/tr_sam.py": "1786aafc7b547b2717acdb06ab4af1d18fbd18c8b6af3f7533f6bc651909115b",
+    "source/src/trainers/tr_seam.py": "01edc546ce23510526708a5b52a066f65b4799e571f848281d5c58e599ef6ec2",
+    "source/src/trainers/tr_seam_legacy.py": "34bdabbea34dfa524a43b011f63da6b6cdf61a66f1a5adb01a4deb1e44e9b434",
+    "source/src/trainers/tr_seam_v1.py": "a35bed137db7455fcce5750eeab9d8b6b2521bfbdcc13dbc59fb3ba5871e52b5",
+    "source/src/trainers/tr_ssiuu.py": "c9b1061fc2d3a5a0a0ddccca43716829bf6ae9ac724e2b24ac6d62a7cab70fd2",
+    "source/src/trainers/tr_tar.py": "17af0ecc0a164edf2547053a0df249854fda3e4cfe18e4882f06cd3b9f585188",
+    "source/src/trainers/tr_wd.py": "7fd4f32b207f36843811343f9237ad68979b734b6ce5005ce0b55c1f80b4daa9",
+    "source/src/trainers/ul_cb.py": "e5d500879c0596a2c669cd0a5823cee8987e1ed3a0202b735890ed56ed2bea38",
+    "source/src/trainers/ul_gd.py": "8fa1bbb06974529512193f8f068c3931be599d9ad0b7cf158eca5d5d94ba95c4",
+    "source/src/trainers/ul_me.py": "3524868904daa100a7157dba2254ac73220c59a1271297675f35941ccd0f55aa",
+    "source/src/trainers/ul_npo.py": "ee65164d6d1ff5bb6a07cb7e386e7cdaaece8f262946e32800fafcd58f58c7ce",
+    "source/src/trainers/ul_rmu.py": "f651c188283f60716d29331f72d99d39381b250f21308cb496868210a12ace85",
+    "source/src/trainers/utils.py": "0af6c8c9a0c1139014bb5792d3ce2e9bd9863777a9cff989dcd46846923b32b5"
+  },
+  "source_identity": {
+    "canonical_run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z",
+    "canonical_source_sha256": "e8d7ea7051685d42e15252fc30c98df4e2204cd9675dbb9f0e60078046667f32",
+    "byte_identical_core": true,
+    "core_file_count": 58
+  }
+}

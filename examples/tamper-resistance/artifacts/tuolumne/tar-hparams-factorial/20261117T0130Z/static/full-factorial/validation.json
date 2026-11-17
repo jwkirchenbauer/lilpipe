@@ -1,0 +1,572 @@
+{
+  "state": "complete",
+  "cells": 8,
+  "points_per_cell": 648,
+  "common_protocol": {
+    "get_ll_sha256": "ffc0d86d6e51298bdf5595d4bee7a3d0f3e1ca95d5d76e613a73d3c154944c91",
+    "torch": "2.12.1+rocm7.2",
+    "hip": "7.2.53211",
+    "seed": 42,
+    "document_sha256": [
+      "ec96196329ae432cd296903a5a453d11cc4c4f7dec325079e68c86d85fb6dd4c",
+      "d75431e865efa620c40de958f294d8271618baf51a2c76f8aae09ae237691648",
+      "d0ba27eda2ba13f62d40a6b018e12a731edc5d6beb1f47d987310383e2261080",
+      "445f5a8523cdf0d0bf4e3c734b13884bedad1584d11fe332a1d2f7ac4657612d",
+      "d0fc0923deb4dc74a39c7254c2bf4093d28f495a893bf9405dae4f255d07fb1a",
+      "91656d19ae5830707b0dbb5d85fbb62b05831b95404f49c0874bc7da1891403f",
+      "443a72bb9bc6bd75b370784d9db5c873c6674f290907f922b7a1b165c94ad967",
+      "94652942beb60f1990b68d719d7492716791fa0d46681215774df3a39cd476e6",
+      "5f10d7c8b601f143d736004f4a718c8bd8ff28fa37b90771cfcce6bce71e23af",
+      "223bcae919bb2b8a925c683127fb9bde75fc5b9ff715dc30b1112b8c2f211650"
+    ],
+    "dataset_revision": "5a786ed1041e56fef2d4ed26c1239f12b73a68eb",
+    "radii": [
+      1000,
+      500,
+      200,
+      125,
+      100,
+      10,
+      1,
+      0.1
+    ],
+    "n_pts": 9,
+    "batch_size": 2,
+    "max_seq_len": 512
+  },
+  "evaluated_batch_sha256": [
+    "3e658ec585dc7b4bd317fe33ae7b69eea6067dec3c05397cc943d91113ca1540",
+    "f05a85d44c0d9b9579a99da275271ac1489382a7c912b18485c5e88efe7b5b0a",
+    "63dc641d84ab37e249139c8d832c46fbd1a993f0e9fe866c22cfd0f42165e381",
+    "17ac144ad315a2d0118a4ed2e228b1b77a526237d14cd17911ff60b6fffcea46",
+    "2cf41b2bed4e84e116bdcf294579ed00ff6e3ffa1cfb91f49d4266c01fd16189"
+  ],
+  "defense_order_sha256": "c5f55ce756e9b0957ba6eb9fee18cf07bd2ac2b772e9884dbd2e8d30f4ddb98e",
+  "legacy_B_token_evidence": "All7 guarded workers recorded equality to B's actual tokenizer/collation; legacy B stores text hashes and original source, not token batch hash fields.",
+  "definitions": {
+    "center_ce": "L[4,4] on the 9x9 grid; CE in nats.",
+    "rim_rise": "max(L[4+di,4+dj] for di,dj in {-1,0,1} except di=dj=0) - L[4,4]. The 8 immediate neighbors have coordinate spacing radius/4. No clipping at zero.",
+    "center_elevation": "L[4,4] - mean(L[i,j] where i or j is 0 or 8). The perimeter contains 32 cells. No clipping at zero.",
+    "interpretation": "Finite-grid diagnostics of these sampled slices; not global barriers, Hessian curvature or attack robustness. One seed and no replication; no p-values.",
+    "factor_coding": "R/I/O are binary 0/1. R: retain 2.5/4; I: inner LR 1e-6/1e-5; O: outer LR 5e-6/1e-5.",
+    "anchored_coefficients": "For subset S, c_S=sum(T subset S) (-1)^(|S|-|T|) f(1_T,0_else). No divisor. The exact 0/1 multilinear expansion is f(r,i,o)=c_empty+c_R*r+c_I*i+c_O*o+c_RI*r*i+c_RO*r*o+c_IO*i*o+c_RIO*r*i*o.",
+    "conditional_main": "At each fixed combination of the other 2 factors, f(factor=1)-f(factor=0). No divisor; the marginal main contrast is the mean of 4 such differences, divisor 4.",
+    "conditional_pair": "At each fixed setting of the third factor, f11-f10-f01+f00. No divisor; the marginal pair contrast is the mean of 2 such differences, divisor 2.",
+    "three_way": "f111-f110-f101-f011+f100+f010+f001-f000. No divisor; also the difference between conditional pair contrasts at third-factor settings 1 and 0."
+  },
+  "scales": {
+    "1000": {
+      "absolute_ce": [
+        4.835255641937256,
+        26.114257221221923
+      ],
+      "center_relative_ce": [
+        -20.239169769287113,
+        20.239169769287113
+      ],
+      "coordinate_limits": [
+        -1000,
+        1000
+      ],
+      "camera": {
+        "elevation": 27,
+        "azimuth": -58
+      }
+    },
+    "500": {
+      "absolute_ce": [
+        5.319559850692749,
+        15.943868837356566
+      ],
+      "center_relative_ce": [
+        -10.110740489959717,
+        10.110740489959717
+      ],
+      "coordinate_limits": [
+        -500,
+        500
+      ],
+      "camera": {
+        "elevation": 27,
+        "azimuth": -58
+      }
+    },
+    "200": {
+      "absolute_ce": [
+        5.323426151275635,
+        15.862676525115967
+      ],
+      "center_relative_ce": [
+        -7.804009923934936,
+        7.804009923934936
+      ],
+      "coordinate_limits": [
+        -200,
+        200
+      ],
+      "camera": {
+        "elevation": 27,
+        "azimuth": -58
+      }
+    },
+    "125": {
+      "absolute_ce": [
+        5.2969741439819344,
+        16.418168678283692
+      ],
+      "center_relative_ce": [
+        -6.468485298156738,
+        6.468485298156738
+      ],
+      "coordinate_limits": [
+        -125,
+        125
+      ],
+      "camera": {
+        "elevation": 27,
+        "azimuth": -58
+      }
+    },
+    "100": {
+      "absolute_ce": [
+        5.266187906265259,
+        17.06467967033386
+      ],
+      "center_relative_ce": [
+        -5.5011676311492925,
+        5.5011676311492925
+      ],
+      "coordinate_limits": [
+        -100,
+        100
+      ],
+      "camera": {
+        "elevation": 27,
+        "azimuth": -58
+      }
+    },
+    "10": {
+      "absolute_ce": [
+        5.35466962337494,
+        15.04206337451935
+      ],
+      "center_relative_ce": [
+        -0.37895233154296915,
+        0.37895233154296915
+      ],
+      "coordinate_limits": [
+        -10,
+        10
+      ],
+      "camera": {
+        "elevation": 27,
+        "azimuth": -58
+      }
+    },
+    "1": {
+      "absolute_ce": [
+        5.367480263710022,
+        14.880251994132994
+      ],
+      "center_relative_ce": [
+        -0.03830675125121959,
+        0.03830675125121959
+      ],
+      "coordinate_limits": [
+        -1,
+        1
+      ],
+      "camera": {
+        "elevation": 27,
+        "azimuth": -58
+      }
+    },
+    "0.1": {
+      "absolute_ce": [
+        5.369706192016602,
+        14.855732498168946
+      ],
+      "center_relative_ce": [
+        -0.016738700866699218,
+        0.016738700866699218
+      ],
+      "coordinate_limits": [
+        -0.1,
+        0.1
+      ],
+      "camera": {
+        "elevation": 27,
+        "azimuth": -58
+      }
+    }
+  },
+  "source_sha256": "5bebfe1dbc7fa1a0a186aec58735eddfd819d5bbebbf13935d298ea58a80675e",
+  "input_spec_sha256": "6561291502d3672cd0734aef2b6ebb620ff6ac40ce96b884ca6cfe8011da8282",
+  "proofs": {
+    "B": {
+      "static_folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/loss-landscape/defense-step125-random-seed42-v3",
+      "grid_sha256": "6a9a7e83f691b96afb9fb59f175087492e0663aa02ebf8fd5fbbd7558d12fb9b",
+      "checkpoint_files": [
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense/config.json",
+          "size": 685,
+          "mtime_ns": 1794257241071030526
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense/generation_config.json",
+          "size": 163,
+          "mtime_ns": 1794257241075235508
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense/model.safetensors",
+          "size": 15008318632,
+          "mtime_ns": 1794257262005208644
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense/tokenizer.json",
+          "size": 3505751,
+          "mtime_ns": 1794257263488163079
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense/tokenizer_config.json",
+          "size": 527,
+          "mtime_ns": 1794257263433398697
+        }
+      ],
+      "legacy_training_validation": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/training_validation.json",
+      "recorded_validation": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/training-validation.json",
+      "recorded_endpoint_distance_from_original": 0,
+      "coordinate_validation": {
+        "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+        "unique_fp32_keys": 648,
+        "fp32_execution_coefficients_bitwise_match_reference": true,
+        "maximum_serialized_coordinate_difference_from_reference": 0.0,
+        "maximum_coordinate_decimal_to_fp32_difference": 6.245004513516506e-17
+      }
+    },
+    "R": {
+      "case_folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-defense",
+      "static_folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/static/cases/hparam-r-defense",
+      "protocol_sha256": "653a3eb5c5909a82ff85a58f10ef53dacf2c5224ebdddb3d72665e3dcd11ccbe",
+      "grid_sha256": "268b4237811ba829fc6d251f14490606e8251c75c7d1bb177d557806ad84203c",
+      "training_validation_sha256": "e8d1aadde04949cee3ecec7fea04f8e327064f03cf1582a3a200cfa737825f05",
+      "checkpoint_files": [
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-defense/models/defense/config.json",
+          "size": 685,
+          "mtime_ns": 1794873617119159372
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-defense/models/defense/generation_config.json",
+          "size": 163,
+          "mtime_ns": 1794873617126290202
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-defense/models/defense/model.safetensors",
+          "size": 15008318632,
+          "mtime_ns": 1794873639503120517
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-defense/models/defense/tokenizer.json",
+          "size": 3505751,
+          "mtime_ns": 1794873641325677934
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-defense/models/defense/tokenizer_config.json",
+          "size": 527,
+          "mtime_ns": 1794873641262497194
+        }
+      ],
+      "coordinate_validation": {
+        "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+        "unique_fp32_keys": 648,
+        "fp32_execution_coefficients_bitwise_match_reference": true,
+        "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+        "maximum_coordinate_decimal_to_fp32_difference": 0.0
+      }
+    },
+    "I": {
+      "case_folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-defense",
+      "static_folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/static/cases/hparam-i-defense",
+      "protocol_sha256": "969cfc17bb090806d1ec29ab4110816cf924626752a8ba56aba1018695ca3cbf",
+      "grid_sha256": "eecb60a185ba917133110bc4d8bb4adbccea8327afb2bb8f8b03ce8fa8a0657c",
+      "training_validation_sha256": "3ebf24a0779fe4d1cdfcf572728d4421112c1222226f6c34da886ae926a92ad8",
+      "checkpoint_files": [
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-defense/models/defense/config.json",
+          "size": 685,
+          "mtime_ns": 1794875513959930330
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-defense/models/defense/generation_config.json",
+          "size": 163,
+          "mtime_ns": 1794875513964248878
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-defense/models/defense/model.safetensors",
+          "size": 15008318632,
+          "mtime_ns": 1794875532125951231
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-defense/models/defense/tokenizer.json",
+          "size": 3505751,
+          "mtime_ns": 1794875533507803044
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-defense/models/defense/tokenizer_config.json",
+          "size": 527,
+          "mtime_ns": 1794875533452971203
+        }
+      ],
+      "coordinate_validation": {
+        "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+        "unique_fp32_keys": 648,
+        "fp32_execution_coefficients_bitwise_match_reference": true,
+        "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+        "maximum_coordinate_decimal_to_fp32_difference": 0.0
+      }
+    },
+    "RI": {
+      "case_folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense",
+      "static_folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/static/cases/hparam-ri-defense",
+      "protocol_sha256": "7344fbf5776ade90c371be7cfc1a7b4ea56104b77018c7934025b433b308b0a2",
+      "grid_sha256": "8b74f20650c446dcd9ee6a11f2b7c5300a738233302e0e97729115002f981b14",
+      "training_validation_sha256": "bdeb4b98cbc9602cc45cda0ad060cad9f082117f9b41d23b373a760d722ecfab",
+      "checkpoint_files": [
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/models/defense/config.json",
+          "size": 685,
+          "mtime_ns": 1794882344975796754
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/models/defense/generation_config.json",
+          "size": 163,
+          "mtime_ns": 1794882344979898244
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/models/defense/model.safetensors",
+          "size": 15008318632,
+          "mtime_ns": 1794882363083030792
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/models/defense/tokenizer.json",
+          "size": 3505751,
+          "mtime_ns": 1794882364544338334
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/models/defense/tokenizer_config.json",
+          "size": 527,
+          "mtime_ns": 1794882364484947339
+        }
+      ],
+      "coordinate_validation": {
+        "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+        "unique_fp32_keys": 648,
+        "fp32_execution_coefficients_bitwise_match_reference": true,
+        "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+        "maximum_coordinate_decimal_to_fp32_difference": 0.0
+      }
+    },
+    "O": {
+      "case_folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-defense",
+      "static_folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/static/cases/hparam-o-defense",
+      "protocol_sha256": "44e1203b5b5016de7c6a312802444a62979e47c947d58bc6ff8b9bd4e48febb4",
+      "grid_sha256": "5c3d11f24d346191bc247aa5468ac417c7bd320da7515682d33882476ee1799e",
+      "training_validation_sha256": "75f8b267cc9fee8833c70286811ffa444eb4543e684c46c9f653742755a892bf",
+      "checkpoint_files": [
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-defense/models/defense/config.json",
+          "size": 685,
+          "mtime_ns": 1794875382512513254
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-defense/models/defense/generation_config.json",
+          "size": 163,
+          "mtime_ns": 1794875382523739465
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-defense/models/defense/model.safetensors",
+          "size": 15008318632,
+          "mtime_ns": 1794875406235906281
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-defense/models/defense/tokenizer.json",
+          "size": 3505751,
+          "mtime_ns": 1794875407536276722
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-defense/models/defense/tokenizer_config.json",
+          "size": 527,
+          "mtime_ns": 1794875407467615092
+        }
+      ],
+      "coordinate_validation": {
+        "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+        "unique_fp32_keys": 648,
+        "fp32_execution_coefficients_bitwise_match_reference": true,
+        "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+        "maximum_coordinate_decimal_to_fp32_difference": 0.0
+      }
+    },
+    "RO": {
+      "case_folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-defense",
+      "static_folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/static/cases/hparam-ro-defense",
+      "protocol_sha256": "32a6e8058f9cd57255ac4aae170e071f31f9a54f409f95391bd38678157857ea",
+      "grid_sha256": "b43156ac42b0b0624574a7afaece95973d0afdec8d8f05fd824c99d9ad572a03",
+      "training_validation_sha256": "2bf54293d59ebec2ae62a7df5bbf5ed0a07ea34d14fab90d440b65cbd0d979e6",
+      "checkpoint_files": [
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-defense/models/defense/config.json",
+          "size": 685,
+          "mtime_ns": 1794882571245770922
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-defense/models/defense/generation_config.json",
+          "size": 163,
+          "mtime_ns": 1794882571257683120
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-defense/models/defense/model.safetensors",
+          "size": 15008318632,
+          "mtime_ns": 1794882588975077027
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-defense/models/defense/tokenizer.json",
+          "size": 3505751,
+          "mtime_ns": 1794882589803129106
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-defense/models/defense/tokenizer_config.json",
+          "size": 527,
+          "mtime_ns": 1794882589753441318
+        }
+      ],
+      "coordinate_validation": {
+        "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+        "unique_fp32_keys": 648,
+        "fp32_execution_coefficients_bitwise_match_reference": true,
+        "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+        "maximum_coordinate_decimal_to_fp32_difference": 0.0
+      }
+    },
+    "IO": {
+      "case_folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-defense",
+      "static_folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/static/cases/hparam-io-defense",
+      "protocol_sha256": "c840da631c504cc0563e08f5cb9532f9872996db90df57d83dcd22e159c53863",
+      "grid_sha256": "fe1a61400665eb572f270280c0583a6a356654e9957b8c7c44d5571305b9abe6",
+      "training_validation_sha256": "9b089ab3bad53ddb1f57ee6a3982f6493ffcb9440c20a4bf36dccbae14164a0d",
+      "checkpoint_files": [
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-defense/models/defense/config.json",
+          "size": 685,
+          "mtime_ns": 1794882558252204537
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-defense/models/defense/generation_config.json",
+          "size": 163,
+          "mtime_ns": 1794882558257546931
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-defense/models/defense/model.safetensors",
+          "size": 15008318632,
+          "mtime_ns": 1794882578484795138
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-defense/models/defense/tokenizer.json",
+          "size": 3505751,
+          "mtime_ns": 1794882579529104847
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-defense/models/defense/tokenizer_config.json",
+          "size": 527,
+          "mtime_ns": 1794882579471140476
+        }
+      ],
+      "coordinate_validation": {
+        "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+        "unique_fp32_keys": 648,
+        "fp32_execution_coefficients_bitwise_match_reference": true,
+        "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+        "maximum_coordinate_decimal_to_fp32_difference": 0.0
+      }
+    },
+    "RIO": {
+      "case_folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-defense",
+      "static_folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/static/cases/hparam-rio-defense",
+      "protocol_sha256": "cf98629971998cf35efbae5f0cec830197da20b8397ed73cddab4c04793189b5",
+      "grid_sha256": "ea8e2d128defb28c905a7b07bdf403aea1e3fe2df07025fce529110b87170cfb",
+      "training_validation_sha256": "2460bedcbccd57d44e8988271b0d1f677b460f7455016435c62160280790be26",
+      "checkpoint_files": [
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-defense/models/defense/config.json",
+          "size": 685,
+          "mtime_ns": 1794876224655337182
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-defense/models/defense/generation_config.json",
+          "size": 163,
+          "mtime_ns": 1794876224663719222
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-defense/models/defense/model.safetensors",
+          "size": 15008318632,
+          "mtime_ns": 1794876244232492335
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-defense/models/defense/tokenizer.json",
+          "size": 3505751,
+          "mtime_ns": 1794876245132902564
+        },
+        {
+          "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-defense/models/defense/tokenizer_config.json",
+          "size": 527,
+          "mtime_ns": 1794876245082063706
+        }
+      ],
+      "coordinate_validation": {
+        "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+        "unique_fp32_keys": 648,
+        "fp32_execution_coefficients_bitwise_match_reference": true,
+        "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+        "maximum_coordinate_decimal_to_fp32_difference": 0.0
+      }
+    }
+  },
+  "artifacts": {
+    "factorial-contrasts.csv": "687c2cbd83fcff12a4135d57d1eab6c46f754151fa6d85e278c885b9f43b34db",
+    "grid-metrics.csv": "61769d1584b2caf6e436e07d76cbdabf3120a3161cdb096ce58ccd50f77c51ba",
+    "radius-0.1-absolute.pdf": "16c4078fe3146873d471ef59ec36fb33af00fb9198b0734e87fc25fcbe542f0f",
+    "radius-0.1-absolute.png": "ad84a9cefa929dd7d3a8a9fb26f6e84da9aabcd1bcc53feb64457578b4a6db8f",
+    "radius-0.1-delta.pdf": "8b0d30663b37e0551a0f7608f4fe60487c7c258fa20aa4e9752e264dc2634bef",
+    "radius-0.1-delta.png": "43ebe30d31c7c4961f8ac066bd962d1dc7a182b58ec7c9577d48c57651c89fe5",
+    "radius-1-absolute.pdf": "34518f89ceffc55919c48f95aa09feab37b2748c68a0089ed4d28327827f24e8",
+    "radius-1-absolute.png": "d208d644f44a0fe8c3869313c800f08e74df0cb4d680d0910a0a2bdc7f7d5d0c",
+    "radius-1-delta.pdf": "7fa872897eb6b6c98c16f4ba82b9adaf5c2bf4825ed6f04ba2b2962e43431add",
+    "radius-1-delta.png": "eb4016235a13777e1e49fbe5a40dc0fb7105a07373c477d691226aa0020fc03d",
+    "radius-10-absolute.pdf": "ad145990f9b18bb9472d6354e9399f09448c8ac1f402e0835cca5c751211cbaf",
+    "radius-10-absolute.png": "9bc66177d01b0043c02d19551cedf9464b774edfeaff49738e547c3898299745",
+    "radius-10-delta.pdf": "ec9663ea40cf987c72f6843c3f2e90dd398894fe564d5f1612d22cff69fb1bab",
+    "radius-10-delta.png": "c4208d917ea35c1930eaa230c964cd97635951f9ed0e0f740e3e6bb917c2327a",
+    "radius-100-absolute.pdf": "1299c284c3d72319a83221f07824b6d9dee6abd69765ff4b772d5b57cb3e245c",
+    "radius-100-absolute.png": "6320e9a2cc170c9f913b94be82ea3dd6460feb9e518988366d836166ceeace76",
+    "radius-100-delta.pdf": "9ac841557f5e9989d95742302c235b70b8c99dae3fffb59499c114bfde08eaed",
+    "radius-100-delta.png": "9842ff91effc5e1ff6cc3ee5f6f64045f6200912ba619d4b5c0eba1f7ffc188f",
+    "radius-1000-absolute.pdf": "ef80123893ed4c019e0f61025f0a61262b8d80700084a12c05b560b7ea8dd415",
+    "radius-1000-absolute.png": "162b44cb242c445e7fae7e22c9bc726f322b0c7401243191d0834e3a85922484",
+    "radius-1000-delta.pdf": "a56b77fee13c467c053d8bed5cb8d07236058b52c40ea1da17800092c57ef610",
+    "radius-1000-delta.png": "0b85ee36d5e59ebf1db3b95bb1d976bdce2fcb09a0b0aa92c784525e1d3a6bf4",
+    "radius-125-absolute.pdf": "3f2534187980fc5e26bf5f3b9bec48724bc0dbca66593e83c9874a2425d7bd83",
+    "radius-125-absolute.png": "c59e03c15adbd0ce03710409b7e58c57bb1ab9f717b369148c9aa0b0ba308854",
+    "radius-125-delta.pdf": "644d6ac088c2c7dea9f5e0f4ced7491691b758252e7b185471efe618d9bbc3e1",
+    "radius-125-delta.png": "9d9f05b6f99b74f772cbc0f8156376e146af00fbe78bf908e6b6c60bd526bb86",
+    "radius-200-absolute.pdf": "d23d38b314c70ad0f74583f1a65263512879dc52c82618395561123a6cfcd926",
+    "radius-200-absolute.png": "1cd827b8b5cf4bcb1778aac70b979f2a726d1f6f0c178627800eb7635b6eb740",
+    "radius-200-delta.pdf": "ac047436512db7b5afa77b3beaa8da6442c86d21180d47bba665e4110ddd69ee",
+    "radius-200-delta.png": "90932b43e5edb8ac4e5b2298b32f03d27c823fd40713c44865dd318270af5cc7",
+    "radius-500-absolute.pdf": "ac5d1f9fb23258c9d32e2c3450c0d96047438cd90e9573c2f2ae7b9bb3f330ed",
+    "radius-500-absolute.png": "84a253fb40c5416d8ef1086fb3f42d4874594e605ad1a0e72c1876017c67d7f4",
+    "radius-500-delta.pdf": "7d108bc0cd523b890324103334ba46709d1ce609a1d4671345a7b31846cb5dd5",
+    "radius-500-delta.png": "378cb8ce486a12026760f3410affb4124a8f1db151a6f455d5745c9ef6b52aae",
+    "report.md": "4bf475ed572a7e87c83e5a7e2aa4fba6b7aaeb6467040fb9cad9e2fb3d836559"
+  }
+}

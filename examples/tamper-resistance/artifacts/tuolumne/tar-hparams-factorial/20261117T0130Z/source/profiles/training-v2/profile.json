@@ -1,0 +1,12 @@
+{
+  "profile": "training-v2",
+  "supersedes_for_new_defense_jobs_only": "training-v1 has a runtime guard requiring study.evaluation_cases, which is intentionally absent in this endpoint-only extension.",
+  "entry": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v2/run.sh",
+  "worker": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/misc/run_tar_compute.sh",
+  "scope_guard": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/planning-v2/training_scope_guard.py",
+  "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4",
+  "accepted_cases": ["hparam-ri-defense", "hparam-ro-defense", "hparam-io-defense"],
+  "evaluation_cases_field_required": false,
+  "attack_jobs_planned": false,
+  "benchmark_evaluation_jobs_planned": false
+}

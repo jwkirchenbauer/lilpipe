@@ -1,0 +1,259 @@
+0: OUTPUT_DIR: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/profiles-r-guard-v3
+0: Logging to /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/profiles-r-guard-v3/logs
+0: Tue Nov 17 01:49:03 UTC 2026 Calling flux run...
+0: 0: Tue Nov 17 01:49:04 UTC 2026 Loading modules
+0: 0: 
+0: 0: Lmod is automatically replacing "cce/20.0.0" with "gcc-native/13".
+0: 0: 
+0: 0: 
+0: 0: Due to MODULEPATH changes, the following have been reloaded:
+0: 0:   1) cray-libsci/25.09.0     2) cray-mpich/9.0.1
+0: 0: 
+0: 0: 
+0: 0: The following have been reloaded with a version change:
+0: 0:   1) libfabric/match_SHS => libfabric/2.1
+0: 0: 
+0: 0: stty: 'standard input': Inappropriate ioctl for device0: 
+0: 0: Tue Nov 17 01:49:09 UTC 2026 Activated environment on 0
+0: 0: Tue Nov 17 01:49:09 UTC 2026 Launching python on 0...
+0: 0: bash: cannot set terminal process group (2252829): Inappropriate ioctl for device
+0: 0: bash: no job control in this shell
+0: 0: stty: 'standard input'0: : Inappropriate ioctl for device
+0: 0: Operational metadata gate passed: hparam-r-lr1e-6
+0: 0: bash: cannot set terminal process group (2252829): Inappropriate ioctl for device
+0: 0: bash: no job control in this shell
+0: 0: stty: 'standard input': Inappropriate ioctl for device
+0: 0: Landscape GPU assignment: {'physical_gpu_requested': '0', 'logical_device': 0, 'visible_devices': 1, 'device': "_CudaDeviceProperties(name='AMD Instinct MI300A', major=9, minor=4, gcnArchName='gfx942:sramecc+:xnack-', total_memory=131072MB, multi_processor_count=228, uuid=65313332-6230-6439-6530-653364653038, pci_bus_id=2, pci_device_id=0, pci_domain_id=0, L2_cache_size=4MB)"}0: 
+0: 0: Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]0: 0: Loading weights:   0%|          | 1/291 [00:00<04:10,  1.16it/s]0: 0: Loading weights:  12%|█▏        | 36/291 [00:00<00:05, 50.58it/s]0: 0: Loading weights:  32%|███▏      | 92/291 [00:01<00:01, 135.76it/s]0: 0: Loading weights:  56%|█████▌    | 162/291 [00:01<00:00, 242.04it/s]0: 0: Loading weights:  76%|███████▌  | 220/291 [00:01<00:00, 314.50it/s]0: 0: Loading weights: 100%|██████████| 291/291 [00:01<00:00, 228.17it/s]
+0: 0: Using the latest cached version of the dataset since cais/wmdp-bio-forget-corpus couldn't be found on the Hugging Face Hub (offline mode is enabled).
+0: 0: Found the latest cached dataset configuration 'default' at /p/vast1/kirchenb/tar-root/cache/huggingface/datasets/cais___wmdp-bio-forget-corpus/default/0.0.0/5a786ed1041e56fef2d4ed26c1239f12b73a68eb (last modified on Mon Nov 16 17:10:23 2026).
+0: 0: Update 1 fraction -1
+0: 0: Update 1 fraction -0.875
+0: 0: Update 1 fraction -0.75
+0: 0: Update 1 fraction -0.625
+0: 0: Update 1 fraction -0.5
+0: 0: Update 1 fraction -0.375
+0: 0: Update 1 fraction -0.25
+0: 0: Update 1 fraction -0.125
+0: 0: Update 1 fraction 0
+0: 0: Update 1 fraction 0.125
+0: 0: Update 1 fraction 0.25
+0: 0: Update 1 fraction 0.375
+0: 0: Update 1 fraction 0.5
+0: 0: Update 1 fraction 0.625
+0: 0: Update 1 fraction 0.75
+0: 0: Update 1 fraction 0.875
+0: 0: Update 1 fraction 1
+0: 0: Update 1 fraction 1.125
+0: 0: Update 1 fraction 1.25
+0: 0: Update 1 fraction 1.375
+0: 0: Update 1 fraction 1.5
+0: 0: Update 1 fraction 1.625
+0: 0: Update 1 fraction 1.75
+0: 0: Update 1 fraction 1.875
+0: 0: Update 1 fraction 2
+0: 0: First-update plane c0=-1
+0: 0: First-update plane c0=-0.875
+0: 0: First-update plane c0=-0.75
+0: 0: First-update plane c0=-0.625
+0: 0: First-update plane c0=-0.5
+0: 0: First-update plane c0=-0.375
+0: 0: First-update plane c0=-0.25
+0: 0: First-update plane c0=-0.125
+0: 0: First-update plane c0=0
+0: 0: First-update plane c0=0.125
+0: 0: First-update plane c0=0.25
+0: 0: First-update plane c0=0.375
+0: 0: First-update plane c0=0.5
+0: 0: First-update plane c0=0.625
+0: 0: First-update plane c0=0.75
+0: 0: First-update plane c0=0.875
+0: 0: First-update plane c0=1
+0: 0: Update 2 fraction -1
+0: 0: Update 2 fraction -0.875
+0: 0: Update 2 fraction -0.75
+0: 0: Update 2 fraction -0.625
+0: 0: Update 2 fraction -0.5
+0: 0: Update 2 fraction -0.375
+0: 0: Update 2 fraction -0.25
+0: 0: Update 2 fraction -0.125
+0: 0: Update 2 fraction 0
+0: 0: Update 2 fraction 0.125
+0: 0: Update 2 fraction 0.25
+0: 0: Update 2 fraction 0.375
+0: 0: Update 2 fraction 0.5
+0: 0: Update 2 fraction 0.625
+0: 0: Update 2 fraction 0.75
+0: 0: Update 2 fraction 0.875
+0: 0: Update 2 fraction 1
+0: 0: Update 2 fraction 1.125
+0: 0: Update 2 fraction 1.25
+0: 0: Update 2 fraction 1.375
+0: 0: Update 2 fraction 1.5
+0: 0: Update 2 fraction 1.625
+0: 0: Update 2 fraction 1.75
+0: 0: Update 2 fraction 1.875
+0: 0: Update 2 fraction 2
+0: 0: Update 3 fraction -1
+0: 0: Update 3 fraction -0.875
+0: 0: Update 3 fraction -0.75
+0: 0: Update 3 fraction -0.625
+0: 0: Update 3 fraction -0.5
+0: 0: Update 3 fraction -0.375
+0: 0: Update 3 fraction -0.25
+0: 0: Update 3 fraction -0.125
+0: 0: Update 3 fraction 0
+0: 0: Update 3 fraction 0.125
+0: 0: Update 3 fraction 0.25
+0: 0: Update 3 fraction 0.375
+0: 0: Update 3 fraction 0.5
+0: 0: Update 3 fraction 0.625
+0: 0: Update 3 fraction 0.75
+0: 0: Update 3 fraction 0.875
+0: 0: Update 3 fraction 1
+0: 0: Update 3 fraction 1.125
+0: 0: Update 3 fraction 1.25
+0: 0: Update 3 fraction 1.375
+0: 0: Update 3 fraction 1.5
+0: 0: Update 3 fraction 1.625
+0: 0: Update 3 fraction 1.75
+0: 0: Update 3 fraction 1.875
+0: 0: Update 3 fraction 2
+0: 0: Update 4 fraction -1
+0: 0: Update 4 fraction -0.875
+0: 0: Update 4 fraction -0.75
+0: 0: Update 4 fraction -0.625
+0: 0: Update 4 fraction -0.5
+0: 0: Update 4 fraction -0.375
+0: 0: Update 4 fraction -0.25
+0: 0: Update 4 fraction -0.125
+0: 0: Update 4 fraction 0
+0: 0: Update 4 fraction 0.125
+0: 0: Update 4 fraction 0.25
+0: 0: Update 4 fraction 0.375
+0: 0: Update 4 fraction 0.5
+0: 0: Update 4 fraction 0.625
+0: 0: Update 4 fraction 0.75
+0: 0: Update 4 fraction 0.875
+0: 0: Update 4 fraction 1
+0: 0: Update 4 fraction 1.125
+0: 0: Update 4 fraction 1.25
+0: 0: Update 4 fraction 1.375
+0: 0: Update 4 fraction 1.5
+0: 0: Update 4 fraction 1.625
+0: 0: Update 4 fraction 1.75
+0: 0: Update 4 fraction 1.875
+0: 0: Update 4 fraction 2
+0: 0: Update 5 fraction -1
+0: 0: Update 5 fraction -0.875
+0: 0: Update 5 fraction -0.75
+0: 0: Update 5 fraction -0.625
+0: 0: Update 5 fraction -0.5
+0: 0: Update 5 fraction -0.375
+0: 0: Update 5 fraction -0.25
+0: 0: Update 5 fraction -0.125
+0: 0: Update 5 fraction 0
+0: 0: Update 5 fraction 0.125
+0: 0: Update 5 fraction 0.25
+0: 0: Update 5 fraction 0.375
+0: 0: Update 5 fraction 0.5
+0: 0: Update 5 fraction 0.625
+0: 0: Update 5 fraction 0.75
+0: 0: Update 5 fraction 0.875
+0: 0: Update 5 fraction 1
+0: 0: Update 5 fraction 1.125
+0: 0: Update 5 fraction 1.25
+0: 0: Update 5 fraction 1.375
+0: 0: Update 5 fraction 1.5
+0: 0: Update 5 fraction 1.625
+0: 0: Update 5 fraction 1.75
+0: 0: Update 5 fraction 1.875
+0: 0: Update 5 fraction 2
+0: 0: Update 6 fraction -1
+0: 0: Update 6 fraction -0.875
+0: 0: Update 6 fraction -0.75
+0: 0: Update 6 fraction -0.625
+0: 0: Update 6 fraction -0.5
+0: 0: Update 6 fraction -0.375
+0: 0: Update 6 fraction -0.25
+0: 0: Update 6 fraction -0.125
+0: 0: Update 6 fraction 0
+0: 0: Update 6 fraction 0.125
+0: 0: Update 6 fraction 0.25
+0: 0: Update 6 fraction 0.375
+0: 0: Update 6 fraction 0.5
+0: 0: Update 6 fraction 0.625
+0: 0: Update 6 fraction 0.75
+0: 0: Update 6 fraction 0.875
+0: 0: Update 6 fraction 1
+0: 0: Update 6 fraction 1.125
+0: 0: Update 6 fraction 1.25
+0: 0: Update 6 fraction 1.375
+0: 0: Update 6 fraction 1.5
+0: 0: Update 6 fraction 1.625
+0: 0: Update 6 fraction 1.75
+0: 0: Update 6 fraction 1.875
+0: 0: Update 6 fraction 2
+0: 0: Update 7 fraction -1
+0: 0: Update 7 fraction -0.875
+0: 0: Update 7 fraction -0.75
+0: 0: Update 7 fraction -0.625
+0: 0: Update 7 fraction -0.5
+0: 0: Update 7 fraction -0.375
+0: 0: Update 7 fraction -0.25
+0: 0: Update 7 fraction -0.125
+0: 0: Update 7 fraction 0
+0: 0: Update 7 fraction 0.125
+0: 0: Update 7 fraction 0.25
+0: 0: Update 7 fraction 0.375
+0: 0: Update 7 fraction 0.5
+0: 0: Update 7 fraction 0.625
+0: 0: Update 7 fraction 0.75
+0: 0: Update 7 fraction 0.875
+0: 0: Update 7 fraction 1
+0: 0: Update 7 fraction 1.125
+0: 0: Update 7 fraction 1.25
+0: 0: Update 7 fraction 1.375
+0: 0: Update 7 fraction 1.5
+0: 0: Update 7 fraction 1.625
+0: 0: Update 7 fraction 1.75
+0: 0: Update 7 fraction 1.875
+0: 0: Update 7 fraction 2
+0: 0: Update 8 fraction -1
+0: 0: Update 8 fraction -0.875
+0: 0: Update 8 fraction -0.75
+0: 0: Update 8 fraction -0.625
+0: 0: Update 8 fraction -0.5
+0: 0: Update 8 fraction -0.375
+0: 0: Update 8 fraction -0.25
+0: 0: Update 8 fraction -0.125
+0: 0: Update 8 fraction 0
+0: 0: Update 8 fraction 0.125
+0: 0: Update 8 fraction 0.25
+0: 0: Update 8 fraction 0.375
+0: 0: Update 8 fraction 0.5
+0: 0: Update 8 fraction 0.625
+0: 0: Update 8 fraction 0.75
+0: 0: Update 8 fraction 0.875
+0: 0: Update 8 fraction 1
+0: 0: Update 8 fraction 1.125
+0: 0: Update 8 fraction 1.25
+0: 0: Update 8 fraction 1.375
+0: 0: Update 8 fraction 1.5
+0: 0: Update 8 fraction 1.625
+0: 0: Update 8 fraction 1.75
+0: 0: Update 8 fraction 1.875
+0: 0: Update 8 fraction 2
+0: 0: {
+0: 0:   "state": "complete",
+0: 0:   "case": "hparam-r-lr1e-6",
+0: 0:   "stage": "profile-values",
+0: 0:   "reused": false
+0: 0: }
+0: 0: {
+0: 0:   "state": "complete",
+0: 0:   "case": "hparam-r-lr1e-6",
+0: 0:   "stage": "profile-report"
+0: 0: }
+0: 0: Early update profiles complete: hparam-r-lr1e-6
+0: Tue Nov 17 02:08:03 UTC 2026 Job execution finished.

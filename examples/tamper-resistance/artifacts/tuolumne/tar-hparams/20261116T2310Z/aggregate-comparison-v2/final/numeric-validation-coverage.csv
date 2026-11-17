@@ -1,0 +1,6 @@
+condition,case,folder,issues,physical_comparable,local_frames,broad_frames,fixed_documents
+B,B,/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6,0,True,0;1;8;32;128;512;1000,0;128;1000,10
+R,hparam-r-lr1e-6,/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-lr1e-6,0,True,0;1;8;32;128;512;1000,0;128;1000,10
+I,hparam-i-lr1e-6,/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-lr1e-6,0,True,0;1;8;32;128;512;1000,0;128;1000,10
+O,hparam-o-lr1e-6,/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-lr1e-6,0,True,0;1;8;32;128;512;1000,0;128;1000,10
+RIO,hparam-rio-lr1e-6,/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-lr1e-6,0,True,0;1;8;32;128;512;1000,0;128;1000,10

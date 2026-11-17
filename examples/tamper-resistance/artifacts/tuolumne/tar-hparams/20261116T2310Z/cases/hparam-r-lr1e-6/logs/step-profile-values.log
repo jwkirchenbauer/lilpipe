@@ -1,0 +1,226 @@
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:00<04:10,  1.16it/s]Loading weights:  12%|█▏        | 36/291 [00:00<00:05, 50.58it/s]Loading weights:  32%|███▏      | 92/291 [00:01<00:01, 135.76it/s]Loading weights:  56%|█████▌    | 162/291 [00:01<00:00, 242.04it/s]Loading weights:  76%|███████▌  | 220/291 [00:01<00:00, 314.50it/s]Loading weights: 100%|██████████| 291/291 [00:01<00:00, 228.17it/s]
+Using the latest cached version of the dataset since cais/wmdp-bio-forget-corpus couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'default' at /p/vast1/kirchenb/tar-root/cache/huggingface/datasets/cais___wmdp-bio-forget-corpus/default/0.0.0/5a786ed1041e56fef2d4ed26c1239f12b73a68eb (last modified on Mon Nov 16 17:10:23 2026).
+Update 1 fraction -1
+Update 1 fraction -0.875
+Update 1 fraction -0.75
+Update 1 fraction -0.625
+Update 1 fraction -0.5
+Update 1 fraction -0.375
+Update 1 fraction -0.25
+Update 1 fraction -0.125
+Update 1 fraction 0
+Update 1 fraction 0.125
+Update 1 fraction 0.25
+Update 1 fraction 0.375
+Update 1 fraction 0.5
+Update 1 fraction 0.625
+Update 1 fraction 0.75
+Update 1 fraction 0.875
+Update 1 fraction 1
+Update 1 fraction 1.125
+Update 1 fraction 1.25
+Update 1 fraction 1.375
+Update 1 fraction 1.5
+Update 1 fraction 1.625
+Update 1 fraction 1.75
+Update 1 fraction 1.875
+Update 1 fraction 2
+First-update plane c0=-1
+First-update plane c0=-0.875
+First-update plane c0=-0.75
+First-update plane c0=-0.625
+First-update plane c0=-0.5
+First-update plane c0=-0.375
+First-update plane c0=-0.25
+First-update plane c0=-0.125
+First-update plane c0=0
+First-update plane c0=0.125
+First-update plane c0=0.25
+First-update plane c0=0.375
+First-update plane c0=0.5
+First-update plane c0=0.625
+First-update plane c0=0.75
+First-update plane c0=0.875
+First-update plane c0=1
+Update 2 fraction -1
+Update 2 fraction -0.875
+Update 2 fraction -0.75
+Update 2 fraction -0.625
+Update 2 fraction -0.5
+Update 2 fraction -0.375
+Update 2 fraction -0.25
+Update 2 fraction -0.125
+Update 2 fraction 0
+Update 2 fraction 0.125
+Update 2 fraction 0.25
+Update 2 fraction 0.375
+Update 2 fraction 0.5
+Update 2 fraction 0.625
+Update 2 fraction 0.75
+Update 2 fraction 0.875
+Update 2 fraction 1
+Update 2 fraction 1.125
+Update 2 fraction 1.25
+Update 2 fraction 1.375
+Update 2 fraction 1.5
+Update 2 fraction 1.625
+Update 2 fraction 1.75
+Update 2 fraction 1.875
+Update 2 fraction 2
+Update 3 fraction -1
+Update 3 fraction -0.875
+Update 3 fraction -0.75
+Update 3 fraction -0.625
+Update 3 fraction -0.5
+Update 3 fraction -0.375
+Update 3 fraction -0.25
+Update 3 fraction -0.125
+Update 3 fraction 0
+Update 3 fraction 0.125
+Update 3 fraction 0.25
+Update 3 fraction 0.375
+Update 3 fraction 0.5
+Update 3 fraction 0.625
+Update 3 fraction 0.75
+Update 3 fraction 0.875
+Update 3 fraction 1
+Update 3 fraction 1.125
+Update 3 fraction 1.25
+Update 3 fraction 1.375
+Update 3 fraction 1.5
+Update 3 fraction 1.625
+Update 3 fraction 1.75
+Update 3 fraction 1.875
+Update 3 fraction 2
+Update 4 fraction -1
+Update 4 fraction -0.875
+Update 4 fraction -0.75
+Update 4 fraction -0.625
+Update 4 fraction -0.5
+Update 4 fraction -0.375
+Update 4 fraction -0.25
+Update 4 fraction -0.125
+Update 4 fraction 0
+Update 4 fraction 0.125
+Update 4 fraction 0.25
+Update 4 fraction 0.375
+Update 4 fraction 0.5
+Update 4 fraction 0.625
+Update 4 fraction 0.75
+Update 4 fraction 0.875
+Update 4 fraction 1
+Update 4 fraction 1.125
+Update 4 fraction 1.25
+Update 4 fraction 1.375
+Update 4 fraction 1.5
+Update 4 fraction 1.625
+Update 4 fraction 1.75
+Update 4 fraction 1.875
+Update 4 fraction 2
+Update 5 fraction -1
+Update 5 fraction -0.875
+Update 5 fraction -0.75
+Update 5 fraction -0.625
+Update 5 fraction -0.5
+Update 5 fraction -0.375
+Update 5 fraction -0.25
+Update 5 fraction -0.125
+Update 5 fraction 0
+Update 5 fraction 0.125
+Update 5 fraction 0.25
+Update 5 fraction 0.375
+Update 5 fraction 0.5
+Update 5 fraction 0.625
+Update 5 fraction 0.75
+Update 5 fraction 0.875
+Update 5 fraction 1
+Update 5 fraction 1.125
+Update 5 fraction 1.25
+Update 5 fraction 1.375
+Update 5 fraction 1.5
+Update 5 fraction 1.625
+Update 5 fraction 1.75
+Update 5 fraction 1.875
+Update 5 fraction 2
+Update 6 fraction -1
+Update 6 fraction -0.875
+Update 6 fraction -0.75
+Update 6 fraction -0.625
+Update 6 fraction -0.5
+Update 6 fraction -0.375
+Update 6 fraction -0.25
+Update 6 fraction -0.125
+Update 6 fraction 0
+Update 6 fraction 0.125
+Update 6 fraction 0.25
+Update 6 fraction 0.375
+Update 6 fraction 0.5
+Update 6 fraction 0.625
+Update 6 fraction 0.75
+Update 6 fraction 0.875
+Update 6 fraction 1
+Update 6 fraction 1.125
+Update 6 fraction 1.25
+Update 6 fraction 1.375
+Update 6 fraction 1.5
+Update 6 fraction 1.625
+Update 6 fraction 1.75
+Update 6 fraction 1.875
+Update 6 fraction 2
+Update 7 fraction -1
+Update 7 fraction -0.875
+Update 7 fraction -0.75
+Update 7 fraction -0.625
+Update 7 fraction -0.5
+Update 7 fraction -0.375
+Update 7 fraction -0.25
+Update 7 fraction -0.125
+Update 7 fraction 0
+Update 7 fraction 0.125
+Update 7 fraction 0.25
+Update 7 fraction 0.375
+Update 7 fraction 0.5
+Update 7 fraction 0.625
+Update 7 fraction 0.75
+Update 7 fraction 0.875
+Update 7 fraction 1
+Update 7 fraction 1.125
+Update 7 fraction 1.25
+Update 7 fraction 1.375
+Update 7 fraction 1.5
+Update 7 fraction 1.625
+Update 7 fraction 1.75
+Update 7 fraction 1.875
+Update 7 fraction 2
+Update 8 fraction -1
+Update 8 fraction -0.875
+Update 8 fraction -0.75
+Update 8 fraction -0.625
+Update 8 fraction -0.5
+Update 8 fraction -0.375
+Update 8 fraction -0.25
+Update 8 fraction -0.125
+Update 8 fraction 0
+Update 8 fraction 0.125
+Update 8 fraction 0.25
+Update 8 fraction 0.375
+Update 8 fraction 0.5
+Update 8 fraction 0.625
+Update 8 fraction 0.75
+Update 8 fraction 0.875
+Update 8 fraction 1
+Update 8 fraction 1.125
+Update 8 fraction 1.25
+Update 8 fraction 1.375
+Update 8 fraction 1.5
+Update 8 fraction 1.625
+Update 8 fraction 1.75
+Update 8 fraction 1.875
+Update 8 fraction 2
+{
+  "state": "complete",
+  "case": "hparam-r-lr1e-6",
+  "stage": "profile-values",
+  "reused": false
+}

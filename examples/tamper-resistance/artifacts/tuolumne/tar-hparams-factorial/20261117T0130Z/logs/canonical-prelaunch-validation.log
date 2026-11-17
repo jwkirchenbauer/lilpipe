@@ -1,0 +1,6 @@
+bash: cannot set terminal process group (3891078): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+{"state": "passed", "case": "hparam-ri-defense", "role": "defense", "steps": 125}
+{"state": "passed", "case": "hparam-ro-defense", "role": "defense", "steps": 125}
+{"state": "passed", "case": "hparam-io-defense", "role": "defense", "steps": 125}

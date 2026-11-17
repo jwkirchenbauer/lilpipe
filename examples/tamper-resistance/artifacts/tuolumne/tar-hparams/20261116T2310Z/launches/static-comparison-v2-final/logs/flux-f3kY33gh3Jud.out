@@ -1,0 +1,261 @@
+0: OUTPUT_DIR: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/static-comparison-v2-final
+0: Logging to /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/static-comparison-v2-final/logs
+0: Tue Nov 17 01:36:49 UTC 2026 Calling flux run...
+0: 0: Tue Nov 17 01:36:49 UTC 2026 Loading modules
+0: 0: 
+0: 0: Lmod is automatically replacing "cce/20.0.0" with "gcc-native/13".
+0: 0: 
+0: 0: 
+0: 0: Due to MODULEPATH changes, the following have been reloaded:
+0: 0:   1) cray-libsci/25.09.0     2) cray-mpich/9.0.1
+0: 0: 
+0: 0: 
+0: 0: The following have been reloaded with a version change:
+0: 0:   1) libfabric/match_SHS => libfabric/2.1
+0: 0: 
+0: 0: stty: 'standard input': Inappropriate ioctl for device
+0: 0: Tue Nov 17 01:36:54 UTC 2026 Activated environment on 0
+0: 0: Tue Nov 17 01:36:54 UTC 2026 Launching python on 0...
+0: 0: bash: cannot set terminal process group (3999782): Inappropriate ioctl for device
+0: 0: bash: no job control in this shell
+0: 0: stty: 'standard input': Inappropriate ioctl for device
+0: 0: {
+0: 0:   "state": "complete",
+0: 0:   "cases": {
+0: 0:     "B": {
+0: 0:       "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/loss-landscape/defense-step125-random-seed42-v3",
+0: 0:       "grid_sha256": "6a9a7e83f691b96afb9fb59f175087492e0663aa02ebf8fd5fbbd7558d12fb9b",
+0: 0:       "center_ce": 11.238433265686036,
+0: 0:       "points": 648,
+0: 0:       "coordinate_validation": {
+0: 0:         "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+0: 0:         "unique_fp32_keys": 648,
+0: 0:         "fp32_execution_coefficients_bitwise_match_reference": true,
+0: 0:         "maximum_serialized_coordinate_difference_from_reference": 0.0,
+0: 0:         "maximum_coordinate_decimal_to_fp32_difference": 6.245004513516506e-17
+0: 0:       }
+0: 0:     },
+0: 0:     "R": {
+0: 0:       "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/static/cases/hparam-r-defense",
+0: 0:       "grid_sha256": "268b4237811ba829fc6d251f14490606e8251c75c7d1bb177d557806ad84203c",
+0: 0:       "center_ce": 10.95722942352295,
+0: 0:       "points": 648,
+0: 0:       "coordinate_validation": {
+0: 0:         "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+0: 0:         "unique_fp32_keys": 648,
+0: 0:         "fp32_execution_coefficients_bitwise_match_reference": true,
+0: 0:         "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+0: 0:         "maximum_coordinate_decimal_to_fp32_difference": 0.0
+0: 0:       }
+0: 0:     },
+0: 0:     "I": {
+0: 0:       "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/static/cases/hparam-i-defense",
+0: 0:       "grid_sha256": "eecb60a185ba917133110bc4d8bb4adbccea8327afb2bb8f8b03ce8fa8a0657c",
+0: 0:       "center_ce": 6.932543468475342,
+0: 0:       "points": 648,
+0: 0:       "coordinate_validation": {
+0: 0:         "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+0: 0:         "unique_fp32_keys": 648,
+0: 0:         "fp32_execution_coefficients_bitwise_match_reference": true,
+0: 0:         "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+0: 0:         "maximum_coordinate_decimal_to_fp32_difference": 0.0
+0: 0:       }
+0: 0:     },
+0: 0:     "O": {
+0: 0:       "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/static/cases/hparam-o-defense",
+0: 0:       "grid_sha256": "5c3d11f24d346191bc247aa5468ac417c7bd320da7515682d33882476ee1799e",
+0: 0:       "center_ce": 11.256805038452148,
+0: 0:       "points": 648,
+0: 0:       "coordinate_validation": {
+0: 0:         "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+0: 0:         "unique_fp32_keys": 648,
+0: 0:         "fp32_execution_coefficients_bitwise_match_reference": true,
+0: 0:         "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+0: 0:         "maximum_coordinate_decimal_to_fp32_difference": 0.0
+0: 0:       }
+0: 0:     },
+0: 0:     "RIO": {
+0: 0:       "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/static/cases/hparam-rio-defense",
+0: 0:       "grid_sha256": "ea8e2d128defb28c905a7b07bdf403aea1e3fe2df07025fce529110b87170cfb",
+0: 0:       "center_ce": 14.411370658874512,
+0: 0:       "points": 648,
+0: 0:       "coordinate_validation": {
+0: 0:         "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+0: 0:         "unique_fp32_keys": 648,
+0: 0:         "fp32_execution_coefficients_bitwise_match_reference": true,
+0: 0:         "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+0: 0:         "maximum_coordinate_decimal_to_fp32_difference": 0.0
+0: 0:       }
+0: 0:     },
+0: 0:     "HF context": {
+0: 0:       "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/static",
+0: 0:       "grid_sha256": "6d5e8ccb8c8680e328f4512e8bd668ffbec42c57270e2e55d1f4e86557d31577",
+0: 0:       "center_ce": 15.520809173583984,
+0: 0:       "points": 648,
+0: 0:       "coordinate_validation": {
+0: 0:         "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+0: 0:         "unique_fp32_keys": 648,
+0: 0:         "fp32_execution_coefficients_bitwise_match_reference": true,
+0: 0:         "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+0: 0:         "maximum_coordinate_decimal_to_fp32_difference": 0.0
+0: 0:       }
+0: 0:     }
+0: 0:   },
+0: 0:   "scales": {
+0: 0:     "1000": {
+0: 0:       "absolute_ce": [
+0: 0:         6.02181914806366,
+0: 0:         26.057754197120666
+0: 0:       ],
+0: 0:       "center_relative_ce": [
+0: 0:         -19.01335463047028,
+0: 0:         19.01335463047028
+0: 0:       ],
+0: 0:       "coordinate_limits": [
+0: 0:         -1000,
+0: 0:         1000
+0: 0:       ]
+0: 0:     },
+0: 0:     "500": {
+0: 0:       "absolute_ce": [
+0: 0:         6.50313018321991,
+0: 0:         15.950222458839416
+0: 0:       ],
+0: 0:       "center_relative_ce": [
+0: 0:         -8.916004700660704,
+0: 0:         8.916004700660704
+0: 0:       ],
+0: 0:       "coordinate_limits": [
+0: 0:         -500,
+0: 0:         500
+0: 0:       ]
+0: 0:     },
+0: 0:     "200": {
+0: 0:       "absolute_ce": [
+0: 0:         6.330376448631287,
+0: 0:         19.5780508852005
+0: 0:       ],
+0: 0:       "center_relative_ce": [
+0: 0:         -6.99496160030365,
+0: 0:         6.99496160030365
+0: 0:       ],
+0: 0:       "coordinate_limits": [
+0: 0:         -200,
+0: 0:         200
+0: 0:       ]
+0: 0:     },
+0: 0:     "125": {
+0: 0:       "absolute_ce": [
+0: 0:         6.33875195980072,
+0: 0:         19.402165150642393
+0: 0:       ],
+0: 0:       "center_relative_ce": [
+0: 0:         -5.4662145280838015,
+0: 0:         5.4662145280838015
+0: 0:       ],
+0: 0:       "coordinate_limits": [
+0: 0:         -125,
+0: 0:         125
+0: 0:       ]
+0: 0:     },
+0: 0:     "100": {
+0: 0:       "absolute_ce": [
+0: 0:         6.317634654045105,
+0: 0:         19.845628571510314
+0: 0:       ],
+0: 0:       "center_relative_ce": [
+0: 0:         -4.534583158493042,
+0: 0:         4.534583158493042
+0: 0:       ],
+0: 0:       "coordinate_limits": [
+0: 0:         -100,
+0: 0:         100
+0: 0:       ]
+0: 0:     },
+0: 0:     "10": {
+0: 0:       "absolute_ce": [
+0: 0:         6.458696360588074,
+0: 0:         16.140090851783754
+0: 0:       ],
+0: 0:       "center_relative_ce": [
+0: 0:         -0.2503535270690918,
+0: 0:         0.2503535270690918
+0: 0:       ],
+0: 0:       "coordinate_limits": [
+0: 0:         -10,
+0: 0:         10
+0: 0:       ]
+0: 0:     },
+0: 0:     "1": {
+0: 0:       "absolute_ce": [
+0: 0:         6.495434551239013,
+0: 0:         15.968193836212158
+0: 0:       ],
+0: 0:       "center_relative_ce": [
+0: 0:         -0.03830675125121959,
+0: 0:         0.03830675125121959
+0: 0:       ],
+0: 0:       "coordinate_limits": [
+0: 0:         -1,
+0: 0:         1
+0: 0:       ]
+0: 0:     },
+0: 0:     "0.1": {
+0: 0:       "absolute_ce": [
+0: 0:         6.500826988220215,
+0: 0:         15.953260459899901
+0: 0:       ],
+0: 0:       "center_relative_ce": [
+0: 0:         -0.01517317771911584,
+0: 0:         0.01517317771911584
+0: 0:       ],
+0: 0:       "coordinate_limits": [
+0: 0:         -0.1,
+0: 0:         0.1
+0: 0:       ]
+0: 0:     }
+0: 0:   },
+0: 0:   "convention": "Original seed42 independent globally normalized BF16 random directions, sequential BF16 perturbations and default attention. These are separate from shared FP32 orthonormal dynamics bases with eager attention.",
+0: 0:   "scale_policy": "Common across all six checkpoints within each radius, including the uploaded HF context. Radii have distinct scales. Delta CE subtracts each checkpoint's measured center; common symmetric color limits.",
+0: 0:   "camera": {
+0: 0:     "elevation": 27,
+0: 0:     "azimuth": -58
+0: 0:   },
+0: 0:   "all_inputs_complete": true,
+0: 0:   "artifacts": {
+0: 0:     "radius-0.1-absolute.pdf": "fe6f2225605a8b3210cff54a8d7143606c2d24c7afdffa4d5d7d088625a6ac4c",
+0: 0:     "radius-0.1-absolute.png": "815c56bbaace15d53c91080eb7f70ce4a7c4ed2da4b34f8a46be6ad036d4c4f5",
+0: 0:     "radius-0.1-delta.pdf": "0b70d5df719ed5efc0cb25f82b98b6e18dd8a9cafbee6e1cc772e6563fe67942",
+0: 0:     "radius-0.1-delta.png": "259041072eb7c95455da8133c623bf1f6a9f471cde89633999840346c5468aee",
+0: 0:     "radius-1-absolute.pdf": "5328557d971ff5ebe1e35106c5da750f1269a489b6ccafb3252f6afc0232bcf3",
+0: 0:     "radius-1-absolute.png": "a59e49134cb821ee384f254d8cfa8d0cf5fee67a24e58ee4a036928877bb093f",
+0: 0:     "radius-1-delta.pdf": "14ef0c80ce8e0c0ef2dc86055cf1f59c40933a65d89712bc0ccfc209d2e335c2",
+0: 0:     "radius-1-delta.png": "5917f685164a424f256f801a6867f10b1f2c4cfd9cde5da5f9ac3debdaa449ae",
+0: 0:     "radius-10-absolute.pdf": "e97685f3de0fbf04e15a872b99510648819236d9e3760f7fb89fa1785fde1dbe",
+0: 0:     "radius-10-absolute.png": "d2940bc0c79dcb3985e7f7a4e5659981f3814a7921f54b815255483f9c2da2b7",
+0: 0:     "radius-10-delta.pdf": "f2bc0a8893a0f8675c188ea1b7cb5a71b353016c46b2337e20d589d9c37dd23b",
+0: 0:     "radius-10-delta.png": "ddc1138c904fcfe23a66bf13cf6123ddcbd172e797b3109dde08674551ed50d2",
+0: 0:     "radius-100-absolute.pdf": "7dbb941852eedd90b468fd55c37c1caa5bfc4b1f6bddcacea0f5ca0c1308a770",
+0: 0:     "radius-100-absolute.png": "7f3682b78e366e409c2420d6a61a5af44a4ae70fc81656737c25d5c3aa62e197",
+0: 0:     "radius-100-delta.pdf": "8269b6441343c3910ca7951e049334a55cb956b8b28d7ea41bff7da3f397633e",
+0: 0:     "radius-100-delta.png": "a3f1f44fae193b6647b869ba2ef26bd9830fe278937b278e56f6f4304c62f8dc",
+0: 0:     "radius-1000-absolute.pdf": "46798842db541326d2ff5bde44b50d035fc398de4a99e2b89a14f83947c6c65f",
+0: 0:     "radius-1000-absolute.png": "a2db179955904196933ccf1c4bd0d2f5f85839d953aea3ef775154bdcdc64801",
+0: 0:     "radius-1000-delta.pdf": "9c04365dc134de71a1158a9420aff1c4e9af1a4acc29e28dc0f587e6be2e011d",
+0: 0:     "radius-1000-delta.png": "b339ce8105fdf03e0563f562731c430c8b0325f1af6200e34b450a7f4e7a639a",
+0: 0:     "radius-125-absolute.pdf": "04e8db92b850c774be261dcb8f02cc083cc1903aa13740c41ff04ac33b8d16dc",
+0: 0:     "radius-125-absolute.png": "10593d65572297f56fb96d2b7d2b4f5b926ae7548dd8b6b66fff792720b1a6f4",
+0: 0:     "radius-125-delta.pdf": "d1c5addd69e3878983c0a0f031c36aae2f0f08d4972d150bcb57296168f142c2",
+0: 0:     "radius-125-delta.png": "aa825fe202e8f28945395ed1bfac00e1ff5b6c9ebe04b3404f34040b29a782c6",
+0: 0:     "radius-200-absolute.pdf": "00d890af66acd90f22ec543a6cb3bca116f893dd9a6934e4bdf647de888ba716",
+0: 0:     "radius-200-absolute.png": "23b054fbd4544c6e8233c2c0335019e1b6d8084835bf4813adb9e15db5e93786",
+0: 0:     "radius-200-delta.pdf": "c15f666f342825e1e82e93472c2e1264a4ef923c4a3ca8fdb82f78bb7e606e24",
+0: 0:     "radius-200-delta.png": "33be9998bb5cc3dd5655d4396fb61b70a539e97ab051b66113ae19568ec89590",
+0: 0:     "radius-500-absolute.pdf": "a8b7eb6c9aa4f42cdefa05ee71c714049f32b38c8ca8389ed8a66c1e6fe9ffa3",
+0: 0:     "radius-500-absolute.png": "6f2b5090127c68c3aa39d3c157dacf31c5050a2e086c087f0b5eb5234f698e93",
+0: 0:     "radius-500-delta.pdf": "71fcde7e00dae2cee4ef758660e06729b89ff0bcc48aa7c0424b18811c3cacc6",
+0: 0:     "radius-500-delta.png": "81adf042d5a14e78174e13b388a598c9182cdbc36ab34a4fa4b5562810a65063",
+0: 0:     "report.md": "0d300e957adae4d4dd4129126aa7c993697d8cadcac1d05af27af8a5409f6e45"
+0: 0:   }
+0: 0: }
+0: Tue Nov 17 01:37:20 UTC 2026 Job execution finished.

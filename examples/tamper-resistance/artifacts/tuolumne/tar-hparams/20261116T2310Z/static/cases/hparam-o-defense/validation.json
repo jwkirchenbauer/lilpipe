@@ -1,0 +1,8 @@
+{
+  "state": "passed",
+  "points": 648,
+  "protocol_sha256": "44e1203b5b5016de7c6a312802444a62979e47c947d58bc6ff8b9bd4e48febb4",
+  "grid_sha256": "5c3d11f24d346191bc247aa5468ac417c7bd320da7515682d33882476ee1799e",
+  "center_ce": 11.256805038452148,
+  "no_trajectory_evaluations": true
+}

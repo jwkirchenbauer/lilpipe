@@ -1,0 +1,71 @@
+{
+  "state": "passed",
+  "existing_controlled_cells": [
+    {
+      "cell": "B",
+      "points": 648,
+      "checkpoint_identity_valid": true,
+      "training_and_static_proofs_valid": true,
+      "coordinate_validation": {
+        "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+        "unique_fp32_keys": 648,
+        "fp32_execution_coefficients_bitwise_match_reference": true,
+        "maximum_serialized_coordinate_difference_from_reference": 0.0,
+        "maximum_coordinate_decimal_to_fp32_difference": 6.245004513516506e-17
+      }
+    },
+    {
+      "cell": "R",
+      "points": 648,
+      "checkpoint_identity_valid": true,
+      "training_and_static_proofs_valid": true,
+      "coordinate_validation": {
+        "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+        "unique_fp32_keys": 648,
+        "fp32_execution_coefficients_bitwise_match_reference": true,
+        "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+        "maximum_coordinate_decimal_to_fp32_difference": 0.0
+      }
+    },
+    {
+      "cell": "I",
+      "points": 648,
+      "checkpoint_identity_valid": true,
+      "training_and_static_proofs_valid": true,
+      "coordinate_validation": {
+        "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+        "unique_fp32_keys": 648,
+        "fp32_execution_coefficients_bitwise_match_reference": true,
+        "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+        "maximum_coordinate_decimal_to_fp32_difference": 0.0
+      }
+    },
+    {
+      "cell": "O",
+      "points": 648,
+      "checkpoint_identity_valid": true,
+      "training_and_static_proofs_valid": true,
+      "coordinate_validation": {
+        "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+        "unique_fp32_keys": 648,
+        "fp32_execution_coefficients_bitwise_match_reference": true,
+        "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+        "maximum_coordinate_decimal_to_fp32_difference": 0.0
+      }
+    },
+    {
+      "cell": "RIO",
+      "points": 648,
+      "checkpoint_identity_valid": true,
+      "training_and_static_proofs_valid": true,
+      "coordinate_validation": {
+        "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+        "unique_fp32_keys": 648,
+        "fp32_execution_coefficients_bitwise_match_reference": true,
+        "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+        "maximum_coordinate_decimal_to_fp32_difference": 0.0
+      }
+    }
+  ],
+  "new_pair_grids_read": false
+}

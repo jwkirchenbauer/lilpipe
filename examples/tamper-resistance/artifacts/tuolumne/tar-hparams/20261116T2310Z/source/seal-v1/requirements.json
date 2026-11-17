@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "main_conditions": ["R", "I", "O", "RIO"],
+  "factorial_conditions": ["RI", "RO", "IO"],
+  "main_attack_statuses": ["train", "evaluation", "geometry", "surfaces", "random-frames", "report", "analysis", "step-profile-values", "step-profile-report", "step-profiles"],
+  "required_case_artifacts": ["summary.json", "center-validation.json", "projection-quality.csv", "geometry/geometry.json", "surfaces/probes.json", "surfaces/actual-losses.csv", "surfaces/fixed-grids.csv", "surfaces/local-grids.csv", "surfaces/random-evolution.csv", "surfaces/step-profiles.json", "surfaces/step-profiles.csv", "surfaces/first-update-grid.csv"],
+  "required_case_figures": ["attack-paths", "surfaces-and-checkpoints", "projection-fidelity", "minibatch-dynamics", "minibatch-landscapes", "local-minibatch-landscapes", "attack-landscape-evolution", "defense-landscape-evolution", "random-landscape-evolution", "early-update-profiles", "first-update-landscape"],
+  "compare_source": "source/misc/tar_compute_compare.py",
+  "evaluation_source": "source/profiles/evaluation-v1/misc/tar_compute_evaluation.py",
+  "aggregate_output": "aggregate-comparison-v1/final",
+  "factorial_source": "source/comparison-v1/factorial_static_report.py",
+  "factorial_output": "static/full-factorial",
+  "required_main": ["report.md", "figure-index.md", "study.json", "matrix.json", "probes.json", "preparation-validation.json", "checkpoint-report.md", "checkpoint-comparison-summary.csv", "checkpoint-comparison-validation.json", "evaluation-report.md", "evaluation-verification.json", "evaluation-scores.csv", "max-observed-wmdp.csv", "utility-matching.csv", "static/comparison/report.md", "static/comparison/findings.md", "static/comparison/validation.json"],
+  "required_factorial": ["study.json", "matrix.json", "probes.json", "preparation-validation.json", "static/full-factorial/report.md", "static/full-factorial/grid-metrics.csv", "static/full-factorial/factorial-contrasts.csv", "static/full-factorial/validation.json", "status/static-factorial-report.json"],
+  "required_repository": [],
+  "maximum_file_bytes": 50000000,
+  "maximum_log_bytes": 2000000,
+  "excluded_directories": ["models", "cache", "__pycache__", ".git", "arrays"],
+  "excluded_suffixes": [".npy", ".npz", ".safetensors", ".bin", ".pt", ".pth", ".arrow", ".parquet", ".pyc", ".mp4", ".gif", ".jsonl"],
+  "main_final_outputs": ["tracked-artifacts.txt", "artifact-manifest.sha256", "seal-validation.json"],
+  "notes": ["One combined main-root curation covers both studies; paths are relative to the lilpipe repository root.", "Factorial attacks and benchmarks are unplanned and are not completion gates.", "No model/basis arrays are hashed or curated. Observation JSONL batches are streamed only for exact-order validation and remain excluded.", "The helper never changes study states, reports, existing source, or artifact permissions.", "Run and verify only inside an allocated launcher job; preparation must not invoke the helper on real studies."]
+}

@@ -1,0 +1,23 @@
+reformatted artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/comparison-v1/prepare_profile.py
+reformatted artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/comparison-v1/test_factorial_static.py
+reformatted artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/comparison-v1/factorial_static_report.py
+
+All done! ✨ 🍰 ✨
+3 files reformatted.
+Prespecified8-cell inputs and metrics without reading any new pair grid.
+test_complete_eight_records_pass_with_exact_common_inputs (test_factorial_static.ComparabilityTests.test_complete_eight_records_pass_with_exact_common_inputs) ... ok
+test_missing_duplicate_or_wrong_factor_case_rejected (test_factorial_static.ComparabilityTests.test_missing_duplicate_or_wrong_factor_case_rejected) ... ok
+test_missing_or_shifted_grid_axes_rejected (test_factorial_static.ComparabilityTests.test_missing_or_shifted_grid_axes_rejected) ... ok
+test_source_versions_seed_texts_tokens_and_order_must_match (test_factorial_static.ComparabilityTests.test_source_versions_seed_texts_tokens_and_order_must_match) ... ok
+test_additive_main_effects_and_zero_interactions (test_factorial_static.FactorialTests.test_additive_main_effects_and_zero_interactions) ... ok
+test_all_coefficients_recovered_together (test_factorial_static.FactorialTests.test_all_coefficients_recovered_together) ... ok
+test_missing_factorial_cell_rejects (test_factorial_static.FactorialTests.test_missing_factorial_cell_rejects) ... ok
+test_pair_effect_and_conditional_difference_recovery (test_factorial_static.FactorialTests.test_pair_effect_and_conditional_difference_recovery) ... ok
+test_three_way_is_change_in_conditional_pair_and_raw_coefficient (test_factorial_static.FactorialTests.test_three_way_is_change_in_conditional_pair_and_raw_coefficient) ... ok
+test_exact_neighbor_and_perimeter_definitions_keep_negative_signs (test_factorial_static.GridDiagnosticTests.test_exact_neighbor_and_perimeter_definitions_keep_negative_signs) ... ok
+test_rim_uses_maximum_of_eight_neighbors (test_factorial_static.GridDiagnosticTests.test_rim_uses_maximum_of_eight_neighbors) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.032s
+
+OK

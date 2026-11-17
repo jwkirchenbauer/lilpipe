@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "case": "hparam-ri-defense",
+  "condition": "RI",
+  "checkpoint": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/models/defense",
+  "checkpoint_files": [
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/models/defense/config.json",
+      "size": 685,
+      "mtime_ns": 1794882344975796754
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/models/defense/generation_config.json",
+      "size": 163,
+      "mtime_ns": 1794882344979898244
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/models/defense/model.safetensors",
+      "size": 15008318632,
+      "mtime_ns": 1794882363083030792
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/models/defense/tokenizer.json",
+      "size": 3505751,
+      "mtime_ns": 1794882364544338334
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/models/defense/tokenizer_config.json",
+      "size": 527,
+      "mtime_ns": 1794882364484947339
+    }
+  ],
+  "defense_config_sha256": "974be1711ac4734d3fa2a7810523cccac782d27d4fcd1f9b75d9ae4bb93ddfae",
+  "training_validation_sha256": "bdeb4b98cbc9602cc45cda0ad060cad9f082117f9b41d23b373a760d722ecfab",
+  "source_sha256": {
+    "get_ll.py": "ffc0d86d6e51298bdf5595d4bee7a3d0f3e1ca95d5d76e613a73d3c154944c91",
+    "plot_ll_2d.py": "e39cbb65d9383b11723c08fc4b942abc0a89aba7e394f83e10f0ba8d82c5036d",
+    "plot_ll_3d.py": "c5c3290f321dafd866242c976e80320482898b250a63305a442b0fb0ec10a61b"
+  },
+  "worker_sha256": "87af17a660d4d58de8b676ca236990b254491ca6085f3bf2d0a4c2dc72c83264",
+  "dataset": "cais/wmdp-bio-forget-corpus",
+  "dataset_revision": "5a786ed1041e56fef2d4ed26c1239f12b73a68eb",
+  "fixed_source_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "document_sha256": [
+    "ec96196329ae432cd296903a5a453d11cc4c4f7dec325079e68c86d85fb6dd4c",
+    "d75431e865efa620c40de958f294d8271618baf51a2c76f8aae09ae237691648",
+    "d0ba27eda2ba13f62d40a6b018e12a731edc5d6beb1f47d987310383e2261080",
+    "445f5a8523cdf0d0bf4e3c734b13884bedad1584d11fe332a1d2f7ac4657612d",
+    "d0fc0923deb4dc74a39c7254c2bf4093d28f495a893bf9405dae4f255d07fb1a",
+    "91656d19ae5830707b0dbb5d85fbb62b05831b95404f49c0874bc7da1891403f",
+    "443a72bb9bc6bd75b370784d9db5c873c6674f290907f922b7a1b165c94ad967",
+    "94652942beb60f1990b68d719d7492716791fa0d46681215774df3a39cd476e6",
+    "5f10d7c8b601f143d736004f4a718c8bd8ff28fa37b90771cfcce6bce71e23af",
+    "223bcae919bb2b8a925c683127fb9bde75fc5b9ff715dc30b1112b8c2f211650"
+  ],
+  "default_dataset_fixed10_matches_pinned": true,
+  "evaluated_batch_sha256": [
+    "3e658ec585dc7b4bd317fe33ae7b69eea6067dec3c05397cc943d91113ca1540",
+    "f05a85d44c0d9b9579a99da275271ac1489382a7c912b18485c5e88efe7b5b0a",
+    "63dc641d84ab37e249139c8d832c46fbd1a993f0e9fe866c22cfd0f42165e381",
+    "17ac144ad315a2d0118a4ed2e228b1b77a526237d14cd17911ff60b6fffcea46",
+    "2cf41b2bed4e84e116bdcf294579ed00ff6e3ffa1cfb91f49d4266c01fd16189"
+  ],
+  "baseline_tokenizer_and_collation_match": true,
+  "radii": [
+    1000,
+    500,
+    200,
+    125,
+    100,
+    10,
+    1,
+    0.1
+  ],
+  "n_pts": 9,
+  "seed": 42,
+  "batch_size": 2,
+  "max_seq_len": 512,
+  "probe_documents": 10,
+  "torch": "2.12.1+rocm7.2",
+  "hip": "7.2.53211",
+  "convention": "Original seed42 independent globally normalized BF16 random directions, sequential BF16 perturbations and default attention. These are separate from shared FP32 orthonormal dynamics bases with eager attention.",
+  "original_static": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/loss-landscape/defense-step125-random-seed42-v3",
+  "flux_job_id": "fTiG4VM",
+  "gpu": "AMD Instinct MI300A",
+  "validated_utc": "2026-11-17T02:41:40.504029+00:00"
+}

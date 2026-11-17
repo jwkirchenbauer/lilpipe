@@ -1,0 +1,29 @@
+Periodic asynchronous stack dumping disabled for this retry; fatal-fault reporting remains enabled.
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:01<04:52,  1.01s/it]Loading weights:   5%|▍         | 14/291 [00:01<00:16, 16.95it/s]Loading weights:  22%|██▏       | 65/291 [00:01<00:02, 90.86it/s]Loading weights:  44%|████▍     | 129/291 [00:01<00:00, 187.36it/s]Loading weights:  67%|██████▋   | 194/291 [00:01<00:00, 280.32it/s]Loading weights: 100%|██████████| 291/291 [00:01<00:00, 205.53it/s]
+Using the latest cached version of the dataset since cais/wmdp-bio-forget-corpus couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'default' at /p/vast1/kirchenb/tar-root/cache/huggingface/datasets/cais___wmdp-bio-forget-corpus/default/0.0.0/5a786ed1041e56fef2d4ed26c1239f12b73a68eb (last modified on Mon Nov 16 19:15:48 2026).
+Using the latest cached version of the dataset since cais/wmdp-bio-forget-corpus couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'default' at /p/vast1/kirchenb/tar-root/cache/huggingface/datasets/cais___wmdp-bio-forget-corpus/default/0.0.0/5a786ed1041e56fef2d4ed26c1239f12b73a68eb (last modified on Mon Nov 16 19:15:48 2026).
+Reusing all actual checkpoint and minibatch losses
+Reusing completed plane: random
+Reusing completed plane: reference
+Loading visualization basis: attack
+Loaded direction 1/2 (27.0 GiB in 92.3 s)
+Loaded direction 2/2 (27.0 GiB in 94.6 s)
+Surface: attack 1 / 17
+Surface: attack 2 / 17
+Surface: attack 3 / 17
+Surface: attack 4 / 17
+Surface: attack 5 / 17
+Surface: attack 6 / 17
+Surface: attack 7 / 17
+Surface: attack 8 / 17
+Surface: attack 9 / 17
+Surface: attack 10 / 17
+Surface: attack 11 / 17
+Surface: attack 12 / 17
+Surface: attack 13 / 17
+Surface: attack 14 / 17
+Surface: attack 15 / 17
+Surface: attack 16 / 17
+Surface: attack 17 / 17

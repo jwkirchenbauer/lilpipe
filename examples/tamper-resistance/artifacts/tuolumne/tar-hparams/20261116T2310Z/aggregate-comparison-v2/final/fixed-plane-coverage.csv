@@ -1,0 +1,16 @@
+condition,plane,half_width_global_l2,grid_points,measured_values
+B,random,1.0,17,289
+R,random,1.0,17,289
+I,random,1.0,17,289
+O,random,1.0,17,289
+RIO,random,1.0,17,289
+B,reference,1.0,17,289
+R,reference,1.0,17,289
+I,reference,1.0,17,289
+O,reference,1.0,17,289
+RIO,reference,1.0,17,289
+B,attack,1.1743115424004833,17,289
+R,attack,1.2309829180695677,17,289
+I,attack,1.4436143757635864,17,289
+O,attack,1.5584599833228772,17,289
+RIO,attack,2.4943971092729305,17,289

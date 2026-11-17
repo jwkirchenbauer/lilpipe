@@ -1,0 +1,166 @@
+{
+  "state": "metadata-audit-complete",
+  "method": "Read existing frozen manifest text plus filesystem paths/sizes only. Normalize ../ aliases to actual curation paths. Evaluate old/new exclusion predicates without loss_matrix_root; no artifact contents hashed, arrays opened, scientific gates invoked or real seal checks run.",
+  "scope": "Existing manifests frozen before seal-v4; this new profile is frozen after audit",
+  "manifest_count": 18,
+  "member_count": 450,
+  "unique_members": 334,
+  "excluded_by_v3": [
+    {
+      "manifest": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/operational-inputs.sha256",
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/axolotl_plugins/__init__.py",
+      "bytes": 0,
+      "reason": "missing/empty/lock"
+    },
+    {
+      "manifest": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/operational-inputs.sha256",
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/data/__init__.py",
+      "bytes": 0,
+      "reason": "missing/empty/lock"
+    },
+    {
+      "manifest": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/operational-inputs.sha256",
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/__init__.py",
+      "bytes": 0,
+      "reason": "missing/empty/lock"
+    },
+    {
+      "manifest": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/manifest.sha256",
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/tests-equivalence-seal.log",
+      "bytes": 4291,
+      "reason": "sealing stdout is live and not self-curated"
+    },
+    {
+      "manifest": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/manifest.sha256",
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/axolotl_plugins/__init__.py",
+      "bytes": 0,
+      "reason": "missing/empty/lock"
+    },
+    {
+      "manifest": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/manifest.sha256",
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/data/__init__.py",
+      "bytes": 0,
+      "reason": "missing/empty/lock"
+    },
+    {
+      "manifest": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/manifest.sha256",
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/__init__.py",
+      "bytes": 0,
+      "reason": "missing/empty/lock"
+    },
+    {
+      "manifest": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/manifest.sha256",
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/axolotl_plugins/__init__.py",
+      "bytes": 0,
+      "reason": "missing/empty/lock"
+    },
+    {
+      "manifest": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/manifest.sha256",
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/__init__.py",
+      "bytes": 0,
+      "reason": "missing/empty/lock"
+    },
+    {
+      "manifest": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/manifest.sha256",
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/__init__.py",
+      "bytes": 0,
+      "reason": "missing/empty/lock"
+    },
+    {
+      "manifest": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/operational-inputs.sha256",
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/axolotl_plugins/__init__.py",
+      "bytes": 0,
+      "reason": "missing/empty/lock"
+    },
+    {
+      "manifest": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/operational-inputs.sha256",
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/__init__.py",
+      "bytes": 0,
+      "reason": "missing/empty/lock"
+    },
+    {
+      "manifest": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/operational-inputs.sha256",
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/__init__.py",
+      "bytes": 0,
+      "reason": "missing/empty/lock"
+    }
+  ],
+  "excluded_by_v4": [],
+  "outside_study_roots": [],
+  "manifests": [
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/operational-inputs.sha256",
+      "members": 96
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v1/SHA256SUMS",
+      "members": 3
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/manifest.sha256",
+      "members": 15
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/manifest.sha256",
+      "members": 46
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/landscapes-v1/manifest.sha256",
+      "members": 11
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-report-v2/manifest.sha256",
+      "members": 7
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-v1/manifest.sha256",
+      "members": 7
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/training-v1/manifest.sha256",
+      "members": 4
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v1/manifest.sha256",
+      "members": 9
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v2/manifest.sha256",
+      "members": 8
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v3/manifest.sha256",
+      "members": 9
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/manifest.sha256",
+      "members": 102
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/operational-inputs.sha256",
+      "members": 102
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/comparison-v1/manifest.sha256",
+      "members": 13
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/manifest.sha256",
+      "members": 6
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v1/manifest.sha256",
+      "members": 4
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v2/manifest.sha256",
+      "members": 4
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v3/manifest.sha256",
+      "members": 4
+    }
+  ],
+  "missing_unique_members": [],
+  "remaining_excluded_unique_members": []
+}

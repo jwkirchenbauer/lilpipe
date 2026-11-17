@@ -1,0 +1,21 @@
+{
+  "state": "frozen-not-submitted",
+  "profiles": {
+    "training-v1": {
+      "entry": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v1/run.sh",
+      "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4",
+      "canonical_source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source",
+      "manifest_sha256": "8c7666e203a6a54f292f89412baca2b4c2194c8f1357f67206d5e6b740aee46b",
+      "manifest": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v1/manifest.sha256"
+    },
+    "static-v1": {
+      "entry": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/run.sh",
+      "worker": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/static_worker.py",
+      "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+      "canonical_source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source",
+      "manifest_sha256": "dfc389abf6f5423a7595bfabc2c87612d54185099c58e23aeb74e40588daf612",
+      "worker_sha256": "87af17a660d4d58de8b676ca236990b254491ca6085f3bf2d0a4c2dc72c83264"
+    }
+  },
+  "no_attack_or_benchmark_profile_planned": true
+}

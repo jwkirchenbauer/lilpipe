@@ -1,0 +1,18 @@
+{
+  "state": "passed",
+  "case": "hparam-o-lr1e-6",
+  "updates": 1000,
+  "model_checkpoints": 26,
+  "optimizer_checkpoints": [
+    128,
+    512,
+    1000
+  ],
+  "training_elapsed_seconds": 1203.241391011048,
+  "input_order_validation": {
+    "state": "passed",
+    "reference_observations": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/observed-batches.jsonl",
+    "batches": 1000,
+    "canonical_step_batch_sha256": "52f9ce25340acc97c869183004b702fd8db4f624798d6e78725b8374ace5108e"
+  }
+}

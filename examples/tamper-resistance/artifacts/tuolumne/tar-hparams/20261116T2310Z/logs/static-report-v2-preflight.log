@@ -1,0 +1,85 @@
+{
+  "state": "passed",
+  "cells": 6,
+  "coordinate_rule": "FP32 execution coefficients match bitwise; CSV decimals canonicalized only for coordinates; losses untouched",
+  "records": {
+    "B": {
+      "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/loss-landscape/defense-step125-random-seed42-v3",
+      "points": 648,
+      "center_ce": 11.238433265686036,
+      "coordinate_validation": {
+        "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+        "unique_fp32_keys": 648,
+        "fp32_execution_coefficients_bitwise_match_reference": true,
+        "maximum_serialized_coordinate_difference_from_reference": 0.0,
+        "maximum_coordinate_decimal_to_fp32_difference": 6.245004513516506e-17
+      },
+      "grid_sha256": "6a9a7e83f691b96afb9fb59f175087492e0663aa02ebf8fd5fbbd7558d12fb9b"
+    },
+    "R": {
+      "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/static/cases/hparam-r-defense",
+      "points": 648,
+      "center_ce": 10.95722942352295,
+      "coordinate_validation": {
+        "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+        "unique_fp32_keys": 648,
+        "fp32_execution_coefficients_bitwise_match_reference": true,
+        "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+        "maximum_coordinate_decimal_to_fp32_difference": 0.0
+      },
+      "grid_sha256": "268b4237811ba829fc6d251f14490606e8251c75c7d1bb177d557806ad84203c"
+    },
+    "I": {
+      "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/static/cases/hparam-i-defense",
+      "points": 648,
+      "center_ce": 6.932543468475342,
+      "coordinate_validation": {
+        "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+        "unique_fp32_keys": 648,
+        "fp32_execution_coefficients_bitwise_match_reference": true,
+        "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+        "maximum_coordinate_decimal_to_fp32_difference": 0.0
+      },
+      "grid_sha256": "eecb60a185ba917133110bc4d8bb4adbccea8327afb2bb8f8b03ce8fa8a0657c"
+    },
+    "O": {
+      "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/static/cases/hparam-o-defense",
+      "points": 648,
+      "center_ce": 11.256805038452148,
+      "coordinate_validation": {
+        "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+        "unique_fp32_keys": 648,
+        "fp32_execution_coefficients_bitwise_match_reference": true,
+        "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+        "maximum_coordinate_decimal_to_fp32_difference": 0.0
+      },
+      "grid_sha256": "5c3d11f24d346191bc247aa5468ac417c7bd320da7515682d33882476ee1799e"
+    },
+    "RIO": {
+      "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/static/cases/hparam-rio-defense",
+      "points": 648,
+      "center_ce": 14.411370658874512,
+      "coordinate_validation": {
+        "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+        "unique_fp32_keys": 648,
+        "fp32_execution_coefficients_bitwise_match_reference": true,
+        "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+        "maximum_coordinate_decimal_to_fp32_difference": 0.0
+      },
+      "grid_sha256": "ea8e2d128defb28c905a7b07bdf403aea1e3fe2df07025fce529110b87170cfb"
+    },
+    "HF context": {
+      "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-collaborator/20261116T1725Z/static",
+      "points": 648,
+      "center_ce": 15.520809173583984,
+      "coordinate_validation": {
+        "method": "Recover original FP32 torch.linspace coordinates; compare radius and FP32 coefficient bits exactly. No interpolation; no loss values changed.",
+        "unique_fp32_keys": 648,
+        "fp32_execution_coefficients_bitwise_match_reference": true,
+        "maximum_serialized_coordinate_difference_from_reference": 6.245004513516506e-17,
+        "maximum_coordinate_decimal_to_fp32_difference": 0.0
+      },
+      "grid_sha256": "6d5e8ccb8c8680e328f4512e8bd668ffbec42c57270e2e55d1f4e86557d31577"
+    }
+  }
+}

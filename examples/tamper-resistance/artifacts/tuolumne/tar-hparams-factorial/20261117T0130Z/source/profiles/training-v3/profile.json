@@ -1,0 +1,13 @@
+{
+  "profile": "training-v3",
+  "supersedes_for_new_defense_jobs_only": "training-v2 had a scope-guard CLI that omitted the mode token `case` supplied by run_tar_compute.sh launch arguments.",
+  "entry": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v3/run.sh",
+  "worker": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/misc/run_tar_compute.sh",
+  "scope_guard": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/planning-v3/training_scope_guard.py",
+  "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4",
+  "cli": ["training", "case", "RUN", "CASE_NAME"],
+  "accepted_cases": ["hparam-ri-defense", "hparam-ro-defense", "hparam-io-defense"],
+  "evaluation_cases_field_required": false,
+  "attack_jobs_planned": false,
+  "benchmark_evaluation_jobs_planned": false
+}

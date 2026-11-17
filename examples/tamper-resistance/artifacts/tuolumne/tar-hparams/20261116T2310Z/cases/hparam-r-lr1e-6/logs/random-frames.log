@@ -1,0 +1,85 @@
+Periodic asynchronous stack dumping disabled for this retry; fatal-fault reporting remains enabled.
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:00<02:56,  1.65it/s]Loading weights:   6%|▌         | 18/291 [00:00<00:08, 33.67it/s]Loading weights:  38%|███▊      | 110/291 [00:00<00:00, 221.97it/s]Loading weights:  64%|██████▎   | 185/291 [00:00<00:00, 339.96it/s]Loading weights: 100%|██████████| 291/291 [00:01<00:00, 289.13it/s]
+Using the latest cached version of the dataset since cais/wmdp-bio-forget-corpus couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'default' at /p/vast1/kirchenb/tar-root/cache/huggingface/datasets/cais___wmdp-bio-forget-corpus/default/0.0.0/5a786ed1041e56fef2d4ed26c1239f12b73a68eb (last modified on Mon Nov 16 19:15:48 2026).
+Using the latest cached version of the dataset since cais/wmdp-bio-forget-corpus couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'default' at /p/vast1/kirchenb/tar-root/cache/huggingface/datasets/cais___wmdp-bio-forget-corpus/default/0.0.0/5a786ed1041e56fef2d4ed26c1239f12b73a68eb (last modified on Mon Nov 16 19:15:48 2026).
+Loaded direction 1/2 (27.0 GiB in 3.8 s)
+Loaded direction 2/2 (27.0 GiB in 3.6 s)
+Loading broad random frame: defense 0
+Broad row: defense 0 -125.0
+Broad row: defense 0 -93.75
+Broad row: defense 0 -62.5
+Broad row: defense 0 -31.25
+Broad row: defense 0 0.0
+Broad row: defense 0 31.25
+Broad row: defense 0 62.5
+Broad row: defense 0 93.75
+Broad row: defense 0 125.0
+Broad random frame: defense 0
+Loading broad random frame: defense 8
+Broad row: defense 8 -125.0
+Broad row: defense 8 -93.75
+Broad row: defense 8 -62.5
+Broad row: defense 8 -31.25
+Broad row: defense 8 0.0
+Broad row: defense 8 31.25
+Broad row: defense 8 62.5
+Broad row: defense 8 93.75
+Broad row: defense 8 125.0
+Broad random frame: defense 8
+Loading broad random frame: defense 32
+Broad row: defense 32 -125.0
+Broad row: defense 32 -93.75
+Broad row: defense 32 -62.5
+Broad row: defense 32 -31.25
+Broad row: defense 32 0.0
+Broad row: defense 32 31.25
+Broad row: defense 32 62.5
+Broad row: defense 32 93.75
+Broad row: defense 32 125.0
+Broad random frame: defense 32
+Loading broad random frame: defense 125
+Broad row: defense 125 -125.0
+Broad row: defense 125 -93.75
+Broad row: defense 125 -62.5
+Broad row: defense 125 -31.25
+Broad row: defense 125 0.0
+Broad row: defense 125 31.25
+Broad row: defense 125 62.5
+Broad row: defense 125 93.75
+Broad row: defense 125 125.0
+Broad random frame: defense 125
+Loading broad random frame: attack 0
+Broad row: attack 0 -125.0
+Broad row: attack 0 -93.75
+Broad row: attack 0 -62.5
+Broad row: attack 0 -31.25
+Broad row: attack 0 0.0
+Broad row: attack 0 31.25
+Broad row: attack 0 62.5
+Broad row: attack 0 93.75
+Broad row: attack 0 125.0
+Broad random frame: attack 0
+Loading broad random frame: attack 128
+Broad row: attack 128 -125.0
+Broad row: attack 128 -93.75
+Broad row: attack 128 -62.5
+Broad row: attack 128 -31.25
+Broad row: attack 128 0.0
+Broad row: attack 128 31.25
+Broad row: attack 128 62.5
+Broad row: attack 128 93.75
+Broad row: attack 128 125.0
+Broad random frame: attack 128
+Loading broad random frame: attack 1000
+Broad row: attack 1000 -125.0
+Broad row: attack 1000 -93.75
+Broad row: attack 1000 -62.5
+Broad row: attack 1000 -31.25
+Broad row: attack 1000 0.0
+Broad row: attack 1000 31.25
+Broad row: attack 1000 62.5
+Broad row: attack 1000 93.75
+Broad row: attack 1000 125.0
+Broad random frame: attack 1000

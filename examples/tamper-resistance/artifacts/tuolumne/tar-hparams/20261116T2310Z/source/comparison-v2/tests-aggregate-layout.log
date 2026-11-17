@@ -1,0 +1,20 @@
+test_defense_training_guard_does_not_require_benchmark_evaluation (test_aggregate.AggregateTests.test_defense_training_guard_does_not_require_benchmark_evaluation) ... ok
+test_failed_input_guard_is_rejected (test_aggregate.AggregateTests.test_failed_input_guard_is_rejected) ... ok
+test_global_limits_and_shared_axes_cover_all_conditions_and_frames (test_aggregate.AggregateTests.test_global_limits_and_shared_axes_cover_all_conditions_and_frames) ... ok
+test_mismatched_physical_axes_are_rejected (test_aggregate.AggregateTests.test_mismatched_physical_axes_are_rejected) ... ok
+test_missing_condition_frame_is_rejected (test_aggregate.AggregateTests.test_missing_condition_frame_is_rejected) ... ok
+test_missing_grid_point_is_rejected (test_aggregate.AggregateTests.test_missing_grid_point_is_rejected) ... ok
+test_nonfinite_or_wrong_shaped_grid_is_rejected (test_aggregate.AggregateTests.test_nonfinite_or_wrong_shaped_grid_is_rejected) ... ok
+test_wrong_physical_grid_coordinate_is_rejected (test_aggregate.AggregateTests.test_wrong_physical_grid_coordinate_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.002s
+
+OK
+test_fixed_five_panels_keep_colorbar_and_two_line_header_separate (test_layout.LayoutTests.test_fixed_five_panels_keep_colorbar_and_two_line_header_separate) ... ok
+test_three_four_seven_row_families_have_no_drawn_overlap (test_layout.LayoutTests.test_three_four_seven_row_families_have_no_drawn_overlap) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 3.073s
+
+OK

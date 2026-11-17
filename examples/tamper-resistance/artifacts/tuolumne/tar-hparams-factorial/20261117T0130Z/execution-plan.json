@@ -1,0 +1,88 @@
+{
+  "state": "dryruns-complete-not-submitted",
+  "design": "Complete 2x2x2 endpoint factorial over retain coefficient, inner attack learning rate, and outer defender learning rate, using static end-defense loss landscapes only.",
+  "training_bundle_required": [
+    "hparam-ri-defense",
+    "hparam-ro-defense",
+    "hparam-io-defense"
+  ],
+  "static_jobs_required_for_new_endpoints": [
+    "hparam-ri-defense",
+    "hparam-ro-defense",
+    "hparam-io-defense"
+  ],
+  "factorial_cells_reused": {
+    "B": "Original K16 static endpoint from tar-k16-repro/20261109T1830Z/loss-landscape/defense-step125-random-seed42-v3",
+    "R": "Existing main HR static/cases/hparam-r-defense",
+    "I": "Existing main HR static/cases/hparam-i-defense",
+    "O": "Existing main HR static/cases/hparam-o-defense",
+    "RIO": "Existing main HR static/cases/hparam-rio-defense"
+  },
+  "factorial_cells_to_measure": {
+    "RI": {
+      "retain_coefficient": 4.0,
+      "inner_learning_rate": 1e-05,
+      "outer_learning_rate": 5e-06
+    },
+    "RO": {
+      "retain_coefficient": 4.0,
+      "inner_learning_rate": 1e-06,
+      "outer_learning_rate": 1e-05
+    },
+    "IO": {
+      "retain_coefficient": 2.5,
+      "inner_learning_rate": 1e-05,
+      "outer_learning_rate": 1e-05
+    }
+  },
+  "attack_configs": {
+    "available_for_future": [
+      "hparam-ri-lr1e-6",
+      "hparam-ro-lr1e-6",
+      "hparam-io-lr1e-6"
+    ],
+    "attack_jobs_planned": [],
+    "benchmark_evaluation_jobs_planned": []
+  },
+  "static_protocol": {
+    "source_profile": "source/profiles/static-v1",
+    "radii": [
+      1000,
+      500,
+      200,
+      125,
+      100,
+      10,
+      1,
+      0.1
+    ],
+    "points_per_axis": 9,
+    "source_documents": 10,
+    "seed": 42,
+    "batch_size": 2,
+    "max_sequence_length": 512,
+    "end_defense_only": true,
+    "numerical_source_identical_to_main_hr_static_v1": true
+  },
+  "resource_plan": {
+    "defense": {
+      "qos": "pdebug",
+      "bank": "verival",
+      "minutes": 55,
+      "gpus_per_node": 4
+    },
+    "static": {
+      "qos": "pdebug",
+      "bank": "verival",
+      "minutes": 30,
+      "gpus_per_node": 1
+    },
+    "dryrun_only_until_parent_review": true
+  },
+  "dryrun_records": {
+    "defense": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/defense-jobs.json",
+    "static": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/static-jobs.json"
+  },
+  "submissions_authorized": false,
+  "static_dependency_rule": "Parent adds the matching afterok dependency to each static job only after the corresponding defense job has been submitted and its ID is known."
+}

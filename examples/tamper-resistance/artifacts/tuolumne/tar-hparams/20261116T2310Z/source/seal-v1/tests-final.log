@@ -1,0 +1,18 @@
+All done! ✨ 🍰 ✨
+2 files would be left unchanged.
+test_complete_five_condition_coverage_requires_all_matrices (test_seal.AggregateTests.test_complete_five_condition_coverage_requires_all_matrices) ... ok
+test_cli_requires_an_allocation_even_for_verify (test_seal.CurationTests.test_cli_requires_an_allocation_even_for_verify) ... ok
+test_excludes_weights_arrays_caches_large_and_live_logs (test_seal.CurationTests.test_excludes_weights_arrays_caches_large_and_live_logs) ... ok
+test_mutation_during_hashing_rejected_and_manifest_paths_cannot_escape (test_seal.CurationTests.test_mutation_during_hashing_rejected_and_manifest_paths_cannot_escape) ... ok
+test_repository_relative_bundle_hashes_both_roots_and_detects_tampering (test_seal.CurationTests.test_repository_relative_bundle_hashes_both_roots_and_detects_tampering) ... ok
+test_required_broken_or_model_link_fails_before_publication (test_seal.CurationTests.test_required_broken_or_model_link_fails_before_publication) ... ok
+test_verify_refuses_symlinks_before_opening_a_target (test_seal.CurationTests.test_verify_refuses_symlinks_before_opening_a_target) ... ok
+test_manifest_checks_source_hash_and_rejects_tensor_members_without_reading (test_seal.SourceTests.test_manifest_checks_source_hash_and_rejects_tensor_members_without_reading) ... ok
+test_both_roles_require_actual_tensors_but_ignore_metrics (test_seal.TrainingTests.test_both_roles_require_actual_tensors_but_ignore_metrics) ... ok
+test_changed_reordered_or_missing_batch_rejects_stale_passed_proof (test_seal.TrainingTests.test_changed_reordered_or_missing_batch_rejects_stale_passed_proof) ... ok
+test_pending_status_failed_guard_wrong_reference_and_checkpoint_gaps_reject (test_seal.TrainingTests.test_pending_status_failed_guard_wrong_reference_and_checkpoint_gaps_reject) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.173s
+
+OK

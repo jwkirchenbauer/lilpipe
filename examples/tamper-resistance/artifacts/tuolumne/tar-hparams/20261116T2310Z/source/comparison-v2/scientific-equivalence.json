@@ -1,0 +1,27 @@
+{
+  "state": "passed",
+  "aggregate_v1_sha256": "aa012fdfd0ec20bd043c088a3e941387375a5fccd75e8f86ef5ff7abbd1d98cd",
+  "aggregate_v2_sha256": "4eae142e395ed7e3666af10da080bfef709c6bb27d8f87f659f4b06deccc900d",
+  "exactly_unchanged_function_asts": [
+    "read_json",
+    "write_csv",
+    "load_compare_module",
+    "require_state",
+    "validate_training_guard",
+    "validate_dynamics",
+    "grid_from_rows",
+    "shared_limits",
+    "matrix_limits",
+    "write_validation_assets"
+  ],
+  "only_changed_existing_functions": [
+    "draw_grid_matrix",
+    "main"
+  ],
+  "approved_ast_differences": [
+    "Dedicated colorbar/panel/suptitle physical layout helper calls replacing only prior layout statements",
+    "Default output directory aggregate-comparison-v1/final to aggregate-comparison-v2/final"
+  ],
+  "remaining_entire_module_ast_equal": true,
+  "paired_rendering": "Calls unchanged frozen canonical checkpoint_surface_data/checkpoint_surface_figure/checkpoint_trajectory_figure; only copied display labels, title linebreaks/font, global header position and publication paths change. Runtime surface-data digests must be identical."
+}

@@ -1,0 +1,68 @@
+0: OUTPUT_DIR: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/launches/static-full-factorial-report-v1
+0: Logging to /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/launches/static-full-factorial-report-v1/logs
+0: Tue Nov 17 02:57:52 UTC 2026 Calling flux run...
+0: 0: Tue Nov 17 02:57:53 UTC 2026 Loading modules
+0: 0: 
+0: 0: Lmod is automatically replacing "cce/20.0.0" with "gcc-native/13".
+0: 0: 
+0: 0: 
+0: 0: Due to MODULEPATH changes, the following have been reloaded:
+0: 0:   1) cray-libsci/25.09.0     2) cray-mpich/9.0.1
+0: 0: 
+0: 0: 
+0: 0: The following have been reloaded with a version change:
+0: 0:   1) libfabric/match_SHS => libfabric/2.1
+0: 0: 
+0: 0: stty: 'standard input': Inappropriate ioctl for device
+0: 0: Tue Nov 17 02:57:58 UTC 2026 Activated environment on 0
+0: 0: bash: cannot set terminal process group (3005562): Inappropriate ioctl for device
+0: 0: Tue Nov 17 02:57:58 UTC 2026 Launching python on 0...
+0: 0: bash: no job control in this shell
+0: 0: stty: 'standard input': Inappropriate ioctl for device
+0: 0: {
+0: 0:   "state": "passed",
+0: 0:   "cells": 8,
+0: 0:   "common_protocol": {
+0: 0:     "get_ll_sha256": "ffc0d86d6e51298bdf5595d4bee7a3d0f3e1ca95d5d76e613a73d3c154944c91",
+0: 0:     "torch": "2.12.1+rocm7.2",
+0: 0:     "hip": "7.2.53211",
+0: 0:     "seed": 42,
+0: 0:     "document_sha256": [
+0: 0:       "ec96196329ae432cd296903a5a453d11cc4c4f7dec325079e68c86d85fb6dd4c",
+0: 0:       "d75431e865efa620c40de958f294d8271618baf51a2c76f8aae09ae237691648",
+0: 0:       "d0ba27eda2ba13f62d40a6b018e12a731edc5d6beb1f47d987310383e2261080",
+0: 0:       "445f5a8523cdf0d0bf4e3c734b13884bedad1584d11fe332a1d2f7ac4657612d",
+0: 0:       "d0fc0923deb4dc74a39c7254c2bf4093d28f495a893bf9405dae4f255d07fb1a",
+0: 0:       "91656d19ae5830707b0dbb5d85fbb62b05831b95404f49c0874bc7da1891403f",
+0: 0:       "443a72bb9bc6bd75b370784d9db5c873c6674f290907f922b7a1b165c94ad967",
+0: 0:       "94652942beb60f1990b68d719d7492716791fa0d46681215774df3a39cd476e6",
+0: 0:       "5f10d7c8b601f143d736004f4a718c8bd8ff28fa37b90771cfcce6bce71e23af",
+0: 0:       "223bcae919bb2b8a925c683127fb9bde75fc5b9ff715dc30b1112b8c2f211650"
+0: 0:     ],
+0: 0:     "dataset_revision": "5a786ed1041e56fef2d4ed26c1239f12b73a68eb",
+0: 0:     "radii": [
+0: 0:       1000,
+0: 0:       500,
+0: 0:       200,
+0: 0:       125,
+0: 0:       100,
+0: 0:       10,
+0: 0:       1,
+0: 0:       0.1
+0: 0:     ],
+0: 0:     "n_pts": 9,
+0: 0:     "batch_size": 2,
+0: 0:     "max_seq_len": 512
+0: 0:   },
+0: 0:   "evaluated_batch_sha256": [
+0: 0:     "3e658ec585dc7b4bd317fe33ae7b69eea6067dec3c05397cc943d91113ca1540",
+0: 0:     "f05a85d44c0d9b9579a99da275271ac1489382a7c912b18485c5e88efe7b5b0a",
+0: 0:     "63dc641d84ab37e249139c8d832c46fbd1a993f0e9fe866c22cfd0f42165e381",
+0: 0:     "17ac144ad315a2d0118a4ed2e228b1b77a526237d14cd17911ff60b6fffcea46",
+0: 0:     "2cf41b2bed4e84e116bdcf294579ed00ff6e3ffa1cfb91f49d4266c01fd16189"
+0: 0:   ],
+0: 0:   "defense_order_sha256": "c5f55ce756e9b0957ba6eb9fee18cf07bd2ac2b772e9884dbd2e8d30f4ddb98e",
+0: 0:   "legacy_B_token_evidence": "All7 guarded workers recorded equality to B's actual tokenizer/collation; legacy B stores text hashes and original source, not token batch hash fields."
+0: 0: }
+0: 0: Complete controlled 8-cell static comparison: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/static/full-factorial
+0: Tue Nov 17 02:58:27 UTC 2026 Job execution finished.

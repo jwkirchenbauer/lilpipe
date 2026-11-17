@@ -1,0 +1,34 @@
+{
+  "argv": [
+    "accelerate",
+    "launch",
+    "--multi_gpu",
+    "--num_processes",
+    "4",
+    "--num_machines",
+    "1",
+    "--num_cpu_threads_per_process",
+    "8",
+    "-m",
+    "lm_eval",
+    "run",
+    "--model",
+    "hf",
+    "--model_args",
+    "pretrained=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-lr1e-6/models/attack/checkpoint-12,dtype=bfloat16,trust_remote_code=True",
+    "--include_path",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/lm_eval_tasks",
+    "--tasks",
+    "wmdp_bio_robust",
+    "--num_fewshot",
+    "0",
+    "--batch_size",
+    "32",
+    "--output_path",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-lr1e-6/evals/checkpoint-12/attempt-20261117T022306-d5803520"
+  ],
+  "model": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-lr1e-6/models/attack/checkpoint-12",
+  "tasks": [
+    "wmdp_bio_robust"
+  ]
+}

@@ -1,0 +1,14 @@
+reformatted artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-report-v2/test_coordinates.py
+reformatted artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-report-v2/coordinates.py
+
+All done! ✨ 🍰 ✨
+2 files reformatted, 1 file left unchanged.
+test_actual_original_and_new_csv_decimals_recover_same_fp32 (test_coordinates.CoordinateTests.test_actual_original_and_new_csv_decimals_recover_same_fp32) ... ok
+test_missing_keys_and_fp32_collisions_are_rejected (test_coordinates.CoordinateTests.test_missing_keys_and_fp32_collisions_are_rejected) ... ok
+test_nonfinite_coordinates_or_losses_are_rejected (test_coordinates.CoordinateTests.test_nonfinite_coordinates_or_losses_are_rejected) ... ok
+test_one_fp32_ulp_coordinate_change_is_rejected (test_coordinates.CoordinateTests.test_one_fp32_ulp_coordinate_change_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK

@@ -1,0 +1,4 @@
+bash: cannot set terminal process group (4111749): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+stty: 'standard input': Inappropriate ioctl for device

@@ -1,0 +1,174 @@
+{
+  "coverage": "complete",
+  "cases": {
+    "reproduced-1000": {
+      "issues": [],
+      "physical_comparable": true,
+      "heldout_matches_root": true,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ]
+    },
+    "hparam-r-lr1e-6": {
+      "issues": [],
+      "physical_comparable": true,
+      "heldout_matches_root": true,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ]
+    },
+    "hparam-i-lr1e-6": {
+      "issues": [],
+      "physical_comparable": true,
+      "heldout_matches_root": true,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ]
+    },
+    "hparam-o-lr1e-6": {
+      "issues": [],
+      "physical_comparable": true,
+      "heldout_matches_root": true,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ]
+    },
+    "hparam-rio-lr1e-6": {
+      "issues": [],
+      "physical_comparable": true,
+      "heldout_matches_root": true,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ]
+    }
+  },
+  "pairs": [
+    {
+      "name": "reproduced-1000--hparam-r-lr1e-6",
+      "schedule_steps": 1000,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ]
+    },
+    {
+      "name": "reproduced-1000--hparam-i-lr1e-6",
+      "schedule_steps": 1000,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ]
+    },
+    {
+      "name": "reproduced-1000--hparam-o-lr1e-6",
+      "schedule_steps": 1000,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ]
+    },
+    {
+      "name": "reproduced-1000--hparam-rio-lr1e-6",
+      "schedule_steps": 1000,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ]
+    }
+  ]
+}

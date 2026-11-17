@@ -1,0 +1,33 @@
+{
+  "coverage": [
+    {
+      "case": "hparam-r-lr1e-6",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "hparam-i-lr1e-6",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "hparam-o-lr1e-6",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "hparam-rio-lr1e-6",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    }
+  ],
+  "rejected": [],
+  "utility_references": {
+    "defended": 54.01591352649753,
+    "base": 58.58729920432367
+  }
+}

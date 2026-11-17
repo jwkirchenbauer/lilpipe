@@ -1,0 +1,21 @@
+{
+  "state": "prepared-not-executed-on-real-studies",
+  "version": 2,
+  "predecessor_preserved": "source/seal-v1",
+  "prepared_utc": "2026-11-17T06:13:39.011098+00:00",
+  "entry": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v2/run.sh",
+  "modes": [
+    "check",
+    "seal",
+    "verify"
+  ],
+  "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+  "allocation_required_for_all_modes": true,
+  "tests": 17,
+  "test_log": "tests.log",
+  "format_log": "format-check.log",
+  "curation_change": "Retain only four explicitly named, bounded, schema/axis-validated minibatch CE NPZ files; other arrays remain excluded.",
+  "real_loss_matrices_opened_during_preparation": false,
+  "no_launcher_calls": true,
+  "no_jobs_reports_scientific_sources_changed": true
+}

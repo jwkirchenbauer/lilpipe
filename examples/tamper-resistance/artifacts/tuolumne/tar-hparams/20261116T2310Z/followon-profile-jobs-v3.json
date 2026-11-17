@@ -1,0 +1,40 @@
+[
+  {
+    "name": "profiles-i-o-guard-v3",
+    "argv": [
+      "python",
+      "/p/vast1/kirchenb/llnl-tools/launch_tuo.py",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+      "--env_act_style=mm_activate",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches",
+      "--sub_output_dir_name=profiles-i-o-guard-v3",
+      "--run_name=tar-profiles-i-o-guard-v3",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--cpus_per_task=96",
+      "--minutes=35",
+      "--qos=pdebug",
+      "--bank=guard",
+      "--torchrun=false",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--quiet_localization=true",
+      "--squonce=false",
+      "--rm_core_dumps=false",
+      "--dependency=afterok:f3kY3vvwPTUB",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/landscapes-v1/run.sh",
+      "profiles-group",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z",
+      "hparam-i-lr1e-6",
+      "hparam-o-lr1e-6"
+    ],
+    "after_profile": "f3kY3vvwPTUB",
+    "old_job_id": "f3kXmy5R5Eej",
+    "launch_directory": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/profiles-i-o-guard-v3",
+    "job_id": "f3kY4KCphdJ7"
+  }
+]

@@ -1,0 +1,9 @@
+test_archive_is_preserved_and_second_publication_refused (test_paired_layout.PairedLayoutTests.test_archive_is_preserved_and_second_publication_refused) ... ok
+test_failed_staging_publish_rolls_original_directory_back (test_paired_layout.PairedLayoutTests.test_failed_staging_publish_rolls_original_directory_back) ... ok
+test_three_and_seven_row_surface_titles_do_not_overlap (test_paired_layout.PairedLayoutTests.test_three_and_seven_row_surface_titles_do_not_overlap) ... ok
+test_wrapping_preserves_all_nonlabel_data_and_exact_surface_values (test_paired_layout.PairedLayoutTests.test_wrapping_preserves_all_nonlabel_data_and_exact_surface_values) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 2.233s
+
+OK

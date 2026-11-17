@@ -1,0 +1,5 @@
+bash: cannot set terminal process group (4024906): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+Submission: flux batch -q pdebug --bank=guard --job-name=tar-landscapes-o-rio-chunk1 -t30 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/landscapes-o-rio-chunk1/launch.sh
+Launched job_id=f3kYPfWgC4pf.

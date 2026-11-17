@@ -1,0 +1,15 @@
+{
+  "state": "passed",
+  "predecessor": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v2",
+  "byte_identical_code_files_sha256": {
+    "seal.py": "bd64182527b4da4fe7edfb4c80cfb1617ccb36e88359b116557668dae913d6eb",
+    "test_seal.py": "fe4e0855b3b50576a3eec2d4e818464c54b13e2ae2f34f8ab69a327c09c248ca",
+    "run.sh": "5790db086a2ffe3ecf0a1039553db4a6df955fd54bc464043ca3e160bfe0b7e5"
+  },
+  "requirements_only_changed_field": [
+    "aggregate_output"
+  ],
+  "old_aggregate_output": "aggregate-comparison-v1/final",
+  "new_aggregate_output": "aggregate-comparison-v2/final",
+  "other_requirements_equal": true
+}

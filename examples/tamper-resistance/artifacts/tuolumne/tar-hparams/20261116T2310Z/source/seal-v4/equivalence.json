@@ -1,0 +1,25 @@
+{
+  "state": "passed",
+  "predecessor_preserved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v3",
+  "requirements_and_wrapper_byte_identical": [
+    "requirements.json",
+    "run.sh"
+  ],
+  "entire_seal_module_ast_equal_after_two_exact_predicate_replacements": true,
+  "approved_predicate_replacements": [
+    {
+      "before": "if \"seal\" in path.name.lower() or (",
+      "after": "if (\"seal\" in path.name.lower() and \"source\" not in parts) or ("
+    },
+    {
+      "before": "if not path.is_file() or path.stat().st_size == 0:",
+      "after": "if not path.is_file() or (path.stat().st_size == 0 and not (\"source\" in parts and path.name == \"__init__.py\")):"
+    }
+  ],
+  "all_other_curation_and_scientific_code_unchanged": true,
+  "existing_17_fixture_asts_unchanged": true,
+  "only_added_fixtures": [
+    "test_empty_source_init_is_manifest_verifiable_and_other_empty_files_excluded",
+    "test_frozen_source_seal_log_is_selected_and_verifiable_but_live_logs_are_not"
+  ]
+}

@@ -1,0 +1,3150 @@
+{
+  "state": "complete",
+  "sealed_utc": "2026-11-17T08:23:15.326391+00:00",
+  "main_study": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z",
+  "factorial_study": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z",
+  "flux_job_id": "fTUvAxF",
+  "gates": {
+    "training": {
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-defense": {
+        "role": "defense",
+        "updates": 125,
+        "canonical_step_batch_sha256": "c5f55ce756e9b0957ba6eb9fee18cf07bd2ac2b772e9884dbd2e8d30f4ddb98e",
+        "reference": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/observed-batches.jsonl",
+        "proof_sha256": "e8d1aadde04949cee3ecec7fea04f8e327064f03cf1582a3a200cfa737825f05"
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-lr1e-6": {
+        "role": "attack",
+        "updates": 1000,
+        "canonical_step_batch_sha256": "52f9ce25340acc97c869183004b702fd8db4f624798d6e78725b8374ace5108e",
+        "reference": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/observed-batches.jsonl",
+        "proof_sha256": "929c7d4da9eec5d90a78e14e141fccabf427d9ef277a1170f77b78902b18aa22"
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-defense": {
+        "role": "defense",
+        "updates": 125,
+        "canonical_step_batch_sha256": "c5f55ce756e9b0957ba6eb9fee18cf07bd2ac2b772e9884dbd2e8d30f4ddb98e",
+        "reference": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/observed-batches.jsonl",
+        "proof_sha256": "3ebf24a0779fe4d1cdfcf572728d4421112c1222226f6c34da886ae926a92ad8"
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-lr1e-6": {
+        "role": "attack",
+        "updates": 1000,
+        "canonical_step_batch_sha256": "52f9ce25340acc97c869183004b702fd8db4f624798d6e78725b8374ace5108e",
+        "reference": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/observed-batches.jsonl",
+        "proof_sha256": "c45eed8b6c5ecc12d8a12a12f0f7e9cef5ada1f1065d589e05020a61f5ea5b07"
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-defense": {
+        "role": "defense",
+        "updates": 125,
+        "canonical_step_batch_sha256": "c5f55ce756e9b0957ba6eb9fee18cf07bd2ac2b772e9884dbd2e8d30f4ddb98e",
+        "reference": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/observed-batches.jsonl",
+        "proof_sha256": "75f8b267cc9fee8833c70286811ffa444eb4543e684c46c9f653742755a892bf"
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-lr1e-6": {
+        "role": "attack",
+        "updates": 1000,
+        "canonical_step_batch_sha256": "52f9ce25340acc97c869183004b702fd8db4f624798d6e78725b8374ace5108e",
+        "reference": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/observed-batches.jsonl",
+        "proof_sha256": "b478395ecb345941c448c6ef8b912ac7efe0a4a072eb35df018d8b5df9364922"
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-defense": {
+        "role": "defense",
+        "updates": 125,
+        "canonical_step_batch_sha256": "c5f55ce756e9b0957ba6eb9fee18cf07bd2ac2b772e9884dbd2e8d30f4ddb98e",
+        "reference": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/observed-batches.jsonl",
+        "proof_sha256": "2460bedcbccd57d44e8988271b0d1f677b460f7455016435c62160280790be26"
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-lr1e-6": {
+        "role": "attack",
+        "updates": 1000,
+        "canonical_step_batch_sha256": "52f9ce25340acc97c869183004b702fd8db4f624798d6e78725b8374ace5108e",
+        "reference": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/observed-batches.jsonl",
+        "proof_sha256": "ebcaa3b1819be295722a8bcc5fec1c5a6d6458e22bceab3dedca1c5fa0a7dd54"
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense": {
+        "role": "defense",
+        "updates": 125,
+        "canonical_step_batch_sha256": "c5f55ce756e9b0957ba6eb9fee18cf07bd2ac2b772e9884dbd2e8d30f4ddb98e",
+        "reference": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/observed-batches.jsonl",
+        "proof_sha256": "bdeb4b98cbc9602cc45cda0ad060cad9f082117f9b41d23b373a760d722ecfab"
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-defense": {
+        "role": "defense",
+        "updates": 125,
+        "canonical_step_batch_sha256": "c5f55ce756e9b0957ba6eb9fee18cf07bd2ac2b772e9884dbd2e8d30f4ddb98e",
+        "reference": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/observed-batches.jsonl",
+        "proof_sha256": "2bf54293d59ebec2ae62a7df5bbf5ed0a07ea34d14fab90d440b65cbd0d979e6"
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-defense": {
+        "role": "defense",
+        "updates": 125,
+        "canonical_step_batch_sha256": "c5f55ce756e9b0957ba6eb9fee18cf07bd2ac2b772e9884dbd2e8d30f4ddb98e",
+        "reference": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/observed-batches.jsonl",
+        "proof_sha256": "9b089ab3bad53ddb1f57ee6a3982f6493ffcb9440c20a4bf36dccbae14164a0d"
+      }
+    },
+    "retained_minibatch_loss_matrices": {
+      "hparam-r-lr1e-6": {
+        "path": "cases/hparam-r-lr1e-6/surfaces/minibatch-losses.npz",
+        "shape": [
+          7,
+          128
+        ],
+        "dtype": "float64",
+        "file_bytes": 9010,
+        "uncompressed_bytes": 8632,
+        "steps": [
+          0,
+          1,
+          8,
+          32,
+          128,
+          512,
+          1000
+        ],
+        "batch_steps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          24,
+          32,
+          44,
+          56,
+          68,
+          80,
+          92,
+          104,
+          116,
+          128,
+          141,
+          148,
+          155,
+          168,
+          175,
+          182,
+          195,
+          202,
+          209,
+          216,
+          223,
+          230,
+          237,
+          250,
+          257,
+          264,
+          277,
+          284,
+          291,
+          304,
+          311,
+          318,
+          325,
+          332,
+          339,
+          346,
+          359,
+          366,
+          373,
+          386,
+          393,
+          400,
+          413,
+          420,
+          427,
+          434,
+          441,
+          448,
+          455,
+          468,
+          475,
+          482,
+          495,
+          502,
+          509,
+          522,
+          529,
+          536,
+          543,
+          550,
+          557,
+          564,
+          577,
+          584,
+          591,
+          604,
+          611,
+          618,
+          631,
+          638,
+          645,
+          652,
+          659,
+          666,
+          673,
+          686,
+          693,
+          700,
+          713,
+          720,
+          727,
+          740,
+          747,
+          754,
+          761,
+          768,
+          775,
+          782,
+          795,
+          802,
+          809,
+          822,
+          829,
+          836,
+          849,
+          856,
+          863,
+          870,
+          877,
+          884,
+          891,
+          904,
+          911,
+          918,
+          931,
+          938,
+          945,
+          958,
+          965,
+          972,
+          986,
+          1000
+        ],
+        "settings_sha256": "508e55fe65ca46e8cdcb46e2d4ea809d6246f407725ccbf9c143840dbc5ca2c2",
+        "sha256": "0261888130881a6c9dfd0afe9af6a215fc636ef42953c8ab751f73eedf47479e",
+        "minimum_ce": 1.0680416822433472,
+        "maximum_ce": 11.28912353515625
+      },
+      "hparam-i-lr1e-6": {
+        "path": "cases/hparam-i-lr1e-6/surfaces/minibatch-losses.npz",
+        "shape": [
+          7,
+          128
+        ],
+        "dtype": "float64",
+        "file_bytes": 9010,
+        "uncompressed_bytes": 8632,
+        "steps": [
+          0,
+          1,
+          8,
+          32,
+          128,
+          512,
+          1000
+        ],
+        "batch_steps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          24,
+          32,
+          44,
+          56,
+          68,
+          80,
+          92,
+          104,
+          116,
+          128,
+          141,
+          148,
+          155,
+          168,
+          175,
+          182,
+          195,
+          202,
+          209,
+          216,
+          223,
+          230,
+          237,
+          250,
+          257,
+          264,
+          277,
+          284,
+          291,
+          304,
+          311,
+          318,
+          325,
+          332,
+          339,
+          346,
+          359,
+          366,
+          373,
+          386,
+          393,
+          400,
+          413,
+          420,
+          427,
+          434,
+          441,
+          448,
+          455,
+          468,
+          475,
+          482,
+          495,
+          502,
+          509,
+          522,
+          529,
+          536,
+          543,
+          550,
+          557,
+          564,
+          577,
+          584,
+          591,
+          604,
+          611,
+          618,
+          631,
+          638,
+          645,
+          652,
+          659,
+          666,
+          673,
+          686,
+          693,
+          700,
+          713,
+          720,
+          727,
+          740,
+          747,
+          754,
+          761,
+          768,
+          775,
+          782,
+          795,
+          802,
+          809,
+          822,
+          829,
+          836,
+          849,
+          856,
+          863,
+          870,
+          877,
+          884,
+          891,
+          904,
+          911,
+          918,
+          931,
+          938,
+          945,
+          958,
+          965,
+          972,
+          986,
+          1000
+        ],
+        "settings_sha256": "d797e2a473314322ce0ef439a7fb3b173c5cce5f50552ca7bfe4a6e3959c9031",
+        "sha256": "e5d2fbadd4083760dba4278d86dbcae4a8c44659dcb1544f3f5496154f14dfb6",
+        "minimum_ce": 2.051546096801758,
+        "maximum_ce": 8.493125915527344
+      },
+      "hparam-o-lr1e-6": {
+        "path": "cases/hparam-o-lr1e-6/surfaces/minibatch-losses.npz",
+        "shape": [
+          7,
+          128
+        ],
+        "dtype": "float64",
+        "file_bytes": 9010,
+        "uncompressed_bytes": 8632,
+        "steps": [
+          0,
+          1,
+          8,
+          32,
+          128,
+          512,
+          1000
+        ],
+        "batch_steps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          24,
+          32,
+          44,
+          56,
+          68,
+          80,
+          92,
+          104,
+          116,
+          128,
+          141,
+          148,
+          155,
+          168,
+          175,
+          182,
+          195,
+          202,
+          209,
+          216,
+          223,
+          230,
+          237,
+          250,
+          257,
+          264,
+          277,
+          284,
+          291,
+          304,
+          311,
+          318,
+          325,
+          332,
+          339,
+          346,
+          359,
+          366,
+          373,
+          386,
+          393,
+          400,
+          413,
+          420,
+          427,
+          434,
+          441,
+          448,
+          455,
+          468,
+          475,
+          482,
+          495,
+          502,
+          509,
+          522,
+          529,
+          536,
+          543,
+          550,
+          557,
+          564,
+          577,
+          584,
+          591,
+          604,
+          611,
+          618,
+          631,
+          638,
+          645,
+          652,
+          659,
+          666,
+          673,
+          686,
+          693,
+          700,
+          713,
+          720,
+          727,
+          740,
+          747,
+          754,
+          761,
+          768,
+          775,
+          782,
+          795,
+          802,
+          809,
+          822,
+          829,
+          836,
+          849,
+          856,
+          863,
+          870,
+          877,
+          884,
+          891,
+          904,
+          911,
+          918,
+          931,
+          938,
+          945,
+          958,
+          965,
+          972,
+          986,
+          1000
+        ],
+        "settings_sha256": "8862987f0ef5c31d0d92fdbbc28cc77fae0266b151befba027d43f818f09e6ec",
+        "sha256": "1af80f33520d81aa510295c176a8022175e2c4d7a800cec6fe9dde5087a0b379",
+        "minimum_ce": 1.1563578844070435,
+        "maximum_ce": 11.55652141571045
+      },
+      "hparam-rio-lr1e-6": {
+        "path": "cases/hparam-rio-lr1e-6/surfaces/minibatch-losses.npz",
+        "shape": [
+          7,
+          128
+        ],
+        "dtype": "float64",
+        "file_bytes": 9010,
+        "uncompressed_bytes": 8632,
+        "steps": [
+          0,
+          1,
+          8,
+          32,
+          128,
+          512,
+          1000
+        ],
+        "batch_steps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          24,
+          32,
+          44,
+          56,
+          68,
+          80,
+          92,
+          104,
+          116,
+          128,
+          141,
+          148,
+          155,
+          168,
+          175,
+          182,
+          195,
+          202,
+          209,
+          216,
+          223,
+          230,
+          237,
+          250,
+          257,
+          264,
+          277,
+          284,
+          291,
+          304,
+          311,
+          318,
+          325,
+          332,
+          339,
+          346,
+          359,
+          366,
+          373,
+          386,
+          393,
+          400,
+          413,
+          420,
+          427,
+          434,
+          441,
+          448,
+          455,
+          468,
+          475,
+          482,
+          495,
+          502,
+          509,
+          522,
+          529,
+          536,
+          543,
+          550,
+          557,
+          564,
+          577,
+          584,
+          591,
+          604,
+          611,
+          618,
+          631,
+          638,
+          645,
+          652,
+          659,
+          666,
+          673,
+          686,
+          693,
+          700,
+          713,
+          720,
+          727,
+          740,
+          747,
+          754,
+          761,
+          768,
+          775,
+          782,
+          795,
+          802,
+          809,
+          822,
+          829,
+          836,
+          849,
+          856,
+          863,
+          870,
+          877,
+          884,
+          891,
+          904,
+          911,
+          918,
+          931,
+          938,
+          945,
+          958,
+          965,
+          972,
+          986,
+          1000
+        ],
+        "settings_sha256": "16c2538ad923e18db1f3df162e9dd5aa013b2f13a23c3bd9d998c97efea04086",
+        "sha256": "2680e15b6a97483b87103b07e4a0e284d3fd14a83f871cfda2e7016916444e61",
+        "minimum_ce": 5.106811046600342,
+        "maximum_ce": 17.691268920898438
+      }
+    },
+    "evaluation": {
+      "hparam-r-lr1e-6": {
+        "task_checkpoints": 31,
+        "complete": true
+      },
+      "hparam-i-lr1e-6": {
+        "task_checkpoints": 31,
+        "complete": true
+      },
+      "hparam-o-lr1e-6": {
+        "task_checkpoints": 31,
+        "complete": true
+      },
+      "hparam-rio-lr1e-6": {
+        "task_checkpoints": 31,
+        "complete": true
+      }
+    },
+    "checkpoint_validation": {
+      "canonical": {
+        "reproduced-1000": {
+          "issues": [],
+          "physical_comparable": true,
+          "heldout_matches_root": true,
+          "local_frames": [
+            0,
+            1,
+            8,
+            32,
+            128,
+            512,
+            1000
+          ],
+          "broad_frames": [
+            0,
+            128,
+            1000
+          ]
+        },
+        "hparam-r-lr1e-6": {
+          "issues": [],
+          "physical_comparable": true,
+          "heldout_matches_root": true,
+          "local_frames": [
+            0,
+            1,
+            8,
+            32,
+            128,
+            512,
+            1000
+          ],
+          "broad_frames": [
+            0,
+            128,
+            1000
+          ]
+        },
+        "hparam-i-lr1e-6": {
+          "issues": [],
+          "physical_comparable": true,
+          "heldout_matches_root": true,
+          "local_frames": [
+            0,
+            1,
+            8,
+            32,
+            128,
+            512,
+            1000
+          ],
+          "broad_frames": [
+            0,
+            128,
+            1000
+          ]
+        },
+        "hparam-o-lr1e-6": {
+          "issues": [],
+          "physical_comparable": true,
+          "heldout_matches_root": true,
+          "local_frames": [
+            0,
+            1,
+            8,
+            32,
+            128,
+            512,
+            1000
+          ],
+          "broad_frames": [
+            0,
+            128,
+            1000
+          ]
+        },
+        "hparam-rio-lr1e-6": {
+          "issues": [],
+          "physical_comparable": true,
+          "heldout_matches_root": true,
+          "local_frames": [
+            0,
+            1,
+            8,
+            32,
+            128,
+            512,
+            1000
+          ],
+          "broad_frames": [
+            0,
+            128,
+            1000
+          ]
+        }
+      },
+      "profiles": {
+        "hparam-r-lr1e-6": {
+          "step_profiles_complete": true,
+          "step_profiles_comparable": true,
+          "first_update_plane_comparable": true,
+          "first_update_plane_status": "fitted",
+          "issues": []
+        },
+        "hparam-i-lr1e-6": {
+          "step_profiles_complete": true,
+          "step_profiles_comparable": true,
+          "first_update_plane_comparable": true,
+          "first_update_plane_status": "fitted",
+          "issues": []
+        },
+        "hparam-o-lr1e-6": {
+          "step_profiles_complete": true,
+          "step_profiles_comparable": true,
+          "first_update_plane_comparable": true,
+          "first_update_plane_status": "fitted",
+          "issues": []
+        },
+        "hparam-rio-lr1e-6": {
+          "step_profiles_complete": true,
+          "step_profiles_comparable": true,
+          "first_update_plane_comparable": true,
+          "first_update_plane_status": "fitted",
+          "issues": []
+        }
+      }
+    },
+    "aggregate_five": {
+      "state": "complete",
+      "conditions": [
+        "B",
+        "R",
+        "I",
+        "O",
+        "RIO"
+      ],
+      "control": "reproduced-1000",
+      "numeric_validation_rows": 5,
+      "figures": [
+        {
+          "figure": "end-defense-fixed-random",
+          "plane": "random",
+          "frames": "attack-start/defense-endpoint",
+          "color_min": 6.6248688354492185,
+          "color_max": 14.741498600006103,
+          "panels": 5,
+          "status": "complete"
+        },
+        {
+          "figure": "end-defense-fixed-reference",
+          "plane": "reference",
+          "frames": "attack-start/defense-endpoint",
+          "color_min": 2.08558349609375,
+          "color_max": 16.517576026916505,
+          "panels": 5,
+          "status": "complete"
+        },
+        {
+          "figure": "end-defense-fixed-attack",
+          "plane": "attack",
+          "frames": "attack-start/defense-endpoint",
+          "color_min": 1.113974287033081,
+          "color_max": 22.95458962726593,
+          "panels": 5,
+          "status": "complete"
+        },
+        {
+          "figure": "broad-random-r125",
+          "plane": "shared-random",
+          "frames": "0;128;1000",
+          "color_min": 1.3906671466827392,
+          "color_max": 16.478487616539002,
+          "panels": 15,
+          "status": "complete"
+        },
+        {
+          "figure": "local-reference-matched-attack",
+          "plane": "shared-reference",
+          "frames": "0;1;8;32;128;512;1000",
+          "color_min": 1.4351288795471193,
+          "color_max": 15.142194986343384,
+          "panels": 35,
+          "status": "complete"
+        },
+        {
+          "figure": "defense-history-local-reference",
+          "plane": "shared-reference",
+          "frames": "0;8;32;125",
+          "color_min": 1.4298378353118897,
+          "color_max": 15.142398488044739,
+          "panels": 20,
+          "status": "complete"
+        }
+      ]
+    },
+    "static": {
+      "main_six_static": "complete",
+      "full_eight_static": "complete",
+      "factorial_current_identities": {
+        "common_protocol": {
+          "get_ll_sha256": "ffc0d86d6e51298bdf5595d4bee7a3d0f3e1ca95d5d76e613a73d3c154944c91",
+          "torch": "2.12.1+rocm7.2",
+          "hip": "7.2.53211",
+          "seed": 42,
+          "document_sha256": [
+            "ec96196329ae432cd296903a5a453d11cc4c4f7dec325079e68c86d85fb6dd4c",
+            "d75431e865efa620c40de958f294d8271618baf51a2c76f8aae09ae237691648",
+            "d0ba27eda2ba13f62d40a6b018e12a731edc5d6beb1f47d987310383e2261080",
+            "445f5a8523cdf0d0bf4e3c734b13884bedad1584d11fe332a1d2f7ac4657612d",
+            "d0fc0923deb4dc74a39c7254c2bf4093d28f495a893bf9405dae4f255d07fb1a",
+            "91656d19ae5830707b0dbb5d85fbb62b05831b95404f49c0874bc7da1891403f",
+            "443a72bb9bc6bd75b370784d9db5c873c6674f290907f922b7a1b165c94ad967",
+            "94652942beb60f1990b68d719d7492716791fa0d46681215774df3a39cd476e6",
+            "5f10d7c8b601f143d736004f4a718c8bd8ff28fa37b90771cfcce6bce71e23af",
+            "223bcae919bb2b8a925c683127fb9bde75fc5b9ff715dc30b1112b8c2f211650"
+          ],
+          "dataset_revision": "5a786ed1041e56fef2d4ed26c1239f12b73a68eb",
+          "radii": [
+            1000,
+            500,
+            200,
+            125,
+            100,
+            10,
+            1,
+            0.1
+          ],
+          "n_pts": 9,
+          "batch_size": 2,
+          "max_seq_len": 512
+        },
+        "evaluated_batch_sha256": [
+          "3e658ec585dc7b4bd317fe33ae7b69eea6067dec3c05397cc943d91113ca1540",
+          "f05a85d44c0d9b9579a99da275271ac1489382a7c912b18485c5e88efe7b5b0a",
+          "63dc641d84ab37e249139c8d832c46fbd1a993f0e9fe866c22cfd0f42165e381",
+          "17ac144ad315a2d0118a4ed2e228b1b77a526237d14cd17911ff60b6fffcea46",
+          "2cf41b2bed4e84e116bdcf294579ed00ff6e3ffa1cfb91f49d4266c01fd16189"
+        ],
+        "defense_order_sha256": "c5f55ce756e9b0957ba6eb9fee18cf07bd2ac2b772e9884dbd2e8d30f4ddb98e",
+        "legacy_B_token_evidence": "All7 guarded workers recorded equality to B's actual tokenizer/collation; legacy B stores text hashes and original source, not token batch hash fields."
+      }
+    },
+    "source_manifests": {
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/operational-inputs.sha256": {
+        "manifest_sha256": "cb46cfae8719b8cd34f75c458ad0907d2254cd1da2171c856729409e507d8e7d",
+        "members": [
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-defense/case.json",
+            "sha256": "01d8b9c35b75ba43fe44ebe504718dec19b57f4f85998b64a6c7512b49419581"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-defense/config.reference.yml",
+            "sha256": "555a1baeaa67abaeae47a9ac229c87050ddf54b4062c41eb4c41882b5c3105de"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-defense/config.yml",
+            "sha256": "717de796fb29524946ce287c834f4bedbedf2ec3385a36c510f027cf770cc426"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-defense/runtime.sh",
+            "sha256": "0375a411d2e629e707029970b1817508cb9512f3fb4edae72bd0ba798c2a1266"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-lr1e-6/case.json",
+            "sha256": "61c8e5fffe3995dafb863a6e9a8c1352b027e7d90e5d6df2158bb3ca24e27854"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-lr1e-6/config.reference.yml",
+            "sha256": "71b6771384511310ba81e1ae614ff1079c3a9fd28e61286ba9c5cbca29c45393"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-lr1e-6/config.yml",
+            "sha256": "76da9b371e4e37815c86de3745f4215349cc5b2af9a3d23db174dbaa94e93519"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-lr1e-6/runtime.sh",
+            "sha256": "dd170b24306ecb3b6f16b70bcd20318cdac9126d5a001f4b95c358784d8df075"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-lr1e-6/study.json",
+            "sha256": "d797e2a473314322ce0ef439a7fb3b173c5cce5f50552ca7bfe4a6e3959c9031"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-defense/case.json",
+            "sha256": "fe441950cd23e03fba62d17e4b26d79c27128c30d23d8fd8ef6d0002f8c9756b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-defense/config.reference.yml",
+            "sha256": "555a1baeaa67abaeae47a9ac229c87050ddf54b4062c41eb4c41882b5c3105de"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-defense/config.yml",
+            "sha256": "7b359b677b785bf90dc90cc59ea3b4efefac166c0ae95bb208337e34d4d9138f"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-defense/runtime.sh",
+            "sha256": "0f0bcd3a55d369c435166456a47ea5915eeb2de0f8cc97285604b7ecc431e22f"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-lr1e-6/case.json",
+            "sha256": "ea4b406c9c19ece81258ae4e6936ff661d5a57389bc6e1bfb865a6e1ce648cc0"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-lr1e-6/config.reference.yml",
+            "sha256": "71b6771384511310ba81e1ae614ff1079c3a9fd28e61286ba9c5cbca29c45393"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-lr1e-6/config.yml",
+            "sha256": "7e046bc5e32efafd7b9ffcb88b84f252e1d3ee47510c1d20bcbc7f38b4c52b69"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-lr1e-6/runtime.sh",
+            "sha256": "202b6e4ecf429621bfabbde51ae6afb223b23d9ee9d38a5946f064de6f235789"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-lr1e-6/study.json",
+            "sha256": "8862987f0ef5c31d0d92fdbbc28cc77fae0266b151befba027d43f818f09e6ec"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-defense/case.json",
+            "sha256": "2a1afb726ced88bbd5ae5966004868649a4c476875c2526aef8843946ea06087"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-defense/config.reference.yml",
+            "sha256": "555a1baeaa67abaeae47a9ac229c87050ddf54b4062c41eb4c41882b5c3105de"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-defense/config.yml",
+            "sha256": "ec2c3938c122d82f0bd4f80799bce73c81b3be79ce541f21bf230a9c72003cd9"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-defense/runtime.sh",
+            "sha256": "aeca0d071f576325699584afaf65dafc68b87fd6ff8e15710073417a31bf51a3"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-lr1e-6/case.json",
+            "sha256": "30db89e9a2145b33628d966409c46e3d7058f364e87389f63a49467e6952fd32"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-lr1e-6/config.reference.yml",
+            "sha256": "71b6771384511310ba81e1ae614ff1079c3a9fd28e61286ba9c5cbca29c45393"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-lr1e-6/config.yml",
+            "sha256": "dd8be5eefbca0badfc911d8201f97677b4a83b02b1156a23355dcc4ef670f488"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-lr1e-6/runtime.sh",
+            "sha256": "43188f71e1718ce4d29935a9ca264a852c146aa15034c1a3b84f3917ffff8401"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-lr1e-6/study.json",
+            "sha256": "508e55fe65ca46e8cdcb46e2d4ea809d6246f407725ccbf9c143840dbc5ca2c2"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-defense/case.json",
+            "sha256": "0d231812cd811b070be2e3d52620429a673d6a8212ff16197bc0cab04635a55a"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-defense/config.reference.yml",
+            "sha256": "555a1baeaa67abaeae47a9ac229c87050ddf54b4062c41eb4c41882b5c3105de"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-defense/config.yml",
+            "sha256": "10211244bdf197473f16efa59fbd30a5b165362ec504f4ddbb91a5d3bba1997e"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-defense/runtime.sh",
+            "sha256": "690c292973e1cfde08521bbfcd7345737e9cd7294ba5cf2af0e34052c4c39c73"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-lr1e-6/case.json",
+            "sha256": "41fda1a3f5efe32bd3d37d07e46ee5349c5776f316c32612bcd8ebf1d2fdfadb"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-lr1e-6/config.reference.yml",
+            "sha256": "71b6771384511310ba81e1ae614ff1079c3a9fd28e61286ba9c5cbca29c45393"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-lr1e-6/config.yml",
+            "sha256": "e1a228a247c56be79a53d5286e6c3f32d47d42b5639ba6eaa8be4b44e3cf3853"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-lr1e-6/runtime.sh",
+            "sha256": "aec12a11d1d584e5b740a923fda82079c810f8e5666b8ac7ebed891a8fd369c8"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-lr1e-6/study.json",
+            "sha256": "16c2538ad923e18db1f3df162e9dd5aa013b2f13a23c3bd9d998c97efea04086"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/matrix.json",
+            "sha256": "f272b9803e62af3578fdb11eee46b0f146440c3960e2770d476fa7ea169cbaa1"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/probes.json",
+            "sha256": "073225fe3139c3021ac5bf831b2398a1d78b0e8c52210104a36cd732a9b52209"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/lm_eval_tasks/mmlu_no_bio.yaml",
+            "sha256": "049885f5f05c0f60a43e9fd749b245028555fc173a08a36175452dab72e27a15"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/_default_template_yaml",
+            "sha256": "011aa06daa186c8115ab1cd43f8c10d6b0e55996e811660ecc1e6117f6804d58"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/_wmdp_bio_robust.yaml",
+            "sha256": "f211781013e5e45a4297a51aaa151a0e85d030cc811f35a665b2cdff9fdc0ae7"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_bioweapons_and_bioterrorism.yaml",
+            "sha256": "e675c85f5300c61454055d7342b6c106b33673de89e19666e4725fab129edb1f"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_dual_use_virology.yaml",
+            "sha256": "3b4a3aa09beeade354739b7363a264eec21a81e0c5c094519c73a70b76b7118f"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_enhanced_potential_pandemic_pathogens.yaml",
+            "sha256": "4c1e6f5d7f22c57bdd4a93e7545dd2b248269d26a25e62a2664c46b48cf32f83"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_expanding_access_to_threat_vectors.yaml",
+            "sha256": "d23724eeeafcc871289a87623e9bbe9cfaa849f2713c17c295271477ccfb2cf3"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_reverse_genetics_and_easy_editing.yaml",
+            "sha256": "61e4e2b52a99ab63669c3b451bfcbbf1296d9913659e029e6d6af4b0f2cbd776"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_viral_vector_research.yaml",
+            "sha256": "e4ffff6afa20543d405ad30ef8679a6b4e9691759b1fbc129e695695f6d5a95c"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/misc/reference_get_ll.py",
+            "sha256": "ffc0d86d6e51298bdf5595d4bee7a3d0f3e1ca95d5d76e613a73d3c154944c91"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/misc/run_tar_compute.sh",
+            "sha256": "7030c584dd6ad163234aca49984dbad1e9f3e08319ec017bd1fd7206437d8b1b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/misc/run_tar_compute_evaluation.sh",
+            "sha256": "08bd5b1625c6e280353f566a4008f64d6b573342c8212503484ce08196eddc36"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/misc/run_tar_compute_landscapes.sh",
+            "sha256": "02eed3c09ba88aed423ed58347416e5607e594b0fc88dbc162faa9882dfdee0a"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/misc/tar_compute.py",
+            "sha256": "b882187c89fe60ab06b416ce50aad7e329eaaef0b3b220046c30ed59c99d4e66"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/misc/tar_compute_compare.py",
+            "sha256": "813cbfe259ff19c86b74d7a8384eb6946b15337eeadd924c34e68c0f62e41f78"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/misc/tar_compute_evaluation.py",
+            "sha256": "4b7213715844dfe11f2706b128bcfa2a6d3e7a9c076b123e391cda4dc054f56a"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/misc/tar_dynamics.py",
+            "sha256": "e8ab333af2f9106204ba0bb17a66d7a0adb21e80dd2970d16fb9aa8f1c953054"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/misc/tar_dynamics_training.py",
+            "sha256": "8fbfd35bd251cbc831bb6dc2fdfdb9183caa33983993b2430d27e3cf858ed9a9"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/axolotl_plugins/__init__.py",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/axolotl_plugins/custom_trainer_args.py",
+            "sha256": "823315684e21dd0044c0553bff7ff36f05c8249762ba28c9139b5d229f1f2a12"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/data/__init__.py",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/data/_base_document_strategy.py",
+            "sha256": "ed7a7d4ae6a5259d047b6e8074a803a91ce39b397dbbb56b838fdfbf2358a509"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/data/authors_documents.py",
+            "sha256": "93dbdcf641f65c78b76f44a1bb2153358900e63bf9a4149baa821ec4e2804290"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/data/authors_documents_masked.py",
+            "sha256": "1cc66116d342700a50d4c7f782d1d51387de2bde97abd30c3493bb82ef85b632"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/data/beavertail_alignment.py",
+            "sha256": "bdd3193a94eb954dfbc6163647ff34947dbe1a388c954b87db0fcb5c48fd2f3a"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/data/beavertail_harmful_alignment.py",
+            "sha256": "7644cb422836685ad708fc21e45a398673ec79a218d1831865ed984d83315331"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/data/beavertail_harmful_mixed_attack.py",
+            "sha256": "e80a76fa5ba4380bb382c6de74b689802bfce2a74d26740c9d245eea858aea74"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/data/beavertail_harmful_relearn.py",
+            "sha256": "606afe5fc709912f79cb4964de1714783769cf9bb882a8dd3e2a5d15b1754004"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/data/beavertail_safe_alignment.py",
+            "sha256": "e466fa2dde9d49daa278e7688f108b68b130cf4b0ad829a823b3f3839a2fb1d4"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/data/beavertails_hh.py",
+            "sha256": "c9e3f0d6f4124fb4d2bbbc4b2a45cbe73cb934e1ffb232d30128306448f453ec"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/data/fixed_documents.py",
+            "sha256": "852ac6b999da34c6069da16e9f8c1e2404249d33743b6c2e4c6a22c48ea320e9"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/data/seam.py",
+            "sha256": "f4bc8ad2aaedb50cced3ce64480516819a91ded080942d60004c140394436d90"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/data/sst2_mixed_attack.py",
+            "sha256": "1279fb8a6979f83a4f53d8e4b773889357aaf37b8e9ece6db929b8b69a7a1d70"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/data/wikitext2.py",
+            "sha256": "09c18207ca958cbe9d7dd3c3e31e5f9f6fd33daa583e1fc984adb08e280aaee5"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/data/wikitext_di.py",
+            "sha256": "8ccdc0b4ec175c578558142dcc78175d00b031aa8e46de0de7b0cc1b0d3a35e0"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/data/wmdp_completion.py",
+            "sha256": "05120990f036cb0299f8f69eb37d8bd886217332f4fb5c9ef55290a95337f4f0"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/data/wmdp_di.py",
+            "sha256": "50166c6e6e040148c72b78f7e596a9de2b2a29e1d2184f041a56330a8e036236"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/data/wmdp_zephyr.py",
+            "sha256": "fd3e4b617389a5c6fe6b2678c317cdc545760eff22fb443bb199b3c55c9680fa"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/__init__.py",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/rl_bf16.py",
+            "sha256": "03886e657233377f2b54881e85a0cd547e6b2fe26efd9ee4f9c6047a64e40bdc"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/rl_cosim.py",
+            "sha256": "81c787dcd30e76d47578a9e51ddce0a93f86bfec74f6f4f103fb607464733320"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/rl_perturb.py",
+            "sha256": "382f3469cfcc837c878f279efc75e64093781aa833845faae587cb565edbbbec"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/tr_ao.py",
+            "sha256": "c610a569081a2ec0541c3c41c8df0e42866c77e364f9e1cfe3bc62815aaa4230"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/tr_booster.py",
+            "sha256": "2a044a9770a46420bea080920a9b2126e545c1be5bd1e1781d00b456817b124d"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/tr_gip.py",
+            "sha256": "c25d824fbb06d8c4f2c020dad69968a734baac41d0db397d1307e61685ec8f66"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/tr_sam.py",
+            "sha256": "1786aafc7b547b2717acdb06ab4af1d18fbd18c8b6af3f7533f6bc651909115b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/tr_seam.py",
+            "sha256": "01edc546ce23510526708a5b52a066f65b4799e571f848281d5c58e599ef6ec2"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/tr_seam_legacy.py",
+            "sha256": "34bdabbea34dfa524a43b011f63da6b6cdf61a66f1a5adb01a4deb1e44e9b434"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/tr_seam_v1.py",
+            "sha256": "a35bed137db7455fcce5750eeab9d8b6b2521bfbdcc13dbc59fb3ba5871e52b5"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/tr_ssiuu.py",
+            "sha256": "c9b1061fc2d3a5a0a0ddccca43716829bf6ae9ac724e2b24ac6d62a7cab70fd2"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/tr_tar.py",
+            "sha256": "17af0ecc0a164edf2547053a0df249854fda3e4cfe18e4882f06cd3b9f585188"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/tr_wd.py",
+            "sha256": "7fd4f32b207f36843811343f9237ad68979b734b6ce5005ce0b55c1f80b4daa9"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/ul_cb.py",
+            "sha256": "e5d500879c0596a2c669cd0a5823cee8987e1ed3a0202b735890ed56ed2bea38"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/ul_gd.py",
+            "sha256": "8fa1bbb06974529512193f8f068c3931be599d9ad0b7cf158eca5d5d94ba95c4"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/ul_me.py",
+            "sha256": "3524868904daa100a7157dba2254ac73220c59a1271297675f35941ccd0f55aa"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/ul_npo.py",
+            "sha256": "ee65164d6d1ff5bb6a07cb7e386e7cdaaece8f262946e32800fafcd58f58c7ce"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/ul_rmu.py",
+            "sha256": "f651c188283f60716d29331f72d99d39381b250f21308cb496868210a12ace85"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/src/trainers/utils.py",
+            "sha256": "0af6c8c9a0c1139014bb5792d3ce2e9bd9863777a9cff989dcd46846923b32b5"
+          }
+        ]
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v1/SHA256SUMS": {
+        "manifest_sha256": "3ba35412e230f4a2a34e7d08be65740e7aa7a4bf17761d071145670fc8132a42",
+        "members": [
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v1/aggregate.py",
+            "sha256": "aa012fdfd0ec20bd043c088a3e941387375a5fccd75e8f86ef5ff7abbd1d98cd"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v1/run.sh",
+            "sha256": "762a3884ea847e18d775e23d4c1c6d4b4e22011c1f2ad39ac1a46ee9ff8f176f"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v1/test_aggregate.py",
+            "sha256": "b4078d86c967d0effd6276fa9ad88ed08cf9ef58bf7ef52370c1382c227deb33"
+          }
+        ]
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/manifest.sha256": {
+        "manifest_sha256": "ed2e952437dd946431150c37fca6a105b8e902893b0ee4032eeb0626c3c7b17d",
+        "members": [
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/README.md",
+            "sha256": "03b48c33cd999d4fe303021808b31d6c5ced315d6fe6f2c873bfbbbe6e3ea589"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/aggregate.py",
+            "sha256": "4eae142e395ed7e3666af10da080bfef709c6bb27d8f87f659f4b06deccc900d"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/format-equivalence-final.log",
+            "sha256": "46c85565a5c60ceeceeffd923ddd15a35dbfc4fe7af6398aa2b4dec666698c46"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/launcher-plan.json",
+            "sha256": "eec319d746595b307534403fa31de3d5abca482c2da6b6c726fdf45e93fba4c6"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/paired_layout.py",
+            "sha256": "7027bc488fb868e86b7036592f67a42b84d8e9f2009f386163f21a50d2493619"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/profile.json",
+            "sha256": "2d2282d1983145d9340c506ccf391aec1a26fb7ac0654bc9f6f7468557870ba4"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/prove_equivalence.py",
+            "sha256": "e6b5642f275f2ab4a2356679f5fcdb9959820908c4d3f2aa5275223af750aec8"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/run.sh",
+            "sha256": "e79552ca01435b025bd462808a5d823703ebb783ff566ee2b24b216526613902"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/scientific-equivalence.json",
+            "sha256": "f82ce6716c552adfd92afc46c578977a9d7539c4c0f2d8b97b9e42064bdc8480"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/test_aggregate.py",
+            "sha256": "62d726e6e230aedb4da882e25487748dd6c1d75011c280fb8cc2c62405329a77"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/test_layout.py",
+            "sha256": "666f6b01227637dbcaec9904fd59fc1c4776b1d4e460b2994c963328a6ded7cd"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/test_paired_layout.py",
+            "sha256": "97e0db871632b7a4e8b56c031cd1c1a57ed4b5975292d33a2b949eb3fe8285d1"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/tests-aggregate-layout.log",
+            "sha256": "df558be9e1e981be26b3e2f15130586c4542bf06aabc13ee2aac5b8dd2245833"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/tests-equivalence-seal.log",
+            "sha256": "8ab7cd3caa76a0a019e03a50eab4cad7e8c776f51b60628ff38f433b5f956389"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/tests-paired-layout.log",
+            "sha256": "eddedf116b51cd07e81e95629bbc71b2f79b011cab59964d5c8070a7d9cde050"
+          }
+        ]
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/manifest.sha256": {
+        "manifest_sha256": "ce76393842336c5368b9581b742f38cc4923b6b2482522e18a2d6e2bacc62c35",
+        "members": [
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/operational-inputs.sha256",
+            "sha256": "cb46cfae8719b8cd34f75c458ad0907d2254cd1da2171c856729409e507d8e7d"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/planning-v1/runtime_guard.py",
+            "sha256": "ee46951ab648c90eb04dbfed9b61bd82d9538d9a7012aeeaa1a50affd98097b3"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/misc/run_tar_compute_evaluation.sh",
+            "sha256": "08bd5b1625c6e280353f566a4008f64d6b573342c8212503484ce08196eddc36"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/misc/tar_compute_evaluation.py",
+            "sha256": "84d88109ef840b8c3b726e0d2b5515d9372eb110f5307c613f96bd307be56050"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/profile.json",
+            "sha256": "52fb395e9bf41b14d1501d828d3736e02dbef6333f4353e5d7f038443407aaee"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/run.sh",
+            "sha256": "a5af880ddaf48069ec7288fd2a04361f19f1a920a62c046d1c1a6646dc9545a5"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/axolotl_plugins/__init__.py",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/axolotl_plugins/custom_trainer_args.py",
+            "sha256": "823315684e21dd0044c0553bff7ff36f05c8249762ba28c9139b5d229f1f2a12"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/data/__init__.py",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/data/_base_document_strategy.py",
+            "sha256": "ed7a7d4ae6a5259d047b6e8074a803a91ce39b397dbbb56b838fdfbf2358a509"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/data/authors_documents.py",
+            "sha256": "93dbdcf641f65c78b76f44a1bb2153358900e63bf9a4149baa821ec4e2804290"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/data/authors_documents_masked.py",
+            "sha256": "1cc66116d342700a50d4c7f782d1d51387de2bde97abd30c3493bb82ef85b632"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/data/beavertail_alignment.py",
+            "sha256": "bdd3193a94eb954dfbc6163647ff34947dbe1a388c954b87db0fcb5c48fd2f3a"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/data/beavertail_harmful_alignment.py",
+            "sha256": "7644cb422836685ad708fc21e45a398673ec79a218d1831865ed984d83315331"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/data/beavertail_harmful_mixed_attack.py",
+            "sha256": "e80a76fa5ba4380bb382c6de74b689802bfce2a74d26740c9d245eea858aea74"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/data/beavertail_harmful_relearn.py",
+            "sha256": "606afe5fc709912f79cb4964de1714783769cf9bb882a8dd3e2a5d15b1754004"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/data/beavertail_safe_alignment.py",
+            "sha256": "e466fa2dde9d49daa278e7688f108b68b130cf4b0ad829a823b3f3839a2fb1d4"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/data/beavertails_hh.py",
+            "sha256": "c9e3f0d6f4124fb4d2bbbc4b2a45cbe73cb934e1ffb232d30128306448f453ec"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/data/fixed_documents.py",
+            "sha256": "852ac6b999da34c6069da16e9f8c1e2404249d33743b6c2e4c6a22c48ea320e9"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/data/seam.py",
+            "sha256": "f4bc8ad2aaedb50cced3ce64480516819a91ded080942d60004c140394436d90"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/data/sst2_mixed_attack.py",
+            "sha256": "1279fb8a6979f83a4f53d8e4b773889357aaf37b8e9ece6db929b8b69a7a1d70"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/data/wikitext2.py",
+            "sha256": "09c18207ca958cbe9d7dd3c3e31e5f9f6fd33daa583e1fc984adb08e280aaee5"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/data/wikitext_di.py",
+            "sha256": "8ccdc0b4ec175c578558142dcc78175d00b031aa8e46de0de7b0cc1b0d3a35e0"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/data/wmdp_completion.py",
+            "sha256": "05120990f036cb0299f8f69eb37d8bd886217332f4fb5c9ef55290a95337f4f0"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/data/wmdp_di.py",
+            "sha256": "50166c6e6e040148c72b78f7e596a9de2b2a29e1d2184f041a56330a8e036236"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/data/wmdp_zephyr.py",
+            "sha256": "fd3e4b617389a5c6fe6b2678c317cdc545760eff22fb443bb199b3c55c9680fa"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/__init__.py",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/rl_bf16.py",
+            "sha256": "03886e657233377f2b54881e85a0cd547e6b2fe26efd9ee4f9c6047a64e40bdc"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/rl_cosim.py",
+            "sha256": "81c787dcd30e76d47578a9e51ddce0a93f86bfec74f6f4f103fb607464733320"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/rl_perturb.py",
+            "sha256": "382f3469cfcc837c878f279efc75e64093781aa833845faae587cb565edbbbec"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/tr_ao.py",
+            "sha256": "c610a569081a2ec0541c3c41c8df0e42866c77e364f9e1cfe3bc62815aaa4230"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/tr_booster.py",
+            "sha256": "2a044a9770a46420bea080920a9b2126e545c1be5bd1e1781d00b456817b124d"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/tr_gip.py",
+            "sha256": "c25d824fbb06d8c4f2c020dad69968a734baac41d0db397d1307e61685ec8f66"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/tr_sam.py",
+            "sha256": "1786aafc7b547b2717acdb06ab4af1d18fbd18c8b6af3f7533f6bc651909115b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/tr_seam.py",
+            "sha256": "01edc546ce23510526708a5b52a066f65b4799e571f848281d5c58e599ef6ec2"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/tr_seam_legacy.py",
+            "sha256": "34bdabbea34dfa524a43b011f63da6b6cdf61a66f1a5adb01a4deb1e44e9b434"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/tr_seam_v1.py",
+            "sha256": "a35bed137db7455fcce5750eeab9d8b6b2521bfbdcc13dbc59fb3ba5871e52b5"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/tr_ssiuu.py",
+            "sha256": "c9b1061fc2d3a5a0a0ddccca43716829bf6ae9ac724e2b24ac6d62a7cab70fd2"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/tr_tar.py",
+            "sha256": "17af0ecc0a164edf2547053a0df249854fda3e4cfe18e4882f06cd3b9f585188"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/tr_wd.py",
+            "sha256": "7fd4f32b207f36843811343f9237ad68979b734b6ce5005ce0b55c1f80b4daa9"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/ul_cb.py",
+            "sha256": "e5d500879c0596a2c669cd0a5823cee8987e1ed3a0202b735890ed56ed2bea38"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/ul_gd.py",
+            "sha256": "8fa1bbb06974529512193f8f068c3931be599d9ad0b7cf158eca5d5d94ba95c4"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/ul_me.py",
+            "sha256": "3524868904daa100a7157dba2254ac73220c59a1271297675f35941ccd0f55aa"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/ul_npo.py",
+            "sha256": "ee65164d6d1ff5bb6a07cb7e386e7cdaaece8f262946e32800fafcd58f58c7ce"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/ul_rmu.py",
+            "sha256": "f651c188283f60716d29331f72d99d39381b250f21308cb496868210a12ace85"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/evaluation-v1/src/trainers/utils.py",
+            "sha256": "0af6c8c9a0c1139014bb5792d3ce2e9bd9863777a9cff989dcd46846923b32b5"
+          }
+        ]
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/landscapes-v1/manifest.sha256": {
+        "manifest_sha256": "f305ba1ac278de882d098ebed171e9789fa5f638fdc04140c7ba0e260070a08b",
+        "members": [
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/operational-inputs.sha256",
+            "sha256": "cb46cfae8719b8cd34f75c458ad0907d2254cd1da2171c856729409e507d8e7d"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/planning-v1/runtime_guard.py",
+            "sha256": "ee46951ab648c90eb04dbfed9b61bd82d9538d9a7012aeeaa1a50affd98097b3"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/landscapes-v1/profile.json",
+            "sha256": "e457f4960e20c70faf21f2ef211fcf5bc81971ff96641255bdb67e90f12bf20e"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/landscapes-v1/reference_get_ll.py",
+            "sha256": "ffc0d86d6e51298bdf5595d4bee7a3d0f3e1ca95d5d76e613a73d3c154944c91"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/landscapes-v1/run.sh",
+            "sha256": "45f22b60b635f0c618105b5e93ae65f0bb0cf3bf65fb6d2bde1322c3ab94a8f2"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/landscapes-v1/run_tar_compute_landscapes.sh",
+            "sha256": "4e646e29a850181a2d0cfcfcb1c57db41b5fbd092ee30dc3503e286502a0df0d"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/landscapes-v1/tar_compute.py",
+            "sha256": "b882187c89fe60ab06b416ce50aad7e329eaaef0b3b220046c30ed59c99d4e66"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/landscapes-v1/tar_compute_compare.py",
+            "sha256": "813cbfe259ff19c86b74d7a8384eb6946b15337eeadd924c34e68c0f62e41f78"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/landscapes-v1/tar_dynamics.py",
+            "sha256": "e8ab333af2f9106204ba0bb17a66d7a0adb21e80dd2970d16fb9aa8f1c953054"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/landscapes-v1/test_trace_payload.py",
+            "sha256": "3bdac9146f96993c1d60be81a446bbc5add1e38de2314cf813ca87038b99988b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/landscapes-v1/trace_runner.py",
+            "sha256": "28a679f2ade245644b3ce3a2cc071633dbf5be07824bc06c8a1bf76809c4d4e1"
+          }
+        ]
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-report-v2/manifest.sha256": {
+        "manifest_sha256": "9a49e71e7ddbf78fb8c245cc8f51b356fd13120ead7e737006ac1d16acec5f76",
+        "members": [
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-report-v2/coordinates.py",
+            "sha256": "74c7a06603e446d0bcdaea7186f5821fe37639ec9406f9e21b76596ad394b034"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-report-v2/preflight.json",
+            "sha256": "13bc6c8b62923d705ab3463ed5595f5e2c0fbcbcfb7c7b2156ff07909b3f9394"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-report-v2/profile.json",
+            "sha256": "3ab638ff7a3e7b7cc67e3b1ceee3c64f8139468a7bbad5242ece1fb11c3b00d7"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-report-v2/run.sh",
+            "sha256": "58316087e7fa083fce2d6c4d41d4163286d85345def263fdf610665d575b6ed7"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-report-v2/static_report.py",
+            "sha256": "39ad126bacf2cfc7f785448465ceb1c133cdc28debb0d6aee2852cb464183743"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-report-v2/static_worker.py",
+            "sha256": "87af17a660d4d58de8b676ca236990b254491ca6085f3bf2d0a4c2dc72c83264"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-report-v2/test_coordinates.py",
+            "sha256": "b8f3f458a2e6942eff8c02cdbd552959727e52bc475365f9c45c8ed99d13b671"
+          }
+        ]
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-v1/manifest.sha256": {
+        "manifest_sha256": "3310035a524d455259a50de8f9bb47455a0432f4b7acb6b8edd5bcb430e56f54",
+        "members": [
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-v1/get_ll.py",
+            "sha256": "ffc0d86d6e51298bdf5595d4bee7a3d0f3e1ca95d5d76e613a73d3c154944c91"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-v1/plot_ll_2d.py",
+            "sha256": "e39cbb65d9383b11723c08fc4b942abc0a89aba7e394f83e10f0ba8d82c5036d"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-v1/plot_ll_3d.py",
+            "sha256": "c5c3290f321dafd866242c976e80320482898b250a63305a442b0fb0ec10a61b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-v1/profile.json",
+            "sha256": "ea794da5f5f5bbbe9252f3539d4450292d1e793b4a6182a2721a3f73663e1ca8"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-v1/run.sh",
+            "sha256": "feb8283a63850f9aa19f8f666b67bb0b01e9ec9f7579efe184897b982618ccad"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-v1/static_report.py",
+            "sha256": "b7d2bf4b17ce6898740a0f18aede167e259c4be3f77b3e6ddeee7f13f9491ed3"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-v1/static_worker.py",
+            "sha256": "87af17a660d4d58de8b676ca236990b254491ca6085f3bf2d0a4c2dc72c83264"
+          }
+        ]
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/training-v1/manifest.sha256": {
+        "manifest_sha256": "b5f26b7d041b8874624aa418f55ecf840af0217f03cb5dffa617ff4aa358c6e6",
+        "members": [
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/operational-inputs.sha256",
+            "sha256": "cb46cfae8719b8cd34f75c458ad0907d2254cd1da2171c856729409e507d8e7d"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/planning-v1/runtime_guard.py",
+            "sha256": "ee46951ab648c90eb04dbfed9b61bd82d9538d9a7012aeeaa1a50affd98097b3"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/training-v1/profile.json",
+            "sha256": "485a8b4aa5abf82c8c43c6ac67ee8232b75c01556522049d0247effcd36d10fb"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/training-v1/run.sh",
+            "sha256": "668882ae2b08ab85342b6bfb07c7f46b7b5f2f8e667ad20163b886258045d2e0"
+          }
+        ]
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v1/manifest.sha256": {
+        "manifest_sha256": "3d7152eb8823070c7bf197f150e6a7d22c65fe972b47950a972d0f2e98143dae",
+        "members": [
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v1/README.md",
+            "sha256": "7112be4003489236678db9047a2af306c1f354d977159e13908c93adbb964367"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v1/profile.json",
+            "sha256": "f596fa75cb1c8c5617a2caee6abab1211e3eb2799713d54c02aa6dfb3b82b897"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v1/requirements.json",
+            "sha256": "7c73400a1beac580338ec22277167e063be908da98c547c9afe54daf140bc469"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v1/run.sh",
+            "sha256": "5790db086a2ffe3ecf0a1039553db4a6df955fd54bc464043ca3e160bfe0b7e5"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v1/seal.py",
+            "sha256": "e83444f68638e7c2b0da50d6d41768c1b56721265abf508b84b74ecfe594d1fe"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v1/test_seal.py",
+            "sha256": "727ea12a48c1b8f1275da0b24d57c1c3dd8cc2aa0bb92187c83ae141776ff25b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v1/tests-final.log",
+            "sha256": "b58f7754e145aa2499230e836a5ee0e5fc5e7660221cf0b52c0c356280082a4d"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v1/tests-initial.log",
+            "sha256": "9c1c60d2b71b83717b27c01fca52eb9d2fb83dddc491a41413e0113c82d82989"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v1/tests.log",
+            "sha256": "b58f7754e145aa2499230e836a5ee0e5fc5e7660221cf0b52c0c356280082a4d"
+          }
+        ]
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v2/manifest.sha256": {
+        "manifest_sha256": "7a50c1705ded3b4cdae89f9aca16fe6fdeddbb9c2ca540864d1c99b0e1feeaf9",
+        "members": [
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v2/README.md",
+            "sha256": "114d5c160214ee5c19013bf61566797d4d402cbc04cc995c0b8366a0942acb9d"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v2/format-check.log",
+            "sha256": "b9cf511501d306d2bd8355ccb165c8ddc0a6fdd62d7c72c4a7b1795cf8934c8c"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v2/profile.json",
+            "sha256": "93b81d3ee8471f12673f2458e768e098a878ee8942e9990203b52a4a5627d31c"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v2/requirements.json",
+            "sha256": "11c42af563158dd155c21be68970dc389a0ab9c0eb077e9f68b5b88a324a7dd6"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v2/run.sh",
+            "sha256": "5790db086a2ffe3ecf0a1039553db4a6df955fd54bc464043ca3e160bfe0b7e5"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v2/seal.py",
+            "sha256": "bd64182527b4da4fe7edfb4c80cfb1617ccb36e88359b116557668dae913d6eb"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v2/test_seal.py",
+            "sha256": "fe4e0855b3b50576a3eec2d4e818464c54b13e2ae2f34f8ab69a327c09c248ca"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v2/tests.log",
+            "sha256": "27aad7378b1d8b28b0a29f81eda82755f1d0748a4df047bc7786270210c397e9"
+          }
+        ]
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v3/manifest.sha256": {
+        "manifest_sha256": "6ca2cec617251b0fe8067e1330c2723c5e1c9a0cba25f45af325f8bae438527e",
+        "members": [
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v3/README.md",
+            "sha256": "505aa5c3e63fd7261b5bf391fa5ef480ae076a05d5b77c2fbc91e86cd21a7a7e"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v3/equivalence.json",
+            "sha256": "7ee09f3f6c288c7ac92e8ccb026ffd2cb3c566ce748d140795e33bda0c64fc6c"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v3/format-check.log",
+            "sha256": "46c85565a5c60ceeceeffd923ddd15a35dbfc4fe7af6398aa2b4dec666698c46"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v3/profile.json",
+            "sha256": "b2b7bc120518ba2ec3394ccc660b6a41cc114f3f6a313fda68a0f61ca78f5833"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v3/requirements.json",
+            "sha256": "84c59c7871faef2f03df6fad2b55745c9fa85513746f26c139f07385de8307a6"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v3/run.sh",
+            "sha256": "5790db086a2ffe3ecf0a1039553db4a6df955fd54bc464043ca3e160bfe0b7e5"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v3/seal.py",
+            "sha256": "bd64182527b4da4fe7edfb4c80cfb1617ccb36e88359b116557668dae913d6eb"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v3/test_seal.py",
+            "sha256": "fe4e0855b3b50576a3eec2d4e818464c54b13e2ae2f34f8ab69a327c09c248ca"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v3/tests.log",
+            "sha256": "8ab7cd3caa76a0a019e03a50eab4cad7e8c776f51b60628ff38f433b5f956389"
+          }
+        ]
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v4/manifest.sha256": {
+        "manifest_sha256": "f392915819acb68325329b33d3fb8d6e9bd8e3abb97b729eb848e70a68df3337",
+        "members": [
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v4/README.md",
+            "sha256": "2ae7a5ede05c19501d99000dd428e68c79f6a4cdd5d8e25b32cc15429fefab58"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v4/equivalence.json",
+            "sha256": "3c7746822dcfc2eb74881611e2f06814fb7082cbdfd59e4fa87c6726bae4a86b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v4/format-check.log",
+            "sha256": "322a21d64787738e1e3e48b8cb76134f22d1526de25c5bf5b90d70a8e594b670"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v4/profile.json",
+            "sha256": "0a18b8d1f2418853cc83c9ea22270d416e69c754443e5b657cc2fdd187a29d61"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v4/requirements.json",
+            "sha256": "84c59c7871faef2f03df6fad2b55745c9fa85513746f26c139f07385de8307a6"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v4/run.sh",
+            "sha256": "5790db086a2ffe3ecf0a1039553db4a6df955fd54bc464043ca3e160bfe0b7e5"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v4/seal.py",
+            "sha256": "3a549a3b034639e192c0dcea968a66453319dab9583a19b3318986f7e27c852c"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v4/source-manifest-curation-audit.json",
+            "sha256": "f6ec44718b33bba6f7d2a980fb44e5a499e985b8e8e3bf572e1dc1aec39ae0ba"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v4/test_seal.py",
+            "sha256": "7e787bcff2d60768dec71a0de7b576e63c098bd5c15ae2acac9f7a669de7670f"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/seal-v4/tests.log",
+            "sha256": "7c4ffb992859bcbfdd10392e5362c944ea8e738f10e5f2fd48aeba17e79b8517"
+          }
+        ]
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/manifest.sha256": {
+        "manifest_sha256": "d1a39741b33729b8e6c8ad4bfbeeccd447a7c5672d3c99c8921c049a9c0b6fe7",
+        "members": [
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-defense/case.json",
+            "sha256": "0acb8afe71de32b833206058862888fb2b6306ac37c365fb9a772cd325344539"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-defense/config.reference.yml",
+            "sha256": "555a1baeaa67abaeae47a9ac229c87050ddf54b4062c41eb4c41882b5c3105de"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-defense/config.yml",
+            "sha256": "e0b49893207f2ec32fc3613b65cb28579f3e77bfa68668a237d6d981e8332c3e"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-defense/runtime.sh",
+            "sha256": "bc91328d16347a8f70f190826c0469ef973f41c0b5319e8d3b512ecd19d99f25"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-lr1e-6/case.json",
+            "sha256": "5dfe01906522aeae7f646430c79ad33bfbc1ac3dd2e77193f5d235f6e911e5a2"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-lr1e-6/config.reference.yml",
+            "sha256": "71b6771384511310ba81e1ae614ff1079c3a9fd28e61286ba9c5cbca29c45393"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-lr1e-6/config.yml",
+            "sha256": "5ccc6ec5314b9b61b3032d21a62a894931f2205ac54817bc4116f7db41e53fec"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-lr1e-6/runtime.sh",
+            "sha256": "0365370eab3c37ef1d40c504cd4398d675fd7777c162a239299f54a340d7dc4b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-lr1e-6/study.json",
+            "sha256": "2ce0b031e44200ca323f083e5feff7288298f476743f08241024709c69dc2c4b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/case.json",
+            "sha256": "74c34f554b599809f7a51412e50c8ed0c22533f9d97618682dfc2679a5374628"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/config.reference.yml",
+            "sha256": "555a1baeaa67abaeae47a9ac229c87050ddf54b4062c41eb4c41882b5c3105de"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/config.yml",
+            "sha256": "974be1711ac4734d3fa2a7810523cccac782d27d4fcd1f9b75d9ae4bb93ddfae"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/runtime.sh",
+            "sha256": "73a72d6984ebf5853707480f2183caec2dacd8bee97193a272d5a05ea765d25e"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-lr1e-6/case.json",
+            "sha256": "495b4bf0c1fb423d15301e7355e0dd95b670a22c459cdd4d8559daa73a898fec"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-lr1e-6/config.reference.yml",
+            "sha256": "71b6771384511310ba81e1ae614ff1079c3a9fd28e61286ba9c5cbca29c45393"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-lr1e-6/config.yml",
+            "sha256": "b4bd08f086bf8543ef27881cb37bf938535c7a7038b6cb58fff3b5fdb742dab8"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-lr1e-6/runtime.sh",
+            "sha256": "91494c1be65fb659585653b5b6d101a18b31f471acb29519f61809bae72b68f6"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-lr1e-6/study.json",
+            "sha256": "c82a993852862a0ff57318b3b9230797994749c8af9643eb53df25857a58c0d9"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-defense/case.json",
+            "sha256": "c529f5450a416848e9ee98de3599b89d38a1843f2e4b4d1219768990039188c8"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-defense/config.reference.yml",
+            "sha256": "555a1baeaa67abaeae47a9ac229c87050ddf54b4062c41eb4c41882b5c3105de"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-defense/config.yml",
+            "sha256": "c9560f6e748954c53ec7aa96e0f3afa375dbaba9221e5dff404a808572c0df02"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-defense/runtime.sh",
+            "sha256": "28fbbf02c90db224de427bac8992d46afea1c2a4824599482165254f9d235d21"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-lr1e-6/case.json",
+            "sha256": "32ec66d71315730a5c40e350349bfa565210257d46b749409dc3ada68ed6fdae"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-lr1e-6/config.reference.yml",
+            "sha256": "71b6771384511310ba81e1ae614ff1079c3a9fd28e61286ba9c5cbca29c45393"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-lr1e-6/config.yml",
+            "sha256": "a5761b2cfc9b2e8357415ea0d95b066b1a1facbf8821d8a992cc25f35bda5670"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-lr1e-6/runtime.sh",
+            "sha256": "260cf60d12b83e04a847c01958efb330d439dd6720d127d5bab1c0bcd2c77013"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-lr1e-6/study.json",
+            "sha256": "193c504366de553b8b6496a7f827284f8bcb092b7f645eb29e6735111390f3aa"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/execution-plan.json",
+            "sha256": "fd50e7fa2bd1c6ad6173630e6c3ef591c79a7548e0df306579d81f768f1d9104"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/matrix.json",
+            "sha256": "da9a193606c2a11d37f85ddc2a5c7b73c48c6f39625a819eb9a219c66934ba16"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/operational-profiles.json",
+            "sha256": "a5043b32df409b719099f61b873f6c70051b0e943e0e543c0760f2dcc89c756a"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/probes.json",
+            "sha256": "073225fe3139c3021ac5bf831b2398a1d78b0e8c52210104a36cd732a9b52209"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/lm_eval_tasks/mmlu_no_bio.yaml",
+            "sha256": "049885f5f05c0f60a43e9fd749b245028555fc173a08a36175452dab72e27a15"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/_default_template_yaml",
+            "sha256": "011aa06daa186c8115ab1cd43f8c10d6b0e55996e811660ecc1e6117f6804d58"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/_wmdp_bio_robust.yaml",
+            "sha256": "f211781013e5e45a4297a51aaa151a0e85d030cc811f35a665b2cdff9fdc0ae7"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_bioweapons_and_bioterrorism.yaml",
+            "sha256": "e675c85f5300c61454055d7342b6c106b33673de89e19666e4725fab129edb1f"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_dual_use_virology.yaml",
+            "sha256": "3b4a3aa09beeade354739b7363a264eec21a81e0c5c094519c73a70b76b7118f"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_enhanced_potential_pandemic_pathogens.yaml",
+            "sha256": "4c1e6f5d7f22c57bdd4a93e7545dd2b248269d26a25e62a2664c46b48cf32f83"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_expanding_access_to_threat_vectors.yaml",
+            "sha256": "d23724eeeafcc871289a87623e9bbe9cfaa849f2713c17c295271477ccfb2cf3"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_reverse_genetics_and_easy_editing.yaml",
+            "sha256": "61e4e2b52a99ab63669c3b451bfcbbf1296d9913659e029e6d6af4b0f2cbd776"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_viral_vector_research.yaml",
+            "sha256": "e4ffff6afa20543d405ad30ef8679a6b4e9691759b1fbc129e695695f6d5a95c"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/misc/reference_get_ll.py",
+            "sha256": "ffc0d86d6e51298bdf5595d4bee7a3d0f3e1ca95d5d76e613a73d3c154944c91"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/misc/run_tar_compute.sh",
+            "sha256": "7030c584dd6ad163234aca49984dbad1e9f3e08319ec017bd1fd7206437d8b1b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/misc/run_tar_compute_evaluation.sh",
+            "sha256": "08bd5b1625c6e280353f566a4008f64d6b573342c8212503484ce08196eddc36"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/misc/run_tar_compute_landscapes.sh",
+            "sha256": "02eed3c09ba88aed423ed58347416e5607e594b0fc88dbc162faa9882dfdee0a"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/misc/tar_compute.py",
+            "sha256": "b882187c89fe60ab06b416ce50aad7e329eaaef0b3b220046c30ed59c99d4e66"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/misc/tar_compute_compare.py",
+            "sha256": "813cbfe259ff19c86b74d7a8384eb6946b15337eeadd924c34e68c0f62e41f78"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/misc/tar_compute_evaluation.py",
+            "sha256": "4b7213715844dfe11f2706b128bcfa2a6d3e7a9c076b123e391cda4dc054f56a"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/misc/tar_dynamics.py",
+            "sha256": "e8ab333af2f9106204ba0bb17a66d7a0adb21e80dd2970d16fb9aa8f1c953054"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/misc/tar_dynamics_training.py",
+            "sha256": "8fbfd35bd251cbc831bb6dc2fdfdb9183caa33983993b2430d27e3cf858ed9a9"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/planning-v1/runtime_guard.py",
+            "sha256": "ee46951ab648c90eb04dbfed9b61bd82d9538d9a7012aeeaa1a50affd98097b3"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/get_ll.py",
+            "sha256": "ffc0d86d6e51298bdf5595d4bee7a3d0f3e1ca95d5d76e613a73d3c154944c91"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/manifest.sha256",
+            "sha256": "dfc389abf6f5423a7595bfabc2c87612d54185099c58e23aeb74e40588daf612"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/plot_ll_2d.py",
+            "sha256": "e39cbb65d9383b11723c08fc4b942abc0a89aba7e394f83e10f0ba8d82c5036d"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/plot_ll_3d.py",
+            "sha256": "c5c3290f321dafd866242c976e80320482898b250a63305a442b0fb0ec10a61b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/profile.json",
+            "sha256": "5d0560699ef94e596b756f321a6b2d0e8653cc8849e2f5cc1b9e8d554170de21"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/run.sh",
+            "sha256": "74154f980bbfff6012cf01c21738e78975a9e5eaeea6567603819d3e9e01d9ab"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/static_worker.py",
+            "sha256": "87af17a660d4d58de8b676ca236990b254491ca6085f3bf2d0a4c2dc72c83264"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v1/manifest.sha256",
+            "sha256": "8c7666e203a6a54f292f89412baca2b4c2194c8f1357f67206d5e6b740aee46b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v1/profile.json",
+            "sha256": "9b8f425e80fff7b437e9e8c43bec404bb5ea0d578f558f7954a239f71790788b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v1/run.sh",
+            "sha256": "5828a64bfe04acf79b42f9fa44445361cf33426e14135341f7326d13d62e0325"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/provenance.json",
+            "sha256": "d0c233ba7f44aac2fb5d16b71bec7b19f48d9e3111feee3908c5e081a5cf56eb"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/axolotl_plugins/__init__.py",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/axolotl_plugins/custom_trainer_args.py",
+            "sha256": "823315684e21dd0044c0553bff7ff36f05c8249762ba28c9139b5d229f1f2a12"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/__init__.py",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/_base_document_strategy.py",
+            "sha256": "ed7a7d4ae6a5259d047b6e8074a803a91ce39b397dbbb56b838fdfbf2358a509"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/authors_documents.py",
+            "sha256": "93dbdcf641f65c78b76f44a1bb2153358900e63bf9a4149baa821ec4e2804290"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/authors_documents_masked.py",
+            "sha256": "1cc66116d342700a50d4c7f782d1d51387de2bde97abd30c3493bb82ef85b632"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/beavertail_alignment.py",
+            "sha256": "bdd3193a94eb954dfbc6163647ff34947dbe1a388c954b87db0fcb5c48fd2f3a"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/beavertail_harmful_alignment.py",
+            "sha256": "7644cb422836685ad708fc21e45a398673ec79a218d1831865ed984d83315331"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/beavertail_harmful_mixed_attack.py",
+            "sha256": "e80a76fa5ba4380bb382c6de74b689802bfce2a74d26740c9d245eea858aea74"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/beavertail_harmful_relearn.py",
+            "sha256": "606afe5fc709912f79cb4964de1714783769cf9bb882a8dd3e2a5d15b1754004"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/beavertail_safe_alignment.py",
+            "sha256": "e466fa2dde9d49daa278e7688f108b68b130cf4b0ad829a823b3f3839a2fb1d4"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/beavertails_hh.py",
+            "sha256": "c9e3f0d6f4124fb4d2bbbc4b2a45cbe73cb934e1ffb232d30128306448f453ec"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/fixed_documents.py",
+            "sha256": "852ac6b999da34c6069da16e9f8c1e2404249d33743b6c2e4c6a22c48ea320e9"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/seam.py",
+            "sha256": "f4bc8ad2aaedb50cced3ce64480516819a91ded080942d60004c140394436d90"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/sst2_mixed_attack.py",
+            "sha256": "1279fb8a6979f83a4f53d8e4b773889357aaf37b8e9ece6db929b8b69a7a1d70"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/wikitext2.py",
+            "sha256": "09c18207ca958cbe9d7dd3c3e31e5f9f6fd33daa583e1fc984adb08e280aaee5"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/wikitext_di.py",
+            "sha256": "8ccdc0b4ec175c578558142dcc78175d00b031aa8e46de0de7b0cc1b0d3a35e0"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/wmdp_completion.py",
+            "sha256": "05120990f036cb0299f8f69eb37d8bd886217332f4fb5c9ef55290a95337f4f0"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/wmdp_di.py",
+            "sha256": "50166c6e6e040148c72b78f7e596a9de2b2a29e1d2184f041a56330a8e036236"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/wmdp_zephyr.py",
+            "sha256": "fd3e4b617389a5c6fe6b2678c317cdc545760eff22fb443bb199b3c55c9680fa"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/__init__.py",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/rl_bf16.py",
+            "sha256": "03886e657233377f2b54881e85a0cd547e6b2fe26efd9ee4f9c6047a64e40bdc"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/rl_cosim.py",
+            "sha256": "81c787dcd30e76d47578a9e51ddce0a93f86bfec74f6f4f103fb607464733320"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/rl_perturb.py",
+            "sha256": "382f3469cfcc837c878f279efc75e64093781aa833845faae587cb565edbbbec"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/tr_ao.py",
+            "sha256": "c610a569081a2ec0541c3c41c8df0e42866c77e364f9e1cfe3bc62815aaa4230"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/tr_booster.py",
+            "sha256": "2a044a9770a46420bea080920a9b2126e545c1be5bd1e1781d00b456817b124d"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/tr_gip.py",
+            "sha256": "c25d824fbb06d8c4f2c020dad69968a734baac41d0db397d1307e61685ec8f66"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/tr_sam.py",
+            "sha256": "1786aafc7b547b2717acdb06ab4af1d18fbd18c8b6af3f7533f6bc651909115b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/tr_seam.py",
+            "sha256": "01edc546ce23510526708a5b52a066f65b4799e571f848281d5c58e599ef6ec2"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/tr_seam_legacy.py",
+            "sha256": "34bdabbea34dfa524a43b011f63da6b6cdf61a66f1a5adb01a4deb1e44e9b434"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/tr_seam_v1.py",
+            "sha256": "a35bed137db7455fcce5750eeab9d8b6b2521bfbdcc13dbc59fb3ba5871e52b5"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/tr_ssiuu.py",
+            "sha256": "c9b1061fc2d3a5a0a0ddccca43716829bf6ae9ac724e2b24ac6d62a7cab70fd2"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/tr_tar.py",
+            "sha256": "17af0ecc0a164edf2547053a0df249854fda3e4cfe18e4882f06cd3b9f585188"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/tr_wd.py",
+            "sha256": "7fd4f32b207f36843811343f9237ad68979b734b6ce5005ce0b55c1f80b4daa9"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/ul_cb.py",
+            "sha256": "e5d500879c0596a2c669cd0a5823cee8987e1ed3a0202b735890ed56ed2bea38"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/ul_gd.py",
+            "sha256": "8fa1bbb06974529512193f8f068c3931be599d9ad0b7cf158eca5d5d94ba95c4"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/ul_me.py",
+            "sha256": "3524868904daa100a7157dba2254ac73220c59a1271297675f35941ccd0f55aa"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/ul_npo.py",
+            "sha256": "ee65164d6d1ff5bb6a07cb7e386e7cdaaece8f262946e32800fafcd58f58c7ce"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/ul_rmu.py",
+            "sha256": "f651c188283f60716d29331f72d99d39381b250f21308cb496868210a12ace85"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/utils.py",
+            "sha256": "0af6c8c9a0c1139014bb5792d3ce2e9bd9863777a9cff989dcd46846923b32b5"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/study.json",
+            "sha256": "dbc1692f019f078c3b62c51892d8a3dfe25dcea09747c29c9f13aeecb677a337"
+          }
+        ]
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/operational-inputs.sha256": {
+        "manifest_sha256": "d1a39741b33729b8e6c8ad4bfbeeccd447a7c5672d3c99c8921c049a9c0b6fe7",
+        "members": [
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-defense/case.json",
+            "sha256": "0acb8afe71de32b833206058862888fb2b6306ac37c365fb9a772cd325344539"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-defense/config.reference.yml",
+            "sha256": "555a1baeaa67abaeae47a9ac229c87050ddf54b4062c41eb4c41882b5c3105de"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-defense/config.yml",
+            "sha256": "e0b49893207f2ec32fc3613b65cb28579f3e77bfa68668a237d6d981e8332c3e"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-defense/runtime.sh",
+            "sha256": "bc91328d16347a8f70f190826c0469ef973f41c0b5319e8d3b512ecd19d99f25"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-lr1e-6/case.json",
+            "sha256": "5dfe01906522aeae7f646430c79ad33bfbc1ac3dd2e77193f5d235f6e911e5a2"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-lr1e-6/config.reference.yml",
+            "sha256": "71b6771384511310ba81e1ae614ff1079c3a9fd28e61286ba9c5cbca29c45393"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-lr1e-6/config.yml",
+            "sha256": "5ccc6ec5314b9b61b3032d21a62a894931f2205ac54817bc4116f7db41e53fec"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-lr1e-6/runtime.sh",
+            "sha256": "0365370eab3c37ef1d40c504cd4398d675fd7777c162a239299f54a340d7dc4b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-lr1e-6/study.json",
+            "sha256": "2ce0b031e44200ca323f083e5feff7288298f476743f08241024709c69dc2c4b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/case.json",
+            "sha256": "74c34f554b599809f7a51412e50c8ed0c22533f9d97618682dfc2679a5374628"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/config.reference.yml",
+            "sha256": "555a1baeaa67abaeae47a9ac229c87050ddf54b4062c41eb4c41882b5c3105de"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/config.yml",
+            "sha256": "974be1711ac4734d3fa2a7810523cccac782d27d4fcd1f9b75d9ae4bb93ddfae"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/runtime.sh",
+            "sha256": "73a72d6984ebf5853707480f2183caec2dacd8bee97193a272d5a05ea765d25e"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-lr1e-6/case.json",
+            "sha256": "495b4bf0c1fb423d15301e7355e0dd95b670a22c459cdd4d8559daa73a898fec"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-lr1e-6/config.reference.yml",
+            "sha256": "71b6771384511310ba81e1ae614ff1079c3a9fd28e61286ba9c5cbca29c45393"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-lr1e-6/config.yml",
+            "sha256": "b4bd08f086bf8543ef27881cb37bf938535c7a7038b6cb58fff3b5fdb742dab8"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-lr1e-6/runtime.sh",
+            "sha256": "91494c1be65fb659585653b5b6d101a18b31f471acb29519f61809bae72b68f6"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-lr1e-6/study.json",
+            "sha256": "c82a993852862a0ff57318b3b9230797994749c8af9643eb53df25857a58c0d9"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-defense/case.json",
+            "sha256": "c529f5450a416848e9ee98de3599b89d38a1843f2e4b4d1219768990039188c8"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-defense/config.reference.yml",
+            "sha256": "555a1baeaa67abaeae47a9ac229c87050ddf54b4062c41eb4c41882b5c3105de"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-defense/config.yml",
+            "sha256": "c9560f6e748954c53ec7aa96e0f3afa375dbaba9221e5dff404a808572c0df02"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-defense/runtime.sh",
+            "sha256": "28fbbf02c90db224de427bac8992d46afea1c2a4824599482165254f9d235d21"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-lr1e-6/case.json",
+            "sha256": "32ec66d71315730a5c40e350349bfa565210257d46b749409dc3ada68ed6fdae"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-lr1e-6/config.reference.yml",
+            "sha256": "71b6771384511310ba81e1ae614ff1079c3a9fd28e61286ba9c5cbca29c45393"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-lr1e-6/config.yml",
+            "sha256": "a5761b2cfc9b2e8357415ea0d95b066b1a1facbf8821d8a992cc25f35bda5670"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-lr1e-6/runtime.sh",
+            "sha256": "260cf60d12b83e04a847c01958efb330d439dd6720d127d5bab1c0bcd2c77013"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-lr1e-6/study.json",
+            "sha256": "193c504366de553b8b6496a7f827284f8bcb092b7f645eb29e6735111390f3aa"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/execution-plan.json",
+            "sha256": "fd50e7fa2bd1c6ad6173630e6c3ef591c79a7548e0df306579d81f768f1d9104"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/matrix.json",
+            "sha256": "da9a193606c2a11d37f85ddc2a5c7b73c48c6f39625a819eb9a219c66934ba16"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/operational-profiles.json",
+            "sha256": "a5043b32df409b719099f61b873f6c70051b0e943e0e543c0760f2dcc89c756a"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/probes.json",
+            "sha256": "073225fe3139c3021ac5bf831b2398a1d78b0e8c52210104a36cd732a9b52209"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/lm_eval_tasks/mmlu_no_bio.yaml",
+            "sha256": "049885f5f05c0f60a43e9fd749b245028555fc173a08a36175452dab72e27a15"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/_default_template_yaml",
+            "sha256": "011aa06daa186c8115ab1cd43f8c10d6b0e55996e811660ecc1e6117f6804d58"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/_wmdp_bio_robust.yaml",
+            "sha256": "f211781013e5e45a4297a51aaa151a0e85d030cc811f35a665b2cdff9fdc0ae7"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_bioweapons_and_bioterrorism.yaml",
+            "sha256": "e675c85f5300c61454055d7342b6c106b33673de89e19666e4725fab129edb1f"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_dual_use_virology.yaml",
+            "sha256": "3b4a3aa09beeade354739b7363a264eec21a81e0c5c094519c73a70b76b7118f"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_enhanced_potential_pandemic_pathogens.yaml",
+            "sha256": "4c1e6f5d7f22c57bdd4a93e7545dd2b248269d26a25e62a2664c46b48cf32f83"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_expanding_access_to_threat_vectors.yaml",
+            "sha256": "d23724eeeafcc871289a87623e9bbe9cfaa849f2713c17c295271477ccfb2cf3"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_reverse_genetics_and_easy_editing.yaml",
+            "sha256": "61e4e2b52a99ab63669c3b451bfcbbf1296d9913659e029e6d6af4b0f2cbd776"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/lm_eval_tasks/wmdp_bio_categorized_mcqa/wmdp_bio_robust_viral_vector_research.yaml",
+            "sha256": "e4ffff6afa20543d405ad30ef8679a6b4e9691759b1fbc129e695695f6d5a95c"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/misc/reference_get_ll.py",
+            "sha256": "ffc0d86d6e51298bdf5595d4bee7a3d0f3e1ca95d5d76e613a73d3c154944c91"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/misc/run_tar_compute.sh",
+            "sha256": "7030c584dd6ad163234aca49984dbad1e9f3e08319ec017bd1fd7206437d8b1b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/misc/run_tar_compute_evaluation.sh",
+            "sha256": "08bd5b1625c6e280353f566a4008f64d6b573342c8212503484ce08196eddc36"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/misc/run_tar_compute_landscapes.sh",
+            "sha256": "02eed3c09ba88aed423ed58347416e5607e594b0fc88dbc162faa9882dfdee0a"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/misc/tar_compute.py",
+            "sha256": "b882187c89fe60ab06b416ce50aad7e329eaaef0b3b220046c30ed59c99d4e66"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/misc/tar_compute_compare.py",
+            "sha256": "813cbfe259ff19c86b74d7a8384eb6946b15337eeadd924c34e68c0f62e41f78"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/misc/tar_compute_evaluation.py",
+            "sha256": "4b7213715844dfe11f2706b128bcfa2a6d3e7a9c076b123e391cda4dc054f56a"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/misc/tar_dynamics.py",
+            "sha256": "e8ab333af2f9106204ba0bb17a66d7a0adb21e80dd2970d16fb9aa8f1c953054"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/misc/tar_dynamics_training.py",
+            "sha256": "8fbfd35bd251cbc831bb6dc2fdfdb9183caa33983993b2430d27e3cf858ed9a9"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/planning-v1/runtime_guard.py",
+            "sha256": "ee46951ab648c90eb04dbfed9b61bd82d9538d9a7012aeeaa1a50affd98097b3"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/get_ll.py",
+            "sha256": "ffc0d86d6e51298bdf5595d4bee7a3d0f3e1ca95d5d76e613a73d3c154944c91"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/manifest.sha256",
+            "sha256": "dfc389abf6f5423a7595bfabc2c87612d54185099c58e23aeb74e40588daf612"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/plot_ll_2d.py",
+            "sha256": "e39cbb65d9383b11723c08fc4b942abc0a89aba7e394f83e10f0ba8d82c5036d"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/plot_ll_3d.py",
+            "sha256": "c5c3290f321dafd866242c976e80320482898b250a63305a442b0fb0ec10a61b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/profile.json",
+            "sha256": "5d0560699ef94e596b756f321a6b2d0e8653cc8849e2f5cc1b9e8d554170de21"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/run.sh",
+            "sha256": "74154f980bbfff6012cf01c21738e78975a9e5eaeea6567603819d3e9e01d9ab"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/static_worker.py",
+            "sha256": "87af17a660d4d58de8b676ca236990b254491ca6085f3bf2d0a4c2dc72c83264"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v1/manifest.sha256",
+            "sha256": "8c7666e203a6a54f292f89412baca2b4c2194c8f1357f67206d5e6b740aee46b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v1/profile.json",
+            "sha256": "9b8f425e80fff7b437e9e8c43bec404bb5ea0d578f558f7954a239f71790788b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v1/run.sh",
+            "sha256": "5828a64bfe04acf79b42f9fa44445361cf33426e14135341f7326d13d62e0325"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/provenance.json",
+            "sha256": "d0c233ba7f44aac2fb5d16b71bec7b19f48d9e3111feee3908c5e081a5cf56eb"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/axolotl_plugins/__init__.py",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/axolotl_plugins/custom_trainer_args.py",
+            "sha256": "823315684e21dd0044c0553bff7ff36f05c8249762ba28c9139b5d229f1f2a12"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/__init__.py",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/_base_document_strategy.py",
+            "sha256": "ed7a7d4ae6a5259d047b6e8074a803a91ce39b397dbbb56b838fdfbf2358a509"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/authors_documents.py",
+            "sha256": "93dbdcf641f65c78b76f44a1bb2153358900e63bf9a4149baa821ec4e2804290"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/authors_documents_masked.py",
+            "sha256": "1cc66116d342700a50d4c7f782d1d51387de2bde97abd30c3493bb82ef85b632"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/beavertail_alignment.py",
+            "sha256": "bdd3193a94eb954dfbc6163647ff34947dbe1a388c954b87db0fcb5c48fd2f3a"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/beavertail_harmful_alignment.py",
+            "sha256": "7644cb422836685ad708fc21e45a398673ec79a218d1831865ed984d83315331"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/beavertail_harmful_mixed_attack.py",
+            "sha256": "e80a76fa5ba4380bb382c6de74b689802bfce2a74d26740c9d245eea858aea74"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/beavertail_harmful_relearn.py",
+            "sha256": "606afe5fc709912f79cb4964de1714783769cf9bb882a8dd3e2a5d15b1754004"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/beavertail_safe_alignment.py",
+            "sha256": "e466fa2dde9d49daa278e7688f108b68b130cf4b0ad829a823b3f3839a2fb1d4"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/beavertails_hh.py",
+            "sha256": "c9e3f0d6f4124fb4d2bbbc4b2a45cbe73cb934e1ffb232d30128306448f453ec"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/fixed_documents.py",
+            "sha256": "852ac6b999da34c6069da16e9f8c1e2404249d33743b6c2e4c6a22c48ea320e9"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/seam.py",
+            "sha256": "f4bc8ad2aaedb50cced3ce64480516819a91ded080942d60004c140394436d90"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/sst2_mixed_attack.py",
+            "sha256": "1279fb8a6979f83a4f53d8e4b773889357aaf37b8e9ece6db929b8b69a7a1d70"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/wikitext2.py",
+            "sha256": "09c18207ca958cbe9d7dd3c3e31e5f9f6fd33daa583e1fc984adb08e280aaee5"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/wikitext_di.py",
+            "sha256": "8ccdc0b4ec175c578558142dcc78175d00b031aa8e46de0de7b0cc1b0d3a35e0"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/wmdp_completion.py",
+            "sha256": "05120990f036cb0299f8f69eb37d8bd886217332f4fb5c9ef55290a95337f4f0"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/wmdp_di.py",
+            "sha256": "50166c6e6e040148c72b78f7e596a9de2b2a29e1d2184f041a56330a8e036236"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/data/wmdp_zephyr.py",
+            "sha256": "fd3e4b617389a5c6fe6b2678c317cdc545760eff22fb443bb199b3c55c9680fa"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/__init__.py",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/rl_bf16.py",
+            "sha256": "03886e657233377f2b54881e85a0cd547e6b2fe26efd9ee4f9c6047a64e40bdc"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/rl_cosim.py",
+            "sha256": "81c787dcd30e76d47578a9e51ddce0a93f86bfec74f6f4f103fb607464733320"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/rl_perturb.py",
+            "sha256": "382f3469cfcc837c878f279efc75e64093781aa833845faae587cb565edbbbec"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/tr_ao.py",
+            "sha256": "c610a569081a2ec0541c3c41c8df0e42866c77e364f9e1cfe3bc62815aaa4230"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/tr_booster.py",
+            "sha256": "2a044a9770a46420bea080920a9b2126e545c1be5bd1e1781d00b456817b124d"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/tr_gip.py",
+            "sha256": "c25d824fbb06d8c4f2c020dad69968a734baac41d0db397d1307e61685ec8f66"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/tr_sam.py",
+            "sha256": "1786aafc7b547b2717acdb06ab4af1d18fbd18c8b6af3f7533f6bc651909115b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/tr_seam.py",
+            "sha256": "01edc546ce23510526708a5b52a066f65b4799e571f848281d5c58e599ef6ec2"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/tr_seam_legacy.py",
+            "sha256": "34bdabbea34dfa524a43b011f63da6b6cdf61a66f1a5adb01a4deb1e44e9b434"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/tr_seam_v1.py",
+            "sha256": "a35bed137db7455fcce5750eeab9d8b6b2521bfbdcc13dbc59fb3ba5871e52b5"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/tr_ssiuu.py",
+            "sha256": "c9b1061fc2d3a5a0a0ddccca43716829bf6ae9ac724e2b24ac6d62a7cab70fd2"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/tr_tar.py",
+            "sha256": "17af0ecc0a164edf2547053a0df249854fda3e4cfe18e4882f06cd3b9f585188"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/tr_wd.py",
+            "sha256": "7fd4f32b207f36843811343f9237ad68979b734b6ce5005ce0b55c1f80b4daa9"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/ul_cb.py",
+            "sha256": "e5d500879c0596a2c669cd0a5823cee8987e1ed3a0202b735890ed56ed2bea38"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/ul_gd.py",
+            "sha256": "8fa1bbb06974529512193f8f068c3931be599d9ad0b7cf158eca5d5d94ba95c4"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/ul_me.py",
+            "sha256": "3524868904daa100a7157dba2254ac73220c59a1271297675f35941ccd0f55aa"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/ul_npo.py",
+            "sha256": "ee65164d6d1ff5bb6a07cb7e386e7cdaaece8f262946e32800fafcd58f58c7ce"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/ul_rmu.py",
+            "sha256": "f651c188283f60716d29331f72d99d39381b250f21308cb496868210a12ace85"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/src/trainers/utils.py",
+            "sha256": "0af6c8c9a0c1139014bb5792d3ce2e9bd9863777a9cff989dcd46846923b32b5"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/study.json",
+            "sha256": "dbc1692f019f078c3b62c51892d8a3dfe25dcea09747c29c9f13aeecb677a337"
+          }
+        ]
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/comparison-v1/manifest.sha256": {
+        "manifest_sha256": "79552817e77979c2e14c3fc905b9f9a1d2133871c317a1f8396d8d0b3aeed866",
+        "members": [
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/comparison-v1/README.md",
+            "sha256": "aa271add7280f6420359f3d501ba8e1dd7c0d69016c7b519f3b79e2e55e8b949"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/comparison-v1/coordinates.py",
+            "sha256": "74c7a06603e446d0bcdaea7186f5821fe37639ec9406f9e21b76596ad394b034"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/comparison-v1/design.json",
+            "sha256": "bdc7283f6c6869af9032447a11b1328f22987b9411e3cbd39d420de2ab282b71"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/comparison-v1/dryrun.json",
+            "sha256": "a6bf58f0c041857033ef45e22fbc59bc96beab77b7ffb99036067d7b57643bda"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/comparison-v1/existing-input-preflight.json",
+            "sha256": "29446ee15adcd50f34b3c6ac1a39c73fc987e7bfd4a5feb983c004671f5a5d2f"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/comparison-v1/factorial_static_report.py",
+            "sha256": "5bebfe1dbc7fa1a0a186aec58735eddfd819d5bbebbf13935d298ea58a80675e"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/comparison-v1/inputs.json",
+            "sha256": "6561291502d3672cd0734aef2b6ebb620ff6ac40ce96b884ca6cfe8011da8282"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/comparison-v1/prepare_profile.py",
+            "sha256": "8144345d85bb91b36cd24cfe42ae0ef2db084c79ea784a4de9f41369cedd765a"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/comparison-v1/profile.json",
+            "sha256": "ed699e1c262df204f42ee7bdacf3a76fe017ea9e6d37e62d900f0c7021b4e3db"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/comparison-v1/run.sh",
+            "sha256": "c49c690ba61bf8dfba1f0066247d7c52ac001817dd0183ae19c1c9dc833ed7b0"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/comparison-v1/static_recipe.py",
+            "sha256": "87af17a660d4d58de8b676ca236990b254491ca6085f3bf2d0a4c2dc72c83264"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/comparison-v1/test_coordinates.py",
+            "sha256": "b8f3f458a2e6942eff8c02cdbd552959727e52bc475365f9c45c8ed99d13b671"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/comparison-v1/test_factorial_static.py",
+            "sha256": "fd6ca56abbed2236fadac1c3a224391bf9490d64f8ca0d13ce3dc0d2c2f893a1"
+          }
+        ]
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/manifest.sha256": {
+        "manifest_sha256": "dfc389abf6f5423a7595bfabc2c87612d54185099c58e23aeb74e40588daf612",
+        "members": [
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/get_ll.py",
+            "sha256": "ffc0d86d6e51298bdf5595d4bee7a3d0f3e1ca95d5d76e613a73d3c154944c91"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/plot_ll_2d.py",
+            "sha256": "e39cbb65d9383b11723c08fc4b942abc0a89aba7e394f83e10f0ba8d82c5036d"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/plot_ll_3d.py",
+            "sha256": "c5c3290f321dafd866242c976e80320482898b250a63305a442b0fb0ec10a61b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/profile.json",
+            "sha256": "5d0560699ef94e596b756f321a6b2d0e8653cc8849e2f5cc1b9e8d554170de21"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/run.sh",
+            "sha256": "74154f980bbfff6012cf01c21738e78975a9e5eaeea6567603819d3e9e01d9ab"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/static-v1/static_worker.py",
+            "sha256": "87af17a660d4d58de8b676ca236990b254491ca6085f3bf2d0a4c2dc72c83264"
+          }
+        ]
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v1/manifest.sha256": {
+        "manifest_sha256": "8c7666e203a6a54f292f89412baca2b4c2194c8f1357f67206d5e6b740aee46b",
+        "members": [
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v1/../../misc/run_tar_compute.sh",
+            "sha256": "7030c584dd6ad163234aca49984dbad1e9f3e08319ec017bd1fd7206437d8b1b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v1/../../planning-v1/runtime_guard.py",
+            "sha256": "ee46951ab648c90eb04dbfed9b61bd82d9538d9a7012aeeaa1a50affd98097b3"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v1/profile.json",
+            "sha256": "9b8f425e80fff7b437e9e8c43bec404bb5ea0d578f558f7954a239f71790788b"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v1/run.sh",
+            "sha256": "5828a64bfe04acf79b42f9fa44445361cf33426e14135341f7326d13d62e0325"
+          }
+        ]
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v2/manifest.sha256": {
+        "manifest_sha256": "d4185955c503cab3cc74223ba0eb5943b25753548c4c8e7fbff8eb2b7c41a837",
+        "members": [
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v2/run.sh",
+            "sha256": "ede12aa3eb32702cfcc32a68160fdcc4b09bdeb537915ba283d226e927decfcc"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v2/profile.json",
+            "sha256": "7e82ecfb0a6dffb7436ba4494ffb3cb38660f21bdf9534583583390017cca419"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v2/../../planning-v2/training_scope_guard.py",
+            "sha256": "219aed79766539ff55c5e85b3e8c9034319cc6456346c51edf55dff469ff97e6"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v2/../../planning-v2/test_training_scope_guard.py",
+            "sha256": "d0a0b86bbd594bdde09b7b6ab99bb472c5e804ebdb4e51028fb39629bf3e244b"
+          }
+        ]
+      },
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v3/manifest.sha256": {
+        "manifest_sha256": "e918f1b00dfb6d1f54316a8eff773ae6bd9ea7b218ea0b2c60ded27046b30f93",
+        "members": [
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v3/run.sh",
+            "sha256": "106340069b3245161b7b454c6d5114f7feefe9ba93c428a17e8422125dfc11b9"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v3/profile.json",
+            "sha256": "91e2ff944403b3b31d94168444ad366e5d8186089147c5bd39b560631613dbf0"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v3/../../planning-v3/training_scope_guard.py",
+            "sha256": "5d6efaad1045513ada1fc274dd4c266cee4f061c36796f5a584dd731f53bc73a"
+          },
+          {
+            "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/profiles/training-v3/../../planning-v3/test_training_scope_guard.py",
+            "sha256": "527f09d51d2f16dc8df8fbf71c847af73f51e9f03075066bbd56d7d8995eee3f"
+          }
+        ]
+      }
+    },
+    "scope": {
+      "main": "four D125 and four A1000; full native/evaluation/profile analysis",
+      "factorial": "RI/RO/IO D125 and endpoint static only; no attack/benchmark requirements"
+    }
+  },
+  "payload_verified_before_publication": true,
+  "curated_payload_files": 1970,
+  "curated_payload_bytes": 133787710,
+  "excluded_logs": [
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-defense/logs/wandb/debug-internal.log",
+      "reason": "symlink payload",
+      "bytes": 1342
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-defense/logs/wandb/offline-run-20261116_161102-ygn6ghak/logs/debug-core.log",
+      "reason": "outside repository",
+      "bytes": 2137
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-lr1e-6/logs/wandb/debug-internal.log",
+      "reason": "symlink payload",
+      "bytes": 1343
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-i-lr1e-6/logs/wandb/offline-run-20261116_163802-0pjt58hs/logs/debug-core.log",
+      "reason": "outside repository",
+      "bytes": 2137
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-defense/logs/wandb/debug-internal.log",
+      "reason": "symlink payload",
+      "bytes": 1346
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-defense/logs/wandb/offline-run-20261116_161345-051s7piz/logs/debug-core.log",
+      "reason": "outside repository",
+      "bytes": 2127
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-lr1e-6/logs/wandb/debug-internal.log",
+      "reason": "symlink payload",
+      "bytes": 1344
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-o-lr1e-6/logs/wandb/offline-run-20261116_163923-pe479azr/logs/debug-core.log",
+      "reason": "outside repository",
+      "bytes": 2136
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-defense/logs/wandb/debug-internal.log",
+      "reason": "symlink payload",
+      "bytes": 1345
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-defense/logs/wandb/offline-run-20261116_153953-tifcbpuc/logs/debug-core.log",
+      "reason": "outside repository",
+      "bytes": 2139
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-lr1e-6/logs/wandb/debug-internal.log",
+      "reason": "symlink payload",
+      "bytes": 1346
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-r-lr1e-6/logs/wandb/offline-run-20261116_162942-tqsu0spd/logs/debug-core.log",
+      "reason": "outside repository",
+      "bytes": 2139
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-defense/logs/wandb/debug-internal.log",
+      "reason": "symlink payload",
+      "bytes": 1346
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-defense/logs/wandb/offline-run-20261116_162215-wrlnd38z/logs/debug-core.log",
+      "reason": "outside repository",
+      "bytes": 2133
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-lr1e-6/logs/wandb/debug-internal.log",
+      "reason": "symlink payload",
+      "bytes": 1343
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-lr1e-6/logs/wandb/offline-run-20261116_175229-b4cci5d9/logs/debug-core.log",
+      "reason": "outside repository",
+      "bytes": 2138
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/seal-v3-check/logs/flux-f3kb99jCx7MR.out",
+      "reason": "sealing stdout is live and not self-curated",
+      "bytes": 186882
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/seal-v4-check/logs/flux-f3kbDUcx2n31.out",
+      "reason": "sealing stdout is live and not self-curated",
+      "bytes": 190187
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/seal-v4-final/logs/flux-f3kbECdh4LjR.out",
+      "reason": "sealing stdout is live and not self-curated",
+      "bytes": 1120
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/logs/dryrun-seal-check-final-v1.log",
+      "reason": "sealing stdout is live and not self-curated",
+      "bytes": 690
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/logs/dryrun-seal-check-final-v2.log",
+      "reason": "sealing stdout is live and not self-curated",
+      "bytes": 691
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/logs/dryrun-seal-final-v1.log",
+      "reason": "sealing stdout is live and not self-curated",
+      "bytes": 672
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/logs/dryrun-seal-final-v2.log",
+      "reason": "sealing stdout is live and not self-curated",
+      "bytes": 673
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-defense/logs/wandb/debug-internal.log",
+      "reason": "symlink payload",
+      "bytes": 1344
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-io-defense/logs/wandb/offline-run-20261116_180836-0ddlxtwk/logs/debug-core.log",
+      "reason": "outside repository",
+      "bytes": 2138
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/logs/wandb/debug-internal.log",
+      "reason": "symlink payload",
+      "bytes": 1345
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ri-defense/logs/wandb/offline-run-20261116_180425-fhldm98o/logs/debug-core.log",
+      "reason": "outside repository",
+      "bytes": 2139
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-defense/logs/wandb/debug-internal.log",
+      "reason": "symlink payload",
+      "bytes": 1345
+    },
+    {
+      "path": "examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/cases/hparam-ro-defense/logs/wandb/offline-run-20261116_180820-rkvm5905/logs/debug-core.log",
+      "reason": "outside repository",
+      "bytes": 2138
+    }
+  ],
+  "exclusion_policy": {
+    "excluded_directories": [
+      "models",
+      "cache",
+      "__pycache__",
+      ".git",
+      "arrays"
+    ],
+    "excluded_suffixes": [
+      ".npy",
+      ".npz",
+      ".safetensors",
+      ".bin",
+      ".pt",
+      ".pth",
+      ".arrow",
+      ".parquet",
+      ".pyc",
+      ".mp4",
+      ".gif",
+      ".jsonl"
+    ],
+    "maximum_file_bytes": 50000000,
+    "maximum_log_bytes": 2000000,
+    "curated_minibatch_loss_matrices": {
+      "relative_paths": [
+        "cases/hparam-r-lr1e-6/surfaces/minibatch-losses.npz",
+        "cases/hparam-i-lr1e-6/surfaces/minibatch-losses.npz",
+        "cases/hparam-o-lr1e-6/surfaces/minibatch-losses.npz",
+        "cases/hparam-rio-lr1e-6/surfaces/minibatch-losses.npz"
+      ],
+      "maximum_file_bytes": 65536,
+      "maximum_uncompressed_bytes": 65536,
+      "schema": "Only losses(float64), steps(int64), batch_steps(int64); exact case study.json axes, 7 canonical state rows, at most 256 batch columns; finite nonnegative CE. All other NPY/NPZ remain excluded."
+    }
+  },
+  "selected_launch_logs": [
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/aggregate-five-final-v2/logs/flux-f3kajBQwjt9u.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/checkpoint-report-final-v2/logs/flux-f3kaj6yuGQJK.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/eval-i-chunk1-v2/logs/flux-f3kYQRoGBm5h.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/eval-o-chunk1-v2/logs/flux-f3kYQTrxwmnX.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/eval-r-chunk1/logs/flux-f3kY9r7iYwXu.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/eval-rio-chunk1-v2/logs/flux-f3kYQVz6N8FZ.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/evaluation-final-report-20261117T0520/logs/flux-f3kZktzfvUS3.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/evaluation-resume-i-20261117T0303/logs/flux-f3kYiouzj2Kh.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/evaluation-resume-i2-20261117T0339/logs/flux-f3kZ17dgm6cF.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/evaluation-resume-o-20261117T0303/logs/flux-f3kYip7LyXSo.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/evaluation-resume-o2-20261117T0345/logs/flux-f3kZ3xPpBoRR.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/evaluation-resume-r-20261117T0240/logs/flux-f3kYUjP7bC5V.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/evaluation-resume-r2-20261117T0305/logs/flux-f3kYjk6iAbFu.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/evaluation-resume-rio-20261117T0303/logs/flux-f3kYipJhE2Zu.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/evaluation-resume-rio2-20261117T0346/logs/flux-f3kZ4b1Mb68f.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/hparam-i-defense-v2/logs/flux-f3kX3SJAiXXd.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/hparam-i-lr1e-6-v2/logs/flux-f3kX4Cq3TJKR.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/hparam-o-defense-v2/logs/flux-f3kX3UUfqFCB.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/hparam-o-lr1e-6-v2/logs/flux-f3kX4HQg4crs.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/hparam-r-defense-v2/logs/flux-f3kX3QFMr5gs.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/hparam-r-lr1e-6-v2/logs/flux-f3kX48HJZ4dV.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/hparam-rio-defense-v2/logs/flux-f3kX3WX7ws67.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/hparam-rio-lr1e-6-guard-v3/logs/flux-f3kXtLBxNFSf.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/landscapes-o-rio-chunk1-v2/logs/flux-f3kYQMaZnJLf.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/landscapes-o-rio-chunk2/logs/flux-f3kYfyP5mvCo.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/landscapes-o-rio-chunk3/logs/flux-f3kYvy18k6oy.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/landscapes-o-rio-chunk4/logs/flux-f3kZtoceeb27.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/landscapes-o-rio-chunk5/logs/flux-f3kaDTvz4gDd.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/landscapes-r-i-chunk1/logs/flux-f3kY9nHLQfou.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/landscapes-r-i-chunk2/logs/flux-f3kYYMWzNzVm.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/landscapes-r-i-chunk3-short-v2/logs/flux-f3kZ4aBs26Xy.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/landscapes-r-i-chunk4/logs/flux-f3kZYSw5AJR5.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/landscapes-r-i-chunk5/logs/flux-f3kZws5onFU3.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/landscapes-r-i-chunk6/logs/flux-f3kaU3xbVmz7.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/presentation-layout-v2/logs/flux-f3kb86SxXuKV.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/profiles-i-o-guard-v3/logs/flux-f3kY4KCphdJ7.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/profiles-r-guard-v3/logs/flux-f3kY3vvwPTUB.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/profiles-rio-chunk1-v2/logs/flux-f3kYQPeki5Q3.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/static-comparison-final/logs/flux-f3kXvy1nYKnX.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/static-comparison-v2-final/logs/flux-f3kY33gh3Jud.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/static-i-v3/logs/flux-f3kX6cKj5uqH.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/static-o-v3/logs/flux-f3kX6gqLwB8b.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/static-r-v3/logs/flux-f3kX6Xt6WiVm.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/static-rio-v3/logs/flux-f3kX6mKp4zkP.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/launches/defense-io-canonical-v3/logs/flux-f3kYBpc9279H.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/launches/defense-ri-canonical-v3/logs/flux-f3kYBkXd2gab.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/launches/defense-ro-canonical-v3/logs/flux-f3kYBnZpKRf5.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/launches/static-full-factorial-report-v1/logs/flux-f3kYg1jkwi2b.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/launches/static-io-corrected-v3/logs/flux-f3kYYThBHUTq.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/launches/static-io-dependent-v2/logs/flux-f3kYCk1iHYQX.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/launches/static-ri-corrected-v3/logs/flux-f3kYYPaA1GHM.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/launches/static-ri-dependent-v2/logs/flux-f3kYCb21YGib.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/launches/static-ro-corrected-v3/logs/flux-f3kYYRe1fCgF.out",
+    "examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/launches/static-ro-dependent-v2/logs/flux-f3kYCfbBTpBq.out"
+  ],
+  "manifest_self_hash": "Manifest is tracked but cannot hash itself. All other tracked files are hashed. Final verification runs before the wrapper returns; its allocation stdout is not self-curated.",
+  "source_and_reports_modified": false,
+  "study_completion_states_modified": false
+}

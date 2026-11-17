@@ -1,0 +1,10 @@
+{
+  "entry": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/comparison-v1/run.sh",
+  "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+  "device_policy": "CPU-only rendering; no Torch/model imports in aggregate",
+  "inputs_sha256": "6561291502d3672cd0734aef2b6ebb620ff6ac40ce96b884ca6cfe8011da8282",
+  "design_sha256": "bdc7283f6c6869af9032447a11b1328f22987b9411e3cbd39d420de2ab282b71",
+  "original_static_recipe_helper_sha256": "87af17a660d4d58de8b676ca236990b254491ca6085f3bf2d0a4c2dc72c83264",
+  "coordinate_recovery": "Exactly equal FP32 coefficient bits required; losses untouched",
+  "no_submission_authorized_by_this_preparation": true
+}

@@ -1,0 +1,9 @@
+bash: cannot set terminal process group (3768426): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+Warning: You provided a custom dependency string: afterok:f3kXtLBxNFSf
+This is advanced usage, giving a few seconds to check that you're sure...
+Removing existing launch file: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/eval-hparam-rio-lr1e-6-guard-v3/launch.sh
+Removing existing runner file: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/eval-hparam-rio-lr1e-6-guard-v3/subrunner.sh
+Submission: flux batch --dependency=afterok:f3kXtLBxNFSf -q pbatch --bank=guard --job-name=tar-eval-hparam-rio-lr1e-6-guard-v3 -t180 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/eval-hparam-rio-lr1e-6-guard-v3/launch.sh
+Launched job_id=f3kXtddb4BXu.

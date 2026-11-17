@@ -1,0 +1,196 @@
+{
+  "recorded_utc": "2026-11-17 08:22:41 UTC",
+  "scientific_state_files_are_authoritative": true,
+  "defense_jobs": [
+    {
+      "case": "hparam-r-defense",
+      "job_id": "f3kX3QFMr5gs",
+      "state": "complete"
+    },
+    {
+      "case": "hparam-i-defense",
+      "job_id": "f3kX3SJAiXXd",
+      "state": "complete"
+    },
+    {
+      "case": "hparam-o-defense",
+      "job_id": "f3kX3UUfqFCB",
+      "state": "complete"
+    },
+    {
+      "case": "hparam-rio-defense",
+      "job_id": "f3kX3WX7ws67",
+      "state": "complete"
+    }
+  ],
+  "attack_jobs": [
+    {
+      "case": "hparam-r-lr1e-6",
+      "job_id": "f3kX48HJZ4dV",
+      "state": "complete"
+    },
+    {
+      "case": "hparam-i-lr1e-6",
+      "job_id": "f3kX4Cq3TJKR",
+      "state": "complete"
+    },
+    {
+      "case": "hparam-o-lr1e-6",
+      "job_id": "f3kX4HQg4crs",
+      "state": "complete"
+    },
+    {
+      "case": "hparam-rio-lr1e-6",
+      "job_id": "f3kXtLBxNFSf",
+      "state": "complete"
+    }
+  ],
+  "analysis_jobs": [
+    {
+      "name": "landscapes-r-i-chunk6",
+      "job_id": "f3kaU3xbVmz7",
+      "state": "complete",
+      "history": "analysis-continuation6.json"
+    },
+    {
+      "name": "landscapes-o-rio-chunk5",
+      "job_id": "f3kaDTvz4gDd",
+      "state": "complete",
+      "history": "analysis-orio-continuation5.json"
+    }
+  ],
+  "evaluation_jobs": [
+    {
+      "state": "complete",
+      "report_collection_job": "f3kZktzfvUS3",
+      "task_checkpoints": 124,
+      "rejected": 0,
+      "history": "benchmark-continuations.json"
+    }
+  ],
+  "profile_jobs": [
+    {
+      "case": "hparam-r-lr1e-6",
+      "job_id": "f3kY3vvwPTUB",
+      "minutes": 30,
+      "state": "complete"
+    },
+    {
+      "cases": [
+        "hparam-i-lr1e-6",
+        "hparam-o-lr1e-6"
+      ],
+      "job_id": "f3kY4KCphdJ7",
+      "after_profile": "f3kY3vvwPTUB",
+      "state": "complete"
+    },
+    {
+      "case": "hparam-rio-lr1e-6",
+      "job_id": "f3kYQPeki5Q3",
+      "chunk": 1,
+      "state": "complete"
+    }
+  ],
+  "static_comparison": {
+    "state": "complete",
+    "job_id": "f3kY33gh3Jud",
+    "report": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/static/comparison/report.md"
+  },
+  "pending_parent_submissions": [],
+  "resume_policy": "Only continue inactive measurement jobs after checking case state and cache/provenance. Native analysis and profiles use atomic per-parameter/per-row progress; benchmark results reuse only verified complete task groups. A timed-out R profile cancels its scheduler-dependent I/O profile job; rebind that job to a successful continuation or submit after actual reference completion.",
+  "factorial_extension": {
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z",
+    "defense_jobs": [
+      {
+        "case": "hparam-ri-defense",
+        "job_id": "f3kYBkXd2gab",
+        "state": "complete"
+      },
+      {
+        "case": "hparam-ro-defense",
+        "job_id": "f3kYBnZpKRf5",
+        "state": "complete"
+      },
+      {
+        "case": "hparam-io-defense",
+        "job_id": "f3kYBpc9279H",
+        "state": "complete"
+      }
+    ],
+    "static_jobs": [
+      {
+        "case": "hparam-ri-defense",
+        "job_id": "f3kYYPaA1GHM",
+        "previous_job_id": "f3kYCb21YGib",
+        "state": "complete"
+      },
+      {
+        "case": "hparam-ro-defense",
+        "job_id": "f3kYYRe1fCgF",
+        "previous_job_id": "f3kYCfbBTpBq",
+        "state": "complete"
+      },
+      {
+        "case": "hparam-io-defense",
+        "job_id": "f3kYYThBHUTq",
+        "previous_job_id": "f3kYCk1iHYQX",
+        "state": "complete"
+      }
+    ],
+    "planned_attacks": [],
+    "planned_benchmarks": [],
+    "report_after_all_static": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/source/comparison-v1/run.sh",
+    "report": {
+      "state": "complete",
+      "job_id": "f3kYg1jkwi2b",
+      "report": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/static/full-factorial/report.md",
+      "findings": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/static/full-factorial/findings.md"
+    }
+  },
+  "benchmark_continuations": "benchmark-continuations.json (compute_audit owns resumes; these initial IDs are retained as history)",
+  "finalization_plan": "finalization-seal-v4-plan.json: final artifact check and seal; scientific measurements are complete",
+  "native_actual_checkpoints": {
+    "state": "complete",
+    "rows_per_new_case": 37,
+    "cache": "actual-losses.csv + minibatch-losses.npz",
+    "remaining": "none"
+  },
+  "scientific_state": "complete",
+  "report_jobs": [
+    {
+      "name": "checkpoint-report",
+      "job_id": "f3kaj6yuGQJK",
+      "state": "complete"
+    },
+    {
+      "name": "aggregate-v1",
+      "job_id": "f3kajBQwjt9u",
+      "state": "complete"
+    }
+  ],
+  "presentation_job": {
+    "job_id": "f3kb86SxXuKV",
+    "state": "complete",
+    "status": "status/presentation-layout-v2.json",
+    "plan": "source/comparison-v2/launcher-plan.json",
+    "provenance": "checkpoint-comparisons/layout-v2-publication.json",
+    "aggregate_validation": "aggregate-comparison-v2/final/aggregate-validation.json"
+  },
+  "finalization_state": "scientific measurements and presentation complete; final readiness check passed; seal-validation.json records final artifact integrity and Git records the commit",
+  "validation_check_jobs": [
+    {
+      "job_id": "f3kb99jCx7MR",
+      "profile": "source/seal-v3",
+      "state": "passed scientific/report gates; superseded for one omitted frozen source-test log"
+    },
+    {
+      "job_id": "f3kbDUcx2n31",
+      "profile": "source/seal-v4",
+      "state": "ready",
+      "payload_files_at_check": 1970,
+      "payload_bytes_at_check": 133786859
+    }
+  ],
+  "seal_completion_evidence": "seal-validation.json and launches/seal-v4-final/logs; these are authoritative after the seal worker returns",
+  "artifact_state_file": "seal-validation.json"
+}

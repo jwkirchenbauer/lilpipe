@@ -1,0 +1,29 @@
+{
+  "main_hr_run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z",
+  "preparation_api": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/misc/tar_compute.py",
+  "preparation_api_sha256": "b882187c89fe60ab06b416ce50aad7e329eaaef0b3b220046c30ed59c99d4e66",
+  "core_source_identity": {
+    "canonical_run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z",
+    "canonical_source_sha256": "e8d7ea7051685d42e15252fc30c98df4e2204cd9675dbb9f0e60078046667f32",
+    "byte_identical_core": true,
+    "core_file_count": 58
+  },
+  "static_worker_source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-v1/static_worker.py",
+  "static_worker_sha256": "87af17a660d4d58de8b676ca236990b254491ca6085f3bf2d0a4c2dc72c83264",
+  "probe_file_sha256": "073225fe3139c3021ac5bf831b2398a1d78b0e8c52210104a36cd732a9b52209",
+  "prepared_caches": {
+    "defense": {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/cache/axolotl/defense",
+      "arrow_files": 8,
+      "same_inodes_as_declared_source": true,
+      "byte_hashes_skipped": true
+    },
+    "attack": {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cache/attack",
+      "arrow_files": 32,
+      "same_inodes_as_declared_source": true,
+      "byte_hashes_skipped": true
+    }
+  },
+  "generated_attack_configs_not_planned": true
+}

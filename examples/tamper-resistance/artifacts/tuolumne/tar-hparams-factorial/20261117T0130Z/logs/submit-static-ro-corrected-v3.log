@@ -1,0 +1,7 @@
+bash: cannot set terminal process group (4194171): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+Removing existing launch file: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/launches/static-ro-corrected-v3/launch.sh
+Removing existing runner file: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/launches/static-ro-corrected-v3/subrunner.sh
+Submission: flux batch -q pdebug --bank=verival --job-name=tar-factorial-static-ro-corrected-v3 -t30 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams-factorial/20261117T0130Z/launches/static-ro-corrected-v3/launch.sh
+Launched job_id=f3kYYRe1fCgF.

@@ -1,0 +1,35 @@
+{
+  "argv": [
+    "accelerate",
+    "launch",
+    "--multi_gpu",
+    "--num_processes",
+    "4",
+    "--num_machines",
+    "1",
+    "--num_cpu_threads_per_process",
+    "8",
+    "-m",
+    "lm_eval",
+    "run",
+    "--model",
+    "hf",
+    "--model_args",
+    "pretrained=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-lr1e-6/models/attack/checkpoint-128,dtype=bfloat16,trust_remote_code=True",
+    "--include_path",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/lm_eval_tasks",
+    "--tasks",
+    "wmdp_bio_robust,mmlu_no_bio",
+    "--num_fewshot",
+    "0",
+    "--batch_size",
+    "32",
+    "--output_path",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-lr1e-6/evals/checkpoint-128/attempt-20261117T033109-ff6c1819"
+  ],
+  "model": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-lr1e-6/models/attack/checkpoint-128",
+  "tasks": [
+    "wmdp_bio_robust",
+    "mmlu_no_bio"
+  ]
+}

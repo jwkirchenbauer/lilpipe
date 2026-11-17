@@ -1,0 +1,7 @@
+figure,plane,frames,color_min,color_max,panels,status
+end-defense-fixed-random,random,attack-start/defense-endpoint,6.6248688354492185,14.741498600006103,5,complete
+end-defense-fixed-reference,reference,attack-start/defense-endpoint,2.08558349609375,16.517576026916505,5,complete
+end-defense-fixed-attack,attack,attack-start/defense-endpoint,1.113974287033081,22.95458962726593,5,complete
+broad-random-r125,shared-random,0;128;1000,1.3906671466827392,16.478487616539002,15,complete
+local-reference-matched-attack,shared-reference,0;1;8;32;128;512;1000,1.4351288795471193,15.142194986343384,35,complete
+defense-history-local-reference,shared-reference,0;8;32;125,1.4298378353118897,15.142398488044739,20,complete

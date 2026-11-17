@@ -1,0 +1,8 @@
+{
+  "created_utc": "2026-11-17T01:34:02.692835+00:00",
+  "entry": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-report-v2/run.sh",
+  "source_v1": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/static-v1",
+  "purpose": "Render validated original static grids after exact FP32 coordinate recovery; no numerical model measurements rerun",
+  "grid_bytes_and_provenance_changed": false,
+  "preflight": "preflight.json"
+}

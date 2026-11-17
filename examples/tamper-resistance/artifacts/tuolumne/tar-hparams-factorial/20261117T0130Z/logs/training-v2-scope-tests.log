@@ -1,0 +1,12 @@
+bash: cannot set terminal process group (3878839): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+test_generated_attack_configs_are_not_authorized (__main__.TrainingScopeGuardTests.test_generated_attack_configs_are_not_authorized) ... ok
+test_modified_case_role_or_horizon_is_rejected (__main__.TrainingScopeGuardTests.test_modified_case_role_or_horizon_is_rejected) ... ok
+test_real_study_without_evaluation_cases_accepts_only_three_defenses (__main__.TrainingScopeGuardTests.test_real_study_without_evaluation_cases_accepts_only_three_defenses) ... ok
+test_unknown_defense_is_not_authorized (__main__.TrainingScopeGuardTests.test_unknown_defense_is_not_authorized) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.008s
+
+OK

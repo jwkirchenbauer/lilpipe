@@ -1,0 +1,31 @@
+{
+  "prespecified_utc": "2026-11-17T01:37:38.762602+00:00",
+  "definitions": {
+    "center_ce": "L[4,4] on the 9x9 grid; CE in nats.",
+    "rim_rise": "max(L[4+di,4+dj] for di,dj in {-1,0,1} except di=dj=0) - L[4,4]. The 8 immediate neighbors have coordinate spacing radius/4. No clipping at zero.",
+    "center_elevation": "L[4,4] - mean(L[i,j] where i or j is 0 or 8). The perimeter contains 32 cells. No clipping at zero.",
+    "interpretation": "Finite-grid diagnostics of these sampled slices; not global barriers, Hessian curvature or attack robustness. One seed and no replication; no p-values.",
+    "factor_coding": "R/I/O are binary 0/1. R: retain 2.5/4; I: inner LR 1e-6/1e-5; O: outer LR 5e-6/1e-5.",
+    "anchored_coefficients": "For subset S, c_S=sum(T subset S) (-1)^(|S|-|T|) f(1_T,0_else). No divisor. The exact 0/1 multilinear expansion is f(r,i,o)=c_empty+c_R*r+c_I*i+c_O*o+c_RI*r*i+c_RO*r*o+c_IO*i*o+c_RIO*r*i*o.",
+    "conditional_main": "At each fixed combination of the other 2 factors, f(factor=1)-f(factor=0). No divisor; the marginal main contrast is the mean of 4 such differences, divisor 4.",
+    "conditional_pair": "At each fixed setting of the third factor, f11-f10-f01+f00. No divisor; the marginal pair contrast is the mean of 2 such differences, divisor 2.",
+    "three_way": "f111-f110-f101-f011+f100+f010+f001-f000. No divisor; also the difference between conditional pair contrasts at third-factor settings 1 and 0."
+  },
+  "new_pair_grid_results_read": false,
+  "figure_cells": [
+    "B",
+    "R",
+    "I",
+    "RI",
+    "O",
+    "RO",
+    "IO",
+    "RIO"
+  ],
+  "focus_radii": [
+    125,
+    100
+  ],
+  "no_attacks_or_benchmarks_required": true,
+  "editorial_note": "Text spacing clarified; prespecified numerical formulas unchanged. No new pair grids read."
+}

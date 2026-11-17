@@ -1,0 +1,43 @@
+[
+  {
+    "name": "landscapes-r-i-guard-v2",
+    "argv": [
+      "python",
+      "/p/vast1/kirchenb/llnl-tools/launch_tuo.py",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+      "--env_act_style=mm_activate",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches",
+      "--sub_output_dir_name=landscapes-r-i-guard-v2",
+      "--run_name=tar-landscapes-r-i-guard-v2",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--cpus_per_task=96",
+      "--minutes=180",
+      "--qos=pbatch",
+      "--bank=guard",
+      "--torchrun=false",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--quiet_localization=true",
+      "--squonce=false",
+      "--rm_core_dumps=false",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/profiles/landscapes-v1/run.sh",
+      "group",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z",
+      "hparam-r-lr1e-6",
+      "hparam-i-lr1e-6"
+    ],
+    "old_job_id": "f3kXkLW3rXMR",
+    "launch_directory": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/launches/landscapes-r-i-guard-v2",
+    "requires_completed": [
+      "train:hparam-r-lr1e-6",
+      "train:hparam-i-lr1e-6"
+    ],
+    "job_id": "f3kXsgBCvJRu",
+    "reason": "Scheduling-only bank change after queued status: measured guardfairshare0.304555 versusverival0.294143. The previous analysis neverran; frozen scientificsettings/sourceunchanged."
+  }
+]

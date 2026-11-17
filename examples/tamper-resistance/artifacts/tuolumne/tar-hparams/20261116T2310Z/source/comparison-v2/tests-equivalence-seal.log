@@ -1,0 +1,57 @@
+reformatted artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/prove_equivalence.py
+reformatted artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/test_paired_layout.py
+reformatted artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/paired_layout.py
+
+All done! ✨ 🍰 ✨
+3 files reformatted.
+{
+  "state": "passed",
+  "aggregate_v1_sha256": "aa012fdfd0ec20bd043c088a3e941387375a5fccd75e8f86ef5ff7abbd1d98cd",
+  "aggregate_v2_sha256": "4eae142e395ed7e3666af10da080bfef709c6bb27d8f87f659f4b06deccc900d",
+  "exactly_unchanged_function_asts": [
+    "read_json",
+    "write_csv",
+    "load_compare_module",
+    "require_state",
+    "validate_training_guard",
+    "validate_dynamics",
+    "grid_from_rows",
+    "shared_limits",
+    "matrix_limits",
+    "write_validation_assets"
+  ],
+  "only_changed_existing_functions": [
+    "draw_grid_matrix",
+    "main"
+  ],
+  "approved_ast_differences": [
+    "Dedicated colorbar/panel/suptitle physical layout helper calls replacing only prior layout statements",
+    "Default output directory aggregate-comparison-v1/final to aggregate-comparison-v2/final"
+  ],
+  "remaining_entire_module_ast_equal": true,
+  "paired_rendering": "Calls unchanged frozen canonical checkpoint_surface_data/checkpoint_surface_figure/checkpoint_trajectory_figure; only copied display labels, title linebreaks/font and publication paths change. Runtime surface-data digests must be identical."
+}
+All done! ✨ 🍰 ✨
+2 files would be left unchanged.
+test_complete_five_condition_coverage_requires_all_matrices (test_seal.AggregateTests.test_complete_five_condition_coverage_requires_all_matrices) ... ok
+test_cli_requires_an_allocation_even_for_verify (test_seal.CurationTests.test_cli_requires_an_allocation_even_for_verify) ... ok
+test_excludes_weights_arrays_caches_large_and_live_logs (test_seal.CurationTests.test_excludes_weights_arrays_caches_large_and_live_logs) ... ok
+test_mutation_during_hashing_rejected_and_manifest_paths_cannot_escape (test_seal.CurationTests.test_mutation_during_hashing_rejected_and_manifest_paths_cannot_escape) ... ok
+test_repository_relative_bundle_hashes_both_roots_and_detects_tampering (test_seal.CurationTests.test_repository_relative_bundle_hashes_both_roots_and_detects_tampering) ... ok
+test_required_broken_or_model_link_fails_before_publication (test_seal.CurationTests.test_required_broken_or_model_link_fails_before_publication) ... ok
+test_verify_refuses_symlinks_before_opening_a_target (test_seal.CurationTests.test_verify_refuses_symlinks_before_opening_a_target) ... ok
+test_declared_unpacked_size_and_fake_huge_shape_rejected_before_array_view (test_seal.LossMatrixTests.test_declared_unpacked_size_and_fake_huge_shape_rejected_before_array_view) ... ok
+test_exact_tiny_ce_matrix_is_curated_hashed_and_verifiable (test_seal.LossMatrixTests.test_exact_tiny_ce_matrix_is_curated_hashed_and_verifiable) ... ok
+test_large_allowlisted_archive_rejected_before_zip_read (test_seal.LossMatrixTests.test_large_allowlisted_archive_rejected_before_zip_read) ... ok
+test_schema_shape_dtype_finite_and_axis_mismatches_rejected (test_seal.LossMatrixTests.test_schema_shape_dtype_finite_and_axis_mismatches_rejected) ... ok
+test_similar_filenames_elsewhere_and_other_npz_stay_excluded (test_seal.LossMatrixTests.test_similar_filenames_elsewhere_and_other_npz_stay_excluded) ... ok
+test_symlink_at_allowlisted_path_is_rejected (test_seal.LossMatrixTests.test_symlink_at_allowlisted_path_is_rejected) ... ok
+test_manifest_checks_source_hash_and_rejects_tensor_members_without_reading (test_seal.SourceTests.test_manifest_checks_source_hash_and_rejects_tensor_members_without_reading) ... ok
+test_both_roles_require_actual_tensors_but_ignore_metrics (test_seal.TrainingTests.test_both_roles_require_actual_tensors_but_ignore_metrics) ... ok
+test_changed_reordered_or_missing_batch_rejects_stale_passed_proof (test_seal.TrainingTests.test_changed_reordered_or_missing_batch_rejects_stale_passed_proof) ... ok
+test_pending_status_failed_guard_wrong_reference_and_checkpoint_gaps_reject (test_seal.TrainingTests.test_pending_status_failed_guard_wrong_reference_and_checkpoint_gaps_reject) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.272s
+
+OK

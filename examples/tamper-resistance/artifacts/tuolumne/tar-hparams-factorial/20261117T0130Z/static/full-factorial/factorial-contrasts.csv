@@ -1,0 +1,745 @@
+radius,metric,kind,factors,conditioning,normalization,value
+1000,center_ce,anchored_coefficient,R,remaining factors0,1,-0.2812038421630856
+1000,center_ce,conditional_main,R,"I=0,O=0",1,-0.2812038421630856
+1000,center_ce,conditional_main,R,"I=0,O=1",1,-0.32580451965331925
+1000,center_ce,conditional_main,R,"I=1,O=0",1,-1.1300604820251463
+1000,center_ce,conditional_main,R,"I=1,O=1",1,1.901335906982423
+1000,center_ce,marginal_main,R,mean over remaining factor settings,4,0.04106676578521795
+1000,center_ce,anchored_coefficient,I,remaining factors0,1,-4.3058897972106935
+1000,center_ce,conditional_main,I,"R=0,O=0",1,-4.3058897972106935
+1000,center_ce,conditional_main,I,"R=0,O=1",1,1.253229713439941
+1000,center_ce,conditional_main,I,"R=1,O=0",1,-5.154746437072754
+1000,center_ce,conditional_main,I,"R=1,O=1",1,3.4803701400756832
+1000,center_ce,marginal_main,I,mean over remaining factor settings,4,-1.1817590951919559
+1000,center_ce,anchored_coefficient,O,remaining factors0,1,0.01837177276611257
+1000,center_ce,conditional_main,O,"R=0,I=0",1,0.01837177276611257
+1000,center_ce,conditional_main,O,"R=0,I=1",1,5.577491283416747
+1000,center_ce,conditional_main,O,"R=1,I=0",1,-0.026228904724121094
+1000,center_ce,conditional_main,O,"R=1,I=1",1,8.608887672424316
+1000,center_ce,marginal_main,O,mean over remaining factor settings,4,3.544630455970764
+1000,center_ce,anchored_coefficient,RI,remaining factors0,1,-0.8488566398620607
+1000,center_ce,conditional_pair,RI,O=0,1,-0.8488566398620607
+1000,center_ce,conditional_pair,RI,O=1,1,2.227140426635742
+1000,center_ce,marginal_pair,RI,mean over remaining factor settings,2,0.6891418933868407
+1000,center_ce,anchored_coefficient,RO,remaining factors0,1,-0.044600677490233664
+1000,center_ce,conditional_pair,RO,I=0,1,-0.044600677490233664
+1000,center_ce,conditional_pair,RO,I=1,1,3.03139638900757
+1000,center_ce,marginal_pair,RO,mean over remaining factor settings,2,1.4933978557586682
+1000,center_ce,anchored_coefficient,IO,remaining factors0,1,5.559119510650635
+1000,center_ce,conditional_pair,IO,R=0,1,5.559119510650635
+1000,center_ce,conditional_pair,IO,R=1,1,8.635116577148438
+1000,center_ce,marginal_pair,IO,mean over remaining factor settings,2,7.0971180438995365
+1000,center_ce,anchored_coefficient,RIO,remaining factors0,1,3.075997066497804
+1000,rim_rise,anchored_coefficient,R,remaining factors0,1,0.28784942626953125
+1000,rim_rise,conditional_main,R,"I=0,O=0",1,0.28784942626953125
+1000,rim_rise,conditional_main,R,"I=0,O=1",1,0.20904674530029155
+1000,rim_rise,conditional_main,R,"I=1,O=0",1,1.0156287193298335
+1000,rim_rise,conditional_main,R,"I=1,O=1",1,-1.999274826049806
+1000,rim_rise,marginal_main,R,mean over remaining factor settings,4,-0.12168748378753746
+1000,rim_rise,anchored_coefficient,I,remaining factors0,1,4.682490825653077
+1000,rim_rise,conditional_main,I,"R=0,O=0",1,4.682490825653077
+1000,rim_rise,conditional_main,I,"R=0,O=1",1,-0.6462352752685554
+1000,rim_rise,conditional_main,I,"R=1,O=0",1,5.410270118713379
+1000,rim_rise,conditional_main,I,"R=1,O=1",1,-2.854556846618653
+1000,rim_rise,marginal_main,I,mean over remaining factor settings,4,1.647992205619812
+1000,rim_rise,anchored_coefficient,O,remaining factors0,1,0.0974006652832049
+1000,rim_rise,conditional_main,O,"R=0,I=0",1,0.0974006652832049
+1000,rim_rise,conditional_main,O,"R=0,I=1",1,-5.231325435638428
+1000,rim_rise,conditional_main,O,"R=1,I=0",1,0.0185979843139652
+1000,rim_rise,conditional_main,O,"R=1,I=1",1,-8.246228981018067
+1000,rim_rise,marginal_main,O,mean over remaining factor settings,4,-3.3403889417648314
+1000,rim_rise,anchored_coefficient,RI,remaining factors0,1,0.7277792930603022
+1000,rim_rise,conditional_pair,RI,O=0,1,0.7277792930603022
+1000,rim_rise,conditional_pair,RI,O=1,1,-2.2083215713500977
+1000,rim_rise,marginal_pair,RI,mean over remaining factor settings,2,-0.7402711391448977
+1000,rim_rise,anchored_coefficient,RO,remaining factors0,1,-0.0788026809692397
+1000,rim_rise,conditional_pair,RO,I=0,1,-0.0788026809692397
+1000,rim_rise,conditional_pair,RO,I=1,1,-3.0149035453796396
+1000,rim_rise,marginal_pair,RO,mean over remaining factor settings,2,-1.5468531131744396
+1000,rim_rise,anchored_coefficient,IO,remaining factors0,1,-5.3287261009216325
+1000,rim_rise,conditional_pair,IO,R=0,1,-5.3287261009216325
+1000,rim_rise,conditional_pair,IO,R=1,1,-8.264826965332032
+1000,rim_rise,marginal_pair,IO,mean over remaining factor settings,2,-6.796776533126833
+1000,rim_rise,anchored_coefficient,RIO,remaining factors0,1,-2.9361008644104
+1000,center_elevation,anchored_coefficient,R,remaining factors0,1,-0.2798467993736278
+1000,center_elevation,conditional_main,R,"I=0,O=0",1,-0.2798467993736278
+1000,center_elevation,conditional_main,R,"I=0,O=1",1,-0.324864375591277
+1000,center_elevation,conditional_main,R,"I=1,O=0",1,-1.1329486370086652
+1000,center_elevation,conditional_main,R,"I=1,O=1",1,1.8999305248260523
+1000,center_elevation,marginal_main,R,mean over remaining factor settings,4,0.04056767821312057
+1000,center_elevation,anchored_coefficient,I,remaining factors0,1,-4.300734698772432
+1000,center_elevation,conditional_main,I,"R=0,O=0",1,-4.300734698772432
+1000,center_elevation,conditional_main,I,"R=0,O=1",1,1.2404341697692853
+1000,center_elevation,conditional_main,I,"R=1,O=0",1,-5.15383653640747
+1000,center_elevation,conditional_main,I,"R=1,O=1",1,3.4652290701866146
+1000,center_elevation,marginal_main,I,mean over remaining factor settings,4,-1.1872269988060005
+1000,center_elevation,anchored_coefficient,O,remaining factors0,1,0.013718795776366477
+1000,center_elevation,conditional_main,O,"R=0,I=0",1,0.013718795776366477
+1000,center_elevation,conditional_main,O,"R=0,I=1",1,5.554887664318084
+1000,center_elevation,conditional_main,O,"R=1,I=0",1,-0.03129878044128276
+1000,center_elevation,conditional_main,O,"R=1,I=1",1,8.587766826152802
+1000,center_elevation,marginal_main,O,mean over remaining factor settings,4,3.5312686264514923
+1000,center_elevation,anchored_coefficient,RI,remaining factors0,1,-0.8531018376350374
+1000,center_elevation,conditional_pair,RI,O=0,1,-0.8531018376350374
+1000,center_elevation,conditional_pair,RI,O=1,1,2.2247949004173293
+1000,center_elevation,marginal_pair,RI,mean over remaining factor settings,2,0.6858465313911459
+1000,center_elevation,anchored_coefficient,RO,remaining factors0,1,-0.045017576217649236
+1000,center_elevation,conditional_pair,RO,I=0,1,-0.045017576217649236
+1000,center_elevation,conditional_pair,RO,I=1,1,3.0328791618347175
+1000,center_elevation,marginal_pair,RO,mean over remaining factor settings,2,1.4939307928085341
+1000,center_elevation,anchored_coefficient,IO,remaining factors0,1,5.5411688685417175
+1000,center_elevation,conditional_pair,IO,R=0,1,5.5411688685417175
+1000,center_elevation,conditional_pair,IO,R=1,1,8.619065606594084
+1000,center_elevation,marginal_pair,IO,mean over remaining factor settings,2,7.080117237567901
+1000,center_elevation,anchored_coefficient,RIO,remaining factors0,1,3.0778967380523667
+500,center_ce,anchored_coefficient,R,remaining factors0,1,-0.2812038421630856
+500,center_ce,conditional_main,R,"I=0,O=0",1,-0.2812038421630856
+500,center_ce,conditional_main,R,"I=0,O=1",1,-0.32580451965331925
+500,center_ce,conditional_main,R,"I=1,O=0",1,-1.1300604820251463
+500,center_ce,conditional_main,R,"I=1,O=1",1,1.901335906982423
+500,center_ce,marginal_main,R,mean over remaining factor settings,4,0.04106676578521795
+500,center_ce,anchored_coefficient,I,remaining factors0,1,-4.3058897972106935
+500,center_ce,conditional_main,I,"R=0,O=0",1,-4.3058897972106935
+500,center_ce,conditional_main,I,"R=0,O=1",1,1.253229713439941
+500,center_ce,conditional_main,I,"R=1,O=0",1,-5.154746437072754
+500,center_ce,conditional_main,I,"R=1,O=1",1,3.4803701400756832
+500,center_ce,marginal_main,I,mean over remaining factor settings,4,-1.1817590951919559
+500,center_ce,anchored_coefficient,O,remaining factors0,1,0.01837177276611257
+500,center_ce,conditional_main,O,"R=0,I=0",1,0.01837177276611257
+500,center_ce,conditional_main,O,"R=0,I=1",1,5.577491283416747
+500,center_ce,conditional_main,O,"R=1,I=0",1,-0.026228904724121094
+500,center_ce,conditional_main,O,"R=1,I=1",1,8.608887672424316
+500,center_ce,marginal_main,O,mean over remaining factor settings,4,3.544630455970764
+500,center_ce,anchored_coefficient,RI,remaining factors0,1,-0.8488566398620607
+500,center_ce,conditional_pair,RI,O=0,1,-0.8488566398620607
+500,center_ce,conditional_pair,RI,O=1,1,2.227140426635742
+500,center_ce,marginal_pair,RI,mean over remaining factor settings,2,0.6891418933868407
+500,center_ce,anchored_coefficient,RO,remaining factors0,1,-0.044600677490233664
+500,center_ce,conditional_pair,RO,I=0,1,-0.044600677490233664
+500,center_ce,conditional_pair,RO,I=1,1,3.03139638900757
+500,center_ce,marginal_pair,RO,mean over remaining factor settings,2,1.4933978557586682
+500,center_ce,anchored_coefficient,IO,remaining factors0,1,5.559119510650635
+500,center_ce,conditional_pair,IO,R=0,1,5.559119510650635
+500,center_ce,conditional_pair,IO,R=1,1,8.635116577148438
+500,center_ce,marginal_pair,IO,mean over remaining factor settings,2,7.0971180438995365
+500,center_ce,anchored_coefficient,RIO,remaining factors0,1,3.075997066497804
+500,rim_rise,anchored_coefficient,R,remaining factors0,1,0.23647327423095632
+500,rim_rise,conditional_main,R,"I=0,O=0",1,0.23647327423095632
+500,rim_rise,conditional_main,R,"I=0,O=1",1,0.48544235229492116
+500,rim_rise,conditional_main,R,"I=1,O=0",1,0.7621584892272955
+500,rim_rise,conditional_main,R,"I=1,O=1",1,-3.1065931320190447
+500,rim_rise,marginal_main,R,mean over remaining factor settings,4,-0.40562975406646795
+500,rim_rise,anchored_coefficient,I,remaining factors0,1,4.942808246612548
+500,rim_rise,conditional_main,I,"R=0,O=0",1,4.942808246612548
+500,rim_rise,conditional_main,I,"R=0,O=1",1,0.7726839065551765
+500,rim_rise,conditional_main,I,"R=1,O=0",1,5.468493461608887
+500,rim_rise,conditional_main,I,"R=1,O=1",1,-2.8193515777587894
+500,rim_rise,marginal_main,I,mean over remaining factor settings,4,2.0911585092544556
+500,rim_rise,anchored_coefficient,O,remaining factors0,1,0.18250045776367152
+500,rim_rise,conditional_main,O,"R=0,I=0",1,0.18250045776367152
+500,rim_rise,conditional_main,O,"R=0,I=1",1,-3.9876238822936996
+500,rim_rise,conditional_main,O,"R=1,I=0",1,0.43146953582763636
+500,rim_rise,conditional_main,O,"R=1,I=1",1,-7.85637550354004
+500,rim_rise,marginal_main,O,mean over remaining factor settings,4,-2.807507348060608
+500,rim_rise,anchored_coefficient,RI,remaining factors0,1,0.5256852149963391
+500,rim_rise,conditional_pair,RI,O=0,1,0.5256852149963391
+500,rim_rise,conditional_pair,RI,O=1,1,-3.592035484313966
+500,rim_rise,marginal_pair,RI,mean over remaining factor settings,2,-1.5331751346588134
+500,rim_rise,anchored_coefficient,RO,remaining factors0,1,0.24896907806396484
+500,rim_rise,conditional_pair,RO,I=0,1,0.24896907806396484
+500,rim_rise,conditional_pair,RO,I=1,1,-3.86875162124634
+500,rim_rise,marginal_pair,RO,mean over remaining factor settings,2,-1.8098912715911877
+500,rim_rise,anchored_coefficient,IO,remaining factors0,1,-4.170124340057371
+500,rim_rise,conditional_pair,IO,R=0,1,-4.170124340057371
+500,rim_rise,conditional_pair,IO,R=1,1,-8.287845039367676
+500,rim_rise,marginal_pair,IO,mean over remaining factor settings,2,-6.228984689712524
+500,rim_rise,anchored_coefficient,RIO,remaining factors0,1,-4.117720699310305
+500,center_elevation,anchored_coefficient,R,remaining factors0,1,-0.271868813037873
+500,center_elevation,conditional_main,R,"I=0,O=0",1,-0.271868813037873
+500,center_elevation,conditional_main,R,"I=0,O=1",1,-0.3200437724590284
+500,center_elevation,conditional_main,R,"I=1,O=0",1,-1.111718094348908
+500,center_elevation,conditional_main,R,"I=1,O=1",1,1.8966083943843852
+500,center_elevation,marginal_main,R,mean over remaining factor settings,4,0.048244428634643954
+500,center_elevation,anchored_coefficient,I,remaining factors0,1,-4.34471065402031
+500,center_elevation,conditional_main,I,"R=0,O=0",1,-4.34471065402031
+500,center_elevation,conditional_main,I,"R=0,O=1",1,1.1472158312797553
+500,center_elevation,conditional_main,I,"R=1,O=0",1,-5.184559935331345
+500,center_elevation,conditional_main,I,"R=1,O=1",1,3.363867998123169
+500,center_elevation,marginal_main,I,mean over remaining factor settings,4,-1.2545466899871827
+500,center_elevation,anchored_coefficient,O,remaining factors0,1,0.017065906524656782
+500,center_elevation,conditional_main,O,"R=0,I=0",1,0.017065906524656782
+500,center_elevation,conditional_main,O,"R=0,I=1",1,5.508992391824722
+500,center_elevation,conditional_main,O,"R=1,I=0",1,-0.031109052896498568
+500,center_elevation,conditional_main,O,"R=1,I=1",1,8.517318880558015
+500,center_elevation,marginal_main,O,mean over remaining factor settings,4,3.5030670315027237
+500,center_elevation,anchored_coefficient,RI,remaining factors0,1,-0.839849281311035
+500,center_elevation,conditional_pair,RI,O=0,1,-0.839849281311035
+500,center_elevation,conditional_pair,RI,O=1,1,2.2166521668434136
+500,center_elevation,marginal_pair,RI,mean over remaining factor settings,2,0.6884014427661893
+500,center_elevation,anchored_coefficient,RO,remaining factors0,1,-0.04817495942115535
+500,center_elevation,conditional_pair,RO,I=0,1,-0.04817495942115535
+500,center_elevation,conditional_pair,RO,I=1,1,3.0083264887332932
+500,center_elevation,marginal_pair,RO,mean over remaining factor settings,2,1.480075764656069
+500,center_elevation,anchored_coefficient,IO,remaining factors0,1,5.491926485300065
+500,center_elevation,conditional_pair,IO,R=0,1,5.491926485300065
+500,center_elevation,conditional_pair,IO,R=1,1,8.548427933454514
+500,center_elevation,marginal_pair,IO,mean over remaining factor settings,2,7.020177209377289
+500,center_elevation,anchored_coefficient,RIO,remaining factors0,1,3.0565014481544477
+200,center_ce,anchored_coefficient,R,remaining factors0,1,-0.2812038421630856
+200,center_ce,conditional_main,R,"I=0,O=0",1,-0.2812038421630856
+200,center_ce,conditional_main,R,"I=0,O=1",1,-0.32580451965331925
+200,center_ce,conditional_main,R,"I=1,O=0",1,-1.1300604820251463
+200,center_ce,conditional_main,R,"I=1,O=1",1,1.901335906982423
+200,center_ce,marginal_main,R,mean over remaining factor settings,4,0.04106676578521795
+200,center_ce,anchored_coefficient,I,remaining factors0,1,-4.3058897972106935
+200,center_ce,conditional_main,I,"R=0,O=0",1,-4.3058897972106935
+200,center_ce,conditional_main,I,"R=0,O=1",1,1.253229713439941
+200,center_ce,conditional_main,I,"R=1,O=0",1,-5.154746437072754
+200,center_ce,conditional_main,I,"R=1,O=1",1,3.4803701400756832
+200,center_ce,marginal_main,I,mean over remaining factor settings,4,-1.1817590951919559
+200,center_ce,anchored_coefficient,O,remaining factors0,1,0.01837177276611257
+200,center_ce,conditional_main,O,"R=0,I=0",1,0.01837177276611257
+200,center_ce,conditional_main,O,"R=0,I=1",1,5.577491283416747
+200,center_ce,conditional_main,O,"R=1,I=0",1,-0.026228904724121094
+200,center_ce,conditional_main,O,"R=1,I=1",1,8.608887672424316
+200,center_ce,marginal_main,O,mean over remaining factor settings,4,3.544630455970764
+200,center_ce,anchored_coefficient,RI,remaining factors0,1,-0.8488566398620607
+200,center_ce,conditional_pair,RI,O=0,1,-0.8488566398620607
+200,center_ce,conditional_pair,RI,O=1,1,2.227140426635742
+200,center_ce,marginal_pair,RI,mean over remaining factor settings,2,0.6891418933868407
+200,center_ce,anchored_coefficient,RO,remaining factors0,1,-0.044600677490233664
+200,center_ce,conditional_pair,RO,I=0,1,-0.044600677490233664
+200,center_ce,conditional_pair,RO,I=1,1,3.03139638900757
+200,center_ce,marginal_pair,RO,mean over remaining factor settings,2,1.4933978557586682
+200,center_ce,anchored_coefficient,IO,remaining factors0,1,5.559119510650635
+200,center_ce,conditional_pair,IO,R=0,1,5.559119510650635
+200,center_ce,conditional_pair,IO,R=1,1,8.635116577148438
+200,center_ce,marginal_pair,IO,mean over remaining factor settings,2,7.0971180438995365
+200,center_ce,anchored_coefficient,RIO,remaining factors0,1,3.075997066497804
+200,rim_rise,anchored_coefficient,R,remaining factors0,1,0.006576728820801847
+200,rim_rise,conditional_main,R,"I=0,O=0",1,0.006576728820801847
+200,rim_rise,conditional_main,R,"I=0,O=1",1,0.011173248291013849
+200,rim_rise,conditional_main,R,"I=1,O=0",1,0.09557981491088796
+200,rim_rise,conditional_main,R,"I=1,O=1",1,-1.60925693511963
+200,rim_rise,marginal_main,R,mean over remaining factor settings,4,-0.3739817857742316
+200,rim_rise,anchored_coefficient,I,remaining factors0,1,1.062659835815432
+200,rim_rise,conditional_main,I,"R=0,O=0",1,1.062659835815432
+200,rim_rise,conditional_main,I,"R=0,O=1",1,2.5666049957275394
+200,rim_rise,conditional_main,I,"R=1,O=0",1,1.1516629219055181
+200,rim_rise,conditional_main,I,"R=1,O=1",1,0.9461748123168956
+200,rim_rise,marginal_main,I,mean over remaining factor settings,4,1.4317756414413463
+200,rim_rise,anchored_coefficient,O,remaining factors0,1,-0.016100120544431107
+200,rim_rise,conditional_main,O,"R=0,I=0",1,-0.016100120544431107
+200,rim_rise,conditional_main,O,"R=0,I=1",1,1.4878450393676763
+200,rim_rise,conditional_main,O,"R=1,I=0",1,-0.011503601074219105
+200,rim_rise,conditional_main,O,"R=1,I=1",1,-0.21699171066284162
+200,rim_rise,marginal_main,O,mean over remaining factor settings,4,0.3108124017715461
+200,rim_rise,anchored_coefficient,RI,remaining factors0,1,0.08900308609008611
+200,rim_rise,conditional_pair,RI,O=0,1,0.08900308609008611
+200,rim_rise,conditional_pair,RI,O=1,1,-1.6204301834106438
+200,rim_rise,marginal_pair,RI,mean over remaining factor settings,2,-0.7657135486602789
+200,rim_rise,anchored_coefficient,RO,remaining factors0,1,0.004596519470212002
+200,rim_rise,conditional_pair,RO,I=0,1,0.004596519470212002
+200,rim_rise,conditional_pair,RO,I=1,1,-1.704836750030518
+200,rim_rise,marginal_pair,RO,mean over remaining factor settings,2,-0.850120115280153
+200,rim_rise,anchored_coefficient,IO,remaining factors0,1,1.5039451599121074
+200,rim_rise,conditional_pair,IO,R=0,1,1.5039451599121074
+200,rim_rise,conditional_pair,IO,R=1,1,-0.20548810958862251
+200,rim_rise,marginal_pair,IO,mean over remaining factor settings,2,0.6492285251617425
+200,rim_rise,anchored_coefficient,RIO,remaining factors0,1,-1.70943326950073
+200,center_elevation,anchored_coefficient,R,remaining factors0,1,-0.2572603881359097
+200,center_elevation,conditional_main,R,"I=0,O=0",1,-0.2572603881359097
+200,center_elevation,conditional_main,R,"I=0,O=1",1,-0.30859220027923584
+200,center_elevation,conditional_main,R,"I=1,O=0",1,-0.9801327228546137
+200,center_elevation,conditional_main,R,"I=1,O=1",1,1.8592823743820208
+200,center_elevation,marginal_main,R,mean over remaining factor settings,4,0.0783242657780654
+200,center_elevation,anchored_coefficient,I,remaining factors0,1,-4.769725370407106
+200,center_elevation,conditional_main,I,"R=0,O=0",1,-4.769725370407106
+200,center_elevation,conditional_main,I,"R=0,O=1",1,0.4650263130664811
+200,center_elevation,conditional_main,I,"R=1,O=0",1,-5.49259770512581
+200,center_elevation,conditional_main,I,"R=1,O=1",1,2.632900887727738
+200,center_elevation,marginal_main,I,mean over remaining factor settings,4,-1.7910989686846743
+200,center_elevation,anchored_coefficient,O,remaining factors0,1,-0.06232370734214854
+200,center_elevation,conditional_main,O,"R=0,I=0",1,-0.06232370734214854
+200,center_elevation,conditional_main,O,"R=0,I=1",1,5.172427976131439
+200,center_elevation,conditional_main,O,"R=1,I=0",1,-0.1136555194854747
+200,center_elevation,conditional_main,O,"R=1,I=1",1,8.011843073368073
+200,center_elevation,marginal_main,O,mean over remaining factor settings,4,3.2520729556679724
+200,center_elevation,anchored_coefficient,RI,remaining factors0,1,-0.722872334718704
+200,center_elevation,conditional_pair,RI,O=0,1,-0.722872334718704
+200,center_elevation,conditional_pair,RI,O=1,1,2.1678745746612567
+200,center_elevation,marginal_pair,RI,mean over remaining factor settings,2,0.7225011199712763
+200,center_elevation,anchored_coefficient,RO,remaining factors0,1,-0.05133181214332616
+200,center_elevation,conditional_pair,RO,I=0,1,-0.05133181214332616
+200,center_elevation,conditional_pair,RO,I=1,1,2.8394150972366345
+200,center_elevation,marginal_pair,RO,mean over remaining factor settings,2,1.3940416425466542
+200,center_elevation,anchored_coefficient,IO,remaining factors0,1,5.234751683473587
+200,center_elevation,conditional_pair,IO,R=0,1,5.234751683473587
+200,center_elevation,conditional_pair,IO,R=1,1,8.125498592853548
+200,center_elevation,marginal_pair,IO,mean over remaining factor settings,2,6.680125138163568
+200,center_elevation,anchored_coefficient,RIO,remaining factors0,1,2.8907469093799607
+125,center_ce,anchored_coefficient,R,remaining factors0,1,-0.2812038421630856
+125,center_ce,conditional_main,R,"I=0,O=0",1,-0.2812038421630856
+125,center_ce,conditional_main,R,"I=0,O=1",1,-0.32580451965331925
+125,center_ce,conditional_main,R,"I=1,O=0",1,-1.1300604820251463
+125,center_ce,conditional_main,R,"I=1,O=1",1,1.901335906982423
+125,center_ce,marginal_main,R,mean over remaining factor settings,4,0.04106676578521795
+125,center_ce,anchored_coefficient,I,remaining factors0,1,-4.3058897972106935
+125,center_ce,conditional_main,I,"R=0,O=0",1,-4.3058897972106935
+125,center_ce,conditional_main,I,"R=0,O=1",1,1.253229713439941
+125,center_ce,conditional_main,I,"R=1,O=0",1,-5.154746437072754
+125,center_ce,conditional_main,I,"R=1,O=1",1,3.4803701400756832
+125,center_ce,marginal_main,I,mean over remaining factor settings,4,-1.1817590951919559
+125,center_ce,anchored_coefficient,O,remaining factors0,1,0.01837177276611257
+125,center_ce,conditional_main,O,"R=0,I=0",1,0.01837177276611257
+125,center_ce,conditional_main,O,"R=0,I=1",1,5.577491283416747
+125,center_ce,conditional_main,O,"R=1,I=0",1,-0.026228904724121094
+125,center_ce,conditional_main,O,"R=1,I=1",1,8.608887672424316
+125,center_ce,marginal_main,O,mean over remaining factor settings,4,3.544630455970764
+125,center_ce,anchored_coefficient,RI,remaining factors0,1,-0.8488566398620607
+125,center_ce,conditional_pair,RI,O=0,1,-0.8488566398620607
+125,center_ce,conditional_pair,RI,O=1,1,2.227140426635742
+125,center_ce,marginal_pair,RI,mean over remaining factor settings,2,0.6891418933868407
+125,center_ce,anchored_coefficient,RO,remaining factors0,1,-0.044600677490233664
+125,center_ce,conditional_pair,RO,I=0,1,-0.044600677490233664
+125,center_ce,conditional_pair,RO,I=1,1,3.03139638900757
+125,center_ce,marginal_pair,RO,mean over remaining factor settings,2,1.4933978557586682
+125,center_ce,anchored_coefficient,IO,remaining factors0,1,5.559119510650635
+125,center_ce,conditional_pair,IO,R=0,1,5.559119510650635
+125,center_ce,conditional_pair,IO,R=1,1,8.635116577148438
+125,center_ce,marginal_pair,IO,mean over remaining factor settings,2,7.0971180438995365
+125,center_ce,anchored_coefficient,RIO,remaining factors0,1,3.075997066497804
+125,rim_rise,anchored_coefficient,R,remaining factors0,1,-0.002787780761719816
+125,rim_rise,conditional_main,R,"I=0,O=0",1,-0.002787780761719816
+125,rim_rise,conditional_main,R,"I=0,O=1",1,0.020960426330564275
+125,rim_rise,conditional_main,R,"I=1,O=0",1,-0.058503532409668324
+125,rim_rise,conditional_main,R,"I=1,O=1",1,-0.9122617721557624
+125,rim_rise,marginal_main,R,mean over remaining factor settings,4,-0.23814816474914657
+125,rim_rise,anchored_coefficient,I,remaining factors0,1,0.30643949508667045
+125,rim_rise,conditional_main,I,"R=0,O=0",1,0.30643949508667045
+125,rim_rise,conditional_main,I,"R=0,O=1",1,1.5277429580688473
+125,rim_rise,conditional_main,I,"R=1,O=0",1,0.25072374343872195
+125,rim_rise,conditional_main,I,"R=1,O=1",1,0.5945207595825206
+125,rim_rise,marginal_main,I,mean over remaining factor settings,4,0.6698567390441901
+125,rim_rise,anchored_coefficient,O,remaining factors0,1,-0.024209403991697798
+125,rim_rise,conditional_main,O,"R=0,I=0",1,-0.024209403991697798
+125,rim_rise,conditional_main,O,"R=0,I=1",1,1.197094058990479
+125,rim_rise,conditional_main,O,"R=1,I=0",1,-0.00046119689941370723
+125,rim_rise,conditional_main,O,"R=1,I=1",1,0.34333581924438494
+125,rim_rise,marginal_main,O,mean over remaining factor settings,4,0.3789398193359381
+125,rim_rise,anchored_coefficient,RI,remaining factors0,1,-0.05571575164794851
+125,rim_rise,conditional_pair,RI,O=0,1,-0.05571575164794851
+125,rim_rise,conditional_pair,RI,O=1,1,-0.9332221984863267
+125,rim_rise,marginal_pair,RI,mean over remaining factor settings,2,-0.4944689750671376
+125,rim_rise,anchored_coefficient,RO,remaining factors0,1,0.02374820709228409
+125,rim_rise,conditional_pair,RO,I=0,1,0.02374820709228409
+125,rim_rise,conditional_pair,RO,I=1,1,-0.8537582397460941
+125,rim_rise,marginal_pair,RO,mean over remaining factor settings,2,-0.415005016326905
+125,rim_rise,anchored_coefficient,IO,remaining factors0,1,1.2213034629821768
+125,rim_rise,conditional_pair,IO,R=0,1,1.2213034629821768
+125,rim_rise,conditional_pair,IO,R=1,1,0.34379701614379865
+125,rim_rise,marginal_pair,IO,mean over remaining factor settings,2,0.7825502395629877
+125,rim_rise,anchored_coefficient,RIO,remaining factors0,1,-0.8775064468383782
+125,center_elevation,anchored_coefficient,R,remaining factors0,1,-0.2582242786884308
+125,center_elevation,conditional_main,R,"I=0,O=0",1,-0.2582242786884308
+125,center_elevation,conditional_main,R,"I=0,O=1",1,-0.6161129355430592
+125,center_elevation,conditional_main,R,"I=1,O=0",1,-0.9132137298583975
+125,center_elevation,conditional_main,R,"I=1,O=1",1,1.8512416303157817
+125,center_elevation,marginal_main,R,mean over remaining factor settings,4,0.015922671556473533
+125,center_elevation,anchored_coefficient,I,remaining factors0,1,-4.794895923137665
+125,center_elevation,conditional_main,I,"R=0,O=0",1,-4.794895923137665
+125,center_elevation,conditional_main,I,"R=0,O=1",1,-0.37001685500145065
+125,center_elevation,conditional_main,I,"R=1,O=0",1,-5.449885374307632
+125,center_elevation,conditional_main,I,"R=1,O=1",1,2.0973377108573903
+125,center_elevation,marginal_main,I,mean over remaining factor settings,4,-2.1293651103973392
+125,center_elevation,anchored_coefficient,O,remaining factors0,1,0.06198654174804652
+125,center_elevation,conditional_main,O,"R=0,I=0",1,0.06198654174804652
+125,center_elevation,conditional_main,O,"R=0,I=1",1,4.486865609884261
+125,center_elevation,conditional_main,O,"R=1,I=0",1,-0.29590211510658193
+125,center_elevation,conditional_main,O,"R=1,I=1",1,7.2513209700584405
+125,center_elevation,marginal_main,O,mean over remaining factor settings,4,2.8760677516460413
+125,center_elevation,anchored_coefficient,RI,remaining factors0,1,-0.6549894511699668
+125,center_elevation,conditional_pair,RI,O=0,1,-0.6549894511699668
+125,center_elevation,conditional_pair,RI,O=1,1,2.467354565858841
+125,center_elevation,marginal_pair,RI,mean over remaining factor settings,2,0.9061825573444371
+125,center_elevation,anchored_coefficient,RO,remaining factors0,1,-0.35788865685462845
+125,center_elevation,conditional_pair,RO,I=0,1,-0.35788865685462845
+125,center_elevation,conditional_pair,RO,I=1,1,2.7644553601741793
+125,center_elevation,marginal_pair,RO,mean over remaining factor settings,2,1.2032833516597754
+125,center_elevation,anchored_coefficient,IO,remaining factors0,1,4.424879068136215
+125,center_elevation,conditional_pair,IO,R=0,1,4.424879068136215
+125,center_elevation,conditional_pair,IO,R=1,1,7.547223085165022
+125,center_elevation,marginal_pair,IO,mean over remaining factor settings,2,5.986051076650618
+125,center_elevation,anchored_coefficient,RIO,remaining factors0,1,3.1223440170288077
+100,center_ce,anchored_coefficient,R,remaining factors0,1,-0.2812038421630856
+100,center_ce,conditional_main,R,"I=0,O=0",1,-0.2812038421630856
+100,center_ce,conditional_main,R,"I=0,O=1",1,-0.32580451965331925
+100,center_ce,conditional_main,R,"I=1,O=0",1,-1.1300604820251463
+100,center_ce,conditional_main,R,"I=1,O=1",1,1.901335906982423
+100,center_ce,marginal_main,R,mean over remaining factor settings,4,0.04106676578521795
+100,center_ce,anchored_coefficient,I,remaining factors0,1,-4.3058897972106935
+100,center_ce,conditional_main,I,"R=0,O=0",1,-4.3058897972106935
+100,center_ce,conditional_main,I,"R=0,O=1",1,1.253229713439941
+100,center_ce,conditional_main,I,"R=1,O=0",1,-5.154746437072754
+100,center_ce,conditional_main,I,"R=1,O=1",1,3.4803701400756832
+100,center_ce,marginal_main,I,mean over remaining factor settings,4,-1.1817590951919559
+100,center_ce,anchored_coefficient,O,remaining factors0,1,0.01837177276611257
+100,center_ce,conditional_main,O,"R=0,I=0",1,0.01837177276611257
+100,center_ce,conditional_main,O,"R=0,I=1",1,5.577491283416747
+100,center_ce,conditional_main,O,"R=1,I=0",1,-0.026228904724121094
+100,center_ce,conditional_main,O,"R=1,I=1",1,8.608887672424316
+100,center_ce,marginal_main,O,mean over remaining factor settings,4,3.544630455970764
+100,center_ce,anchored_coefficient,RI,remaining factors0,1,-0.8488566398620607
+100,center_ce,conditional_pair,RI,O=0,1,-0.8488566398620607
+100,center_ce,conditional_pair,RI,O=1,1,2.227140426635742
+100,center_ce,marginal_pair,RI,mean over remaining factor settings,2,0.6891418933868407
+100,center_ce,anchored_coefficient,RO,remaining factors0,1,-0.044600677490233664
+100,center_ce,conditional_pair,RO,I=0,1,-0.044600677490233664
+100,center_ce,conditional_pair,RO,I=1,1,3.03139638900757
+100,center_ce,marginal_pair,RO,mean over remaining factor settings,2,1.4933978557586682
+100,center_ce,anchored_coefficient,IO,remaining factors0,1,5.559119510650635
+100,center_ce,conditional_pair,IO,R=0,1,5.559119510650635
+100,center_ce,conditional_pair,IO,R=1,1,8.635116577148438
+100,center_ce,marginal_pair,IO,mean over remaining factor settings,2,7.0971180438995365
+100,center_ce,anchored_coefficient,RIO,remaining factors0,1,3.075997066497804
+100,rim_rise,anchored_coefficient,R,remaining factors0,1,-4.844665527414804e-05
+100,rim_rise,conditional_main,R,"I=0,O=0",1,-4.844665527414804e-05
+100,rim_rise,conditional_main,R,"I=0,O=1",1,0.016776847839354403
+100,rim_rise,conditional_main,R,"I=1,O=0",1,-0.015124797821044922
+100,rim_rise,conditional_main,R,"I=1,O=1",1,-0.5661113739013679
+100,rim_rise,marginal_main,R,mean over remaining factor settings,4,-0.14112694263458314
+100,rim_rise,anchored_coefficient,I,remaining factors0,1,0.15272779464721697
+100,rim_rise,conditional_main,I,"R=0,O=0",1,0.15272779464721697
+100,rim_rise,conditional_main,I,"R=0,O=1",1,1.0879035949707028
+100,rim_rise,conditional_main,I,"R=1,O=0",1,0.1376514434814462
+100,rim_rise,conditional_main,I,"R=1,O=1",1,0.5050153732299805
+100,rim_rise,marginal_main,I,mean over remaining factor settings,4,0.4708245515823366
+100,rim_rise,anchored_coefficient,O,remaining factors0,1,-0.01654911041259588
+100,rim_rise,conditional_main,O,"R=0,I=0",1,-0.01654911041259588
+100,rim_rise,conditional_main,O,"R=0,I=1",1,0.9186266899108899
+100,rim_rise,conditional_main,O,"R=1,I=0",1,0.0002761840820326711
+100,rim_rise,conditional_main,O,"R=1,I=1",1,0.36764011383056694
+100,rim_rise,marginal_main,O,mean over remaining factor settings,4,0.3174984693527234
+100,rim_rise,anchored_coefficient,RI,remaining factors0,1,-0.015076351165770774
+100,rim_rise,conditional_pair,RI,O=0,1,-0.015076351165770774
+100,rim_rise,conditional_pair,RI,O=1,1,-0.5828882217407223
+100,rim_rise,marginal_pair,RI,mean over remaining factor settings,2,-0.29898228645324654
+100,rim_rise,anchored_coefficient,RO,remaining factors0,1,0.01682529449462855
+100,rim_rise,conditional_pair,RO,I=0,1,0.01682529449462855
+100,rim_rise,conditional_pair,RO,I=1,1,-0.550986576080323
+100,rim_rise,marginal_pair,RO,mean over remaining factor settings,2,-0.2670806407928472
+100,rim_rise,anchored_coefficient,IO,remaining factors0,1,0.9351758003234858
+100,rim_rise,conditional_pair,IO,R=0,1,0.9351758003234858
+100,rim_rise,conditional_pair,IO,R=1,1,0.36736392974853427
+100,rim_rise,marginal_pair,IO,mean over remaining factor settings,2,0.65126986503601
+100,rim_rise,anchored_coefficient,RIO,remaining factors0,1,-0.5678118705749515
+100,center_elevation,anchored_coefficient,R,remaining factors0,1,-0.15473068952560354
+100,center_elevation,conditional_main,R,"I=0,O=0",1,-0.15473068952560354
+100,center_elevation,conditional_main,R,"I=0,O=1",1,-0.980303394794463
+100,center_elevation,conditional_main,R,"I=1,O=0",1,-0.7921787798404685
+100,center_elevation,conditional_main,R,"I=1,O=1",1,1.4883769154548663
+100,center_elevation,marginal_main,R,mean over remaining factor settings,4,-0.1097089871764172
+100,center_elevation,anchored_coefficient,I,remaining factors0,1,-4.248586201667785
+100,center_elevation,conditional_main,I,"R=0,O=0",1,-4.248586201667785
+100,center_elevation,conditional_main,I,"R=0,O=1",1,-0.5204089641571059
+100,center_elevation,conditional_main,I,"R=1,O=0",1,-4.88603429198265
+100,center_elevation,conditional_main,I,"R=1,O=1",1,1.9482713460922234
+100,center_elevation,marginal_main,I,mean over remaining factor settings,4,-1.9266895279288294
+100,center_elevation,anchored_coefficient,O,remaining factors0,1,-0.04639489650726247
+100,center_elevation,conditional_main,O,"R=0,I=0",1,-0.04639489650726247
+100,center_elevation,conditional_main,O,"R=0,I=1",1,3.6817823410034167
+100,center_elevation,conditional_main,O,"R=1,I=0",1,-0.871967601776122
+100,center_elevation,conditional_main,O,"R=1,I=1",1,5.9623380362987515
+100,center_elevation,marginal_main,O,mean over remaining factor settings,4,2.1814394697546957
+100,center_elevation,anchored_coefficient,RI,remaining factors0,1,-0.6374480903148649
+100,center_elevation,conditional_pair,RI,O=0,1,-0.6374480903148649
+100,center_elevation,conditional_pair,RI,O=1,1,2.4686803102493293
+100,center_elevation,marginal_pair,RI,mean over remaining factor settings,2,0.9156161099672322
+100,center_elevation,anchored_coefficient,RO,remaining factors0,1,-0.8255727052688595
+100,center_elevation,conditional_pair,RO,I=0,1,-0.8255727052688595
+100,center_elevation,conditional_pair,RO,I=1,1,2.2805556952953348
+100,center_elevation,marginal_pair,RO,mean over remaining factor settings,2,0.7274914950132376
+100,center_elevation,anchored_coefficient,IO,remaining factors0,1,3.728177237510679
+100,center_elevation,conditional_pair,IO,R=0,1,3.728177237510679
+100,center_elevation,conditional_pair,IO,R=1,1,6.8343056380748735
+100,center_elevation,marginal_pair,IO,mean over remaining factor settings,2,5.281241437792776
+100,center_elevation,anchored_coefficient,RIO,remaining factors0,1,3.1061284005641943
+10,center_ce,anchored_coefficient,R,remaining factors0,1,-0.2812038421630856
+10,center_ce,conditional_main,R,"I=0,O=0",1,-0.2812038421630856
+10,center_ce,conditional_main,R,"I=0,O=1",1,-0.32580451965331925
+10,center_ce,conditional_main,R,"I=1,O=0",1,-1.1300604820251463
+10,center_ce,conditional_main,R,"I=1,O=1",1,1.901335906982423
+10,center_ce,marginal_main,R,mean over remaining factor settings,4,0.04106676578521795
+10,center_ce,anchored_coefficient,I,remaining factors0,1,-4.3058897972106935
+10,center_ce,conditional_main,I,"R=0,O=0",1,-4.3058897972106935
+10,center_ce,conditional_main,I,"R=0,O=1",1,1.253229713439941
+10,center_ce,conditional_main,I,"R=1,O=0",1,-5.154746437072754
+10,center_ce,conditional_main,I,"R=1,O=1",1,3.4803701400756832
+10,center_ce,marginal_main,I,mean over remaining factor settings,4,-1.1817590951919559
+10,center_ce,anchored_coefficient,O,remaining factors0,1,0.01837177276611257
+10,center_ce,conditional_main,O,"R=0,I=0",1,0.01837177276611257
+10,center_ce,conditional_main,O,"R=0,I=1",1,5.577491283416747
+10,center_ce,conditional_main,O,"R=1,I=0",1,-0.026228904724121094
+10,center_ce,conditional_main,O,"R=1,I=1",1,8.608887672424316
+10,center_ce,marginal_main,O,mean over remaining factor settings,4,3.544630455970764
+10,center_ce,anchored_coefficient,RI,remaining factors0,1,-0.8488566398620607
+10,center_ce,conditional_pair,RI,O=0,1,-0.8488566398620607
+10,center_ce,conditional_pair,RI,O=1,1,2.227140426635742
+10,center_ce,marginal_pair,RI,mean over remaining factor settings,2,0.6891418933868407
+10,center_ce,anchored_coefficient,RO,remaining factors0,1,-0.044600677490233664
+10,center_ce,conditional_pair,RO,I=0,1,-0.044600677490233664
+10,center_ce,conditional_pair,RO,I=1,1,3.03139638900757
+10,center_ce,marginal_pair,RO,mean over remaining factor settings,2,1.4933978557586682
+10,center_ce,anchored_coefficient,IO,remaining factors0,1,5.559119510650635
+10,center_ce,conditional_pair,IO,R=0,1,5.559119510650635
+10,center_ce,conditional_pair,IO,R=1,1,8.635116577148438
+10,center_ce,marginal_pair,IO,mean over remaining factor settings,2,7.0971180438995365
+10,center_ce,anchored_coefficient,RIO,remaining factors0,1,3.075997066497804
+10,rim_rise,anchored_coefficient,R,remaining factors0,1,-0.00030479431152308223
+10,rim_rise,conditional_main,R,"I=0,O=0",1,-0.00030479431152308223
+10,rim_rise,conditional_main,R,"I=0,O=1",1,0.0020374298095706678
+10,rim_rise,conditional_main,R,"I=1,O=0",1,-0.00591011047363299
+10,rim_rise,conditional_main,R,"I=1,O=1",1,0.014615249633786576
+10,rim_rise,marginal_main,R,mean over remaining factor settings,4,0.0026094436645502928
+10,rim_rise,anchored_coefficient,I,remaining factors0,1,0.006330585479736861
+10,rim_rise,conditional_main,I,"R=0,O=0",1,0.006330585479736861
+10,rim_rise,conditional_main,I,"R=0,O=1",1,0.06237506866455256
+10,rim_rise,conditional_main,I,"R=1,O=0",1,0.0007252693176269531
+10,rim_rise,conditional_main,I,"R=1,O=1",1,0.07495288848876847
+10,rim_rise,marginal_main,I,mean over remaining factor settings,4,0.03609595298767121
+10,rim_rise,anchored_coefficient,O,remaining factors0,1,-0.0027309417724605822
+10,rim_rise,conditional_main,O,"R=0,I=0",1,-0.0027309417724605822
+10,rim_rise,conditional_main,O,"R=0,I=1",1,0.053313541412355114
+10,rim_rise,conditional_main,O,"R=1,I=0",1,-0.00038871765136683223
+10,rim_rise,conditional_main,O,"R=1,I=1",1,0.07383890151977468
+10,rim_rise,marginal_main,O,mean over remaining factor settings,4,0.031008195877075595
+10,rim_rise,anchored_coefficient,RI,remaining factors0,1,-0.005605316162109908
+10,rim_rise,conditional_pair,RI,O=0,1,-0.005605316162109908
+10,rim_rise,conditional_pair,RI,O=1,1,0.012577819824215908
+10,rim_rise,marginal_pair,RI,mean over remaining factor settings,2,0.003486251831053
+10,rim_rise,anchored_coefficient,RO,remaining factors0,1,0.00234222412109375
+10,rim_rise,conditional_pair,RO,I=0,1,0.00234222412109375
+10,rim_rise,conditional_pair,RO,I=1,1,0.020525360107419566
+10,rim_rise,marginal_pair,RO,mean over remaining factor settings,2,0.011433792114256658
+10,rim_rise,anchored_coefficient,IO,remaining factors0,1,0.0560444831848157
+10,rim_rise,conditional_pair,IO,R=0,1,0.0560444831848157
+10,rim_rise,conditional_pair,IO,R=1,1,0.07422761917114151
+10,rim_rise,marginal_pair,IO,mean over remaining factor settings,2,0.0651360511779786
+10,rim_rise,anchored_coefficient,RIO,remaining factors0,1,0.018183135986325816
+10,center_elevation,anchored_coefficient,R,remaining factors0,1,0.0007477879524238062
+10,center_elevation,conditional_main,R,"I=0,O=0",1,0.0007477879524238062
+10,center_elevation,conditional_main,R,"I=0,O=1",1,-0.0011703848838795494
+10,center_elevation,conditional_main,R,"I=1,O=0",1,-0.007007631659507574
+10,center_elevation,conditional_main,R,"I=1,O=1",1,0.09079443216323924
+10,center_elevation,marginal_main,R,mean over remaining factor settings,4,0.02084105089306898
+10,center_elevation,anchored_coefficient,I,remaining factors0,1,-0.003577011823653997
+10,center_elevation,conditional_main,I,"R=0,O=0",1,-0.003577011823653997
+10,center_elevation,conditional_main,I,"R=0,O=1",1,-0.11065945029258728
+10,center_elevation,conditional_main,I,"R=1,O=0",1,-0.011332431435585377
+10,center_elevation,conditional_main,I,"R=1,O=1",1,-0.018694633245468495
+10,center_elevation,marginal_main,I,mean over remaining factor settings,4,-0.03606588169932379
+10,center_elevation,anchored_coefficient,O,remaining factors0,1,0.0016615867614735436
+10,center_elevation,conditional_main,O,"R=0,I=0",1,0.0016615867614735436
+10,center_elevation,conditional_main,O,"R=0,I=1",1,-0.10542085170745974
+10,center_elevation,conditional_main,O,"R=1,I=0",1,-0.0002565860748298121
+10,center_elevation,conditional_main,O,"R=1,I=1",1,-0.00761878788471293
+10,center_elevation,marginal_main,O,mean over remaining factor settings,4,-0.027908659726382234
+10,center_elevation,anchored_coefficient,RI,remaining factors0,1,-0.00775541961193138
+10,center_elevation,conditional_pair,RI,O=0,1,-0.00775541961193138
+10,center_elevation,conditional_pair,RI,O=1,1,0.09196481704711879
+10,center_elevation,marginal_pair,RI,mean over remaining factor settings,2,0.0421046987175937
+10,center_elevation,anchored_coefficient,RO,remaining factors0,1,-0.0019181728363033557
+10,center_elevation,conditional_pair,RO,I=0,1,-0.0019181728363033557
+10,center_elevation,conditional_pair,RO,I=1,1,0.09780206382274681
+10,center_elevation,marginal_pair,RO,mean over remaining factor settings,2,0.04794194549322173
+10,center_elevation,anchored_coefficient,IO,remaining factors0,1,-0.10708243846893328
+10,center_elevation,conditional_pair,IO,R=0,1,-0.10708243846893328
+10,center_elevation,conditional_pair,IO,R=1,1,-0.007362201809883118
+10,center_elevation,marginal_pair,IO,mean over remaining factor settings,2,-0.0572223201394082
+10,center_elevation,anchored_coefficient,RIO,remaining factors0,1,0.09972023665905017
+1,center_ce,anchored_coefficient,R,remaining factors0,1,-0.2812038421630856
+1,center_ce,conditional_main,R,"I=0,O=0",1,-0.2812038421630856
+1,center_ce,conditional_main,R,"I=0,O=1",1,-0.32580451965331925
+1,center_ce,conditional_main,R,"I=1,O=0",1,-1.1300604820251463
+1,center_ce,conditional_main,R,"I=1,O=1",1,1.901335906982423
+1,center_ce,marginal_main,R,mean over remaining factor settings,4,0.04106676578521795
+1,center_ce,anchored_coefficient,I,remaining factors0,1,-4.3058897972106935
+1,center_ce,conditional_main,I,"R=0,O=0",1,-4.3058897972106935
+1,center_ce,conditional_main,I,"R=0,O=1",1,1.253229713439941
+1,center_ce,conditional_main,I,"R=1,O=0",1,-5.154746437072754
+1,center_ce,conditional_main,I,"R=1,O=1",1,3.4803701400756832
+1,center_ce,marginal_main,I,mean over remaining factor settings,4,-1.1817590951919559
+1,center_ce,anchored_coefficient,O,remaining factors0,1,0.01837177276611257
+1,center_ce,conditional_main,O,"R=0,I=0",1,0.01837177276611257
+1,center_ce,conditional_main,O,"R=0,I=1",1,5.577491283416747
+1,center_ce,conditional_main,O,"R=1,I=0",1,-0.026228904724121094
+1,center_ce,conditional_main,O,"R=1,I=1",1,8.608887672424316
+1,center_ce,marginal_main,O,mean over remaining factor settings,4,3.544630455970764
+1,center_ce,anchored_coefficient,RI,remaining factors0,1,-0.8488566398620607
+1,center_ce,conditional_pair,RI,O=0,1,-0.8488566398620607
+1,center_ce,conditional_pair,RI,O=1,1,2.227140426635742
+1,center_ce,marginal_pair,RI,mean over remaining factor settings,2,0.6891418933868407
+1,center_ce,anchored_coefficient,RO,remaining factors0,1,-0.044600677490233664
+1,center_ce,conditional_pair,RO,I=0,1,-0.044600677490233664
+1,center_ce,conditional_pair,RO,I=1,1,3.03139638900757
+1,center_ce,marginal_pair,RO,mean over remaining factor settings,2,1.4933978557586682
+1,center_ce,anchored_coefficient,IO,remaining factors0,1,5.559119510650635
+1,center_ce,conditional_pair,IO,R=0,1,5.559119510650635
+1,center_ce,conditional_pair,IO,R=1,1,8.635116577148438
+1,center_ce,marginal_pair,IO,mean over remaining factor settings,2,7.0971180438995365
+1,center_ce,anchored_coefficient,RIO,remaining factors0,1,3.075997066497804
+1,rim_rise,anchored_coefficient,R,remaining factors0,1,0.00011730194091796875
+1,rim_rise,conditional_main,R,"I=0,O=0",1,0.00011730194091796875
+1,rim_rise,conditional_main,R,"I=0,O=1",1,0.00010128021240163321
+1,rim_rise,conditional_main,R,"I=1,O=0",1,-0.0003740310668947089
+1,rim_rise,conditional_main,R,"I=1,O=1",1,0.0058572769165028404
+1,rim_rise,marginal_main,R,mean over remaining factor settings,4,0.0014254570007319334
+1,rim_rise,anchored_coefficient,I,remaining factors0,1,-0.0004490852355951702
+1,rim_rise,conditional_main,I,"R=0,O=0",1,-0.0004490852355951702
+1,rim_rise,conditional_main,I,"R=0,O=1",1,0.01045246124267507
+1,rim_rise,conditional_main,I,"R=1,O=0",1,-0.0009404182434078479
+1,rim_rise,conditional_main,I,"R=1,O=1",1,0.016208457946776278
+1,rim_rise,marginal_main,I,mean over remaining factor settings,4,0.006317853927612083
+1,rim_rise,anchored_coefficient,O,remaining factors0,1,-2.3841857908379893e-05
+1,rim_rise,conditional_main,O,"R=0,I=0",1,-2.3841857908379893e-05
+1,rim_rise,conditional_main,O,"R=0,I=1",1,0.010877704620361861
+1,rim_rise,conditional_main,O,"R=1,I=0",1,-3.9863586424715436e-05
+1,rim_rise,conditional_main,O,"R=1,I=1",1,0.01710901260375941
+1,rim_rise,marginal_main,O,mean over remaining factor settings,4,0.006980752944947044
+1,rim_rise,anchored_coefficient,RI,remaining factors0,1,-0.0004913330078126776
+1,rim_rise,conditional_pair,RI,O=0,1,-0.0004913330078126776
+1,rim_rise,conditional_pair,RI,O=1,1,0.005755996704101207
+1,rim_rise,marginal_pair,RI,mean over remaining factor settings,2,0.002632331848144265
+1,rim_rise,anchored_coefficient,RO,remaining factors0,1,-1.6021728516335543e-05
+1,rim_rise,conditional_pair,RO,I=0,1,-1.6021728516335543e-05
+1,rim_rise,conditional_pair,RO,I=1,1,0.006231307983397549
+1,rim_rise,marginal_pair,RO,mean over remaining factor settings,2,0.003107643127440607
+1,rim_rise,anchored_coefficient,IO,remaining factors0,1,0.010901546478270241
+1,rim_rise,conditional_pair,IO,R=0,1,0.010901546478270241
+1,rim_rise,conditional_pair,IO,R=1,1,0.017148876190184126
+1,rim_rise,marginal_pair,IO,mean over remaining factor settings,2,0.014025211334227183
+1,rim_rise,anchored_coefficient,RIO,remaining factors0,1,0.006247329711913885
+1,center_elevation,anchored_coefficient,R,remaining factors0,1,-0.00011345148086583379
+1,center_elevation,conditional_main,R,"I=0,O=0",1,-0.00011345148086583379
+1,center_elevation,conditional_main,R,"I=0,O=1",1,-0.0007958173751809738
+1,center_elevation,conditional_main,R,"I=1,O=0",1,2.2268295287730666e-05
+1,center_elevation,conditional_main,R,"I=1,O=1",1,0.0011716723442098953
+1,center_elevation,marginal_main,R,mean over remaining factor settings,4,7.116794586270458e-05
+1,center_elevation,anchored_coefficient,I,remaining factors0,1,0.0002568066120147705
+1,center_elevation,conditional_main,I,"R=0,O=0",1,0.0002568066120147705
+1,center_elevation,conditional_main,I,"R=0,O=1",1,-0.0027181446552280164
+1,center_elevation,conditional_main,I,"R=1,O=0",1,0.00039252638816833496
+1,center_elevation,conditional_main,I,"R=1,O=1",1,-0.0007506549358371473
+1,center_elevation,marginal_main,I,mean over remaining factor settings,4,-0.0007048666477205145
+1,center_elevation,anchored_coefficient,O,remaining factors0,1,0.0006386816501606773
+1,center_elevation,conditional_main,O,"R=0,I=0",1,0.0006386816501606773
+1,center_elevation,conditional_main,O,"R=0,I=1",1,-0.0023362696170821096
+1,center_elevation,conditional_main,O,"R=1,I=0",1,-4.3684244154462704e-05
+1,center_elevation,conditional_main,O,"R=1,I=1",1,-0.001186865568159945
+1,center_elevation,marginal_main,O,mean over remaining factor settings,4,-0.00073203444480896
+1,center_elevation,anchored_coefficient,RI,remaining factors0,1,0.00013571977615356445
+1,center_elevation,conditional_pair,RI,O=0,1,0.00013571977615356445
+1,center_elevation,conditional_pair,RI,O=1,1,0.001967489719390869
+1,center_elevation,marginal_pair,RI,mean over remaining factor settings,2,0.0010516047477722168
+1,center_elevation,anchored_coefficient,RO,remaining factors0,1,-0.00068236589431514
+1,center_elevation,conditional_pair,RO,I=0,1,-0.00068236589431514
+1,center_elevation,conditional_pair,RO,I=1,1,0.0011494040489221646
+1,center_elevation,marginal_pair,RO,mean over remaining factor settings,2,0.0002335190773035123
+1,center_elevation,anchored_coefficient,IO,remaining factors0,1,-0.002974951267242787
+1,center_elevation,conditional_pair,IO,R=0,1,-0.002974951267242787
+1,center_elevation,conditional_pair,IO,R=1,1,-0.0011431813240054822
+1,center_elevation,marginal_pair,IO,mean over remaining factor settings,2,-0.0020590662956241346
+1,center_elevation,anchored_coefficient,RIO,remaining factors0,1,0.0018317699432373047
+0.1,center_ce,anchored_coefficient,R,remaining factors0,1,-0.2812038421630856
+0.1,center_ce,conditional_main,R,"I=0,O=0",1,-0.2812038421630856
+0.1,center_ce,conditional_main,R,"I=0,O=1",1,-0.32580451965331925
+0.1,center_ce,conditional_main,R,"I=1,O=0",1,-1.1300604820251463
+0.1,center_ce,conditional_main,R,"I=1,O=1",1,1.901335906982423
+0.1,center_ce,marginal_main,R,mean over remaining factor settings,4,0.04106676578521795
+0.1,center_ce,anchored_coefficient,I,remaining factors0,1,-4.3058897972106935
+0.1,center_ce,conditional_main,I,"R=0,O=0",1,-4.3058897972106935
+0.1,center_ce,conditional_main,I,"R=0,O=1",1,1.253229713439941
+0.1,center_ce,conditional_main,I,"R=1,O=0",1,-5.154746437072754
+0.1,center_ce,conditional_main,I,"R=1,O=1",1,3.4803701400756832
+0.1,center_ce,marginal_main,I,mean over remaining factor settings,4,-1.1817590951919559
+0.1,center_ce,anchored_coefficient,O,remaining factors0,1,0.01837177276611257
+0.1,center_ce,conditional_main,O,"R=0,I=0",1,0.01837177276611257
+0.1,center_ce,conditional_main,O,"R=0,I=1",1,5.577491283416747
+0.1,center_ce,conditional_main,O,"R=1,I=0",1,-0.026228904724121094
+0.1,center_ce,conditional_main,O,"R=1,I=1",1,8.608887672424316
+0.1,center_ce,marginal_main,O,mean over remaining factor settings,4,3.544630455970764
+0.1,center_ce,anchored_coefficient,RI,remaining factors0,1,-0.8488566398620607
+0.1,center_ce,conditional_pair,RI,O=0,1,-0.8488566398620607
+0.1,center_ce,conditional_pair,RI,O=1,1,2.227140426635742
+0.1,center_ce,marginal_pair,RI,mean over remaining factor settings,2,0.6891418933868407
+0.1,center_ce,anchored_coefficient,RO,remaining factors0,1,-0.044600677490233664
+0.1,center_ce,conditional_pair,RO,I=0,1,-0.044600677490233664
+0.1,center_ce,conditional_pair,RO,I=1,1,3.03139638900757
+0.1,center_ce,marginal_pair,RO,mean over remaining factor settings,2,1.4933978557586682
+0.1,center_ce,anchored_coefficient,IO,remaining factors0,1,5.559119510650635
+0.1,center_ce,conditional_pair,IO,R=0,1,5.559119510650635
+0.1,center_ce,conditional_pair,IO,R=1,1,8.635116577148438
+0.1,center_ce,marginal_pair,IO,mean over remaining factor settings,2,7.0971180438995365
+0.1,center_ce,anchored_coefficient,RIO,remaining factors0,1,3.075997066497804
+0.1,rim_rise,anchored_coefficient,R,remaining factors0,1,1.3351440433240214e-06
+0.1,rim_rise,conditional_main,R,"I=0,O=0",1,1.3351440433240214e-06
+0.1,rim_rise,conditional_main,R,"I=0,O=1",1,-6.484985351740136e-05
+0.1,rim_rise,conditional_main,R,"I=1,O=0",1,0.00024995803832972285
+0.1,rim_rise,conditional_main,R,"I=1,O=1",1,0.001449394226073153
+0.1,rim_rise,marginal_main,R,mean over remaining factor settings,4,0.0004089593887321996
+0.1,rim_rise,anchored_coefficient,I,remaining factors0,1,0.00013389587402379277
+0.1,rim_rise,conditional_main,I,"R=0,O=0",1,0.00013389587402379277
+0.1,rim_rise,conditional_main,I,"R=0,O=1",1,0.005724906921386719
+0.1,rim_rise,conditional_main,I,"R=1,O=0",1,0.0003825187683101916
+0.1,rim_rise,conditional_main,I,"R=1,O=1",1,0.007239151000977273
+0.1,rim_rise,marginal_main,I,mean over remaining factor settings,4,0.003370118141174494
+0.1,rim_rise,anchored_coefficient,O,remaining factors0,1,-5.0926208494672665e-05
+0.1,rim_rise,conditional_main,O,"R=0,I=0",1,-5.0926208494672665e-05
+0.1,rim_rise,conditional_main,O,"R=0,I=1",1,0.005540084838868253
+0.1,rim_rise,conditional_main,O,"R=1,I=0",1,-0.00011711120605539804
+0.1,rim_rise,conditional_main,O,"R=1,I=1",1,0.006739521026611683
+0.1,rim_rise,marginal_main,O,mean over remaining factor settings,4,0.0030278921127324665
+0.1,rim_rise,anchored_coefficient,RI,remaining factors0,1,0.00024862289428639883
+0.1,rim_rise,conditional_pair,RI,O=0,1,0.00024862289428639883
+0.1,rim_rise,conditional_pair,RI,O=1,1,0.0015142440795905543
+0.1,rim_rise,marginal_pair,RI,mean over remaining factor settings,2,0.0008814334869384766
+0.1,rim_rise,anchored_coefficient,RO,remaining factors0,1,-6.618499756072538e-05
+0.1,rim_rise,conditional_pair,RO,I=0,1,-6.618499756072538e-05
+0.1,rim_rise,conditional_pair,RO,I=1,1,0.00119943618774343
+0.1,rim_rise,marginal_pair,RO,mean over remaining factor settings,2,0.0005666255950913524
+0.1,rim_rise,anchored_coefficient,IO,remaining factors0,1,0.005591011047362926
+0.1,rim_rise,conditional_pair,IO,R=0,1,0.005591011047362926
+0.1,rim_rise,conditional_pair,IO,R=1,1,0.0068566322326670814
+0.1,rim_rise,marginal_pair,IO,mean over remaining factor settings,2,0.006223821640015004
+0.1,rim_rise,anchored_coefficient,RIO,remaining factors0,1,0.0012656211853041555
+0.1,center_elevation,anchored_coefficient,R,remaining factors0,1,2.6345253001380797e-06
+0.1,center_elevation,conditional_main,R,"I=0,O=0",1,2.6345253001380797e-06
+0.1,center_elevation,conditional_main,R,"I=0,O=1",1,6.307363510238417e-05
+0.1,center_elevation,conditional_main,R,"I=1,O=0",1,-0.0005388915538784289
+0.1,center_elevation,conditional_main,R,"I=1,O=1",1,0.0055337429046637965
+0.1,center_elevation,marginal_main,R,mean over remaining factor settings,4,0.0012651398777969725
+0.1,center_elevation,anchored_coefficient,I,remaining factors0,1,0.0011368900537487292
+0.1,center_elevation,conditional_main,I,"R=0,O=0",1,0.0011368900537487292
+0.1,center_elevation,conditional_main,I,"R=0,O=1",1,-0.0026887178421013402
+0.1,center_elevation,conditional_main,I,"R=1,O=0",1,0.0005953639745701622
+0.1,center_elevation,conditional_main,I,"R=1,O=1",1,0.002781951427460072
+0.1,center_elevation,marginal_main,I,mean over remaining factor settings,4,0.0004563719034194058
+0.1,center_elevation,anchored_coefficient,O,remaining factors0,1,4.198551177836407e-05
+0.1,center_elevation,conditional_main,O,"R=0,I=0",1,4.198551177836407e-05
+0.1,center_elevation,conditional_main,O,"R=0,I=1",1,-0.0037836223840717054
+0.1,center_elevation,conditional_main,O,"R=1,I=0",1,0.00010242462158061016
+0.1,center_elevation,conditional_main,O,"R=1,I=1",1,0.00228901207447052
+0.1,center_elevation,marginal_main,O,mean over remaining factor settings,4,-0.0003375500440605528
+0.1,center_elevation,anchored_coefficient,RI,remaining factors0,1,-0.000541526079178567
+0.1,center_elevation,conditional_pair,RI,O=0,1,-0.000541526079178567
+0.1,center_elevation,conditional_pair,RI,O=1,1,0.005470669269561412
+0.1,center_elevation,marginal_pair,RI,mean over remaining factor settings,2,0.0024645715951914227
+0.1,center_elevation,anchored_coefficient,RO,remaining factors0,1,6.0439109802246094e-05
+0.1,center_elevation,conditional_pair,RO,I=0,1,6.0439109802246094e-05
+0.1,center_elevation,conditional_pair,RO,I=1,1,0.006072634458542225
+0.1,center_elevation,marginal_pair,RO,mean over remaining factor settings,2,0.0030665367841722357
+0.1,center_elevation,anchored_coefficient,IO,remaining factors0,1,-0.0038256078958500694
+0.1,center_elevation,conditional_pair,IO,R=0,1,-0.0038256078958500694
+0.1,center_elevation,conditional_pair,IO,R=1,1,0.00218658745288991
+0.1,center_elevation,marginal_pair,IO,mean over remaining factor settings,2,-0.0008195102214800798
+0.1,center_elevation,anchored_coefficient,RIO,remaining factors0,1,0.006012195348739979

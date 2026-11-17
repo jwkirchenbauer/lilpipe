@@ -1,0 +1,30 @@
+{
+  "state": "prepared-not-rendered-not-launched",
+  "version": 2,
+  "prepared_utc": "2026-11-17T08:03:48.365130+00:00",
+  "predecessor_preserved": "source/comparison-v1",
+  "entry": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/source/comparison-v2/run.sh",
+  "aggregate_output": "aggregate-comparison-v2/final",
+  "paired_output": "checkpoint-comparisons/final",
+  "paired_original_archive": "checkpoint-comparisons/layout-v1-original",
+  "paired_publication_provenance": "checkpoint-comparisons/layout-v2-publication.json",
+  "canonical_compare_sha256": "813cbfe259ff19c86b74d7a8384eb6946b15337eeadd924c34e68c0f62e41f78",
+  "changes": [
+    "Aggregate figure panel/colorbar/header geometry and output directory only",
+    "Paired copied display-label wrapping, panel title 9pt linebreaks, global header y=.995 only",
+    "One-time validated 40-image staged archive/publication with exact per-image hashes"
+  ],
+  "tests": {
+    "unchanged_numeric_fixtures": 8,
+    "aggregate_layout_fixtures": 2,
+    "paired_layout_data_publication_fixtures": 4
+  },
+  "logs": [
+    "tests-aggregate-layout.log",
+    "tests-paired-layout.log",
+    "format-equivalence-final.log"
+  ],
+  "source_proof": "scientific-equivalence.json",
+  "real_study_data_rendered_or_model_arrays_opened": false,
+  "launcher_invoked": false
+}

@@ -1,0 +1,37 @@
+0: OUTPUT_DIR: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/launches/baseline-observation-v2
+0: Logging to /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/launches/baseline-observation-v2/logs
+0: Tue Nov 17 23:26:35 UTC 2026 Calling flux run...
+0: 0: Tue Nov 17 23:26:35 UTC 2026 Loading modules
+0: 0: 
+0: 0: Lmod is automatically replacing "cce/20.0.0" with "gcc-native/13".
+0: 0: 
+0: 0: 
+0: 0: Due to MODULEPATH changes, the following have been reloaded:
+0: 0:   1) cray-libsci/25.09.0     2) cray-mpich/9.0.1
+0: 0: 
+0: 0: 
+0: 0: The following have been reloaded with a version change:
+0: 0:   1) libfabric/match_SHS => libfabric/2.1
+0: 0: 
+0: 0: stty: 'standard input': Inappropriate ioctl for device
+0: 0: Tue Nov 17 23:26:46 UTC 2026 Activated environment on 0
+0: 0: bash: cannot set terminal process group (42927): Inappropriate ioctl for device
+0: 0: Tue Nov 17 23:26:46 UTC 2026 Launching python on 0...
+0: 0: bash: no job control in this shell
+0: 0: stty: 'standard input': Inappropriate ioctl for device
+0: 0: W20261117 15:26:52.376715 23456247842496 agent.cpp:461] Attempt to enable hip visiblity for agent-5 which is not visible to HSA (ROCR)
+0: 0: W20261117 15:26:52.393782 23456247842496 agent.cpp:461] Attempt to enable hip visiblity for agent-6 which is not visible to HSA (ROCR)
+0: 0: W20261117 15:26:52.410464 23456247842496 agent.cpp:461] Attempt to enable hip visiblity for agent-7 which is not visible to HSA (ROCR)
+0: 0: Traceback (most recent call last):
+0: 0:   File "<stdin>", line 6, in <module>
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-train-rocm72-v4/lib/python3.12/site-packages/torch/cuda/__init__.py", line 1129, in device_count
+0: 0:     nvml_count = _device_count_amdsmi()
+0: 0:                  ^^^^^^^^^^^^^^^^^^^^^^
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-train-rocm72-v4/lib/python3.12/site-packages/torch/cuda/__init__.py", line 1026, in _device_count_amdsmi
+0: 0:     visible_devices = _parse_visible_devices()
+0: 0:                       ^^^^^^^^^^^^^^^^^^^^^^^^
+0: 0:   File "/usr/WS2/kirchenb/lilpipe-tar-train-rocm72-v4/lib/python3.12/site-packages/torch/cuda/__init__.py", line 839, in _parse_visible_devices
+0: 0:     raise RuntimeError(
+0: 0: RuntimeError: HIP_VISIBLE_DEVICES contains more devices than ROCR_VISIBLE_DEVICES
+0: flux-job: task(s) exited with exit code 1
+0: Tue Nov 17 23:27:05 UTC 2026 Job execution finished.

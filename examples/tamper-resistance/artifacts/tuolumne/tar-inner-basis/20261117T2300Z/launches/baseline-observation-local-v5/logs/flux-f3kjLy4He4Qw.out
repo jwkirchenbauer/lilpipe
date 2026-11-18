@@ -1,0 +1,42 @@
+0: OUTPUT_DIR: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/launches/baseline-observation-local-v5
+0: Logging to /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/launches/baseline-observation-local-v5/logs
+0: Wed Nov 18 01:35:30 UTC 2026 Calling flux run...
+0: 0: Wed Nov 18 01:35:30 UTC 2026 Loading modules
+0: 0: 
+0: 0: Lmod is automatically replacing "cce/20.0.0" with "gcc-native/13".
+0: 0: 
+0: 0: 
+0: 0: Due to MODULEPATH changes, the following have been reloaded:
+0: 0:   1) cray-libsci/25.09.0     2) cray-mpich/9.0.1
+0: 0: 
+0: 0: 
+0: 0: The following have been reloaded with a version change:
+0: 0:   1) libfabric/match_SHS => libfabric/2.1
+0: 0: 
+0: 0: stty: 'standard input'0: 0: : Inappropriate ioctl for device
+0: 0: Wed Nov 18 01:35:36 UTC 2026 Activated environment on 0
+0: 0: Wed Nov 18 01:35:36 UTC 2026 Launching python on 0...
+0: 0: bash: cannot set terminal process group (64612): Inappropriate ioctl for device
+0: 0: bash: no job control in this shell
+0: 0: stty: 'standard input': Inappropriate ioctl for device
+0: 0: Inner observation: one process, four visible GPUs, rocBLAS
+0: 0: Skipping import of cpp extensions due to TORCHAO_FORCE_SKIP_LOADING_SO_FILES=1
+0: 0: W1117 17:36:33.575000 65179 site-packages/torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+0: 0: W1117 17:36:33.775000 65179 site-packages/torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+0: 0: [INFO] Running in WANDB offline mode
+0: 0: /usr/WS2/kirchenb/lilpipe-tar-train-rocm72-v4/lib/python3.12/site-packages/axolotl/core/trainers/base.py:32: TRLExperimentalWarning: You are importing from 'trl.experimental'. APIs here are unstable and may change or be removed without notice. Silence this warning by setting environment variable TRL_EXPERIMENTAL_SILENCE=1.
+0: 0:   from trl.experimental.utils import pad_to_length
+0: 0: Inner recorder outer 1: reading pre-call parameters0: 0: 
+0: 0: Inner recorder outer 1: captured inner 1 in memory0: 
+0: 0: Inner recorder outer 1: captured inner 2 in memory0: 
+0: 0: Inner recorder outer 1: scanned 1/1 parameters through weight on cpu0: 0: 
+0: 0: Inner recorder outer 1: published /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/cache/gpu-measurement-check-a6znr0b1/cpu/outer-000001.json0: 0: 
+0: 0: Inner recorder outer 1: reading pre-call parameters0: 0: 
+0: 0: Inner recorder outer 1: captured inner 1 in memory0: 0: 
+0: 0: Inner recorder outer 1: captured inner 2 in memory0: 0: 
+0: 0: Inner recorder outer 1: scanned 1/1 parameters through weight on cuda:00: 0: 
+0: 0: Inner recorder outer 1: published /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/cache/gpu-measurement-check-a6znr0b1/cuda-0/outer-000001.json0: 
+0: 0: {"state": "passed", "measurement": "FP64 Gram CPU/GPU parity on fixed toy tensors", "maximum_absolute_matrix_error": 0.0, "active_device_preserved": true, "observer_rng_contract_passed": true, "wall_seconds": {"cpu": 0.15140891500050202, "cuda:0": 0.6749501240010432}}0: 0: 
+0: 0: bash: EPOCHSECONDS: unbound variable
+0: flux-job: task(s) exited with exit code 1
+0: Wed Nov 18 01:36:52 UTC 2026 Job execution finished.

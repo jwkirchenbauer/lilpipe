@@ -1,0 +1,11 @@
+{
+  "state": "passed",
+  "measurement": "FP64 Gram CPU/GPU parity on fixed toy tensors",
+  "maximum_absolute_matrix_error": 0.0,
+  "active_device_preserved": true,
+  "observer_rng_contract_passed": true,
+  "wall_seconds": {
+    "cpu": 0.10300222399928316,
+    "cuda:0": 0.6691650009997829
+  }
+}

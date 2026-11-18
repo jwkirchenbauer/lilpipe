@@ -1,25 +1,25 @@
 # Simulated inner attack versus the recorded actual attack
 
-Rerun the completed local B defense with unchanged model, K16, data/order, seeds,
-losses and optimizer settings. Observe its simulated attack at outer calls
-1, 32, 64, 96 and 125. Within each call, use displacements at inner updates
-1, 2, 4, 8, 12 and 16 from that call's exact starting parameters.
+Completed an observation-only replay of local B from our original Zephyr
+checkpoint: K16, 125 outer updates, retain coefficient 2.5, inner LR 1e-6 and
+outer LR 5e-6. All nine saved model states, 125 batches and 2,000 finite inner
+losses match the original. The archived standard 1000-update attack was reused.
 
-Compare these fitted bases with the existing B attack, first at the same six
-updates, then separately against its recorded 1000-update path. Report ranks,
-principal angles, directional projection capture and module contributions.
-Use raw and BF16-evaluated endpoint differences separately. Inner iterates stay
-transient; retain aggregate Gram and cross-Gram statistics sufficient for these
-comparisons. No additional attack training is planned.
+Recorded inner calls 1/32/64/96/125 at updates 1/2/4/8/12/16. Per-call bases now
+come from these actual simulated trajectories, replacing the outer-path proxy.
+Exact aggregate inner products support rank-two and full sampled-span comparisons
+with matching 16-step and longer 1000-step actual trajectories.
 
-Require exact agreement with the original B batches and all saved outer model
-states before interpreting the comparison. Inner call t starts before outer
-update t, while the actual attack starts after outer update 125. Quantify that
-anchor difference and distinguish observed mismatch from a causal explanation
-of resistance. An inner-path basis is also not every direction protected by
-the defense objective.
+The simulator is partially aligned with the actual attack. At the last call,
+the six-direction span captures 12.83% of the first recorded displacement,
+55.34% at attack step 16 and 16.44% at step 1000 in BF16-rounded coordinates.
+This is far more overlap than the outer-path proxy showed. Different examples,
+optimizer settings and starting states remain bundled, so these observations
+do not establish why the defense fails.
 
-This replaces the outer-path proxy used in the earlier
-[basis study](TAR_BASIS_STRUCTURE.md), following the
+[Report and numeric evidence](examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/report.md)
+and [figures with full paths](examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/figure-index.md).
+
+This follows the [original reproduction](TAR_REPRODUCTION_PLAN.md),
+[outer-path basis study](TAR_BASIS_STRUCTURE.md), and
 [hyperparameter study](TAR_HPARAM_STUDY.md).
-Execution and results: [study directory](examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/).

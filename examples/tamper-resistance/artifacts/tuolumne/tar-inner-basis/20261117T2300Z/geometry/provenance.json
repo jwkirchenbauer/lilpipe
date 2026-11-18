@@ -1,0 +1,227 @@
+{
+  "signature": "692ef9a854ca1bc18b570d412f5029e102cf57b33ade51b22d4e2a506367c3ff",
+  "spec": {
+    "version": 1,
+    "aggregates": [
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v6/outer-000001.json",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v6/outer-000032.json",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v6/outer-000064.json",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v6/outer-000096.json",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v6/outer-000125.json"
+    ],
+    "actual_views": {
+      "matched": [
+        {
+          "name": "actual_1",
+          "step": 1
+        },
+        {
+          "name": "actual_2",
+          "step": 2
+        },
+        {
+          "name": "actual_4",
+          "step": 4
+        },
+        {
+          "name": "actual_8",
+          "step": 8
+        },
+        {
+          "name": "actual_12",
+          "step": 12
+        },
+        {
+          "name": "actual_16",
+          "step": 16
+        }
+      ],
+      "long": [
+        {
+          "name": "actual_1",
+          "step": 1
+        },
+        {
+          "name": "actual_2",
+          "step": 2
+        },
+        {
+          "name": "actual_4",
+          "step": 4
+        },
+        {
+          "name": "actual_8",
+          "step": 8
+        },
+        {
+          "name": "actual_16",
+          "step": 16
+        },
+        {
+          "name": "actual_32",
+          "step": 32
+        },
+        {
+          "name": "actual_48",
+          "step": 48
+        },
+        {
+          "name": "actual_64",
+          "step": 64
+        },
+        {
+          "name": "actual_96",
+          "step": 96
+        },
+        {
+          "name": "actual_128",
+          "step": 128
+        },
+        {
+          "name": "actual_256",
+          "step": 256
+        },
+        {
+          "name": "actual_512",
+          "step": 512
+        },
+        {
+          "name": "actual_1000",
+          "step": 1000
+        }
+      ]
+    },
+    "actual_states": [
+      {
+        "name": "actual_1",
+        "step": 1
+      },
+      {
+        "name": "actual_2",
+        "step": 2
+      },
+      {
+        "name": "actual_3",
+        "step": 3
+      },
+      {
+        "name": "actual_4",
+        "step": 4
+      },
+      {
+        "name": "actual_5",
+        "step": 5
+      },
+      {
+        "name": "actual_6",
+        "step": 6
+      },
+      {
+        "name": "actual_7",
+        "step": 7
+      },
+      {
+        "name": "actual_8",
+        "step": 8
+      },
+      {
+        "name": "actual_12",
+        "step": 12
+      },
+      {
+        "name": "actual_16",
+        "step": 16
+      },
+      {
+        "name": "actual_24",
+        "step": 24
+      },
+      {
+        "name": "actual_32",
+        "step": 32
+      },
+      {
+        "name": "actual_40",
+        "step": 40
+      },
+      {
+        "name": "actual_48",
+        "step": 48
+      },
+      {
+        "name": "actual_56",
+        "step": 56
+      },
+      {
+        "name": "actual_64",
+        "step": 64
+      },
+      {
+        "name": "actual_80",
+        "step": 80
+      },
+      {
+        "name": "actual_96",
+        "step": 96
+      },
+      {
+        "name": "actual_112",
+        "step": 112
+      },
+      {
+        "name": "actual_128",
+        "step": 128
+      },
+      {
+        "name": "actual_192",
+        "step": 192
+      },
+      {
+        "name": "actual_256",
+        "step": 256
+      },
+      {
+        "name": "actual_384",
+        "step": 384
+      },
+      {
+        "name": "actual_512",
+        "step": 512
+      },
+      {
+        "name": "actual_768",
+        "step": 768
+      },
+      {
+        "name": "actual_1000",
+        "step": 1000
+      }
+    ]
+  },
+  "inputs": [
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v6/outer-000001.json",
+      "sha256": "2771c4e63a1fbe708ec90fbc284f4778f55f65f5d9fa293bd1458a9ace079db8"
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v6/outer-000032.json",
+      "sha256": "920a81be20751fae4d9f3f5643ddd553e1f9c08bbd4f39067208a7d225c66eff"
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v6/outer-000064.json",
+      "sha256": "62fde277caff235994235dcdc7a317652e87dad6defa7f57d09a24bd4ea121fd"
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v6/outer-000096.json",
+      "sha256": "26a05e3e5d2f9612937e9dd8f0f9974bb1c330a8fdbcdf8ed67510af4bbbd576"
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v6/outer-000125.json",
+      "sha256": "1677895e421975c385be2c8e5cf144c64caf58cda69f612cfd0a51346b1b4dbc"
+    }
+  ],
+  "source_sha256": [
+    "25bb477cf24bfc69ec916b8c6c417015a893928897b29bafcbddb8824de4bdeb",
+    "6ab38451a8ab3da906cce6a74424dc0526b1a332c043604e8fd11c3a2b20c78f"
+  ]
+}

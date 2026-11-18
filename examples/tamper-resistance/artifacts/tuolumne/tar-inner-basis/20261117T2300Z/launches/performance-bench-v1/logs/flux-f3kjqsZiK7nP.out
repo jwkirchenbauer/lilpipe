@@ -1,0 +1,34 @@
+0: OUTPUT_DIR: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/launches/performance-bench-v1
+0: Logging to /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/launches/performance-bench-v1/logs
+0: Wed Nov 18 02:38:54 UTC 2026 Calling flux run...
+0: 0: Wed Nov 18 02:38:55 UTC 2026 Loading modules
+0: 0: 
+0: 0: Lmod is automatically replacing "cce/20.0.0" with "gcc-native/13".
+0: 0: 
+0: 0: 
+0: 0: Due to MODULEPATH changes, the following have been reloaded:
+0: 0:   1) cray-libsci/25.09.0     2) cray-mpich/9.0.1
+0: 0: 
+0: 0: 
+0: 0: The following have been reloaded with a version change:
+0: 0:   1) libfabric/match_SHS => libfabric/2.1
+0: 0: 
+0: 0: stty: 'standard input'0: 0: : Inappropriate ioctl for device
+0: 0: Wed Nov 18 02:39:00 UTC 2026 Activated environment on 0
+0: 0: bash: cannot set terminal process group (1043160): Inappropriate ioctl for device
+0: 0: Wed Nov 18 02:39:00 UTC 2026 Launching python on 0...
+0: 0: bash: no job control in this shell
+0: 0: stty: 'standard input': Inappropriate ioctl for device
+0: 0: Skipping import of cpp extensions due to TORCHAO_FORCE_SKIP_LOADING_SO_FILES=1
+0: 0: W1117 18:39:43.727000 1043707 site-packages/torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+0: 0: W1117 18:39:43.898000 1043707 site-packages/torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+0: 0: [INFO] Running in WANDB offline mode
+0: 0: /usr/WS2/kirchenb/lilpipe-tar-train-rocm72-v4/lib/python3.12/site-packages/axolotl/core/trainers/base.py:32: TRLExperimentalWarning: You are importing from 'trl.experimental'. APIs here are unstable and may change or be removed without notice. Silence this warning by setting environment variable TRL_EXPERIMENTAL_SILENCE=1.
+0: 0:   from trl.experimental.utils import pad_to_length
+0: 0: cpu_build_gpu_gram0:  0: 0: {"wall_ms": 230.81144702155143, "gpu_stream_span_ms": 230.77175903320312, "gpu_gemm_ms": 0.8347100019454956}0: 0: 
+0: 0: native_slice_gpu_build0: 0:  0: {"wall_ms": 4.324133973568678, "gpu_stream_span_ms": 4.306324005126953, "gpu_gemm_ms": 0.48469600081443787}
+0: 0: packed_fp32_host_gpu_build0: 0:  {"wall_ms": 110.2206289069727, "gpu_stream_span_ms": 110.19676971435547, "gpu_gemm_ms": 0.45808500051498413}0: 
+0: 0: standalone_gram0: 0:  0: 1 0: {"wall_ms": 0.287303002551198, "gpu_stream_span_ms": 0.26436299085617065}
+0: 0: standalone_gram0: 0:  0: 64 0: {"wall_ms": 0.2996940165758133, "gpu_stream_span_ms": 0.2812039852142334}
+0: 0: standalone_gram0:  0: 128 {"wall_ms": 0.3053939435631037, "gpu_stream_span_ms": 0.28908398747444153}0: 
+0: Wed Nov 18 02:40:09 UTC 2026 Job execution finished.

@@ -1,0 +1,231 @@
+{
+  "signature": "692ef9a854ca1bc18b570d412f5029e102cf57b33ade51b22d4e2a506367c3ff",
+  "outer_calls": [
+    1,
+    32,
+    64,
+    96,
+    125
+  ],
+  "inner_steps": [
+    1,
+    2,
+    4,
+    8,
+    12,
+    16
+  ],
+  "actual_views": {
+    "matched": [
+      {
+        "name": "actual_1",
+        "step": 1
+      },
+      {
+        "name": "actual_2",
+        "step": 2
+      },
+      {
+        "name": "actual_4",
+        "step": 4
+      },
+      {
+        "name": "actual_8",
+        "step": 8
+      },
+      {
+        "name": "actual_12",
+        "step": 12
+      },
+      {
+        "name": "actual_16",
+        "step": 16
+      }
+    ],
+    "long": [
+      {
+        "name": "actual_1",
+        "step": 1
+      },
+      {
+        "name": "actual_2",
+        "step": 2
+      },
+      {
+        "name": "actual_4",
+        "step": 4
+      },
+      {
+        "name": "actual_8",
+        "step": 8
+      },
+      {
+        "name": "actual_16",
+        "step": 16
+      },
+      {
+        "name": "actual_32",
+        "step": 32
+      },
+      {
+        "name": "actual_48",
+        "step": 48
+      },
+      {
+        "name": "actual_64",
+        "step": 64
+      },
+      {
+        "name": "actual_96",
+        "step": 96
+      },
+      {
+        "name": "actual_128",
+        "step": 128
+      },
+      {
+        "name": "actual_256",
+        "step": 256
+      },
+      {
+        "name": "actual_512",
+        "step": 512
+      },
+      {
+        "name": "actual_1000",
+        "step": 1000
+      }
+    ]
+  },
+  "actual_states": [
+    {
+      "name": "actual_1",
+      "step": 1
+    },
+    {
+      "name": "actual_2",
+      "step": 2
+    },
+    {
+      "name": "actual_3",
+      "step": 3
+    },
+    {
+      "name": "actual_4",
+      "step": 4
+    },
+    {
+      "name": "actual_5",
+      "step": 5
+    },
+    {
+      "name": "actual_6",
+      "step": 6
+    },
+    {
+      "name": "actual_7",
+      "step": 7
+    },
+    {
+      "name": "actual_8",
+      "step": 8
+    },
+    {
+      "name": "actual_12",
+      "step": 12
+    },
+    {
+      "name": "actual_16",
+      "step": 16
+    },
+    {
+      "name": "actual_24",
+      "step": 24
+    },
+    {
+      "name": "actual_32",
+      "step": 32
+    },
+    {
+      "name": "actual_40",
+      "step": 40
+    },
+    {
+      "name": "actual_48",
+      "step": 48
+    },
+    {
+      "name": "actual_56",
+      "step": 56
+    },
+    {
+      "name": "actual_64",
+      "step": 64
+    },
+    {
+      "name": "actual_80",
+      "step": 80
+    },
+    {
+      "name": "actual_96",
+      "step": 96
+    },
+    {
+      "name": "actual_112",
+      "step": 112
+    },
+    {
+      "name": "actual_128",
+      "step": 128
+    },
+    {
+      "name": "actual_192",
+      "step": 192
+    },
+    {
+      "name": "actual_256",
+      "step": 256
+    },
+    {
+      "name": "actual_384",
+      "step": 384
+    },
+    {
+      "name": "actual_512",
+      "step": 512
+    },
+    {
+      "name": "actual_768",
+      "step": 768
+    },
+    {
+      "name": "actual_1000",
+      "step": 1000
+    }
+  ],
+  "coordinates": 7241732096,
+  "anchor_caveat": "Each inner trajectory starts immediately before its own outer update. The archived attack starts at the final defender, after the last outer update. Even the last inner call therefore has a different anchor. Observed directional similarity cannot establish how both would move from the same state.",
+  "cross_call_scope": "Each aggregate contains one inner trajectory. Between-call inner angles and pooled multi-call spans require unrecorded cross-call inner products.",
+  "representations": {
+    "raw_saved": "The recorder converts each saved or transient endpoint and its anchor to FP32 before subtracting. It accumulates the resulting inner products in FP64.",
+    "bf16_evaluated": "The recorder casts each endpoint and its anchor to BF16, converts both to FP32 for subtraction, and accumulates inner products in FP64."
+  },
+  "motion": "Interval updates are net changes over (start_step, end_step]. Each horizon differences successive saved points in that horizon. Only adjacent step numbers measure a single optimizer update.",
+  "normalization": "Uncentered PCA uses displacement magnitudes for norm_weighted and gives each nonzero vector unit length for equal_unit. actual_energy_captured always weights targets by squared norm; mean_actual_vector_capture weights each nonzero target equally.",
+  "rank": "At requested rank 1 or 2, both spans use the smaller available rank capped at the request. Full uses both numerical ranks independently. Overlap divides the sum of squared principal cosines by each side's rank.",
+  "all_states": "Projection-only rows in capture.csv fit the requested inner rank independently. No PCA across all archived reference states is fitted.",
+  "families": "family_comparisons.csv fits both spans anew within each parameter family. family_basis_energy.csv retains the globally fitted axes and partitions their squared norms across module families. Its share is the average family-restricted squared norm across the selected orthonormal axes, weighting each axis equally. At positive rank the shares sum to one.",
+  "rank_tolerance": "Eigenvalues below or equal to 1e-11 times the largest eigenvalue are discarded. Each local Gram is scaled by its largest diagonal before fitting.",
+  "zero_motion": "Zero denominators have missing fractions or cosines (blank CSV cells, gray heatmap cells).",
+  "figures": "Overlap and capture panels use cumulative displacements with norm-weighted PCA. The similarity panels show interval updates within each call.",
+  "tables": {
+    "anchor_distance": 10,
+    "comparisons": 240,
+    "angles": 720,
+    "capture": 5400,
+    "spectrum": 1000,
+    "inner_similarity": 420,
+    "family_comparisons": 1200,
+    "family_basis_energy": 2400
+  }
+}

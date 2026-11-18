@@ -1,0 +1,12 @@
+{
+  "state": "passed",
+  "reference_checkpoints": 26,
+  "source_files": 27,
+  "source_bytes": 405224603064,
+  "cache_proof": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/cache-provenance/fWF2qPV-2892131-20261118T025442/provenance.json",
+  "cache_proof_sha256": "2314fa285d06bfbba30d7c7f0eba38b4e5ab79d27daaffed7f2dac2c73f41348",
+  "source_spec_sha256": "6112d943bdb3702119fd4bbeecc18037f80f5758c90cd2e998c2b535ece23a1d",
+  "local_copies_verified_during_staging": true,
+  "source_identities_unchanged_after_training": true,
+  "local_cache_cleaned": true
+}

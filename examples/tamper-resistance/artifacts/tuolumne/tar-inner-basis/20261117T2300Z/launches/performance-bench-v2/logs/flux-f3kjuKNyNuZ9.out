@@ -1,0 +1,46 @@
+0: OUTPUT_DIR: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/launches/performance-bench-v2
+0: Logging to /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/launches/performance-bench-v2/logs
+0: Wed Nov 18 02:46:32 UTC 2026 Calling flux run...
+0: 0: Wed Nov 18 02:46:33 UTC 2026 Loading modules
+0: 0: 
+0: 0: Lmod is automatically replacing "cce/20.0.0" with "gcc-native/13".
+0: 0: 
+0: 0: 
+0: 0: Due to MODULEPATH changes, the following have been reloaded:
+0: 0:   1) cray-libsci/25.09.0     2) cray-mpich/9.0.1
+0: 0: 
+0: 0: 
+0: 0: The following have been reloaded with a version change:
+0: 0:   1) libfabric/match_SHS => libfabric/2.1
+0: 0: 
+0: 0: stty: 'standard input': Inappropriate ioctl for device
+0: 0: Wed Nov 18 02:46:38 UTC 2026 Activated environment on 0
+0: 0: Wed Nov 18 02:46:38 UTC 2026 Launching python on 0...
+0: 0: bash: cannot set terminal process group (3364641): Inappropriate ioctl for device
+0: 0: bash: no job control in this shell
+0: 0: stty: 'standard input': Inappropriate ioctl for device
+0: 0: Skipping import of cpp extensions due to TORCHAO_FORCE_SKIP_LOADING_SO_FILES=1
+0: 0: W1117 18:47:18.139000 3365189 site-packages/torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+0: 0: W1117 18:47:18.280000 3365189 site-packages/torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+0: 0: [INFO] Running in WANDB offline mode
+0: 0: /usr/WS2/kirchenb/lilpipe-tar-train-rocm72-v4/lib/python3.12/site-packages/axolotl/core/trainers/base.py:32: TRLExperimentalWarning: You are importing from 'trl.experimental'. APIs here are unstable and may change or be removed without notice. Silence this warning by setting environment variable TRL_EXPERIMENTAL_SILENCE=1.
+0: 0:   from trl.experimental.utils import pad_to_length
+0: 0: ssd0:  0: 0: direct 0: 0: 1 0: build_ms 0: [121.686, 4.421]
+0: 0: ssd0: 0:  0: full_clone 0: 1 0: build_ms 0: [65.801, 4.734]
+0: 0: ssd0: 0:  slice_clone0:  10:  build_ms0:  0: [30.555, 4.746]
+0: 0: ssd0: 0:  full_clone0:  20:  build_ms0:  0: [31.364, 4.765]0: 
+0: 0: ssd0: 0:  slice_clone0:  20:  build_ms0:  0: [21.737, 4.442]0: 
+0: 0: ssd0: 0:  direct0:  20:  0: build_ms 0: [94.793, 4.79]
+0: 0: ssd0: 0:  0: slice_clone 0: 3 0: build_ms 0: [10.055, 4.394]
+0: 0: ssd0: 0:  0: 0: direct 0: 3 0: build_ms 0: [98.671, 4.778]
+0: 0: ssd0: 0:  full_clone0:  30:  build_ms0:  0: [21.117, 4.413]
+0: 0: tmpfs0: 0:  0: direct 0: 10:  build_ms0:  0: [156.959, 4.802]0: 
+0: 0: tmpfs0: 0:  0: full_clone 0: 1 0: build_ms 0: [18.855, 4.448]
+0: 0: tmpfs0: 0:  0: slice_clone 0: 1 0: build_ms 0: [6.482, 4.381]
+0: 0: tmpfs0: 0:  0: full_clone 0: 2 0: build_ms 0: [9.372, 4.417]
+0: 0: tmpfs0: 0:  0: 0: slice_clone 0: 2 0: build_ms 0: [5.13, 4.375]
+0: 0: tmpfs0: 0:  0: direct 0: 2 0: build_ms 0: [105.865, 4.818]
+0: 0: tmpfs0: 0:  0: slice_clone 0: 3 0: build_ms 0: [4.931, 4.483]
+0: 0: tmpfs0: 0:  0: direct 0: 3 0: build_ms 0: [111.286, 4.775]
+0: 0: tmpfs0: 0:  0: full_clone 3 0: build_ms 0: [5.72, 4.391]
+0: Wed Nov 18 02:47:52 UTC 2026 Job execution finished.

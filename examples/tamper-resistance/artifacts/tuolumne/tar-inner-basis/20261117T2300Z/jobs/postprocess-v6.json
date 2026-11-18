@@ -1,0 +1,11 @@
+{
+  "job_id": "f3kksk1z9NGP",
+  "purpose": "Strict original-B replay, actual saved-anchor and aggregate parity validation, then geometry report",
+  "plan": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/postprocess-local-plan-v6.json",
+  "defense_job": "f3kjxbbFnWk7",
+  "queue_after_submission": "pbatch",
+  "queue_update": "The pending pdebug request reserved05:03 UTC. A supported pending-job queue update to pbatch was accepted; execution began around04:51 UTC. Node count, duration, environment and worker were unchanged.",
+  "defense_terminal_step": 125,
+  "inner_records": 5,
+  "raw_training_wrapper_error": "Final metadata check used model-root trainer_state.json; actual checkpoint-125 state exists at125; raw status retained"
+}

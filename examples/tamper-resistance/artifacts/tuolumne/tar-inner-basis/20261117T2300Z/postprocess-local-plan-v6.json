@@ -1,6 +1,7 @@
 {
-  "state": "prepared-not-launched",
-  "prerequisite": "Local-reference training status complete, local cache cleaned, transfer and replay gates",
+  "state": "complete",
+  "completed_job_id": "f3kksk1z9NGP",
+  "prerequisite": "Training job inactive; checkpoint-125 trainer state at125; local cache cleaned; strict replay, loss-trace and saved-anchor gates. Raw training-wrapper status is retained because its final state-file path is incorrect.",
   "dryrun_argv": [
     "python",
     "/p/vast1/kirchenb/llnl-tools/launch_tuo.py",

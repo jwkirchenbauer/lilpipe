@@ -640,7 +640,7 @@ def figures(folder, tables, steps, actual_views, calls):
     fig.supylabel("Fraction of displacement energy in the inner span")
     fig.legend(
         *axes[0, 0].get_legend_handles_labels(),
-        loc="outside lower center",
+        loc="outside upper center",
         ncol=min(5, len(calls)),
         frameon=False,
     )

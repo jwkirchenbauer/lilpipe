@@ -1,0 +1,14 @@
+{
+  "state": "complete",
+  "terminal_checkpoint_global_step": 125,
+  "saved_checkpoint_values_match_original": true,
+  "all_2000_inner_losses_match_original": true,
+  "ordered_finite_inner_loss_pairs_equal": true,
+  "actual_attack_saved_anchor_matches": true,
+  "training_wrapper_status": {
+    "state": "failed",
+    "exit_code": 1
+  },
+  "completion_source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/cases/baseline-inner-recording/models/defense/checkpoint-125/trainer_state.json",
+  "note": "The frozen training wrapper checks a root-level trainer_state.json that Axolotl does not normally write. Scientific completion is established by the terminal checkpoint, exact saved-value replay validation and protocol summary; the raw wrapper status is retained."
+}

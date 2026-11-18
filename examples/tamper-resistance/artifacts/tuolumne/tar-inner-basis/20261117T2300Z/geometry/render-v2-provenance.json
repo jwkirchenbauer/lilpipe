@@ -1,0 +1,31 @@
+{
+  "state": "complete",
+  "change": "Move capture-plot legend above the panels to separate it from the x-axis label",
+  "analysis_signature": "692ef9a854ca1bc18b570d412f5029e102cf57b33ade51b22d4e2a506367c3ff",
+  "cached_tables": {
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/geometry/per-call/outer-000001.json": "ed73dfd5ef683d0cfe9713d40a9ea8a8cb24287e9b2614bbbc23192c43f10ae2",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/geometry/per-call/outer-000032.json": "47fe279f3ba602013cfdc64acbe9813131b02933c0fed75b4b7bcae1c4befb20",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/geometry/per-call/outer-000064.json": "ed7f83b652b77852726ee7457f5a53bb3156ce1cab893d04597d2907e01c3e2a",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/geometry/per-call/outer-000096.json": "aa821771b85116bbab6ddd62b4c15a13eea3ebcdce805ab47a255883713d4d3d",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/geometry/per-call/outer-000125.json": "1b4ec1f7c06f9c9f1a511171b62815656f8b114689cafa6414f10acdae4b7f7a"
+  },
+  "numeric_csv_sha256_unchanged": {
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/geometry/anchor_distance.csv": "bc53cca6ffc70d862d03b68bf2feff12074bcae1a0e77610ce2d75e2a9c1fcc4",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/geometry/angles.csv": "e317984d33ba57d1525d48bed4809f61fb5402cc2cd7d0ff1e51a3a4c70c3325",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/geometry/capture.csv": "52ab9afa1e9a052ea73d4832de9e555ced6f4144fa12fc4a4254267b78935c7b",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/geometry/comparisons.csv": "e25813103934b2d2a39594da106277ef84c01a1bdcff77c0c80008c869176a91",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/geometry/family_basis_energy.csv": "06f9cf0a4d1aa42087fc46b70e2eeea4f51ce9d5c950156a356892c63bec2376",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/geometry/family_comparisons.csv": "35628fcbc22578c060475b6024362378adcb56ec0a38a82da045cc2992713d5c",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/geometry/inner_similarity.csv": "69c09e72e3517f53be9d8653ae478d09b6b1e07a46edff57c2e93806685e8895",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/geometry/spectrum.csv": "6f16063c0f40802b273b4512b7d8355208767dbf7cb3fc2639b028d55815820a"
+  },
+  "published": {
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/geometry/capture-by-step.png": "5cca28eb8603eee32bc9ec1802f0b6d597c06099df7ab424e3b97a240a319487",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/geometry/capture-by-step.pdf": "6d2db477d06ff045c3e54445721a41e0268129628476ce05251b6d51574960b8"
+  },
+  "source_sha256": {
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/source/render-v2/render.py": "f1166b02469d337fffd4e11e1db6972e7e796047c8b5c328eb47cacf7eaaa4eb",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/source/render-v2/tar_basis_structure.py": "6ab38451a8ab3da906cce6a74424dc0526b1a332c043604e8fd11c3a2b20c78f",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/source/render-v2/tar_inner_geometry.py": "9c30f90d8e4a82fb0c527c3960bbc7fd8165b58da0fc35c4884ca54e1cb41da4"
+  }
+}

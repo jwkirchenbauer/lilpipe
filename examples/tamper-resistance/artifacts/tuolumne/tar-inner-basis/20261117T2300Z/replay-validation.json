@@ -1,0 +1,116 @@
+{
+  "state": "passed",
+  "outer_checkpoints": [
+    {
+      "outer_step": 1,
+      "coordinates": 7241732096,
+      "different_coordinates": 0,
+      "maximum_absolute_difference": 0.0,
+      "l2_difference": 0.0,
+      "bitwise_equal_values": true
+    },
+    {
+      "outer_step": 2,
+      "coordinates": 7241732096,
+      "different_coordinates": 0,
+      "maximum_absolute_difference": 0.0,
+      "l2_difference": 0.0,
+      "bitwise_equal_values": true
+    },
+    {
+      "outer_step": 4,
+      "coordinates": 7241732096,
+      "different_coordinates": 0,
+      "maximum_absolute_difference": 0.0,
+      "l2_difference": 0.0,
+      "bitwise_equal_values": true
+    },
+    {
+      "outer_step": 8,
+      "coordinates": 7241732096,
+      "different_coordinates": 0,
+      "maximum_absolute_difference": 0.0,
+      "l2_difference": 0.0,
+      "bitwise_equal_values": true
+    },
+    {
+      "outer_step": 16,
+      "coordinates": 7241732096,
+      "different_coordinates": 0,
+      "maximum_absolute_difference": 0.0,
+      "l2_difference": 0.0,
+      "bitwise_equal_values": true
+    },
+    {
+      "outer_step": 32,
+      "coordinates": 7241732096,
+      "different_coordinates": 0,
+      "maximum_absolute_difference": 0.0,
+      "l2_difference": 0.0,
+      "bitwise_equal_values": true
+    },
+    {
+      "outer_step": 64,
+      "coordinates": 7241732096,
+      "different_coordinates": 0,
+      "maximum_absolute_difference": 0.0,
+      "l2_difference": 0.0,
+      "bitwise_equal_values": true
+    },
+    {
+      "outer_step": 96,
+      "coordinates": 7241732096,
+      "different_coordinates": 0,
+      "maximum_absolute_difference": 0.0,
+      "l2_difference": 0.0,
+      "bitwise_equal_values": true
+    },
+    {
+      "outer_step": 125,
+      "coordinates": 7241732096,
+      "different_coordinates": 0,
+      "maximum_absolute_difference": 0.0,
+      "l2_difference": 0.0,
+      "bitwise_equal_values": true
+    }
+  ],
+  "inner_loss_trace": {
+    "observations": 2000,
+    "maximum_absolute_difference": 0.0,
+    "exactly_equal": true
+  },
+  "inner_aggregates": [
+    {
+      "outer_call": 1,
+      "attack_batch_sha256": "7b5e8ab7239b2a532ef43c7945b14edc8133d512d821be37ca5f61dee6f6d33b",
+      "file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v6/outer-000001.json",
+      "sha256": "2771c4e63a1fbe708ec90fbc284f4778f55f65f5d9fa293bd1458a9ace079db8"
+    },
+    {
+      "outer_call": 32,
+      "attack_batch_sha256": "379b305fba0934cc4aea064c867428e9ca8d9487c9e1b2156d35a4354c600e1b",
+      "file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v6/outer-000032.json",
+      "sha256": "920a81be20751fae4d9f3f5643ddd553e1f9c08bbd4f39067208a7d225c66eff"
+    },
+    {
+      "outer_call": 64,
+      "attack_batch_sha256": "57b949500e1b0a18cc62a6697860ed30a98d94bc37592758b00ef3f9264e1a88",
+      "file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v6/outer-000064.json",
+      "sha256": "62fde277caff235994235dcdc7a317652e87dad6defa7f57d09a24bd4ea121fd"
+    },
+    {
+      "outer_call": 96,
+      "attack_batch_sha256": "29947343f662d1ccfb0073eb9ad8dddcb47ffad5d3a7c51cec06baa19edfcef8",
+      "file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v6/outer-000096.json",
+      "sha256": "26a05e3e5d2f9612937e9dd8f0f9974bb1c330a8fdbcdf8ed67510af4bbbd576"
+    },
+    {
+      "outer_call": 125,
+      "attack_batch_sha256": "5d4d73235cb646de2eb76e2be1dc28322cab11b051b917e94edcc1c365698776",
+      "file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v6/outer-000125.json",
+      "sha256": "1677895e421975c385be2c8e5cf144c64caf58cda69f612cfd0a51346b1b4dbc"
+    }
+  ],
+  "new_attacks": [],
+  "interpretation": "Exact saved-value equality verifies observation did not alter the defense at declared checkpoints; original actual attack is reused."
+}

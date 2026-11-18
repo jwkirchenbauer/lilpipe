@@ -1,0 +1,5 @@
+{
+  "job_id": "f3kkzzKnKyeX",
+  "plan": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/render-plan-v2.json",
+  "purpose": "Fix capture legend placement using cached numeric rows; verify unchanged CSV hashes"
+}

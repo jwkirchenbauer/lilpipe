@@ -1,6 +1,6 @@
 {
   "job_id": "f3kjNJR1JYnB",
-  "state": "submitted",
+  "state": "interrupted-before-first-outer-update",
   "plan": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/launcher-local-reference-v6.json",
   "previous_job": "f3kjLy4He4Qw",
   "previous_failure": "Bash EPOCHSECONDS unsupported; failed before staging/training; scientific settings unchanged"

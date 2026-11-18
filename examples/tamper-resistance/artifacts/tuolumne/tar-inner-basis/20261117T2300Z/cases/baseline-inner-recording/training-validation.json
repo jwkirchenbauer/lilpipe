@@ -1,0 +1,19 @@
+{
+  "state": "passed",
+  "case": "baseline-inner-recording",
+  "updates": 125,
+  "model_checkpoints": 9,
+  "optimizer_checkpoints": [
+    32,
+    64,
+    96,
+    125
+  ],
+  "training_elapsed_seconds": 6070.687696052017,
+  "input_order_validation": {
+    "state": "passed",
+    "reference_observations": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/models/defense/observed-batches.jsonl",
+    "batches": 125,
+    "canonical_step_batch_sha256": "c5f55ce756e9b0957ba6eb9fee18cf07bd2ac2b772e9884dbd2e8d30f4ddb98e"
+  }
+}

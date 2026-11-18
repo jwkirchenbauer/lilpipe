@@ -1,0 +1,650 @@
+{
+  "schema_version": 1,
+  "status": "cleaned",
+  "owner": {
+    "token": "b62cc539234c4883ac55bbc9d49d925a",
+    "host": "tuolumne1825",
+    "uid": 65301,
+    "provenance": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/cache-provenance/fWF2qPV-2892131-20261118T025442/provenance.json"
+  },
+  "spec": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/references.json",
+  "spec_sha256": "6112d943bdb3702119fd4bbeecc18037f80f5758c90cd2e998c2b535ece23a1d",
+  "roots": {
+    "ssd": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd",
+    "ram": "/tmp/kirchenb/flux-kGqEdq/jobtmp-0-fWF2qPV/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ram"
+  },
+  "source_folders": {
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-1": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0000",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-1000": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0001",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-112": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0002",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-12": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0003",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-128": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0004",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-16": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0005",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-192": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0006",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-2": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0007",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-24": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0008",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-256": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0009",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-3": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0010",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-32": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0011",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-384": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0012",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-4": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0013",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-40": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0014",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-48": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0015",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-5": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0016",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-512": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0017",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-56": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0018",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-6": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0019",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-64": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0020",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-7": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0021",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-768": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0022",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-8": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0023",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-80": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0024",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-96": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0025",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0026"
+  },
+  "capacities": {
+    "ssd": 191570227200,
+    "ram": 240000000000
+  },
+  "planned_bytes": {
+    "ssd": 180099823584,
+    "ram": 225124779480
+  },
+  "total_bytes": 405224603064,
+  "files": [
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-1/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 9307145295287131462,
+        "mtime_ns": 1794335942584831787,
+        "ctime_ns": 1794335942587150700
+      },
+      "relative": "checkpoint-0000/model.safetensors",
+      "tier": "ssd",
+      "destination": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0000/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0000/model.safetensors",
+      "sha256": "6dc91ee91c77f7923ab84beb75722b3dd13ef6e436bbda1ac075c5693afc0d9a",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 64768,
+        "ino": 201620162,
+        "mtime_ns": 1794970523161826269,
+        "ctime_ns": 1794970523161826269
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-1000/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 13640350113488418029,
+        "mtime_ns": 1794337091361037667,
+        "ctime_ns": 1794337091364510835
+      },
+      "relative": "checkpoint-0001/model.safetensors",
+      "tier": "ssd",
+      "destination": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0001/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0001/model.safetensors",
+      "sha256": "b29b7a7ce6c47204433fbf0f2215e1f28a401d1cb52cb5bbcc958030d66fc760",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 64768,
+        "ino": 235120002,
+        "mtime_ns": 1794970523968844559,
+        "ctime_ns": 1794970523968844559
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-112/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 4310926180907301992,
+        "mtime_ns": 1794336455541994826,
+        "ctime_ns": 1794336455544959043
+      },
+      "relative": "checkpoint-0002/model.safetensors",
+      "tier": "ssd",
+      "destination": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0002/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0002/model.safetensors",
+      "sha256": "94d3d2227534e602c1bf734232ef78709e8316a569b2fe5e71c9e45ec6a9a33b",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 64768,
+        "ino": 268916802,
+        "mtime_ns": 1794970523077824365,
+        "ctime_ns": 1794970523077824365
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-12/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 6757404463848095026,
+        "mtime_ns": 1794336167379596378,
+        "ctime_ns": 1794336167383077003
+      },
+      "relative": "checkpoint-0003/model.safetensors",
+      "tier": "ssd",
+      "destination": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0003/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0003/model.safetensors",
+      "sha256": "683f50d3cde8c59b942693fcc2b37664f805fb92fa9a6270010dd24a6cb071b2",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 64768,
+        "ino": 302337602,
+        "mtime_ns": 1794970523540834858,
+        "ctime_ns": 1794970523540834858
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-128/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 2413735401732105049,
+        "mtime_ns": 1794336488555479488,
+        "ctime_ns": 1794336488558463657
+      },
+      "relative": "checkpoint-0004/model.safetensors",
+      "tier": "ssd",
+      "destination": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0004/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0004/model.safetensors",
+      "sha256": "0747211e5c1a3e99f0bbd23a80a69dd2914fbc1055387b1dd78bece86716b79b",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 64768,
+        "ino": 335900866,
+        "mtime_ns": 1794970579550003059,
+        "ctime_ns": 1794970579550003059
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-16/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 612593117513824990,
+        "mtime_ns": 1794336195943025503,
+        "ctime_ns": 1794336195947537248
+      },
+      "relative": "checkpoint-0005/model.safetensors",
+      "tier": "ssd",
+      "destination": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0005/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0005/model.safetensors",
+      "sha256": "4fb7263ccb3326e4fc5bd48e6ecbde031491401e268f13e0c2443e69ad0317e6",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 64768,
+        "ino": 369411266,
+        "mtime_ns": 1794970579531002888,
+        "ctime_ns": 1794970579531002888
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-192/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 6912809453559820656,
+        "mtime_ns": 1794336593885490817,
+        "ctime_ns": 1794336593888282425
+      },
+      "relative": "checkpoint-0006/model.safetensors",
+      "tier": "ssd",
+      "destination": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0006/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0006/model.safetensors",
+      "sha256": "b64c2c1b31b46c433afc34999ee51f5b8d3ea67b17f6221bea32898b44523b0e",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 64768,
+        "ino": 402950402,
+        "mtime_ns": 1794970581496020615,
+        "ctime_ns": 1794970581496020615
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-2/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 13843509454426902377,
+        "mtime_ns": 1794335969226991305,
+        "ctime_ns": 1794335969238213064
+      },
+      "relative": "checkpoint-0007/model.safetensors",
+      "tier": "ssd",
+      "destination": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0007/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0007/model.safetensors",
+      "sha256": "55b98d1388feffc856bd33b4ce27683cb6a412691eeed7d2a9c9a97bf5190c5a",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 64768,
+        "ino": 436446786,
+        "mtime_ns": 1794970580988016033,
+        "ctime_ns": 1794970580988016033
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-24/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 15144679931573959575,
+        "mtime_ns": 1794336224400419371,
+        "ctime_ns": 1794336224406397107
+      },
+      "relative": "checkpoint-0008/model.safetensors",
+      "tier": "ssd",
+      "destination": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0008/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0008/model.safetensors",
+      "sha256": "a7e0ad6c48c131d52da6c07604d55b5472d37024ce3059a41a2d1a6034b66929",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 64768,
+        "ino": 470042434,
+        "mtime_ns": 1794970632892078203,
+        "ctime_ns": 1794970632892078203
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-256/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 9903893413334108177,
+        "mtime_ns": 1794336642223598435,
+        "ctime_ns": 1794336642226189451
+      },
+      "relative": "checkpoint-0009/model.safetensors",
+      "tier": "ssd",
+      "destination": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0009/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0009/model.safetensors",
+      "sha256": "0ff695a68fb79dfeacf5808930aba9d222bbe0baba90c8571142ab5f0b547a77",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 64768,
+        "ino": 503648450,
+        "mtime_ns": 1794970632478069493,
+        "ctime_ns": 1794970632478069493
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-3/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 9075951164907802193,
+        "mtime_ns": 1794335997207660326,
+        "ctime_ns": 1794335997214379411
+      },
+      "relative": "checkpoint-0010/model.safetensors",
+      "tier": "ssd",
+      "destination": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0010/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0010/model.safetensors",
+      "sha256": "ec34e846b66472c10bc68d8479a717d5f7caf08aaa6d7d56f6e48825c1748b50",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 64768,
+        "ino": 133,
+        "mtime_ns": 1794970634448110937,
+        "ctime_ns": 1794970634448110937
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-32/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 12061834921244913831,
+        "mtime_ns": 1794336251310514500,
+        "ctime_ns": 1794336251314197051
+      },
+      "relative": "checkpoint-0011/model.safetensors",
+      "tier": "ssd",
+      "destination": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0011/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0011/model.safetensors",
+      "sha256": "c2cf3b54a66d21c87c1d70581491fa4f84dcf266989277eaf90e372507b9e5f9",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 64768,
+        "ino": 33855425,
+        "mtime_ns": 1794970635705137378,
+        "ctime_ns": 1794970635705137378
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-384/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 11007689622159652334,
+        "mtime_ns": 1794336717566162583,
+        "ctime_ns": 1794336717568701470
+      },
+      "relative": "checkpoint-0012/model.safetensors",
+      "tier": "ram",
+      "destination": "/tmp/kirchenb/flux-kGqEdq/jobtmp-0-fWF2qPV/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ram/checkpoint-0012/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0012/model.safetensors",
+      "sha256": "e4f22a559b93849f0a2da66e3edc23c4c0734e7b9700b0b659e132ae7031e7c9",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 20,
+        "ino": 85764605,
+        "mtime_ns": 1794970682266058973,
+        "ctime_ns": 1794970682266058973
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-4/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 15612342354824535802,
+        "mtime_ns": 1794336027027183177,
+        "ctime_ns": 1794336027029377095
+      },
+      "relative": "checkpoint-0013/model.safetensors",
+      "tier": "ram",
+      "destination": "/tmp/kirchenb/flux-kGqEdq/jobtmp-0-fWF2qPV/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ram/checkpoint-0013/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0013/model.safetensors",
+      "sha256": "cf8c0ff63a829f6a24f55bf9b074096d1326b516db910db9138db164f798519d",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 20,
+        "ino": 85875031,
+        "mtime_ns": 1794970682939072896,
+        "ctime_ns": 1794970682939072896
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-40/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 12433623502390825747,
+        "mtime_ns": 1794336277397748484,
+        "ctime_ns": 1794336277402587884
+      },
+      "relative": "checkpoint-0014/model.safetensors",
+      "tier": "ram",
+      "destination": "/tmp/kirchenb/flux-kGqEdq/jobtmp-0-fWF2qPV/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ram/checkpoint-0014/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0014/model.safetensors",
+      "sha256": "eed5984d204ca5b9b1c59dd4e8953b660962e0e48214122e5b510444353e90e6",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 20,
+        "ino": 84739613,
+        "mtime_ns": 1794970684619107652,
+        "ctime_ns": 1794970684619107652
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-48/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 3070172434292987914,
+        "mtime_ns": 1794336302751796915,
+        "ctime_ns": 1794336302757354920
+      },
+      "relative": "checkpoint-0015/model.safetensors",
+      "tier": "ram",
+      "destination": "/tmp/kirchenb/flux-kGqEdq/jobtmp-0-fWF2qPV/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ram/checkpoint-0015/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0015/model.safetensors",
+      "sha256": "87cb30cb33575c5ca6b0443b9868dd1a0ea67faa6985b4e6b7f6ee58eafd9804",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 20,
+        "ino": 84553224,
+        "mtime_ns": 1794970686693150560,
+        "ctime_ns": 1794970686693150560
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-5/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 16683482639220905013,
+        "mtime_ns": 1794336055926205996,
+        "ctime_ns": 1794336055928733807
+      },
+      "relative": "checkpoint-0016/model.safetensors",
+      "tier": "ram",
+      "destination": "/tmp/kirchenb/flux-kGqEdq/jobtmp-0-fWF2qPV/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ram/checkpoint-0016/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0016/model.safetensors",
+      "sha256": "26b5af0eff7f08b3dd6cb558dda3ed16448f3f75de6146a80f095ef77ea44947",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 20,
+        "ino": 85760165,
+        "mtime_ns": 1794970757924570871,
+        "ctime_ns": 1794970757924570871
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-512/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 13872298434868921969,
+        "mtime_ns": 1794336798490033417,
+        "ctime_ns": 1794336798493614468
+      },
+      "relative": "checkpoint-0017/model.safetensors",
+      "tier": "ram",
+      "destination": "/tmp/kirchenb/flux-kGqEdq/jobtmp-0-fWF2qPV/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ram/checkpoint-0017/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0017/model.safetensors",
+      "sha256": "ba06e29422bf4f260cb77aecc3ef5fe6e5fd3c4bbabab117029ca1f721a316b6",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 20,
+        "ino": 85758897,
+        "mtime_ns": 1794970759165596347,
+        "ctime_ns": 1794970759165596347
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-56/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 16105732644786757843,
+        "mtime_ns": 1794336331370348672,
+        "ctime_ns": 1794336331373045960
+      },
+      "relative": "checkpoint-0018/model.safetensors",
+      "tier": "ram",
+      "destination": "/tmp/kirchenb/flux-kGqEdq/jobtmp-0-fWF2qPV/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ram/checkpoint-0018/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0018/model.safetensors",
+      "sha256": "50c2ad4b089e7b08345e818b1b94a8217609a21fbc634bd3ea00ed534ef3b504",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 20,
+        "ino": 84739614,
+        "mtime_ns": 1794970760231618230,
+        "ctime_ns": 1794970760231618230
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-6/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 1991118960785665001,
+        "mtime_ns": 1794336083809581957,
+        "ctime_ns": 1794336083811857450
+      },
+      "relative": "checkpoint-0019/model.safetensors",
+      "tier": "ram",
+      "destination": "/tmp/kirchenb/flux-kGqEdq/jobtmp-0-fWF2qPV/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ram/checkpoint-0019/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0019/model.safetensors",
+      "sha256": "bfc785b77abd6d7e997347257bddd583cab6d028d7b454df9a2fbdedad80fc99",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 20,
+        "ino": 84553225,
+        "mtime_ns": 1794970764308701924,
+        "ctime_ns": 1794970764308701924
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-64/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 17097459339427934454,
+        "mtime_ns": 1794336360974331164,
+        "ctime_ns": 1794336360986034653
+      },
+      "relative": "checkpoint-0020/model.safetensors",
+      "tier": "ram",
+      "destination": "/tmp/kirchenb/flux-kGqEdq/jobtmp-0-fWF2qPV/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ram/checkpoint-0020/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0020/model.safetensors",
+      "sha256": "2838f32e4735e22b24af7fab673b24b87ef336709045a6aa3eaabaaa2616dea2",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 20,
+        "ino": 85760166,
+        "mtime_ns": 1794970837533158291,
+        "ctime_ns": 1794970837533158291
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-7/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 6112689310850821048,
+        "mtime_ns": 1794336110798649083,
+        "ctime_ns": 1794336110801330085
+      },
+      "relative": "checkpoint-0021/model.safetensors",
+      "tier": "ram",
+      "destination": "/tmp/kirchenb/flux-kGqEdq/jobtmp-0-fWF2qPV/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ram/checkpoint-0021/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0021/model.safetensors",
+      "sha256": "f1f00cf6dba8fec52799f4e27d474d113f313151d442935e4204e4b218382451",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 20,
+        "ino": 85387354,
+        "mtime_ns": 1794970838691182823,
+        "ctime_ns": 1794970838691182823
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-768/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 8459790272130345600,
+        "mtime_ns": 1794336980520750322,
+        "ctime_ns": 1794336980523848312
+      },
+      "relative": "checkpoint-0022/model.safetensors",
+      "tier": "ram",
+      "destination": "/tmp/kirchenb/flux-kGqEdq/jobtmp-0-fWF2qPV/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ram/checkpoint-0022/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0022/model.safetensors",
+      "sha256": "bf911b6dace171aacc42bd47b782d928e9fdf5d3902d64937d321b6fd7eebc9e",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 20,
+        "ino": 85387355,
+        "mtime_ns": 1794970838999189348,
+        "ctime_ns": 1794970838999189348
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-8/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 11781041738471050797,
+        "mtime_ns": 1794336137267946476,
+        "ctime_ns": 1794336137278662715
+      },
+      "relative": "checkpoint-0023/model.safetensors",
+      "tier": "ram",
+      "destination": "/tmp/kirchenb/flux-kGqEdq/jobtmp-0-fWF2qPV/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ram/checkpoint-0023/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0023/model.safetensors",
+      "sha256": "bd748a876e799c12d36bc27a2006b0c29c01f6520e178c27ef8f73b5a1282ea8",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 20,
+        "ino": 85382306,
+        "mtime_ns": 1794970843204278429,
+        "ctime_ns": 1794970843204278429
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-80/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 10283070623494792517,
+        "mtime_ns": 1794336394096915327,
+        "ctime_ns": 1794336394099833267
+      },
+      "relative": "checkpoint-0024/model.safetensors",
+      "tier": "ram",
+      "destination": "/tmp/kirchenb/flux-kGqEdq/jobtmp-0-fWF2qPV/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ram/checkpoint-0024/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0024/model.safetensors",
+      "sha256": "a409e927687d8f44340c7539208921a8d1c28ab65e293e2bbd991ad1b159c906",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 20,
+        "ino": 80126531,
+        "mtime_ns": 1794970911308688018,
+        "ctime_ns": 1794970911308688018
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/checkpoint-96/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 15335127558446147929,
+        "mtime_ns": 1794336426298635473,
+        "ctime_ns": 1794336426301208454
+      },
+      "relative": "checkpoint-0025/model.safetensors",
+      "tier": "ram",
+      "destination": "/tmp/kirchenb/flux-kGqEdq/jobtmp-0-fWF2qPV/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ram/checkpoint-0025/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0025/model.safetensors",
+      "sha256": "3be5510eeb2c27048555716f7a30871114dc06c6113d443170313feeb414d96c",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 20,
+        "ino": 85196221,
+        "mtime_ns": 1794970913438731063,
+        "ctime_ns": 1794970913438731063
+      }
+    },
+    {
+      "source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/models/defense/model.safetensors",
+      "source_stat": {
+        "size": 15008318632,
+        "dev": 79,
+        "ino": 10184706699858544107,
+        "mtime_ns": 1794257262005208644,
+        "ctime_ns": 1794257262008197187
+      },
+      "relative": "checkpoint-0026/model.safetensors",
+      "tier": "ram",
+      "destination": "/tmp/kirchenb/flux-kGqEdq/jobtmp-0-fWF2qPV/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ram/checkpoint-0026/model.safetensors",
+      "logical": "/l/ssd/kirchenb/tar-reference-b62cc539234c4883ac55bbc9d49d925a-ssd/checkpoint-0026/model.safetensors",
+      "sha256": "1f3e557293bfa359487155a3e84060bbb131e13b7b771ff2e4a62bbfdb455fb5",
+      "destination_stat": {
+        "size": 15008318632,
+        "dev": 20,
+        "ino": 85374306,
+        "mtime_ns": 1794970913240727062,
+        "ctime_ns": 1794970913240727062
+      }
+    }
+  ]
+}

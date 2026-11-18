@@ -166,3 +166,54 @@ pbatch replay f3kjxbbFnWk7 started at02:53 UTC on tuolumne1825. All B scientific
 settings and the five observation calls are unchanged. The long time limit is
 headroom; no other training worker is active. Full replay validation and final
 inner-versus-actual geometry remain outstanding.
+
+At03:25 UTC, the v8 replay had reached outer step16. Its first full inner
+aggregate completed at03:17 UTC. Canonical JSON comparison of every whole-model
+and family matrix/norm field (excluding anchor-gap scalars) was exact against
+the earlier CPU-build/GPU-reduce aggregate from f3kiuKH4AK75. Allocated final
+postprocessing still checks scalar-gap tolerance and saved defense equality.
+This confirms the storage change preserves the first actual7B measurement; it
+does not replace full replay validation or establish later-call parity.
+
+Read-only protocol audit found no execution-blocking issue in postprocess-v6.
+All five selected old-B inner batches and actual steps1–16 have full512-token
+attention masks: each16-row set has8,176 active shifted targets and zero active
+padding targets. Thus the known padding-policy difference is not realized in
+these sampled comparisons. Token-plus-mask signatures overlap zero times with
+the actual prefix; this establishes different tokenized rows, not original
+document identities. No archived actual step-zero exists after model loading,
+so saved-anchor equality cannot establish native in-memory initialization
+equality. Report raw and BF16-rounded endpoint geometry separately.
+
+At04:16 UTC a tool-server restart interrupted the assistant, while the cluster
+job continued normally. Recordings1/32/64 were complete and96 was in progress;
+the latest completed outer update was95. No training was relaunched.
+
+Before final completion, an operator error in the frozen worker's completion
+check was found: it looks for trainer_state.json in the model root, whereas
+the original Axolotl output only has it in checkpoint-125. The running worker
+is unchanged and its raw status will be retained. The unexecuted postprocess-v6
+gate now checks the actual terminal checkpoint and still requires exact saved
+values at all nine checkpoints, all2,000 inner losses, input-order equality,
+the actual saved attack anchor and cleaned transfer provenance. It writes a
+separate status/verified-defense.json after those checks.
+
+Completed: f3kjxbbFnWk7 exited at04:48 UTC after125 outer updates and all five
+inner observations. The frozen root-state path check then failed as anticipated;
+the current1825 cache was explicitly cleaned. Postprocessing f3kksk1z9NGP was
+submitted via the launcher, then its pending queue was changed from pdebug to
+pbatch using the supported update API. It ran at04:51–04:59 UTC. All125 batches,
+all nine saved model values/dtypes and the2,000 ordered finite inner-loss pairs
+match B exactly. The final model also equals the archived attack's saved source.
+Whole/family first-call matrices match the earlier implementation exactly;
+anchor-gap summation differs by at most2.05e-14, within the declared FP64 check.
+status/verified-defense.json and status/postprocess.json record verified completion.
+
+Independent interpretation review confirmed partial, horizon-dependent simulator
+alignment rather than the outer-path proxy's near orthogonality. The report
+separates first recorded displacement from an unarchived post-load step zero,
+and separates geometric capture from causal resistance. All four figures were
+visually inspected. A capture-plot legend/axis-label collision was corrected by
+f3kkzzKnKyeX using cached numeric tables; all CSV hashes remained unchanged and
+render-v2-provenance.json records the new presentation. The corrected figure was
+inspected again. Report.md and figure-index.md contain the completed results.

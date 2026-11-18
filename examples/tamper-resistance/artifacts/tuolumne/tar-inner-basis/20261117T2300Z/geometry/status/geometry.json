@@ -1,0 +1,28 @@
+{
+  "state": "complete",
+  "signature": "692ef9a854ca1bc18b570d412f5029e102cf57b33ade51b22d4e2a506367c3ff",
+  "files": [
+    "anchor_distance.csv",
+    "comparisons.csv",
+    "angles.csv",
+    "capture.csv",
+    "spectrum.csv",
+    "inner_similarity.csv",
+    "family_comparisons.csv",
+    "family_basis_energy.csv",
+    "subspace-overlap.pdf",
+    "subspace-overlap.png",
+    "family-basis-energy.pdf",
+    "family-basis-energy.png",
+    "capture-by-step.pdf",
+    "capture-by-step.png",
+    "within-call-update-similarity.pdf",
+    "within-call-update-similarity.png",
+    "summary.json",
+    "per-call/outer-000001.json",
+    "per-call/outer-000032.json",
+    "per-call/outer-000064.json",
+    "per-call/outer-000096.json",
+    "per-call/outer-000125.json"
+  ]
+}

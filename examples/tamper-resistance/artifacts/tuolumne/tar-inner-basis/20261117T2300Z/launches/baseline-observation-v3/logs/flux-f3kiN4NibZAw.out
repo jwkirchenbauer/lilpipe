@@ -1,0 +1,352 @@
+0: OUTPUT_DIR: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/launches/baseline-observation-v3
+0: Logging to /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/launches/baseline-observation-v3/logs
+0: Wed Nov 18 00:18:05 UTC 2026 Calling flux run...
+0: 0: Wed Nov 18 00:18:06 UTC 2026 Loading modules
+0: 0: 
+0: 0: Lmod is automatically replacing "cce/20.0.0" with "gcc-native/13".
+0: 0: 
+0: 0: 
+0: 0: Due to MODULEPATH changes, the following have been reloaded:
+0: 0:   1) cray-libsci/25.09.0     2) cray-mpich/9.0.1
+0: 0: 
+0: 0: 
+0: 0: The following have been reloaded with a version change:
+0: 0:   1) libfabric/match_SHS => libfabric/2.1
+0: 0: 
+0: 0: stty: 'standard input'0: 0: : Inappropriate ioctl for device
+0: 0: Wed Nov 18 00:18:11 UTC 2026 Activated environment on 0
+0: 0: Wed Nov 18 00:18:11 UTC 2026 Launching python on 0...
+0: 0: bash: cannot set terminal process group (53355): Inappropriate ioctl for device
+0: 0: bash: no job control in this shell
+0: 0: stty: 'standard input': Inappropriate ioctl for device
+0: 0: Inner observation: one process, four visible GPUs, rocBLAS
+0: 0: 
+0: 0:      #@@ #@@      @@# @@#
+0: 0:     @@  @@          @@  @@           =@@#                               @@                 #@    =@@#.
+0: 0:     @@    #@@@@@@@@@    @@           #@#@=                              @@                 #@     .=@@
+0: 0:       #@@@@@@@@@@@@@@@@@            =@# @#     ##=     ##    =####=+    @@      =#####+  =#@@###.   @@
+0: 0:     @@@@@@@@@@/  +@@/  +@@          #@  =@=     #@=   @@   =@#+  +#@#   @@    =@#+  +#@#   #@.      @@
+0: 0:     @@@@@@@@@@  ##@@  ##@@         =@#   @#      =@# @#    @@      @@   @@    @@      #@   #@       @@
+0: 0:      @@@@@@@@@@@@@@@@@@@@          #@=+++#@=      =@@#     @@      @@   @@    @@      #@   #@       @@
+0: 0:                                   =@#=====@@     =@# @#    @@      @@   @@    @@      #@   #@       @@
+0: 0:     @@@@@@@@@@@@@@@@  @@@@        #@      #@=   #@=  +@@   #@#    =@#   @@.   =@#    =@#   #@.      @@
+0: 0:                                  =@#       @#  #@=     #@   =#@@@@#=    +#@@=  +#@@@@#=    .##@@+   @@
+0: 0:     @@@@  @@@@@@@@@@@@@@@@
+0: 0: 
+0: 0: [2026-11-17 16:19:15,660] [WARNING] [torchao] Skipping import of cpp extensions due to TORCHAO_FORCE_SKIP_LOADING_SO_FILES=1
+0: 0: W1117 16:19:17.480000 53914 /usr/WS2/kirchenb/lilpipe-tar-train-rocm72-v4/lib/python3.12/site-packages/torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+0: 0: W1117 16:19:17.728000 53914 /usr/WS2/kirchenb/lilpipe-tar-train-rocm72-v4/lib/python3.12/site-packages/torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+0: 0: [INFO] Running in WANDB offline mode
+0: 0: [2026-11-17 16:19:23,603] [INFO] [axolotl.integrations.base] Attempting to load plugin: axolotl_plugins.custom_trainer_args.CustomTrainerArgsPlugin
+0: 0: [2026-11-17 16:19:23,623] [INFO] [axolotl.integrations.base] Plugin loaded successfully: axolotl_plugins.custom_trainer_args.CustomTrainerArgsPlugin
+0: 0: [2026-11-17 16:19:23,852] [INFO] [axolotl.cli.config] config:
+0: 0: {
+0: 0:   "activation_offloading": false,
+0: 0:   "attn_decontaminates_packing": true,
+0: 0:   "attn_implementation": "eager",
+0: 0:   "attn_needs_dtype_cast": false,
+0: 0:   "attn_supports_packing": false,
+0: 0:   "attn_uses_flash_lib": false,
+0: 0:   "axolotl_config_path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/cases/baseline-inner-recording/config.yml",
+0: 0:   "base_model": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+0: 0:   "base_model_config": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+0: 0:   "batch_size": 24,
+0: 0:   "bf16": true,
+0: 0:   "capabilities": {
+0: 0:     "bf16": true,
+0: 0:     "compute_capability": "sm_94",
+0: 0:     "fp8": true,
+0: 0:     "n_gpu": 1,
+0: 0:     "n_node": 1,
+0: 0:     "tf32": false
+0: 0:   },
+0: 0:   "context_parallel_size": 1,
+0: 0:   "custom_trainer_args": {
+0: 0:     "attack_epochs": 1,
+0: 0:     "attack_forget_batch_size": 16,
+0: 0:     "attack_forget_batch_size_per_iteration": 1,
+0: 0:     "attack_learning_rate": 1e-06,
+0: 0:     "defence_forget_batch_size": 4,
+0: 0:     "defence_retain_batch_size": 4,
+0: 0:     "forget_coefficient": 1.0,
+0: 0:     "retain_coefficient": 2.5
+0: 0:   },
+0: 0:   "data_seed": 42,
+0: 0:   "dataloader_num_workers": 1,
+0: 0:   "dataloader_pin_memory": true,
+0: 0:   "dataloader_prefetch_factor": 256,
+0: 0:   "dataset_num_proc": 8,
+0: 0:   "dataset_prepared_path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/cache/axolotl/defense",
+0: 0:   "datasets": [
+0: 0:     {
+0: 0:       "message_property_mappings": {
+0: 0:         "content": "content",
+0: 0:         "metadata": "defence::forget",
+0: 0:         "role": "role"
+0: 0:       },
+0: 0:       "path": "cais/wmdp-bio-forget-corpus",
+0: 0:       "revision": "5a786ed1041e56fef2d4ed26c1239f12b73a68eb",
+0: 0:       "split": "train",
+0: 0:       "trust_remote_code": false,
+0: 0:       "type": "data._base_document_strategy"
+0: 0:     },
+0: 0:     {
+0: 0:       "message_property_mappings": {
+0: 0:         "content": "content",
+0: 0:         "metadata": "attack::forget",
+0: 0:         "role": "role"
+0: 0:       },
+0: 0:       "path": "cais/wmdp-bio-forget-corpus",
+0: 0:       "revision": "5a786ed1041e56fef2d4ed26c1239f12b73a68eb",
+0: 0:       "split": "train",
+0: 0:       "trust_remote_code": false,
+0: 0:       "type": "data._base_document_strategy"
+0: 0:     },
+0: 0:     {
+0: 0:       "message_property_mappings": {
+0: 0:         "content": "content",
+0: 0:         "metadata": "defence::retain",
+0: 0:         "role": "role"
+0: 0:       },
+0: 0:       "name": "wikitext-2-raw-v1",
+0: 0:       "path": "Salesforce/wikitext",
+0: 0:       "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+0: 0:       "split": "test",
+0: 0:       "trust_remote_code": false,
+0: 0:       "type": "data._base_document_strategy"
+0: 0:     }
+0: 0:   ],
+0: 0:   "ddp": false,
+0: 0:   "debug": false,
+0: 0:   "debug_num_examples": 0,
+0: 0:   "debug_text_only": false,
+0: 0:   "device": "cuda:0",
+0: 0:   "device_map": {
+0: 0:     "lm_head": 3,
+0: 0:     "model.embed_tokens": 0,
+0: 0:     "model.layers.0": 0,
+0: 0:     "model.layers.1": 0,
+0: 0:     "model.layers.10": 1,
+0: 0:     "model.layers.11": 1,
+0: 0:     "model.layers.12": 1,
+0: 0:     "model.layers.13": 1,
+0: 0:     "model.layers.14": 1,
+0: 0:     "model.layers.15": 1,
+0: 0:     "model.layers.16": 2,
+0: 0:     "model.layers.17": 2,
+0: 0:     "model.layers.18": 2,
+0: 0:     "model.layers.19": 2,
+0: 0:     "model.layers.2": 0,
+0: 0:     "model.layers.20": 2,
+0: 0:     "model.layers.21": 2,
+0: 0:     "model.layers.22": 2,
+0: 0:     "model.layers.23": 2,
+0: 0:     "model.layers.24": 3,
+0: 0:     "model.layers.25": 3,
+0: 0:     "model.layers.26": 3,
+0: 0:     "model.layers.27": 3,
+0: 0:     "model.layers.28": 3,
+0: 0:     "model.layers.29": 3,
+0: 0:     "model.layers.3": 0,
+0: 0:     "model.layers.30": 3,
+0: 0:     "model.layers.31": 3,
+0: 0:     "model.layers.4": 0,
+0: 0:     "model.layers.5": 0,
+0: 0:     "model.layers.6": 0,
+0: 0:     "model.layers.7": 0,
+0: 0:     "model.layers.8": 1,
+0: 0:     "model.layers.9": 1,
+0: 0:     "model.norm": 3
+0: 0:   },
+0: 0:   "dion_rank_fraction": 1.0,
+0: 0:   "dion_rank_multiple_of": 1,
+0: 0:   "eaft_alpha": 1.0,
+0: 0:   "eaft_k": 20,
+0: 0:   "env_capabilities": {
+0: 0:     "torch_version": "2.12.1"
+0: 0:   },
+0: 0:   "eval_batch_size": 24,
+0: 0:   "eval_causal_lm_metrics": [
+0: 0:     "sacrebleu",
+0: 0:     "comet",
+0: 0:     "ter",
+0: 0:     "chrf"
+0: 0:   ],
+0: 0:   "eval_max_new_tokens": 128,
+0: 0:   "eval_strategy": "no",
+0: 0:   "eval_table_size": 0,
+0: 0:   "experimental_skip_move_to_device": true,
+0: 0:   "fp16": false,
+0: 0:   "generate_samples": false,
+0: 0:   "generation_do_sample": true,
+0: 0:   "generation_max_new_tokens": 50,
+0: 0:   "generation_prompt_ratio": 0.5,
+0: 0:   "generation_temperature": 0.7,
+0: 0:   "gradient_accumulation_steps": 1,
+0: 0:   "gradient_checkpointing": false,
+0: 0:   "include_tkps": true,
+0: 0:   "is_mistral_derived_model": true,
+0: 0:   "layer_offloading": false,
+0: 0:   "learning_rate": 5e-06,
+0: 0:   "lisa_layers_attribute": "model.layers",
+0: 0:   "load_best_model_at_end": false,
+0: 0:   "load_in_4bit": false,
+0: 0:   "load_in_8bit": false,
+0: 0:   "local_rank": 0,
+0: 0:   "logging_steps": 1,
+0: 0:   "lora_dropout": 0.0,
+0: 0:   "loraplus_lr_embedding": 1e-06,
+0: 0:   "lr_scheduler": "linear",
+0: 0:   "max_grad_norm": 1.0,
+0: 0:   "max_steps": 125,
+0: 0:   "mean_resizing_embeddings": false,
+0: 0:   "merge_method": "memory_efficient",
+0: 0:   "micro_batch_size": 24,
+0: 0:   "model_config_type": "mistral",
+0: 0:   "num_epochs": 1.0,
+0: 0:   "num_generation_samples": 3,
+0: 0:   "optimizer": "adamw_torch",
+0: 0:   "otel_metrics_host": "localhost",
+0: 0:   "otel_metrics_port": 8000,
+0: 0:   "output_dir": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/cases/baseline-inner-recording/models/defense",
+0: 0:   "pad_to_sequence_len": false,
+0: 0:   "plugins": [
+0: 0:     "axolotl_plugins.custom_trainer_args.CustomTrainerArgsPlugin"
+0: 0:   ],
+0: 0:   "pretrain_multipack_attn": true,
+0: 0:   "profiler_steps_start": 0,
+0: 0:   "qgalore_cos_threshold": 0.4,
+0: 0:   "qgalore_gamma_proj": 2,
+0: 0:   "qgalore_proj_bits": 4,
+0: 0:   "qgalore_proj_group_size": 256,
+0: 0:   "qgalore_proj_quant": true,
+0: 0:   "qgalore_proj_type": "std",
+0: 0:   "qgalore_queue_size": 5,
+0: 0:   "qgalore_rank": 256,
+0: 0:   "qgalore_scale": 0.25,
+0: 0:   "qgalore_update_proj_gap": 200,
+0: 0:   "qlora_sharded_model_loading": false,
+0: 0:   "quantize_moe_experts": false,
+0: 0:   "ray_num_workers": 1,
+0: 0:   "relora_prune_method": "magnitude",
+0: 0:   "remove_unused_columns": false,
+0: 0:   "resources_per_worker": {
+0: 0:     "GPU": 1
+0: 0:   },
+0: 0:   "sample_packing": false,
+0: 0:   "sample_packing_bin_size": 200,
+0: 0:   "sample_packing_group_size": 100000,
+0: 0:   "save_only_model": true,
+0: 0:   "save_safetensors": true,
+0: 0:   "save_steps": 125,
+0: 0:   "save_strategy": "steps",
+0: 0:   "save_total_limit": 16,
+0: 0:   "seed": 42,
+0: 0:   "sequence_len": 512,
+0: 0:   "shard": false,
+0: 0:   "shuffle_before_merging_datasets": false,
+0: 0:   "shuffle_merged_datasets": false,
+0: 0:   "skip_prepare_dataset": false,
+0: 0:   "streaming_multipack_buffer_size": 10000,
+0: 0:   "strict": false,
+0: 0:   "tensor_parallel_size": 1,
+0: 0:   "tf32": false,
+0: 0:   "tiled_mlp_use_original_mlp": true,
+0: 0:   "tokenizer_config": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+0: 0:   "tokenizer_save_jinja_files": true,
+0: 0:   "torch_dtype": "torch.bfloat16",
+0: 0:   "train_on_inputs": true,
+0: 0:   "trainer_cls": "tar_inner_recording.RecordedInnerTARMETrainer",
+0: 0:   "trl": {
+0: 0:     "async_prefetch": false,
+0: 0:     "log_completions": false,
+0: 0:     "mask_truncated_completions": false,
+0: 0:     "ref_model_mixup_alpha": 0.9,
+0: 0:     "ref_model_sync_steps": 64,
+0: 0:     "replay_buffer_size": 0,
+0: 0:     "replay_recompute_logps": true,
+0: 0:     "reroll_max_groups": 1,
+0: 0:     "reroll_start_fraction": 1.0,
+0: 0:     "reward_num_workers": 1,
+0: 0:     "scale_rewards": true,
+0: 0:     "skip_zero_advantage_batches": true,
+0: 0:     "sync_ref_model": false,
+0: 0:     "use_data_producer": false,
+0: 0:     "use_vllm": false,
+0: 0:     "vllm_lora_sync": false,
+0: 0:     "vllm_server_host": "0.0.0.0",
+0: 0:     "vllm_server_port": 8000
+0: 0:   },
+0: 0:   "use_otel_metrics": false,
+0: 0:   "use_ray": false,
+0: 0:   "use_wandb": true,
+0: 0:   "val_set_size": 0.0,
+0: 0:   "vllm": {
+0: 0:     "device": "auto",
+0: 0:     "dtype": "auto",
+0: 0:     "gpu_memory_utilization": 0.9,
+0: 0:     "host": "0.0.0.0",
+0: 0:     "port": 8000
+0: 0:   },
+0: 0:   "wandb_name": "baseline-inner-basis-observation-20261117T2300Z",
+0: 0:   "wandb_project": "jwk-tar-reproduction",
+0: 0:   "warmup_steps": 12,
+0: 0:   "weight_decay": 0.0,
+0: 0:   "world_size": 1
+0: 0: }
+0: 0: [2026-11-17 16:19:23,857] [INFO] [axolotl.cli.checks] Skipping HuggingFace token verification because HF_HUB_OFFLINE is set to True. Only local files will be used.
+0: 0: [2026-11-17 16:19:30,890] [ERROR] [bitsandbytes.cextension] bitsandbytes library load error: Configured ROCm binary not found at /usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4/lib/python3.12/site-packages/bitsandbytes/libbitsandbytes_rocm72.so
+0: 0: Traceback (most recent call last):
+0: 0:   File "/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4/lib/python3.12/site-packages/bitsandbytes/cextension.py", line 320, in <module>
+0: 0:     lib = get_native_library()
+0: 0:           ^^^^^^^^^^^^^^^^^^^^
+0: 0:   File "/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4/lib/python3.12/site-packages/bitsandbytes/cextension.py", line 288, in get_native_library
+0: 0:     raise RuntimeError(f"Configured {BNB_BACKEND} binary not found at {cuda_binary_path}")
+0: 0: RuntimeError: Configured ROCm binary not found at /usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4/lib/python3.12/site-packages/bitsandbytes/libbitsandbytes_rocm72.so
+0: 0: [2026-11-17 16:19:34,779] [INFO] [axolotl.utils.data.shared] Loading prepared dataset from disk at /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/cache/axolotl/defense/07a6d09f5c7939d49582059226f996de...
+0: 0: [2026-11-17 16:19:37,454] [INFO] [axolotl.utils.data.sft] Maximum number of steps set at 125
+0: 0: Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]0: 0: Loading weights:   0%|          | 1/291 [00:03<16:48,  3.48s/it]0: 0: Loading weights:   1%|          | 2/291 [00:03<07:14,  1.50s/it]0: 0: Loading weights:   2%|▏         | 5/291 [00:04<02:43,  1.75it/s]0: 0: Loading weights:   2%|▏         | 6/291 [00:04<02:34,  1.84it/s]0: 0: Loading weights:   3%|▎         | 9/291 [00:04<01:20,  3.51it/s]0: 0: Loading weights:   3%|▎         | 10/291 [00:05<01:16,  3.70it/s]0: 0: Loading weights:   4%|▍         | 13/291 [00:05<01:00,  4.58it/s]0: 0: Loading weights:   5%|▍         | 14/291 [00:06<01:15,  3.69it/s]0: 0: Loading weights:   5%|▌         | 15/291 [00:06<01:24,  3.26it/s]0: 0: Loading weights:   6%|▌         | 18/291 [00:06<00:50,  5.37it/s]0: 0: Loading weights:   7%|▋         | 19/291 [00:06<00:51,  5.30it/s]0: 0: Loading weights:   7%|▋         | 20/291 [00:06<00:48,  5.63it/s]0: 0: Loading weights:   8%|▊         | 22/291 [00:07<00:45,  5.96it/s]0: 0: Loading weights:   8%|▊         | 23/291 [00:07<01:04,  4.14it/s]0: 0: Loading weights:   8%|▊         | 24/291 [00:08<01:19,  3.38it/s]0: 0: Loading weights:   9%|▉         | 27/291 [00:08<00:46,  5.73it/s]0: 0: Loading weights:  10%|▉         | 28/291 [00:08<00:47,  5.51it/s]0: 0: Loading weights:  11%|█         | 31/291 [00:09<00:46,  5.54it/s]0: 0: Loading weights:  11%|█         | 32/291 [00:09<01:00,  4.26it/s]0: 0: Loading weights:  11%|█▏        | 33/291 [00:10<01:09,  3.70it/s]0: 0: Loading weights:  12%|█▏        | 36/291 [00:10<00:49,  5.13it/s]0: 0: Loading weights:  14%|█▎        | 40/291 [00:10<00:43,  5.78it/s]0: 0: Loading weights:  14%|█▍        | 41/291 [00:11<00:55,  4.54it/s]0: 0: Loading weights:  14%|█▍        | 42/291 [00:11<01:05,  3.77it/s]0: 0: Loading weights:  15%|█▌        | 45/291 [00:12<00:43,  5.66it/s]0: 0: Loading weights:  16%|█▌        | 46/291 [00:12<00:42,  5.78it/s]0: 0: Loading weights:  17%|█▋        | 49/291 [00:12<00:42,  5.74it/s]0: 0: Loading weights:  17%|█▋        | 50/291 [00:13<00:52,  4.56it/s]0: 0: Loading weights:  18%|█▊        | 51/291 [00:13<01:05,  3.66it/s]0: 0: Loading weights:  19%|█▊        | 54/291 [00:13<00:41,  5.73it/s]0: 0: Loading weights:  19%|█▉        | 55/291 [00:14<00:42,  5.56it/s]0: 0: Loading weights:  20%|█▉        | 58/291 [00:14<00:41,  5.63it/s]0: 0: Loading weights:  20%|██        | 59/291 [00:15<00:53,  4.37it/s]0: 0: Loading weights:  21%|██        | 60/291 [00:15<01:04,  3.58it/s]0: 0: Loading weights:  22%|██▏       | 63/291 [00:15<00:40,  5.64it/s]0: 0: Loading weights:  22%|██▏       | 64/291 [00:15<00:39,  5.78it/s]0: 0: Loading weights:  23%|██▎       | 67/291 [00:16<00:41,  5.44it/s]0: 0: Loading weights:  23%|██▎       | 68/291 [00:17<01:02,  3.56it/s]0: 0: Loading weights:  24%|██▎       | 69/291 [00:17<01:22,  2.69it/s]0: 0: Loading weights:  25%|██▍       | 72/291 [00:18<00:54,  4.04it/s]0: 0: Loading weights:  25%|██▌       | 73/291 [00:18<00:59,  3.64it/s]0: 0: Loading weights:  26%|██▌       | 76/291 [00:19<01:03,  3.41it/s]0: 0: Loading weights:  27%|██▋       | 78/291 [00:20<01:02,  3.40it/s]0: 0: Loading weights:  28%|██▊       | 81/291 [00:20<00:43,  4.85it/s]0: 0: Loading weights:  28%|██▊       | 82/291 [00:20<00:41,  5.05it/s]0: 0: Loading weights:  29%|██▉       | 85/291 [00:21<00:40,  5.05it/s]0: 0: Loading weights:  30%|██▉       | 86/291 [00:21<00:48,  4.27it/s]0: 0: Loading weights:  30%|██▉       | 87/291 [00:22<00:55,  3.71it/s]0: 0: Loading weights:  31%|███       | 90/291 [00:22<00:34,  5.82it/s]0: 0: Loading weights:  31%|███▏      | 91/291 [00:22<00:36,  5.51it/s]0: 0: Loading weights:  32%|███▏      | 94/291 [00:22<00:34,  5.79it/s]0: 0: Loading weights:  33%|███▎      | 95/291 [00:23<00:43,  4.49it/s]0: 0: Loading weights:  33%|███▎      | 96/291 [00:23<00:52,  3.73it/s]0: 0: Loading weights:  34%|███▍      | 99/291 [00:23<00:32,  5.96it/s]0: 0: Loading weights:  34%|███▍      | 100/291 [00:24<00:30,  6.23it/s]0: 0: Loading weights:  35%|███▌      | 103/291 [00:24<00:32,  5.85it/s]0: 0: Loading weights:  36%|███▌      | 104/291 [00:25<00:42,  4.37it/s]0: 0: Loading weights:  36%|███▌      | 105/291 [00:25<00:50,  3.66it/s]0: 0: Loading weights:  37%|███▋      | 108/291 [00:25<00:31,  5.90it/s]0: 0: Loading weights:  37%|███▋      | 109/291 [00:25<00:29,  6.23it/s]0: 0: Loading weights:  38%|███▊      | 112/291 [00:26<00:27,  6.54it/s]0: 0: Loading weights:  39%|███▉      | 113/291 [00:26<00:34,  5.17it/s]0: 0: Loading weights:  39%|███▉      | 114/291 [00:27<00:41,  4.30it/s]0: 0: Loading weights:  40%|████      | 117/291 [00:27<00:25,  6.83it/s]0: 0: Loading weights:  41%|████      | 119/291 [00:27<00:21,  7.98it/s]0: 0: Loading weights:  42%|████▏     | 121/291 [00:27<00:26,  6.47it/s]0: 0: Loading weights:  42%|████▏     | 122/291 [00:28<00:33,  5.03it/s]0: 0: Loading weights:  42%|████▏     | 123/291 [00:28<00:40,  4.15it/s]0: 0: Loading weights:  43%|████▎     | 126/291 [00:28<00:24,  6.61it/s]0: 0: Loading weights:  44%|████▍     | 128/291 [00:28<00:21,  7.55it/s]0: 0: Loading weights:  45%|████▍     | 130/291 [00:29<00:25,  6.31it/s]0: 0: Loading weights:  45%|████▌     | 131/291 [00:29<00:33,  4.74it/s]0: 0: Loading weights:  45%|████▌     | 132/291 [00:30<00:40,  3.90it/s]0: 0: Loading weights:  46%|████▋     | 135/291 [00:30<00:24,  6.32it/s]0: 0: Loading weights:  47%|████▋     | 137/291 [00:30<00:20,  7.42it/s]0: 0: Loading weights:  48%|████▊     | 139/291 [00:31<00:27,  5.59it/s]0: 0: Loading weights:  48%|████▊     | 140/291 [00:31<00:41,  3.66it/s]0: 0: Loading weights:  48%|████▊     | 141/291 [00:32<00:51,  2.94it/s]0: 0: Loading weights:  49%|████▉     | 144/291 [00:32<00:33,  4.33it/s]0: 0: Loading weights:  50%|█████     | 146/291 [00:32<00:26,  5.42it/s]0: 0: Loading weights:  51%|█████     | 147/291 [00:33<00:30,  4.74it/s]0: 0: Loading weights:  51%|█████     | 149/291 [00:33<00:30,  4.70it/s]0: 0: Loading weights:  52%|█████▏    | 150/291 [00:34<00:37,  3.78it/s]0: 0: Loading weights:  53%|█████▎    | 153/291 [00:34<00:22,  6.02it/s]0: 0: Loading weights:  53%|█████▎    | 154/291 [00:34<00:22,  6.13it/s]0: 0: Loading weights:  54%|█████▍    | 157/291 [00:34<00:22,  6.05it/s]0: 0: Loading weights:  54%|█████▍    | 158/291 [00:35<00:27,  4.76it/s]0: 0: Loading weights:  55%|█████▍    | 159/291 [00:35<00:33,  3.96it/s]0: 0: Loading weights:  56%|█████▌    | 162/291 [00:35<00:21,  5.99it/s]0: 0: Loading weights:  56%|█████▌    | 163/291 [00:36<00:20,  6.28it/s]0: 0: Loading weights:  57%|█████▋    | 166/291 [00:36<00:19,  6.38it/s]0: 0: Loading weights:  57%|█████▋    | 167/291 [00:37<00:25,  4.94it/s]0: 0: Loading weights:  58%|█████▊    | 168/291 [00:37<00:30,  4.04it/s]0: 0: Loading weights:  59%|█████▉    | 171/291 [00:37<00:18,  6.34it/s]0: 0: Loading weights:  59%|█████▉    | 172/291 [00:37<00:18,  6.45it/s]0: 0: Loading weights:  60%|██████    | 175/291 [00:38<00:17,  6.59it/s]0: 0: Loading weights:  60%|██████    | 176/291 [00:38<00:22,  5.04it/s]0: 0: Loading weights:  61%|██████    | 177/291 [00:39<00:27,  4.14it/s]0: 0: Loading weights:  62%|██████▏   | 180/291 [00:39<00:16,  6.60it/s]0: 0: Loading weights:  63%|██████▎   | 182/291 [00:39<00:14,  7.50it/s]0: 0: Loading weights:  63%|██████▎   | 184/291 [00:39<00:17,  6.15it/s]0: 0: Loading weights:  64%|██████▎   | 185/291 [00:40<00:21,  4.87it/s]0: 0: Loading weights:  64%|██████▍   | 186/291 [00:40<00:25,  4.06it/s]0: 0: Loading weights:  65%|██████▍   | 189/291 [00:40<00:15,  6.51it/s]0: 0: Loading weights:  66%|██████▌   | 191/291 [00:40<00:13,  7.26it/s]0: 0: Loading weights:  66%|██████▋   | 193/291 [00:41<00:16,  5.99it/s]0: 0: Loading weights:  67%|██████▋   | 194/291 [00:41<00:19,  4.89it/s]0: 0: Loading weights:  67%|██████▋   | 195/291 [00:42<00:23,  4.08it/s]0: 0: Loading weights:  68%|██████▊   | 198/291 [00:42<00:14,  6.63it/s]0: 0: Loading weights:  69%|██████▊   | 200/291 [00:42<00:11,  7.90it/s]0: 0: Loading weights:  69%|██████▉   | 202/291 [00:42<00:13,  6.43it/s]0: 0: Loading weights:  70%|██████▉   | 203/291 [00:43<00:18,  4.83it/s]0: 0: Loading weights:  70%|███████   | 204/291 [00:43<00:21,  4.09it/s]0: 0: Loading weights:  71%|███████   | 207/291 [00:43<00:12,  6.59it/s]0: 0: Loading weights:  72%|███████▏  | 209/291 [00:44<00:10,  7.73it/s]0: 0: Loading weights:  73%|███████▎  | 211/291 [00:44<00:13,  5.93it/s]0: 0: Loading weights:  73%|███████▎  | 212/291 [00:45<00:19,  4.08it/s]0: 0: Loading weights:  73%|███████▎  | 213/291 [00:45<00:25,  3.10it/s]0: 0: Loading weights:  74%|███████▍  | 216/291 [00:46<00:20,  3.68it/s]0: 0: Loading weights:  75%|███████▍  | 218/291 [00:46<00:17,  4.21it/s]0: 0: Loading weights:  76%|███████▌  | 221/291 [00:47<00:14,  4.78it/s]0: 0: Loading weights:  76%|███████▋  | 222/291 [00:47<00:17,  4.01it/s]0: 0: Loading weights:  77%|███████▋  | 225/291 [00:47<00:11,  5.90it/s]0: 0: Loading weights:  78%|███████▊  | 226/291 [00:48<00:10,  6.00it/s]0: 0: Loading weights:  79%|███████▊  | 229/291 [00:48<00:09,  6.21it/s]0: 0: Loading weights:  79%|███████▉  | 230/291 [00:48<00:12,  5.05it/s]0: 0: Loading weights:  79%|███████▉  | 231/291 [00:49<00:13,  4.36it/s]0: 0: Loading weights:  80%|████████  | 234/291 [00:49<00:08,  6.94it/s]0: 0: Loading weights:  81%|████████  | 236/291 [00:49<00:06,  8.35it/s]0: 0: Loading weights:  82%|████████▏ | 238/291 [00:49<00:07,  7.10it/s]0: 0: Loading weights:  82%|████████▏ | 240/291 [00:50<00:10,  4.77it/s]0: 0: Loading weights:  84%|████████▎ | 243/291 [00:50<00:07,  6.06it/s]0: 0: Loading weights:  85%|████████▍ | 247/291 [00:51<00:05,  7.49it/s]0: 0: Loading weights:  85%|████████▌ | 248/291 [00:51<00:07,  6.12it/s]0: 0: Loading weights:  86%|████████▌ | 249/291 [00:51<00:08,  5.13it/s]0: 0: Loading weights:  87%|████████▋ | 252/291 [00:52<00:05,  7.43it/s]0: 0: Loading weights:  87%|████████▋ | 254/291 [00:52<00:04,  8.74it/s]0: 0: Loading weights:  88%|████████▊ | 256/291 [00:52<00:04,  7.09it/s]0: 0: Loading weights:  89%|████████▊ | 258/291 [00:53<00:07,  4.60it/s]0: 0: Loading weights:  90%|████████▉ | 261/291 [00:53<00:04,  6.71it/s]0: 0: Loading weights:  90%|█████████ | 263/291 [00:53<00:03,  7.94it/s]0: 0: Loading weights:  91%|█████████ | 265/291 [00:54<00:03,  7.41it/s]0: 0: Loading weights:  92%|█████████▏| 267/291 [00:54<00:04,  5.34it/s]0: 0: Loading weights:  93%|█████████▎| 270/291 [00:54<00:02,  7.71it/s]0: 0: Loading weights:  93%|█████████▎| 272/291 [00:54<00:02,  8.93it/s]0: 0: Loading weights:  94%|█████████▍| 274/291 [00:55<00:02,  7.61it/s]0: 0: Loading weights:  95%|█████████▍| 276/291 [00:55<00:03,  4.99it/s]0: 0: Loading weights:  96%|█████████▌| 279/291 [00:56<00:01,  7.17it/s]0: 0: Loading weights:  97%|█████████▋| 281/291 [00:56<00:01,  8.37it/s]0: 0: Loading weights:  97%|█████████▋| 283/291 [00:56<00:01,  7.37it/s]0: 0: Loading weights:  98%|█████████▊| 285/291 [00:57<00:01,  5.23it/s]0: 0: Loading weights:  99%|█████████▉| 288/291 [00:57<00:00,  7.42it/s]0: 0: Loading weights: 100%|█████████▉| 290/291 [00:57<00:00,  8.73it/s]0: 0: Loading weights: 100%|██████████| 291/291 [00:57<00:00,  5.06it/s]0: 
+0: 0: [2026-11-17 16:20:48,348] [WARNING] [accelerate.utils.other] [RANK 0] Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+0: 0: TAR device check: {"accelerator": {"device": "cuda", "distributed_type": "DistributedType.NO", "num_processes": 1, "process_index": 0}, "current_device": 0, "hf_device_map": {"lm_head": "3", "model.embed_tokens": "0", "model.layers.0": "0", "model.layers.1": "0", "model.layers.10": "1", "model.layers.11": "1", "model.layers.12": "1", "model.layers.13": "1", "model.layers.14": "1", "model.layers.15": "1", "model.layers.16": "2", "model.layers.17": "2", "model.layers.18": "2", "model.layers.19": "2", "model.layers.2": "0", "model.layers.20": "2", "model.layers.21": "2", "model.layers.22": "2", "model.layers.23": "2", "model.layers.24": "3", "model.layers.25": "3", "model.layers.26": "3", "model.layers.27": "3", "model.layers.28": "3", "model.layers.29": "3", "model.layers.3": "0", "model.layers.30": "3", "model.layers.31": "3", "model.layers.4": "0", "model.layers.5": "0", "model.layers.6": "0", "model.layers.7": "0", "model.layers.8": "1", "model.layers.9": "1", "model.norm": "3"}, "parameter_counts_by_device": {"cuda:0": 1875968000, "cuda:1": 1744896000, "cuda:2": 1744896000, "cuda:3": 1875972096}, "phase": "trainer_init", "pid": 53914, "ranks": {"LOCAL_RANK": null, "RANK": null, "SLURM_PROCID": "0", "WORLD_SIZE": null}, "visible_devices": 4}0: 0: 
+0: 0: [2026-11-17 16:20:48,359] [INFO] [axolotl.train] Pre-saving tokenizer to /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/cases/baseline-inner-recording/models/defense...
+0: 0: [2026-11-17 16:20:48,416] [INFO] [axolotl.train] Pre-saving model config to /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/cases/baseline-inner-recording/models/defense...
+0: 0: [2026-11-17 16:20:48,428] [INFO] [axolotl.train] Starting trainer...
+0: 0: [transformers] The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'pad_token_id': 2}.
+0: 0: wandb: Tracking run with wandb version 0.30.0
+0: 0: wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+0: 0: wandb: Run data is saved locally in /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/logs/wandb/offline-run-20261117_162049-5fn8s5sb
+0: 0: wandb: View this run in the terminal with `wandb leet`
+0: 0: wandb: WARNING Saving files without folders. If you want to preserve subdirectories pass base_path to wandb.save, i.e. wandb.save("/mnt/folder/file.h5", base_path="/mnt")
+0: 0: wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+0: 0: [2026-11-17 16:20:51,272] [INFO] [axolotl.utils.callbacks] The Axolotl config has been saved to the WandB run under files.
+0: 0:   0%|          | 0/125 [00:00<?, ?it/s]0: 0: TAR device check: {"accelerator": {"device": "cuda", "distributed_type": "DistributedType.NO", "num_processes": 1, "process_index": 0}, "batch": {"attention_mask": {"device": "cuda:0", "shape": [24, 512]}, "input_ids": {"device": "cuda:0", "shape": [24, 512]}, "labels": {"device": "cuda:0", "shape": [24, 512]}, "metadata_ids": {"device": "cuda:0", "shape": [24]}}, "current_device": 0, "hf_device_map": {"lm_head": "3", "model.embed_tokens": "0", "model.layers.0": "0", "model.layers.1": "0", "model.layers.10": "1", "model.layers.11": "1", "model.layers.12": "1", "model.layers.13": "1", "model.layers.14": "1", "model.layers.15": "1", "model.layers.16": "2", "model.layers.17": "2", "model.layers.18": "2", "model.layers.19": "2", "model.layers.2": "0", "model.layers.20": "2", "model.layers.21": "2", "model.layers.22": "2", "model.layers.23": "2", "model.layers.24": "3", "model.layers.25": "3", "model.layers.26": "3", "model.layers.27": "3", "model.layers.28": "3", "model.layers.29": "3", "model.layers.3": "0", "model.layers.30": "3", "model.layers.31": "3", "model.layers.4": "0", "model.layers.5": "0", "model.layers.6": "0", "model.layers.7": "0", "model.layers.8": "1", "model.layers.9": "1", "model.norm": "3"}, "parameter_counts_by_device": {"cuda:0": 1875968000, "cuda:1": 1744896000, "cuda:2": 1744896000, "cuda:3": 1875972096}, "phase": "first_batch", "pid": 53914, "ranks": {"LOCAL_RANK": null, "RANK": null, "SLURM_PROCID": "0", "WORLD_SIZE": null}, "visible_devices": 4}0: 
+0: 0: TAR device check: {"batch": {"attention_mask": {"device": "cuda:0", "shape": [16, 512]}, "input_ids": {"device": "cuda:0", "shape": [16, 512]}, "labels": {"device": "cuda:0", "shape": [16, 512]}}, "current_device": 0, "hf_device_map": {"lm_head": "3", "model.embed_tokens": "0", "model.layers.0": "0", "model.layers.1": "0", "model.layers.10": "1", "model.layers.11": "1", "model.layers.12": "1", "model.layers.13": "1", "model.layers.14": "1", "model.layers.15": "1", "model.layers.16": "2", "model.layers.17": "2", "model.layers.18": "2", "model.layers.19": "2", "model.layers.2": "0", "model.layers.20": "2", "model.layers.21": "2", "model.layers.22": "2", "model.layers.23": "2", "model.layers.24": "3", "model.layers.25": "3", "model.layers.26": "3", "model.layers.27": "3", "model.layers.28": "3", "model.layers.29": "3", "model.layers.3": "0", "model.layers.30": "3", "model.layers.31": "3", "model.layers.4": "0", "model.layers.5": "0", "model.layers.6": "0", "model.layers.7": "0", "model.layers.8": "1", "model.layers.9": "1", "model.norm": "3"}, "parameter_counts_by_device": {"cuda:0": 1875968000, "cuda:1": 1744896000, "cuda:2": 1744896000, "cuda:3": 1875972096}, "phase": "copied_attack_model", "pid": 53914, "ranks": {"LOCAL_RANK": null, "RANK": null, "SLURM_PROCID": "0", "WORLD_SIZE": null}, "visible_devices": 4}0: 
+0: 0: Inner recorder outer 1: reading pre-call parameters0: 
+0: 0: TAR first inner backward completed; loss device: cuda:30: 
+0: 0:                                        0: 0:   0%|          | 0/125 [00:18<?, ?it/s]0: 0: {'inner_loss': '2.032', 'inner_step_total': 0, 'memory/max_active (GiB)': '11.47', 'memory/max_allocated (GiB)': '11.47', 'memory/device_reserved (GiB)': '12.02', 'epoch': 0}0: 
+0: 0: Inner recorder outer 1: captured inner 1 in memory0: 
+0: 0:                                        0: 0: 0:   0%|          | 0/125 [00:27<?, ?it/s]0: 0: {'inner_loss': '2.396', 'inner_step_total': 1, 'memory/max_active (GiB)': '22.68', 'memory/max_allocated (GiB)': '22.68', 'memory/device_reserved (GiB)': '22.74', 'epoch': 0}0: 
+0: 0: Inner recorder outer 1: captured inner 2 in memory0: 
+0: 0:                                        0: 0: 0:   0%|          | 0/125 [00:32<?, ?it/s]0: 0: {'inner_loss': '2.096', 'inner_step_total': 2, 'memory/max_active (GiB)': '22.68', 'memory/max_allocated (GiB)': '22.68', 'memory/device_reserved (GiB)': '22.82', 'epoch': 0}0: 
+0: 0:                                        0: 0: 0:   0%|          | 0/125 [00:32<?, ?it/s]0: 0: {'inner_loss': '2.128', 'inner_step_total': 3, 'memory/max_active (GiB)': '22.68', 'memory/max_allocated (GiB)': '22.68', 'memory/device_reserved (GiB)': '22.82', 'epoch': 0}0: 
+0: 0: Inner recorder outer 1: captured inner 4 in memory0: 
+0: 0:                                        0: 0: 0:   0%|          | 0/125 [00:37<?, ?it/s]0: 0: {'inner_loss': '2.144', 'inner_step_total': 4, 'memory/max_active (GiB)': '22.68', 'memory/max_allocated (GiB)': '22.68', 'memory/device_reserved (GiB)': '22.82', 'epoch': 0}0: 
+0: 0:                                        0: 0: 0:   0%|          | 0/125 [00:37<?, ?it/s]0: 0: {'inner_loss': '1.468', 'inner_step_total': 5, 'memory/max_active (GiB)': '22.68', 'memory/max_allocated (GiB)': '22.68', 'memory/device_reserved (GiB)': '22.82', 'epoch': 0}0: 
+0: 0:                                        0: 0: 0:   0%|          | 0/125 [00:37<?, ?it/s]0: 0: {'inner_loss': '2.335', 'inner_step_total': 6, 'memory/max_active (GiB)': '22.68', 'memory/max_allocated (GiB)': '22.68', 'memory/device_reserved (GiB)': '22.82', 'epoch': 0}0: 
+0: 0:                                        0: 0: 0:   0%|          | 0/125 [00:38<?, ?it/s]0: 0: {'inner_loss': '1.999', 'inner_step_total': 7, 'memory/max_active (GiB)': '22.68', 'memory/max_allocated (GiB)': '22.68', 'memory/device_reserved (GiB)': '22.82', 'epoch': 0}0: 
+0: 0: Inner recorder outer 1: captured inner 8 in memory0: 
+0: 0:                                        0: 0: 0:   0%|          | 0/125 [00:42<?, ?it/s]0: 0: {'inner_loss': '2.07', 'inner_step_total': 8, 'memory/max_active (GiB)': '22.68', 'memory/max_allocated (GiB)': '22.68', 'memory/device_reserved (GiB)': '22.82', 'epoch': 0}0: 
+0: 0:                                        0: 0: 0:   0%|          | 0/125 [00:42<?, ?it/s]0: 0: {'inner_loss': '2.082', 'inner_step_total': 9, 'memory/max_active (GiB)': '22.68', 'memory/max_allocated (GiB)': '22.68', 'memory/device_reserved (GiB)': '22.82', 'epoch': 0}0: 
+0: 0:                                        0: 0: 0:   0%|          | 0/125 [00:43<?, ?it/s]0: 0: {'inner_loss': '2.404', 'inner_step_total': 10, 'memory/max_active (GiB)': '22.68', 'memory/max_allocated (GiB)': '22.68', 'memory/device_reserved (GiB)': '22.82', 'epoch': 0}0: 
+0: 0:                                        0: 0: 0:   0%|          | 0/125 [00:43<?, ?it/s]0: 0: {'inner_loss': '1.856', 'inner_step_total': 11, 'memory/max_active (GiB)': '22.68', 'memory/max_allocated (GiB)': '22.68', 'memory/device_reserved (GiB)': '22.82', 'epoch': 0}0: 
+0: 0: Inner recorder outer 1: captured inner 12 in memory0: 
+0: 0:                                        0: 0: 0:   0%|          | 0/125 [00:48<?, ?it/s]0: 0: {'inner_loss': '1.662', 'inner_step_total': 12, 'memory/max_active (GiB)': '22.68', 'memory/max_allocated (GiB)': '22.68', 'memory/device_reserved (GiB)': '22.82', 'epoch': 0}0: 
+0: 0:                                        0: 0: 0:   0%|          | 0/125 [00:48<?, ?it/s]0: 0: {'inner_loss': '1.885', 'inner_step_total': 13, 'memory/max_active (GiB)': '22.68', 'memory/max_allocated (GiB)': '22.68', 'memory/device_reserved (GiB)': '22.82', 'epoch': 0}0: 
+0: 0:                                        0: 0: 0:   0%|          | 0/125 [00:48<?, ?it/s]0: 0: {'inner_loss': '1.303', 'inner_step_total': 14, 'memory/max_active (GiB)': '22.68', 'memory/max_allocated (GiB)': '22.68', 'memory/device_reserved (GiB)': '22.82', 'epoch': 0}0: 
+0: 0:                                        0: 0: 0:   0%|          | 0/125 [00:48<?, ?it/s]0: 0: {'inner_loss': '2.04', 'inner_step_total': 15, 'memory/max_active (GiB)': '22.68', 'memory/max_allocated (GiB)': '22.68', 'memory/device_reserved (GiB)': '22.82', 'epoch': 0}0: 
+0: 0: Inner recorder outer 1: captured inner 16 in memory0: 
+0: 0: Inner recorder outer 1: scanned 32/291 parameters0: 0: 
+0: 0: Inner recorder outer 1: scanned 64/291 parameters0: 
+0: Nov 17 16:37:37.107410 PST 2026 broker.err[0]: rc2.0: /var/tmp/kirchenb/jobtmp-0-f3kiN4NibZAw/script Terminated (rc=143) 1171.9s
+0: Nov 17 16:37:37.676852 PST 2026 broker.err[0]: cleanup.2: flux-cancel: Canceled 1 job (0 errors)
+0: 1171.719s: job.exception fY7Fvxf type=cancel severity=0 

@@ -1,0 +1,1 @@
+{"state":"failed","job_id":"f3kiHbvUTK5q","stage":"topology_preflight","exit_code":1,"model_training_started":false,"reason":"Worker expected four GPUs but launcher exposed one via ROCR_VISIBLE_DEVICES"}

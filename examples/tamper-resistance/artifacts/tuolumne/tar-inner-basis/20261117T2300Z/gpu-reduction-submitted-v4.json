@@ -1,0 +1,10 @@
+{
+  "job_id": "f3kiuKH4AK75",
+  "previous_canceled_job": "f3kiN4NibZAw",
+  "previous_complete_outer_steps": 0,
+  "submitted_utc": "2026-11-18 00:39:07 UTC",
+  "stage": "train",
+  "profile": "source/reduction-gpu-v2",
+  "new_inner_root": "inner-gpu-v2",
+  "new_attacks": []
+}

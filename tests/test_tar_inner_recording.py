@@ -181,7 +181,11 @@ def test_grams_match_direct_endpoint_arithmetic_and_refuse_duplicate_or_incomple
         for i in [1, 2]
     ]
     root = tmp_path / "observations"
-    recorder = TransientInnerRecorder(root, [1, 3], refs, chunk_elements=2)
+    recorder = TransientInnerRecorder(
+        root, [1, 3], refs, chunk_elements=2, reduction_device="cpu"
+    )
+    with pytest.raises(ValueError, match="CPU or CUDA/ROCm"):
+        TransientInnerRecorder(root, [1, 3], refs, reduction_device="meta")
     inputs = {key: torch.ones((1, 3), dtype=torch.long) for key in ROLE_FIELDS}
     snapshots = []
 
@@ -205,6 +209,8 @@ def test_grams_match_direct_endpoint_arithmetic_and_refuse_duplicate_or_incomple
     original = path.read_bytes()
     record = json.loads(original)
     assert record["status"] == "complete" and record["coordinates"] == 8
+    assert record["reduction_device"] == "cpu"
+    assert record["chunk_elements"] == 2
     assert record["inner_steps"] == [1, 3]
     assert record["reference_names"] == ["fixed-1", "fixed-2"]
     assert {v["name"] for v in record["layout"]} == base.keys()

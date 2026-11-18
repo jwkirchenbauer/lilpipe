@@ -1,0 +1,7 @@
+{
+  "scientific_config_unchanged": true,
+  "original_source_preserved": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/source-manifest.sha256",
+  "change": "Only aggregate FP64 inner-product reduction uses cuda:0 and 1048576-element chunks; training optimizer and data unchanged.",
+  "new_inner_record_root": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-gpu-v2",
+  "old_cpu_attempt": "f3kiN4NibZAw; slow initial aggregate, no completed outer step at profile preparation"
+}

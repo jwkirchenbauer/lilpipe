@@ -1,0 +1,13 @@
+{
+  "job_id": "f3kiHbvUTK5q",
+  "previous_job": "f3kiCDSHPFio",
+  "previous_canceled_while": "SCHED",
+  "stage": "train",
+  "submitted_utc": "2026-11-17 23:20:47 UTC",
+  "minutes": 60,
+  "queue": "pdebug",
+  "bank": "guard",
+  "config_source_changed": false,
+  "followup": "validate + report after actual completed training",
+  "own_status": "status/train.json"
+}

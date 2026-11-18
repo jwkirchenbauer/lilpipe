@@ -1,0 +1,12 @@
+{
+  "job_id": "f3kiN4NibZAw",
+  "previous_failed_job": "f3kiHbvUTK5q",
+  "submitted_utc": "2026-11-17 23:30:33 UTC",
+  "stage": "train",
+  "minutes": 60,
+  "queue": "pdebug",
+  "gpus_per_node_visibility": 4,
+  "outer_tasks": 1,
+  "exclusive_node": true,
+  "source_and_config_unchanged": true
+}

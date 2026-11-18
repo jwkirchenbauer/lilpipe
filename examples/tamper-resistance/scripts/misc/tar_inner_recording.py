@@ -4,7 +4,7 @@ import hashlib
 import json
 import os
 import random
-from contextlib import ExitStack, contextmanager
+from contextlib import ExitStack, contextmanager, nullcontext
 from pathlib import Path
 
 import numpy as np
@@ -31,10 +31,15 @@ def _rng_state(devices):
 @contextmanager
 def _observe(devices):
     before = _rng_state(devices)
+    active_device = torch.cuda.current_device() if devices else None
     with torch.no_grad():
         yield
     if _rng_state(devices) != before:
         raise RuntimeError("Inner trajectory observation changed an RNG state")
+    if devices and torch.cuda.current_device() != active_device:
+        raise RuntimeError(
+            "Inner trajectory observation changed the active CUDA device"
+        )
 
 
 def _cpu_parameters(model):
@@ -64,6 +69,7 @@ def _steps(variable):
 def _representations(matrices, split):
     output = {}
     for rep, matrix in matrices.items():
+        matrix = matrix.cpu()
         if not torch.isfinite(matrix).all():
             raise ValueError(f"Nonfinite {rep} Gram matrix")
         norms = matrix.diagonal().sqrt()
@@ -81,13 +87,25 @@ class TransientInnerRecorder:
     """Hold selected endpoints for one call and publish only full-coordinate Gram matrices."""
 
     def __init__(
-        self, root, inner_steps, references, *, chunk_elements=131072, spec_path=None
+        self,
+        root,
+        inner_steps,
+        references,
+        *,
+        chunk_elements=131072,
+        spec_path=None,
+        reduction_device="cpu",
     ):
         self.root = Path(root)
         self.inner_steps = tuple(inner_steps)
         self.references = references
         self.chunk_elements = chunk_elements
         self.spec_path = spec_path
+        self.reduction_device = torch.device(reduction_device)
+        if self.reduction_device.type not in {"cpu", "cuda"}:
+            raise ValueError("Inner Gram reduction requires a CPU or CUDA/ROCm device")
+        if self.reduction_device.type == "cuda" and self.reduction_device.index is None:
+            self.reduction_device = torch.device("cuda", torch.cuda.current_device())
         names = [ref["name"] for ref in references]
         if not names or len(set(names)) != len(names):
             raise ValueError("Reference directions must have unique names")
@@ -118,7 +136,10 @@ class TransientInnerRecorder:
         if destination.exists():
             raise FileExistsError(destination)
 
-        devices = sorted({p.device for p in model.parameters() if p.is_cuda}, key=str)
+        devices = {p.device for p in model.parameters() if p.is_cuda}
+        if self.reduction_device.type == "cuda":
+            devices.add(self.reduction_device)
+        devices = sorted(devices, key=str)
         print(
             f"Inner recorder outer {outer_call}: reading pre-call parameters",
             flush=True,
@@ -155,7 +176,12 @@ class TransientInnerRecorder:
             raise ValueError(
                 f"Expected inner steps {self.inner_steps}, observed {tuple(endpoints)}"
             )
-        with _observe(devices):
+        reduction_context = (
+            torch.cuda.device(self.reduction_device)
+            if self.reduction_device.type == "cuda"
+            else nullcontext()
+        )
+        with _observe(devices), reduction_context:
             representations, families, source_files = self._grams(
                 anchor, endpoints, outer_call
             )
@@ -186,6 +212,8 @@ class TransientInnerRecorder:
                 for name, value in anchor.items()
             ],
             "coordinates": sum(t.numel() for t in anchor.values()),
+            "reduction_device": str(self.reduction_device),
+            "chunk_elements": self.chunk_elements,
             "representations": representations,
             "families": families,
             "rng_unchanged_during_observation": True,
@@ -201,7 +229,9 @@ class TransientInnerRecorder:
     def _grams(self, anchor, endpoints, outer_call):
         rows = len(endpoints) + len(self.references)
         matrices = {
-            key: torch.zeros((rows, rows), dtype=torch.float64, device="cpu")
+            key: torch.zeros(
+                (rows, rows), dtype=torch.float64, device=self.reduction_device
+            )
             for key in ("raw", "bf16")
         }
         family_matrices = {}
@@ -264,10 +294,12 @@ class TransientInnerRecorder:
                         gaps[rep] += torch.dot(difference, difference).item()
                         for i, ref in enumerate(self.references, start=len(observed)):
                             block[i].copy_(refs[ref["path"]] - refs[ref["anchor"]])
-                        matrix.addmm_(block, block.T)
-                if number % 32 == 0 or number == len(anchor):
+                        reduction_block = block.to(self.reduction_device)
+                        matrix.addmm_(reduction_block, reduction_block.T)
+                        del reduction_block
+                if number % 8 == 0 or number == len(anchor):
                     print(
-                        f"Inner recorder outer {outer_call}: scanned {number}/{len(anchor)} parameters",
+                        f"Inner recorder outer {outer_call}: scanned {number}/{len(anchor)} parameters through {name} on {self.reduction_device}",
                         flush=True,
                     )
 
@@ -298,7 +330,12 @@ class RecordedInnerTARMETrainer(RecordedTARMETrainer):
         references = json.loads(spec_path.read_text())["references"]
         outer_steps = frozenset(_steps("TAR_INNER_OUTER_STEPS"))
         recorder = TransientInnerRecorder(
-            root, _steps("TAR_INNER_SAVE_STEPS"), references, spec_path=str(spec_path)
+            root,
+            _steps("TAR_INNER_SAVE_STEPS"),
+            references,
+            spec_path=str(spec_path),
+            reduction_device=os.environ.get("TAR_INNER_REDUCTION_DEVICE", "cpu"),
+            chunk_elements=int(os.environ.get("TAR_INNER_CHUNK_ELEMENTS", "131072")),
         )
         inner = self.sample_attack_fn
 

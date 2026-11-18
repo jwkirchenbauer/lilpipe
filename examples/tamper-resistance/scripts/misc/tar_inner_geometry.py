@@ -92,6 +92,19 @@ TABLES = {
 
 
 TABLES["family_comparisons"] = ("family", "coordinates", *TABLES["comparisons"])
+TABLES["family_basis_energy"] = (
+    "outer_call",
+    "representation",
+    "motion",
+    "normalization",
+    "actual_view",
+    "requested_rank",
+    "basis_side",
+    "basis_rank",
+    "family",
+    "coordinates",
+    "equal_axis_energy_share",
+)
 
 
 def validate_record(record, actual_views, actual_states):
@@ -255,6 +268,33 @@ def capture_rows(scope, refs, intervals, energies, fractions):
         )
 
 
+def family_basis_energy(scope, side, axes, transformed_grams, families):
+    """Partition the squared norms of fixed whole-model orthonormal axes."""
+    rank = axes.shape[1]
+    rows = []
+    for family, gram in transformed_grams.items():
+        share = float(np.sum(axes * (gram @ axes)) / rank) if rank else None
+        if rank:
+            if not np.isfinite(share) or not -1e-5 <= share <= 1 + 1e-5:
+                raise ValueError(f"Invalid whole-model basis energy in family {family}")
+            share = float(np.clip(share, 0, 1))
+        rows.append(
+            dict(
+                **scope,
+                basis_side=side,
+                basis_rank=rank,
+                family=family,
+                coordinates=families[family]["coordinates"],
+                equal_axis_energy_share=share,
+            )
+        )
+    if rank and not np.isclose(
+        sum(r["equal_axis_energy_share"] for r in rows), 1, rtol=1e-5, atol=0
+    ):
+        raise ValueError("Family shares of the whole-model basis do not sum to one")
+    return rows
+
+
 def analyze_call(record, actual_views, actual_states, family_only=False):
     validate_record(record, actual_views, actual_states)
     inner_steps = record["inner_steps"]
@@ -268,8 +308,30 @@ def analyze_call(record, actual_views, actual_states, family_only=False):
         },
     }
     tables = {name: [] for name in TABLES}
+    families = {} if family_only else record.get("families", {})
+    if (
+        families
+        and sum(f["coordinates"] for f in families.values()) != record["coordinates"]
+    ):
+        raise ValueError(
+            "Family coordinate counts do not sum to the full parameter count"
+        )
     for representation in REPRESENTATIONS:
         gram = combined_gram(record, representation)
+        family_grams = {
+            family: combined_gram(
+                {**record, "representations": data["representations"]}, representation
+            )
+            for family, data in families.items()
+        }
+        if family_grams:
+            np.testing.assert_allclose(
+                sum(family_grams.values()),
+                gram,
+                rtol=1e-10,
+                atol=np.max(np.abs(gram)) * 1e-13,
+                err_msg="Family Gram matrices do not sum to the whole model",
+            )
         gap = record["representations"][REPRESENTATIONS[representation]].get(
             "anchor_gap_squared_norm"
         )
@@ -296,6 +358,10 @@ def analyze_call(record, actual_views, actual_states, family_only=False):
                 for v, selection in selections.items()
             }
             within = {v: t @ gram @ t.T for v, t in transforms.items()}
+            within_family = {
+                v: {family: t @ block @ t.T for family, block in family_grams.items()}
+                for v, t in transforms.items()
+            }
             inner_gram = within["inner"]
             all_transform = transform(
                 [index[r["name"]] for r in actual_states], len(gram), intervals
@@ -354,6 +420,14 @@ def analyze_call(record, actual_views, actual_states, family_only=False):
                         )
                         if family_only:
                             continue
+                        if families:
+                            for side, view in (("inner", "inner"), ("actual", v)):
+                                axes = bases[view][:, : measures[side + "_rank"]]
+                                tables["family_basis_energy"].extend(
+                                    family_basis_energy(
+                                        scope, side, axes, within_family[view], families
+                                    )
+                                )
                         for i, angle in enumerate(angles):
                             tables["angles"].append(
                                 dict(**scope, component=i + 1, degrees=float(angle))
@@ -377,23 +451,13 @@ def analyze_call(record, actual_views, actual_states, family_only=False):
                                 scope, actual_states, intervals, all_energies, capture
                             )
                         )
-    if not family_only and record.get("families"):
-        families = record["families"]
-        if sum(f["coordinates"] for f in families.values()) != record["coordinates"]:
-            raise ValueError(
-                "Family coordinate counts do not sum to the full parameter count"
-            )
-        family_grams = {
-            rep: np.zeros_like(combined_gram(record, rep)) for rep in REPRESENTATIONS
-        }
+    if families:
         for family, data in families.items():
             restricted = {
                 **record,
                 "coordinates": data["coordinates"],
                 "representations": data["representations"],
             }
-            for rep in REPRESENTATIONS:
-                family_grams[rep] += combined_gram(restricted, rep)
             measures = analyze_call(
                 restricted, actual_views, actual_states, family_only=True
             )
@@ -401,15 +465,6 @@ def analyze_call(record, actual_views, actual_states, family_only=False):
                 tables["family_comparisons"].append(
                     {"family": family, "coordinates": data["coordinates"], **row}
                 )
-        for rep, total in family_grams.items():
-            whole = combined_gram(record, rep)
-            np.testing.assert_allclose(
-                total,
-                whole,
-                rtol=1e-10,
-                atol=np.max(np.abs(whole)) * 1e-13,
-                err_msg="Family Gram matrices do not sum to the whole model",
-            )
     return tables
 
 
@@ -504,6 +559,48 @@ def figures(folder, tables, steps, actual_views, calls):
         image, ax=axes.ravel().tolist(), label="Subspace overlap fraction", shrink=0.8
     )
     save(fig, "subspace-overlap")
+    energy = {
+        (r["representation"], r["outer_call"], r["basis_side"], r["family"]): r[
+            "equal_axis_energy_share"
+        ]
+        for r in tables["family_basis_energy"]
+        if selected(r) and r["actual_view"] == "matched" and r["requested_rank"] == "2"
+    }
+    if energy:
+        families = sorted({key[-1] for key in energy})
+        fig, axes = plt.subplots(
+            2,
+            2,
+            figsize=(max(6, 2.2 * len(families)), max(4.5, 0.95 * len(calls))),
+            layout="constrained",
+        )
+        for i, (rep, label) in enumerate(
+            (("raw_saved", "Raw"), ("bf16_evaluated", "BF16"))
+        ):
+            for j, (side, title) in enumerate(
+                (("inner", "Inner"), ("actual", "Matched actual"))
+            ):
+                ax = axes[i, j]
+                image = heat(
+                    ax,
+                    [[energy.get((rep, c, side, f)) for f in families] for c in calls],
+                    [f.replace("_", " ") for f in families],
+                    calls,
+                    f"{label} · {title}",
+                )
+                if j == 0:
+                    ax.set_ylabel("Outer call")
+                ax.tick_params(axis="x", labelrotation=25)
+        fig.suptitle(
+            "Module-family shares of whole-model axes\nRequested rank 2 · norm-weighted displacements"
+        )
+        fig.colorbar(
+            image,
+            ax=axes.ravel().tolist(),
+            label="Equal-axis average energy share",
+            shrink=0.8,
+        )
+        save(fig, "family-basis-energy")
 
     capture = [
         r for r in tables["capture"] if selected(r) and r["actual_view"] == "all_states"
@@ -721,7 +818,7 @@ def run(stage, spec, folder):
                     "normalization": "Uncentered PCA uses displacement magnitudes for norm_weighted and gives each nonzero vector unit length for equal_unit. actual_energy_captured always weights targets by squared norm; mean_actual_vector_capture weights each nonzero target equally.",
                     "rank": "At requested rank 1 or 2, both spans use the smaller available rank capped at the request. Full uses both numerical ranks independently. Overlap divides the sum of squared principal cosines by each side's rank.",
                     "all_states": "Projection-only rows in capture.csv fit the requested inner rank independently. No PCA across all archived reference states is fitted.",
-                    "families": "Family rows fit both spans anew within each parameter family. These are local geometric overlaps, not a decomposition of the full-space overlap.",
+                    "families": "family_comparisons.csv fits both spans anew within each parameter family. family_basis_energy.csv retains the globally fitted axes and partitions their squared norms across module families. Its share is the average family-restricted squared norm across the selected orthonormal axes, weighting each axis equally. At positive rank the shares sum to one.",
                     "rank_tolerance": "Eigenvalues below or equal to 1e-11 times the largest eigenvalue are discarded. Each local Gram is scaled by its largest diagonal before fitting.",
                     "zero_motion": "Zero denominators have missing fractions or cosines (blank CSV cells, gray heatmap cells).",
                     "figures": "Overlap and capture panels use cumulative displacements with norm-weighted PCA. The similarity panels show interval updates within each call.",

@@ -175,8 +175,53 @@ class TestInnerGeometry(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "positive semidefinite"):
             geometry.combined_gram(record, "raw_saved")
 
+    def test_family_basis_energy_matches_dense_global_axes(self):
+        record, views, states = example()
+        rng = np.random.default_rng(159)
+        inner, actual = rng.normal(size=(2, 5)), rng.normal(size=(4, 5))
+        # Different family composition per representation exposes row selection errors.
+        endpoints = {"raw": (inner, actual), "bf16": (inner * 0.0, actual[:, ::-1])}
+        families = {"head": slice(0, 2), "body": slice(2, 5)}
+        record["coordinates"] = 5
+        record["representations"] = {
+            rep: blocks(x, y) for rep, (x, y) in endpoints.items()
+        }
+        record["families"] = {
+            family: {
+                "coordinates": sub.stop - sub.start,
+                "representations": {
+                    rep: blocks(x[:, sub], y[:, sub])
+                    for rep, (x, y) in endpoints.items()
+                },
+            }
+            for family, sub in families.items()
+        }
+        results = geometry.analyze_call(record, views, states)["family_basis_energy"]
+        self.assertEqual(len(results), 2 * 2 * 2 * 2 * 3 * 2 * 2)
+        for row in results:
+            x, y = endpoints[geometry.REPRESENTATIONS[row["representation"]]]
+            actual_rows = [states.index(ref) for ref in views[row["actual_view"]]]
+            vectors = x if row["basis_side"] == "inner" else y[actual_rows]
+            if row["motion"] == "interval_update":
+                vectors = np.diff(vectors, axis=0, prepend=np.zeros_like(vectors[:1]))
+            if row["normalization"] == "equal_unit":
+                lengths = np.linalg.norm(vectors, axis=1, keepdims=True)
+                vectors = np.divide(
+                    vectors, lengths, out=np.zeros_like(vectors), where=lengths > 0
+                )
+            rank = row["basis_rank"]
+            if rank:
+                axes = np.linalg.svd(vectors, full_matrices=False)[2][:rank]
+                expected = np.square(axes[:, families[row["family"]]]).sum() / rank
+                self.assertAlmostEqual(row["equal_axis_energy_share"], expected)
+            else:
+                self.assertIsNone(row["equal_axis_energy_share"])
+
     def test_report_resumes_from_atomic_per_call_results(self):
         record, views, states = example()
+        record["families"] = {
+            "whole": {"coordinates": 3, "representations": record["representations"]}
+        }
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             path = root / "input.json"
@@ -202,6 +247,12 @@ class TestInnerGeometry(unittest.TestCase):
                 status = json.loads((output / "status/geometry.json").read_text())
                 self.assertEqual(status["state"], "complete")
                 self.assertTrue(all((output / p).is_file() for p in status["files"]))
+                for file in (
+                    "family_basis_energy.csv",
+                    "family-basis-energy.png",
+                    "family-basis-energy.pdf",
+                ):
+                    self.assertIn(file, status["files"])
                 with (output / "capture.csv").open() as stream:
                     self.assertIn(
                         "all_states", {r["actual_view"] for r in csv.DictReader(stream)}

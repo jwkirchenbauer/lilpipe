@@ -1,0 +1,19 @@
+{
+  "purpose": "GPU construction and reduction of aggregate measurement blocks; defense config, optimizer and data unchanged",
+  "recorder_build_device": "cuda:0",
+  "recorder_sha256": "d2baa1620698a4641970722104c52fb4a068af39bb029534c47b880ca70e619e",
+  "materialize_references": true,
+  "maximum_extra_host_parameter_payload_bytes": 14155776000,
+  "maximum_live_chunk_payload_mib": 528,
+  "numerical_check": "Compare CPU and GPU construction, BF16 endpoint semantics and anchor gaps on fixed tensors before model loading; later compare first real aggregate with prior CPU-construction observation",
+  "original_reference_spec": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/references.json",
+  "reference_checkpoints": 26,
+  "cache": "Verified temporary SSD/RAM copies under allocation-owned roots; persistent logical-source/transfer hash map in cache-provenance",
+  "limits": {
+    "total_bytes": 450000000000,
+    "ram_bytes": 240000000000,
+    "ssd_reserved_bytes": 21474836480
+  },
+  "memory_policy": "Interleave CPU file-cache and training host allocations across allowed NUMA nodes; explicit four-GPU model map unchanged",
+  "new_inner_root": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v6"
+}

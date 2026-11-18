@@ -1,0 +1,15 @@
+{
+  "purpose": "Exact input transport only; no numerical recorder, defense config, optimizer or data changes",
+  "recorder_byte_identical_to": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/source/reduction-gpu-v2/tar_inner_recording.py",
+  "recorder_sha256": "39a0b6c8bb8993ab4b132169d5bb97a7de5716e4929fd5acff242970b39cab00",
+  "original_reference_spec": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/references.json",
+  "reference_checkpoints": 26,
+  "cache": "Verified temporary SSD/RAM copies under allocation-owned roots; persistent logical-source/transfer hash map in cache-provenance",
+  "limits": {
+    "total_bytes": 450000000000,
+    "ram_bytes": 240000000000,
+    "ssd_reserved_bytes": 21474836480
+  },
+  "memory_policy": "Interleave CPU file-cache and training host allocations across allowed NUMA nodes; explicit four-GPU model map unchanged",
+  "new_inner_root": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v3"
+}

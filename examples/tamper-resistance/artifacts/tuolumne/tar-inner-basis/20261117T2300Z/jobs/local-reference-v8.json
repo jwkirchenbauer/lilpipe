@@ -1,0 +1,9 @@
+{
+  "job_id": "f3kjxbbFnWk7",
+  "plan": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/launcher-local-reference-v8.json",
+  "state": "submitted",
+  "previous_job": "f3kjfWPuvCko",
+  "previous_job_inactive": true,
+  "scope": "Same B defensive replay; anonymous CPU parameter staging for aggregate measurement",
+  "maximum_extra_host_bytes": 14155776000
+}

@@ -85,3 +85,84 @@ and confirming the old CPU worker was inactive. Its initial reservation was
 code; the original manifest remains intact. The updated maintained tests also
 verify explicit CPU selection, chunk-size metadata and rejection of unsupported
 reduction devices. No new attacker training has been added.
+
+The GPU worker started earlier, at00:39 UTC. Its toy CPU/GPU comparison passed
+with zero error and preserved RNG/device state. Shared-storage scans still took
+about46 minutes for the first observation. That completed aggregate is retained
+under inner-gpu-v2; outer checkpoint1 and its first batch/loss match B. The job
+was canceled at01:31 UTC, and its incomplete defense output was archived under
+history/remote-reference-v4/models/defense before restarting.
+
+Execution profile reference-local-v3 changes reference transport only: exact
+temporary copies on node SSD/RAM, source/destination SHA verification, bounded
+capacity, and private ownership-checked cleanup. The recorder remains byte
+identical to the GPU profile. Seven synthetic staging tests passed. The new
+worker interleaves host allocations across NUMA nodes and retains the same
+explicit four-GPU model placement. All scientific settings remain B. The
+inspected v5 launcher was submitted as f3kjLy4He4Qw after confirming the prior
+worker inactive. Full replay and transfer validation remain required.
+
+The v5 request passed its GPU arithmetic preflight, then failed before staging
+or training because the node Bash lacks EPOCHSECONDS. Profile reference-local-v4
+uses the portable date command for the private cache suffix. The failed profile
+is retained unchanged; the new inspected v6 launch makes no scientific change.
+
+The v6 request f3kjNJR1JYnB started immediately at01:38 UTC on tuolumne1016.
+Exact staging completed for405,224,603,064 bytes across27 weight files (about
+180GB SSD and225GB tmpfs). Training began at01:49 UTC. Model diagnostics confirm
+one process and the intended four-device layer map. The first observed inner
+call is in progress. Filesystem capacity does not establish unified-memory
+headroom; read-only node diagnostics showed108GiB available during capture.
+
+The maintained analyzer now also partitions globally fitted basis-axis norms
+across module families. This differs from fitting separate axes within each
+family. Five synthetic geometry tests passed, including dense-coordinate SVD
+agreement and empty spans; the frozen postprocess-v4 copy was tested directly.
+Black checks passed. Code is committed as8699a3e0. Postprocessing additionally
+checks all2,000 inner losses for exact equality, summarizes shifted padding
+targets/document overlap from existing records, and compares the completed first
+aggregate with the remote-reference trial. No new model training is introduced.
+
+Despite local references, CPU block construction remained the bottleneck
+(144/291 parameters after roughly14 minutes of reduction). The v6 trainer was
+interrupted before its first outer update. Axolotl caught SIGINT and returned
+success after saving an initial model, so its wrapper status incorrectly said
+complete; this is not a completed defense. Its output is archived under
+history/local-reference-v6/models/defense and the transfer provenance confirms
+explicit cache cleanup. The new worker checks final global_step125 before
+declaring training complete. Original replay-validation requirements are intact.
+
+Profile reference-local-v5 opts into GPU block construction as well as reduction.
+It transfers native slices, preserves FP32 subtraction and direct-endpoint BF16
+rounding, and holds about528MiB of live chunk payload. The CPU/default path stays
+unchanged. Five focused tests passed, including mixed endpoint dtypes and BF16
+rounding boundaries. GPU gap-dot reductions may differ in low bits; preflight
+now compares those too. The frozen profile and launcher preview were inspected,
+and100-minute pbatch request f3kjfWPuvCko started at02:16 UTC on tuolumne1222.
+No prior training worker remains active. GPU parity, speed and full replay
+agreement are still to be measured on this profile.
+
+The GPU-native scan remained slow. Synthetic benchmark f3kjqsZiK7nP isolated
+resident GPU construction at4.3ms/chunk versus231ms for CPU construction;
+GEMM took under1ms and explicit split-K did not help. File-backed benchmark
+f3kjuKNyNuZ9 then measured fresh-map direct builds around95–157ms versus4ms
+for resident arrays, with exact Gram/gap parity after materialization. This
+identifies mapped-file transfers as a concrete issue; synthetic timings alone
+do not establish total real-model speed or exclude memory pressure.
+
+An attempt to extend v7 to3h was rejected: running duration updates require
+instance-owner privileges. SIGINT did not terminate the nested worker cleanly;
+f3kjfWPuvCko was then canceled and confirmed inactive before any outer update.
+Its cache provenance still says complete rather than cleaned; physical cleanup
+on tuolumne1222 is unconfirmed. Its model output and partial marker are retained
+as interrupted history, not scientific results.
+
+Reference-local-v6 uses owned, native CPU parameter copies before GPU transfer,
+one parameter at a time. Stream synchronization preserves their lifetime. The
+largest clone payload is14,155,776,000 bytes across27 references. Six focused
+tests passed, including exact mixed-dtype aggregate equality and archive hash
+preservation. This change is committed as7dcc31f8. The inspected240-minute
+pbatch replay f3kjxbbFnWk7 started at02:53 UTC on tuolumne1825. All B scientific
+settings and the five observation calls are unchanged. The long time limit is
+headroom; no other training worker is active. Full replay validation and final
+inner-versus-actual geometry remain outstanding.

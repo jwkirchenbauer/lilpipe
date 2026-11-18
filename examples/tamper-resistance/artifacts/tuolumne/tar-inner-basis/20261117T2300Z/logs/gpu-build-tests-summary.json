@@ -1,0 +1,12 @@
+{
+  "state": "passed",
+  "tests": 5,
+  "files": [
+    "tests/test_tar_inner_recording.py",
+    "tests/test_tar_attack_epochs.py"
+  ],
+  "source_sha256": "94b2a3a77e89c90ec034ecece17e4344a98b149dae8a0399b9df6f47e7647d90",
+  "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4",
+  "command": "bash -ic 'set -e; mm_activate /usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4; python -m black scripts/misc/tar_inner_recording.py ../../tests/test_tar_inner_recording.py; PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -c \"import sys; sys.path.append(\\\"/usr/lib/python3.12/site-packages\\\"); import pytest; sys.exit(pytest.main(sys.argv[1:]))\" -q ../../tests/test_tar_inner_recording.py ../../tests/test_tar_attack_epochs.py'",
+  "evidence": "Agent execution completed successfully; retained summary, no raw test log was saved. GPU preflight proof is recorded separately by the allocation."
+}

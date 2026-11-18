@@ -1,0 +1,224 @@
+{
+  "recorder_sha256": "94b2a3a77e89c90ec034ecece17e4344a98b149dae8a0399b9df6f47e7647d90",
+  "benchmark_sha256": "12900451bc81389206e836334d2cd4e0320e4ddcb6b1575ab16f53c71d964eb2",
+  "torch_version": "2.12.1+rocm7.2",
+  "hip_version": "7.2.53211",
+  "cpu_threads": 8,
+  "device": "cuda:0",
+  "device_name": "AMD Instinct MI300A",
+  "rows": 32,
+  "inner_rows": 6,
+  "coordinates": 1048576,
+  "measured_repetitions": 5,
+  "synthetic_endpoint_bytes": 106954752,
+  "timing": "Wall and GPU stream span both include time the host can leave the stream idle. GEMM event times isolate the two queued matrix products. One untimed warmup precedes each mode.",
+  "scope": "Generated resident CPU storage. This test measures neither checkpoint paging nor model/optimizer memory contention.",
+  "modes": {
+    "cpu_build_gpu_gram": {
+      "samples": [
+        {
+          "wall_ms": 289.201308041811,
+          "gpu_stream_span_ms": 289.13446044921875,
+          "gpu_gemm_ms": 0.9935730397701263
+        },
+        {
+          "wall_ms": 230.81144702155143,
+          "gpu_stream_span_ms": 230.77175903320312,
+          "gpu_gemm_ms": 0.8131900131702423
+        },
+        {
+          "wall_ms": 250.2554509555921,
+          "gpu_stream_span_ms": 250.19895935058594,
+          "gpu_gemm_ms": 0.9901120066642761
+        },
+        {
+          "wall_ms": 220.5895200604573,
+          "gpu_stream_span_ms": 220.55323791503906,
+          "gpu_gemm_ms": 0.8347100019454956
+        },
+        {
+          "wall_ms": 221.4181210147217,
+          "gpu_stream_span_ms": 221.38270568847656,
+          "gpu_gemm_ms": 0.7711690068244934
+        }
+      ],
+      "median": {
+        "wall_ms": 230.81144702155143,
+        "gpu_stream_span_ms": 230.77175903320312,
+        "gpu_gemm_ms": 0.8347100019454956
+      },
+      "exact_gram_and_gap_parity": true,
+      "peak_gpu_allocated_bytes": 402669568,
+      "peak_gpu_reserved_bytes": 404750336
+    },
+    "native_slice_gpu_build": {
+      "samples": [
+        {
+          "wall_ms": 4.641207982786,
+          "gpu_stream_span_ms": 4.609626770019531,
+          "gpu_gemm_ms": 0.48469600081443787
+        },
+        {
+          "wall_ms": 4.40509500913322,
+          "gpu_stream_span_ms": 4.375955104827881,
+          "gpu_gemm_ms": 0.5003869980573654
+        },
+        {
+          "wall_ms": 4.268422955647111,
+          "gpu_stream_span_ms": 4.251842975616455,
+          "gpu_gemm_ms": 0.4744659960269928
+        },
+        {
+          "wall_ms": 4.305304028093815,
+          "gpu_stream_span_ms": 4.279813766479492,
+          "gpu_gemm_ms": 0.5022870004177094
+        },
+        {
+          "wall_ms": 4.324133973568678,
+          "gpu_stream_span_ms": 4.306324005126953,
+          "gpu_gemm_ms": 0.4743160009384155
+        }
+      ],
+      "median": {
+        "wall_ms": 4.324133973568678,
+        "gpu_stream_span_ms": 4.306324005126953,
+        "gpu_gemm_ms": 0.48469600081443787
+      },
+      "exact_gram_and_gap_parity": true,
+      "peak_gpu_allocated_bytes": 687883264,
+      "peak_gpu_reserved_bytes": 761266176
+    },
+    "packed_fp32_host_gpu_build": {
+      "samples": [
+        {
+          "wall_ms": 110.42997194454074,
+          "gpu_stream_span_ms": 110.40729522705078,
+          "gpu_gemm_ms": 0.45640599727630615
+        },
+        {
+          "wall_ms": 110.22843793034554,
+          "gpu_stream_span_ms": 110.19676971435547,
+          "gpu_gemm_ms": 0.45748600363731384
+        },
+        {
+          "wall_ms": 109.86593400593847,
+          "gpu_stream_span_ms": 109.83368682861328,
+          "gpu_gemm_ms": 0.45808500051498413
+        },
+        {
+          "wall_ms": 110.2206289069727,
+          "gpu_stream_span_ms": 110.20072174072266,
+          "gpu_gemm_ms": 0.47931599617004395
+        },
+        {
+          "wall_ms": 109.95345492847264,
+          "gpu_stream_span_ms": 109.93399810791016,
+          "gpu_gemm_ms": 0.4715160131454468
+        }
+      ],
+      "median": {
+        "wall_ms": 110.2206289069727,
+        "gpu_stream_span_ms": 110.19676971435547,
+        "gpu_gemm_ms": 0.45808500051498413
+      },
+      "exact_gram_and_gap_parity": true,
+      "peak_gpu_allocated_bytes": 687883264,
+      "peak_gpu_reserved_bytes": 761266176
+    }
+  },
+  "standalone_gram_split_k": {
+    "1": {
+      "samples": [
+        {
+          "wall_ms": 0.2896339865401387,
+          "gpu_stream_span_ms": 0.26436299085617065
+        },
+        {
+          "wall_ms": 0.287303002551198,
+          "gpu_stream_span_ms": 0.26732298731803894
+        },
+        {
+          "wall_ms": 0.27174397837370634,
+          "gpu_stream_span_ms": 0.25372400879859924
+        },
+        {
+          "wall_ms": 0.2765029203146696,
+          "gpu_stream_span_ms": 0.2554830014705658
+        },
+        {
+          "wall_ms": 0.2877629594877362,
+          "gpu_stream_span_ms": 0.269802987575531
+        }
+      ],
+      "median": {
+        "wall_ms": 0.287303002551198,
+        "gpu_stream_span_ms": 0.26436299085617065
+      },
+      "maximum_absolute_gram_error": 0.0,
+      "tile_width": 1048576,
+      "peak_gpu_allocated_bytes": 402686976
+    },
+    "64": {
+      "samples": [
+        {
+          "wall_ms": 0.574036967009306,
+          "gpu_stream_span_ms": 0.5502470135688782
+        },
+        {
+          "wall_ms": 0.2996940165758133,
+          "gpu_stream_span_ms": 0.2812039852142334
+        },
+        {
+          "wall_ms": 0.30212407000362873,
+          "gpu_stream_span_ms": 0.2836430072784424
+        },
+        {
+          "wall_ms": 0.29551400803029537,
+          "gpu_stream_span_ms": 0.2775239944458008
+        },
+        {
+          "wall_ms": 0.27906300965696573,
+          "gpu_stream_span_ms": 0.26008298993110657
+        }
+      ],
+      "median": {
+        "wall_ms": 0.2996940165758133,
+        "gpu_stream_span_ms": 0.2812039852142334
+      },
+      "maximum_absolute_gram_error": 0.0,
+      "tile_width": 16384,
+      "peak_gpu_allocated_bytes": 403211264
+    },
+    "128": {
+      "samples": [
+        {
+          "wall_ms": 0.308853923343122,
+          "gpu_stream_span_ms": 0.2904829978942871
+        },
+        {
+          "wall_ms": 0.30719395726919174,
+          "gpu_stream_span_ms": 0.29056400060653687
+        },
+        {
+          "wall_ms": 0.3015439724549651,
+          "gpu_stream_span_ms": 0.285522997379303
+        },
+        {
+          "wall_ms": 0.3053939435631037,
+          "gpu_stream_span_ms": 0.28908398747444153
+        },
+        {
+          "wall_ms": 0.3039439907297492,
+          "gpu_stream_span_ms": 0.28768301010131836
+        }
+      ],
+      "median": {
+        "wall_ms": 0.3053939435631037,
+        "gpu_stream_span_ms": 0.28908398747444153
+      },
+      "maximum_absolute_gram_error": 0.0,
+      "tile_width": 8192,
+      "peak_gpu_allocated_bytes": 403735552
+    }
+  }
+}

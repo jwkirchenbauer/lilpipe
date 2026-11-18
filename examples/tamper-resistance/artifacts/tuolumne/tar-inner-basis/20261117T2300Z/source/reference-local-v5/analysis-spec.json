@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "aggregates": [
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v5/outer-000001.json",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v5/outer-000032.json",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v5/outer-000064.json",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v5/outer-000096.json",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/inner-local-v5/outer-000125.json"
+  ],
+  "actual_views": {
+    "matched": [
+      {
+        "name": "actual_1",
+        "step": 1
+      },
+      {
+        "name": "actual_2",
+        "step": 2
+      },
+      {
+        "name": "actual_4",
+        "step": 4
+      },
+      {
+        "name": "actual_8",
+        "step": 8
+      },
+      {
+        "name": "actual_12",
+        "step": 12
+      },
+      {
+        "name": "actual_16",
+        "step": 16
+      }
+    ],
+    "long": [
+      {
+        "name": "actual_1",
+        "step": 1
+      },
+      {
+        "name": "actual_2",
+        "step": 2
+      },
+      {
+        "name": "actual_4",
+        "step": 4
+      },
+      {
+        "name": "actual_8",
+        "step": 8
+      },
+      {
+        "name": "actual_16",
+        "step": 16
+      },
+      {
+        "name": "actual_32",
+        "step": 32
+      },
+      {
+        "name": "actual_48",
+        "step": 48
+      },
+      {
+        "name": "actual_64",
+        "step": 64
+      },
+      {
+        "name": "actual_96",
+        "step": 96
+      },
+      {
+        "name": "actual_128",
+        "step": 128
+      },
+      {
+        "name": "actual_256",
+        "step": 256
+      },
+      {
+        "name": "actual_512",
+        "step": 512
+      },
+      {
+        "name": "actual_1000",
+        "step": 1000
+      }
+    ]
+  },
+  "actual_states": [
+    {
+      "name": "actual_1",
+      "step": 1
+    },
+    {
+      "name": "actual_2",
+      "step": 2
+    },
+    {
+      "name": "actual_3",
+      "step": 3
+    },
+    {
+      "name": "actual_4",
+      "step": 4
+    },
+    {
+      "name": "actual_5",
+      "step": 5
+    },
+    {
+      "name": "actual_6",
+      "step": 6
+    },
+    {
+      "name": "actual_7",
+      "step": 7
+    },
+    {
+      "name": "actual_8",
+      "step": 8
+    },
+    {
+      "name": "actual_12",
+      "step": 12
+    },
+    {
+      "name": "actual_16",
+      "step": 16
+    },
+    {
+      "name": "actual_24",
+      "step": 24
+    },
+    {
+      "name": "actual_32",
+      "step": 32
+    },
+    {
+      "name": "actual_40",
+      "step": 40
+    },
+    {
+      "name": "actual_48",
+      "step": 48
+    },
+    {
+      "name": "actual_56",
+      "step": 56
+    },
+    {
+      "name": "actual_64",
+      "step": 64
+    },
+    {
+      "name": "actual_80",
+      "step": 80
+    },
+    {
+      "name": "actual_96",
+      "step": 96
+    },
+    {
+      "name": "actual_112",
+      "step": 112
+    },
+    {
+      "name": "actual_128",
+      "step": 128
+    },
+    {
+      "name": "actual_192",
+      "step": 192
+    },
+    {
+      "name": "actual_256",
+      "step": 256
+    },
+    {
+      "name": "actual_384",
+      "step": 384
+    },
+    {
+      "name": "actual_512",
+      "step": 512
+    },
+    {
+      "name": "actual_768",
+      "step": 768
+    },
+    {
+      "name": "actual_1000",
+      "step": 1000
+    }
+  ]
+}

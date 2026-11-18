@@ -1,0 +1,11 @@
+test_family_basis_energy_matches_dense_global_axes (__main__.TestInnerGeometry.test_family_basis_energy_matches_dense_global_axes) ... ok
+test_intervals_and_full_rank_normalization (__main__.TestInnerGeometry.test_intervals_and_full_rank_normalization) ... ok
+test_projection_matches_dense_svd_at_both_normalizations (__main__.TestInnerGeometry.test_projection_matches_dense_svd_at_both_normalizations) ... ok
+test_report_resumes_from_atomic_per_call_results (__main__.TestInnerGeometry.test_report_resumes_from_atomic_per_call_results) ... ok
+test_spec_and_family_validation (__main__.TestInnerGeometry.test_spec_and_family_validation) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 3.213s
+
+OK
+/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/source/postprocess-v4/tar_inner_geometry.py

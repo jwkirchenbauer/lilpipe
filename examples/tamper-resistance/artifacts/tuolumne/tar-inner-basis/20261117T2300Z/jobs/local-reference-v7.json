@@ -1,0 +1,9 @@
+{
+  "job_id": "f3kjfWPuvCko",
+  "state": "submitted",
+  "plan": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-inner-basis/20261117T2300Z/launcher-local-reference-v7.json",
+  "previous_job": "f3kjNJR1JYnB",
+  "previous_stopped_before_outer_update": true,
+  "previous_reference_cache": "cleaned",
+  "scientific_configuration": "unchanged local B; GPU measurement block construction opt-in"
+}

@@ -1,0 +1,11 @@
+{
+  "state": "passed",
+  "tests": 6,
+  "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4",
+  "source_sha256": "d2baa1620698a4641970722104c52fb4a068af39bb029534c47b880ca70e619e",
+  "test_files": [
+    "tests/test_tar_inner_recording.py",
+    "tests/test_tar_attack_epochs.py"
+  ],
+  "evidence": "Agent execution passed; includes stream-lifetime guard, exact mixed-dtype aggregate parity and unchanged archived bytes. No raw test log saved."
+}

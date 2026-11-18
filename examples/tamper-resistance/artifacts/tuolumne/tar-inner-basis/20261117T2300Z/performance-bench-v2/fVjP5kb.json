@@ -1,0 +1,1133 @@
+{
+  "recorder_sha256": "94b2a3a77e89c90ec034ecece17e4344a98b149dae8a0399b9df6f47e7647d90",
+  "benchmark_sha256": "c3b63f9827eeaa64c2e37479711e2d7ada63ca9f1a5f1d0edd8c66c349167a6c",
+  "v1_benchmark_sha256": "12900451bc81389206e836334d2cd4e0320e4ddcb6b1575ab16f53c71d964eb2",
+  "host": "tuolumne1012",
+  "torch_version": "2.12.1+rocm7.2",
+  "hip_version": "7.2.53211",
+  "device": "cuda:0",
+  "cpu_threads": 8,
+  "rows": 32,
+  "coordinates": 1048576,
+  "parameter_length": 1310720,
+  "fresh_map_trials_per_mode": 3,
+  "resident_builds": [
+    {
+      "wall_ms": 4.589999094605446,
+      "minor_faults": 0,
+      "major_faults": 0,
+      "storage_read_bytes": 0,
+      "gpu_stream_span_ms": 4.555488109588623,
+      "gpu_gemm_ms": 0.4904630035161972,
+      "peak_gpu_allocated_bytes": 687883264
+    },
+    {
+      "wall_ms": 4.3316560331732035,
+      "minor_faults": 0,
+      "major_faults": 0,
+      "storage_read_bytes": 0,
+      "gpu_stream_span_ms": 4.2875471115112305,
+      "gpu_gemm_ms": 0.4930430054664612,
+      "peak_gpu_allocated_bytes": 687883264
+    },
+    {
+      "wall_ms": 4.327335976995528,
+      "minor_faults": 0,
+      "major_faults": 0,
+      "storage_read_bytes": 0,
+      "gpu_stream_span_ms": 4.2974162101745605,
+      "gpu_gemm_ms": 0.4830329865217209,
+      "peak_gpu_allocated_bytes": 687883264
+    }
+  ],
+  "resident_median_wall_ms": 4.3316560331732035,
+  "scope": "Generated sparse files, one map per fresh trial. Each trial builds twice from the same inputs. Files are populated immediately before the trials; kernel page cache is not dropped. The unselected tail padding stays untouched. Storage-read counters exclude cache hits. Production has more files, larger parameters and concurrent training allocations.",
+  "tiers": {
+    "ssd": {
+      "root": "/l/ssd/kirchenb",
+      "file_logical_bytes": 1073744448,
+      "tensor_bytes_written": 106954752,
+      "allocated_bytes_after_write": 107102208,
+      "modes": {
+        "direct": [
+          {
+            "open_and_get_tensor": {
+              "wall_ms": 15.120072988793254,
+              "minor_faults": 11,
+              "major_faults": 40,
+              "storage_read_bytes": 344064
+            },
+            "materialization": {
+              "wall_ms": 0.0027900096029043198,
+              "minor_faults": 0,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "builds": [
+              {
+                "wall_ms": 121.6855039820075,
+                "minor_faults": 26146,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 121.5683822631836,
+                "gpu_gemm_ms": 0.6472830027341843,
+                "peak_gpu_allocated_bytes": 687883264
+              },
+              {
+                "wall_ms": 4.421227029524744,
+                "minor_faults": 1,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 4.38343620300293,
+                "gpu_gemm_ms": 0.48889200389385223,
+                "peak_gpu_allocated_bytes": 687883264
+              }
+            ],
+            "source_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            },
+            "build_input_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            }
+          },
+          {
+            "open_and_get_tensor": {
+              "wall_ms": 1.584450015798211,
+              "minor_faults": 35,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "materialization": {
+              "wall_ms": 0.0016200356185436249,
+              "minor_faults": 0,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "builds": [
+              {
+                "wall_ms": 94.7928570676595,
+                "minor_faults": 26146,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 94.6677017211914,
+                "gpu_gemm_ms": 0.6643639951944351,
+                "peak_gpu_allocated_bytes": 687883264
+              },
+              {
+                "wall_ms": 4.7898589400574565,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 4.75278902053833,
+                "gpu_gemm_ms": 0.5026029944419861,
+                "peak_gpu_allocated_bytes": 687883264
+              }
+            ],
+            "source_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            },
+            "build_input_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            }
+          },
+          {
+            "open_and_get_tensor": {
+              "wall_ms": 1.6207100125029683,
+              "minor_faults": 35,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "materialization": {
+              "wall_ms": 0.001400010660290718,
+              "minor_faults": 0,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "builds": [
+              {
+                "wall_ms": 98.67092105560005,
+                "minor_faults": 26146,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 98.50032806396484,
+                "gpu_gemm_ms": 0.7027639895677567,
+                "peak_gpu_allocated_bytes": 687883264
+              },
+              {
+                "wall_ms": 4.777509020641446,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 4.731988906860352,
+                "gpu_gemm_ms": 0.47084300220012665,
+                "peak_gpu_allocated_bytes": 687883264
+              }
+            ],
+            "source_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            },
+            "build_input_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            }
+          }
+        ],
+        "full_clone": [
+          {
+            "open_and_get_tensor": {
+              "wall_ms": 1.5758200315758586,
+              "minor_faults": 35,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "materialization": {
+              "wall_ms": 32.700191950425506,
+              "minor_faults": 16518,
+              "major_faults": 10,
+              "storage_read_bytes": 106496
+            },
+            "builds": [
+              {
+                "wall_ms": 65.8013679785654,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 65.70359802246094,
+                "gpu_gemm_ms": 0.6125249862670898,
+                "peak_gpu_allocated_bytes": 687883264
+              },
+              {
+                "wall_ms": 4.734209040179849,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 4.70120906829834,
+                "gpu_gemm_ms": 0.47915300726890564,
+                "peak_gpu_allocated_bytes": 687883264
+              }
+            ],
+            "source_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            },
+            "build_input_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 0,
+              "process_vma_sizes": [
+                839794688
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            }
+          },
+          {
+            "open_and_get_tensor": {
+              "wall_ms": 1.6288700280711055,
+              "minor_faults": 35,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "materialization": {
+              "wall_ms": 40.39540095254779,
+              "minor_faults": 22840,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "builds": [
+              {
+                "wall_ms": 31.363634974695742,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 31.258991241455078,
+                "gpu_gemm_ms": 0.602963000535965,
+                "peak_gpu_allocated_bytes": 687883264
+              },
+              {
+                "wall_ms": 4.764819983392954,
+                "minor_faults": 1,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 4.72576904296875,
+                "gpu_gemm_ms": 0.4919020086526871,
+                "peak_gpu_allocated_bytes": 687883264
+              }
+            ],
+            "source_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            },
+            "build_input_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 0,
+              "process_vma_sizes": [
+                860766208
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            }
+          },
+          {
+            "open_and_get_tensor": {
+              "wall_ms": 1.669780001975596,
+              "minor_faults": 35,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "materialization": {
+              "wall_ms": 29.18060205411166,
+              "minor_faults": 17336,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "builds": [
+              {
+                "wall_ms": 21.11718093510717,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 21.015127182006836,
+                "gpu_gemm_ms": 0.617482990026474,
+                "peak_gpu_allocated_bytes": 687883264
+              },
+              {
+                "wall_ms": 4.412596928887069,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 4.387436866760254,
+                "gpu_gemm_ms": 0.49329300224781036,
+                "peak_gpu_allocated_bytes": 687883264
+              }
+            ],
+            "source_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            },
+            "build_input_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 0,
+              "process_vma_sizes": [
+                852901888
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            }
+          }
+        ],
+        "slice_clone": [
+          {
+            "open_and_get_tensor": {
+              "wall_ms": 1.7270899843424559,
+              "minor_faults": 35,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "materialization": {
+              "wall_ms": 32.606071908958256,
+              "minor_faults": 19043,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "builds": [
+              {
+                "wall_ms": 30.554829048924148,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 30.464866638183594,
+                "gpu_gemm_ms": 0.5943650007247925,
+                "peak_gpu_allocated_bytes": 687883264
+              },
+              {
+                "wall_ms": 4.745748941786587,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 4.716468811035156,
+                "gpu_gemm_ms": 0.4836429953575134,
+                "peak_gpu_allocated_bytes": 687883264
+              }
+            ],
+            "source_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            },
+            "build_input_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 0,
+              "process_vma_sizes": [
+                819347456
+              ],
+              "tensor_storage_sizes": [
+                2097152,
+                4194304
+              ]
+            }
+          },
+          {
+            "open_and_get_tensor": {
+              "wall_ms": 1.706169918179512,
+              "minor_faults": 35,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "materialization": {
+              "wall_ms": 25.229415972717106,
+              "minor_faults": 14434,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "builds": [
+              {
+                "wall_ms": 21.736893919296563,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 21.615671157836914,
+                "gpu_gemm_ms": 0.6145849823951721,
+                "peak_gpu_allocated_bytes": 687883264
+              },
+              {
+                "wall_ms": 4.442338016815484,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 4.403666973114014,
+                "gpu_gemm_ms": 0.4866740107536316,
+                "peak_gpu_allocated_bytes": 687883264
+              }
+            ],
+            "source_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            },
+            "build_input_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 0,
+              "process_vma_sizes": [
+                821440512
+              ],
+              "tensor_storage_sizes": [
+                2097152,
+                4194304
+              ]
+            }
+          },
+          {
+            "open_and_get_tensor": {
+              "wall_ms": 1.6616500215604901,
+              "minor_faults": 35,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "materialization": {
+              "wall_ms": 12.323995004408062,
+              "minor_faults": 5251,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "builds": [
+              {
+                "wall_ms": 10.054772021248937,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 9.96074104309082,
+                "gpu_gemm_ms": 0.5858839899301529,
+                "peak_gpu_allocated_bytes": 687883264
+              },
+              {
+                "wall_ms": 4.393966984935105,
+                "minor_faults": 1,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 4.362967014312744,
+                "gpu_gemm_ms": 0.47922399640083313,
+                "peak_gpu_allocated_bytes": 687883264
+              }
+            ],
+            "source_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            },
+            "build_input_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 0,
+              "process_vma_sizes": [
+                836124672
+              ],
+              "tensor_storage_sizes": [
+                2097152,
+                4194304
+              ]
+            }
+          }
+        ]
+      },
+      "medians": {
+        "direct": {
+          "get_tensor_ms": 1.6207100125029683,
+          "materialize_ms": 0.0016200356185436249,
+          "first_build_ms": 98.67092105560005,
+          "repeat_build_ms": 4.777509020641446,
+          "first_total_ms": 100.2930310787633
+        },
+        "full_clone": {
+          "get_tensor_ms": 1.6288700280711055,
+          "materialize_ms": 32.700191950425506,
+          "first_build_ms": 31.363634974695742,
+          "repeat_build_ms": 4.734209040179849,
+          "first_total_ms": 73.38790595531464
+        },
+        "slice_clone": {
+          "get_tensor_ms": 1.706169918179512,
+          "materialize_ms": 25.229415972717106,
+          "first_build_ms": 21.736893919296563,
+          "repeat_build_ms": 4.442338016815484,
+          "first_total_ms": 48.67247981019318
+        }
+      },
+      "allocated_bytes_after_read": 107102208,
+      "exact_gram_and_gap_parity": true
+    },
+    "tmpfs": {
+      "root": "/var/tmp/kirchenb/flux-sKyU4N/jobtmp-0-fVjP5kb",
+      "file_logical_bytes": 1073744448,
+      "tensor_bytes_written": 106954752,
+      "allocated_bytes_after_write": 107098112,
+      "modes": {
+        "direct": [
+          {
+            "open_and_get_tensor": {
+              "wall_ms": 1.7131809145212173,
+              "minor_faults": 35,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "materialization": {
+              "wall_ms": 0.0013600802049040794,
+              "minor_faults": 0,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "builds": [
+              {
+                "wall_ms": 156.9592229789123,
+                "minor_faults": 26146,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 156.83534240722656,
+                "gpu_gemm_ms": 0.6745639890432358,
+                "peak_gpu_allocated_bytes": 687883264
+              },
+              {
+                "wall_ms": 4.802190000191331,
+                "minor_faults": 1,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 4.748108863830566,
+                "gpu_gemm_ms": 0.475722000002861,
+                "peak_gpu_allocated_bytes": 687883264
+              }
+            ],
+            "source_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            },
+            "build_input_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            }
+          },
+          {
+            "open_and_get_tensor": {
+              "wall_ms": 1.6546399565413594,
+              "minor_faults": 35,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "materialization": {
+              "wall_ms": 0.0013799872249364853,
+              "minor_faults": 0,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "builds": [
+              {
+                "wall_ms": 105.86470598354936,
+                "minor_faults": 26146,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 105.75448608398438,
+                "gpu_gemm_ms": 0.6962040066719055,
+                "peak_gpu_allocated_bytes": 687883264
+              },
+              {
+                "wall_ms": 4.818218993023038,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 4.781269073486328,
+                "gpu_gemm_ms": 0.47220200300216675,
+                "peak_gpu_allocated_bytes": 687883264
+              }
+            ],
+            "source_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            },
+            "build_input_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            }
+          },
+          {
+            "open_and_get_tensor": {
+              "wall_ms": 1.6960999928414822,
+              "minor_faults": 35,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "materialization": {
+              "wall_ms": 0.0013400567695498466,
+              "minor_faults": 0,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "builds": [
+              {
+                "wall_ms": 111.28612991888076,
+                "minor_faults": 26146,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 111.1518783569336,
+                "gpu_gemm_ms": 0.7012050002813339,
+                "peak_gpu_allocated_bytes": 687883264
+              },
+              {
+                "wall_ms": 4.77468001190573,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 4.736670017242432,
+                "gpu_gemm_ms": 0.479763001203537,
+                "peak_gpu_allocated_bytes": 687883264
+              }
+            ],
+            "source_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            },
+            "build_input_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            }
+          }
+        ],
+        "full_clone": [
+          {
+            "open_and_get_tensor": {
+              "wall_ms": 1.455949037335813,
+              "minor_faults": 35,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "materialization": {
+              "wall_ms": 41.63954802788794,
+              "minor_faults": 20478,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "builds": [
+              {
+                "wall_ms": 18.854797002859414,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 18.7525634765625,
+                "gpu_gemm_ms": 0.5941729992628098,
+                "peak_gpu_allocated_bytes": 687883264
+              },
+              {
+                "wall_ms": 4.4475969625636935,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 4.418656826019287,
+                "gpu_gemm_ms": 0.49219299852848053,
+                "peak_gpu_allocated_bytes": 687883264
+              }
+            ],
+            "source_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            },
+            "build_input_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 0,
+              "process_vma_sizes": [
+                856571904
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            }
+          },
+          {
+            "open_and_get_tensor": {
+              "wall_ms": 1.6904600197449327,
+              "minor_faults": 35,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "materialization": {
+              "wall_ms": 11.073688976466656,
+              "minor_faults": 4055,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "builds": [
+              {
+                "wall_ms": 9.371968917548656,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 9.272067070007324,
+                "gpu_gemm_ms": 0.6009939908981323,
+                "peak_gpu_allocated_bytes": 687883264
+              },
+              {
+                "wall_ms": 4.416847950778902,
+                "minor_faults": 1,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 4.389986991882324,
+                "gpu_gemm_ms": 0.4601619988679886,
+                "peak_gpu_allocated_bytes": 687883264
+              }
+            ],
+            "source_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            },
+            "build_input_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 0,
+              "process_vma_sizes": [
+                864960512
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            }
+          },
+          {
+            "open_and_get_tensor": {
+              "wall_ms": 1.7139900010079145,
+              "minor_faults": 35,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "materialization": {
+              "wall_ms": 8.155930903740227,
+              "minor_faults": 2007,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "builds": [
+              {
+                "wall_ms": 5.719825974665582,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 5.630784034729004,
+                "gpu_gemm_ms": 0.5721540153026581,
+                "peak_gpu_allocated_bytes": 687883264
+              },
+              {
+                "wall_ms": 4.391288035549223,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 4.3531670570373535,
+                "gpu_gemm_ms": 0.47140300273895264,
+                "peak_gpu_allocated_bytes": 687883264
+              }
+            ],
+            "source_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            },
+            "build_input_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 0,
+              "process_vma_sizes": [
+                864960512
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            }
+          }
+        ],
+        "slice_clone": [
+          {
+            "open_and_get_tensor": {
+              "wall_ms": 1.6035990556702018,
+              "minor_faults": 35,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "materialization": {
+              "wall_ms": 7.815247983671725,
+              "minor_faults": 1666,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "builds": [
+              {
+                "wall_ms": 6.48238998837769,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 6.39539909362793,
+                "gpu_gemm_ms": 0.568123996257782,
+                "peak_gpu_allocated_bytes": 687883264
+              },
+              {
+                "wall_ms": 4.381156992167234,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 4.356225967407227,
+                "gpu_gemm_ms": 0.4956029951572418,
+                "peak_gpu_allocated_bytes": 687883264
+              }
+            ],
+            "source_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            },
+            "build_input_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 0,
+              "process_vma_sizes": [
+                856571904
+              ],
+              "tensor_storage_sizes": [
+                2097152,
+                4194304
+              ]
+            }
+          },
+          {
+            "open_and_get_tensor": {
+              "wall_ms": 1.6775409458205104,
+              "minor_faults": 35,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "materialization": {
+              "wall_ms": 7.5751569820567966,
+              "minor_faults": 1666,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "builds": [
+              {
+                "wall_ms": 5.129872006364167,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 5.03272008895874,
+                "gpu_gemm_ms": 0.5780129879713058,
+                "peak_gpu_allocated_bytes": 687883264
+              },
+              {
+                "wall_ms": 4.375418066047132,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 4.339907169342041,
+                "gpu_gemm_ms": 0.4641620069742203,
+                "peak_gpu_allocated_bytes": 687883264
+              }
+            ],
+            "source_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            },
+            "build_input_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 0,
+              "process_vma_sizes": [
+                864960512
+              ],
+              "tensor_storage_sizes": [
+                2097152,
+                4194304
+              ]
+            }
+          },
+          {
+            "open_and_get_tensor": {
+              "wall_ms": 1.71174097340554,
+              "minor_faults": 35,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "materialization": {
+              "wall_ms": 7.671838044188917,
+              "minor_faults": 1666,
+              "major_faults": 0,
+              "storage_read_bytes": 0
+            },
+            "builds": [
+              {
+                "wall_ms": 4.931470029987395,
+                "minor_faults": 0,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 4.818268775939941,
+                "gpu_gemm_ms": 0.5899230241775513,
+                "peak_gpu_allocated_bytes": 687883264
+              },
+              {
+                "wall_ms": 4.483417957089841,
+                "minor_faults": 1,
+                "major_faults": 0,
+                "storage_read_bytes": 0,
+                "gpu_stream_span_ms": 4.445857048034668,
+                "gpu_gemm_ms": 0.4784340113401413,
+                "peak_gpu_allocated_bytes": 687883264
+              }
+            ],
+            "source_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 34,
+              "process_vma_sizes": [
+                1073745920
+              ],
+              "tensor_storage_sizes": [
+                2621440,
+                5242880
+              ]
+            },
+            "build_input_mapping": {
+              "tensors": 34,
+              "mapped_to_backing": 0,
+              "process_vma_sizes": [
+                864960512
+              ],
+              "tensor_storage_sizes": [
+                2097152,
+                4194304
+              ]
+            }
+          }
+        ]
+      },
+      "medians": {
+        "direct": {
+          "get_tensor_ms": 1.6960999928414822,
+          "materialize_ms": 0.0013600802049040794,
+          "first_build_ms": 111.28612991888076,
+          "repeat_build_ms": 4.802190000191331,
+          "first_total_ms": 112.98356996849179
+        },
+        "full_clone": {
+          "get_tensor_ms": 1.6904600197449327,
+          "materialize_ms": 11.073688976466656,
+          "first_build_ms": 9.371968917548656,
+          "repeat_build_ms": 4.416847950778902,
+          "first_total_ms": 22.136117913760245
+        },
+        "slice_clone": {
+          "get_tensor_ms": 1.6775409458205104,
+          "materialize_ms": 7.671838044188917,
+          "first_build_ms": 5.129872006364167,
+          "repeat_build_ms": 4.381156992167234,
+          "first_total_ms": 14.382569934241474
+        }
+      },
+      "allocated_bytes_after_read": 133697536,
+      "exact_gram_and_gap_parity": true
+    }
+  }
+}

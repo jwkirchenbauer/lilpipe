@@ -95,6 +95,7 @@ class TransientInnerRecorder:
         chunk_elements=131072,
         spec_path=None,
         reduction_device="cpu",
+        build_device="cpu",
     ):
         self.root = Path(root)
         self.inner_steps = tuple(inner_steps)
@@ -106,6 +107,19 @@ class TransientInnerRecorder:
             raise ValueError("Inner Gram reduction requires a CPU or CUDA/ROCm device")
         if self.reduction_device.type == "cuda" and self.reduction_device.index is None:
             self.reduction_device = torch.device("cuda", torch.cuda.current_device())
+        self.build_device = torch.device(build_device)
+        if (
+            self.build_device == torch.device("cuda")
+            and self.reduction_device.type == "cuda"
+        ):
+            self.build_device = self.reduction_device
+        if self.build_device != torch.device("cpu") and (
+            self.build_device.type != "cuda"
+            or self.build_device != self.reduction_device
+        ):
+            raise ValueError(
+                "Block building requires CPU or the selected reduction GPU"
+            )
         names = [ref["name"] for ref in references]
         if not names or len(set(names)) != len(names):
             raise ValueError("Reference directions must have unique names")
@@ -213,6 +227,7 @@ class TransientInnerRecorder:
             ],
             "coordinates": sum(t.numel() for t in anchor.values()),
             "reduction_device": str(self.reduction_device),
+            "build_device": str(self.build_device),
             "chunk_elements": self.chunk_elements,
             "representations": representations,
             "families": families,
@@ -226,6 +241,43 @@ class TransientInnerRecorder:
         print(f"Inner recorder outer {outer_call}: published {destination}", flush=True)
         return result
 
+    def _accumulate_device_chunk(
+        self, initial, observed, saved, section, matrices, gaps
+    ):
+        """Transfer native slices once and form both displacement blocks on the device."""
+
+        def native(tensor):
+            return tensor.view(-1)[section].to(self.build_device, non_blocking=True)
+
+        initial = native(initial).float()
+        archived = native(saved[self.references[0]["anchor"]]).float()
+        # All supported endpoint dtypes convert exactly to FP32.
+        values = torch.empty(
+            (len(observed) + len(self.references), initial.numel()),
+            dtype=torch.float32,
+            device=self.build_device,
+        )
+        for i, tensor in enumerate(observed):
+            values[i].copy_(native(tensor))
+        for i, ref in enumerate(self.references, start=len(observed)):
+            values[i].copy_(native(saved[ref["path"]]))
+        # Use the original FP32 buffer last so the raw branch can subtract in place.
+        for rep in ("bf16", "raw"):
+            if rep == "bf16":
+                updates = values.to(torch.bfloat16).float()
+                start_inner = initial.to(torch.bfloat16).float()
+                start_actual = archived.to(torch.bfloat16).float()
+            else:
+                updates, start_inner, start_actual = values, initial, archived
+            updates[: len(observed)].sub_(start_inner)
+            updates[len(observed) :].sub_(start_actual)
+            gap = (start_inner - start_actual).double()
+            gaps[rep].add_(torch.dot(gap, gap))
+            del gap
+            block = updates.double()
+            matrices[rep].addmm_(block, block.T)
+            del block, updates
+
     def _grams(self, anchor, endpoints, outer_call):
         rows = len(endpoints) + len(self.references)
         matrices = {
@@ -236,7 +288,14 @@ class TransientInnerRecorder:
         }
         family_matrices = {}
         coordinates = {}
-        gaps = {key: 0.0 for key in matrices}
+        gaps = {
+            key: (
+                torch.zeros((), dtype=torch.float64, device=self.build_device)
+                if self.build_device.type == "cuda"
+                else 0.0
+            )
+            for key in matrices
+        }
         archived_anchor = self.references[0]["anchor"]
         paths = sorted(
             {ref[field] for ref in self.references for field in ("anchor", "path")}
@@ -278,6 +337,16 @@ class TransientInnerRecorder:
                 # Keeping the transient endpoints avoids a potentially lossy delta round trip.
                 for start in range(0, initial.numel(), self.chunk_elements):
                     section = slice(start, start + self.chunk_elements)
+                    if self.build_device.type == "cuda":
+                        self._accumulate_device_chunk(
+                            initial,
+                            observed,
+                            saved,
+                            section,
+                            family_matrices[family],
+                            gaps,
+                        )
+                        continue
                     count = min(self.chunk_elements, initial.numel() - start)
                     block = torch.empty(
                         (rows, count), dtype=torch.float64, device="cpu"
@@ -314,7 +383,7 @@ class TransientInnerRecorder:
             }
         overall = _representations(matrices, split)
         for rep, value in gaps.items():
-            overall[rep]["anchor_gap_squared_norm"] = value
+            overall[rep]["anchor_gap_squared_norm"] = float(value)
         return overall, families, files
 
 
@@ -335,6 +404,7 @@ class RecordedInnerTARMETrainer(RecordedTARMETrainer):
             references,
             spec_path=str(spec_path),
             reduction_device=os.environ.get("TAR_INNER_REDUCTION_DEVICE", "cpu"),
+            build_device=os.environ.get("TAR_INNER_BUILD_DEVICE", "cpu"),
             chunk_elements=int(os.environ.get("TAR_INNER_CHUNK_ELEMENTS", "131072")),
         )
         inner = self.sample_attack_fn

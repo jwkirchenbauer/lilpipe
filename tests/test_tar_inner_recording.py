@@ -62,6 +62,7 @@ def test_step_observation_preserves_inner_and_outer_training(monkeypatch, tmp_pa
     monkeypatch.setenv("TAR_INNER_RECORD_ROOT", str(output))
     monkeypatch.setenv("TAR_INNER_OUTER_STEPS", "3")
     monkeypatch.setenv("TAR_INNER_SAVE_STEPS", "1,2")
+    monkeypatch.setenv("TAR_INNER_BUILD_DEVICE", "cpu")
 
     def init(trainer, inner):
         trainer.sample_attack_fn = inner
@@ -138,7 +139,9 @@ def test_step_observation_preserves_inner_and_outer_training(monkeypatch, tmp_pa
     assert recorded[-1][-1][1] == recorded[1].norm().item()
     [path] = output.iterdir()
     assert path.name == "outer-000003.json"
-    assert json.loads(path.read_text())["rng_unchanged_during_observation"] is True
+    record = json.loads(path.read_text())
+    assert record["rng_unchanged_during_observation"] is True
+    assert record["build_device"] == "cpu"
 
 
 def test_grams_match_direct_endpoint_arithmetic_and_refuse_duplicate_or_incomplete(
@@ -210,6 +213,7 @@ def test_grams_match_direct_endpoint_arithmetic_and_refuse_duplicate_or_incomple
     record = json.loads(original)
     assert record["status"] == "complete" and record["coordinates"] == 8
     assert record["reduction_device"] == "cpu"
+    assert record["build_device"] == "cpu"
     assert record["chunk_elements"] == 2
     assert record["inner_steps"] == [1, 3]
     assert record["reference_names"] == ["fixed-1", "fixed-2"]
@@ -262,3 +266,55 @@ def test_grams_match_direct_endpoint_arithmetic_and_refuse_duplicate_or_incomple
     ]
     with pytest.raises(FileExistsError):
         recorder.run(update, model, inputs, 8)
+
+
+def test_device_block_building_uses_original_endpoints(monkeypatch, tmp_path):
+    pytest.importorskip("axolotl")
+    monkeypatch.syspath_prepend(str(EXAMPLE / "src"))
+    monkeypatch.syspath_prepend(str(EXAMPLE / "scripts/misc"))
+    from tar_inner_recording import TransientInnerRecorder
+
+    refs = [{"name": "one", "anchor": "start", "path": "one"}]
+    for build, reduction in (("cuda", "cpu"), ("cuda:1", "cuda:0"), ("meta", "cpu")):
+        with pytest.raises(ValueError, match="selected reduction GPU"):
+            TransientInnerRecorder(
+                tmp_path, [1], refs, build_device=build, reduction_device=reduction
+            )
+    assert TransientInnerRecorder(
+        tmp_path, [1], refs, build_device="cuda", reduction_device="cuda:3"
+    ).build_device == torch.device("cuda:3")
+    recorder = TransientInnerRecorder(tmp_path, [1], refs, build_device="cpu")
+    # Exercise the device arithmetic directly on CPU; mixed dtypes and a BF16
+    # midpoint distinguish rounding the endpoints from rounding the resulting delta.
+    initial = torch.tensor([1.004, 0.996, 0.501, 1.0, -0.75], dtype=torch.float32)
+    current = torch.tensor([1.003, 1.0, 0.50, 1.00390625, -0.76], dtype=torch.float16)
+    actual_anchor = initial.to(torch.bfloat16)
+    actual = torch.tensor([1.001, 0.997, 0.504, 1.005, -0.751])
+    originals = [t.clone() for t in (initial, current, actual_anchor, actual)]
+    reps = ("raw", "bf16")
+    matrices = {rep: torch.zeros((2, 2), dtype=torch.float64) for rep in reps}
+    gaps = {rep: torch.zeros((), dtype=torch.float64) for rep in reps}
+    for section in (slice(0, 3), slice(3, 6)):
+        recorder._accumulate_device_chunk(
+            initial,
+            [current],
+            {"start": actual_anchor, "one": actual},
+            section,
+            matrices,
+            gaps,
+        )
+    for rep in reps:
+
+        def cast(t):
+            return t.to(torch.bfloat16).float() if rep == "bf16" else t.float()
+
+        rows = torch.stack(
+            (cast(current) - cast(initial), cast(actual) - cast(actual_anchor))
+        ).double()
+        gap = (cast(initial) - cast(actual_anchor)).double()
+        torch.testing.assert_close(matrices[rep], rows @ rows.T, rtol=1e-14, atol=0)
+        torch.testing.assert_close(gaps[rep], gap @ gap, rtol=1e-14, atol=0)
+    for before, after in zip(
+        originals, (initial, current, actual_anchor, actual), strict=True
+    ):
+        assert torch.equal(before, after)

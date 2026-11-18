@@ -1,0 +1,6 @@
+bash: cannot set terminal process group (4150161): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+Submission: flux batch -q pdebug --bank=verival --job-name=tar-concentration-collaborator -t55 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/launches/tar-concentration-collaborator/launch.sh
+No jobs were launched. You can inspect the files created at /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/launches/tar-concentration-collaborator/launch.sh

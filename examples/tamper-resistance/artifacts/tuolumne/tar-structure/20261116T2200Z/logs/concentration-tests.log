@@ -1,0 +1,9 @@
+bash: cannot set terminal process group (4169651): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+reformatted artifacts/tuolumne/tar-structure/20261116T2200Z/source/seal-concentration-v1/seal.py
+reformatted ../../tests/test_tar_basis_structure.py
+
+All done! ✨ 🍰 ✨
+2 files reformatted, 1 file left unchanged.
+..........                                                               [100%]

@@ -1,0 +1,9 @@
+{
+  "python": "3.12.16 (main, Oct 26 2026, 11:37:43) [GCC 15.3.0]",
+  "torch": "2.12.1+rocm7.2",
+  "numpy": "2.3.5",
+  "hip": "7.2.53211",
+  "device": "_CudaDeviceProperties(name='AMD Instinct MI300A', major=9, minor=4, gcnArchName='gfx942:sramecc+:xnack-', total_memory=131072MB, multi_processor_count=228, uuid=38366530-3764-3235-6461-373530356663, pci_bus_id=2, pci_device_id=0, pci_domain_id=0, L2_cache_size=4MB)",
+  "flux_job_id": "fVoq3bd",
+  "source_sha256": "5f60beca1789ca6fda57f251c4670eca79ef0c731ea416a1c15f352ce5b818c9"
+}

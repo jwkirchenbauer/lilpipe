@@ -1,0 +1,437 @@
+{
+  "state": "complete",
+  "records": [
+    {
+      "group": "collaborator-attack",
+      "precision": "raw",
+      "measure": "endpoint",
+      "source_view": "attack-1000-raw-displacement",
+      "saved_steps": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        48,
+        64,
+        96,
+        128,
+        256,
+        512,
+        1000
+      ],
+      "module_shares": {
+        "embedding": 0.0014915012605540986,
+        "attention": 0.018947164135273538,
+        "mlp": 0.10537754741209329,
+        "norm": 0.0005876780559225613,
+        "output_head": 0.8735961091361565
+      },
+      "dimensions": 1,
+      "energy": 7.890981143020239,
+      "coordinates": 7241732096,
+      "nonzero_coordinates": 1039622184,
+      "nonzero_fraction": 0.14355987907564816,
+      "effective_support_fraction": 0.012534954752999107,
+      "energy_targets": {
+        "0.5": {
+          "coordinate_fraction_lower": 0.004593418474894103,
+          "coordinate_fraction_upper": 0.004603679555946942
+        },
+        "0.9": {
+          "coordinate_fraction_lower": 0.012855637403574009,
+          "coordinate_fraction_upper": 0.012864740198199125
+        },
+        "0.99": {
+          "coordinate_fraction_lower": 0.029561283566157486,
+          "coordinate_fraction_upper": 0.029568430337028585
+        },
+        "0.999": {
+          "coordinate_fraction_lower": 0.059018154542899014,
+          "coordinate_fraction_upper": 0.05904504037593163
+        }
+      },
+      "top_fractions": {
+        "1e-06": {
+          "energy_fraction_lower": 0.0003412028943150675,
+          "energy_fraction_upper": 0.0003456024769431648
+        },
+        "1e-05": {
+          "energy_fraction_lower": 0.0024639695849371338,
+          "energy_fraction_upper": 0.002479844592075283
+        },
+        "0.0001": {
+          "energy_fraction_lower": 0.018860635503742968,
+          "energy_fraction_upper": 0.01890375745705778
+        },
+        "0.001": {
+          "energy_fraction_lower": 0.14521721600104703,
+          "energy_fraction_upper": 0.14551789432964166
+        },
+        "0.01": {
+          "energy_fraction_lower": 0.8154253239802495,
+          "energy_fraction_upper": 0.815479180102156
+        },
+        "0.1": {
+          "energy_fraction_lower": 0.999869395482067,
+          "energy_fraction_upper": 0.9998706953118845
+        },
+        "0.5": {
+          "energy_fraction_lower": 1.0,
+          "energy_fraction_upper": 1.0
+        },
+        "1.0": {
+          "energy_fraction_lower": 1.0,
+          "energy_fraction_upper": 1.0
+        }
+      }
+    },
+    {
+      "group": "collaborator-attack",
+      "precision": "raw",
+      "measure": "trajectory",
+      "source_view": null,
+      "saved_steps": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        48,
+        64,
+        96,
+        128,
+        256,
+        512,
+        1000
+      ],
+      "module_shares": {
+        "embedding": 0.002191969802119237,
+        "attention": 0.023416601841161875,
+        "mlp": 0.1271566694107542,
+        "norm": 0.001759674958064365,
+        "output_head": 0.8454750839879003
+      },
+      "energy": 19.96865360788694,
+      "coordinates": 7241732096,
+      "nonzero_coordinates": 1052773734,
+      "nonzero_fraction": 0.1453759570284993,
+      "effective_support_fraction": 0.013877806088514154,
+      "energy_targets": {
+        "0.5": {
+          "coordinate_fraction_lower": 0.005084129944593852,
+          "coordinate_fraction_upper": 0.00509655169657356
+        },
+        "0.9": {
+          "coordinate_fraction_lower": 0.014347601737074809,
+          "coordinate_fraction_upper": 0.014359226165993754
+        },
+        "0.99": {
+          "coordinate_fraction_lower": 0.04174571373152327,
+          "coordinate_fraction_upper": 0.04176087819750243
+        },
+        "0.999": {
+          "coordinate_fraction_lower": 0.08993318840940454,
+          "coordinate_fraction_upper": 0.08994462489986042
+        }
+      },
+      "top_fractions": {
+        "1e-06": {
+          "energy_fraction_lower": 0.0005735072426371995,
+          "energy_fraction_upper": 0.0005742664914969182
+        },
+        "1e-05": {
+          "energy_fraction_lower": 0.00251176231578266,
+          "energy_fraction_upper": 0.002523598915761805
+        },
+        "0.0001": {
+          "energy_fraction_lower": 0.017077597328279043,
+          "energy_fraction_upper": 0.017234224510755812
+        },
+        "0.001": {
+          "energy_fraction_lower": 0.131327296963704,
+          "energy_fraction_upper": 0.13184285765116865
+        },
+        "0.01": {
+          "energy_fraction_lower": 0.7771012733834084,
+          "energy_fraction_upper": 0.777359147286026
+        },
+        "0.1": {
+          "energy_fraction_lower": 0.9992863170049002,
+          "energy_fraction_upper": 0.9992889862456955
+        },
+        "0.5": {
+          "energy_fraction_lower": 1.0,
+          "energy_fraction_upper": 1.0
+        },
+        "1.0": {
+          "energy_fraction_lower": 1.0,
+          "energy_fraction_upper": 1.0
+        }
+      }
+    },
+    {
+      "group": "collaborator-attack",
+      "precision": "raw",
+      "measure": "plane",
+      "source_view": "collaborator-attack-raw-plane",
+      "saved_steps": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        48,
+        64,
+        96,
+        128,
+        256,
+        512,
+        1000
+      ],
+      "module_shares": {
+        "embedding": 0.007978506686153738,
+        "attention": 0.050485592910891684,
+        "mlp": 0.2354796701131759,
+        "norm": 0.00820059092526604,
+        "output_head": 0.6978556393645126
+      },
+      "dimensions": 2,
+      "energy": 2.0000000001420473,
+      "coordinates": 7241732096,
+      "nonzero_coordinates": 1052773734,
+      "nonzero_fraction": 0.1453759570284993,
+      "effective_support_fraction": 0.015451299249136944,
+      "energy_targets": {
+        "0.5": {
+          "coordinate_fraction_lower": 0.006823146361254179,
+          "coordinate_fraction_upper": 0.006824948968672812
+        },
+        "0.9": {
+          "coordinate_fraction_lower": 0.023927261006480623,
+          "coordinate_fraction_upper": 0.023950415135600176
+        },
+        "0.99": {
+          "coordinate_fraction_lower": 0.0708803743628574,
+          "coordinate_fraction_upper": 0.07100218140961176
+        },
+        "0.999": {
+          "coordinate_fraction_lower": 0.1266545998721243,
+          "coordinate_fraction_upper": 0.12866674169217981
+        }
+      },
+      "top_fractions": {
+        "1e-06": {
+          "energy_fraction_lower": 0.002267970317265165,
+          "energy_fraction_upper": 0.002269470191443477
+        },
+        "1e-05": {
+          "energy_fraction_lower": 0.007087695985725076,
+          "energy_fraction_upper": 0.007098334802261053
+        },
+        "0.0001": {
+          "energy_fraction_lower": 0.02975856324352,
+          "energy_fraction_upper": 0.029792660971971013
+        },
+        "0.001": {
+          "energy_fraction_lower": 0.14048907252749357,
+          "energy_fraction_upper": 0.1405457939625344
+        },
+        "0.01": {
+          "energy_fraction_lower": 0.6342023598143786,
+          "energy_fraction_upper": 0.6343065383203931
+        },
+        "0.1": {
+          "energy_fraction_lower": 0.99636677684263,
+          "energy_fraction_upper": 0.9964100250644533
+        },
+        "0.5": {
+          "energy_fraction_lower": 1.0,
+          "energy_fraction_upper": 1.0
+        },
+        "1.0": {
+          "energy_fraction_lower": 1.0,
+          "energy_fraction_upper": 1.0
+        }
+      }
+    },
+    {
+      "group": "collaborator-attack",
+      "precision": "evaluated",
+      "measure": "endpoint",
+      "source_view": "attack-1000-evaluated-displacement",
+      "saved_steps": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        48,
+        64,
+        96,
+        128,
+        256,
+        512,
+        1000
+      ],
+      "module_shares": {
+        "embedding": 0.0014326947710577315,
+        "attention": 0.018959293544925582,
+        "mlp": 0.1054450069765729,
+        "norm": 1.3425780474651856e-06,
+        "output_head": 0.8741616621293964
+      },
+      "dimensions": 1,
+      "energy": 7.885932803923983,
+      "coordinates": 7241732096,
+      "nonzero_coordinates": 1005642902,
+      "nonzero_fraction": 0.13886773062973026,
+      "effective_support_fraction": 0.01253541910931271,
+      "energy_targets": {
+        "0.5": {
+          "coordinate_fraction_lower": 0.004584183253387229,
+          "coordinate_fraction_upper": 0.004594185280394001
+        },
+        "0.9": {
+          "coordinate_fraction_lower": 0.012844096932469566,
+          "coordinate_fraction_upper": 0.012863953507953687
+        },
+        "0.99": {
+          "coordinate_fraction_lower": 0.029533106605549857,
+          "coordinate_fraction_upper": 0.02953674675678033
+        },
+        "0.999": {
+          "coordinate_fraction_lower": 0.057590644678827956,
+          "coordinate_fraction_upper": 0.05759814937511878
+        }
+      },
+      "top_fractions": {
+        "1e-06": {
+          "energy_fraction_lower": 0.00027837230698425354,
+          "energy_fraction_upper": 0.0002812918369282137
+        },
+        "1e-05": {
+          "energy_fraction_lower": 0.0023679903626437353,
+          "energy_fraction_upper": 0.0023944818607803554
+        },
+        "0.0001": {
+          "energy_fraction_lower": 0.018475214846809543,
+          "energy_fraction_upper": 0.018657324748123757
+        },
+        "0.001": {
+          "energy_fraction_lower": 0.14400577644141097,
+          "energy_fraction_upper": 0.1451596383423162
+        },
+        "0.01": {
+          "energy_fraction_lower": 0.8158704924366295,
+          "energy_fraction_upper": 0.8159762517157332
+        },
+        "0.1": {
+          "energy_fraction_lower": 0.9998805361084514,
+          "energy_fraction_upper": 0.999882395046977
+        },
+        "0.5": {
+          "energy_fraction_lower": 1.0,
+          "energy_fraction_upper": 1.0
+        },
+        "1.0": {
+          "energy_fraction_lower": 1.0,
+          "energy_fraction_upper": 1.0
+        }
+      }
+    },
+    {
+      "group": "collaborator-attack",
+      "precision": "evaluated",
+      "measure": "trajectory",
+      "source_view": null,
+      "saved_steps": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        48,
+        64,
+        96,
+        128,
+        256,
+        512,
+        1000
+      ],
+      "module_shares": {
+        "embedding": 0.0015157933123201303,
+        "attention": 0.023511358748111576,
+        "mlp": 0.12767121771170406,
+        "norm": 1.0557209153121974e-06,
+        "output_head": 0.8473005745069491
+      },
+      "energy": 19.88817472650432,
+      "coordinates": 7241732096,
+      "nonzero_coordinates": 1025884407,
+      "nonzero_fraction": 0.14166284990943692,
+      "effective_support_fraction": 0.013944401293361058,
+      "energy_targets": {
+        "0.5": {
+          "coordinate_fraction_lower": 0.005095522246726317,
+          "coordinate_fraction_upper": 0.005110276866005732
+        },
+        "0.9": {
+          "coordinate_fraction_lower": 0.014294958668407498,
+          "coordinate_fraction_upper": 0.014304155501308398
+        },
+        "0.99": {
+          "coordinate_fraction_lower": 0.04085408602223995,
+          "coordinate_fraction_upper": 0.04089038880125952
+        },
+        "0.999": {
+          "coordinate_fraction_lower": 0.08773663822097845,
+          "coordinate_fraction_upper": 0.08775993333846743
+        }
+      },
+      "top_fractions": {
+        "1e-06": {
+          "energy_fraction_lower": 0.0002508742044640274,
+          "energy_fraction_upper": 0.0002534484338961102
+        },
+        "1e-05": {
+          "energy_fraction_lower": 0.0021221123758828554,
+          "energy_fraction_upper": 0.0021307142075581544
+        },
+        "0.0001": {
+          "energy_fraction_lower": 0.016390768475200233,
+          "energy_fraction_upper": 0.01665568064692839
+        },
+        "0.001": {
+          "energy_fraction_lower": 0.13026931742129938,
+          "energy_fraction_upper": 0.13096102658573025
+        },
+        "0.01": {
+          "energy_fraction_lower": 0.7777397164745731,
+          "energy_fraction_upper": 0.7779759225253199
+        },
+        "0.1": {
+          "energy_fraction_lower": 0.9993296212276355,
+          "energy_fraction_upper": 0.999332868499548
+        },
+        "0.5": {
+          "energy_fraction_lower": 1.0,
+          "energy_fraction_upper": 1.0
+        },
+        "1.0": {
+          "energy_fraction_lower": 1.0,
+          "energy_fraction_upper": 1.0
+        }
+      }
+    }
+  ],
+  "trajectory_definition": "Sum of squared displacements from phase start over ALL listed saves; each save has weight one. No PCA truncation, no whitening, no checkpoint-spacing correction; not adjacent-update energy.",
+  "endpoint_definition": "Squared final-minus-start parameter displacement.",
+  "plane_definition": "Equal energy for each orthonormal fitted axis; source histogram sums both axes, with normalization cancelling that factor of two.",
+  "precision_note": "Raw uses native saved values. Evaluated casts each checkpoint and anchor separately to BF16 before subtraction. Explicit plane_views map source-plane precision."
+}

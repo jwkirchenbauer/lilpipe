@@ -118,6 +118,154 @@ def test_temporal_rank_and_coordinate_support_are_distinct():
     assert np.count_nonzero(sparse_rank_two) / sparse_rank_two.size == 0.25
 
 
+def test_saved_displacement_energy_preserves_magnitudes_and_excursions():
+    import torch
+
+    # The final checkpoint has returned to coordinate zero, after a large excursion.
+    # An unrelated phase in row 3 must not contribute to this trajectory.
+    snapshots = torch.tensor(
+        [[3.0, 0.0, 0.0], [3.0, 1.0, 0.0], [0.0, 2.0, 0.0], [0.0, 0.0, 100.0]],
+        dtype=torch.float64,
+    )
+    trajectory = BASIS.displacement_energy(snapshots, [0, 1, 2]).numpy()
+    endpoint = BASIS.displacement_energy(snapshots, [2]).numpy()
+    np.testing.assert_array_equal(trajectory, [18.0, 5.0, 0.0])
+    np.testing.assert_array_equal(endpoint, [0.0, 4.0, 0.0])
+    assert math.isclose(trajectory.sum(), np.trace((snapshots @ snapshots.T)[:3, :3]))
+    # Scaling the dominant excursion changes path weighting, but not its span.
+    scaled = snapshots.clone()
+    scaled[0] *= 10
+    np.testing.assert_array_equal(
+        BASIS.displacement_energy(scaled, [0, 1, 2]).numpy(), [909.0, 5.0, 0.0]
+    )
+
+
+def test_displacement_energy_casts_endpoints_before_subtraction():
+    import torch
+
+    anchor = torch.tensor([[1.0, 1.0]], dtype=torch.float64)
+    saved = torch.tensor([[1.001, 1.01], [1.002, 1.02]], dtype=torch.float64)
+    raw = saved - anchor
+    evaluated = saved.to(torch.bfloat16).double() - anchor.to(torch.bfloat16).double()
+    assert BASIS.displacement_energy(raw, [0, 1])[0] > 0
+    assert BASIS.displacement_energy(evaluated, [0, 1])[0] == 0
+    np.testing.assert_array_equal(
+        BASIS.displacement_energy(evaluated, [0, 1]).numpy(),
+        np.square(evaluated.numpy()).sum(axis=0),
+    )
+
+
+def test_concentration_comparison_aggregates_dense_trajectory_and_endpoint(
+    tmp_path, monkeypatch
+):
+    import contextlib
+    import csv
+
+    import torch
+
+    folder = tmp_path / "case"
+    folder.mkdir()
+    anchor = torch.zeros(4, dtype=torch.float64)
+    raw = torch.tensor(
+        [[1.0, 1.0, 0.0, 0.0], [2.0, 1.0, 1.0, 0.0], [1.0, 0.0, 2.0, 0.0]],
+        dtype=torch.float64,
+    )
+    evaluated = raw.to(torch.bfloat16).double()
+    snapshots = [
+        {"name": f"save-{step}", "step": step, "anchor": "anchor", "path": f"p{step}"}
+        for step in (1, 2, 4)
+    ]
+    job = {
+        "layout": str(folder / "layout.json"),
+        "snapshots": snapshots,
+        "groups": [{"name": "attack", "indices": [0, 1, 2]}],
+    }
+    (folder / "job.json").write_text(json.dumps(job))
+    original_declaration = {"job": job, "files": []}
+    (folder / "input-identity.json").write_text(
+        json.dumps({"declaration": original_declaration})
+    )
+    (folder / "layout.json").write_text(
+        json.dumps({"names": ["weight"], "shapes": {"weight": [4]}, "parameters": 4})
+    )
+    (folder / "gram.npz").write_bytes(b"fixture")
+
+    edges = np.logspace(-100, 100, 8193)
+
+    def histogram(values):
+        energy = np.square(values).sum(axis=0)
+        positive = energy[energy > 0]
+        bins = np.floor((np.log10(positive) + 100) * (8192 / 200)).astype(int)
+        counts = np.bincount(bins, minlength=8192)
+        masses = np.bincount(bins, weights=positive, minlength=8192)
+        summary = BASIS.concentration(counts, masses, edges, 4, float(energy @ energy))
+        return counts, masses, summary
+
+    endpoint_data = {}
+    view_names = []
+    all_counts, all_masses = [], []
+    rows = []
+    for precision, values in (("raw", raw.numpy()), ("evaluated", evaluated.numpy())):
+        name = f"save-4-{precision}-displacement"
+        counts, masses, summary = histogram(values[-1:])
+        endpoint_data[name] = summary
+        view_names.append(name)
+        all_counts.append(counts)
+        all_masses.append(masses)
+        rows.append({"view": name, "category": "mlp", "energy": summary["energy"]})
+    (folder / "concentration.json").write_text(json.dumps({"views": endpoint_data}))
+    np.savez(
+        folder / "coordinate-histograms.npz",
+        names=np.array(view_names),
+        counts=np.array(all_counts),
+        masses=np.array(all_masses),
+    )
+    with (folder / "parameter-structure.csv").open("w", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=("view", "category", "energy"))
+        writer.writeheader()
+        writer.writerows(rows)
+
+    monkeypatch.setattr(
+        BASIS,
+        "identity",
+        lambda current: ("signature", {"job": current, "files": []}),
+    )
+    monkeypatch.setattr(BASIS, "classify_parameter", lambda name: ("mlp",))
+    monkeypatch.setattr(BASIS, "plot_concentration_comparison", lambda *args: None)
+
+    @contextlib.contextmanager
+    def synthetic_blocks(current, layout, start_parameter=0, include_external=True):
+        assert start_parameter == 0
+        yield iter([(0, "weight", 0, 4, 4, raw, evaluated, {})])
+
+    monkeypatch.setattr(BASIS, "blocks", synthetic_blocks)
+    BASIS.concentration_comparison(folder, job)
+
+    result = json.loads(
+        (folder / "displacement-concentration/results.json").read_text()
+    )
+    raw_trajectory = next(
+        row
+        for row in result["records"]
+        if row["precision"] == "raw" and row["measure"] == "trajectory"
+    )
+    direct = np.square(raw.numpy()).sum(axis=0)
+    ordered = np.sort(direct)[::-1]
+    exact = int(np.searchsorted(np.cumsum(ordered), 0.9 * ordered.sum()) + 1) / 4
+    bounds = raw_trajectory["energy_targets"]["0.9"]
+    assert raw_trajectory["nonzero_coordinates"] == int(np.count_nonzero(direct))
+    assert bounds["coordinate_fraction_lower"] <= exact
+    assert exact <= bounds["coordinate_fraction_upper"]
+    assert bounds["coordinate_fraction_upper"] <= 1
+    validation = json.loads(
+        (folder / "displacement-concentration/validation.json").read_text()
+    )["checks"]
+    assert all(
+        item["endpoint_expected_energy"] == item["endpoint_scanned_energy"]
+        for item in validation
+    )
+
+
 def test_fp32_plane_energy_is_invariant_to_rotation_within_plane():
     # Rows are sampled snapshots; columns 0 and 2 form the restricted parameter block.
     deltas = np.array(

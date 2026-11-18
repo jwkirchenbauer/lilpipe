@@ -1,0 +1,42 @@
+[
+  {
+    "case": "local-defense-attack",
+    "run_name": "tar-concentration-local",
+    "job_id": "f3ktL1tmKA4X",
+    "bank": "verival",
+    "queue": "pdebug",
+    "minutes": 55,
+    "nodes": 1,
+    "tasks_per_node": 1,
+    "analysis_gpus": 1,
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+    "stage": "concentration_comparison",
+    "source": "source/concentration-v1",
+    "case_configuration": "cases/local-defense-attack/displacement-concentration/job.json",
+    "launch_script": "launches/tar-concentration-local/launch.sh",
+    "runner_script": "launches/tar-concentration-local/subrunner.sh",
+    "state": "complete",
+    "validation": "passed",
+    "worker_flux_job_id": "fWekdu1"
+  },
+  {
+    "case": "collaborator-attack",
+    "run_name": "tar-concentration-collaborator",
+    "job_id": "f3ktL8wFsGdD",
+    "bank": "verival",
+    "queue": "pdebug",
+    "minutes": 55,
+    "nodes": 1,
+    "tasks_per_node": 1,
+    "analysis_gpus": 1,
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2",
+    "stage": "concentration_comparison",
+    "source": "source/concentration-v1",
+    "case_configuration": "cases/collaborator-attack/displacement-concentration/job.json",
+    "launch_script": "launches/tar-concentration-collaborator/launch.sh",
+    "runner_script": "launches/tar-concentration-collaborator/subrunner.sh",
+    "state": "complete",
+    "validation": "passed",
+    "worker_flux_job_id": "fVoq3bd"
+  }
+]

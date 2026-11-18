@@ -1,0 +1,21 @@
+{
+  "state": "passed",
+  "checks": [
+    {
+      "group": "collaborator-attack",
+      "precision": "raw",
+      "endpoint_expected_energy": 7.890981143020239,
+      "endpoint_scanned_energy": 7.890981143020708,
+      "trajectory_expected_energy": 19.968653607883482,
+      "trajectory_scanned_energy": 19.96865360788694
+    },
+    {
+      "group": "collaborator-attack",
+      "precision": "evaluated",
+      "endpoint_expected_energy": 7.885932803923983,
+      "endpoint_scanned_energy": 7.885932803923985,
+      "trajectory_expected_energy": null,
+      "trajectory_scanned_energy": 19.88817472650432
+    }
+  ]
+}

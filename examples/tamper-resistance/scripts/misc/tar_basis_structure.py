@@ -301,6 +301,12 @@ def blocks(job, layout, start_parameter=0, include_external=True):
                     folder: reader.tensor(name).reshape(-1)
                     for folder, reader in readers.items()
                 }
+                if job.get("materialize_cpu"):
+                    # Own each native CPU buffer before transferring its chunks.
+                    # Transfers directly from fresh ROCm mmap storage are very slow.
+                    tensors = {
+                        folder: tensor.clone() for folder, tensor in tensors.items()
+                    }
                 if any(tensor.numel() != count for tensor in tensors.values()):
                     raise ValueError("Parameter shape differs")
                 dtypes = {
@@ -802,6 +808,358 @@ def structure(folder, job):
     publish(folder / "status/structure.json", {"state": "complete"})
 
 
+def displacement_energy(vectors, indices):
+    """Sum squared phase-start displacements, without PCA or axis whitening."""
+    energy = vectors[0].new_zeros(vectors.shape[1])
+    for index in indices:
+        energy.addcmul_(vectors[index], vectors[index])
+    return energy
+
+
+def concentration_comparison(folder, job):
+    """Add full sampled-path concentration, reusing original endpoint/plane scans."""
+    import torch
+
+    output = folder / "displacement-concentration"
+    output.mkdir(exist_ok=True)
+    original_job = read(folder / "job.json")
+    _, original_inputs = identity(original_job)
+    prior = read(folder / "input-identity.json")["declaration"]
+    for key in ("job", "files"):
+        if original_inputs[key] != prior[key]:
+            raise ValueError(f"Original analysis inputs changed: {key}")
+    signature, declaration = identity(job)
+    dependencies = {
+        name: hashlib.sha256((folder / name).read_bytes()).hexdigest()
+        for name in (
+            "concentration.json",
+            "coordinate-histograms.npz",
+            "parameter-structure.csv",
+            "gram.npz",
+        )
+    }
+    signature = hashlib.sha256(
+        json.dumps([signature, dependencies], sort_keys=True).encode()
+    ).hexdigest()
+    publish(
+        output / "input-identity.json",
+        {
+            "signature": signature,
+            "declaration": declaration,
+            "dependencies": dependencies,
+        },
+    )
+    groups = job["groups"]
+    views = [
+        (group, precision) for group in groups for precision in ("raw", "evaluated")
+    ]
+    for group in groups:
+        indices = group["indices"]
+        snapshots = [job["snapshots"][i] for i in indices]
+        if not indices or len(set(indices)) != len(indices):
+            raise ValueError("A trajectory needs unique saved indices")
+        if len({item["anchor"] for item in snapshots}) != 1:
+            raise ValueError("Trajectory snapshots must share a phase-start anchor")
+        steps = [item["step"] for item in snapshots]
+        if steps != sorted(set(steps)):
+            raise ValueError("Trajectory saves must have distinct increasing steps")
+        endpoint = snapshots[-1]
+        original_endpoint = next(
+            item
+            for item in original_job["snapshots"]
+            if item["name"] == endpoint["name"]
+        )
+        for key in ("anchor", "path", "step"):
+            if endpoint[key] != original_endpoint[key]:
+                raise ValueError("Reused endpoint belongs to a different trajectory")
+    layout = read(job["layout"])
+    edges = np.logspace(-100, 100, 8193)
+    cache = output / "cache"
+    cache.mkdir(exist_ok=True)
+    completed = 0
+    while (cache / f"{completed:03}.npz").exists():
+        with np.load(cache / f"{completed:03}.npz") as data:
+            if str(data["signature"]) != signature:
+                raise ValueError("Displacement concentration cache identity changed")
+        completed += 1
+    current = None
+    with blocks(job, layout, completed, include_external=False) as iterator:
+        for index, name, start, stop, count, raw, evaluated, _ in iterator:
+            if current != name:
+                current = name
+                counts = np.zeros((len(views), 8192), dtype=np.int64)
+                masses = np.zeros((len(views), 8192))
+                fourth = np.zeros(len(views))
+                endpoint_energy = np.zeros(len(views))
+            for j, (group, precision) in enumerate(views):
+                vectors = raw if precision == "raw" else evaluated
+                energy = displacement_energy(vectors, group["indices"])
+                if not torch.isfinite(energy).all():
+                    raise ValueError("Nonfinite saved-displacement energy")
+                positive = energy[energy > 0]
+                if len(positive):
+                    bins = torch.floor(
+                        (torch.log10(positive) + 100) * (8192 / 200)
+                    ).long()
+                    if bins.min() < 0 or bins.max() >= 8192:
+                        raise ValueError("Energy histogram range exceeded")
+                    counts[j] += torch.bincount(bins, minlength=8192).cpu().numpy()
+                    masses[j] += (
+                        torch.bincount(bins, weights=positive, minlength=8192)
+                        .cpu()
+                        .numpy()
+                    )
+                fourth[j] += float(energy.square().sum())
+                endpoint_energy[j] += float(
+                    vectors[group["indices"][-1]].square().sum()
+                )
+            if stop == count:
+                save_npz(
+                    cache / f"{index:03}.npz",
+                    counts=counts,
+                    masses=masses,
+                    fourth=fourth,
+                    endpoint_energy=endpoint_energy,
+                    signature=np.array(signature),
+                )
+                publish(
+                    output / "status/concentration_comparison.json",
+                    {
+                        "state": "running",
+                        "completed_parameters": index + 1,
+                    },
+                )
+                print("Displacement concentration", index + 1, name, flush=True)
+    all_counts = np.zeros((len(views), 8192), dtype=np.int64)
+    all_masses = np.zeros((len(views), 8192))
+    all_fourth, all_endpoint = np.zeros(len(views)), np.zeros(len(views))
+    module_energy = [{} for _ in views]
+    for index, name in enumerate(layout["names"]):
+        category = classify_parameter(name)[0]
+        with np.load(cache / f"{index:03}.npz") as data:
+            all_counts += data["counts"]
+            all_masses += data["masses"]
+            all_fourth += data["fourth"]
+            all_endpoint += data["endpoint_energy"]
+            for j in range(len(views)):
+                module_energy[j][category] = module_energy[j].get(category, 0) + float(
+                    data["masses"][j].sum()
+                )
+    original = read(folder / "concentration.json")["views"]
+    with (folder / "parameter-structure.csv").open() as stream:
+        parameter_rows = list(csv.DictReader(stream))
+    with np.load(folder / "coordinate-histograms.npz") as data:
+        original_histograms = {
+            key: data[key].copy() for key in ("names", "counts", "masses")
+        }
+    records, histogram_counts, histogram_masses, validations = [], [], [], []
+    for j, (group, precision) in enumerate(views):
+        endpoint_name = job["snapshots"][group["indices"][-1]]["name"]
+        endpoint_view = f"{endpoint_name}-{precision}-displacement"
+        expected_endpoint = original[endpoint_view]["energy"]
+        np.testing.assert_allclose(
+            all_endpoint[j], expected_endpoint, rtol=2e-6, atol=1e-12
+        )
+        trajectory = concentration(
+            all_counts[j], all_masses[j], edges, layout["parameters"], all_fourth[j]
+        )
+        expected = group.get("expected_energy", {}).get(precision)
+        if expected is not None:
+            np.testing.assert_allclose(
+                trajectory["energy"], expected, rtol=2e-6, atol=1e-12
+            )
+        validations.append(
+            {
+                "group": group["name"],
+                "precision": precision,
+                "endpoint_expected_energy": expected_endpoint,
+                "endpoint_scanned_energy": float(all_endpoint[j]),
+                "trajectory_expected_energy": expected,
+                "trajectory_scanned_energy": trajectory["energy"],
+            }
+        )
+        definitions = [("endpoint", endpoint_view), ("trajectory", None)]
+        plane_view = group.get("plane_views", {}).get(precision)
+        if plane_view:
+            definitions.append(("plane", plane_view))
+        for measure, source in definitions:
+            if source:
+                summary = original[source]
+                position = list(original_histograms["names"]).index(source)
+                counts = original_histograms["counts"][position]
+                masses = original_histograms["masses"][position]
+                modules = {}
+                for row in parameter_rows:
+                    if row["view"] == source:
+                        modules[row["category"]] = modules.get(
+                            row["category"], 0
+                        ) + float(row["energy"])
+            else:
+                summary, counts, masses, modules = (
+                    trajectory,
+                    all_counts[j],
+                    all_masses[j],
+                    module_energy[j],
+                )
+            module_total = sum(modules.values())
+            np.testing.assert_allclose(
+                module_total, summary["energy"], rtol=2e-6, atol=1e-12
+            )
+            records.append(
+                {
+                    "group": group["name"],
+                    "precision": precision,
+                    "measure": measure,
+                    "source_view": source,
+                    "saved_steps": [
+                        job["snapshots"][i]["step"] for i in group["indices"]
+                    ],
+                    "module_shares": {
+                        key: value / module_total for key, value in modules.items()
+                    },
+                    **summary,
+                    # The source external plane can have a different legacy precision label.
+                    "precision": precision,
+                }
+            )
+            histogram_counts.append(counts)
+            histogram_masses.append(masses)
+    publish(
+        output / "results.json",
+        {
+            "state": "complete",
+            "records": records,
+            "trajectory_definition": "Sum of squared displacements from phase start over ALL listed saves; each save has weight one. No PCA truncation, no whitening, no checkpoint-spacing correction; not adjacent-update energy.",
+            "endpoint_definition": "Squared final-minus-start parameter displacement.",
+            "plane_definition": "Equal energy for each orthonormal fitted axis; source histogram sums both axes, with normalization cancelling that factor of two.",
+            "precision_note": "Raw uses native saved values. Evaluated casts each checkpoint and anchor separately to BF16 before subtraction. Explicit plane_views map source-plane precision.",
+        },
+    )
+    save_npz(
+        output / "coordinate-histograms.npz",
+        edges=edges,
+        counts=np.array(histogram_counts),
+        masses=np.array(histogram_masses),
+    )
+    write_csv(
+        output / "summary.csv",
+        [
+            {
+                "group": record["group"],
+                "precision": record["precision"],
+                "measure": record["measure"],
+                "coordinates_for_90pct_lower": record["energy_targets"]["0.9"][
+                    "coordinate_fraction_lower"
+                ],
+                "coordinates_for_90pct_upper": record["energy_targets"]["0.9"][
+                    "coordinate_fraction_upper"
+                ],
+                "nonzero_fraction": record["nonzero_fraction"],
+                **{
+                    f"{key}_share": record["module_shares"].get(key, 0)
+                    for key in (
+                        "mlp",
+                        "attention",
+                        "output_head",
+                        "embedding",
+                        "norm",
+                        "other",
+                    )
+                },
+            }
+            for record in records
+        ],
+    )
+    publish(output / "validation.json", {"state": "passed", "checks": validations})
+    plot_concentration_comparison(
+        output, groups, records, histogram_counts, histogram_masses
+    )
+    publish(output / "status/concentration_comparison.json", {"state": "complete"})
+
+
+def plot_concentration_comparison(output, groups, records, counts, masses):
+    import matplotlib.pyplot as plt
+
+    labels = {
+        "endpoint": "Endpoint delta",
+        "trajectory": "All saved displacements",
+        "plane": "Equal-axis fitted plane",
+    }
+    colors = {"endpoint": "#2166ac", "trajectory": "#d6604d", "plane": "#4d9221"}
+    categories = ("mlp", "attention", "output_head", "embedding", "norm")
+    for kind in ("coordinate", "module"):
+        fig, axes = plt.subplots(
+            2,
+            len(groups),
+            figsize=(6 * len(groups), 8),
+            squeeze=False,
+            constrained_layout=True,
+        )
+        for column, group in enumerate(groups):
+            for row, precision in enumerate(("raw", "evaluated")):
+                axis = axes[row, column]
+                for j, record in enumerate(records):
+                    if (
+                        record["group"] != group["name"]
+                        or record["precision"] != precision
+                    ):
+                        continue
+                    measure = record["measure"]
+                    if kind == "coordinate":
+                        valid = np.asarray(counts[j])[::-1] > 0
+                        xx = (
+                            np.cumsum(np.asarray(counts[j])[::-1])[valid]
+                            / record["coordinates"]
+                        )
+                        yy = (
+                            np.cumsum(np.asarray(masses[j])[::-1])[valid]
+                            / record["energy"]
+                        )
+                        axis.plot(xx, yy, color=colors[measure], label=labels[measure])
+                    else:
+                        offset = {"endpoint": -0.25, "trajectory": 0, "plane": 0.25}[
+                            measure
+                        ]
+                        axis.bar(
+                            np.arange(len(categories)) + offset,
+                            [
+                                100 * record["module_shares"].get(category, 0)
+                                for category in categories
+                            ],
+                            width=0.24,
+                            color=colors[measure],
+                            label=labels[measure],
+                        )
+                precision_label = (
+                    "Saved weights"
+                    if precision == "raw"
+                    else "BF16 before differencing"
+                )
+                axis.set_title(f"{group['name']} — {precision_label}")
+                if kind == "coordinate":
+                    axis.set(
+                        xscale="log",
+                        xlim=(1e-6, 1),
+                        ylim=(0, 1.02),
+                        xlabel="Fraction of highest-energy parameter coordinates",
+                        ylabel="Fraction of squared-coordinate energy",
+                    )
+                    axis.axhline(0.9, color="0.6", linestyle=":", linewidth=1)
+                else:
+                    axis.set_xticks(
+                        np.arange(len(categories)),
+                        ["MLP", "Attention", "Head", "Embedding", "Norm"],
+                    )
+                    axis.set(
+                        ylabel="Share of squared-coordinate energy (%)", ylim=(0, 100)
+                    )
+                axis.grid(alpha=0.2, axis="y")
+                axis.legend(fontsize=8)
+        fig.savefig(output / f"{kind}-comparison.png", dpi=160)
+        fig.savefig(output / f"{kind}-comparison.pdf")
+        plt.close(fig)
+
+
 def token_frequencies(path, vocabulary, role=None):
     counts = {
         key: np.zeros(vocabulary, dtype=np.int64)
@@ -1196,7 +1554,10 @@ def report(folder, job):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("stage", choices=("scan", "structure", "report", "run"))
+    parser.add_argument(
+        "stage",
+        choices=("scan", "structure", "report", "run", "concentration_comparison"),
+    )
     parser.add_argument("folder", type=Path)
     args = parser.parse_args()
     if not os.environ.get("FLUX_JOB_ID"):
@@ -1209,8 +1570,13 @@ def main():
         raise ValueError("Expose exactly one analysis GPU")
     folder = args.folder.resolve()
     job = read(folder / "job.json")
-    (folder / "status").mkdir(exist_ok=True)
-    publish(folder / "status/analysis.json", {"state": "running"})
+    if args.stage == "concentration_comparison":
+        output = folder / "displacement-concentration"
+        job = read(output / "job.json")
+    else:
+        output = folder
+    (output / "status").mkdir(exist_ok=True)
+    publish(output / "status/analysis.json", {"state": "running"})
     smoke_values = torch.tensor(
         [0.25, 1.0, 4.0, 1.0], dtype=torch.float64, device="cuda:0"
     )
@@ -1225,7 +1591,7 @@ def main():
         np.array([[18.0625, -18.0625], [-18.0625, 18.0625]]),
     )
     publish(
-        folder / "gpu-preflight.json",
+        output / "gpu-preflight.json",
         {
             "state": "passed",
             "fp64_gram": True,
@@ -1234,7 +1600,7 @@ def main():
         },
     )
     publish(
-        folder / "environment.json",
+        output / "environment.json",
         {
             "python": sys.version,
             "torch": torch.__version__,
@@ -1254,7 +1620,7 @@ def main():
     )
     stages = ("scan", "structure", "report") if args.stage == "run" else (args.stage,)
     for stage in stages:
-        marker = folder / "status" / (stage + ".json")
+        marker = output / "status" / (stage + ".json")
         if (
             marker.exists()
             and read(marker).get("state") == "complete"
@@ -1268,7 +1634,7 @@ def main():
         except Exception as error:
             publish(marker, {"state": "failed", "error": repr(error)})
             raise
-    publish(folder / "status/analysis.json", {"state": "complete"})
+    publish(output / "status/analysis.json", {"state": "complete"})
 
 
 if __name__ == "__main__":

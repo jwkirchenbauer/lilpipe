@@ -1,0 +1,10 @@
+bash: cannot set terminal process group (4154873): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+      f3ktL8wFsGdD    pdebug tar-conc kirchenb  S      00:00      1 
+      f3ktL1tmKA4X    pdebug tar-conc kirchenb  R      00:16      1 tuolumne1012
+Removing existing launch file: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/launches/tar-concentration-collaborator/launch.sh
+Removing existing runner file: /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/launches/tar-concentration-collaborator/subrunner.sh
+Submission: flux batch -q pdebug --bank=verival --job-name=tar-concentration-collaborator -t55 -N1 -n1 -g1 -c96 -ofastload -o mpibind=off --label-io --exclusive --unbuffered /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-structure/20261116T2200Z/launches/tar-concentration-collaborator/launch.sh
+Launched job_id=f3ktL8wFsGdD.

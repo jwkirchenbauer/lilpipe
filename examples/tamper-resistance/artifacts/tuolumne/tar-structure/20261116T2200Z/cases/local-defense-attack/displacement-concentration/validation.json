@@ -1,0 +1,37 @@
+{
+  "state": "passed",
+  "checks": [
+    {
+      "group": "local-defense",
+      "precision": "raw",
+      "endpoint_expected_energy": 3.685407369704623,
+      "endpoint_scanned_energy": 3.6854073697046372,
+      "trajectory_expected_energy": 13.081888869758156,
+      "trajectory_scanned_energy": 13.081888869758204
+    },
+    {
+      "group": "local-defense",
+      "precision": "evaluated",
+      "endpoint_expected_energy": 3.6929988731325145,
+      "endpoint_scanned_energy": 3.692998873132515,
+      "trajectory_expected_energy": 13.114461008981838,
+      "trajectory_scanned_energy": 13.114461008981833
+    },
+    {
+      "group": "local-attack",
+      "precision": "raw",
+      "endpoint_expected_energy": 0.8825648631136346,
+      "endpoint_scanned_energy": 0.8825648631136362,
+      "trajectory_expected_energy": 4.502149041814537,
+      "trajectory_scanned_energy": 4.502149041814549
+    },
+    {
+      "group": "local-attack",
+      "precision": "evaluated",
+      "endpoint_expected_energy": 0.8812260804289167,
+      "endpoint_scanned_energy": 0.8812260804289169,
+      "trajectory_expected_energy": 4.4523324585547766,
+      "trajectory_scanned_energy": 4.4523324585547766
+    }
+  ]
+}

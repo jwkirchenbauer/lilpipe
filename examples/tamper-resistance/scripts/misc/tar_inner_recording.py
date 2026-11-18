@@ -96,12 +96,16 @@ class TransientInnerRecorder:
         spec_path=None,
         reduction_device="cpu",
         build_device="cpu",
+        materialize_references=False,
     ):
         self.root = Path(root)
         self.inner_steps = tuple(inner_steps)
         self.references = references
         self.chunk_elements = chunk_elements
         self.spec_path = spec_path
+        if not isinstance(materialize_references, bool):
+            raise ValueError("materialize_references must be a boolean")
+        self.materialize_references = materialize_references
         self.reduction_device = torch.device(reduction_device)
         if self.reduction_device.type not in {"cpu", "cuda"}:
             raise ValueError("Inner Gram reduction requires a CPU or CUDA/ROCm device")
@@ -228,6 +232,7 @@ class TransientInnerRecorder:
             "coordinates": sum(t.numel() for t in anchor.values()),
             "reduction_device": str(self.reduction_device),
             "build_device": str(self.build_device),
+            "materialize_references": self.materialize_references,
             "chunk_elements": self.chunk_elements,
             "representations": representations,
             "families": families,
@@ -278,6 +283,13 @@ class TransientInnerRecorder:
             matrices[rep].addmm_(block, block.T)
             del block, updates
 
+    def _reference_parameters(self, readers, name):
+        values = {path: reader.tensor(name) for path, reader in readers.items()}
+        if self.materialize_references:
+            for path in values:
+                values[path] = values[path].clone(memory_format=torch.contiguous_format)
+        return values
+
     def _grams(self, anchor, endpoints, outer_call):
         rows = len(endpoints) + len(self.references)
         matrices = {
@@ -303,6 +315,11 @@ class TransientInnerRecorder:
         files = {}
         with ExitStack() as stack:
             readers = {path: WeightReader(path, stack) for path in paths}
+            transfer_stream = None
+            if self.materialize_references and self.build_device.type == "cuda":
+                transfer_stream = torch.cuda.current_stream(self.build_device)
+                # An interrupted parameter may still have host-to-device copies in flight.
+                stack.callback(transfer_stream.synchronize)
             for folder, reader in readers.items():
                 sources = set(reader.handles)
                 if reader.mapping is not None:
@@ -322,7 +339,7 @@ class TransientInnerRecorder:
                     }
                     coordinates[family] = 0
                 coordinates[family] += initial.numel()
-                saved = {path: reader.tensor(name) for path, reader in readers.items()}
+                saved = self._reference_parameters(readers, name)
                 observed = [values[name] for values in endpoints.values()]
                 if any(t.shape != initial.shape for t in (*observed, *saved.values())):
                     raise ValueError(f"Parameter shape mismatch for {name!r}")
@@ -366,6 +383,9 @@ class TransientInnerRecorder:
                         reduction_block = block.to(self.reduction_device)
                         matrix.addmm_(reduction_block, reduction_block.T)
                         del reduction_block
+                if transfer_stream is not None:
+                    transfer_stream.synchronize()
+                del saved  # Release all owned reference copies before the next parameter.
                 if number % 8 == 0 or number == len(anchor):
                     print(
                         f"Inner recorder outer {outer_call}: scanned {number}/{len(anchor)} parameters through {name} on {self.reduction_device}",
@@ -398,6 +418,9 @@ class RecordedInnerTARMETrainer(RecordedTARMETrainer):
         spec_path = Path(os.environ["TAR_INNER_REFERENCE_SPEC"]).resolve()
         references = json.loads(spec_path.read_text())["references"]
         outer_steps = frozenset(_steps("TAR_INNER_OUTER_STEPS"))
+        materialize = os.environ.get("TAR_INNER_MATERIALIZE_REFERENCES", "0")
+        if materialize not in {"0", "1"}:
+            raise ValueError("TAR_INNER_MATERIALIZE_REFERENCES must be 0 or 1")
         recorder = TransientInnerRecorder(
             root,
             _steps("TAR_INNER_SAVE_STEPS"),
@@ -405,6 +428,7 @@ class RecordedInnerTARMETrainer(RecordedTARMETrainer):
             spec_path=str(spec_path),
             reduction_device=os.environ.get("TAR_INNER_REDUCTION_DEVICE", "cpu"),
             build_device=os.environ.get("TAR_INNER_BUILD_DEVICE", "cpu"),
+            materialize_references=materialize == "1",
             chunk_elements=int(os.environ.get("TAR_INNER_CHUNK_ELEMENTS", "131072")),
         )
         inner = self.sample_attack_fn

@@ -1,5 +1,6 @@
 """Test observation at completed inner optimizer steps using a stochastic toy model."""
 
+import hashlib
 import json
 from contextlib import nullcontext
 from pathlib import Path
@@ -63,6 +64,7 @@ def test_step_observation_preserves_inner_and_outer_training(monkeypatch, tmp_pa
     monkeypatch.setenv("TAR_INNER_OUTER_STEPS", "3")
     monkeypatch.setenv("TAR_INNER_SAVE_STEPS", "1,2")
     monkeypatch.setenv("TAR_INNER_BUILD_DEVICE", "cpu")
+    monkeypatch.setenv("TAR_INNER_MATERIALIZE_REFERENCES", "1")
 
     def init(trainer, inner):
         trainer.sample_attack_fn = inner
@@ -142,6 +144,7 @@ def test_step_observation_preserves_inner_and_outer_training(monkeypatch, tmp_pa
     record = json.loads(path.read_text())
     assert record["rng_unchanged_during_observation"] is True
     assert record["build_device"] == "cpu"
+    assert record["materialize_references"] is True
 
 
 def test_grams_match_direct_endpoint_arithmetic_and_refuse_duplicate_or_incomplete(
@@ -171,6 +174,8 @@ def test_grams_match_direct_endpoint_arithmetic_and_refuse_duplicate_or_incomple
     fixed = [
         {name: value + change for name, value in archived.items()} for change in changes
     ]
+    fixed[0]["norm.weight"] = fixed[0]["norm.weight"].to(torch.bfloat16)
+    fixed[1]["norm.bias"] = fixed[1]["norm.bias"].to(torch.float16)
     for idx, weights in enumerate([archived, *fixed]):
         directory = tmp_path / str(idx)
         directory.mkdir()
@@ -191,6 +196,10 @@ def test_grams_match_direct_endpoint_arithmetic_and_refuse_duplicate_or_incomple
         TransientInnerRecorder(root, [1, 3], refs, reduction_device="meta")
     inputs = {key: torch.ones((1, 3), dtype=torch.long) for key in ROLE_FIELDS}
     snapshots = []
+    originals = {
+        path: hashlib.sha256(path.read_bytes()).digest()
+        for path in tmp_path.glob("*/model.safetensors")
+    }
 
     def update(model, rows, on_step_end, steps=3):
         assert rows is inputs
@@ -215,6 +224,7 @@ def test_grams_match_direct_endpoint_arithmetic_and_refuse_duplicate_or_incomple
     assert record["reduction_device"] == "cpu"
     assert record["build_device"] == "cpu"
     assert record["chunk_elements"] == 2
+    assert record["materialize_references"] is False
     assert record["inner_steps"] == [1, 3]
     assert record["reference_names"] == ["fixed-1", "fixed-2"]
     assert {v["name"] for v in record["layout"]} == base.keys()
@@ -255,6 +265,22 @@ def test_grams_match_direct_endpoint_arithmetic_and_refuse_duplicate_or_incomple
             == torch.dot(gap, gap).item()
         )
 
+    model.load_state_dict(base)
+    copied = TransientInnerRecorder(
+        tmp_path / "materialized",
+        [1, 3],
+        refs,
+        chunk_elements=2,
+        materialize_references=True,
+    )
+    assert copied.run(update, model, inputs, 5) is model
+    copied_record = json.loads((copied.root / path.name).read_text())
+    assert copied_record == {**record, "materialize_references": True}
+    assert all(
+        hashlib.sha256(p.read_bytes()).digest() == digest
+        for p, digest in originals.items()
+    )
+
     with pytest.raises(FileExistsError):
         recorder.run(update, model, inputs, 5)
     assert path.read_bytes() == original
@@ -266,6 +292,29 @@ def test_grams_match_direct_endpoint_arithmetic_and_refuse_duplicate_or_incomple
     ]
     with pytest.raises(FileExistsError):
         recorder.run(update, model, inputs, 8)
+
+
+def test_materialization_owns_contiguous_storage(monkeypatch, tmp_path):
+    pytest.importorskip("axolotl")
+    monkeypatch.syspath_prepend(str(EXAMPLE / "src"))
+    monkeypatch.syspath_prepend(str(EXAMPLE / "scripts/misc"))
+    from tar_inner_recording import TransientInnerRecorder
+
+    refs = [{"name": "one", "anchor": "base", "path": "one"}]
+    recorder = TransientInnerRecorder(tmp_path, [1], refs, materialize_references=True)
+    weights = {
+        k: torch.arange(6, dtype=t).reshape(3, 2).T
+        for k, t in (("base", torch.float16), ("one", torch.bfloat16))
+    }
+    readers = {
+        k: SimpleNamespace(tensor=lambda name, w=w: w) for k, w in weights.items()
+    }
+    copies = recorder._reference_parameters(readers, "weight")
+    for k, original in weights.items():
+        assert not original.is_contiguous() and copies[k].is_contiguous()
+        assert copies[k].dtype == original.dtype and copies[k].device.type == "cpu"
+        assert copies[k].data_ptr() != original.data_ptr()
+        assert torch.equal(copies[k], original)
 
 
 def test_device_block_building_uses_original_endpoints(monkeypatch, tmp_path):

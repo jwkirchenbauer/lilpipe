@@ -3472,7 +3472,7 @@ def rio_report(run):
         "",
         "Coverage: **complete**. Every declared measurement is present.",
         "",
-        "The study holds RIO retain coefficient at 4, inner and outer learning rates at 1e-5, and outer defense updates at 125 while varying simulation K. Attack schedules use 1,000 updates. K16 is a reused external control with its defense history available. Fixed-prefix simulations do not establish full numerical parity or continuous-state behavior.",
+        "The K comparison holds RIO retain coefficient at 4, inner and outer learning rates at 1e-5, and outer defense updates at 125. K16 reuses our archived RIO defense and attack, including its defense history. All actual attacks use the same 1,000-update schedule. The parity pilot tests the first 16 updates at that archived defended checkpoint. Simulations restart optimizer state at each outer call; they do not form one continuous attack.",
         "",
         f"[Summary CSV]({csv_path.name}) · [Measured trajectories CSV]({trajectory_csv.name}) · [Validation]({validation_path.name}) · [Numerical parity pilot]({relative_link(Path(pilot['validation_path']), run)}) (**{pilot['verdict']}**)",
         "",
@@ -3508,7 +3508,7 @@ def rio_report(run):
             "",
             "## Data and compute provenance",
             "",
-            "| Case | K | Replay policy | Inner optimizer | Defense inner updates | Defense supervised tokens | Defense training seconds | Wall / allocated GPU hours |",
+            "| Case | K | Simulation data | Simulation update protocol | Defense inner updates | Defense supervised tokens | Defense training seconds | Wall / allocated GPU hours |",
             "|---|---:|---|---|---:|---:|---:|---:|",
         ]
     )

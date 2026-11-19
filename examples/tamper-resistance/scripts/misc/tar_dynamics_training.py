@@ -11,7 +11,88 @@ import torch
 from axolotl.core.trainers.base import AxolotlTrainer
 from transformers import TrainerCallback
 
-from trainers.tr_tar import TARMETrainer
+from trainers.tr_tar import ROLE_FIELDS, TARMETrainer, adamw_attack
+
+
+def load_attack_trace(path, expected_steps=16):
+    """Load and validate the first ordered single-row minibatches of an attack trace."""
+    batches, learning_rates, hashes = [], [], []
+    with Path(path).open() as stream:
+        for line in stream:
+            if not line.strip():
+                continue
+            record = json.loads(line)
+            step = record.get("step")
+            if step != len(batches) + 1:
+                raise ValueError("Attack trace steps must start at 1 and be contiguous")
+            raw = record.get("batch")
+            if not isinstance(raw, dict) or set(ROLE_FIELDS) - set(raw):
+                raise ValueError(
+                    f"Attack trace step {step} lacks required model fields"
+                )
+            batch = {field: torch.as_tensor(raw[field]) for field in ROLE_FIELDS}
+            if any(value.ndim != 2 or value.shape[0] != 1 for value in batch.values()):
+                raise ValueError("Replay trace must contain single-row minibatches")
+            serial = {field: batch[field].tolist() for field in ROLE_FIELDS}
+            digest = hashlib.sha256(
+                json.dumps(serial, sort_keys=True).encode()
+            ).hexdigest()
+            archived_digest = record.get("batch_sha256")
+            if archived_digest is not None and archived_digest != digest:
+                raise ValueError(f"Attack trace batch hash mismatch at step {step}")
+            rate = record.get("learning_rate_used")
+            if not isinstance(rate, (float, int)) or rate < 0:
+                raise ValueError(f"Invalid archived learning rate at step {step}")
+            batches.append(batch)
+            learning_rates.append(float(rate))
+            hashes.append(digest)
+            if len(batches) == expected_steps:
+                break
+    if len(batches) != expected_steps:
+        raise ValueError(
+            f"Attack trace has {len(batches)} usable rows; expected {expected_steps}"
+        )
+    return batches, learning_rates, hashes
+
+
+def order_attack_trace(trace, order="forward"):
+    """Order the same frozen minibatch pool without changing its LR schedule."""
+    if order not in {"forward", "reverse"}:
+        raise ValueError("order must be 'forward' or 'reverse'")
+    batches, learning_rates, hashes = trace
+    indices = list(range(len(batches)))
+    if order == "reverse":
+        indices.reverse()
+    return (
+        [batches[index] for index in indices],
+        list(learning_rates),
+        [hashes[index] for index in indices],
+    )
+
+
+def load_attack_schedule(path, expected_steps=1000):
+    """Load the full archived LR schedule without retaining training tensors."""
+    rates = []
+    with Path(path).open() as stream:
+        for line in stream:
+            if not line.strip():
+                continue
+            record = json.loads(line)
+            if record.get("step") != len(rates) + 1:
+                raise ValueError(
+                    "Attack schedule steps must start at 1 and be contiguous"
+                )
+            rate = record.get("learning_rate_used")
+            if not isinstance(rate, (float, int)) or rate < 0:
+                raise ValueError(
+                    f"Invalid archived learning rate at step {len(rates) + 1}"
+                )
+            rates.append(float(rate))
+    if len(rates) != expected_steps:
+        raise ValueError(
+            f"Attack schedule has {len(rates)} rows; expected {expected_steps}"
+        )
+    return rates
 
 
 def select_attack_dataset(dataset, manifest_path, bootstrap_seed=None):
@@ -155,6 +236,214 @@ class RecordingMixin:
 
 class RecordedTARMETrainer(RecordingMixin, TARMETrainer):
     """Keep the selected TAR objective and record its actual mixed batches."""
+
+
+class RecordedReplayTARMETrainer(RecordedTARMETrainer):
+    """Run bounded TAR inner attacks with optional frozen attack-batch replay."""
+
+    def __init__(
+        self,
+        *args,
+        attack_trace_path=None,
+        attack_schedule_trace_path=None,
+        attack_schedule_steps=1000,
+        attack_trace_order="forward",
+        attack_optimizer_mode="legacy",
+        attack_max_steps=16,
+        **kwargs,
+    ):
+        if attack_trace_order not in {"forward", "reverse"}:
+            raise ValueError("attack_trace_order must be 'forward' or 'reverse'")
+        if attack_optimizer_mode not in {"legacy", "matched"}:
+            raise ValueError("attack_optimizer_mode must be 'legacy' or 'matched'")
+        schedule_path = attack_schedule_trace_path
+        if attack_optimizer_mode == "matched" and schedule_path is None:
+            schedule_path = attack_trace_path
+        if attack_optimizer_mode == "matched" and schedule_path is None:
+            raise ValueError("matched optimizer mode requires an archived LR trace")
+        if attack_max_steps < 1:
+            raise ValueError("attack_max_steps must be positive")
+        self.attack_trace_path = attack_trace_path
+        self.attack_schedule_trace_path = schedule_path
+        self.attack_schedule_steps = attack_schedule_steps
+        self.attack_trace_order = attack_trace_order
+        self.attack_optimizer_mode = attack_optimizer_mode
+        self.attack_max_steps = attack_max_steps
+        self._attack_trace_batches = None
+        self._attack_trace_rates = None
+        self._attack_trace_hashes = None
+        self._attack_trace_sha256 = None
+        self._attack_schedule_sha256 = None
+        self._attack_schedule_rates = None
+        if attack_trace_path is not None:
+            self._attack_trace_sha256 = hashlib.sha256(
+                Path(attack_trace_path).read_bytes()
+            ).hexdigest()
+            (
+                self._attack_trace_batches,
+                self._attack_trace_rates,
+                self._attack_trace_hashes,
+            ) = load_attack_trace(attack_trace_path)
+        if schedule_path is not None:
+            self._attack_schedule_sha256 = hashlib.sha256(
+                Path(schedule_path).read_bytes()
+            ).hexdigest()
+            self._attack_schedule_rates = load_attack_schedule(
+                schedule_path, expected_steps=attack_schedule_steps
+            )
+        super().__init__(*args, attack_max_steps=attack_max_steps, **kwargs)
+        self.sample_attack_fn = self._run_replay_attack
+
+    def _optimizer_parameter_groups(self, model):
+        """Mirror Axolotl/Transformers decay and no-decay parameter groups."""
+        decay_names = set(self.get_decay_parameter_names(model))
+        trainable_names = [
+            name
+            for name, parameter in model.named_parameters()
+            if parameter.requires_grad
+        ]
+        decay = [name for name in trainable_names if name in decay_names]
+        no_decay = [name for name in trainable_names if name not in decay_names]
+        return [group for group in (decay, no_decay) if group]
+
+    def _run_replay_attack(
+        self, model, inputs, *, on_loss_backward=None, on_step_end=None
+    ):
+        batches = None
+        hashes = None
+        learning_rates = self._attack_schedule_rates
+        if self._attack_trace_batches is not None:
+            ordered_batches, _, hashes = order_attack_trace(
+                (
+                    self._attack_trace_batches,
+                    self._attack_trace_rates,
+                    self._attack_trace_hashes,
+                ),
+                self.attack_trace_order,
+            )
+            batches = [
+                {
+                    field: batch[field].to(device=inputs[field].device)
+                    for field in ROLE_FIELDS
+                }
+                for batch in ordered_batches
+            ]
+            # Keep the real attack's chronological schedule even when only the
+            # minibatch order is reversed; otherwise order and LR are confounded.
+        if self.attack_optimizer_mode != "matched":
+            learning_rates = None
+
+        inner_records = []
+
+        def record_inner(step, batch, loss, learning_rate, grad_norm):
+            serial = {
+                field: batch[field].detach().cpu().tolist() for field in ROLE_FIELDS
+            }
+            batch_hash = hashlib.sha256(
+                json.dumps(serial, sort_keys=True).encode()
+            ).hexdigest()
+            token_count = int((batch["labels"][..., 1:] != -100).sum().item())
+            record = {
+                "step": step,
+                "batch_sha256": batch_hash,
+                "loss_before_update": loss,
+                "learning_rate_used": learning_rate,
+                "preclip_grad_norm": grad_norm,
+                "supervised_tokens": token_count,
+            }
+            if hashes is not None and batch_hash != hashes[step - 1]:
+                raise ValueError("Replay minibatch hash differs from the frozen trace")
+            inner_records.append(record)
+
+        result = adamw_attack(
+            model,
+            inputs,
+            attack_forget_batch_size_per_iteration=(
+                self.attack_forget_batch_size_per_iteration
+            ),
+            attack_epochs=self.attack_epochs,
+            attack_learning_rate=self.attack_learning_rate,
+            on_loss_backward=on_loss_backward,
+            on_step_end=on_step_end,
+            attack_max_steps=self.attack_max_steps,
+            attack_optimizer_mode=self.attack_optimizer_mode,
+            attack_learning_rates=learning_rates,
+            attack_batches=batches,
+            attack_parameter_groups=(
+                self._optimizer_parameter_groups(model)
+                if self.attack_optimizer_mode == "matched"
+                else None
+            ),
+            on_inner_step=record_inner,
+        )
+        expected_steps = min(
+            self.attack_max_steps,
+            (
+                len(batches)
+                if batches is not None
+                else math.ceil(
+                    len(inputs["input_ids"])
+                    / self.attack_forget_batch_size_per_iteration
+                )
+                * self.attack_epochs
+            ),
+        )
+        if len(inner_records) != expected_steps:
+            raise ValueError(
+                "Replay ran "
+                f"{len(inner_records)} inner steps; expected {expected_steps}"
+            )
+        path = Path(self.args.output_dir) / "replay-inner.jsonl"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        params = list(model.parameters())
+        record = {
+            "outer_step": self.state.global_step + 1,
+            "attack_trace_path": self.attack_trace_path,
+            "attack_trace_sha256": self._attack_trace_sha256,
+            "attack_schedule_trace_path": self.attack_schedule_trace_path,
+            "attack_schedule_trace_sha256": self._attack_schedule_sha256,
+            "attack_schedule_steps": self.attack_schedule_steps,
+            "attack_trace_order": self.attack_trace_order,
+            "replay_source": (
+                "frozen_trace" if batches is not None else "fresh_outer_batch"
+            ),
+            "attack_optimizer_mode": self.attack_optimizer_mode,
+            "optimizer": {
+                "class": "torch.optim.AdamW",
+                "betas": [0.9, 0.999],
+                "epsilon": 1e-8,
+                "weight_decay": (
+                    0.0 if self.attack_optimizer_mode == "matched" else 0.01
+                ),
+                "max_grad_norm": (
+                    1.0 if self.attack_optimizer_mode == "matched" else None
+                ),
+                "learning_rate_schedule": (
+                    "archived_attack_trace"
+                    if self.attack_optimizer_mode == "matched"
+                    else "constant_configured_attack_learning_rate"
+                ),
+            },
+            "attack_max_steps": self.attack_max_steps,
+            "model_training": bool(model.training),
+            "parameter_dtypes": sorted({str(parameter.dtype) for parameter in params}),
+            "replay_batch_sequence_sha256": hashlib.sha256(
+                json.dumps(
+                    [item["batch_sha256"] for item in inner_records],
+                    separators=(",", ":"),
+                ).encode()
+            ).hexdigest(),
+            "inner_steps": inner_records,
+            "inner_step_count": len(inner_records),
+            "supervised_tokens": sum(
+                item["supervised_tokens"] for item in inner_records
+            ),
+        }
+        with path.open("a") as stream:
+            stream.write(
+                json.dumps(record, allow_nan=False, separators=(",", ":")) + "\n"
+            )
+        return result
 
 
 class RecordedRelearnTrainer(RecordingMixin, AxolotlTrainer):

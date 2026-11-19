@@ -120,6 +120,12 @@ def adamw_attack(
     attack_learning_rate=2e-5,
     on_loss_backward=None,
     on_step_end=None,
+    attack_max_steps=None,
+    attack_optimizer_mode="legacy",
+    attack_learning_rates=None,
+    attack_batches=None,
+    attack_parameter_groups=None,
+    on_inner_step=None,
 ):
     """Run AdamW on selected rows, calling on_step_end with the completed step count."""
     if attack_forget_batch_size_per_iteration < 1 or attack_epochs < 0:
@@ -127,26 +133,92 @@ def adamw_attack(
     n_samples = len(inputs["input_ids"])
     if not n_samples:
         raise ValueError("TAR attack requires at least one attack row")
-    optimizer = torch.optim.AdamW(model.parameters(), lr=attack_learning_rate)
+    if attack_max_steps is not None and attack_max_steps < 1:
+        raise ValueError("attack_max_steps must be positive when provided")
+    if attack_optimizer_mode not in {"legacy", "matched"}:
+        raise ValueError("attack_optimizer_mode must be 'legacy' or 'matched'")
+    batches = attack_batches
+    if batches is None:
+        batches = [
+            {
+                field: inputs[field][
+                    start : start + attack_forget_batch_size_per_iteration
+                ]
+                for field in ROLE_FIELDS
+            }
+            for start in range(0, n_samples, attack_forget_batch_size_per_iteration)
+        ]
+    if attack_epochs < 0:
+        raise ValueError("attack_epochs must be nonnegative")
+    available_steps = len(batches) * attack_epochs
+    step_limit = (
+        available_steps
+        if attack_max_steps is None
+        else min(available_steps, attack_max_steps)
+    )
+    if attack_learning_rates is not None and len(attack_learning_rates) < step_limit:
+        raise ValueError(
+            "Not enough archived learning rates for requested attack steps"
+        )
+    optimizer_kwargs = {"lr": attack_learning_rate}
+    if attack_optimizer_mode == "matched":
+        optimizer_kwargs.update(betas=(0.9, 0.999), eps=1e-8, weight_decay=0.0)
+    if attack_parameter_groups is None:
+        optimizer_parameters = model.parameters()
+    else:
+        named_parameters = {
+            name: parameter
+            for name, parameter in model.named_parameters()
+            if parameter.requires_grad
+        }
+        assigned = [name for group in attack_parameter_groups for name in group]
+        if len(assigned) != len(set(assigned)) or set(assigned) != set(
+            named_parameters
+        ):
+            raise ValueError(
+                "attack_parameter_groups must partition all trainable parameter names"
+            )
+        optimizer_parameters = [
+            {"params": [named_parameters[name] for name in group]}
+            for group in attack_parameter_groups
+        ]
+    optimizer = torch.optim.AdamW(optimizer_parameters, **optimizer_kwargs)
     inner_step = 0
     for _ in range(attack_epochs):
-        for start in range(0, n_samples, attack_forget_batch_size_per_iteration):
+        for batch in batches:
+            if inner_step >= step_limit:
+                break
+            learning_rate = (
+                attack_learning_rates[inner_step]
+                if attack_learning_rates is not None
+                else attack_learning_rate
+            )
+            for group in optimizer.param_groups:
+                group["lr"] = learning_rate
             optimizer.zero_grad(set_to_none=True)
-            loss = model(
-                **{
-                    field: inputs[field][
-                        start : start + attack_forget_batch_size_per_iteration
-                    ]
-                    for field in ROLE_FIELDS
-                }
-            ).loss
+            loss = model(**batch).loss
             loss.backward()
             if on_loss_backward is not None:
                 on_loss_backward(inner_step, loss.detach())
+            grad_norm = None
+            if attack_optimizer_mode == "matched":
+                grad_norm = float(
+                    torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                )
             optimizer.step()
             inner_step += 1
+            if on_inner_step is not None:
+                on_inner_step(
+                    inner_step,
+                    batch,
+                    float(loss.detach()),
+                    float(learning_rate),
+                    grad_norm,
+                )
             if on_step_end is not None:
                 on_step_end(inner_step)
+        if inner_step >= step_limit:
+            break
     return model
 
 
@@ -200,6 +272,7 @@ class TARBaseTrainer:
         attack_forget_batch_size_per_iteration=1,
         attack_epochs=1,
         attack_learning_rate,
+        attack_max_steps=None,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
@@ -217,14 +290,18 @@ class TARBaseTrainer:
         )
         self.attack_epochs = attack_epochs
         self.attack_learning_rate = attack_learning_rate
+        self.attack_max_steps = attack_max_steps
         self.inner_step_total = 0
         self._inner_loss_metric_defined = False
         if sample_attack_fn is None:
             sample_attack_fn = partial(
                 adamw_attack,
-                attack_forget_batch_size_per_iteration=attack_forget_batch_size_per_iteration,
+                attack_forget_batch_size_per_iteration=(
+                    attack_forget_batch_size_per_iteration
+                ),
                 attack_epochs=attack_epochs,
                 attack_learning_rate=attack_learning_rate,
+                attack_max_steps=attack_max_steps,
             )
         self.sample_attack_fn = sample_attack_fn
 

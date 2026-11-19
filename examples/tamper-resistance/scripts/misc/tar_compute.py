@@ -322,7 +322,69 @@ def validate_hparam_input_order(folder, case, records):
         return None
     program = json.loads(study_path.read_text())
     if program.get("kind") != "fixed-sampler-hparam-study":
-        return None
+        if program.get("kind") != "rio-k-fidelity-study":
+            return None
+        defense = case["role"] == "defense"
+        maximum = 125 if defense else 1000
+        reference = (
+            Path(program["original_rio_defense_observations"])
+            if defense
+            else Path(program["compute_study"])
+            / "cases/baseline-lr1e-6/models/attack/observed-batches.jsonl"
+        )
+        control = [json.loads(line) for line in reference.read_text().splitlines()]
+        steps = list(range(1, maximum + 1))
+        if case["max_steps"] != maximum or [row["step"] for row in control] != steps:
+            raise ValueError(
+                "RIO fidelity validation requires complete matched horizons"
+            )
+        if [row["step"] for row in records] != steps:
+            raise ValueError("RIO fidelity observations are incomplete")
+        if defense:
+            required = {"input_ids", "attention_mask", "labels", "metadata_ids"}
+            signature = hashlib.sha256()
+            for step, (actual, expected) in enumerate(zip(records, control), 1):
+                batches = [actual.get("batch"), expected.get("batch")]
+                if any(
+                    not isinstance(batch, dict) or not required <= batch.keys()
+                    for batch in batches
+                ):
+                    raise ValueError(
+                        f"Missing canonical defense tensors at step {step}"
+                    )
+                if batches[0] != batches[1]:
+                    raise ValueError(f"RIO defense outer batch differs at step {step}")
+                signature.update(
+                    json.dumps(
+                        [step, batches[0]], sort_keys=True, separators=(",", ":")
+                    ).encode()
+                    + b"\n"
+                )
+            return {
+                "state": "passed",
+                "reference_observations": str(reference),
+                "batches": maximum,
+                "canonical_step_batch_sha256": signature.hexdigest(),
+            }
+
+        # Attack traces must retain the exact prepared-data order. Replay cases
+        # intentionally select their inner rows from the RIO defense trace;
+        # their outer TAR batches still match the standard attack control.
+        if any(
+            actual.get("batch") != expected.get("batch")
+            for actual, expected in zip(records, control)
+        ):
+            raise ValueError(
+                "RIO fidelity attack outer batches differ from standard control"
+            )
+        return {
+            "state": "passed",
+            "reference_observations": str(reference),
+            "batches": maximum,
+            "canonical_step_batch_sha256": hashlib.sha256(
+                json.dumps([row.get("batch_sha256") for row in records]).encode()
+            ).hexdigest(),
+        }
     defense = case["role"] == "defense"
     maximum = 125 if defense else 1000
     reference = (
@@ -396,6 +458,7 @@ def validate_case(folder):
     for step in case["state_steps"]:
         for filename in ("optimizer.pt", "scheduler.pt", "rng_state.pth"):
             assert (model / f"checkpoint-{step}" / filename).exists(), (step, filename)
+    replay_validation = None
     if case["role"] == "defense":
         inner = [
             int(r["inner_step_total"])
@@ -409,6 +472,14 @@ def validate_case(folder):
             expected,
             inner[-1:] if inner else [],
         )
+        study_path = folder.resolve().parents[1] / "study.json"
+        if study_path.is_file():
+            study = json.loads(study_path.read_text())
+            if (
+                study.get("kind") == "rio-k-fidelity-study"
+                and case.get("family") == "fidelity"
+            ):
+                replay_validation = validate_rio_replay(folder, case, study, records)
     else:
         assert all(
             math.isfinite(r["loss_after_update"]) and r["source_rows"] for r in records
@@ -428,8 +499,148 @@ def validate_case(folder):
     }
     if input_order is not None:
         summary["input_order_validation"] = input_order
+    if replay_validation is not None:
+        summary["replay_validation"] = replay_validation
     dump(folder / "training-validation.json", summary)
     print(json.dumps(summary))
+
+
+def validate_rio_replay(folder, case, study, outer_records):
+    """Check all replayed inner batches, supervised tokens, and LR values."""
+    records_path = Path(folder) / "models/defense/replay-inner.jsonl"
+    records = [
+        json.loads(line) for line in records_path.read_text().splitlines() if line
+    ]
+    if len(records) != 125 or [row.get("outer_step") for row in records] != list(
+        range(1, 126)
+    ):
+        raise ValueError("RIO fidelity replay log must have 125 ordered outer records")
+    trace_rows = []
+    expected_rates = []
+    if case["simulation_optimizer"] == "matched":
+        schedule_rows = [
+            json.loads(line)
+            for line in Path(study["original_rio_attack_observations"])
+            .read_text()
+            .splitlines()
+        ][:16]
+        expected_rates = [row["learning_rate_used"] for row in schedule_rows]
+    if case["simulation_data_policy"] != "fresh":
+        trace_rows = [
+            json.loads(line)
+            for line in Path(study["original_rio_attack_observations"])
+            .read_text()
+            .splitlines()
+        ][:16]
+        if case["simulation_data_policy"] == "reverse":
+            trace_rows.reverse()
+    expected_hashes = [
+        hashlib.sha256(
+            json.dumps(
+                {
+                    field: row["batch"][field]
+                    for field in ("input_ids", "attention_mask", "labels")
+                },
+                sort_keys=True,
+            ).encode()
+        ).hexdigest()
+        for row in trace_rows
+    ]
+    for outer, observed_outer in zip(records, outer_records):
+        if outer.get("attack_optimizer_mode") != case["simulation_optimizer"]:
+            raise ValueError("RIO fidelity replay optimizer mode differs from its case")
+        optimizer = outer.get("optimizer", {})
+        if case["simulation_optimizer"] == "matched":
+            expected_schedule_sha = study["rio_attack_trace"]["sha256"]
+            if outer.get("attack_schedule_trace_sha256") != expected_schedule_sha:
+                raise ValueError("RIO matched replay schedule trace hash differs")
+            if (
+                optimizer.get("weight_decay") != 0.0
+                or optimizer.get("max_grad_norm") != 1.0
+            ):
+                raise ValueError("RIO matched replay optimizer settings differ")
+        else:
+            if (
+                optimizer.get("weight_decay") != 0.01
+                or optimizer.get("max_grad_norm") is not None
+            ):
+                raise ValueError("RIO legacy replay optimizer settings differ")
+        if (
+            case["simulation_data_policy"] != "fresh"
+            and outer.get("attack_trace_sha256") != study["rio_attack_trace"]["sha256"]
+        ):
+            raise ValueError("RIO replay data trace hash differs")
+        inner = outer.get("inner_steps", [])
+        if outer.get("inner_step_count") != 16 or len(inner) != 16:
+            raise ValueError(
+                f"RIO fidelity outer update {outer.get('outer_step')} did not record 16 inner steps"
+            )
+        if case["simulation_data_policy"] == "fresh":
+            source_batch = observed_outer["batch"]
+            expected_fresh = []
+            for row_index, metadata in enumerate(source_batch["metadata_ids"]):
+                if metadata != 2:
+                    continue
+                batch = {
+                    field: [source_batch[field][row_index]]
+                    for field in ("input_ids", "attention_mask", "labels")
+                }
+                digest = hashlib.sha256(
+                    json.dumps(batch, sort_keys=True).encode()
+                ).hexdigest()
+                supervised = sum(token != -100 for token in batch["labels"][0][1:])
+                expected_fresh.append((digest, supervised))
+            if len(expected_fresh) != 16:
+                raise ValueError(
+                    "Fresh RIO fidelity batches must contain 16 attack rows"
+                )
+        for index, step in enumerate(inner):
+            if (
+                not isinstance(step.get("batch_sha256"), str)
+                or len(step["batch_sha256"]) != 64
+            ):
+                raise ValueError(
+                    "RIO fidelity replay batch hash is missing or malformed"
+                )
+            if (
+                type(step.get("supervised_tokens")) is not int
+                or step["supervised_tokens"] < 1
+            ):
+                raise ValueError("RIO fidelity replay has no supervised tokens")
+            if not math.isfinite(step.get("learning_rate_used", float("nan"))):
+                raise ValueError("RIO fidelity replay learning rate is invalid")
+            if expected_hashes and step["batch_sha256"] != expected_hashes[index]:
+                raise ValueError("RIO fidelity replay hash differs from the RIO trace")
+            if (
+                case["simulation_data_policy"] == "fresh"
+                and (step["batch_sha256"], step["supervised_tokens"])
+                != expected_fresh[index]
+            ):
+                raise ValueError(
+                    "Fresh RIO fidelity hash/token count differs from outer batch"
+                )
+            if expected_hashes:
+                labels = trace_rows[index]["batch"]["labels"]
+                expected_tokens = sum(
+                    token != -100 for row in labels for token in row[1:]
+                )
+                if step["supervised_tokens"] != expected_tokens:
+                    raise ValueError(
+                        "RIO fidelity supervised token count differs from trace"
+                    )
+            if expected_rates and case["simulation_optimizer"] == "matched":
+                if step["learning_rate_used"] != expected_rates[index]:
+                    raise ValueError("RIO matched replay LR differs from the RIO trace")
+            elif case["simulation_optimizer"] == "legacy":
+                if step["learning_rate_used"] != 1e-5:
+                    raise ValueError("RIO legacy replay must use the declared 1e-5 LR")
+    return {
+        "state": "passed",
+        "outer_records": len(records),
+        "inner_steps_per_outer": 16,
+        "simulation_data_policy": case["simulation_data_policy"],
+        "simulation_optimizer": case["simulation_optimizer"],
+    }
 
 
 def hparam_matrix(matrix=None):
@@ -759,6 +970,552 @@ def prepare_hparam_study(run, example, original, baseline, compute, matrix=None)
     }
     dump(run / "study.json", program)
     print(f"Prepared {len(matrix)} fresh defense/attack pairs; reused B at {control}")
+
+
+RIO_FIDELITY_CASES = {
+    "rio-k4": {"kind": "fresh", "k": 4},
+    "rio-k64": {"kind": "fresh", "k": 64},
+    "rio-k256": {"kind": "fresh", "k": 256},
+    "rio-prefix-forward-legacy": {
+        "kind": "replay",
+        "order": "forward",
+        "optimizer": "legacy",
+    },
+    "rio-prefix-reverse-legacy": {
+        "kind": "replay",
+        "order": "reverse",
+        "optimizer": "legacy",
+    },
+    "rio-fresh-matched": {"kind": "replay", "order": "fresh", "optimizer": "matched"},
+    "rio-prefix-forward-matched": {
+        "kind": "replay",
+        "order": "forward",
+        "optimizer": "matched",
+    },
+    "rio-prefix-reverse-matched": {
+        "kind": "replay",
+        "order": "reverse",
+        "optimizer": "matched",
+    },
+}
+
+
+def prepare_rio_study(run, example, original, baseline, compute, rio_study):
+    """Prepare fixed-outer K and inner-trace fidelity comparisons for archived RIO."""
+    run, example, original, baseline, compute, rio_study = (
+        Path(path).resolve()
+        for path in (run, example, original, baseline, compute, rio_study)
+    )
+    if run.exists():
+        raise FileExistsError("Use a new directory for a RIO K study")
+    original_cfg = yaml.safe_load((original / "configs/defense.yml").read_text())
+    rio_case = json.loads(
+        (rio_study / "cases/hparam-rio-defense/case.json").read_text()
+    )
+    rio_cfg_path = Path(rio_case["config"])
+    if not rio_cfg_path.is_file():
+        rio_cfg_path = rio_study / "cases/hparam-rio-defense/config.yml"
+    rio_cfg = yaml.safe_load(rio_cfg_path.read_text())
+    rio_obs = (
+        rio_study / "cases/hparam-rio-defense/models/defense/observed-batches.jsonl"
+    )
+    control = compute / "cases/baseline-lr1e-6"
+    attack = yaml.safe_load((control / "config.yml").read_text())
+    expected_attack = {
+        "max_steps": 1000,
+        "warmup_steps": 0,
+        "learning_rate": 1e-6,
+        "seed": 1,
+        "data_seed": 42,
+        "micro_batch_size": 1,
+        "gradient_accumulation_steps": 1,
+        "sequence_len": 512,
+        "bf16": True,
+        "lr_scheduler": "linear",
+        "weight_decay": 0.0,
+        "attn_implementation": "eager",
+        "optimizer": "adamw_torch",
+        "sample_packing": False,
+        "pad_to_sequence_len": False,
+        "remove_unused_columns": True,
+        "train_on_inputs": True,
+        "tf32": False,
+        "gradient_checkpointing": False,
+        "max_grad_norm": 1.0,
+    }
+    if any(attack.get(key) != value for key, value in expected_attack.items()):
+        raise ValueError(
+            "The standard attack reference differs from the LR1e-6 protocol"
+        )
+    rio_weights = rio_study / "cases/hparam-rio-defense/models/defense"
+    if (
+        not rio_obs.is_file()
+        or not (rio_weights / "checkpoint-125/model.safetensors").is_file()
+    ):
+        raise ValueError("Archived RIO defense trace and checkpoint-125 are required")
+    if (
+        json.loads(
+            (
+                rio_study / "cases/hparam-rio-defense/training-validation.json"
+            ).read_text()
+        ).get("state")
+        != "passed"
+    ):
+        raise ValueError("Archived RIO defense must have passed validation")
+    expected_rio = {
+        "max_steps": 125,
+        "warmup_steps": 12,
+        "learning_rate": 1e-5,
+        "seed": 42,
+        "data_seed": 42,
+        "micro_batch_size": 24,
+        "gradient_accumulation_steps": 1,
+        "sequence_len": 512,
+        "bf16": True,
+        "lr_scheduler": "linear",
+        "optimizer": "adamw_torch",
+        "weight_decay": 0.0,
+        "attn_implementation": "eager",
+        "sample_packing": False,
+        "pad_to_sequence_len": False,
+        "remove_unused_columns": False,
+        "train_on_inputs": True,
+        "tf32": False,
+        "gradient_checkpointing": False,
+        "max_grad_norm": 1.0,
+        "retain_coefficient": 4.0,
+        "forget_coefficient": 1.0,
+        "defence_forget_batch_size": 4,
+        "defence_retain_batch_size": 4,
+        "attack_learning_rate": 1e-5,
+        "attack_forget_batch_size": 16,
+        "attack_forget_batch_size_per_iteration": 1,
+        "attack_epochs": 1,
+    }
+    if any(
+        rio_cfg.get(key) != val
+        for key, val in expected_rio.items()
+        if key
+        in {
+            "max_steps",
+            "warmup_steps",
+            "learning_rate",
+            "seed",
+            "data_seed",
+            "micro_batch_size",
+            "gradient_accumulation_steps",
+            "sequence_len",
+            "bf16",
+            "lr_scheduler",
+            "optimizer",
+            "weight_decay",
+            "attn_implementation",
+            "sample_packing",
+            "pad_to_sequence_len",
+            "remove_unused_columns",
+            "train_on_inputs",
+            "tf32",
+            "gradient_checkpointing",
+            "max_grad_norm",
+        }
+    ) or any(
+        rio_cfg.get("custom_trainer_args", {}).get(key) != val
+        for key, val in expected_rio.items()
+        if key
+        not in {
+            "max_steps",
+            "warmup_steps",
+            "learning_rate",
+            "seed",
+            "data_seed",
+            "micro_batch_size",
+            "gradient_accumulation_steps",
+            "sequence_len",
+            "bf16",
+            "lr_scheduler",
+            "optimizer",
+            "weight_decay",
+            "attn_implementation",
+            "sample_packing",
+            "pad_to_sequence_len",
+            "remove_unused_columns",
+            "train_on_inputs",
+            "tf32",
+            "gradient_checkpointing",
+            "max_grad_norm",
+        }
+    ):
+        raise ValueError("Archived RIO config does not match the declared RIO recipe")
+    if rio_cfg["base_model"] != original_cfg["base_model"]:
+        raise ValueError("RIO comparison must start from the original Zephyr base")
+    if rio_cfg["datasets"] != original_cfg["datasets"]:
+        raise ValueError(
+            "RIO must retain the original defense dataset mix and revisions"
+        )
+    if (
+        json.loads((control / "training-validation.json").read_text()).get("state")
+        != "passed"
+    ):
+        raise ValueError(
+            "The standard 1000-step attack control must be complete and validated"
+        )
+    if (
+        json.loads(
+            (rio_study / "cases/hparam-rio-lr1e-6/training-validation.json").read_text()
+        ).get("state")
+        != "passed"
+    ):
+        raise ValueError(
+            "The existing RIO standard attack must be complete and validated"
+        )
+
+    run.mkdir(parents=True)
+    for name in ("source/misc", "cases", "logs", "status", "cache"):
+        (run / name).mkdir(parents=True, exist_ok=True)
+    shutil.copytree(
+        example / "src",
+        run / "source/src",
+        ignore=shutil.ignore_patterns("__pycache__"),
+    )
+    protocol_document = example.parents[1] / "TAR_RIO_K_AND_FIDELITY.md"
+    shutil.copy2(protocol_document, run / "source/TAR_RIO_K_AND_FIDELITY.md")
+    for filename in (
+        "tar_compute.py",
+        "tar_dynamics.py",
+        "tar_dynamics_training.py",
+        "tar_compute_compare.py",
+        "tar_compute_evaluation.py",
+        "run_tar_compute.sh",
+        "run_tar_compute_landscapes.sh",
+        "run_tar_compute_evaluation.sh",
+    ):
+        shutil.copy2(
+            example / "scripts/misc" / filename, run / "source/misc" / filename
+        )
+    for filename in ("tar_inner_recording.py", "tar_basis_structure.py"):
+        shutil.copy2(
+            example / "scripts/misc" / filename, run / "source/misc" / filename
+        )
+    shutil.copy2(
+        baseline / "source/misc/reference_get_ll.py",
+        run / "source/misc/reference_get_ll.py",
+    )
+    shutil.copytree(compute / "source/lm_eval_tasks", run / "source/lm_eval_tasks")
+    shutil.copytree(
+        original / "cache/axolotl/defense",
+        run / "cache/defense",
+        copy_function=os.link,
+        ignore=shutil.ignore_patterns("*.lock"),
+    )
+    shutil.copytree(
+        compute / "cache/attack",
+        run / "cache/attack",
+        copy_function=os.link,
+        ignore=shutil.ignore_patterns("*.lock"),
+    )
+    shutil.copy2(compute / "probes.json", run / "probes.json")
+    shutil.copy2(rio_obs, run / "rio-defense-observed-batches.jsonl")
+    rio_attack_obs = (
+        rio_study / "cases/hparam-rio-lr1e-6/models/attack/observed-batches.jsonl"
+    )
+    shutil.copy2(rio_attack_obs, run / "rio-attack-observed-batches.jsonl")
+    trace_rows = [json.loads(line) for line in rio_attack_obs.read_text().splitlines()]
+    if len(trace_rows) != 1000 or [row.get("step") for row in trace_rows] != list(
+        range(1, 1001)
+    ):
+        raise ValueError(
+            "Archived RIO attack trace must contain all 1000 ordered batches"
+        )
+    control_rows = [
+        json.loads(line)
+        for line in (control / "models/attack/observed-batches.jsonl")
+        .read_text()
+        .splitlines()
+    ]
+    if len(control_rows) != 1000:
+        raise ValueError("The standard attack control must contain 1000 observations")
+    for index, (row, control_row) in enumerate(zip(trace_rows, control_rows), 1):
+        batch = row.get("batch")
+        if not isinstance(batch, dict) or set(batch) != {
+            "input_ids",
+            "attention_mask",
+            "labels",
+        }:
+            raise ValueError(f"RIO attack trace row {index} has invalid batch fields")
+        digest = hashlib.sha256(json.dumps(batch, sort_keys=True).encode()).hexdigest()
+        if row.get("batch_sha256") != digest:
+            raise ValueError(f"RIO attack trace row {index} has an invalid batch hash")
+        if any(
+            len(batch[field]) != 1
+            for field in ("input_ids", "attention_mask", "labels")
+        ):
+            raise ValueError(f"RIO attack trace row {index} is not a single-row batch")
+        if sum(token != -100 for token in batch["labels"][0]) < 1:
+            raise ValueError(f"RIO attack trace row {index} has no supervised tokens")
+        rate = row.get("learning_rate_used")
+        if not isinstance(rate, (int, float)) or not math.isfinite(rate) or rate < 0:
+            raise ValueError(
+                f"RIO attack trace row {index} has an invalid learning rate"
+            )
+        if row["batch_sha256"] != control_row.get("batch_sha256"):
+            raise ValueError(
+                f"RIO attack data order differs from standard control at row {index}"
+            )
+        if rate != control_row.get("learning_rate_used"):
+            raise ValueError(
+                f"RIO attack learning-rate schedule differs at row {index}"
+            )
+    trace_digest = hashlib.sha256(
+        (run / "rio-attack-observed-batches.jsonl").read_bytes()
+    ).hexdigest()
+    cases = {}
+    program = {
+        "state": "prepared",
+        "kind": "rio-k-fidelity-study",
+        "baseline_commit": subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=example, text=True
+        ).strip(),
+        "protocol_document": "source/TAR_RIO_K_AND_FIDELITY.md",
+        "original_run": str(original),
+        "baseline_dynamics": str(baseline),
+        "compute_study": str(compute),
+        "rio_study": str(rio_study),
+        "original_rio_defense_observations": str(
+            run / "rio-defense-observed-batches.jsonl"
+        ),
+        "original_rio_attack_observations": str(
+            run / "rio-attack-observed-batches.jsonl"
+        ),
+        "rio_attack_trace": {
+            "path": str(run / "rio-attack-observed-batches.jsonl"),
+            "rows": len(trace_rows),
+            "sha256": trace_digest,
+            "batch_hashes": [row["batch_sha256"] for row in trace_rows],
+            "learning_rates": [row["learning_rate_used"] for row in trace_rows],
+        },
+        "base_model": original_cfg["base_model"],
+        "shared_probes": str(run / "probes.json"),
+        "fixed_outer_updates": 125,
+        "seeds": {"seed": 42, "data_seed": 42},
+        "outer_sampler": "unchanged original 24-row batch: 4 defense-forget, 4 defense-retain, 16 simulated-attack rows",
+        "primary_k_values": [4, 16, 64, 256],
+        "fixed_outer_interpretation": "All primary cells use 125 outer updates. Inner compute and repeated exposure therefore increase with K; this is not a matched-compute comparison.",
+        "comparison_controls": {
+            "rio-k16": {
+                "folder": str(rio_study / "cases/hparam-rio-lr1e-6"),
+                "attack": str(rio_study / "cases/hparam-rio-lr1e-6"),
+                "source_ref_defense": str(rio_study / "cases/hparam-rio-defense"),
+                "schedule_steps": 1000,
+                "label": "existing RIO K16 defense and standard 1000-step LR1e-6 attack; reused without rerun",
+            },
+        },
+        "attack_reuse_control": {
+            "folder": str(control),
+            "label": "existing standard 1000-step LR1e-6 attack control; reused without rerun",
+        },
+        "profile_reference_case": "rio-k4-lr1e-6",
+        "cases": cases,
+        "bundles": {"defenses": [], "attacks": [], "all": []},
+        "jobs": {},
+    }
+    cache_sources = {
+        "defense": original / "cache/axolotl/defense",
+        "attack": compute / "cache/attack",
+    }
+    for name, settings in RIO_FIDELITY_CASES.items():
+        if settings["kind"] == "fresh":
+            k = settings["k"]
+            items = [
+                (
+                    f"{name}-defense",
+                    "defense",
+                    rio_cfg,
+                    125,
+                    DEFENSE_STEPS,
+                    [32, 64, 125],
+                    k,
+                )
+            ]
+        else:
+            items = [
+                (
+                    f"{name}-defense",
+                    "defense",
+                    rio_cfg,
+                    125,
+                    DEFENSE_STEPS,
+                    [32, 64, 125],
+                    16,
+                )
+            ]
+        items.append(
+            (
+                f"{name}-lr1e-6",
+                "attack",
+                attack,
+                1000,
+                ATTACK_STEPS,
+                [128, 512, 1000],
+                None,
+            )
+        )
+        defended = run / "cases" / f"{name}-defense/models/defense"
+        for case_name, role, reference, maximum, saves, state_saves, k in items:
+            folder = run / "cases" / case_name
+            for child in ("models", "logs", "status", "geometry", "surfaces", "cache"):
+                (folder / child).mkdir(parents=True, exist_ok=True)
+            (folder / "source").symlink_to(run / "source", target_is_directory=True)
+            if role == "attack":
+                (folder / "models/defense").symlink_to(
+                    defended, target_is_directory=True
+                )
+            config = case_config(
+                reference,
+                base_model=(
+                    original_cfg["base_model"] if role == "defense" else defended
+                ),
+                output=folder / "models" / role,
+                prepared=run / "cache" / role,
+                role=role,
+                steps=maximum,
+            )
+            config["wandb_name"] = case_name
+            config["wandb_project"] = "jwk-tar-rio-k-fidelity"
+            if role == "defense":
+                config["learning_rate"] = 1e-5
+                config["custom_trainer_args"].update(
+                    retain_coefficient=4.0,
+                    attack_learning_rate=1e-5,
+                    attack_max_steps=k,
+                    attack_epochs=max(1, k // 16),
+                )
+                if settings["kind"] == "replay":
+                    config["trainer_cls"] = (
+                        "tar_dynamics_training.RecordedReplayTARMETrainer"
+                    )
+                    config["custom_trainer_args"].update(
+                        attack_trace_path=(
+                            None
+                            if settings["order"] == "fresh"
+                            else str(run / "rio-attack-observed-batches.jsonl")
+                        ),
+                        attack_schedule_trace_path=(
+                            str(run / "rio-attack-observed-batches.jsonl")
+                            if settings["optimizer"] == "matched"
+                            else None
+                        ),
+                        attack_trace_order=(
+                            "forward"
+                            if settings["order"] == "fresh"
+                            else settings["order"]
+                        ),
+                        attack_optimizer_mode=settings["optimizer"],
+                    )
+            else:
+                config = copy.deepcopy(reference)
+                config.update(
+                    base_model=str(defended),
+                    output_dir=str(folder / "models/attack"),
+                    dataset_prepared_path=str(run / "cache/attack"),
+                    wandb_name=case_name,
+                    wandb_project="jwk-tar-rio-k-fidelity",
+                    save_steps=1000,
+                    save_strategy="steps",
+                    save_only_model=False,
+                    save_total_limit=len(ATTACK_STEPS) + 3,
+                )
+                config["trainer_cls"] = "tar_dynamics_training.RecordedRelearnTrainer"
+            (folder / "config.reference.yml").write_text(
+                yaml.safe_dump(reference, sort_keys=False)
+            )
+            (folder / "config.yml").write_text(yaml.safe_dump(config, sort_keys=False))
+            fidelity = (
+                settings
+                if settings["kind"] == "replay"
+                else {"kind": "fresh", "order": "fresh", "optimizer": "legacy"}
+            )
+            label = (
+                f"RIO K={k}; 125 outer updates; fresh sampled inner batches; legacy AdamW"
+                if settings["kind"] == "fresh"
+                else f"RIO K=16 fidelity; {fidelity['order']} data; {fidelity['optimizer']} AdamW"
+            )
+            case = {
+                "name": case_name,
+                "label": label,
+                "condition": name,
+                "family": "k" if settings["kind"] == "fresh" else "fidelity",
+                "role": role,
+                "folder": str(folder),
+                "config": str(folder / "config.yml"),
+                "reference_config": str(
+                    rio_cfg_path if role == "defense" else control / "config.yml"
+                ),
+                "max_steps": maximum,
+                "save_steps": list(saves),
+                "state_steps": state_saves,
+                "defense_reference": str(
+                    original_cfg["base_model"] if role == "defense" else defended
+                ),
+                "bootstrap_seed": None,
+                "inner_steps_per_update": k,
+                "simulation_steps": k,
+                "attack_learning_rate": None if role == "defense" else 1e-6,
+                "gaussian_sigma": None,
+                "base_model": original_cfg["base_model"],
+                "k": k,
+                "simulation_data_policy": fidelity["order"],
+                "simulation_optimizer": fidelity["optimizer"],
+                "fidelity": fidelity,
+            }
+            cases[case_name] = case
+            program["bundles"]["defenses" if role == "defense" else "attacks"].append(
+                case_name
+            )
+            program["bundles"]["all"].append(case_name)
+            dump(folder / "case.json", case)
+            exports = {
+                "TAR_CASE_NAME": case_name,
+                "TAR_CASE_ROLE": role,
+                "TAR_CASE_CONFIG": str(folder / "config.yml"),
+                "DYNAMICS_SAVE_STEPS": ",".join(map(str, saves)),
+                "DYNAMICS_STATE_STEPS": ",".join(map(str, state_saves)),
+            }
+            if role == "attack":
+                exports["DYNAMICS_SOURCE_MANIFEST"] = str(
+                    folder / "source-dataset.json"
+                )
+                analysis = analysis_settings(
+                    run, program, case, json.loads((run / "probes.json").read_text())
+                )
+                analysis.update(
+                    defense_checkpoint_root=str(defended),
+                    defense_steps=list(DEFENSE_STEPS),
+                    defense_frames=[0, 8, 16, 32, 64, 96, 125],
+                    broad_defense_frames=[0, 8, 32, 125],
+                )
+                dump(folder / "study.json", analysis)
+            (folder / "runtime.sh").write_text(
+                "\n".join(
+                    f"export {key}={shlex.quote(value)}"
+                    for key, value in exports.items()
+                )
+                + "\n"
+            )
+    # The existing RIO K16 attack is an analysis control as well as a training control.
+    program["reused_k16_rio_attack"] = str(rio_study / "cases/hparam-rio-lr1e-6")
+    program["evaluation_cases"] = list(program["bundles"]["attacks"])
+    program["prepared_cache_sources"] = {
+        role: str(path) for role, path in cache_sources.items()
+    }
+    program["source_sha256"] = {
+        str(path.relative_to(run)): hashlib.sha256(path.read_bytes()).hexdigest()
+        for path in (run / "source").rglob("*")
+        if path.is_file()
+    }
+    dump(run / "study.json", program)
+    print(
+        f"Prepared RIO K study with {len(cases)} new cases and reused RIO K16 control"
+    )
 
 
 def prepare_checkpoint_comparison(
@@ -1356,6 +2113,10 @@ def main():
         type=Path,
         help="JSON file mapping condition names to the three factor values",
     )
+    p = sub.add_parser("prepare-rio-study")
+    p.add_argument("run", type=Path)
+    for name in ("example", "original", "baseline", "compute", "rio-study"):
+        p.add_argument(f"--{name}", type=Path, required=True)
     p = sub.add_parser("verify-checkpoint-comparison")
     p.add_argument("run", type=Path)
     args = parser.parse_args()
@@ -1387,6 +2148,15 @@ def main():
             args.baseline,
             args.compute,
             json.loads(args.matrix.read_text()) if args.matrix is not None else None,
+        )
+    elif args.stage == "prepare-rio-study":
+        prepare_rio_study(
+            args.run,
+            args.example,
+            args.original,
+            args.baseline,
+            args.compute,
+            args.rio_study,
         )
     else:
         validate_case(args.folder)

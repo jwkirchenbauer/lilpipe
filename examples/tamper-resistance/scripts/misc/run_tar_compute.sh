@@ -21,6 +21,42 @@ unset LOCAL_RANK RANK WORLD_SIZE LOCAL_WORLD_SIZE
 mkdir -p "$run/logs" "$run/status"
 if [[ "$mode" == verify ]]; then
     python "$source_root/misc/tar_compute.py" verify-checkpoint-comparison "$run"
+elif [[ "$mode" == parity ]]; then
+    folder="$run/pilots/$name"
+    source "$folder/runtime.sh"
+    export WANDB_DIR="$folder/logs"
+    mkdir -p "$folder/status" "$folder/logs"
+    test ! -e "$folder/status/train.json"
+    trap 'result=$?; if (( result != 0 )); then printf "{\"state\":\"failed\",\"exit_code\":%d}\n" "$result" > "$folder/status/train.json"; fi' EXIT
+    printf '{"state":"running"}\n' > "$folder/status/train.json"
+    python - <<'PY'
+import torch
+from accelerate import PartialState
+from accelerate.utils import DistributedType
+state = PartialState()
+assert state.distributed_type == DistributedType.NO and state.num_processes == 1
+assert torch.cuda.device_count() == 4
+assert torch.backends.cuda.preferred_blas_library() == torch._C._BlasBackend.Cublas
+print("Parity: actual Axolotl placement, one process and four GPUs", flush=True)
+PY
+    axolotl train "$TAR_CASE_CONFIG" --launcher python
+    python - "$folder" <<'PY'
+import json
+import sys
+from pathlib import Path
+folder = Path(sys.argv[1])
+model = folder / "models/attack"
+result = json.loads((model / "parity/validation.json").read_text())
+assert result["state"] == "complete" and result["actual_updates"] == 16
+assert result["actual_horizon"] == 1000
+state = json.loads((model / "checkpoint-16/trainer_state.json").read_text())
+assert state["global_step"] == 16
+for step in (1, 2, 4, 8, 16):
+    assert (model / f"checkpoint-{step}/model.safetensors").is_file()
+    assert (model / f"parity/simulated-{step}/model.safetensors").is_file()
+print("Actual/simulated prefix parity:", result["trajectory_parity"], flush=True)
+PY
+    printf '{"state":"complete"}\n' > "$folder/status/train.json"
 elif [[ "$mode" == bundle ]]; then
     python "$source_root/misc/tar_compute.py" list "$run" "$name" > "$run/status/bundle-$name.cases"
     mapfile -t cases < "$run/status/bundle-$name.cases"

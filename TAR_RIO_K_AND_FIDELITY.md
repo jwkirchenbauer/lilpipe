@@ -32,9 +32,9 @@ prediction of the number of actual attack updates resisted.
 
 At K16, cross two simulation data policies with two optimizer policies:
 
-| Simulation data | Legacy RIO optimizer | Actual-prefix optimizer settings |
+| Simulation data | Legacy RIO update protocol | Actual-prefix update protocol |
 |---|---|---|
-| Fresh original per-outer simulation examples | Existing RIO control | New optimizer-only contrast |
+| Fresh original per-outer simulation examples | Existing RIO control | New update-protocol contrast |
 | Exact first 16 standard-attack minibatches, repeated at every outer call | New data-only contrast | New joint contrast |
 
 Also reverse the same fixed 16 minibatches under both optimizer policies.
@@ -46,6 +46,16 @@ label masking differs. Replaying exact minibatches matches the full tokens,
 masks, and labels as well as the selected examples. Therefore the fresh-versus-
 prefix contrast includes input preparation and repeated use of a small pool;
 it does not isolate source-document identity alone.
+
+The initial 7B parity pilot reproduced every checked actual attacker state
+exactly, but its copied simulation diverged after the first update. A small
+controlled regression identified stale automatic mixed-precision (AMP) casts
+when one autocast context spans multiple optimizer updates. The matched update
+protocol refreshes that cache after every update; a second real-model pilot
+checks this correction. The primary K sweep and legacy replay conditions keep
+the original cache behavior. This makes the matched-versus-legacy comparison
+a full update-protocol comparison, including arithmetic context, rather than
+an attribution to a single optimizer hyperparameter.
 
 Legacy AdamW uses constant LR 1e-5, weight decay 0.01, and no inner clipping.
 The matched setting uses the actual attack prefix's recorded LR values from

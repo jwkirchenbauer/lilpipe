@@ -25,6 +25,55 @@ from tar_dynamics_training import (
 from trainers.tr_tar import adamw_attack
 
 
+def test_matched_inner_updates_refresh_amp_weight_casts_between_steps():
+    import copy
+
+    class LinearLoss(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.linear = nn.Linear(3, 2)
+
+        def forward(self, input_ids, attention_mask, labels):
+            logits = self.linear(input_ids.float())
+            return SimpleNamespace(
+                loss=nn.functional.cross_entropy(logits, labels[:, 0])
+            )
+
+    torch.manual_seed(17)
+    inner = LinearLoss()
+    actual = copy.deepcopy(inner)
+    inputs = {
+        "input_ids": torch.tensor([[1, 2, 3], [3, 2, 1], [2, 1, 3], [1, 3, 2]]),
+        "attention_mask": torch.ones(4, 3, dtype=torch.long),
+        "labels": torch.tensor([[0], [1], [1], [0]]),
+    }
+    rates = [0.02, 0.019, 0.018, 0.017]
+    # TAR's surrounding context lives for the whole simulated trajectory.
+    with torch.autocast("cpu", dtype=torch.bfloat16):
+        adamw_attack(
+            inner,
+            inputs,
+            attack_optimizer_mode="matched",
+            attack_max_steps=4,
+            attack_learning_rate=rates[0],
+            attack_learning_rates=rates,
+        )
+    optimizer = torch.optim.AdamW(actual.parameters(), lr=rates[0], weight_decay=0)
+    # A genuine Trainer enters and exits autocast for every optimizer update.
+    for step, rate in enumerate(rates):
+        optimizer.param_groups[0]["lr"] = rate
+        optimizer.zero_grad(set_to_none=True)
+        with torch.autocast("cpu", dtype=torch.bfloat16):
+            loss = actual(
+                **{key: value[step : step + 1] for key, value in inputs.items()}
+            ).loss
+        loss.backward()
+        torch.nn.utils.clip_grad_norm_(actual.parameters(), 1.0)
+        optimizer.step()
+    for simulated, measured in zip(inner.parameters(), actual.parameters()):
+        torch.testing.assert_close(simulated, measured, rtol=0, atol=0)
+
+
 class ToyLanguageModel(nn.Module):
     def __init__(self):
         super().__init__()

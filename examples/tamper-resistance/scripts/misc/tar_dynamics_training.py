@@ -408,6 +408,11 @@ class RecordedReplayTARMETrainer(RecordedTARMETrainer):
                 "frozen_trace" if batches is not None else "fresh_outer_batch"
             ),
             "attack_optimizer_mode": self.attack_optimizer_mode,
+            "amp_parameter_cache_policy": (
+                "refresh_after_step"
+                if self.attack_optimizer_mode == "matched"
+                else "legacy_enclosing_context"
+            ),
             "optimizer": {
                 "class": "torch.optim.AdamW",
                 "betas": [0.9, 0.999],

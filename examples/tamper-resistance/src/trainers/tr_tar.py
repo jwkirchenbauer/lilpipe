@@ -206,6 +206,11 @@ def adamw_attack(
                     torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
                 )
             optimizer.step()
+            if attack_optimizer_mode == "matched":
+                # TAR's caller keeps one autocast context open across the loop.
+                # Cached FP32 parameter casts otherwise retain pre-update values.
+                # A genuine Trainer ends that context after every forward.
+                torch.clear_autocast_cache()
             inner_step += 1
             if on_inner_step is not None:
                 on_inner_step(

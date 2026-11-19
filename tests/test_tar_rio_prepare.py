@@ -217,6 +217,12 @@ def test_prepare_rio_study_emits_k_and_fidelity_cases(tmp_path):
         assert case["inner_steps_per_update"] == case["simulation_steps"] == k
         assert case["family"] == "k"
         assert case["simulation_data_policy"] == "fresh"
+        attack_case = json.loads(
+            (run / "cases" / f"{name}-lr1e-6/case.json").read_text()
+        )
+        assert attack_case["inner_steps_per_update"] == k
+        assert attack_case["simulation_steps"] == attack_case["k"] == k
+        assert f"K={k}" in attack_case["label"]
     for name, order, optimizer in (
         ("rio-prefix-forward-legacy", "forward", "legacy"),
         ("rio-prefix-reverse-legacy", "reverse", "legacy"),
@@ -245,6 +251,12 @@ def test_prepare_rio_study_emits_k_and_fidelity_cases(tmp_path):
         assert "data" in case["label"]
         assert case["simulation_data_policy"] == order
         assert case["simulation_optimizer"] == optimizer
+        attack_case = json.loads(
+            (run / "cases" / f"{name}-lr1e-6/case.json").read_text()
+        )
+        assert attack_case["inner_steps_per_update"] == 16
+        assert attack_case["simulation_steps"] == attack_case["k"] == 16
+        assert "K=16" in attack_case["label"]
 
 
 def test_rio_input_order_validation_checks_outer_sampler(tmp_path):

@@ -8,6 +8,7 @@ import json
 import math
 import os
 import runpy
+import uuid
 from pathlib import Path
 
 import numpy as np
@@ -18,6 +19,29 @@ def dump(path, value):
     temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
     temporary.write_text(json.dumps(value, indent=2) + "\n")
     temporary.replace(path)
+
+
+def atomic_savez(path, **arrays):
+    """Publish an NPZ archive only after NumPy finishes writing it."""
+    path = Path(path)
+    temporary = path.with_name(f".{path.name}.{uuid.uuid4().hex}.tmp")
+    try:
+        with temporary.open("wb") as stream:
+            np.savez(stream, **arrays)
+        temporary.replace(path)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def atomic_dataframe_csv(frame, path):
+    """Publish a DataFrame CSV through a same-directory atomic replacement."""
+    path = Path(path)
+    temporary = path.with_name(f".{path.name}.{uuid.uuid4().hex}.tmp")
+    try:
+        frame.to_csv(temporary, index=False)
+        temporary.replace(path)
+    finally:
+        temporary.unlink(missing_ok=True)
 
 
 def plane_coefficients(
@@ -910,7 +934,7 @@ def surfaces(study, settings):
         print("Actual checkpoint:", row, flush=True)
     if not reuse_actual:
         save_rows("actual-losses.csv", actual)
-        np.savez(
+        atomic_savez(
             study / "surfaces/minibatch-losses.npz",
             losses=np.array(matrix),
             steps=matrix_steps,
@@ -1963,7 +1987,7 @@ def random_frames(study, settings):
             print("Broad random frame:", phase, step, flush=True)
     data = pd.DataFrame(rows)
     assert len(rows) == len(frames) * resolution**2
-    data.to_csv(study / "surfaces/random-evolution.csv", index=False)
+    atomic_dataframe_csv(data, study / "surfaces/random-evolution.csv")
     low, high = data.probe_loss.min(), data.probe_loss.max()
     if low == high:
         padding = max(abs(float(low)), 1) * 1e-6

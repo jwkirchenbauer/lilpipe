@@ -156,6 +156,150 @@ def test_rio_defense_reference_normalizes_models_defense_path(tmp_path):
     )
 
 
+def test_rio_attack_metadata_falls_back_to_paired_defense_k_and_label(tmp_path):
+    run = tmp_path / "study"
+    defense = run / "cases/rio-k4-defense"
+    attack = run / "cases/rio-k4-lr1e-6"
+    defense.mkdir(parents=True)
+    attack.mkdir(parents=True)
+    defense_declaration = {
+        "role": "defense",
+        "condition": "rio-k4",
+        "folder": str(defense),
+        "label": "RIO K=4; 125 outer updates; fresh sampled inner batches; legacy AdamW",
+        "simulation_steps": 4,
+        "inner_steps_per_update": 4,
+        "k": 4,
+    }
+    attack_declaration = {
+        "role": "attack",
+        "condition": "rio-k4",
+        "family": "k",
+        "label": "RIO K=None; legacy attack",
+        "folder": str(attack),
+        "defense_reference": str(defense / "models/defense"),
+        "simulation_steps": None,
+        "inner_steps_per_update": None,
+        "k": None,
+    }
+
+    result = MODULE._rio_simulation_metadata(
+        run,
+        {"cases": {"rio-k4-defense": defense_declaration}},
+        "rio-k4-lr1e-6",
+        attack_declaration,
+    )
+
+    assert result == {
+        "k": 4,
+        "label": defense_declaration["label"],
+        "issues": [],
+    }
+
+
+@pytest.mark.parametrize("policy", ["forward", "reverse"])
+def test_rio_case_replay_audit_requires_trace_hashes_for_forward_reverse(
+    tmp_path, policy
+):
+    defense = tmp_path / "cases/fidelity-defense"
+    log = defense / "models/defense/replay-inner.jsonl"
+    log.parent.mkdir(parents=True)
+    rows = []
+    for outer_step in range(1, 126):
+        rows.append(
+            {
+                "outer_step": outer_step,
+                "attack_max_steps": 16,
+                "inner_step_count": 16,
+                "inner_steps": [{"supervised_tokens": 1} for _ in range(16)],
+                "supervised_tokens": 16,
+                "replay_batch_sequence_sha256": "c" * 64,
+                # Deliberately omit attack_trace_sha256.
+            }
+        )
+    log.write_text("\n".join(json.dumps(row) for row in rows) + "\n")
+
+    audit = MODULE._rio_case_replay_audit(
+        tmp_path,
+        "rio-prefix-test-lr1e-6",
+        {
+            "family": "fidelity",
+            "simulation_steps": 16,
+            "simulation_data_policy": policy,
+            "simulation_optimizer": "legacy",
+        },
+        defense,
+        resolved_k=16,
+    )
+
+    assert not audit["complete"]
+    assert any("identity hashes are missing" in issue for issue in audit["issues"])
+
+
+@pytest.mark.parametrize(
+    "policy,optimizer",
+    [
+        ("forward", "legacy"),
+        ("reverse", "legacy"),
+        ("fresh", "matched"),
+        ("forward", "matched"),
+        ("reverse", "matched"),
+    ],
+)
+def test_fidelity_replay_audits_use_resolved_defense_k(tmp_path, policy, optimizer):
+    name = "fidelity-lr1e-6"
+    defense = tmp_path / "cases/fidelity-defense"
+    log = defense / "models/defense/replay-inner.jsonl"
+    log.parent.mkdir(parents=True)
+    declaration = {
+        "role": "attack",
+        "family": "fidelity",
+        "condition": "fidelity",
+        "defense_reference": str(defense / "models/defense"),
+        "simulation_steps": None,
+        "inner_steps_per_update": None,
+        "k": None,
+        "simulation_data_policy": policy,
+        "simulation_optimizer": optimizer,
+    }
+    program = {
+        "cases": {
+            "fidelity-defense": {
+                "role": "defense",
+                "condition": "fidelity",
+                "folder": str(defense),
+                "simulation_steps": 16,
+                "label": "RIO K=16 fidelity condition",
+            },
+            name: declaration,
+        }
+    }
+    rows = [
+        {
+            "outer_step": step,
+            "attack_max_steps": 16,
+            "inner_step_count": 16,
+            "inner_steps": [{"supervised_tokens": 3} for _ in range(16)],
+            "supervised_tokens": 48,
+            "attack_trace_sha256": "a" * 64,
+            "attack_schedule_trace_sha256": "b" * 64,
+            "replay_batch_sequence_sha256": "c" * 64,
+        }
+        for step in range(1, 126)
+    ]
+    log.write_text("\n".join(json.dumps(row) for row in rows) + "\n")
+    metadata = MODULE._rio_simulation_metadata(tmp_path, program, name, declaration)
+    audit = MODULE._rio_case_replay_audit(
+        tmp_path, name, declaration, defense, resolved_k=metadata["k"]
+    )
+    assert metadata["k"] == 16
+    assert not metadata["issues"]
+    assert audit["complete"], audit["issues"]
+    assert audit["outer_steps"] == 125
+    assert audit["inner_steps"] == 2000
+    assert audit["supervised_tokens"] == 6000
+
+
 def test_rio_replay_audit_uses_emitted_fidelity_schema(tmp_path):
     replay = tmp_path / "replay-inner.jsonl"
     rows = []

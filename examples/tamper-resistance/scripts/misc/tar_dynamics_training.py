@@ -154,9 +154,17 @@ class DynamicsCallback(TrainerCallback):
         )
         if self.state_steps is not None and not self.state_steps <= self.save_steps:
             raise ValueError("Optimizer-state steps must also be model-save steps")
+        stop_step = os.environ.get("DYNAMICS_STOP_STEP")
+        self.stop_step = None if stop_step is None else int(stop_step)
+        if self.stop_step is not None and self.stop_step <= 0:
+            raise ValueError("DYNAMICS_STOP_STEP must be positive")
 
     def on_step_end(self, args, state, control, **kwargs):
         trainer = self.trainer
+        if self.stop_step is not None and state.global_step > self.stop_step:
+            raise RuntimeError(
+                f"Training passed requested segment stop {self.stop_step}"
+            )
         record = trainer._dynamics_record
         assert record["step"] == state.global_step
         record["elapsed_seconds"] = time.perf_counter() - trainer._dynamics_started
@@ -177,8 +185,15 @@ class DynamicsCallback(TrainerCallback):
             handle.write(json.dumps(record, separators=(",", ":")) + "\n")
         trainer._dynamics_record = None
         trainer._dynamics_batch = None
+        if self.stop_step is not None:
+            if state.global_step == self.stop_step:
+                # A segment boundary must be resumable even when it is not one
+                # of the study's ordinary model-only observation checkpoints.
+                args.save_only_model = False
+                control.should_save = True
+                control.should_training_stop = True
         if state.global_step in self.save_steps:
-            if self.state_steps is not None:
+            if self.state_steps is not None and state.global_step != self.stop_step:
                 args.save_only_model = state.global_step not in self.state_steps
             control.should_save = True
         return control
@@ -193,7 +208,10 @@ class RecordingMixin:
             raise ValueError("This observation run requires accumulation=1")
         self._dynamics_record = None
         self._dynamics_batch = None
-        self._dynamics_started = time.perf_counter()
+        elapsed_offset = float(os.environ.get("DYNAMICS_ELAPSED_OFFSET", "0"))
+        if elapsed_offset < 0 or not math.isfinite(elapsed_offset):
+            raise ValueError("DYNAMICS_ELAPSED_OFFSET must be finite and nonnegative")
+        self._dynamics_started = time.perf_counter() - elapsed_offset
         self._source_lookup = None
         manifest = os.environ.get("DYNAMICS_SOURCE_MANIFEST")
         if manifest:
@@ -203,6 +221,10 @@ class RecordingMixin:
             )
         steps = [int(value) for value in os.environ["DYNAMICS_SAVE_STEPS"].split(",")]
         self.add_callback(DynamicsCallback(self, steps))
+        inner_offset = int(os.environ.get("DYNAMICS_INNER_OFFSET", "0"))
+        if inner_offset < 0:
+            raise ValueError("DYNAMICS_INNER_OFFSET must be nonnegative")
+        self.inner_step_total = inner_offset
 
     def training_step(self, model, inputs, *args, **kwargs):
         started = time.perf_counter()

@@ -2216,6 +2216,7 @@ def checkpoint_record(name, folder, schedule_steps, declarations=None):
     ]
     return {
         "name": name,
+        "label": declarations.get("label") or case.get("label") or name,
         "folder": folder,
         "schedule_steps": int(schedule_steps),
         "declarations": declarations,
@@ -2653,6 +2654,52 @@ def _rio_defense_folder(run, name, declaration):
     return path
 
 
+def _rio_simulation_metadata(run, program, name, declaration):
+    """Resolve simulation K/label, falling back to its paired defense case."""
+    def_folder = _rio_defense_folder(run, name, declaration)
+    paired = [
+        case
+        for case in program.get("cases", {}).values()
+        if case.get("role") == "defense"
+        and case.get("folder")
+        and Path(case["folder"]).resolve() == def_folder
+    ]
+    if not paired and declaration.get("condition"):
+        paired = [
+            case
+            for case in program.get("cases", {}).values()
+            if case.get("role") == "defense"
+            and case.get("condition") == declaration["condition"]
+        ]
+    issues = []
+    if len(paired) > 1:
+        issues.append("Paired defense declaration is ambiguous for simulation K")
+        defense = {}
+    elif paired:
+        defense = paired[0]
+    else:
+        defense = {}
+        issues.append("Paired defense declaration is missing for simulation K")
+
+    def read_k(case):
+        for field in ("simulation_steps", "inner_steps_per_update", "k"):
+            value = case.get(field)
+            if type(value) is int and value > 0:
+                return value
+        return None
+
+    attack_k = read_k(declaration)
+    k_value = attack_k or read_k(defense)
+    if k_value is None:
+        issues.append(
+            "Simulation K is missing from attack and paired defense declarations"
+        )
+    label = declaration.get("label") or ""
+    if attack_k is None or not label:
+        label = defense.get("label") or label or name
+    return {"k": k_value, "label": label, "issues": issues}
+
+
 def _rio_replay_audit(path, expected_k, *, require_trace=False, require_schedule=False):
     records = []
     if Path(path).exists():
@@ -2707,10 +2754,10 @@ def _rio_replay_audit(path, expected_k, *, require_trace=False, require_schedule
     }
 
 
-def _rio_case_replay_audit(run, name, declaration, defense_folder):
+def _rio_case_replay_audit(run, name, declaration, defense_folder, resolved_k=None):
     if declaration.get("family") != "fidelity":
         return None
-    k_value = declaration.get(
+    k_value = resolved_k or declaration.get(
         "simulation_steps",
         declaration.get(
             "inner_steps_per_update", declaration.get("k", declaration.get("fidelity"))
@@ -2722,7 +2769,7 @@ def _rio_case_replay_audit(run, name, declaration, defense_folder):
         defense_folder / "models/defense/replay-inner.jsonl",
         k_value,
         require_trace=declaration.get("simulation_data_policy")
-        in {"prefix-forward", "prefix-reverse"},
+        in {"forward", "reverse", "prefix-forward", "prefix-reverse"},
         require_schedule=declaration.get("simulation_optimizer") == "matched",
     )
 
@@ -3205,6 +3252,10 @@ def rio_report(run):
         raise ValueError(
             "RIO report is missing one or more declared fidelity/data/optimizer attack cases"
         )
+    simulation_metadata = {
+        name: _rio_simulation_metadata(run, program, name, declaration)
+        for name, declaration in attack_declarations.items()
+    }
     controls = program["comparison_controls"]
     records = {
         name: checkpoint_record(
@@ -3214,11 +3265,13 @@ def rio_report(run):
     }
     for name, case in attack_declarations.items():
         records[name] = checkpoint_record(name, run / "cases" / name, case["max_steps"])
+        records[name]["label"] = simulation_metadata[name]["label"]
     validations = {
         name: checkpoint_validation(record, program, read_json(run / "probes.json"))
         for name, record in records.items()
     }
     for name in attack_declarations:
+        validations[name]["issues"].extend(simulation_metadata[name]["issues"])
         folder = run / "cases" / name
         training = read_json(folder / "training-validation.json")
         if training.get("state") != "passed":
@@ -3237,7 +3290,13 @@ def rio_report(run):
                 "Simulation data or optimizer provenance is missing"
             )
         defense_folder = _rio_defense_folder(run, name, declaration)
-        audit = _rio_case_replay_audit(run, name, declaration, defense_folder)
+        audit = _rio_case_replay_audit(
+            run,
+            name,
+            declaration,
+            defense_folder,
+            resolved_k=simulation_metadata[name]["k"],
+        )
         if audit is not None:
             validations[name]["replay_inner_audit"] = audit
             validations[name]["issues"].extend(audit["issues"])
@@ -3460,10 +3519,7 @@ def rio_report(run):
         runtime = read_json(defense_folder / "runtime.json")
         policy = case.get("simulation_data_policy", "not declared")
         optimizer = case.get("simulation_optimizer", "not declared")
-        k_value = case.get(
-            "simulation_steps",
-            case.get("inner_steps_per_update", case.get("k", case.get("fidelity"))),
-        )
+        k_value = simulation_metadata[name]["k"]
         train_seconds = number(training.get("training_elapsed_seconds"))
         audit = validations[name].get("replay_inner_audit", {})
         if audit:
@@ -3502,6 +3558,7 @@ def rio_report(run):
             "## Scope",
             "",
             "The control and each case are checked for declared checkpoints, shared fixed probes, matching corpus revision, saved shared directions, complete evaluation frames, paired defense status, and the replay-inner audit. Missing measurements stop this final report. Fresh-original versus exact-prefix simulation changes padding and target-label construction as well as example source, so it cannot be attributed only to source identity. Forward versus reverse replays use the same fixed minibatch pool and token budget, isolating order. Per-case generated figures and the source study record are the provenance for projected CE and landscapes. No full parity or continuous-state claim follows from these finite observations.",
+            "The K sweep and reused legacy K16 condition retain the original enclosing AMP autocast behavior; that source does not refresh cached parameter casts after each inner optimizer update. The v1 real-model parity pilot with that cache behavior matched update 1 and diverged at later checked states. The v2 per-update cache refresh matched the five checked parameter states and all 16 losses at its tested anchor. Thus K results describe the frozen legacy simulator conditions and are not numerical parity claims about actual attacker trajectories.",
             "",
         ]
     )

@@ -51,8 +51,11 @@ The initial 7B parity pilot reproduced every checked actual attacker state
 exactly, but its copied simulation diverged after the first update. A small
 controlled regression identified stale automatic mixed-precision (AMP) casts
 when one autocast context spans multiple optimizer updates. The matched update
-protocol refreshes that cache after every update; a second real-model pilot
-checks this correction. The primary K sweep and legacy replay conditions keep
+protocol refreshes that cache after every update. The second 7B pilot matched
+all 7.24 billion parameters exactly at updates 1, 2, 4, 8, and 16, and matched
+all 16 training losses exactly. This verifies the tested prefix at the archived
+RIO defender; robustness and fidelity at later defenders remain separate
+measurements. The primary K sweep and legacy replay conditions keep
 the original cache behavior. This makes the matched-versus-legacy comparison
 a full update-protocol comparison, including arithmetic context, rather than
 an attribution to a single optimizer hyperparameter.

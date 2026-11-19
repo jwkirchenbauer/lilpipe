@@ -1356,7 +1356,7 @@ def prepare_rio_study(run, example, original, baseline, compute, rio_study):
                 1000,
                 ATTACK_STEPS,
                 [128, 512, 1000],
-                None,
+                settings["k"] if settings["kind"] == "fresh" else 16,
             )
         )
         defended = run / "cases" / f"{name}-defense/models/defense"
@@ -1434,11 +1434,18 @@ def prepare_rio_study(run, example, original, baseline, compute, rio_study):
                 if settings["kind"] == "replay"
                 else {"kind": "fresh", "order": "fresh", "optimizer": "legacy"}
             )
-            label = (
-                f"RIO K={k}; 125 outer updates; fresh sampled inner batches; legacy AdamW"
-                if settings["kind"] == "fresh"
-                else f"RIO K=16 fidelity; {fidelity['order']} data; {fidelity['optimizer']} AdamW"
-            )
+            if settings["kind"] == "fresh":
+                label = (
+                    f"RIO K={k}; 125 outer updates; fresh sampled inner batches; legacy AdamW"
+                    if role == "defense"
+                    else f"LR1e-6 standard attack against RIO K={k} defense"
+                )
+            else:
+                label = (
+                    f"RIO K=16 fidelity; {fidelity['order']} data; {fidelity['optimizer']} AdamW"
+                    if role == "defense"
+                    else f"LR1e-6 standard attack against RIO K=16; {fidelity['order']} data; {fidelity['optimizer']} AdamW defense"
+                )
             case = {
                 "name": case_name,
                 "label": label,

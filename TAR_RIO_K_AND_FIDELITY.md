@@ -5,6 +5,9 @@ This follows the [hyperparameter study](TAR_HPARAM_STUDY.md),
 [inner-versus-actual attack analysis](TAR_INNER_BASIS_STUDY.md).
 The prior work was committed and pushed through `d0681786` before this phase.
 
+Use `pbatch` for long runs and all production continuations. Do not chain jobs
+or split longer work across multiple `pdebug` allocations.
+
 Start every new defense from our original pinned Zephyr checkpoint. Use RIO:
 retain coefficient 4, outer learning rate 1e-5, 125 outer updates, and the
 existing data, precision, outer schedule, seeds, and maximum-entropy objective.

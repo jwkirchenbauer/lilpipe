@@ -35,6 +35,9 @@ creation or mutation requires the maintainer's current workflow and explicit aut
 The only acceptable way to run any meaningful piece of computational work is by using the launcher:
 `/p/vast1/kirchenb/llnl-tools/launch_tuo.py`
 
+Do not chain jobs or split longer work across multiple allocations in `pdebug`.
+Submit longer production work to `pbatch`.
+
 Feel free to use subagents as useful, _iff_ the next pieces of proposed work happen to be non-blocking and are best handled independently. 
 Note that my default subagent setting is conservative (luna-low, verify in my global ~/.codex/config.toml).
 So, if more horsepower is necessary because the subtasks are all equivalently complex and open ended as the main thread's work, then spawn the subagents with the same level of reasoning as the main agent for the session. 

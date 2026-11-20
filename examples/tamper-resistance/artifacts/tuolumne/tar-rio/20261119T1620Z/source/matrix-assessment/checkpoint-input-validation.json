@@ -1,0 +1,57 @@
+{
+  "state": "prepared",
+  "control": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-lr1e-6",
+  "expected_points": [
+    {
+      "c0": -125,
+      "c1": -125,
+      "probe_loss": 12.394662666320801
+    },
+    {
+      "c0": -125,
+      "c1": 0,
+      "probe_loss": 11.403730583190917
+    },
+    {
+      "c0": -125,
+      "c1": 125,
+      "probe_loss": 12.419066429138184
+    },
+    {
+      "c0": 0,
+      "c1": -125,
+      "probe_loss": 11.215188789367676
+    },
+    {
+      "c0": 0,
+      "c1": 0,
+      "probe_loss": 14.407840919494628
+    },
+    {
+      "c0": 0,
+      "c1": 125,
+      "probe_loss": 11.24739875793457
+    },
+    {
+      "c0": 125,
+      "c1": -125,
+      "probe_loss": 12.451097679138183
+    },
+    {
+      "c0": 125,
+      "c1": 0,
+      "probe_loss": 11.36212215423584
+    },
+    {
+      "c0": 125,
+      "c1": 125,
+      "probe_loss": 12.459885215759277
+    }
+  ],
+  "tolerance_nats": 0.01,
+  "submitted": false,
+  "runtime_commit": "45ef3d0c",
+  "reviewed_dryrun": "launches/matrix-assessment/launch-k5zk5s7z",
+  "required_host_memory": "256G",
+  "source_hashes_verified": true
+}

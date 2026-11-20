@@ -1,0 +1,14 @@
+{
+  "basis_path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/random-basis.npy",
+  "shape": [
+    2,
+    7241732096
+  ],
+  "dtype": "float32",
+  "basis_bytes": 57933856768,
+  "model_plus_center_lower_bound_bytes": 28966928384,
+  "total_lower_bound_gib": 80.93266296386719,
+  "h100_total_gib": 79.2222900390625,
+  "ignores_workspace_and_logits": true,
+  "fits_unchanged": false
+}

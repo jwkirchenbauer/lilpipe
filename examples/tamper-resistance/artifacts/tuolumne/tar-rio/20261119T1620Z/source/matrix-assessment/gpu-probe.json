@@ -1,0 +1,36 @@
+{
+  "state": "complete",
+  "host": "matrix11",
+  "python": "3.12.16",
+  "prefix": "/usr/WS2/kirchenb/matrix-torch-cu126-demo",
+  "versions": {
+    "torch": "2.14.1+cu126",
+    "numpy": "2.5.5",
+    "safetensors": null,
+    "transformers": null,
+    "accelerate": null,
+    "datasets": null,
+    "axolotl": null,
+    "lm_eval": null,
+    "matplotlib": null,
+    "scipy": null,
+    "pandas": null,
+    "pillow": null,
+    "tokenizers": null,
+    "peft": null,
+    "trl": null,
+    "wandb": null
+  },
+  "slurm_job_id": "515334",
+  "created_epoch": 1795200012.7610676,
+  "device": {
+    "name": "NVIDIA H100 80GB HBM3",
+    "total_memory_bytes": 85064286208,
+    "compute_capability": [
+      9,
+      0
+    ],
+    "visible_devices": "0"
+  },
+  "bf16_matmul": "passed"
+}

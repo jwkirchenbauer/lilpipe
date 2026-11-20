@@ -1,0 +1,15 @@
+{
+  "observed_at": "2026-11-20T18:40:31Z",
+  "cluster": "matrix",
+  "partition": "pbatch",
+  "account": "verival",
+  "method": "sbatch --test-only; no jobs submitted",
+  "reviewed_batch_script": "launches/matrix-assessment/launch-h7a5v9yd/launch.sh",
+  "payload_not_executed": true,
+  "forecasts": [
+    {"gpus": 1, "cpus": 28, "minutes": 180, "host_memory": "256G", "exclusive": false, "start_utc": "2026-11-20T19:31:04Z", "node": "matrix23"},
+    {"gpus": 1, "cpus": 28, "minutes": 180, "host_memory": "all", "exclusive": false, "start_utc": "2026-11-20T19:31:04Z", "node": "matrix29"},
+    {"gpus": 4, "cpus": 112, "minutes": 240, "host_memory": "all", "exclusive": true, "start_utc": "2026-11-20T19:31:04Z", "node": "matrix29"}
+  ],
+  "limitation": "Independent scheduler forecasts, not reserved starts, simultaneous capacity, or throughput measurements"
+}

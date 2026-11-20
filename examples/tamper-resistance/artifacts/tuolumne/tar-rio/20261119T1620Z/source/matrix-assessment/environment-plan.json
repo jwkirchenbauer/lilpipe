@@ -1,0 +1,61 @@
+{
+  "state": "installed",
+  "authorization": "User explicitly replied 'Go ahead' to the dedicated CUDA environment and checkpoint comparison request on 2026-11-20",
+  "target_prefix": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+  "source_manifest": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/runtime/tuolumne/eval/pyproject.toml",
+  "source_sha256": "e1b96bfaff0d9a5dfc8606ff62e26befe2969af880f7eb01ecd0c93fc4036df0",
+  "target_manifest": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/runtime/matrix/eval/pyproject.toml",
+  "target_sha256": "677d203fa991910a33fc9a480567403fe5b25a5e53d65e6ea7f67d5cac7acf3b",
+  "public_versions_preserved": true,
+  "torch_build_change": "2.12.1+rocm7.2 to 2.12.1+cu126",
+  "triton_change": "use CUDA torch native triton dependency instead of triton-rocm",
+  "installer_source": "/p/vast1/kirchenb/llnl-tools/install_matrix_mm_uv_env.sh",
+  "installer_source_sha256": "b58ce705ae9b7a7dbc1b56ca75713870420bcb203575485a2b0215731f19fb08",
+  "installer_path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/source/matrix-assessment/install_eval.sh",
+  "installer_changes": [
+    "point PROJECT_DIR to the Matrix evaluation manifest",
+    "use a fresh TAR CUDA prefix name",
+    "activate existing absolute CUDA prefix before environment commands",
+    "activate new absolute prefix before uv sync and Python"
+  ],
+  "environment_mutation_executed": true,
+  "lock_sha256": "353e19ecbc212f746fe07fb333a371f7358474b8c62f8e0be80600ae130e4716",
+  "lock_package_count": 123,
+  "common_non_torch_versions_preserved": 102,
+  "cuda_constraint_change": "Remove inherited CUDA 13 constraints; use CUDA 12 dependencies required by torch 2.12.1+cu126",
+  "installer_sha256": "4e7d4cd1baf2f069104df7a66112bf632cc18b34595733ee9f6555bfba0bd7b1",
+  "checkpoint_probe_sha256": "af1f946fe94c23521648a646a83f942714fce5dd59423b806e97164a00b04db5",
+  "matrix_dynamics_sha256": "100621fd0dbf64e21d2d5854711ab9717d1961a726e6f0ad0162ff510653264e",
+  "tests": {
+    "command": "python ../../tests/test_tar_dynamics.py",
+    "passed": 11,
+    "device": "cpu"
+  },
+  "installer_exit_code": 0,
+  "installed_inventory": {
+    "state": "inventory",
+    "host": "matrix1",
+    "python": "3.12.16",
+    "prefix": "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "versions": {
+      "torch": "2.12.1+cu126",
+      "numpy": "2.3.5",
+      "safetensors": "0.8.0",
+      "transformers": "5.14.1",
+      "accelerate": "1.13.0",
+      "datasets": "4.8.4",
+      "axolotl": null,
+      "lm_eval": "0.4.11",
+      "matplotlib": "3.11.1",
+      "scipy": "1.18.1",
+      "pandas": "2.3.3",
+      "pillow": "11.3.0",
+      "tokenizers": "0.22.2",
+      "peft": "0.19.1",
+      "trl": null,
+      "wandb": null
+    },
+    "slurm_job_id": null,
+    "created_epoch": 1795207465.5607407
+  }
+}

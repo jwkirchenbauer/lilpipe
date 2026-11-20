@@ -1,0 +1,26 @@
+{
+  "state": "inventory",
+  "host": "matrix2",
+  "python": "3.12.16",
+  "prefix": "/usr/WS2/kirchenb/matrix-torch-cu126-demo",
+  "versions": {
+    "torch": "2.14.1+cu126",
+    "numpy": "2.5.5",
+    "safetensors": null,
+    "transformers": null,
+    "accelerate": null,
+    "datasets": null,
+    "axolotl": null,
+    "lm_eval": null,
+    "matplotlib": null,
+    "scipy": null,
+    "pandas": null,
+    "pillow": null,
+    "tokenizers": null,
+    "peft": null,
+    "trl": null,
+    "wandb": null
+  },
+  "slurm_job_id": null,
+  "created_epoch": 1795199146.7990887
+}

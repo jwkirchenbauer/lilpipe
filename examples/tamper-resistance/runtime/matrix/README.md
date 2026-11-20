@@ -15,11 +15,13 @@ directory to `runtime/matrix/eval`, activate absolute prefixes inside interactiv
 Bash with `set -e`, and sync with `uv sync --locked`. Existing prefixes must
 remain independent. Use `UV_SYSTEM_CERTS=true` for the cluster certificates.
 
-The proposed prefix is
+The installed prefix is
 `/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1`. The first assessment and
 prepared installer are recorded under
 `artifacts/tuolumne/tar-rio/20261119T1620Z/source/matrix-assessment`.
-As of preparation on 2026-11-20, this prefix has not been installed.
+The user authorized installation on 2026-11-20. The maintainer's fresh-prefix
+workflow completed successfully with `torch=2.12.1+cu126`, CUDA 12.6, and
+Python 3.12.16. Existing environments were preserved.
 
 Launch on Matrix through `/p/vast1/kirchenb/llnl-tools/launch_matrix.py`, using
 `pbatch` and account `verival`. Its default CUDA module is unavailable on Matrix;
@@ -33,6 +35,11 @@ directions, and measure H100 memory use before moving workloads. Changing the
 training backend also changes the experiment; bitwise replay checks remain on
 Tuolumne unless separately validated. Queue estimates and starter probes do not
 establish model-level equivalence or production throughput.
+
+The subsequent nine-point RIO checkpoint comparison passed the fixed 0.01-nat
+CE tolerance, with maximum difference 0.0052534 nats and peak GPU reservation
+70.02 GiB. See the repository's `TAR_MATRIX_ASSESSMENT.md` for its scope,
+queue observations, benchmark check, and remaining production validation.
 
 Landscape settings can enable `cpu_landscape_anchor: true` to keep saved
 centers on the CPU. Perturbations copy each center tensor to the model's device

@@ -1,0 +1,16 @@
+{
+  "job_id": "515852",
+  "backend": "slurm",
+  "cluster": "matrix",
+  "partition": "pbatch",
+  "account": "verival",
+  "minutes": 45,
+  "gpus": 1,
+  "cpus": 28,
+  "host_memory": "256G",
+  "exclusive": false,
+  "launch_directory": "launches/matrix-assessment/launch-vlmtywh5",
+  "reviewed_dryrun": "launches/matrix-assessment/launch-k5zk5s7z",
+  "production_registry_member": false,
+  "result": "matrix-assessment/checkpoint-probe/result.json"
+}

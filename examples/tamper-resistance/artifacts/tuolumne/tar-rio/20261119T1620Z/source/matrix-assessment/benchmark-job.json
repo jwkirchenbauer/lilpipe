@@ -1,0 +1,19 @@
+{
+  "job_id": "515883",
+  "cluster": "matrix",
+  "backend": "slurm",
+  "partition": "pbatch",
+  "account": "verival",
+  "minutes": 45,
+  "gpus": 4,
+  "cpus": 112,
+  "host_memory": "256G",
+  "outer_tasks": 1,
+  "accelerate_processes": 4,
+  "torchrun": false,
+  "exclusive": false,
+  "launch_directory": "launches/matrix-assessment/launch-xzi7jpth",
+  "reviewed_dryrun": "launches/matrix-assessment/launch-t22jmjx3",
+  "production_registry_member": false,
+  "result": "matrix-assessment/benchmark-probe/result.json"
+}

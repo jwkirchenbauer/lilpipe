@@ -1,0 +1,7 @@
+{
+  "operation": "CRLF to LF for Git; all parsed field strings identical",
+  "raw_sha256": "6fda6e758b6b7d24ba00b20e83eb66458a09e5c067e5d04ce3747f75352353ab",
+  "normalized_sha256": "79bc6450201370cd3ba815901feaac276f2f84e659136455721eb907f9a07de0",
+  "raw_copy": "artifacts/tuolumne/tar-rio/20261119T1620Z/matrix-assessment/checkpoint-probe/comparison.raw-crlf.csv",
+  "values_changed": false
+}

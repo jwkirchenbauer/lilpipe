@@ -1,0 +1,16 @@
+{
+  "training_folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/cases/rio-fresh-matched-lr1e-6",
+  "origin_settings_sha256": "1b29f9c2731ebef720ad96dc9e469d1c2ab693e429b6316682d07ab8f926181c",
+  "measurement_backend": "CUDA12.6/H100",
+  "changed_settings": {
+    "capability_scores_file": {
+      "old": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/cases/rio-fresh-matched-lr1e-6/evaluation-scores.csv",
+      "new": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-fresh-matched-lr1e-6/evaluation-scores.csv"
+    },
+    "cpu_landscape_anchor": {
+      "old": null,
+      "new": true
+    }
+  },
+  "models_are_read_only_inputs": true
+}

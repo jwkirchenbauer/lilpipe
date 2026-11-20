@@ -1,0 +1,181 @@
+{
+  "jobs": [
+    {
+      "job_id": "f3m4u9CgNceT",
+      "name": "eval-rio-k4-lr1e-6",
+      "state_at_transition": "SCHED",
+      "replacement": "516069",
+      "reason": "Native Matrix evaluator has verified both full benchmark groups at checkpoint zero and checkpoint one; fresh CUDA outputs"
+    },
+    {
+      "job_id": "f3m4hcMawEsR",
+      "name": "train-rio-k256-defense",
+      "state_at_transition": "SCHED",
+      "replacement": "516131",
+      "reason": "CUDA training pilot passed; prevent concurrent writers to canonical K256 outputs"
+    },
+    {
+      "job_id": "f3m4hhGkD6iK",
+      "name": "train-rio-k256-lr1e-6",
+      "state_at_transition": "DEPEND",
+      "replacement": "516136",
+      "reason": "CUDA training pilot passed; prevent concurrent writers to canonical K256 outputs"
+    },
+    {
+      "job_id": "f3m4hspdNgco",
+      "name": "eval-rio-k256-lr1e-6",
+      "state_at_transition": "INACTIVE",
+      "replacement": "516146",
+      "reason": "Flux canceled dependent request when its old training dependency was superseded; expected during migration"
+    },
+    {
+      "job_id": "f3m4hxjMSkfq",
+      "name": "analysis-rio-k256-lr1e-6",
+      "state_at_transition": "INACTIVE",
+      "replacement": "Matrix phase follows native training 516136 and analysis/profile validation gates",
+      "reason": "Flux canceled dependent request when its old training dependency was superseded; expected during migration"
+    },
+    {
+      "job_id": "f3m4i3evSR2F",
+      "name": "profiles-rio-k256-lr1e-6",
+      "state_at_transition": "INACTIVE",
+      "replacement": "Matrix phase follows native training 516136 and analysis/profile validation gates",
+      "reason": "Flux canceled dependent request when its old training dependency was superseded; expected during migration"
+    },
+    {
+      "job_id": "f3m4hhqkB7XV",
+      "name": "eval-rio-k64-lr1e-6",
+      "state_at_transition": "RUN",
+      "replacement": "516140",
+      "reason": "Fresh CUDA measurement after successful one-GPU calibration, preserving completed ROCm training inputs"
+    },
+    {
+      "job_id": "f3m4i3yxwBy9",
+      "name": "eval-rio-prefix-forward-legacy-lr1e-6",
+      "replacement": "516141",
+      "reason": "Fresh CUDA one-GPU evaluation after complete six-subtask/full868-sample calibration; original trained weights retained"
+    },
+    {
+      "job_id": "f3m4i9aHU5YK",
+      "name": "eval-rio-prefix-reverse-legacy-lr1e-6",
+      "replacement": "516142",
+      "reason": "Fresh CUDA one-GPU evaluation after complete six-subtask/full868-sample calibration; original trained weights retained"
+    },
+    {
+      "job_id": "f3m4iFFnxTKV",
+      "name": "eval-rio-fresh-matched-lr1e-6",
+      "replacement": "516143",
+      "reason": "Fresh CUDA one-GPU evaluation after complete six-subtask/full868-sample calibration; original trained weights retained"
+    },
+    {
+      "job_id": "f3m4iLmh1V91",
+      "name": "eval-rio-prefix-forward-matched-lr1e-6",
+      "replacement": "516144",
+      "reason": "Fresh CUDA one-GPU evaluation after complete six-subtask/full868-sample calibration; original trained weights retained"
+    },
+    {
+      "job_id": "f3m4iSNASJQF",
+      "name": "eval-rio-prefix-reverse-matched-lr1e-6",
+      "replacement": "516145",
+      "reason": "Fresh CUDA one-GPU evaluation after complete six-subtask/full868-sample calibration; original trained weights retained"
+    },
+    {
+      "job_id": "f3m4ho4K4YHD",
+      "name": "profiles-rio-k64-lr1e-6",
+      "state_at_transition": "DEPEND",
+      "replacement": "516165",
+      "reason": "Native Matrix replacement is submitted with full K4 analysis/profile validation gates; separate fresh CUDA outputs"
+    },
+    {
+      "job_id": "f3m4i9DtPxf9",
+      "name": "profiles-rio-prefix-forward-legacy-lr1e-6",
+      "state_at_transition": "DEPEND",
+      "replacement": "516166",
+      "reason": "Native Matrix replacement is submitted with full K4 analysis/profile validation gates; separate fresh CUDA outputs"
+    },
+    {
+      "job_id": "f3m4iEukeAP9",
+      "name": "profiles-rio-prefix-reverse-legacy-lr1e-6",
+      "state_at_transition": "DEPEND",
+      "replacement": "516167",
+      "reason": "Native Matrix replacement is submitted with full K4 analysis/profile validation gates; separate fresh CUDA outputs"
+    },
+    {
+      "job_id": "f3m4iLT7CVGK",
+      "name": "profiles-rio-fresh-matched-lr1e-6",
+      "state_at_transition": "DEPEND",
+      "replacement": "516168",
+      "reason": "Native Matrix replacement is submitted with full K4 analysis/profile validation gates; separate fresh CUDA outputs"
+    },
+    {
+      "job_id": "f3m4iS33VZcK",
+      "name": "profiles-rio-prefix-forward-matched-lr1e-6",
+      "state_at_transition": "DEPEND",
+      "replacement": "516169",
+      "reason": "Native Matrix replacement is submitted with full K4 analysis/profile validation gates; separate fresh CUDA outputs"
+    },
+    {
+      "job_id": "f3m4iXiJA4a3",
+      "name": "profiles-rio-prefix-reverse-matched-lr1e-6",
+      "state_at_transition": "DEPEND",
+      "replacement": "516170",
+      "reason": "Native Matrix replacement is submitted with full K4 analysis/profile validation gates; separate fresh CUDA outputs"
+    },
+    {
+      "job_id": "f3m4uEWvPHxj",
+      "name": "profiles-rio-k4-lr1e-6",
+      "state_at_transition": "DEPEND",
+      "replacement": "516150",
+      "reason": "Native Matrix replacement is submitted with full K4 analysis/profile validation gates; separate fresh CUDA outputs"
+    },
+    {
+      "job_id": "f3m4hiAMU6gX",
+      "name": "analysis-rio-k64-lr1e-6",
+      "state_at_transition": "SCHED",
+      "replacement": "516154",
+      "reason": "Native Matrix replacement is submitted with full K4 analysis/profile validation gates; separate fresh CUDA outputs"
+    },
+    {
+      "job_id": "f3m4i4Jywydh",
+      "name": "analysis-rio-prefix-forward-legacy-lr1e-6",
+      "state_at_transition": "SCHED",
+      "replacement": "516155",
+      "reason": "Native Matrix replacement is submitted with full K4 analysis/profile validation gates; separate fresh CUDA outputs"
+    },
+    {
+      "job_id": "f3m4iA1cfop3",
+      "name": "analysis-rio-prefix-reverse-legacy-lr1e-6",
+      "state_at_transition": "SCHED",
+      "replacement": "516156",
+      "reason": "Native Matrix replacement is submitted with full K4 analysis/profile validation gates; separate fresh CUDA outputs"
+    },
+    {
+      "job_id": "f3m4iFYvGA8X",
+      "name": "analysis-rio-fresh-matched-lr1e-6",
+      "state_at_transition": "SCHED",
+      "replacement": "516157",
+      "reason": "Native Matrix replacement is submitted with full K4 analysis/profile validation gates; separate fresh CUDA outputs"
+    },
+    {
+      "job_id": "f3m4iM7dPpwy",
+      "name": "analysis-rio-prefix-forward-matched-lr1e-6",
+      "state_at_transition": "SCHED",
+      "replacement": "516158",
+      "reason": "Native Matrix replacement is submitted with full K4 analysis/profile validation gates; separate fresh CUDA outputs"
+    },
+    {
+      "job_id": "f3m4iSiziD5H",
+      "name": "analysis-rio-prefix-reverse-matched-lr1e-6",
+      "state_at_transition": "SCHED",
+      "replacement": "516159",
+      "reason": "Native Matrix replacement is submitted with full K4 analysis/profile validation gates; separate fresh CUDA outputs"
+    },
+    {
+      "job_id": "f3m4u9bi9TZ9",
+      "name": "analysis-rio-k4-lr1e-6",
+      "state_at_transition": "RUN",
+      "replacement": "516068",
+      "reason": "Native Matrix replacement is submitted with full K4 analysis/profile validation gates; separate fresh CUDA outputs"
+    }
+  ]
+}

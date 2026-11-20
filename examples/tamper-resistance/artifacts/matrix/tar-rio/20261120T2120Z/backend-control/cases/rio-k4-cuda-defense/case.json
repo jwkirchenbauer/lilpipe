@@ -1,0 +1,45 @@
+{
+  "name": "rio-k4-cuda-defense",
+  "label": "RIO K=4 CUDA backend control; 125 defense updates; fresh sampled inner batches; legacy AdamW",
+  "condition": "rio-k4",
+  "family": "k",
+  "role": "defense",
+  "folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-defense",
+  "config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-defense/config.yml",
+  "reference_config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-defense/config.yml",
+  "max_steps": 125,
+  "save_steps": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    96,
+    125
+  ],
+  "state_steps": [
+    32,
+    64,
+    125
+  ],
+  "defense_reference": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+  "bootstrap_seed": null,
+  "inner_steps_per_update": 4,
+  "simulation_steps": 4,
+  "attack_learning_rate": null,
+  "gaussian_sigma": null,
+  "base_model": "/p/vast1/kirchenb/tar-root/cache/huggingface/hub/models--HuggingFaceH4--zephyr-7b-beta/snapshots/892b3d7a7b1cf10c7a701c60881cd93df615734c",
+  "k": 4,
+  "simulation_data_policy": "fresh",
+  "simulation_optimizer": "legacy",
+  "fidelity": {
+    "kind": "fresh",
+    "order": "fresh",
+    "optimizer": "legacy"
+  },
+  "source_case": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/cases/rio-k4-defense",
+  "measurement_backend": "CUDA 12.6 / H100",
+  "runtime_provenance": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-defense/runtime-provenance.json"
+}

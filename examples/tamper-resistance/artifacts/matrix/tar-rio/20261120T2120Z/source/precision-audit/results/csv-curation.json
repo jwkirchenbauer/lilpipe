@@ -1,0 +1,7 @@
+{
+  "raw_path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/precision-audit/results/precision-audit.raw-crlf.csv",
+  "raw_sha256": "4019c31294a3829e11e713d9b727c63c1537189b24d86feea3f7bb2adc1c6bd4",
+  "curated_path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/precision-audit/results/precision-audit.csv",
+  "curated_sha256": "2cba3c199d081edcb791f98f04a5665d36cbf647ec7179b02ec34dcdb56838ca",
+  "change": "CSV line endings only: CRLF to LF; parsed rows compared exactly equal; raw bytes preserved outside Git"
+}

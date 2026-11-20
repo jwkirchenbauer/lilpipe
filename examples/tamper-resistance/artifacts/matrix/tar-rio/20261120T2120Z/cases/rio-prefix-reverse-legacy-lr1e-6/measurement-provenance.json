@@ -1,0 +1,16 @@
+{
+  "training_folder": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/cases/rio-prefix-reverse-legacy-lr1e-6",
+  "origin_settings_sha256": "1e386b9f5def95d1d647b11c16da2fb77c8b46b387137539d78c24ead7feb817",
+  "measurement_backend": "CUDA12.6/H100",
+  "changed_settings": {
+    "capability_scores_file": {
+      "old": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/cases/rio-prefix-reverse-legacy-lr1e-6/evaluation-scores.csv",
+      "new": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-legacy-lr1e-6/evaluation-scores.csv"
+    },
+    "cpu_landscape_anchor": {
+      "old": null,
+      "new": true
+    }
+  },
+  "models_are_read_only_inputs": true
+}

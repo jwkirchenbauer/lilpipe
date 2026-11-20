@@ -1,0 +1,54 @@
+{
+  "4": {
+    "stop_step": 4,
+    "max_steps": 125,
+    "warmup_steps": 12,
+    "source_config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/cases/rio-k4-defense/config.yml",
+    "source_sha256": "30070549ca6d6f879aad51e20d3db3e7e2536717798fcc2bdf56a9dd2a87f954",
+    "config_changes": {
+      "trainer_cls": {
+        "original": "tar_dynamics_training.RecordedTARMETrainer",
+        "pilot": "training_pilot_observer.MatrixPilotTrainer"
+      },
+      "output_dir": {
+        "original": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/cases/rio-k4-defense/models/defense",
+        "pilot": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/cuda-training/k4/models/defense"
+      },
+      "wandb_project": {
+        "original": "jwk-tar-rio-k-fidelity",
+        "pilot": "jwk-tar-matrix-runtime-pilot"
+      },
+      "wandb_name": {
+        "original": "rio-k4-defense",
+        "pilot": "cuda-pilot-k4"
+      }
+    },
+    "trainer_note": "Subclass adds only an on_train_end peak-memory observer; existing frozen stop callback preserves the original schedule"
+  },
+  "256": {
+    "stop_step": 1,
+    "max_steps": 125,
+    "warmup_steps": 12,
+    "source_config": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/cases/rio-k256-defense/config.yml",
+    "source_sha256": "088038c210fd17556387eb1dc390e22ea23d55ccec917a574133da27259b7d74",
+    "config_changes": {
+      "trainer_cls": {
+        "original": "tar_dynamics_training.RecordedTARMETrainer",
+        "pilot": "training_pilot_observer.MatrixPilotTrainer"
+      },
+      "output_dir": {
+        "original": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/cases/rio-k256-defense/models/defense",
+        "pilot": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/cuda-training/k256/models/defense"
+      },
+      "wandb_project": {
+        "original": "jwk-tar-rio-k-fidelity",
+        "pilot": "jwk-tar-matrix-runtime-pilot"
+      },
+      "wandb_name": {
+        "original": "rio-k256-defense",
+        "pilot": "cuda-pilot-k256"
+      }
+    },
+    "trainer_note": "Subclass adds only an on_train_end peak-memory observer; existing frozen stop callback preserves the original schedule"
+  }
+}

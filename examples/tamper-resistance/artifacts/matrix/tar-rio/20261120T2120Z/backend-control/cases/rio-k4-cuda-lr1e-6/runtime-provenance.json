@@ -1,0 +1,16 @@
+{
+  "source_case": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/cases/rio-k4-lr1e-6",
+  "source_config_sha256": "e53bb0a9e4b54fc3a87cd290284f49ce6f4ca0d994da446c1f25484b98f1d4a0",
+  "source_case_json_sha256": "9fab3fe96ba81211762d91d8f2b5cd521e3288082c5d0adcdaba02cb5368758b",
+  "source_runtime_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/cases/rio-k4-lr1e-6/runtime.json",
+  "source_runtime_sha256": "6a5a83e1a16318be3bb238bd0286b88a80ce10f38e70a17b6a8bd6dba5d06944",
+  "source_backend": "Tuolumne / ROCm",
+  "target_backend": "CUDA 12.6 / H100",
+  "target_runtime_measured": false,
+  "runtime_json_policy": "Tuolumne duration remains provenance, not a Matrix estimate.",
+  "config_fields_changed": [
+    "base_model",
+    "output_dir",
+    "wandb_name"
+  ]
+}

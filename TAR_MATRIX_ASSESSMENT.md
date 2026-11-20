@@ -95,8 +95,11 @@ measure accumulated drift.
 The K256 update took 31.1 seconds, suggesting roughly 65 minutes for 125 updates
 before checkpoint I/O. Its production defense requests three hours. The old
 queued K256 defense and attack were canceled before submitting replacements
-516131 and 516136, preventing duplicate writers. The full CUDA K4 control jobs
-are 516132 and 516137. Original completed ROCm training remains an input to the
+516131 and 516136, preventing duplicate writers. The first full K4 control
+request failed before model loading because its status directory was missing.
+The directories and defender link were added, a submission check now rejects
+incomplete preparation, and the control was resubmitted. Current IDs are in
+the run ledger. Original completed ROCm training remains an input to the
 study, so K256-versus-other-K comparisons must report the training backend and
 consider the paired K4 backend control.
 
@@ -105,8 +108,23 @@ profile validation remains the gate for broad analysis migration. Saved centers
 and early-profile vectors can reside on the CPU while retaining the original
 arithmetic and endpoint checks. Fresh CUDA benchmark results, including the
 reused K16 control, share one measurement backend; archived ROCm scores are
-kept as provenance. A one-GPU evaluation pilot tests whether partially occupied
-nodes can reduce queue time and GPU usage.
+kept as provenance. The one-GPU evaluation pilot passed with identical scores
+for all six WMDP subtasks and all 868 examples, taking 105.9 seconds. Remaining
+evaluations use this layout on partially occupied nodes. The fresh CUDA base
+reference is WMDP 55.069124% and MMLU 58.579793%, with all 868 and 13,322
+examples verified, respectively.
+
+The independent CUDA replay pilot also passed bitwise: all 16 losses and
+parameter states at updates 1, 2, 4, 8, and 16 matched between the matched
+simulator and genuine training at the new forward-matched defense endpoint.
+Its archived ROCm comparison is a separate diagnostic. This check applies
+after checkpoint reload and to the matched implementation, while the main
+K conditions retain their declared legacy simulator.
+
+Both full four-GPU production defenses are now advancing. The optional
+two-H100 placement pilot remains prepared and unrun; the validated production
+placement stays in use. Slurm's earlier forecasts were more pessimistic than
+the eventual starts, so forecast queue times should remain provisional.
 
 Runtime manifests:
 `/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/runtime/matrix`.

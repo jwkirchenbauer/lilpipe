@@ -1,0 +1,87 @@
+{
+  "state": "complete",
+  "initial_weights_bitwise_equal": true,
+  "outer_batches_and_rates_exact": true,
+  "max_loss_error": 0.0449371337890625,
+  "reference_update_l2": 0.1194238010715196,
+  "cuda_update_l2": 0.11947527274300883,
+  "relative_update_error": 0.11738411061688551,
+  "update_cosine": 0.9931135462302267,
+  "declared_migration_limits": {
+    "max_loss_error": 0.05,
+    "relative_update_error": 0.25,
+    "minimum_cosine": 0.95
+  },
+  "k256_inner_updates": 256,
+  "k256_outer_step_seconds": 31.085338812088594,
+  "k256_125_step_time_estimate_seconds": 3885.6673515110742,
+  "k4_memory": {
+    "torch": "2.12.1+cu126",
+    "updates": 4,
+    "gpus": [
+      {
+        "device": 0,
+        "name": "NVIDIA H100 80GB HBM3",
+        "allocated_peak_bytes": 12109743616,
+        "reserved_peak_bytes": 12626952192,
+        "total_bytes": 85064286208
+      },
+      {
+        "device": 1,
+        "name": "NVIDIA H100 80GB HBM3",
+        "allocated_peak_bytes": 27986493440,
+        "reserved_peak_bytes": 28156362752,
+        "total_bytes": 85064286208
+      },
+      {
+        "device": 2,
+        "name": "NVIDIA H100 80GB HBM3",
+        "allocated_peak_bytes": 27986493440,
+        "reserved_peak_bytes": 28156362752,
+        "total_bytes": 85064286208
+      },
+      {
+        "device": 3,
+        "name": "NVIDIA H100 80GB HBM3",
+        "allocated_peak_bytes": 31918506496,
+        "reserved_peak_bytes": 32078036992,
+        "total_bytes": 85064286208
+      }
+    ]
+  },
+  "k256_memory": {
+    "torch": "2.12.1+cu126",
+    "updates": 1,
+    "gpus": [
+      {
+        "device": 0,
+        "name": "NVIDIA H100 80GB HBM3",
+        "allocated_peak_bytes": 12109743616,
+        "reserved_peak_bytes": 12417236992,
+        "total_bytes": 85064286208
+      },
+      {
+        "device": 1,
+        "name": "NVIDIA H100 80GB HBM3",
+        "allocated_peak_bytes": 21006647296,
+        "reserved_peak_bytes": 21109932032,
+        "total_bytes": 85064286208
+      },
+      {
+        "device": 2,
+        "name": "NVIDIA H100 80GB HBM3",
+        "allocated_peak_bytes": 21006647296,
+        "reserved_peak_bytes": 21109932032,
+        "total_bytes": 85064286208
+      },
+      {
+        "device": 3,
+        "name": "NVIDIA H100 80GB HBM3",
+        "allocated_peak_bytes": 23890051584,
+        "reserved_peak_bytes": 24064819200,
+        "total_bytes": 85064286208
+      }
+    ]
+  },
+  "scope": "Short prefixes of unchanged 125-step schedules; approximate cross-backend training agreement, not bitwise trajectory equality"
+}

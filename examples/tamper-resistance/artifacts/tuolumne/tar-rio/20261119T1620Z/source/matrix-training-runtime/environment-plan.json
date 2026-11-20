@@ -1,0 +1,18 @@
+{
+  "state": "locked_prepared",
+  "authorized_by": "User explicitly authorized transition of training to Matrix, accepting expected floating-point variation",
+  "target_prefix": "/usr/workspace/wsb/kirchenb/lilpipe-tar-train-cu126-v1",
+  "common_non_torch_versions_preserved": 222,
+  "changed": {
+    "torch": [
+      "2.12.1+rocm7.2",
+      "2.12.1+cu126"
+    ]
+  },
+  "files": {
+    "runtime/tuolumne/train/uv.lock": "011c5d9e4aa34e37a75ab88c365023d4a6fb46aa1f1f8b75d41a090e3f605066",
+    "runtime/matrix/train/uv.lock": "301135eec2748928b23d1b76370ba91383c1c60d5ef6bbf4d06e65f8a447e188",
+    "runtime/matrix/train/pyproject.toml": "8d259a5c3603a7354bb1332224ab43d4a830687a130c9bbacc18c3f20c2596f0",
+    "artifacts/tuolumne/tar-rio/20261119T1620Z/source/matrix-training-runtime/install_matrix_train_mm_uv_env.sh": "e4c68fb2a5b6dc5961e21abafb3f427f4e8444127a68beddfc24ec1b890b3383"
+  }
+}

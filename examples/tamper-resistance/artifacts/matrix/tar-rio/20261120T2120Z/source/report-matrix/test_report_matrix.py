@@ -72,6 +72,44 @@ class ReportMatrixTests(unittest.TestCase):
             alias.symlink_to(physical, target_is_directory=True)
             self.assertTrue(report.same_path(alias, physical))
 
+    def test_reload_cast_match_does_not_mean_zero_reload_drift(self):
+        rows = []
+        for reload_norm, first_norm, last_norm, error, changed in (
+            (3.0, 6.0, 12.0, 0.3, 1),
+            (4.0, 8.0, 16.0, 0.4, 2),
+        ):
+            common = {"anchor": "fixture", "anchor_backend": "cuda"}
+            rows.extend(
+                [
+                    {
+                        **common,
+                        "measure": "native_to_reload",
+                        "difference_l2": reload_norm,
+                        "changed_coordinates": changed,
+                    },
+                    {**common, "measure": "native_bf16_roundtrip", "difference_l2": 0},
+                    {
+                        **common,
+                        "measure": "straight_through_reconstruction",
+                        "step": 1,
+                        "reference_l2": first_norm,
+                    },
+                    {
+                        **common,
+                        "measure": "straight_through_reconstruction",
+                        "step": 16,
+                        "reference_l2": last_norm,
+                        "difference_l2": error,
+                    },
+                ]
+            )
+        summary = report.precision_summary_rows(rows)[0]
+        self.assertEqual(summary["roundtrip_residual_l2"], 0)
+        self.assertEqual(summary["reload_l2"], 5)
+        self.assertEqual(summary["reload_changed_coordinates"], 3)
+        self.assertEqual(summary["reload_over_first_update"], 0.5)
+        self.assertAlmostEqual(summary["step16_reconstruction_relative_error"], 0.025)
+
 
 if __name__ == "__main__":
     unittest.main()

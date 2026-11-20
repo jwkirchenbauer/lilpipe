@@ -424,6 +424,53 @@ def write_backend_drift(main_attack: Path, control_root: Path):
     return output, original, cuda, common
 
 
+def precision_summary_rows(rows):
+    summaries = []
+    for anchor in sorted({row["anchor"] for row in rows}):
+        selected = [row for row in rows if row["anchor"] == anchor]
+        reload_rows = [row for row in selected if row["measure"] == "native_to_reload"]
+        cast_rows = [
+            row for row in selected if row["measure"] == "native_bf16_roundtrip"
+        ]
+        first = [
+            row
+            for row in selected
+            if row["measure"] == "straight_through_reconstruction" and row["step"] == 1
+        ]
+        last = [
+            row
+            for row in selected
+            if row["measure"] == "straight_through_reconstruction" and row["step"] == 16
+        ]
+        if not all((reload_rows, cast_rows, first, last)):
+            raise ValueError(f"Precision audit lacks required measures for {anchor}")
+
+        def norm(group, field):
+            return math.sqrt(math.fsum(float(row[field]) ** 2 for row in group))
+
+        reload_norm = norm(reload_rows, "difference_l2")
+        first_norm = norm(first, "reference_l2")
+        last_norm = norm(last, "reference_l2")
+        summaries.append(
+            {
+                "anchor": anchor,
+                "backend": selected[0].get("anchor_backend", "unspecified"),
+                "reload_l2": reload_norm,
+                "reload_changed_coordinates": sum(
+                    row["changed_coordinates"] for row in reload_rows
+                ),
+                "roundtrip_residual_l2": norm(cast_rows, "difference_l2"),
+                "reload_over_first_update": (
+                    reload_norm / first_norm if first_norm else None
+                ),
+                "step16_reconstruction_relative_error": (
+                    norm(last, "difference_l2") / last_norm if last_norm else None
+                ),
+            }
+        )
+    return summaries
+
+
 def report_backend_scope(report_path, references, parity, archived_errors, drift):
     base = references["base"]
     defended = references["defended"]
@@ -487,6 +534,32 @@ def report_backend_scope(report_path, references, parity, archived_errors, drift
             "",
             f"The matched-cache-v2 simulated and genuine CUDA runs had exactly equal losses for all 16 prefix updates and exactly equal parameter states at updates 1, 2, 4, 8, and 16 (maximum absolute loss error {max_loss_error:.8g}). This is a strict same-backend result at the new forward-matched anchor; it does not establish parity for every training-time simulation or change the legacy K-sweep AMP-cache behavior described above.",
             f"Archived ROCm comparisons are diagnostic only. Their maximum reported relative update error across the five states is {archived_max}; cross-backend bitwise equality is not required.",
+        ]
+    )
+    precision = read_json(
+        TARGET / "source/precision-audit/results/precision-audit.json"
+    )
+    lines.extend(
+        [
+            "",
+            "### Checkpoint reload and parameter precision",
+            "",
+            "The audit's `native_to_reload` measures loaded anchor minus the exact native file supplied to the loader. Its `native_bf16_roundtrip` measures loaded anchor minus native values cast through BF16 and back. A zero roundtrip residual proves that the reload is explained by this cast; it does not mean the native parameters were unchanged.",
+            "",
+            "| Anchor | Reload L2 | Changed coordinates | Loaded minus BF16-roundtrip L2 | Reload / first optimizer update L2 | Step-16 straight-through relative error |",
+            "|---|---:|---:|---:|---:|---:|",
+        ]
+    )
+    for row in precision_summary_rows(precision["rows"]):
+        ratio = comparison.display(row["reload_over_first_update"], 4)
+        relative = comparison.display(row["step16_reconstruction_relative_error"], 7)
+        lines.append(
+            f"| {row['anchor']} ({row['backend']}) | {row['reload_l2']:.7g} | {row['reload_changed_coordinates']:,} | {row['roundtrip_residual_l2']:.7g} | {ratio} | {relative} |"
+        )
+    lines.extend(
+        [
+            "",
+            "A raw displacement from a native defense file to a saved attack checkpoint includes this reload offset. The optimizer update is measured from the loaded anchor. This distinction matters for interpreting early trajectory directions and coordinate concentration. The straight-through audit checks saved-dtype `anchor + (endpoint - anchor)` arithmetic, not the defender's complete training-time simulation. No forward pass is performed here, so these norms alone do not establish a CE change or explain robustness.",
         ]
     )
     report += "\n".join(lines) + "\n"

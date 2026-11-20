@@ -449,8 +449,8 @@
     },
     {
       "path": "artifacts/matrix/tar-rio/20261120T2120Z/source/report-matrix/finish_report.py",
-      "bytes": 28124,
-      "sha256": "b33bd44dbe087cb38f3282d1e14dd1580afd43480ac5f01090e442f45d25f4d6"
+      "bytes": 31834,
+      "sha256": "5b1d3d26b7f3dc6276dceb23c4d7d21e46031d48396fc7a9605401f20270f5e6"
     },
     {
       "path": "artifacts/matrix/tar-rio/20261120T2120Z/source/report-matrix/run_report.sh",
@@ -459,8 +459,8 @@
     },
     {
       "path": "artifacts/matrix/tar-rio/20261120T2120Z/source/report-matrix/test_report_matrix.py",
-      "bytes": 2667,
-      "sha256": "d67856c7d22da8325ea07a59a1d82895ed0d3c6d4baf5988fc9dac23dd81d0f6"
+      "bytes": 4297,
+      "sha256": "4611acf4214dafe4b02b3ef01a13db358e8cb0feca1e5ab7c56d5c46bdcfdf49"
     },
     {
       "path": "artifacts/matrix/tar-rio/20261120T2120Z/source/transition/AUXILIARY_MATRIX.md",
@@ -591,6 +591,11 @@
       "path": "artifacts/tuolumne/tar-rio/20261119T1620Z/source/precision-audit/results/csv-curation.json",
       "bytes": 650,
       "sha256": "98323fe9985509561023e05915613a5fd36bcfb308b0c7533298ad450f996f54"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio/20261120T2120Z/source/precision-audit/MEASURE_NOTES.md",
+      "bytes": 1085,
+      "sha256": "fdd40fa5daf398a2a92a347753b5a5c1a9fd7fa50448323e6490428e29c2d96a"
     }
   ],
   "csv_line_endings": [

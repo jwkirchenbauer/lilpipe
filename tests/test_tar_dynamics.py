@@ -320,5 +320,57 @@ class RecoveryTests(unittest.TestCase):
             self.assertEqual(scope["cached"]("empty.csv"), [])
 
 
+class LandscapeAnchorTests(unittest.TestCase):
+    def setUp(self):
+        spec = importlib.util.spec_from_file_location(
+            "tar_dynamics_anchor", MISC / "tar_dynamics.py"
+        )
+        self.module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(self.module)
+
+    def test_cpu_center_is_an_independent_snapshot(self):
+        parameter = torch.nn.Parameter(torch.tensor([1.5, -2.0]))
+        anchor = self.module._copy_landscape_anchor({"weight": parameter}, cpu=True)
+        with torch.no_grad():
+            parameter.add_(7)
+        torch.testing.assert_close(anchor["weight"], torch.tensor([1.5, -2.0]))
+        self.assertEqual(anchor["weight"].device.type, "cpu")
+        self.assertFalse(anchor["weight"].requires_grad)
+
+    def test_perturbation_preserves_legacy_rounding_and_snapshot(self):
+        for dtype in (torch.float32, torch.float16, torch.bfloat16):
+            with self.subTest(dtype=dtype):
+                parameters = {
+                    "weight": torch.nn.Parameter(
+                        torch.tensor([[1.01, -0.7], [0.03, 12.0]], dtype=dtype)
+                    ),
+                    "bias": torch.nn.Parameter(torch.tensor([0.125], dtype=dtype)),
+                }
+                basis = torch.tensor(
+                    [[0.3, -0.2, 0.1, 0.04, 0.05], [-0.1, 0.4, 0.2, -0.3, 0.6]]
+                )
+                offsets = {"weight": 0, "bias": 4}
+                resident = self.module._copy_landscape_anchor(parameters)
+                host = self.module._copy_landscape_anchor(parameters, cpu=True)
+                for c0, c1 in ((0.0, 0.0), (0.157, -0.08), (-125.0, 125.0)):
+                    expected = {}
+                    for name, parameter in parameters.items():
+                        start = offsets[name]
+                        stop = start + parameter.numel()
+                        first, second = basis[:, start:stop].reshape(
+                            2, *parameter.shape
+                        )
+                        expected[name] = (
+                            resident[name].float() + c0 * first + c1 * second
+                        ).to(dtype)
+                    for anchor in (resident, host):
+                        self.module._perturb_landscape(
+                            parameters, anchor, basis, offsets, c0, c1
+                        )
+                        for name, parameter in parameters.items():
+                            self.assertTrue(torch.equal(parameter, expected[name]))
+                            self.assertTrue(torch.equal(host[name], resident[name]))
+
+
 if __name__ == "__main__":
     unittest.main()

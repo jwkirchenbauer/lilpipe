@@ -693,6 +693,32 @@ def _basis_to_device(mapped, device, chunk_elements=4 * 1024 * 1024):
     return basis
 
 
+def _copy_landscape_anchor(parameters, *, cpu=False):
+    """Keep an independent center, optionally outside scarce device memory."""
+    return {
+        name: (
+            value.detach().to(device="cpu", copy=True)
+            if cpu
+            else value.detach().clone()
+        )
+        for name, value in parameters.items()
+    }
+
+
+def _perturb_landscape(parameters, anchor, basis, offsets, c0, c1):
+    """Apply the same FP32 perturbation with either CPU or resident centers."""
+    import torch
+
+    with torch.no_grad():
+        for name, parameter in parameters.items():
+            start = offsets[name]
+            count = parameter.numel()
+            first = basis[0, start : start + count].reshape(parameter.shape)
+            second = basis[1, start : start + count].reshape(parameter.shape)
+            center = anchor[name].to(device=parameter.device, dtype=torch.float32)
+            parameter.copy_(center + c0 * first + c1 * second)
+
+
 def surfaces(study, settings):
     import pandas as pd
     import torch
@@ -718,7 +744,9 @@ def surfaces(study, settings):
         .eval()
     )
     parameters = dict(model.named_parameters())
-    center = {name: value.detach().clone() for name, value in parameters.items()}
+    center = _copy_landscape_anchor(
+        parameters, cpu=settings.get("cpu_landscape_anchor", False)
+    )
     tokenizer = AutoTokenizer.from_pretrained(reference)
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
@@ -858,12 +886,7 @@ def surfaces(study, settings):
 
     @torch.inference_mode()
     def perturb(anchor, basis, c0, c1):
-        for name, parameter in parameters.items():
-            start = geom["offsets"][name]
-            count = parameter.numel()
-            first = basis[0, start : start + count].reshape(parameter.shape)
-            second = basis[1, start : start + count].reshape(parameter.shape)
-            parameter.copy_(anchor[name].float() + c0 * first + c1 * second)
+        _perturb_landscape(parameters, anchor, basis, geom["offsets"], c0, c1)
 
     states = [("defense", 0, Path(settings["base_model"]))]
     states += [
@@ -1077,10 +1100,9 @@ def surfaces(study, settings):
                     continue
                 print("Loading local frame:", phase, step, flush=True)
                 load(path)
-                anchor = {
-                    name: parameter.detach().clone()
-                    for name, parameter in parameters.items()
-                }
+                anchor = _copy_landscape_anchor(
+                    parameters, cpu=settings.get("cpu_landscape_anchor", False)
+                )
                 for c0 in local_coords:
                     for c1 in local_coords:
                         key = (phase, step, round(float(c0), 10), round(float(c1), 10))
@@ -1946,25 +1968,17 @@ def random_frames(study, settings):
                 }
                 for name, parameter in parameters.items():
                     parameter.copy_(handles[mapping[name]].get_tensor(name).clone())
-            anchor = {
-                name: parameter.detach().clone()
-                for name, parameter in parameters.items()
-            }
+            anchor = _copy_landscape_anchor(
+                parameters, cpu=settings.get("cpu_landscape_anchor", False)
+            )
             for c0 in coordinates:
                 for c1 in coordinates:
                     key = (phase, step, round(float(c0), 10), round(float(c1), 10))
                     if key in completed:
                         continue
-                    for name, parameter in parameters.items():
-                        offset = geom["offsets"][name]
-                        count = parameter.numel()
-                        first = basis[0, offset : offset + count].reshape(
-                            parameter.shape
-                        )
-                        second = basis[1, offset : offset + count].reshape(
-                            parameter.shape
-                        )
-                        parameter.copy_(anchor[name].float() + c0 * first + c1 * second)
+                    _perturb_landscape(
+                        parameters, anchor, basis, geom["offsets"], c0, c1
+                    )
                     value = float(
                         np.mean([float(model(**batch).loss) for batch in fixed])
                     )

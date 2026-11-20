@@ -44,7 +44,10 @@
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
       "rio-k4-lr1e-6"
     ],
-    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-k4-lr1e-6-submit.log"
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-k4-lr1e-6-submit.log",
+    "superseded": true,
+    "superseded_by": "516227",
+    "supersession_reason": "Slurm rejects active-job time extension; same numerical worker reuses complete cached rows after original allocation ends. Final scientific completion is tracked by this pbatch closure allocation."
   },
   "eval:rio-k4-lr1e-6": {
     "job_id": "516069",
@@ -702,7 +705,7 @@
     "phase": "analysis",
     "case": "hparam-rio-lr1e-6",
     "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study",
-    "minutes": 240,
+    "minutes": 360,
     "gpus": 1,
     "evaluation_processes": null,
     "cpus": 28,
@@ -710,7 +713,7 @@
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/status/analysis.json",
     "dependencies": [
-      "516068"
+      "516227"
     ],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
@@ -742,7 +745,25 @@
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study",
       "hparam-rio-lr1e-6"
     ],
-    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-hparam-rio-lr1e-6-submit.log"
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-hparam-rio-lr1e-6-submit.log",
+    "resource_amendment": {
+      "original_minutes": 240,
+      "reason": "Observed full-grid rate approaches four-hour limit; pending analysis limit increased to six hours for geometry/checkpoint I/O in one allocation",
+      "command": [
+        "ssh",
+        "matrix",
+        "scontrol",
+        "update",
+        "JobId=516151",
+        "TimeLimit=360"
+      ]
+    },
+    "completion_gate_amendment": {
+      "original": [
+        "516068"
+      ],
+      "reason": "Track successful six-hour K4 closure, which reuses the active allocation's saved grids if needed."
+    }
   },
   "reference:base": {
     "job_id": "516152",
@@ -771,7 +792,7 @@
     "phase": "analysis",
     "case": "rio-k64-lr1e-6",
     "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
-    "minutes": 240,
+    "minutes": 360,
     "gpus": 1,
     "evaluation_processes": null,
     "cpus": 28,
@@ -779,7 +800,7 @@
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k64-lr1e-6/status/analysis.json",
     "dependencies": [
-      "516068"
+      "516227"
     ],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
@@ -811,7 +832,25 @@
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
       "rio-k64-lr1e-6"
     ],
-    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-k64-lr1e-6-submit.log"
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-k64-lr1e-6-submit.log",
+    "resource_amendment": {
+      "original_minutes": 240,
+      "reason": "Observed full-grid rate approaches four-hour limit; pending analysis limit increased to six hours for geometry/checkpoint I/O in one allocation",
+      "command": [
+        "ssh",
+        "matrix",
+        "scontrol",
+        "update",
+        "JobId=516154",
+        "TimeLimit=360"
+      ]
+    },
+    "completion_gate_amendment": {
+      "original": [
+        "516068"
+      ],
+      "reason": "Track successful six-hour K4 closure, which reuses the active allocation's saved grids if needed."
+    }
   },
   "analysis:rio-prefix-forward-legacy-lr1e-6": {
     "job_id": "516155",
@@ -822,7 +861,7 @@
     "phase": "analysis",
     "case": "rio-prefix-forward-legacy-lr1e-6",
     "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
-    "minutes": 240,
+    "minutes": 360,
     "gpus": 1,
     "evaluation_processes": null,
     "cpus": 28,
@@ -830,7 +869,7 @@
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-legacy-lr1e-6/status/analysis.json",
     "dependencies": [
-      "516068"
+      "516227"
     ],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
@@ -862,7 +901,25 @@
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
       "rio-prefix-forward-legacy-lr1e-6"
     ],
-    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-prefix-forward-legacy-lr1e-6-submit.log"
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-prefix-forward-legacy-lr1e-6-submit.log",
+    "resource_amendment": {
+      "original_minutes": 240,
+      "reason": "Observed full-grid rate approaches four-hour limit; pending analysis limit increased to six hours for geometry/checkpoint I/O in one allocation",
+      "command": [
+        "ssh",
+        "matrix",
+        "scontrol",
+        "update",
+        "JobId=516155",
+        "TimeLimit=360"
+      ]
+    },
+    "completion_gate_amendment": {
+      "original": [
+        "516068"
+      ],
+      "reason": "Track successful six-hour K4 closure, which reuses the active allocation's saved grids if needed."
+    }
   },
   "analysis:rio-prefix-reverse-legacy-lr1e-6": {
     "job_id": "516156",
@@ -873,7 +930,7 @@
     "phase": "analysis",
     "case": "rio-prefix-reverse-legacy-lr1e-6",
     "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
-    "minutes": 240,
+    "minutes": 360,
     "gpus": 1,
     "evaluation_processes": null,
     "cpus": 28,
@@ -881,7 +938,7 @@
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-legacy-lr1e-6/status/analysis.json",
     "dependencies": [
-      "516068"
+      "516227"
     ],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
@@ -913,7 +970,25 @@
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
       "rio-prefix-reverse-legacy-lr1e-6"
     ],
-    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-prefix-reverse-legacy-lr1e-6-submit.log"
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-prefix-reverse-legacy-lr1e-6-submit.log",
+    "resource_amendment": {
+      "original_minutes": 240,
+      "reason": "Observed full-grid rate approaches four-hour limit; pending analysis limit increased to six hours for geometry/checkpoint I/O in one allocation",
+      "command": [
+        "ssh",
+        "matrix",
+        "scontrol",
+        "update",
+        "JobId=516156",
+        "TimeLimit=360"
+      ]
+    },
+    "completion_gate_amendment": {
+      "original": [
+        "516068"
+      ],
+      "reason": "Track successful six-hour K4 closure, which reuses the active allocation's saved grids if needed."
+    }
   },
   "analysis:rio-fresh-matched-lr1e-6": {
     "job_id": "516157",
@@ -924,7 +999,7 @@
     "phase": "analysis",
     "case": "rio-fresh-matched-lr1e-6",
     "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
-    "minutes": 240,
+    "minutes": 360,
     "gpus": 1,
     "evaluation_processes": null,
     "cpus": 28,
@@ -932,7 +1007,7 @@
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-fresh-matched-lr1e-6/status/analysis.json",
     "dependencies": [
-      "516068"
+      "516227"
     ],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
@@ -964,7 +1039,25 @@
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
       "rio-fresh-matched-lr1e-6"
     ],
-    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-fresh-matched-lr1e-6-submit.log"
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-fresh-matched-lr1e-6-submit.log",
+    "resource_amendment": {
+      "original_minutes": 240,
+      "reason": "Observed full-grid rate approaches four-hour limit; pending analysis limit increased to six hours for geometry/checkpoint I/O in one allocation",
+      "command": [
+        "ssh",
+        "matrix",
+        "scontrol",
+        "update",
+        "JobId=516157",
+        "TimeLimit=360"
+      ]
+    },
+    "completion_gate_amendment": {
+      "original": [
+        "516068"
+      ],
+      "reason": "Track successful six-hour K4 closure, which reuses the active allocation's saved grids if needed."
+    }
   },
   "analysis:rio-prefix-forward-matched-lr1e-6": {
     "job_id": "516158",
@@ -975,7 +1068,7 @@
     "phase": "analysis",
     "case": "rio-prefix-forward-matched-lr1e-6",
     "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
-    "minutes": 240,
+    "minutes": 360,
     "gpus": 1,
     "evaluation_processes": null,
     "cpus": 28,
@@ -983,7 +1076,7 @@
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-matched-lr1e-6/status/analysis.json",
     "dependencies": [
-      "516068"
+      "516227"
     ],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
@@ -1015,7 +1108,25 @@
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
       "rio-prefix-forward-matched-lr1e-6"
     ],
-    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-prefix-forward-matched-lr1e-6-submit.log"
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-prefix-forward-matched-lr1e-6-submit.log",
+    "resource_amendment": {
+      "original_minutes": 240,
+      "reason": "Observed full-grid rate approaches four-hour limit; pending analysis limit increased to six hours for geometry/checkpoint I/O in one allocation",
+      "command": [
+        "ssh",
+        "matrix",
+        "scontrol",
+        "update",
+        "JobId=516158",
+        "TimeLimit=360"
+      ]
+    },
+    "completion_gate_amendment": {
+      "original": [
+        "516068"
+      ],
+      "reason": "Track successful six-hour K4 closure, which reuses the active allocation's saved grids if needed."
+    }
   },
   "analysis:rio-prefix-reverse-matched-lr1e-6": {
     "job_id": "516159",
@@ -1026,7 +1137,7 @@
     "phase": "analysis",
     "case": "rio-prefix-reverse-matched-lr1e-6",
     "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
-    "minutes": 240,
+    "minutes": 360,
     "gpus": 1,
     "evaluation_processes": null,
     "cpus": 28,
@@ -1034,7 +1145,7 @@
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-matched-lr1e-6/status/analysis.json",
     "dependencies": [
-      "516068"
+      "516227"
     ],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
@@ -1066,7 +1177,25 @@
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
       "rio-prefix-reverse-matched-lr1e-6"
     ],
-    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-prefix-reverse-matched-lr1e-6-submit.log"
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-prefix-reverse-matched-lr1e-6-submit.log",
+    "resource_amendment": {
+      "original_minutes": 240,
+      "reason": "Observed full-grid rate approaches four-hour limit; pending analysis limit increased to six hours for geometry/checkpoint I/O in one allocation",
+      "command": [
+        "ssh",
+        "matrix",
+        "scontrol",
+        "update",
+        "JobId=516159",
+        "TimeLimit=360"
+      ]
+    },
+    "completion_gate_amendment": {
+      "original": [
+        "516068"
+      ],
+      "reason": "Track successful six-hour K4 closure, which reuses the active allocation's saved grids if needed."
+    }
   },
   "analysis:rio-k256-lr1e-6": {
     "job_id": "516160",
@@ -1077,7 +1206,7 @@
     "phase": "analysis",
     "case": "rio-k256-lr1e-6",
     "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
-    "minutes": 240,
+    "minutes": 360,
     "gpus": 1,
     "evaluation_processes": null,
     "cpus": 28,
@@ -1085,7 +1214,7 @@
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k256-lr1e-6/status/analysis.json",
     "dependencies": [
-      "516068",
+      "516227",
       "516136"
     ],
     "argv": [
@@ -1118,7 +1247,26 @@
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
       "rio-k256-lr1e-6"
     ],
-    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-k256-lr1e-6-submit.log"
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-k256-lr1e-6-submit.log",
+    "resource_amendment": {
+      "original_minutes": 240,
+      "reason": "Observed full-grid rate approaches four-hour limit; pending analysis limit increased to six hours for geometry/checkpoint I/O in one allocation",
+      "command": [
+        "ssh",
+        "matrix",
+        "scontrol",
+        "update",
+        "JobId=516160",
+        "TimeLimit=360"
+      ]
+    },
+    "completion_gate_amendment": {
+      "original": [
+        "516068",
+        "516136"
+      ],
+      "reason": "Track successful six-hour K4 closure, which reuses the active allocation's saved grids if needed."
+    }
   },
   "profiles:hparam-rio-lr1e-6": {
     "job_id": "516161",
@@ -1993,7 +2141,7 @@
     "phase": "analysis",
     "case": "rio-k4-cuda-lr1e-6",
     "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control",
-    "minutes": 240,
+    "minutes": 360,
     "gpus": 1,
     "evaluation_processes": null,
     "cpus": 28,
@@ -2001,8 +2149,7 @@
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/status/analysis.json",
     "dependencies": [
-      "516187",
-      "516068"
+      "516227"
     ],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
@@ -2034,7 +2181,29 @@
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control",
       "rio-k4-cuda-lr1e-6"
     ],
-    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-k4-cuda-lr1e-6-submit.log"
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-k4-cuda-lr1e-6-submit.log",
+    "resource_amendment": {
+      "original_minutes": 240,
+      "reason": "Observed full-grid rate approaches four-hour limit; pending analysis limit increased to six hours for geometry/checkpoint I/O in one allocation",
+      "command": [
+        "ssh",
+        "matrix",
+        "scontrol",
+        "update",
+        "JobId=516192",
+        "TimeLimit=360"
+      ]
+    },
+    "completion_gate_amendment": {
+      "original": [
+        "516187",
+        "516068"
+      ],
+      "completed_dependencies_verified": [
+        "516187"
+      ],
+      "reason": "Use six-hour K4 closure516227; omit completed controller-purged IDs after verifying their scientific statuses."
+    }
   },
   "profiles:rio-k4-cuda-lr1e-6": {
     "job_id": "516197",
@@ -2087,5 +2256,162 @@
       "rio-k4-cuda-lr1e-6"
     ],
     "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-k4-cuda-lr1e-6-submit.log"
+  },
+  "report:final": {
+    "job_id": "516219",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "report",
+    "case": "final",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 120,
+    "gpus": 1,
+    "evaluation_processes": null,
+    "cpus": 28,
+    "host_memory": "256G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/report-matrix-references.json",
+    "dependencies": [
+      "516227",
+      "516131",
+      "516136",
+      "516146",
+      "516150",
+      "516151",
+      "516154",
+      "516155",
+      "516156",
+      "516157",
+      "516158",
+      "516159",
+      "516160",
+      "516161",
+      "516165",
+      "516166",
+      "516167",
+      "516168",
+      "516169",
+      "516170",
+      "516171",
+      "516191",
+      "516192",
+      "516197"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-report-final",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=1",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=120",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=report-final",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516068:516131:516136:516146:516150:516151:516154:516155:516156:516157:516158:516159:516160:516161:516165:516166:516167:516168:516169:516170:516171:516187:516191:516192:516197",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/report-matrix/run_report.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/report-final-submit.log",
+    "completion_gate_amendment": {
+      "original": [
+        "516068",
+        "516131",
+        "516136",
+        "516146",
+        "516150",
+        "516151",
+        "516154",
+        "516155",
+        "516156",
+        "516157",
+        "516158",
+        "516159",
+        "516160",
+        "516161",
+        "516165",
+        "516166",
+        "516167",
+        "516168",
+        "516169",
+        "516170",
+        "516171",
+        "516187",
+        "516191",
+        "516192",
+        "516197"
+      ],
+      "completed_dependencies_verified": [
+        "516187"
+      ],
+      "reason": "Use six-hour K4 closure516227; omit completed controller-purged IDs after verifying their scientific statuses."
+    }
+  },
+  "analysis:rio-k4-lr1e-6:closure": {
+    "job_id": "516227",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis",
+    "case": "rio-k4-lr1e-6",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 360,
+    "gpus": 1,
+    "cpus": 28,
+    "host_memory": "256G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k4-lr1e-6/status/analysis.json",
+    "dependencies": [
+      "516068"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-rio-k4-lr1e-6-closure",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=1",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-rio-k4-lr1e-6-closure",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterany:516068",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/entry.sh",
+      "analysis",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-k4-lr1e-6"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/k4-closure-submit.log",
+    "dependency_mode": "afterany",
+    "reason": "Slurm rejects active-job time extension; same numerical worker reuses complete cached rows after original allocation ends. Final scientific completion is tracked by this pbatch closure allocation."
   }
 }

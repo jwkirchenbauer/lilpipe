@@ -1,5 +1,43 @@
 # Matrix transition state
 
+## Latest update: 2026-11-20 23:40 UTC
+
+The complete CUDA K4 defense and its 1000-update attack have passed training
+and input-order validation. Their evaluation516191 is running. K256 defense
+516131 is advancing; its original attack/evaluation jobs remain correctly
+dependent. K4 profile516150 is running concurrently with the original K4 grids.
+All other analysis/profile requests retain their scientific validation gates.
+
+All nine pending analysis limits were increased in place to360min. Slurm
+rejected increasing the active K4 allocation516068. A new six-hour pbatch
+continuation516227 waits afterany516068 and invokes exactly the same frozen
+worker on the same case. It reuses completed stages/grid rows; if the original
+finishes fully, the continuation only validates/reuses them. No pdebug use.
+The original K4 row is marked superseded for required completion tracking but
+its allocation still runs. Every downstream analysis now waits afterok516227
+instead of516068. Other already-established attack dependencies are retained;
+completed516187 was omitted from newly edited dependencies after verifying
+its scientific completion because Slurm had purged its controller record.
+
+Final report516219 is submitted with all remaining required native dependencies,
+now including516227. The report's completion marker is
+report-matrix-references.json; source/report-matrix must now stay frozen.
+The K4 continuation plan is source/transition/k4-closure-plan.json. Current
+dependency lists and resource amendments are recorded in matrix-jobs.json;
+the original argv fields remain as historical submitted requests.
+
+Commits a41ba1d9 and031dda60 are pushed: execution snapshots, configurations,
+complete calibration/replay/precision proofs, and clarified precision measures.
+CSV exports were normalized from CRLF to LF with parsed rows checked equal;
+raw copies remain outside Git and csv-curation.json records both hashes.
+The optional two-GPU pilot remains deferred and unrun. No numerical source or
+scientific training settings changed during these scheduling amendments.
+
+Continue slow monitoring (PID1301232, sleep900). Resolve failures, inspect the
+finished figures and numerical report, assess K4 backend drift, curate final
+small results/plots, and commit/push. No results should be declared final before
+the strict report passes. User's root AGENTS.md remains unstaged and unchanged.
+
 ## Latest update: 2026-11-20 23:10 UTC
 
 Both full production defenses are advancing on Matrix: K256516131 and full

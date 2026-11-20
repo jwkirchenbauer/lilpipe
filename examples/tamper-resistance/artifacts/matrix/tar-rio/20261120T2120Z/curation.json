@@ -39,8 +39,8 @@
   "files": [
     {
       "path": "artifacts/matrix/tar-rio/20261120T2120Z/OPERATOR_STATE.md",
-      "bytes": 12453,
-      "sha256": "38e7a13dd6eccd87f0aa576750ce8d06cd7297e36e685cddc4f30a6ffdc7124c"
+      "bytes": 14845,
+      "sha256": "a336072326abbab4d9b3c4c387bcb2fcfbde91df2def3e5b35a9d2137bd2a001"
     },
     {
       "path": "artifacts/matrix/tar-rio/20261120T2120Z/backend-control/README.md",
@@ -229,8 +229,8 @@
     },
     {
       "path": "artifacts/matrix/tar-rio/20261120T2120Z/matrix-jobs.json",
-      "bytes": 90457,
-      "sha256": "d7b68f27599460cb09af30e47a3d5e0e4eed54fd7e6c5918e76c42c2c33a89cb"
+      "bytes": 101618,
+      "sha256": "2f09866117daa9277441c2285a38d0c4fa2f28605808b8a335ab03fa53d28a45"
     },
     {
       "path": "artifacts/matrix/tar-rio/20261120T2120Z/migration.json",
@@ -596,6 +596,16 @@
       "path": "artifacts/matrix/tar-rio/20261120T2120Z/source/precision-audit/MEASURE_NOTES.md",
       "bytes": 1085,
       "sha256": "fdd40fa5daf398a2a92a347753b5a5c1a9fd7fa50448323e6490428e29c2d96a"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio/20261120T2120Z/source/transition/k4-closure-plan.json",
+      "bytes": 1524,
+      "sha256": "a3e691998c1815cffe661d9735980acbeb1f45721b3db9e9805a023aad315114"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio/20261120T2120Z/source/report-matrix/submission-plan.json",
+      "bytes": 4283,
+      "sha256": "027f440ad639b16a475916919f5e67262b99bea7d6c0af434bab665648ad67dd"
     }
   ],
   "csv_line_endings": [

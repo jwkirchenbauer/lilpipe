@@ -5,15 +5,30 @@ mode=${1:?case or bundle required}
 run=${2:?absolute study directory required}
 name=${3:?case or bundle name required}
 [[ "$run" == /* ]]
-mm_activate /usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4
+backend=${TAR_RUNTIME_BACKEND:-rocm}
+case "$backend" in
+    rocm) train_prefix=/usr/workspace/wsb/kirchenb/lilpipe-tar-train-rocm72-v4 ;;
+    matrix) train_prefix=/usr/workspace/wsb/kirchenb/lilpipe-tar-train-cu126-v1 ;;
+    *) echo 'TAR_RUNTIME_BACKEND must be rocm or matrix.' >&2; exit 2 ;;
+esac
+mm_activate "$train_prefix"
 cd /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance
 worker=${BASH_SOURCE[0]}
 source_root=$(cd "$(dirname "$worker")/.." && pwd)
 export HF_HOME=/p/vast1/kirchenb/tar-root/cache/huggingface
 export HF_HUB_OFFLINE=1 HF_DATASETS_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 export PYTHONPATH="$source_root/misc:$source_root/src${PYTHONPATH:+:$PYTHONPATH}"
-export TORCH_BLAS_PREFER_CUBLASLT=0 TORCH_BLAS_PREFER_HIPBLASLT=0 AMD_COMGR_CACHE=0
-export CUDA_VISIBLE_DEVICES=0,1,2,3 HIP_VISIBLE_DEVICES=0,1,2,3
+export TORCH_BLAS_PREFER_CUBLASLT=0
+if [[ "$backend" == rocm ]]; then
+    export TORCH_BLAS_PREFER_HIPBLASLT=0 AMD_COMGR_CACHE=0
+    export CUDA_VISIBLE_DEVICES=0,1,2,3 HIP_VISIBLE_DEVICES=0,1,2,3
+else
+    [[ ${SLURM_JOB_ID:-} ]]
+    if [[ ${SLURM_STEP_GPUS:-} == 0,1,2,3 ]]; then
+        export CUDA_VISIBLE_DEVICES="$SLURM_STEP_GPUS"
+    fi
+    unset HIP_VISIBLE_DEVICES
+fi
 export TORCHAO_FORCE_SKIP_LOADING_SO_FILES=1 PYTHONUNBUFFERED=1
 export TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=8 AXOLOTL_DO_NOT_TRACK=1
 export WANDB_MODE=offline LILPIPE_DEVICE_DEBUG=1
@@ -228,7 +243,7 @@ state = PartialState()
 assert state.distributed_type == DistributedType.NO
 assert state.num_processes == 1 and torch.cuda.device_count() == 4
 assert torch.backends.cuda.preferred_blas_library() == torch._C._BlasBackend.Cublas
-print("Compute study: one process, four GPUs, hipBLAS/rocBLAS", flush=True)
+print("Compute study: one process, four GPUs", {"torch": torch.__version__, "cuda": torch.version.cuda, "hip": torch.version.hip}, flush=True)
 PY
     axolotl train "$TAR_CASE_CONFIG" --launcher python
     python "$source_root/misc/tar_compute.py" validate "$folder"

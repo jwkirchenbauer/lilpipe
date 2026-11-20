@@ -1,11 +1,13 @@
 # Matrix assessment, 2026-11-20
 
-Matrix can run the tested RIO landscape calculation with small operational
-changes. It looks promising for accelerating evaluations and landscape work
-in the [RIO study](TAR_RIO_K_AND_FIDELITY.md).
-The Tuolumne monitor runs detached on `tuolumne1004`, polling every 900 seconds.
-At 20:52 UTC, all 26 production allocations remained pending. No production
-requests have been canceled or moved; all work remains in `pbatch`.
+Matrix is now running production evaluation and landscape work for the
+[RIO study](TAR_RIO_K_AND_FIDELITY.md). Following user authorization and a
+successful training pilot, the unfinished K256 defense and attack have also
+been submitted there. All requests use `pbatch/verival`.
+The detached monitor on `tuolumne1004` polls both clusters every 900 seconds.
+The active run is
+`/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z`;
+its `matrix-jobs.json` and `cancellations.json` record replacements.
 
 Using `ssh matrix` and the documented Matrix launcher, the CUDA/BF16 probe
 passed on an H100. Its measured queue wait was one second. The four-Slurm-process
@@ -79,15 +81,32 @@ All nine frozen task-source files matched. The archived reference lacks
 per-sample input hashes, so that identity check is unavailable. These checks
 do not isolate the backend as the sole cause of the score difference.
 
-Prioritize evaluation and landscape work for migration, without
-duplicate writers or bypassing the K4 validation gates. Keep training and exact
-replay audits on Tuolumne: moving only some training conditions to CUDA would
-add a backend difference to the scientific comparisons.
-Use one backend for benchmark comparisons and rerun reused controls there;
-the measured 0.576-point difference makes mixing archived ROCm scores with
-new CUDA scores unsuitable for small-effect comparisons. The production
-wrappers still need explicit Slurm/CUDA preflight and runtime paths, and the
-full landscape/profile worker needs validation before a broad migration.
+The dedicated CUDA training lock preserves the 222 common non-Torch package
+versions from the ROCm training environment. A short training pilot (516076)
+completed both a four-update K4 prefix and one full K256 outer update, keeping
+the production 125-update schedule, warmup, data, and optimizer settings.
+Initial weights were bitwise equal and outer batches/rates matched exactly.
+The K4 update cosine was **0.9931**, relative update error **0.1174**, and maximum
+loss difference **0.04494 nats**, within the predeclared migration limits.
+This establishes approximate agreement over a short prefix. A full K4 CUDA
+defense and standard attack are submitted as a separate backend control to
+measure accumulated drift.
+
+The K256 update took 31.1 seconds, suggesting roughly 65 minutes for 125 updates
+before checkpoint I/O. Its production defense requests three hours. The old
+queued K256 defense and attack were canceled before submitting replacements
+516131 and 516136, preventing duplicate writers. The full CUDA K4 control jobs
+are 516132 and 516137. Original completed ROCm training remains an input to the
+study, so K256-versus-other-K comparisons must report the training backend and
+consider the paired K4 backend control.
+
+Production wrappers now explicitly support Slurm/CUDA. K4 full landscape and
+profile validation remains the gate for broad analysis migration. Saved centers
+and early-profile vectors can reside on the CPU while retaining the original
+arithmetic and endpoint checks. Fresh CUDA benchmark results, including the
+reused K16 control, share one measurement backend; archived ROCm scores are
+kept as provenance. A one-GPU evaluation pilot tests whether partially occupied
+nodes can reduce queue time and GPU usage.
 
 Runtime manifests:
 `/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/runtime/matrix`.

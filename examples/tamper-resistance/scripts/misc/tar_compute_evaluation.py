@@ -20,6 +20,7 @@ from pathlib import Path
 TASKS = ("wmdp_bio_robust", "mmlu_no_bio")
 BUDGETS = (128, 256, 512, 1000)
 EVAL_ENV = "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2"
+MATRIX_EVAL_ENV = "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1"
 HF_HOME = "/p/vast1/kirchenb/tar-root/cache/huggingface"
 SCORE_FIELDS = ("learning_rate", "attack_step", "task", "jwk_percent")
 ORIGINAL_DEFENDED_MMLU = 54.01591352649753
@@ -313,12 +314,13 @@ def require_training_complete(folder, case):
 
 
 def evaluation_command(model, output, include_path, tasks):
-    return [
-        "accelerate",
-        "launch",
-        "--multi_gpu",
+    processes = evaluation_process_count()
+    command = ["accelerate", "launch"]
+    if processes != 1:
+        command.append("--multi_gpu")
+    command += [
         "--num_processes",
-        "4",
+        str(processes),
         "--num_machines",
         "1",
         "--num_cpu_threads_per_process",
@@ -341,35 +343,115 @@ def evaluation_command(model, output, include_path, tasks):
         "--output_path",
         str(output),
     ]
+    return command
+
+
+def evaluation_process_count():
+    value = os.environ.get("TAR_EVAL_PROCESSES", "4")
+    if value not in {"1", "4"}:
+        raise ValueError("TAR_EVAL_PROCESSES must be 1 or 4")
+    if (
+        value == "1"
+        and os.environ.get("TAR_RUNTIME_BACKEND", "rocm").lower() != "matrix"
+    ):
+        raise ValueError("Single-process evaluation is supported only on Matrix")
+    return int(value)
 
 
 def require_evaluation_runtime():
+    backend = os.environ.get("TAR_RUNTIME_BACKEND", "rocm").lower()
+    if backend not in {"rocm", "matrix"}:
+        raise ValueError("TAR_RUNTIME_BACKEND must be rocm or matrix")
+    expected_prefix = MATRIX_EVAL_ENV if backend == "matrix" else EVAL_ENV
     prefix = os.environ.get("CONDA_PREFIX")
     try:
-        correct_environment = bool(prefix) and Path(prefix).samefile(EVAL_ENV)
+        correct_environment = bool(prefix) and Path(prefix).samefile(expected_prefix)
     except (OSError, ValueError):
         correct_environment = False
     if not correct_environment:
-        raise ValueError(f"Evaluation requires activated environment {EVAL_ENV}")
-    if not os.environ.get("FLUX_JOB_ID"):
+        raise ValueError(f"Evaluation requires activated environment {expected_prefix}")
+    if backend == "rocm":
+        if not os.environ.get("FLUX_JOB_ID"):
+            raise ValueError(
+                "Run evaluation through launch_tuo.py and the interactive Bash wrapper"
+            )
+    elif not (os.environ.get("SLURM_JOB_ID") and os.environ.get("SLURM_CLUSTER_NAME")):
         raise ValueError(
-            "Run evaluation through launch_tuo.py and the interactive Bash wrapper"
+            "Matrix evaluation requires real SLURM_JOB_ID and SLURM_CLUSTER_NAME"
         )
+    processes = evaluation_process_count()
     expected = {
         "HF_HOME": HF_HOME,
         "HF_HUB_OFFLINE": "1",
         "HF_DATASETS_OFFLINE": "1",
         "TRANSFORMERS_OFFLINE": "1",
-        "CUDA_VISIBLE_DEVICES": "0,1,2,3",
-        "HIP_VISIBLE_DEVICES": "0,1,2,3",
         "TORCH_BLAS_PREFER_CUBLASLT": "0",
-        "TORCH_BLAS_PREFER_HIPBLASLT": "0",
-        "AMD_COMGR_CACHE": "0",
         "OMP_NUM_THREADS": "8",
     }
     for key, value in expected.items():
         if os.environ.get(key) != value:
             raise ValueError(f"Evaluation wrapper must set {key}={value}")
+    if backend == "rocm":
+        rocm_expected = {
+            "CUDA_VISIBLE_DEVICES": "0,1,2,3",
+            "HIP_VISIBLE_DEVICES": "0,1,2,3",
+            "TORCH_BLAS_PREFER_HIPBLASLT": "0",
+            "AMD_COMGR_CACHE": "0",
+        }
+        for key, value in rocm_expected.items():
+            if os.environ.get(key) != value:
+                raise ValueError(f"Evaluation wrapper must set {key}={value}")
+        return
+    # Matrix allocations can expose a permuted mask or a single-device task mask.
+    # Accept four visible devices directly; accept an unset mask only when CUDA
+    # confirms that the process can see all four devices.
+    step_gpus = {
+        part.strip()
+        for part in os.environ.get("SLURM_STEP_GPUS", "").split(",")
+        if part.strip()
+    }
+    mask = os.environ.get("CUDA_VISIBLE_DEVICES")
+    if processes == 1:
+        # Respect the scheduler's one-device cgroup/mask; never widen it.
+        try:
+            import torch
+
+            count = torch.cuda.device_count()
+            if torch.version.hip is not None or not str(
+                torch.version.cuda or ""
+            ).startswith("12.6"):
+                raise ValueError(
+                    "Matrix evaluation requires CUDA 12.6 PyTorch (HIP must be None)"
+                )
+        except ImportError as error:
+            raise ValueError("Matrix runtime must provide PyTorch CUDA") from error
+        if count != 1:
+            raise ValueError(
+                "Single-process Matrix evaluation requires exactly one CUDA device"
+            )
+        return
+    if step_gpus == {"0", "1", "2", "3"}:
+        # Full step ownership permits clearing a restrictive task-level mask.
+        os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
+        mask = "0,1,2,3"
+    try:
+        import torch
+
+        count = torch.cuda.device_count()
+        if torch.version.hip is not None or not str(
+            torch.version.cuda or ""
+        ).startswith("12.6"):
+            raise ValueError(
+                "Matrix evaluation requires CUDA 12.6 PyTorch (HIP must be None)"
+            )
+    except ImportError as error:
+        raise ValueError("Matrix runtime must provide PyTorch CUDA") from error
+    if mask is None:
+        if count != 4:
+            raise ValueError("Cannot prove ownership of all four Matrix GPUs")
+        os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
+    elif count != 4:
+        raise ValueError("Matrix task does not expose all four allocated GPUs")
 
 
 def record_preflight_failure(folder, name, error):

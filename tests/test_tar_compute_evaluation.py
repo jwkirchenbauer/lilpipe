@@ -8,7 +8,7 @@ import os
 import tempfile
 import unittest
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -577,6 +577,199 @@ class IntegrationTests(unittest.TestCase):
             self.assertEqual(
                 EVAL.read_json(folder / "status/evaluation.json")["state"], "failed"
             )
+
+
+class EvaluationRuntimeTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.prefix = Path(self.temp.name) / "eval-prefix"
+        self.prefix.mkdir()
+        self.matrix_prefix = Path(self.temp.name) / "matrix-prefix"
+        self.matrix_prefix.mkdir()
+        self.common = {
+            "HF_HOME": EVAL.HF_HOME,
+            "HF_HUB_OFFLINE": "1",
+            "HF_DATASETS_OFFLINE": "1",
+            "TRANSFORMERS_OFFLINE": "1",
+            "TORCH_BLAS_PREFER_CUBLASLT": "0",
+            "OMP_NUM_THREADS": "8",
+        }
+
+    def test_default_rocm_runtime_contract_is_preserved(self):
+        env = {
+            **self.common,
+            "CONDA_PREFIX": str(self.prefix),
+            "FLUX_JOB_ID": "flux-123",
+            "CUDA_VISIBLE_DEVICES": "0,1,2,3",
+            "HIP_VISIBLE_DEVICES": "0,1,2,3",
+            "TORCH_BLAS_PREFER_HIPBLASLT": "0",
+            "AMD_COMGR_CACHE": "0",
+        }
+        with (
+            patch.object(EVAL, "EVAL_ENV", str(self.prefix)),
+            patch.dict(os.environ, env, clear=True),
+        ):
+            EVAL.require_evaluation_runtime()
+
+    def test_matrix_requires_matching_prefix_and_slurm_provenance(self):
+        env = {
+            **self.common,
+            "TAR_RUNTIME_BACKEND": "matrix",
+            "CONDA_PREFIX": str(self.prefix),
+            "SLURM_JOB_ID": "42",
+            "SLURM_CLUSTER_NAME": "matrix",
+            "CUDA_VISIBLE_DEVICES": "0,1,2,3",
+        }
+        with (
+            patch.object(EVAL, "MATRIX_EVAL_ENV", str(self.matrix_prefix)),
+            patch.dict(os.environ, env, clear=True),
+        ):
+            with self.assertRaisesRegex(ValueError, "activated environment"):
+                EVAL.require_evaluation_runtime()
+            env["CONDA_PREFIX"] = str(self.matrix_prefix)
+            env.pop("SLURM_JOB_ID")
+            with patch.dict(os.environ, env, clear=True):
+                with self.assertRaisesRegex(ValueError, "SLURM_JOB_ID"):
+                    EVAL.require_evaluation_runtime()
+
+    def test_matrix_accepts_permuted_four_device_mask_and_cuda_126(self):
+        fake_torch = Mock()
+        fake_torch.cuda.device_count.return_value = 4
+        fake_torch.version.cuda = "12.6"
+        fake_torch.version.hip = None
+        env = {
+            **self.common,
+            "TAR_RUNTIME_BACKEND": "matrix",
+            "CONDA_PREFIX": str(self.matrix_prefix),
+            "SLURM_JOB_ID": "42",
+            "SLURM_CLUSTER_NAME": "matrix",
+            "CUDA_VISIBLE_DEVICES": "3,1,0,2",
+        }
+        with (
+            patch.object(EVAL, "MATRIX_EVAL_ENV", str(self.matrix_prefix)),
+            patch.dict(os.environ, env, clear=True),
+            patch.dict("sys.modules", {"torch": fake_torch}),
+        ):
+            EVAL.require_evaluation_runtime()
+            self.assertEqual(os.environ["CUDA_VISIBLE_DEVICES"], "3,1,0,2")
+
+    def test_matrix_full_step_allocation_clears_mask_and_requires_gpu_ownership(self):
+        fake_torch = Mock()
+        fake_torch.cuda.device_count.return_value = 4
+        fake_torch.version.cuda = "12.6"
+        fake_torch.version.hip = None
+        env = {
+            **self.common,
+            "TAR_RUNTIME_BACKEND": "matrix",
+            "CONDA_PREFIX": str(self.matrix_prefix),
+            "SLURM_JOB_ID": "42",
+            "SLURM_CLUSTER_NAME": "matrix",
+            "SLURM_STEP_GPUS": "0,1,2,3",
+            "CUDA_VISIBLE_DEVICES": "0",
+        }
+        with (
+            patch.object(EVAL, "MATRIX_EVAL_ENV", str(self.matrix_prefix)),
+            patch.dict(os.environ, env, clear=True),
+            patch.dict("sys.modules", {"torch": fake_torch}),
+        ):
+            EVAL.require_evaluation_runtime()
+            self.assertEqual(os.environ["CUDA_VISIBLE_DEVICES"], "0,1,2,3")
+        env.pop("SLURM_STEP_GPUS")
+        fake_torch.cuda.device_count.return_value = 1
+        with (
+            patch.object(EVAL, "MATRIX_EVAL_ENV", str(self.matrix_prefix)),
+            patch.dict(os.environ, env, clear=True),
+            patch.dict("sys.modules", {"torch": fake_torch}),
+        ):
+            with self.assertRaisesRegex(ValueError, "does not expose all four"):
+                EVAL.require_evaluation_runtime()
+
+    def test_matrix_unset_mask_requires_four_visible_cuda_devices(self):
+        fake_torch = Mock()
+        fake_torch.cuda.device_count.return_value = 4
+        fake_torch.version.cuda = "12.6"
+        fake_torch.version.hip = None
+        env = {
+            **self.common,
+            "TAR_RUNTIME_BACKEND": "matrix",
+            "CONDA_PREFIX": str(self.matrix_prefix),
+            "SLURM_JOB_ID": "42",
+            "SLURM_CLUSTER_NAME": "matrix",
+        }
+        with (
+            patch.object(EVAL, "MATRIX_EVAL_ENV", str(self.matrix_prefix)),
+            patch.dict(os.environ, env, clear=True),
+            patch.dict("sys.modules", {"torch": fake_torch}),
+        ):
+            EVAL.require_evaluation_runtime()
+            self.assertEqual(os.environ["CUDA_VISIBLE_DEVICES"], "0,1,2,3")
+        fake_torch.cuda.device_count.return_value = 2
+        env.pop("CUDA_VISIBLE_DEVICES", None)
+        with (
+            patch.object(EVAL, "MATRIX_EVAL_ENV", str(self.matrix_prefix)),
+            patch.dict(os.environ, env, clear=True),
+            patch.dict("sys.modules", {"torch": fake_torch}),
+        ):
+            with self.assertRaisesRegex(ValueError, "Cannot prove ownership"):
+                EVAL.require_evaluation_runtime()
+
+    def test_matrix_single_process_command_keeps_evaluation_arguments(self):
+        with patch.dict(
+            os.environ,
+            {"TAR_RUNTIME_BACKEND": "matrix", "TAR_EVAL_PROCESSES": "1"},
+            clear=True,
+        ):
+            argv = EVAL.evaluation_command("/model", "/out", "/tasks", EVAL.TASKS)
+        self.assertNotIn("--multi_gpu", argv)
+        self.assertEqual(argv[argv.index("--num_processes") + 1], "1")
+        self.assertEqual(argv[argv.index("--batch_size") + 1], "32")
+        self.assertEqual(argv[argv.index("--num_fewshot") + 1], "0")
+        self.assertEqual(argv[argv.index("--tasks") + 1], ",".join(EVAL.TASKS))
+        self.assertIn("dtype=bfloat16", argv[argv.index("--model_args") + 1])
+
+    def test_matrix_single_device_runtime_preserves_mask_and_rejects_wrong_count(self):
+        fake_torch = Mock()
+        fake_torch.cuda.device_count.return_value = 1
+        fake_torch.version.cuda = "12.6"
+        fake_torch.version.hip = None
+        env = {
+            **self.common,
+            "TAR_RUNTIME_BACKEND": "matrix",
+            "TAR_EVAL_PROCESSES": "1",
+            "CONDA_PREFIX": str(self.matrix_prefix),
+            "SLURM_JOB_ID": "42",
+            "SLURM_CLUSTER_NAME": "matrix",
+            "SLURM_STEP_GPUS": "0,1,2,3",
+            "CUDA_VISIBLE_DEVICES": "1",
+        }
+        with (
+            patch.object(EVAL, "MATRIX_EVAL_ENV", str(self.matrix_prefix)),
+            patch.dict(os.environ, env, clear=True),
+            patch.dict("sys.modules", {"torch": fake_torch}),
+        ):
+            EVAL.require_evaluation_runtime()
+            self.assertEqual(os.environ["CUDA_VISIBLE_DEVICES"], "1")
+        fake_torch.cuda.device_count.return_value = 2
+        with (
+            patch.object(EVAL, "MATRIX_EVAL_ENV", str(self.matrix_prefix)),
+            patch.dict(os.environ, env, clear=True),
+            patch.dict("sys.modules", {"torch": fake_torch}),
+        ):
+            with self.assertRaisesRegex(ValueError, "exactly one CUDA device"):
+                EVAL.require_evaluation_runtime()
+
+    def test_single_process_rejects_rocm_and_invalid_process_counts(self):
+        for env, expected in (
+            ({"TAR_EVAL_PROCESSES": "1"}, "only on Matrix"),
+            (
+                {"TAR_RUNTIME_BACKEND": "matrix", "TAR_EVAL_PROCESSES": "2"},
+                "must be 1 or 4",
+            ),
+        ):
+            with patch.dict(os.environ, env, clear=True):
+                with self.assertRaisesRegex(ValueError, expected):
+                    EVAL.evaluation_process_count()
 
 
 if __name__ == "__main__":

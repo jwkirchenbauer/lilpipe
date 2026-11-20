@@ -2368,6 +2368,12 @@ def step_profiles(study, settings):
 
     study = Path(study)
     device = torch.device("cuda:0")
+    # Keep raw checkpoints, deltas, and the shared random row on host memory
+    # when the analysis GPU cannot hold those full-model vectors alongside the
+    # resident evaluation model. All arithmetic retains its original dtype and
+    # ordering; parameter-sized values transfer only while each parameter is
+    # copied into the model for evaluation.
+    cpu_anchor = settings.get("cpu_landscape_anchor", False)
     torch.backends.cuda.matmul.allow_tf32 = False
     reference = Path(settings.get("attack_anchor", study / "models/defense"))
     checkpoints = [reference] + [
@@ -2554,7 +2560,9 @@ def step_profiles(study, settings):
         center = {}
         with handles(path) as tensor:
             for name, parameter in parameters.items():
-                value = tensor(name).to(device)
+                value = tensor(name)
+                if not cpu_anchor:
+                    value = value.to(device)
                 parameter.copy_(value)
                 if capture:
                     center[name] = value
@@ -2597,7 +2605,9 @@ def step_profiles(study, settings):
         saved_dtype_scalars = {"before": {}, "after": {}}
         with handles(checkpoints[step]) as tensor:
             for name, parameter in parameters.items():
-                after = tensor(name).to(device=device)
+                after = tensor(name)
+                if not cpu_anchor:
+                    after = after.to(device=device)
                 # .float() can alias either FP32 source. Subtract out of place.
                 delta[name] = after.float() - center[name].float()
                 raw_squared, raw_count = _profile_update_statistics(center[name], after)
@@ -2731,7 +2741,10 @@ def step_profiles(study, settings):
                         host = np.array(
                             shared[0, offset + start : offset + stop], copy=True
                         )
-                        flat[start:stop].copy_(torch.from_numpy(host).to(device))
+                        vector = torch.from_numpy(host)
+                        if not cpu_anchor:
+                            vector = vector.to(device)
+                        flat[start:stop].copy_(vector)
                 proof = _profile_first_plane(delta, random, norm=norm)
             else:
                 proof = {"status": "skipped_zero_first_update", "first_update_l2": 0}
@@ -2809,7 +2822,9 @@ def step_profiles(study, settings):
     cache.metadata["endpoint_ce_tolerance"] = 1e-4
     cache.metadata["source_sha256"] = protocol["source_sha256"]
     cache.metadata["memory_note"] = (
-        "At most one raw mixed BF16/FP32 anchor, one FP32 update, and one FP32 random row; no global FP64 weights or second random row on GPU."
+        "Raw mixed BF16/FP32 anchor, FP32 update, and FP32 random row are host-resident; only per-parameter values are copied to the evaluation model. No global FP64 weights or second random row on GPU."
+        if cpu_anchor
+        else "At most one raw mixed BF16/FP32 anchor, one FP32 update, and one FP32 random row; no global FP64 weights or second random row on GPU."
     )
     cache.save()
     _profile_plots(study, cache)

@@ -5,17 +5,33 @@ mode=${1:?prepare, case, group, geometry, geometry-group, profiles, profiles-gro
 run=${2:?absolute run directory required}
 shift 2
 [[ "$run" == /* ]]
-mm_activate /usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2
+backend=${TAR_RUNTIME_BACKEND:-rocm}
+case "$backend" in
+    rocm) eval_prefix=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-rocm72-v2 ;;
+    matrix) eval_prefix=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1 ;;
+    *) echo 'TAR_RUNTIME_BACKEND must be rocm or matrix.' >&2; exit 2 ;;
+esac
+mm_activate "$eval_prefix"
 cd /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance
 worker=${BASH_SOURCE[0]}
 code_dir=$(cd "$(dirname "$worker")" && pwd)
 export HF_HOME=/p/vast1/kirchenb/tar-root/cache/huggingface
 export HF_HUB_OFFLINE=1 HF_DATASETS_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 export PYTHONPATH="$code_dir:$run/source/src${PYTHONPATH:+:$PYTHONPATH}"
-export TORCH_BLAS_PREFER_CUBLASLT=0 TORCH_BLAS_PREFER_HIPBLASLT=0 AMD_COMGR_CACHE=0
+export TORCH_BLAS_PREFER_CUBLASLT=0
 export TORCHAO_FORCE_SKIP_LOADING_SO_FILES=1 PYTHONUNBUFFERED=1
 export TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=8 MPLBACKEND=Agg
-export CUDA_VISIBLE_DEVICES=${TAR_ANALYSIS_GPU:-0} HIP_VISIBLE_DEVICES=${TAR_ANALYSIS_GPU:-0}
+if [[ "$backend" == rocm ]]; then
+    export TORCH_BLAS_PREFER_HIPBLASLT=0 AMD_COMGR_CACHE=0
+    export CUDA_VISIBLE_DEVICES=${TAR_ANALYSIS_GPU:-0} HIP_VISIBLE_DEVICES=${TAR_ANALYSIS_GPU:-0}
+else
+    [[ ${SLURM_JOB_ID:-} ]]
+    unset HIP_VISIBLE_DEVICES
+fi
+python_command=(python)
+if [[ -n ${TAR_TRACE_RUNNER:-} ]]; then
+    python_command=(/usr/bin/time -v python "$TAR_TRACE_RUNNER")
+fi
 unset LOCAL_RANK RANK WORLD_SIZE LOCAL_WORLD_SIZE
 if [[ "$mode" == compare || "$mode" == checkpoint-compare ]]; then
     exec 9>"$run/status/comparison-report.lock"
@@ -29,6 +45,7 @@ elif [[ "$mode" == prepare ]]; then
     python "$code_dir/tar_compute.py" prepare-analysis "$run"
     printf '{"state":"complete"}\n' > "$run/status/probes.json"
 elif [[ "$mode" == group || "$mode" == geometry-group || "$mode" == profiles-group || "$mode" == profile-render-group ]]; then
+    [[ "$backend" == rocm ]] || { echo 'Matrix allocations run one analysis case each.' >&2; exit 2; }
     (( $# > 0 && $# <= 2 ))
     pids=()
     gpu=0
@@ -86,8 +103,12 @@ if registry.exists():
 elif sys.argv[3] not in ("profiles", "profile-render"):
     registry.write_text(json.dumps({"settings_sha256":signature}) + "\n")
 assert torch.cuda.device_count() == 1
-assert os.environ["CUDA_VISIBLE_DEVICES"] == os.environ["HIP_VISIBLE_DEVICES"]
-print("Landscape GPU assignment:", {"physical_gpu_requested":os.environ["HIP_VISIBLE_DEVICES"], "logical_device":0, "visible_devices":1, "device":str(torch.cuda.get_device_properties(0))}, flush=True)
+if os.environ.get("TAR_RUNTIME_BACKEND", "rocm") == "rocm":
+    assert os.environ["CUDA_VISIBLE_DEVICES"] == os.environ["HIP_VISIBLE_DEVICES"]
+else:
+    assert os.environ.get("SLURM_JOB_ID")
+    assert torch.version.hip is None and torch.version.cuda == "12.6"
+print("Landscape GPU assignment:", {"physical_gpu_requested":os.environ.get("CUDA_VISIBLE_DEVICES", "Slurm cgroup"), "logical_device":0, "visible_devices":1, "device":str(torch.cuda.get_device_properties(0))}, flush=True)
 PY
     if [[ "$status_name" == step-profiles ]]; then
         printf '{"state":"running"}\n' > "$folder/status/step-profiles.json"
@@ -100,26 +121,26 @@ PY
     if [[ "$mode" == profile-render ]]; then phases=(step-profile-report); fi
     if [[ "$mode" == render ]]; then
         for required in geometry surfaces random-frames; do
-            rg -q '"state"[[:space:]]*:[[:space:]]*"complete"' "$folder/status/$required.json"
+            grep -Eq '"state"[[:space:]]*:[[:space:]]*"complete"' "$folder/status/$required.json"
         done
         phases=(report)
     fi
     for stage in "${phases[@]}"; do
-        if [[ "$mode" != render && "$mode" != profile-render && -f "$folder/status/$stage.json" ]] && rg -q '"state"[[:space:]]*:[[:space:]]*"complete"' "$folder/status/$stage.json"; then
+        if [[ "$mode" != render && "$mode" != profile-render && -f "$folder/status/$stage.json" ]] && grep -Eq '"state"[[:space:]]*:[[:space:]]*"complete"' "$folder/status/$stage.json"; then
             echo "Reusing completed stage: $stage"
             continue
         fi
         printf '{"state":"running"}\n' > "$folder/status/$stage.json"
         if [[ "$stage" == step-profile-values ]]; then
-            python "$code_dir/tar_compute_compare.py" profile-values "$run" "$name" 2>&1 | tee "$folder/logs/$stage.log"
+            "${python_command[@]}" "$code_dir/tar_compute_compare.py" profile-values "$run" "$name" 2>&1 | tee "$folder/logs/$stage.log"
         elif [[ "$stage" == step-profile-report ]]; then
             # Rendering starts in a fresh process after Torch/model work exits.
             # A private cache also avoids reusing a potentially corrupt MPL cache.
             export MPLCONFIGDIR
             MPLCONFIGDIR=$(mktemp -d "$folder/cache/matplotlib-profile-render.XXXXXXXX")
-            python "$code_dir/tar_compute_compare.py" profile-report "$run" "$name" 2>&1 | tee "$folder/logs/$stage.log"
+            "${python_command[@]}" "$code_dir/tar_compute_compare.py" profile-report "$run" "$name" 2>&1 | tee "$folder/logs/$stage.log"
         else
-            python "$code_dir/tar_dynamics.py" "$stage" "$folder" 2>&1 | tee "$folder/logs/$stage.log"
+            "${python_command[@]}" "$code_dir/tar_dynamics.py" "$stage" "$folder" 2>&1 | tee "$folder/logs/$stage.log"
         fi
         printf '{"state":"complete"}\n' > "$folder/status/$stage.json"
     done

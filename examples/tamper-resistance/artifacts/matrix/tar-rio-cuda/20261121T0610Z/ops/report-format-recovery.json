@@ -1,0 +1,15 @@
+{
+  "state": "complete",
+  "failed_report_job": "516719",
+  "failure": "ValueError: unsupported format character comma in recovery-note percent formatting",
+  "before_worker_sha256": "b7395eff2218197328be165761962104d39a31d55e67cb71f3137d3720d95bef",
+  "after_worker_sha256": "420ae7ee5177d98980c7de160d4757c165a406b75c432ff52b173eaaf04bcaf3",
+  "regression_tests": 4,
+  "all_ten_numeric_phases_complete": true,
+  "numeric_completion_snapshot_sha256": "e6ecbc4c846d6a932f1ed41c4440630da351dc162b126f2a7f329f582056dbf7",
+  "numeric_source_settings_or_measurements_changed": false,
+  "numeric_completion_snapshot": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/report-516719-failure-snapshot.json",
+  "replacement_job_id": "516772",
+  "replacement_allocation_state": "COMPLETED",
+  "replacement_scientific_state": "complete"
+}

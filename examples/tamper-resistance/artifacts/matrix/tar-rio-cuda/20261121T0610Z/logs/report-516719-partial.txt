@@ -1,0 +1,12 @@
+# RIO same-backend CUDA K-fidelity comparison
+
+This report compares full K=4, 16, 64, and 256 defenses and standard 1000-update attacks trained on CUDA, with common evaluation, probes, batch stream, and original random/reference basis. It uses one paired seed. The same frozen legacy enclosing AMP autocast-cache behavior is retained: it does not refresh cached parameter casts after inner optimizer updates. The v1 real-model parity pilot with this behavior matched update 1 and diverged at later checked states; the v2 per-update cache refresh matched five checked states and all 16 losses at its tested anchor. The K sweep retains the legacy simulator conditions and makes no numerical parity claim for actual attacker trajectories.
+
+## Main results
+
+| K | Defended MMLU (%) | Utility gate | Initial WMDP (%) | Final WMDP (%) | First >=45% | First >=50% | First >=90% fresh base |
+|---:|---:|:---:|---:|---:|---:|---:|---:|
+| 4 | 52.425 | fail | 45.276 | 52.535 | 0 | 384 | 48 |
+| 16 | 52.432 | fail | 36.751 | 33.986 | not reached | not reached | not reached |
+| 64 | 52.680 | fail | 41.475 | 49.309 | 384 | not reached | not reached |
+| 256 | 46.862 | fail | 29.839 | 46.889 | 512 | not reached | not reached |

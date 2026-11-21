@@ -1,0 +1,23 @@
+{
+  "state": "complete",
+  "cases": [
+    {
+      "case": "rio-k16-cuda-lr1e-6",
+      "readiness_sha256": "69961f4a525ca4fd106182352cd86f0308e7ad841271b95fa96897da0437e2a9",
+      "immutable_loss_sha256": {
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6/surfaces/actual-losses.csv": "1a2046a6c5526aa33ce859d0d1b81a9f94ac249a5580860c45ed3f289d0cd5d8",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6/surfaces/minibatch-losses.npz": "91267f4e07a27843b2cdb33974bbc6fa4044aa105697066fb725f5ba14ea4200"
+      },
+      "bases_unchanged": true
+    },
+    {
+      "case": "rio-k64-cuda-lr1e-6",
+      "readiness_sha256": "b08d1b014c9221d69ce2384203fac75f4a0922925dad3aeb26675cfdcefaaa28",
+      "immutable_loss_sha256": {
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6/surfaces/actual-losses.csv": "759291ca3f2fabad2f4e883ebc1501a2fc5e685ad2f93627c0e3eef480501b3c",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6/surfaces/minibatch-losses.npz": "cb33efce5a5766608c4361bcd66ddd07741b0300db774a50eb75578a37220e14"
+      },
+      "bases_unchanged": true
+    }
+  ]
+}

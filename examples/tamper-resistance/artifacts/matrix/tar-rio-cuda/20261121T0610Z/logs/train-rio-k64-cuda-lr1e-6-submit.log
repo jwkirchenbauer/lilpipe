@@ -1,0 +1,2 @@
+Submission: sbatch --parsable --dependency=afterok:516702 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/launches/train-rio-k64-cuda-lr1e-6/launch-p4ajq8hr/launch.sh
+Launched job 1/1 with job_id=516704.

@@ -239,7 +239,8 @@
     "backend": "slurm",
     "partition": "pbatch",
     "account": "verival",
-    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6/status/evaluation.json"
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6/status/evaluation.json",
+    "scheduler_time_limit_minutes": 120
   },
   "eval:rio-k64-cuda-lr1e-6": {
     "argv": [
@@ -287,7 +288,8 @@
     "backend": "slurm",
     "partition": "pbatch",
     "account": "verival",
-    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6/status/evaluation.json"
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6/status/evaluation.json",
+    "scheduler_time_limit_minutes": 120
   },
   "analysis:rio-k16-cuda-lr1e-6": {
     "argv": [
@@ -336,7 +338,8 @@
     "backend": "slurm",
     "partition": "pbatch",
     "account": "verival",
-    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6/status/analysis.json"
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6/status/analysis.json",
+    "scheduler_time_limit_minutes": 240
   },
   "analysis:rio-k64-cuda-lr1e-6": {
     "argv": [
@@ -385,7 +388,8 @@
     "backend": "slurm",
     "partition": "pbatch",
     "account": "verival",
-    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6/status/analysis.json"
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6/status/analysis.json",
+    "scheduler_time_limit_minutes": 240
   },
   "profiles:rio-k16-cuda-lr1e-6": {
     "argv": [
@@ -424,9 +428,7 @@
     "case": "rio-k16-cuda-lr1e-6",
     "gpus": 1,
     "host_memory": "224G",
-    "dependencies": [
-      "516709"
-    ],
+    "dependencies": [],
     "source_sha256": {
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/entry.sh": "c508cd872e5a31e541887c0256f2c6dbb9f29b6d6fcbefbed07e692e6bfb5ece"
     },
@@ -434,9 +436,55 @@
     "backend": "slurm",
     "partition": "pbatch",
     "account": "verival",
-    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6/status/step-profiles.json"
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6/status/step-profiles.json",
+    "scheduler_time_limit_minutes": 150,
+    "dependency_amendments": [
+      {
+        "reason": "Immutable geometry and complete loss inputs verified; independent profile can overlap remaining grids. Final report retains full analysis.",
+        "readiness": {
+          "actual_rows": 37,
+          "matrix_shape": [
+            7,
+            128
+          ],
+          "settings_sha256": "810169bc9726242ab62b891607702c3b0495d9f65b967c9e1cefc002e6d1d05f",
+          "geometry_sha256": "bc3b0059fb446a64b833e24247c78fe5df69563d07e4171b25ff45a896ce9e2f",
+          "bases": [
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/random-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213655003007
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213826399917
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1795245385157600768
+            }
+          ],
+          "immutable_loss_sha256": {
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6/surfaces/actual-losses.csv": "1a2046a6c5526aa33ce859d0d1b81a9f94ac249a5580860c45ed3f289d0cd5d8",
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6/surfaces/minibatch-losses.npz": "91267f4e07a27843b2cdb33974bbc6fa4044aa105697066fb725f5ba14ea4200"
+          },
+          "case": "rio-k16-cuda-lr1e-6",
+          "profile_job": "516711",
+          "analysis_job": "516709",
+          "final_report_job": "516719",
+          "verified_epoch": 1795246422.367068,
+          "before_dependencies": [
+            "516709"
+          ],
+          "applied": true,
+          "readiness_source_sha256": "a14ab6ca73a78c9cb16ea1b5c6ed061ceb646e28d1557437dca340aa26dc55cf"
+        }
+      }
+    ]
   },
-  "profiles:rio-k64-cuda-lr1e-6": {
+  "profiles:rio-k64-cuda-lr1e-6:interrupted-reference-order": {
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
       "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
@@ -473,9 +521,7 @@
     "case": "rio-k64-cuda-lr1e-6",
     "gpus": 1,
     "host_memory": "224G",
-    "dependencies": [
-      "516710"
-    ],
+    "dependencies": [],
     "source_sha256": {
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/entry.sh": "c508cd872e5a31e541887c0256f2c6dbb9f29b6d6fcbefbed07e692e6bfb5ece"
     },
@@ -483,9 +529,111 @@
     "backend": "slurm",
     "partition": "pbatch",
     "account": "verival",
-    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6/status/step-profiles.json"
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6/status/step-profiles.json",
+    "scheduler_time_limit_minutes": 150,
+    "dependency_amendments": [
+      {
+        "reason": "Immutable geometry and complete loss inputs verified; independent profile can overlap remaining grids. Final report retains full analysis.",
+        "readiness": {
+          "actual_rows": 37,
+          "matrix_shape": [
+            7,
+            128
+          ],
+          "settings_sha256": "43a9fdc16a9fc5c8b5800d15b48d8b228040133300e8b34dd777e78a3443caa7",
+          "geometry_sha256": "d1b563694aa4f07c8599c4b4c322c4b7246b5c0ad769e4d541cf0dc33421f00e",
+          "bases": [
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/random-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213655003007
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213826399917
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1795245939391134400
+            }
+          ],
+          "immutable_loss_sha256": {
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6/surfaces/actual-losses.csv": "759291ca3f2fabad2f4e883ebc1501a2fc5e685ad2f93627c0e3eef480501b3c",
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6/surfaces/minibatch-losses.npz": "cb33efce5a5766608c4361bcd66ddd07741b0300db774a50eb75578a37220e14"
+          },
+          "case": "rio-k64-cuda-lr1e-6",
+          "profile_job": "516712",
+          "analysis_job": "516710",
+          "final_report_job": "516719",
+          "verified_epoch": 1795246422.7565947,
+          "before_dependencies": [
+            "516710"
+          ],
+          "applied": true,
+          "readiness_source_sha256": "a14ab6ca73a78c9cb16ea1b5c6ed061ceb646e28d1557437dca340aa26dc55cf"
+        }
+      }
+    ],
+    "superseded": true,
+    "superseded_reason": "The frozen profile adapter requires the shared K16 profile metadata to be complete before final numerical validation. K64 must depend on K16. Slurm requeuehold is disabled, so replace the allocation and preserve its partial measurement cache.",
+    "replacement_job_id": "516739",
+    "cancellation_requested": true
   },
-  "report": {
+  "profiles:rio-k64-cuda-lr1e-6": {
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-cuda-profiles-rio-k64-cuda-lr1e-6",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=1",
+      "--gpus_per_task=1",
+      "--cpus_per_task=28",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=180",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/launches",
+      "--sub_output_dir_name=profiles-rio-k64-cuda-lr1e-6",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516711",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/entry.sh",
+      "profiles",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z",
+      "rio-k64-cuda-lr1e-6"
+    ],
+    "phase": "profiles",
+    "case": "rio-k64-cuda-lr1e-6",
+    "gpus": 1,
+    "host_memory": "224G",
+    "dependencies": [
+      "516711"
+    ],
+    "source_sha256": {
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/entry.sh": "c508cd872e5a31e541887c0256f2c6dbb9f29b6d6fcbefbed07e692e6bfb5ece"
+    },
+    "job_id": "516739",
+    "backend": "slurm",
+    "partition": "pbatch",
+    "account": "verival",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6/status/step-profiles.json",
+    "scheduler_time_limit_minutes": 150,
+    "partial_cache_preserved_from_job": "516712",
+    "shared_reference_job": "516711"
+  },
+  "report:failed-percent-format": {
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
       "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
@@ -520,17 +668,80 @@
     "gpus": 1,
     "host_memory": "224G",
     "dependencies": [
-      "516707",
-      "516708",
       "516709",
       "516710",
       "516711",
-      "516712"
+      "516739"
     ],
     "source_sha256": {
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/run_report.sh": "0a7c113ce9e11d6575701771164c606be5480fe1ac0272156d079d4bc997ad72"
     },
     "job_id": "516719",
+    "backend": "slurm",
+    "partition": "pbatch",
+    "account": "verival",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/status/report.json",
+    "scheduler_time_limit_minutes": 45,
+    "dependency_amendments": [
+      {
+        "reason": "Replacement K64 profile waits for completed K16 profile reference. Both benchmarks are already COMPLETED0:0; keep both full analyses and profiles as remaining gates.",
+        "before": [
+          "516707",
+          "516708",
+          "516709",
+          "516710",
+          "516711",
+          "516712"
+        ],
+        "after": [
+          "516709",
+          "516710",
+          "516711",
+          "516739"
+        ]
+      }
+    ],
+    "superseded": true,
+    "superseded_reason": "Unescaped percent sign in report prose; all numerical validation and plot generation completed before formatting failed."
+  },
+  "report": {
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-cuda-report",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=1",
+      "--gpus_per_task=1",
+      "--cpus_per_task=28",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=60",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/launches",
+      "--sub_output_dir_name=report",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/run_report.sh"
+    ],
+    "phase": "report",
+    "case": null,
+    "gpus": 1,
+    "host_memory": "224G",
+    "dependencies": [],
+    "source_sha256": {
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/run_report.sh": "0a7c113ce9e11d6575701771164c606be5480fe1ac0272156d079d4bc997ad72"
+    },
+    "job_id": "516772",
     "backend": "slurm",
     "partition": "pbatch",
     "account": "verival",

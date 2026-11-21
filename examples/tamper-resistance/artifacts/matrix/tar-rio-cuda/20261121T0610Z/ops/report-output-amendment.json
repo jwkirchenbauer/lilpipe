@@ -1,0 +1,9 @@
+{
+  "kind": "report_presentation_and_missing_data_guard",
+  "before_worker_sha256": "9db994ec630bb5d2e6d7550f75f89073e0ec2f012b976131f8ed6740a7eca01e",
+  "after_worker_sha256": "b7395eff2218197328be165761962104d39a31d55e67cb71f3137d3720d95bef",
+  "reason": "Distinguish a measured utility gate failure from absent data. Output fail for below-gate observations; reject missing checkpoint-zero MMLU. Loss calculations, score aggregation, plot data and scientific settings are unchanged.",
+  "regression_tests": 3,
+  "result": "passed",
+  "report_allocation": "516719; still gated on running K64 profile"
+}

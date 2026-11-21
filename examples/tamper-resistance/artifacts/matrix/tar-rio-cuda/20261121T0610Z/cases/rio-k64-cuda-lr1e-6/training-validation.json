@@ -1,0 +1,18 @@
+{
+  "state": "passed",
+  "case": "rio-k64-cuda-lr1e-6",
+  "updates": 1000,
+  "model_checkpoints": 26,
+  "optimizer_checkpoints": [
+    128,
+    512,
+    1000
+  ],
+  "training_elapsed_seconds": 637.1513243562076,
+  "input_order_validation": {
+    "state": "passed",
+    "reference_observations": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-compute/20261110T1815Z/cases/baseline-lr1e-6/models/attack/observed-batches.jsonl",
+    "batches": 1000,
+    "canonical_step_batch_sha256": "d9ceaa6eccd2253662349f682662617193fb6f17929b22debdf6f61d6314cad0"
+  }
+}

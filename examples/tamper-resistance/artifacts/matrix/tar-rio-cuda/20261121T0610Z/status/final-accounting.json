@@ -1,0 +1,184 @@
+{
+  "checked_at_utc": "2026-11-21T09:40:42.830624+00:00",
+  "all_complete": true,
+  "missing_declared_phases": [],
+  "jobs": [
+    {
+      "key": "train:rio-k16-cuda-defense",
+      "job_id": "516701",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516701",
+        "State": "COMPLETED",
+        "Elapsed": "00:11:30",
+        "Submit": "2026-11-20T22:11:49",
+        "Start": "2026-11-20T22:18:43",
+        "End": "2026-11-20T22:30:13",
+        "Reason": "None"
+      }
+    },
+    {
+      "key": "train:rio-k64-cuda-defense",
+      "job_id": "516702",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516702",
+        "State": "COMPLETED",
+        "Elapsed": "00:21:48",
+        "Submit": "2026-11-20T22:11:49",
+        "Start": "2026-11-20T22:18:43",
+        "End": "2026-11-20T22:40:31",
+        "Reason": "None"
+      }
+    },
+    {
+      "key": "train:rio-k16-cuda-lr1e-6",
+      "job_id": "516703",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516703",
+        "State": "COMPLETED",
+        "Elapsed": "00:18:57",
+        "Submit": "2026-11-20T22:13:19",
+        "Start": "2026-11-20T22:31:43",
+        "End": "2026-11-20T22:50:40",
+        "Reason": "Dependency"
+      }
+    },
+    {
+      "key": "train:rio-k64-cuda-lr1e-6",
+      "job_id": "516704",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516704",
+        "State": "COMPLETED",
+        "Elapsed": "00:18:54",
+        "Submit": "2026-11-20T22:13:20",
+        "Start": "2026-11-20T22:41:43",
+        "End": "2026-11-20T23:00:37",
+        "Reason": "Dependency"
+      }
+    },
+    {
+      "key": "eval:rio-k16-cuda-lr1e-6",
+      "job_id": "516707",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516707",
+        "State": "COMPLETED",
+        "Elapsed": "00:31:57",
+        "Submit": "2026-11-20T22:15:20",
+        "Start": "2026-11-20T22:52:43",
+        "End": "2026-11-20T23:24:40",
+        "Reason": "Dependency"
+      }
+    },
+    {
+      "key": "eval:rio-k64-cuda-lr1e-6",
+      "job_id": "516708",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516708",
+        "State": "COMPLETED",
+        "Elapsed": "00:29:04",
+        "Submit": "2026-11-20T22:15:21",
+        "Start": "2026-11-20T23:02:43",
+        "End": "2026-11-20T23:31:47",
+        "Reason": "Dependency"
+      }
+    },
+    {
+      "key": "analysis:rio-k16-cuda-lr1e-6",
+      "job_id": "516709",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516709",
+        "State": "COMPLETED",
+        "Elapsed": "01:18:34",
+        "Submit": "2026-11-20T22:15:21",
+        "Start": "2026-11-20T22:52:43",
+        "End": "2026-11-21T00:11:17",
+        "Reason": "Dependency"
+      }
+    },
+    {
+      "key": "analysis:rio-k64-cuda-lr1e-6",
+      "job_id": "516710",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516710",
+        "State": "COMPLETED",
+        "Elapsed": "01:16:11",
+        "Submit": "2026-11-20T22:15:21",
+        "Start": "2026-11-20T23:02:43",
+        "End": "2026-11-21T00:18:54",
+        "Reason": "Dependency"
+      }
+    },
+    {
+      "key": "profiles:rio-k16-cuda-lr1e-6",
+      "job_id": "516711",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516711",
+        "State": "COMPLETED",
+        "Elapsed": "00:56:25",
+        "Submit": "2026-11-20T22:16:35",
+        "Start": "2026-11-20T23:33:45",
+        "End": "2026-11-21T00:30:10",
+        "Reason": "Dependency"
+      }
+    },
+    {
+      "key": "profiles:rio-k64-cuda-lr1e-6",
+      "job_id": "516739",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516739",
+        "State": "COMPLETED",
+        "Elapsed": "00:52:16",
+        "Submit": "2026-11-20T23:43:09",
+        "Start": "2026-11-21T00:30:45",
+        "End": "2026-11-21T01:23:01",
+        "Reason": "Dependency"
+      }
+    },
+    {
+      "key": "report",
+      "job_id": "516772",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516772",
+        "State": "COMPLETED",
+        "Elapsed": "00:00:45",
+        "Submit": "2026-11-21T01:38:00",
+        "Start": "2026-11-21T01:38:46",
+        "End": "2026-11-21T01:39:31",
+        "Reason": "None"
+      }
+    }
+  ],
+  "errors": []
+}

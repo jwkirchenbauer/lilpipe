@@ -1,0 +1,108 @@
+Periodic asynchronous stack dumping disabled for this retry; fatal-fault reporting remains enabled.
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:00<00:38,  7.53it/s]Loading weights: 100%|██████████| 291/291 [00:00<00:00, 1641.81it/s]
+Using the latest cached version of the dataset since cais/wmdp-bio-forget-corpus couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'default' at /p/vast1/kirchenb/tar-root/cache/huggingface/datasets/cais___wmdp-bio-forget-corpus/default/0.0.0/5a786ed1041e56fef2d4ed26c1239f12b73a68eb (last modified on Fri Nov 20 23:26:09 2026).
+Using the latest cached version of the dataset since cais/wmdp-bio-forget-corpus couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'default' at /p/vast1/kirchenb/tar-root/cache/huggingface/datasets/cais___wmdp-bio-forget-corpus/default/0.0.0/5a786ed1041e56fef2d4ed26c1239f12b73a68eb (last modified on Fri Nov 20 23:26:09 2026).
+Loaded direction 1/2 (27.0 GiB in 60.3 s)
+Loaded direction 2/2 (27.0 GiB in 66.3 s)
+Loading broad random frame: defense 0
+Broad row: defense 0 -125.0
+Broad row: defense 0 -93.75
+Broad row: defense 0 -62.5
+Broad row: defense 0 -31.25
+Broad row: defense 0 0.0
+Broad row: defense 0 31.25
+Broad row: defense 0 62.5
+Broad row: defense 0 93.75
+Broad row: defense 0 125.0
+Broad random frame: defense 0
+Loading broad random frame: defense 8
+Broad row: defense 8 -125.0
+Broad row: defense 8 -93.75
+Broad row: defense 8 -62.5
+Broad row: defense 8 -31.25
+Broad row: defense 8 0.0
+Broad row: defense 8 31.25
+Broad row: defense 8 62.5
+Broad row: defense 8 93.75
+Broad row: defense 8 125.0
+Broad random frame: defense 8
+Loading broad random frame: defense 32
+Broad row: defense 32 -125.0
+Broad row: defense 32 -93.75
+Broad row: defense 32 -62.5
+Broad row: defense 32 -31.25
+Broad row: defense 32 0.0
+Broad row: defense 32 31.25
+Broad row: defense 32 62.5
+Broad row: defense 32 93.75
+Broad row: defense 32 125.0
+Broad random frame: defense 32
+Loading broad random frame: defense 125
+Broad row: defense 125 -125.0
+Broad row: defense 125 -93.75
+Broad row: defense 125 -62.5
+Broad row: defense 125 -31.25
+Broad row: defense 125 0.0
+Broad row: defense 125 31.25
+Broad row: defense 125 62.5
+Broad row: defense 125 93.75
+Broad row: defense 125 125.0
+Broad random frame: defense 125
+Loading broad random frame: attack 0
+Broad row: attack 0 -125.0
+Broad row: attack 0 -93.75
+Broad row: attack 0 -62.5
+Broad row: attack 0 -31.25
+Broad row: attack 0 0.0
+Broad row: attack 0 31.25
+Broad row: attack 0 62.5
+Broad row: attack 0 93.75
+Broad row: attack 0 125.0
+Broad random frame: attack 0
+Loading broad random frame: attack 128
+Broad row: attack 128 -125.0
+Broad row: attack 128 -93.75
+Broad row: attack 128 -62.5
+Broad row: attack 128 -31.25
+Broad row: attack 128 0.0
+Broad row: attack 128 31.25
+Broad row: attack 128 62.5
+Broad row: attack 128 93.75
+Broad row: attack 128 125.0
+Broad random frame: attack 128
+Loading broad random frame: attack 1000
+Broad row: attack 1000 -125.0
+Broad row: attack 1000 -93.75
+Broad row: attack 1000 -62.5
+Broad row: attack 1000 -31.25
+Broad row: attack 1000 0.0
+Broad row: attack 1000 31.25
+Broad row: attack 1000 62.5
+Broad row: attack 1000 93.75
+Broad row: attack 1000 125.0
+Broad random frame: attack 1000
+	Command being timed: "python /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/../misc/trace_runner.py /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/misc/tar_dynamics.py random-frames /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6"
+	User time (seconds): 416.07
+	System time (seconds): 197.44
+	Percent of CPU this job got: 93%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 10:53.50
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 64977224
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 371051
+	Minor (reclaiming a frame) page faults: 28558053
+	Voluntary context switches: 343148
+	Involuntary context switches: 42040
+	Swaps: 0
+	File system inputs: 121467496
+	File system outputs: 4560
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

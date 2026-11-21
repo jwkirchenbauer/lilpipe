@@ -1,14 +1,17 @@
 # RIO: simulation depth and attacker matching
 
-Completed on Matrix on 2026-11-21 UTC. The strict report has complete coverage:
-[results and key figures](/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/report.md).
-All four K conditions miss the initial MMLU utility gate; the paired training
-backend control also shows material score variation. These limits are recorded
-with the measurements in the final report.
+Completed on Matrix on 2026-11-21 UTC, including the additional controls needed
+for comparability. Start with the
+[same-backend K results and key figures](/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/report.md).
+All four K values now share CUDA training and the frozen numerical source.
+There is no monotone improvement in WMDP recovery with K in this paired seed;
+all four defenders miss the initial MMLU utility gate.
 
-A [same-backend CUDA follow-up](/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/README.md)
-adds K16 and K64 to the completed CUDA K4/K256 runs. It holds the numerical
-source fixed across all four K values to address backend/source uncertainty.
+The [original study and simulation-fidelity results](/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/report.md)
+also remain complete. Its paired training-backend control found material score
+variation, motivating the additional CUDA K16/K64 runs. The K comparison keeps
+the declared legacy simulator arithmetic; the separate matched simulator pilot
+does not establish numerical parity for that legacy path.
 
 This follows the [hyperparameter study](TAR_HPARAM_STUDY.md),
 [cleanroom study](TAR_CLEANROOM_STUDY.md), and

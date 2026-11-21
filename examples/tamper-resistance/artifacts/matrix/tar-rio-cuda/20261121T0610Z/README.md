@@ -10,7 +10,12 @@ recipe. Each defense has 125 outer updates; each attack has 1,000 updates at 1e-
 The legacy simulator behavior and the utility gate remain part of the analysis.
 This is one paired seed.
 
-The run is in progress. The final report is produced only after every declared
-measurement and validation passes. See [protocol](protocol.json),
-[configuration/data-order audit](ops/comparability-audit.md), and
-[execution state](OPERATOR_STATE.md).
+Completed on 2026-11-21 UTC. All eleven declared phases and strict validations
+passed. Start with [results and key figures](report.md), or read the
+[full report](rio-cuda-report.md). Recovery is not monotone in K in this seed,
+and every defender misses the initial MMLU utility gate.
+
+See [protocol](protocol.json),
+[configuration/data-order audit](ops/comparability-audit.md),
+[final accounting](status/final-accounting.json), and
+[execution history](OPERATOR_STATE.md).

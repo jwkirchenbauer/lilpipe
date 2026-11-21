@@ -1,0 +1,21 @@
+{
+  "coverage": [
+    {
+      "case": "rio-k16-cuda-lr1e-6",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "rio-k64-cuda-lr1e-6",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    }
+  ],
+  "rejected": [],
+  "utility_references": {
+    "base": 58.57979282390031,
+    "defended": 52.43206725716859
+  }
+}

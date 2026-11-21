@@ -1,0 +1,22 @@
+bash: cannot set terminal process group (2696724): Inappropriate ioctl for device
+bash: no job control in this shell
+stty: 'standard input': Inappropriate ioctl for device
+bash: child setpgid (2697708 to 2696724): Operation not permitted
+bash: child setpgid (2697718 to 2696724): Operation not permitted
+bash: child setpgid (2697719 to 2696724): Operation not permitted
+bash: child setpgid (2697723 to 2696724): Operation not permitted
+bash: child setpgid (2697725 to 2696724): Operation not permitted
+{"time": "2026-11-21T06:16:37.013168+00:00", "all_complete": false, "done": 0, "declared": 10, "missing_phases": ["report"], "errors": []}
+{"time": "2026-11-21T06:31:38.015236+00:00", "all_complete": false, "done": 1, "declared": 10, "missing_phases": ["report"], "errors": []}
+{"time": "2026-11-21T06:46:38.974149+00:00", "all_complete": false, "done": 2, "declared": 11, "missing_phases": [], "errors": []}
+{"time": "2026-11-21T07:01:39.916086+00:00", "all_complete": false, "done": 4, "declared": 11, "missing_phases": [], "errors": []}
+{"time": "2026-11-21T07:16:40.883493+00:00", "all_complete": false, "done": 4, "declared": 11, "missing_phases": [], "errors": []}
+{"time": "2026-11-21T07:31:41.846639+00:00", "all_complete": false, "done": 5, "declared": 11, "missing_phases": [], "errors": []}
+{"time": "2026-11-21T07:46:42.756006+00:00", "all_complete": false, "done": 6, "declared": 11, "missing_phases": [], "errors": []}
+{"time": "2026-11-21T08:01:43.681354+00:00", "all_complete": false, "done": 6, "declared": 11, "missing_phases": [], "errors": []}
+{"time": "2026-11-21T08:16:44.694568+00:00", "all_complete": false, "done": 7, "declared": 11, "missing_phases": [], "errors": []}
+{"time": "2026-11-21T08:31:45.713937+00:00", "all_complete": false, "done": 9, "declared": 11, "missing_phases": [], "errors": []}
+{"time": "2026-11-21T08:46:46.760018+00:00", "all_complete": false, "done": 9, "declared": 11, "missing_phases": [], "errors": []}
+{"time": "2026-11-21T09:01:59.153725+00:00", "all_complete": false, "done": 9, "declared": 11, "missing_phases": [], "errors": []}
+{"time": "2026-11-21T09:17:09.205392+00:00", "all_complete": false, "done": 9, "declared": 11, "missing_phases": [], "errors": []}
+{"time": "2026-11-21T09:32:10.151008+00:00", "all_complete": false, "done": 10, "declared": 11, "missing_phases": [], "errors": ["report: FAILED, scientific state failed"]}

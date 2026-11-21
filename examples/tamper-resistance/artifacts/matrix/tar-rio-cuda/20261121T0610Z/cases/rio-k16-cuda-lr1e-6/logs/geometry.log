@@ -1,0 +1,324 @@
+Periodic asynchronous stack dumping disabled for this retry; fatal-fault reporting remains enabled.
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:00<01:32,  3.13it/s]Loading weights:   1%|          | 2/291 [00:00<00:58,  4.97it/s]Loading weights: 100%|██████████| 291/291 [00:00<00:00, 644.41it/s]
+Computing FP64 trajectory Gram matrix
+Gram: model.embed_tokens.weight
+Gram: model.layers.0.self_attn.q_proj.weight
+Gram: model.layers.0.self_attn.k_proj.weight
+Gram: model.layers.0.self_attn.v_proj.weight
+Gram: model.layers.0.self_attn.o_proj.weight
+Gram: model.layers.0.mlp.gate_proj.weight
+Gram: model.layers.0.mlp.up_proj.weight
+Gram: model.layers.0.mlp.down_proj.weight
+Gram: model.layers.0.input_layernorm.weight
+Gram: model.layers.0.post_attention_layernorm.weight
+Gram: model.layers.1.self_attn.q_proj.weight
+Gram: model.layers.1.self_attn.k_proj.weight
+Gram: model.layers.1.self_attn.v_proj.weight
+Gram: model.layers.1.self_attn.o_proj.weight
+Gram: model.layers.1.mlp.gate_proj.weight
+Gram: model.layers.1.mlp.up_proj.weight
+Gram: model.layers.1.mlp.down_proj.weight
+Gram: model.layers.1.input_layernorm.weight
+Gram: model.layers.1.post_attention_layernorm.weight
+Gram: model.layers.2.self_attn.q_proj.weight
+Gram: model.layers.2.self_attn.k_proj.weight
+Gram: model.layers.2.self_attn.v_proj.weight
+Gram: model.layers.2.self_attn.o_proj.weight
+Gram: model.layers.2.mlp.gate_proj.weight
+Gram: model.layers.2.mlp.up_proj.weight
+Gram: model.layers.2.mlp.down_proj.weight
+Gram: model.layers.2.input_layernorm.weight
+Gram: model.layers.2.post_attention_layernorm.weight
+Gram: model.layers.3.self_attn.q_proj.weight
+Gram: model.layers.3.self_attn.k_proj.weight
+Gram: model.layers.3.self_attn.v_proj.weight
+Gram: model.layers.3.self_attn.o_proj.weight
+Gram: model.layers.3.mlp.gate_proj.weight
+Gram: model.layers.3.mlp.up_proj.weight
+Gram: model.layers.3.mlp.down_proj.weight
+Gram: model.layers.3.input_layernorm.weight
+Gram: model.layers.3.post_attention_layernorm.weight
+Gram: model.layers.4.self_attn.q_proj.weight
+Gram: model.layers.4.self_attn.k_proj.weight
+Gram: model.layers.4.self_attn.v_proj.weight
+Gram: model.layers.4.self_attn.o_proj.weight
+Gram: model.layers.4.mlp.gate_proj.weight
+Gram: model.layers.4.mlp.up_proj.weight
+Gram: model.layers.4.mlp.down_proj.weight
+Gram: model.layers.4.input_layernorm.weight
+Gram: model.layers.4.post_attention_layernorm.weight
+Gram: model.layers.5.self_attn.q_proj.weight
+Gram: model.layers.5.self_attn.k_proj.weight
+Gram: model.layers.5.self_attn.v_proj.weight
+Gram: model.layers.5.self_attn.o_proj.weight
+Gram: model.layers.5.mlp.gate_proj.weight
+Gram: model.layers.5.mlp.up_proj.weight
+Gram: model.layers.5.mlp.down_proj.weight
+Gram: model.layers.5.input_layernorm.weight
+Gram: model.layers.5.post_attention_layernorm.weight
+Gram: model.layers.6.self_attn.q_proj.weight
+Gram: model.layers.6.self_attn.k_proj.weight
+Gram: model.layers.6.self_attn.v_proj.weight
+Gram: model.layers.6.self_attn.o_proj.weight
+Gram: model.layers.6.mlp.gate_proj.weight
+Gram: model.layers.6.mlp.up_proj.weight
+Gram: model.layers.6.mlp.down_proj.weight
+Gram: model.layers.6.input_layernorm.weight
+Gram: model.layers.6.post_attention_layernorm.weight
+Gram: model.layers.7.self_attn.q_proj.weight
+Gram: model.layers.7.self_attn.k_proj.weight
+Gram: model.layers.7.self_attn.v_proj.weight
+Gram: model.layers.7.self_attn.o_proj.weight
+Gram: model.layers.7.mlp.gate_proj.weight
+Gram: model.layers.7.mlp.up_proj.weight
+Gram: model.layers.7.mlp.down_proj.weight
+Gram: model.layers.7.input_layernorm.weight
+Gram: model.layers.7.post_attention_layernorm.weight
+Gram: model.layers.8.self_attn.q_proj.weight
+Gram: model.layers.8.self_attn.k_proj.weight
+Gram: model.layers.8.self_attn.v_proj.weight
+Gram: model.layers.8.self_attn.o_proj.weight
+Gram: model.layers.8.mlp.gate_proj.weight
+Gram: model.layers.8.mlp.up_proj.weight
+Gram: model.layers.8.mlp.down_proj.weight
+Gram: model.layers.8.input_layernorm.weight
+Gram: model.layers.8.post_attention_layernorm.weight
+Gram: model.layers.9.self_attn.q_proj.weight
+Gram: model.layers.9.self_attn.k_proj.weight
+Gram: model.layers.9.self_attn.v_proj.weight
+Gram: model.layers.9.self_attn.o_proj.weight
+Gram: model.layers.9.mlp.gate_proj.weight
+Gram: model.layers.9.mlp.up_proj.weight
+Gram: model.layers.9.mlp.down_proj.weight
+Gram: model.layers.9.input_layernorm.weight
+Gram: model.layers.9.post_attention_layernorm.weight
+Gram: model.layers.10.self_attn.q_proj.weight
+Gram: model.layers.10.self_attn.k_proj.weight
+Gram: model.layers.10.self_attn.v_proj.weight
+Gram: model.layers.10.self_attn.o_proj.weight
+Gram: model.layers.10.mlp.gate_proj.weight
+Gram: model.layers.10.mlp.up_proj.weight
+Gram: model.layers.10.mlp.down_proj.weight
+Gram: model.layers.10.input_layernorm.weight
+Gram: model.layers.10.post_attention_layernorm.weight
+Gram: model.layers.11.self_attn.q_proj.weight
+Gram: model.layers.11.self_attn.k_proj.weight
+Gram: model.layers.11.self_attn.v_proj.weight
+Gram: model.layers.11.self_attn.o_proj.weight
+Gram: model.layers.11.mlp.gate_proj.weight
+Gram: model.layers.11.mlp.up_proj.weight
+Gram: model.layers.11.mlp.down_proj.weight
+Gram: model.layers.11.input_layernorm.weight
+Gram: model.layers.11.post_attention_layernorm.weight
+Gram: model.layers.12.self_attn.q_proj.weight
+Gram: model.layers.12.self_attn.k_proj.weight
+Gram: model.layers.12.self_attn.v_proj.weight
+Gram: model.layers.12.self_attn.o_proj.weight
+Gram: model.layers.12.mlp.gate_proj.weight
+Gram: model.layers.12.mlp.up_proj.weight
+Gram: model.layers.12.mlp.down_proj.weight
+Gram: model.layers.12.input_layernorm.weight
+Gram: model.layers.12.post_attention_layernorm.weight
+Gram: model.layers.13.self_attn.q_proj.weight
+Gram: model.layers.13.self_attn.k_proj.weight
+Gram: model.layers.13.self_attn.v_proj.weight
+Gram: model.layers.13.self_attn.o_proj.weight
+Gram: model.layers.13.mlp.gate_proj.weight
+Gram: model.layers.13.mlp.up_proj.weight
+Gram: model.layers.13.mlp.down_proj.weight
+Gram: model.layers.13.input_layernorm.weight
+Gram: model.layers.13.post_attention_layernorm.weight
+Gram: model.layers.14.self_attn.q_proj.weight
+Gram: model.layers.14.self_attn.k_proj.weight
+Gram: model.layers.14.self_attn.v_proj.weight
+Gram: model.layers.14.self_attn.o_proj.weight
+Gram: model.layers.14.mlp.gate_proj.weight
+Gram: model.layers.14.mlp.up_proj.weight
+Gram: model.layers.14.mlp.down_proj.weight
+Gram: model.layers.14.input_layernorm.weight
+Gram: model.layers.14.post_attention_layernorm.weight
+Gram: model.layers.15.self_attn.q_proj.weight
+Gram: model.layers.15.self_attn.k_proj.weight
+Gram: model.layers.15.self_attn.v_proj.weight
+Gram: model.layers.15.self_attn.o_proj.weight
+Gram: model.layers.15.mlp.gate_proj.weight
+Gram: model.layers.15.mlp.up_proj.weight
+Gram: model.layers.15.mlp.down_proj.weight
+Gram: model.layers.15.input_layernorm.weight
+Gram: model.layers.15.post_attention_layernorm.weight
+Gram: model.layers.16.self_attn.q_proj.weight
+Gram: model.layers.16.self_attn.k_proj.weight
+Gram: model.layers.16.self_attn.v_proj.weight
+Gram: model.layers.16.self_attn.o_proj.weight
+Gram: model.layers.16.mlp.gate_proj.weight
+Gram: model.layers.16.mlp.up_proj.weight
+Gram: model.layers.16.mlp.down_proj.weight
+Gram: model.layers.16.input_layernorm.weight
+Gram: model.layers.16.post_attention_layernorm.weight
+Gram: model.layers.17.self_attn.q_proj.weight
+Gram: model.layers.17.self_attn.k_proj.weight
+Gram: model.layers.17.self_attn.v_proj.weight
+Gram: model.layers.17.self_attn.o_proj.weight
+Gram: model.layers.17.mlp.gate_proj.weight
+Gram: model.layers.17.mlp.up_proj.weight
+Gram: model.layers.17.mlp.down_proj.weight
+Gram: model.layers.17.input_layernorm.weight
+Gram: model.layers.17.post_attention_layernorm.weight
+Gram: model.layers.18.self_attn.q_proj.weight
+Gram: model.layers.18.self_attn.k_proj.weight
+Gram: model.layers.18.self_attn.v_proj.weight
+Gram: model.layers.18.self_attn.o_proj.weight
+Gram: model.layers.18.mlp.gate_proj.weight
+Gram: model.layers.18.mlp.up_proj.weight
+Gram: model.layers.18.mlp.down_proj.weight
+Gram: model.layers.18.input_layernorm.weight
+Gram: model.layers.18.post_attention_layernorm.weight
+Gram: model.layers.19.self_attn.q_proj.weight
+Gram: model.layers.19.self_attn.k_proj.weight
+Gram: model.layers.19.self_attn.v_proj.weight
+Gram: model.layers.19.self_attn.o_proj.weight
+Gram: model.layers.19.mlp.gate_proj.weight
+Gram: model.layers.19.mlp.up_proj.weight
+Gram: model.layers.19.mlp.down_proj.weight
+Gram: model.layers.19.input_layernorm.weight
+Gram: model.layers.19.post_attention_layernorm.weight
+Gram: model.layers.20.self_attn.q_proj.weight
+Gram: model.layers.20.self_attn.k_proj.weight
+Gram: model.layers.20.self_attn.v_proj.weight
+Gram: model.layers.20.self_attn.o_proj.weight
+Gram: model.layers.20.mlp.gate_proj.weight
+Gram: model.layers.20.mlp.up_proj.weight
+Gram: model.layers.20.mlp.down_proj.weight
+Gram: model.layers.20.input_layernorm.weight
+Gram: model.layers.20.post_attention_layernorm.weight
+Gram: model.layers.21.self_attn.q_proj.weight
+Gram: model.layers.21.self_attn.k_proj.weight
+Gram: model.layers.21.self_attn.v_proj.weight
+Gram: model.layers.21.self_attn.o_proj.weight
+Gram: model.layers.21.mlp.gate_proj.weight
+Gram: model.layers.21.mlp.up_proj.weight
+Gram: model.layers.21.mlp.down_proj.weight
+Gram: model.layers.21.input_layernorm.weight
+Gram: model.layers.21.post_attention_layernorm.weight
+Gram: model.layers.22.self_attn.q_proj.weight
+Gram: model.layers.22.self_attn.k_proj.weight
+Gram: model.layers.22.self_attn.v_proj.weight
+Gram: model.layers.22.self_attn.o_proj.weight
+Gram: model.layers.22.mlp.gate_proj.weight
+Gram: model.layers.22.mlp.up_proj.weight
+Gram: model.layers.22.mlp.down_proj.weight
+Gram: model.layers.22.input_layernorm.weight
+Gram: model.layers.22.post_attention_layernorm.weight
+Gram: model.layers.23.self_attn.q_proj.weight
+Gram: model.layers.23.self_attn.k_proj.weight
+Gram: model.layers.23.self_attn.v_proj.weight
+Gram: model.layers.23.self_attn.o_proj.weight
+Gram: model.layers.23.mlp.gate_proj.weight
+Gram: model.layers.23.mlp.up_proj.weight
+Gram: model.layers.23.mlp.down_proj.weight
+Gram: model.layers.23.input_layernorm.weight
+Gram: model.layers.23.post_attention_layernorm.weight
+Gram: model.layers.24.self_attn.q_proj.weight
+Gram: model.layers.24.self_attn.k_proj.weight
+Gram: model.layers.24.self_attn.v_proj.weight
+Gram: model.layers.24.self_attn.o_proj.weight
+Gram: model.layers.24.mlp.gate_proj.weight
+Gram: model.layers.24.mlp.up_proj.weight
+Gram: model.layers.24.mlp.down_proj.weight
+Gram: model.layers.24.input_layernorm.weight
+Gram: model.layers.24.post_attention_layernorm.weight
+Gram: model.layers.25.self_attn.q_proj.weight
+Gram: model.layers.25.self_attn.k_proj.weight
+Gram: model.layers.25.self_attn.v_proj.weight
+Gram: model.layers.25.self_attn.o_proj.weight
+Gram: model.layers.25.mlp.gate_proj.weight
+Gram: model.layers.25.mlp.up_proj.weight
+Gram: model.layers.25.mlp.down_proj.weight
+Gram: model.layers.25.input_layernorm.weight
+Gram: model.layers.25.post_attention_layernorm.weight
+Gram: model.layers.26.self_attn.q_proj.weight
+Gram: model.layers.26.self_attn.k_proj.weight
+Gram: model.layers.26.self_attn.v_proj.weight
+Gram: model.layers.26.self_attn.o_proj.weight
+Gram: model.layers.26.mlp.gate_proj.weight
+Gram: model.layers.26.mlp.up_proj.weight
+Gram: model.layers.26.mlp.down_proj.weight
+Gram: model.layers.26.input_layernorm.weight
+Gram: model.layers.26.post_attention_layernorm.weight
+Gram: model.layers.27.self_attn.q_proj.weight
+Gram: model.layers.27.self_attn.k_proj.weight
+Gram: model.layers.27.self_attn.v_proj.weight
+Gram: model.layers.27.self_attn.o_proj.weight
+Gram: model.layers.27.mlp.gate_proj.weight
+Gram: model.layers.27.mlp.up_proj.weight
+Gram: model.layers.27.mlp.down_proj.weight
+Gram: model.layers.27.input_layernorm.weight
+Gram: model.layers.27.post_attention_layernorm.weight
+Gram: model.layers.28.self_attn.q_proj.weight
+Gram: model.layers.28.self_attn.k_proj.weight
+Gram: model.layers.28.self_attn.v_proj.weight
+Gram: model.layers.28.self_attn.o_proj.weight
+Gram: model.layers.28.mlp.gate_proj.weight
+Gram: model.layers.28.mlp.up_proj.weight
+Gram: model.layers.28.mlp.down_proj.weight
+Gram: model.layers.28.input_layernorm.weight
+Gram: model.layers.28.post_attention_layernorm.weight
+Gram: model.layers.29.self_attn.q_proj.weight
+Gram: model.layers.29.self_attn.k_proj.weight
+Gram: model.layers.29.self_attn.v_proj.weight
+Gram: model.layers.29.self_attn.o_proj.weight
+Gram: model.layers.29.mlp.gate_proj.weight
+Gram: model.layers.29.mlp.up_proj.weight
+Gram: model.layers.29.mlp.down_proj.weight
+Gram: model.layers.29.input_layernorm.weight
+Gram: model.layers.29.post_attention_layernorm.weight
+Gram: model.layers.30.self_attn.q_proj.weight
+Gram: model.layers.30.self_attn.k_proj.weight
+Gram: model.layers.30.self_attn.v_proj.weight
+Gram: model.layers.30.self_attn.o_proj.weight
+Gram: model.layers.30.mlp.gate_proj.weight
+Gram: model.layers.30.mlp.up_proj.weight
+Gram: model.layers.30.mlp.down_proj.weight
+Gram: model.layers.30.input_layernorm.weight
+Gram: model.layers.30.post_attention_layernorm.weight
+Gram: model.layers.31.self_attn.q_proj.weight
+Gram: model.layers.31.self_attn.k_proj.weight
+Gram: model.layers.31.self_attn.v_proj.weight
+Gram: model.layers.31.self_attn.o_proj.weight
+Gram: model.layers.31.mlp.gate_proj.weight
+Gram: model.layers.31.mlp.up_proj.weight
+Gram: model.layers.31.mlp.down_proj.weight
+Gram: model.layers.31.input_layernorm.weight
+Gram: model.layers.31.post_attention_layernorm.weight
+Gram: model.norm.weight
+Gram: lm_head.weight
+Constructing and saving 3 visualization planes
+{
+  "radius": 3.532481154200853,
+  "attack_plane_energy_fraction": 0.98949575294224,
+  "random_transverse_overlap": null,
+  "rerun_distance_from_original": {}
+}
+	Command being timed: "python /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/../misc/trace_runner.py /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/misc/tar_dynamics.py geometry /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6"
+	User time (seconds): 2138.80
+	System time (seconds): 1093.96
+	Percent of CPU this job got: 227%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 23:41.83
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 236723320
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 3691600
+	Minor (reclaiming a frame) page faults: 595380801
+	Voluntary context switches: 2904104
+	Involuntary context switches: 154812
+	Swaps: 0
+	File system inputs: 1243543168
+	File system outputs: 113164344
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

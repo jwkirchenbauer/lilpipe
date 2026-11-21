@@ -1,0 +1,296 @@
+stty: 'standard input': Inappropriate ioctl for device
+Job 516711 started on matrix41 at 2026-11-20T23:33:45-08:00
+0: host=matrix41 job_id=516711 node_id=0 nodes=1 tasks_per_node=1 cpus_per_task=28
+0: rank=0 local_rank=0 world_size=1 step_gpus=0 cuda_visible_devices=0
+0: master_addr=matrix41 master_port=59399 pwd=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance
+0: bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+0: bash: no job control in this shell
+0: stty: 'standard input'
+0: : Inappropriate ioctl for device
+0: bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+0: bash: no job control in this shell
+0: stty: 'standard input'
+0: : Inappropriate ioctl for device
+0: Landscape GPU assignment: {'physical_gpu_requested': '0', 'logical_device': 0, 'visible_devices': 1, 'device': "_CudaDeviceProperties(name='NVIDIA H100 80GB HBM3', major=9, minor=0, total_memory=81123MB, multi_processor_count=132, uuid=25af6b57-33f8-debc-e22a-375ce70cfd44, pci_bus_id=76, pci_device_id=0, pci_domain_id=0, L2_cache_size=50MB)"}
+0: Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]
+0: Loading weights:   0%|          | 1/291 [00:00<01:37,  2.97it/s]
+0: Loading weights:  99%|█████████▉| 289/291 [00:00<00:00, 859.51it/s]Loading weights: 100%|██████████| 291/291 [00:00<00:00, 665.66it/s]
+0: Using the latest cached version of the dataset since cais/wmdp-bio-forget-corpus couldn't be found on the Hugging Face Hub (offline mode is enabled).
+0: Found the latest cached dataset configuration 'default' at /p/vast1/kirchenb/tar-root/cache/huggingface/datasets/cais___wmdp-bio-forget-corpus/default/0.0.0/5a786ed1041e56fef2d4ed26c1239f12b73a68eb (last modified on Fri Nov 20 23:26:09 2026).
+0: Update 1 fraction -1
+0: Update 1 fraction -0.875
+0: Update 1 fraction -0.75
+0: Update 1 fraction -0.625
+0: Update 1 fraction -0.5
+0: Update 1 fraction -0.375
+0: Update 1 fraction -0.25
+0: Update 1 fraction -0.125
+0: Update 1 fraction 0
+0: Update 1 fraction 0.125
+0: Update 1 fraction 0.25
+0: Update 1 fraction 0.375
+0: Update 1 fraction 0.5
+0: Update 1 fraction 0.625
+0: Update 1 fraction 0.75
+0: Update 1 fraction 0.875
+0: Update 1 fraction 1
+0: Update 1 fraction 1.125
+0: Update 1 fraction 1.25
+0: Update 1 fraction 1.375
+0: Update 1 fraction 1.5
+0: Update 1 fraction 1.625
+0: Update 1 fraction 1.75
+0: Update 1 fraction 1.875
+0: Update 1 fraction 2
+0: First-update plane c0=-1
+0: First-update plane c0=-0.875
+0: First-update plane c0=-0.75
+0: First-update plane c0=-0.625
+0: First-update plane c0=-0.5
+0: First-update plane c0=-0.375
+0: First-update plane c0=-0.25
+0: First-update plane c0=-0.125
+0: First-update plane c0=0
+0: First-update plane c0=0.125
+0: First-update plane c0=0.25
+0: First-update plane c0=0.375
+0: First-update plane c0=0.5
+0: First-update plane c0=0.625
+0: First-update plane c0=0.75
+0: First-update plane c0=0.875
+0: First-update plane c0=1
+0: Update 2 fraction -1
+0: Update 2 fraction -0.875
+0: Update 2 fraction -0.75
+0: Update 2 fraction -0.625
+0: Update 2 fraction -0.5
+0: Update 2 fraction -0.375
+0: Update 2 fraction -0.25
+0: Update 2 fraction -0.125
+0: Update 2 fraction 0
+0: Update 2 fraction 0.125
+0: Update 2 fraction 0.25
+0: Update 2 fraction 0.375
+0: Update 2 fraction 0.5
+0: Update 2 fraction 0.625
+0: Update 2 fraction 0.75
+0: Update 2 fraction 0.875
+0: Update 2 fraction 1
+0: Update 2 fraction 1.125
+0: Update 2 fraction 1.25
+0: Update 2 fraction 1.375
+0: Update 2 fraction 1.5
+0: Update 2 fraction 1.625
+0: Update 2 fraction 1.75
+0: Update 2 fraction 1.875
+0: Update 2 fraction 2
+0: Update 3 fraction -1
+0: Update 3 fraction -0.875
+0: Update 3 fraction -0.75
+0: Update 3 fraction -0.625
+0: Update 3 fraction -0.5
+0: Update 3 fraction -0.375
+0: Update 3 fraction -0.25
+0: Update 3 fraction -0.125
+0: Update 3 fraction 0
+0: Update 3 fraction 0.125
+0: Update 3 fraction 0.25
+0: Update 3 fraction 0.375
+0: Update 3 fraction 0.5
+0: Update 3 fraction 0.625
+0: Update 3 fraction 0.75
+0: Update 3 fraction 0.875
+0: Update 3 fraction 1
+0: Update 3 fraction 1.125
+0: Update 3 fraction 1.25
+0: Update 3 fraction 1.375
+0: Update 3 fraction 1.5
+0: Update 3 fraction 1.625
+0: Update 3 fraction 1.75
+0: Update 3 fraction 1.875
+0: Update 3 fraction 2
+0: Update 4 fraction -1
+0: Update 4 fraction -0.875
+0: Update 4 fraction -0.75
+0: Update 4 fraction -0.625
+0: Update 4 fraction -0.5
+0: Update 4 fraction -0.375
+0: Update 4 fraction -0.25
+0: Update 4 fraction -0.125
+0: Update 4 fraction 0
+0: Update 4 fraction 0.125
+0: Update 4 fraction 0.25
+0: Update 4 fraction 0.375
+0: Update 4 fraction 0.5
+0: Update 4 fraction 0.625
+0: Update 4 fraction 0.75
+0: Update 4 fraction 0.875
+0: Update 4 fraction 1
+0: Update 4 fraction 1.125
+0: Update 4 fraction 1.25
+0: Update 4 fraction 1.375
+0: Update 4 fraction 1.5
+0: Update 4 fraction 1.625
+0: Update 4 fraction 1.75
+0: Update 4 fraction 1.875
+0: Update 4 fraction 2
+0: Update 5 fraction -1
+0: Update 5 fraction -0.875
+0: Update 5 fraction -0.75
+0: Update 5 fraction -0.625
+0: Update 5 fraction -0.5
+0: Update 5 fraction -0.375
+0: Update 5 fraction -0.25
+0: Update 5 fraction -0.125
+0: Update 5 fraction 0
+0: Update 5 fraction 0.125
+0: Update 5 fraction 0.25
+0: Update 5 fraction 0.375
+0: Update 5 fraction 0.5
+0: Update 5 fraction 0.625
+0: Update 5 fraction 0.75
+0: Update 5 fraction 0.875
+0: Update 5 fraction 1
+0: Update 5 fraction 1.125
+0: Update 5 fraction 1.25
+0: Update 5 fraction 1.375
+0: Update 5 fraction 1.5
+0: Update 5 fraction 1.625
+0: Update 5 fraction 1.75
+0: Update 5 fraction 1.875
+0: Update 5 fraction 2
+0: Update 6 fraction -1
+0: Update 6 fraction -0.875
+0: Update 6 fraction -0.75
+0: Update 6 fraction -0.625
+0: Update 6 fraction -0.5
+0: Update 6 fraction -0.375
+0: Update 6 fraction -0.25
+0: Update 6 fraction -0.125
+0: Update 6 fraction 0
+0: Update 6 fraction 0.125
+0: Update 6 fraction 0.25
+0: Update 6 fraction 0.375
+0: Update 6 fraction 0.5
+0: Update 6 fraction 0.625
+0: Update 6 fraction 0.75
+0: Update 6 fraction 0.875
+0: Update 6 fraction 1
+0: Update 6 fraction 1.125
+0: Update 6 fraction 1.25
+0: Update 6 fraction 1.375
+0: Update 6 fraction 1.5
+0: Update 6 fraction 1.625
+0: Update 6 fraction 1.75
+0: Update 6 fraction 1.875
+0: Update 6 fraction 2
+0: Update 7 fraction -1
+0: Update 7 fraction -0.875
+0: Update 7 fraction -0.75
+0: Update 7 fraction -0.625
+0: Update 7 fraction -0.5
+0: Update 7 fraction -0.375
+0: Update 7 fraction -0.25
+0: Update 7 fraction -0.125
+0: Update 7 fraction 0
+0: Update 7 fraction 0.125
+0: Update 7 fraction 0.25
+0: Update 7 fraction 0.375
+0: Update 7 fraction 0.5
+0: Update 7 fraction 0.625
+0: Update 7 fraction 0.75
+0: Update 7 fraction 0.875
+0: Update 7 fraction 1
+0: Update 7 fraction 1.125
+0: Update 7 fraction 1.25
+0: Update 7 fraction 1.375
+0: Update 7 fraction 1.5
+0: Update 7 fraction 1.625
+0: Update 7 fraction 1.75
+0: Update 7 fraction 1.875
+0: Update 7 fraction 2
+0: Update 8 fraction -1
+0: Update 8 fraction -0.875
+0: Update 8 fraction -0.75
+0: Update 8 fraction -0.625
+0: Update 8 fraction -0.5
+0: Update 8 fraction -0.375
+0: Update 8 fraction -0.25
+0: Update 8 fraction -0.125
+0: Update 8 fraction 0
+0: Update 8 fraction 0.125
+0: Update 8 fraction 0.25
+0: Update 8 fraction 0.375
+0: Update 8 fraction 0.5
+0: Update 8 fraction 0.625
+0: Update 8 fraction 0.75
+0: Update 8 fraction 0.875
+0: Update 8 fraction 1
+0: Update 8 fraction 1.125
+0: Update 8 fraction 1.25
+0: Update 8 fraction 1.375
+0: Update 8 fraction 1.5
+0: Update 8 fraction 1.625
+0: Update 8 fraction 1.75
+0: Update 8 fraction 1.875
+0: Update 8 fraction 2
+0: {
+0:   "state": "complete",
+0:   "case": "rio-k16-cuda-lr1e-6",
+0:   "stage": "profile-values",
+0:   "reused": false
+0: }
+0: 	Command being timed: "python /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/misc/trace_runner.py /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/misc/tar_compute_compare.py profile-values /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z rio-k16-cuda-lr1e-6"
+0: 	User time (seconds): 12237.09
+0: 	System time (seconds): 7815.87
+0: 	Percent of CPU this job got: 593%
+0: 	Elapsed (wall clock) time (h:mm:ss or m:ss): 56:17.66
+0: 	Average shared text size (kbytes): 0
+0: 	Average unshared data size (kbytes): 0
+0: 	Average stack size (kbytes): 0
+0: 	Average total size (kbytes): 0
+0: 	Maximum resident set size (kbytes): 98943896
+0: 	Average resident set size (kbytes): 0
+0: 	Major (requiring I/O) page faults: 511903
+0: 	Minor (reclaiming a frame) page faults: 5273107343
+0: 	Voluntary context switches: 1203844
+0: 	Involuntary context switches: 7624
+0: 	Swaps: 0
+0: 	File system inputs: 19774
+0: 9056
+0: 	File system outputs: 11040
+0: 	Socket messages sent: 0
+0: 	Socket messages received: 0
+0: 	Signals delivered: 0
+0: 	Page size (bytes): 4096
+0: 	Exit status: 0
+0: {
+0:   "state": "complete",
+0:   "case": "rio-k16-cuda-lr1e-6",
+0:   "stage": "profile-report"
+0: }
+0: 	Command being timed: "python /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/misc/trace_runner.py /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/misc/tar_compute_compare.py profile-report /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z rio-k16-cuda-lr1e-6"
+0: 	User time (seconds): 3.02
+0: 	System time (seconds): 0.22
+0: 	Percent of CPU this job got: 107%
+0: 	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:03.02
+0: 	Average shared text size (kbytes): 0
+0: 	Average unshared data size (kbytes): 0
+0: 	Average stack size (kbytes): 0
+0: 	Average total size (kbytes): 0
+0: 	Maximum resident set size (kbytes): 113012
+0: 	Average resident set size (kbytes): 0
+0: 	Major (requiring I/O) page faults: 6
+0: 	Minor (reclaiming a frame) page faults: 31622
+0: 	Voluntary context switches: 2501
+0: 	Involuntary context switches: 62
+0: 	Swaps: 0
+0: 	File system inputs: 7720
+0: 	File system outputs: 138
+0: 4
+0: 	Socket messages sent: 0
+0: 	Socket messages received: 0
+0: 	Signals delivered: 0
+0: 	Page size (bytes): 4096
+0: 	Exit status: 0
+0: Early update profiles complete: rio-k16-cuda-lr1e-6

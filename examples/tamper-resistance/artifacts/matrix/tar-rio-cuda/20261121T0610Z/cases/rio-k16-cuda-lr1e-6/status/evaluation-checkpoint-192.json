@@ -1,0 +1,10 @@
+{
+  "state": "complete",
+  "step": 192,
+  "tasks": {
+    "wmdp_bio_robust": [
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6/evals/checkpoint-192/attempt-20261121T071559-76154285/__p__vast1__kirchenb__tar-root__lilpipe__examples__tamper-resistance__artifacts__matrix__tar-rio-cuda__20261121T0610Z__cases__rio-k16-cuda-lr1e-6__models__attack__checkpoint-192/results_2026-11-20T23-16-53.681380.json"
+    ]
+  },
+  "rejected": []
+}

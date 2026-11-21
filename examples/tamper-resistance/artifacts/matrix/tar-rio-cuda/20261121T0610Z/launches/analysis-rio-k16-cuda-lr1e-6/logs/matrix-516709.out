@@ -1,0 +1,956 @@
+stty: 'standard input': Inappropriate ioctl for device
+Job 516709 started on matrix42 at 2026-11-20T22:52:44-08:00
+0: host=matrix42 job_id=516709 node_id=0 nodes=1 tasks_per_node=1 cpus_per_task=56
+0: rank=0 local_rank=0 world_size=1 step_gpus=2,3 cuda_visible_devices=0,1
+0: master_addr=matrix42 master_port=60971 pwd=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance
+0: bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+0: bash: no job control in this shell
+0: stty: 'standard input'
+0: : Inappropriate ioctl for device
+0: Landscape GPU assignment: {'host': 'matrix42', 'python': '3.12.16 (main, Oct 26 2026, 11:37:43) [GCC 15.3.0]', 'python_executable': '/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python', 'environment': {'SLURM_CLUSTER_NAME': 'matrix', 'SLURM_JOB_ID': '516709', 'SLURM_STEP_ID': '0', 'SLURM_NTASKS': '1', 'SLURM_CPUS_PER_TASK': '56', 'TAR_GPU_ASSIGNMENT_MODE': 'slurm_step_gpus', 'CONDA_PREFIX': '/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1', 'TAR_RUNTIME_BACKEND': 'matrix', 'TAR_LANDSCAPE_PEER': '1', 'HF_HOME': '/p/vast1/kirchenb/tar-root/cache/huggingface', 'HF_HUB_OFFLINE': '1', 'HF_DATASETS_OFFLINE': '1', 'TRANSFORMERS_OFFLINE': '1', 'TORCH_BLAS_PREFER_CUBLASLT': '0', 'TORCHAO_FORCE_SKIP_LOADING_SO_FILES': '1', 'TOKENIZERS_PARALLELISM': 'false', 'OMP_NUM_THREADS': '8', 'PYTHONUNBUFFERED': '1', 'MPLBACKEND': 'Agg', 'NVIDIA_TF32_OVERRIDE': '0', 'SLURM_STEP_GPUS': '2,3', 'CUDA_VISIBLE_DEVICES': '0,1', 'TAR_SLURM_INHERITED_CUDA_VISIBLE_DEVICES': '0,1'}, 'cuda_device_order': None, 'torch': '2.12.1+cu126', 'cuda'
+0: : '12.6', 'hip': None, 'matmul_allow_tf32': False, 'cudnn_allow_tf32': False, 'devices': ["_CudaDeviceProperties(name='NVIDIA H100 80GB HBM3', major=9, minor=0, total_memory=81123MB, multi_processor_count=132, uuid=8e88fa4f-522a-815e-3279-cfc480b0140a, pci_bus_id=204, pci_device_id=0, pci_domain_id=0, L2_cache_size=50MB)", "_CudaDeviceProperties(name='NVIDIA H100 80GB HBM3', major=9, minor=0, total_memory=81123MB, multi_processor_count=132, uuid=04db9cac-34ca-5712-75ec-c70d3a87aaa3, pci_bus_id=220, pci_device_id=0, pci_domain_id=0, L2_cache_size=50MB)"], 'peer_access_0_to_1': True, 'peer_access_1_to_0': True}
+0: Periodic asynchronous stack dumping disabled for this retry; fatal-fault reporting remains enabled.
+0: Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]
+0: Loading weights:   0%|          | 1/291 [00:00<01:32,  3.13it/s]
+0: Loading weights:   1%|          | 2/291 [00:00<00:58,  4.97it/s]
+0: Loading weights: 100%|██████████| 291/291 [00:00<00:00, 644.41it/s]
+0: Computing FP64 trajectory Gram matrix
+0: Gram: model.embed_tokens.weight
+0: Gram: model.layers.0.self_attn.q_proj.weight
+0: Gram: model.layers.0.self_attn.k_proj.weight
+0: Gram: model.layers.0.self_attn.v_proj.weight
+0: Gram: model.layers.0.self_attn.o_proj.weight
+0: Gram: model.layers.0.mlp.gate_proj.weight
+0: Gram: model.layers.0.mlp.up_proj.weight
+0: Gram: model.layers.0.mlp.down_proj.weight
+0: Gram: model.layers.0.input_layernorm.weight
+0: Gram: model.layers.0.post_attention_layernorm.weight
+0: Gram: model.layers.1.self_attn.q_proj.weight
+0: Gram: model.layers.1.self_attn.k_proj.weight
+0: Gram: model.layers.1.self_attn.v_proj.weight
+0: Gram: model.layers.1.self_attn.o_proj.weight
+0: Gram: model.layers.1.mlp.gate_proj.weight
+0: Gram: model.layers.1.mlp.up_proj.weight
+0: Gram: model.layers.1.mlp.down_proj.weight
+0: Gram: model.layers.1.input_layernorm.weight
+0: Gram: model.layers.1.post_attention_layernorm.weight
+0: Gram: model.layers.2.self_attn.q_proj.weight
+0: Gram: model.layers.2.self_attn.k_proj.weight
+0: Gram: model.layers.2.self_attn.v_proj.weight
+0: Gram: model.layers.2.self_attn.o_proj.weight
+0: Gram: model.layers.2.mlp.gate_proj.weight
+0: Gram: model.layers.2.mlp.up_proj.weight
+0: Gram: model.layers.2.mlp.down_proj.weight
+0: Gram: model.layers.2.input_layernorm.weight
+0: Gram: model.layers.2.post_attention_layernorm.weight
+0: Gram: model.layers.3.self_attn.q_proj.weight
+0: Gram: model.layers.3.self_attn.k_proj.weight
+0: Gram: model.layers.3.self_attn.v_proj.weight
+0: Gram: model.layers.3.self_attn.o_proj.weight
+0: Gram: model.layers.3.mlp.gate_proj.weight
+0: Gram: model.layers.3.mlp.up_proj.weight
+0: Gram: model.layers.3.mlp.down_proj.weight
+0: Gram: model.layers.3.input_layernorm.weight
+0: Gram: model.layers.3.post_attention_layernorm.weight
+0: Gram: model.layers.4.self_attn.q_proj.weight
+0: Gram: model.layers.4.self_attn.k_proj.weight
+0: Gram: model.layers.4.self_attn.v_proj.weight
+0: Gram: model.layers.4.self_attn.o_proj.weight
+0: Gram: model.layers.4.mlp.gate_proj.weight
+0: Gram: model.layers.4.mlp.up_proj.weight
+0: Gram: model.layers.4.mlp.down_proj.weight
+0: Gram: model.layers.4.input_layernorm.weight
+0: Gram: model.layers.4.post_attention_layernorm.weight
+0: Gram: model.layers.5.self_attn.q_proj.weight
+0: Gram: model.layers.5.self_attn.k_proj.weight
+0: Gram: model.layers.5.self_attn.v_proj.weight
+0: Gram: model.layers.5.self_attn.o_proj.weight
+0: Gram: model.layers.5.mlp.gate_proj.weight
+0: Gram: model.layers.5.mlp.up_proj.weight
+0: Gram: model.layers.5.mlp.down_proj.weight
+0: Gram: model.layers.5.input_layernorm.weight
+0: Gram: model.layers.5.post_attention_layernorm.weight
+0: Gram: model.layers.6.self_attn.q_proj.weight
+0: Gram: model.layers.6.self_attn.k_proj.weight
+0: Gram: model.layers.6.self_attn.v_proj.weight
+0: Gram: model.layers.6.self_attn.o_proj.weight
+0: Gram: model.layers.6.mlp.gate_proj.weight
+0: Gram: model.layers.6.mlp.up_proj.weight
+0: Gram: model.layers.6.mlp.down_proj.weight
+0: Gram: model.layers.6.input_layernorm.weight
+0: Gram: model.layers.6.post_attention_layernorm.weight
+0: Gram: model.layers.7.self_attn.q_proj.weight
+0: Gram: model.layers.7.self_attn.k_proj.weight
+0: Gram: model.layers.7.self_attn.v_proj.weight
+0: Gram: model.layers.7.self_attn.o_proj.weight
+0: Gram: model.layers.7.mlp.gate_proj.weight
+0: Gram: model.layers.7.mlp.up_proj.weight
+0: Gram: model.layers.7.mlp.down_proj.weight
+0: Gram: model.layers.7.input_layernorm.weight
+0: Gram: model.layers.7.post_attention_layernorm.weight
+0: Gram: model.layers.8.self_attn.q_proj.weight
+0: Gram: model.layers.8.self_attn.k_proj.weight
+0: Gram: model.layers.8.self_attn.v_proj.weight
+0: Gram: model.layers.8.self_attn.o_proj.weight
+0: Gram: model.layers.8.mlp.gate_proj.weight
+0: Gram: model.layers.8.mlp.up_proj.weight
+0: Gram: model.layers.8.mlp.down_proj.weight
+0: Gram: model.layers.8.input_layernorm.weight
+0: Gram: model.layers.8.post_attention_layernorm.weight
+0: Gram: model.layers.9.self_attn.q_proj.weight
+0: Gram: model.layers.9.self_attn.k_proj.weight
+0: Gram: model.layers.9.self_attn.v_proj.weight
+0: Gram: model.layers.9.self_attn.o_proj.weight
+0: Gram: model.layers.9.mlp.gate_proj.weight
+0: Gram: model.layers.9.mlp.up_proj.weight
+0: Gram: model.layers.9.mlp.down_proj.weight
+0: Gram: model.layers.9.input_layernorm.weight
+0: Gram: model.layers.9.post_attention_layernorm.weight
+0: Gram: model.layers.10.self_attn.q_proj.weight
+0: Gram: model.layers.10.self_attn.k_proj.weight
+0: Gram: model.layers.10.self_attn.v_proj.weight
+0: Gram: model.layers.10.self_attn.o_proj.weight
+0: Gram: model.layers.10.mlp.gate_proj.weight
+0: Gram: model.layers.10.mlp.up_proj.weight
+0: Gram: model.layers.10.mlp.down_proj.weight
+0: Gram: model.layers.10.input_layernorm.weight
+0: Gram: model.layers.10.post_attention_layernorm.weight
+0: Gram: model.layers.11.self_attn.q_proj.weight
+0: Gram: model.layers.11.self_attn.k_proj.weight
+0: Gram: model.layers.11.self_attn.v_proj.weight
+0: Gram: model.layers.11.self_attn.o_proj.weight
+0: Gram: model.layers.11.mlp.gate_proj.weight
+0: Gram: model.layers.11.mlp.up_proj.weight
+0: Gram: model.layers.11.mlp.down_proj.weight
+0: Gram: model.layers.11.input_layernorm.weight
+0: Gram: model.layers.11.post_attention_layernorm.weight
+0: Gram: model.layers.12.self_attn.q_proj.weight
+0: Gram: model.layers.12.self_attn.k_proj.weight
+0: Gram: model.layers.12.self_attn.v_proj.weight
+0: Gram: model.layers.12.self_attn.o_proj.weight
+0: Gram: model.layers.12.mlp.gate_proj.weight
+0: Gram: model.layers.12.mlp.up_proj.weight
+0: Gram: model.layers.12.mlp.down_proj.weight
+0: Gram: model.layers.12.input_layernorm.weight
+0: Gram: model.layers.12.post_attention_layernorm.weight
+0: Gram: model.layers.13.self_attn.q_proj.weight
+0: Gram: model.layers.13.self_attn.k_proj.weight
+0: Gram: model.layers.13.self_attn.v_proj.weight
+0: Gram: model.layers.13.self_attn.o_proj.weight
+0: Gram: model.layers.13.mlp.gate_proj.weight
+0: Gram: model.layers.13.mlp.up_proj.weight
+0: Gram: model.layers.13.mlp.down_proj.weight
+0: Gram: model.layers.13.input_layernorm.weight
+0: Gram: model.layers.13.post_attention_layernorm.weight
+0: Gram: model.layers.14.self_attn.q_proj.weight
+0: Gram: model.layers.14.self_attn.k_proj.weight
+0: Gram: model.layers.14.self_attn.v_proj.weight
+0: Gram: model.layers.14.self_attn.o_proj.weight
+0: Gram: model.layers.14.mlp.gate_proj.weight
+0: Gram: model.layers.14.mlp.up_proj.weight
+0: Gram: model.layers.14.mlp.down_proj.weight
+0: Gram: model.layers.14.input_layernorm.weight
+0: Gram: model.layers.14.post_attention_layernorm.weight
+0: Gram: model.layers.15.self_attn.q_proj.weight
+0: Gram: model.layers.15.self_attn.k_proj.weight
+0: Gram: model.layers.15.self_attn.v_proj.weight
+0: Gram: model.layers.15.self_attn.o_proj.weight
+0: Gram: model.layers.15.mlp.gate_proj.weight
+0: Gram: model.layers.15.mlp.up_proj.weight
+0: Gram: model.layers.15.mlp.down_proj.weight
+0: Gram: model.layers.15.input_layernorm.weight
+0: Gram: model.layers.15.post_attention_layernorm.weight
+0: Gram: model.layers.16.self_attn.q_proj.weight
+0: Gram: model.layers.16.self_attn.k_proj.weight
+0: Gram: model.layers.16.self_attn.v_proj.weight
+0: Gram: model.layers.16.self_attn.o_proj.weight
+0: Gram: model.layers.16.mlp.gate_proj.weight
+0: Gram: model.layers.16.mlp.up_proj.weight
+0: Gram: model.layers.16.mlp.down_proj.weight
+0: Gram: model.layers.16.input_layernorm.weight
+0: Gram: model.layers.16.post_attention_layernorm.weight
+0: Gram: model.layers.17.self_attn.q_proj.weight
+0: Gram: model.layers.17.self_attn.k_proj.weight
+0: Gram: model.layers.17.self_attn.v_proj.weight
+0: Gram: model.layers.17.self_attn.o_proj.weight
+0: Gram: model.layers.17.mlp.gate_proj.weight
+0: Gram: model.layers.17.mlp.up_proj.weight
+0: Gram: model.layers.17.mlp.down_proj.weight
+0: Gram: model.layers.17.input_layernorm.weight
+0: Gram: model.layers.17.post_attention_layernorm.weight
+0: Gram: model.layers.18.self_attn.q_proj.weight
+0: Gram: model.layers.18.self_attn.k_proj.weight
+0: Gram: model.layers.18.self_attn.v_proj.weight
+0: Gram: model.layers.18.self_attn.o_proj.weight
+0: Gram: model.layers.18.mlp.gate_proj.weight
+0: Gram: model.layers.18.mlp.up_proj.weight
+0: Gram: model.layers.18.mlp.down_proj.weight
+0: Gram: model.layers.18.input_layernorm.weight
+0: Gram: model.layers.18.post_attention_layernorm.weight
+0: Gram: model.layers.19.self_attn.q_proj.weight
+0: Gram: model.layers.19.self_attn.k_proj.weight
+0: Gram: model.layers.19.self_attn.v_proj.weight
+0: Gram: model.layers.19.self_attn.o_proj.weight
+0: Gram: model.layers.19.mlp.gate_proj.weight
+0: Gram: model.layers.19.mlp.up_proj.weight
+0: Gram: model.layers.19.mlp.down_proj.weight
+0: Gram: model.layers.19.input_layernorm.weight
+0: Gram: model.layers.19.post_attention_layernorm.weight
+0: Gram: model.layers.20.self_attn.q_proj.weight
+0: Gram: model.layers.20.self_attn.k_proj.weight
+0: Gram: model.layers.20.self_attn.v_proj.weight
+0: Gram: model.layers.20.self_attn.o_proj.weight
+0: Gram: model.layers.20.mlp.gate_proj.weight
+0: Gram: model.layers.20.mlp.up_proj.weight
+0: Gram: model.layers.20.mlp.down_proj.weight
+0: Gram: model.layers.20.input_layernorm.weight
+0: Gram: model.layers.20.post_attention_layernorm.weight
+0: Gram: model.layers.21.self_attn.q_proj.weight
+0: Gram: model.layers.21.self_attn.k_proj.weight
+0: Gram: model.layers.21.self_attn.v_proj.weight
+0: Gram: model.layers.21.self_attn.o_proj.weight
+0: Gram: model.layers.21.mlp.gate_proj.weight
+0: Gram: model.layers.21.mlp.up_proj.weight
+0: Gram: model.layers.21.mlp.down_proj.weight
+0: Gram: model.layers.21.input_layernorm.weight
+0: Gram: model.layers.21.post_attention_layernorm.weight
+0: Gram: model.layers.22.self_attn.q_proj.weight
+0: Gram: model.layers.22.self_attn.k_proj.weight
+0: Gram: model.layers.22.self_attn.v_proj.weight
+0: Gram: model.layers.22.self_attn.o_proj.weight
+0: Gram: model.layers.22.mlp.gate_proj.weight
+0: Gram: model.layers.22.mlp.up_proj.weight
+0: Gram: model.layers.22.mlp.down_proj.weight
+0: Gram: model.layers.22.input_layernorm.weight
+0: Gram: model.layers.22.post_attention_layernorm.weight
+0: Gram: model.layers.23.self_attn.q_proj.weight
+0: Gram: model.layers.23.self_attn.k_proj.weight
+0: Gram: model.layers.23.self_attn.v_proj.weight
+0: Gram: model.layers.23.self_attn.o_proj.weight
+0: Gram: model.layers.23.mlp.gate_proj.weight
+0: Gram: model.layers.23.mlp.up_proj.weight
+0: Gram: model.layers.23.mlp.down_proj.weight
+0: Gram: model.layers.23.input_layernorm.weight
+0: Gram: model.layers.23.post_attention_layernorm.weight
+0: Gram: model.layers.24.self_attn.q_proj.weight
+0: Gram: model.layers.24.self_attn.k_proj.weight
+0: Gram: model.layers.24.self_attn.v_proj.weight
+0: Gram: model.layers.24.self_attn.o_proj.weight
+0: Gram: model.layers.24.mlp.gate_proj.weight
+0: Gram: model.layers.24.mlp.up_proj.weight
+0: Gram: model.layers.24.mlp.down_proj.weight
+0: Gram: model.layers.24.input_layernorm.weight
+0: Gram: model.layers.24.post_attention_layernorm.weight
+0: Gram: model.layers.25.self_attn.q_proj.weight
+0: Gram: model.layers.25.self_attn.k_proj.weight
+0: Gram: model.layers.25.self_attn.v_proj.weight
+0: Gram: model.layers.25.self_attn.o_proj.weight
+0: Gram: model.layers.25.mlp.gate_proj.weight
+0: Gram: model.layers.25.mlp.up_proj.weight
+0: Gram: model.layers.25.mlp.down_proj.weight
+0: Gram: model.layers.25.input_layernorm.weight
+0: Gram: model.layers.25.post_attention_layernorm.weight
+0: Gram: model.layers.26.self_attn.q_proj.weight
+0: Gram: model.layers.26.self_attn.k_proj.weight
+0: Gram: model.layers.26.self_attn.v_proj.weight
+0: Gram: model.layers.26.self_attn.o_proj.weight
+0: Gram: model.layers.26.mlp.gate_proj.weight
+0: Gram: model.layers.26.mlp.up_proj.weight
+0: Gram: model.layers.26.mlp.down_proj.weight
+0: Gram: model.layers.26.input_layernorm.weight
+0: Gram: model.layers.26.post_attention_layernorm.weight
+0: Gram: model.layers.27.self_attn.q_proj.weight
+0: Gram: model.layers.27.self_attn.k_proj.weight
+0: Gram: model.layers.27.self_attn.v_proj.weight
+0: Gram: model.layers.27.self_attn.o_proj.weight
+0: Gram: model.layers.27.mlp.gate_proj.weight
+0: Gram: model.layers.27.mlp.up_proj.weight
+0: Gram: model.layers.27.mlp.down_proj.weight
+0: Gram: model.layers.27.input_layernorm.weight
+0: Gram: model.layers.27.post_attention_layernorm.weight
+0: Gram: model.layers.28.self_attn.q_proj.weight
+0: Gram: model.layers.28.self_attn.k_proj.weight
+0: Gram: model.layers.28.self_attn.v_proj.weight
+0: Gram: model.layers.28.self_attn.o_proj.weight
+0: Gram: model.layers.28.mlp.gate_proj.weight
+0: Gram: model.layers.28.mlp.up_proj.weight
+0: Gram: model.layers.28.mlp.down_proj.weight
+0: Gram: model.layers.28.input_layernorm.weight
+0: Gram: model.layers.28.post_attention_layernorm.weight
+0: Gram: model.layers.29.self_attn.q_proj.weight
+0: Gram: model.layers.29.self_attn.k_proj.weight
+0: Gram: model.layers.29.self_attn.v_proj.weight
+0: Gram: model.layers.29.self_attn.o_proj.weight
+0: Gram: model.layers.29.mlp.gate_proj.weight
+0: Gram: model.layers.29.mlp.up_proj.weight
+0: Gram: model.layers.29.mlp.down_proj.weight
+0: Gram: model.layers.29.input_layernorm.weight
+0: Gram: model.layers.29.post_attention_layernorm.weight
+0: Gram: model.layers.30.self_attn.q_proj.weight
+0: Gram: model.layers.30.self_attn.k_proj.weight
+0: Gram: model.layers.30.self_attn.v_proj.weight
+0: Gram: model.layers.30.self_attn.o_proj.weight
+0: Gram: model.layers.30.mlp.gate_proj.weight
+0: Gram: model.layers.30.mlp.up_proj.weight
+0: Gram: model.layers.30.mlp.down_proj.weight
+0: Gram: model.layers.30.input_layernorm.weight
+0: Gram: model.layers.30.post_attention_layernorm.weight
+0: Gram: model.layers.31.self_attn.q_proj.weight
+0: Gram: model.layers.31.self_attn.k_proj.weight
+0: Gram: model.layers.31.self_attn.v_proj.weight
+0: Gram: model.layers.31.self_attn.o_proj.weight
+0: Gram: model.layers.31.mlp.gate_proj.weight
+0: Gram: model.layers.31.mlp.up_proj.weight
+0: Gram: model.layers.31.mlp.down_proj.weight
+0: Gram: model.layers.31.input_layernorm.weight
+0: Gram: model.layers.31.post_attention_layernorm.weight
+0: Gram: model.norm.weight
+0: Gram: lm_head.weight
+0: Constructing and saving 3 visualization planes
+0: {
+0:   "radius": 3.532481154200853,
+0:   "attack_plane_energy_fraction": 0.98949575294224,
+0:   "random_transverse_overlap": null,
+0:   "rerun_distance_from_original": {}
+0: }
+0: 	Command being timed: "python /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/../misc/trace_runner.py /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/misc/tar_dynamics.py geometry /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6"
+0: 	User time (seconds): 2138.80
+0: 	System time (seconds): 1093.96
+0: 	Percent of CPU this job got: 227%
+0: 	Elapsed (wall clock) time (h:mm:ss or m:ss): 23:41.83
+0: 	Average shared text size (kbytes): 0
+0: 	Average unshared data size (kbytes): 0
+0: 	Average stack size (kbytes): 0
+0: 	Average total size (kbytes): 0
+0: 	Maximum resident set size (kbytes): 236723320
+0: 	Average resident set size (kbytes): 0
+0: 	Major (requiring I/O) page faults: 3691600
+0: 	Minor (reclaiming a frame) page faults: 595380801
+0: 	Voluntary context switches: 2904104
+0: 	Involuntary context switches: 154812
+0: 	Swaps: 
+0: 0
+0: 	File system inputs: 1243543168
+0: 	File system outputs: 113164344
+0: 	Socket messages sent: 0
+0: 	Socket messages received: 0
+0: 	Signals delivered: 0
+0: 	Page size (bytes): 4096
+0: 	Exit status: 0
+0: Periodic asynchronous stack dumping disabled for this retry; fatal-fault reporting remains enabled.
+0: Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]
+0: Loading weights:   1%|          | 2/291 [00:00<00:50,  5.71it/s]
+0: Loading weights: 100%|██████████| 291/291 [00:00<00:00, 819.30it/s]
+0: Using the latest cached version of the dataset since cais/wmdp-bio-forget-corpus couldn't be found on the Hugging Face Hub (offline mode is enabled).
+0: Found the latest cached dataset configuration 'default' at /p/vast1/kirchenb/tar-root/cache/huggingface/datasets/cais___wmdp-bio-forget-corpus/default/0.0.0/5a786ed1041e56fef2d4ed26c1239f12b73a68eb (last modified on Fri Nov 20 20:05:01 2026).
+0: Map:   0%|          | 0/10 [00:00<?, ? examples/s]
+0: Map: 100%|██████████| 10/10 [00:00<00:00, 63.32 examples/s]
+0: Map: 100%|██████████| 10/10 [00:00<00:00, 60.83 examples/s]
+0: Using the latest cached version of the dataset since cais/wmdp-bio-forget-corpus couldn't be found on the Hugging Face Hub (offline mode is enabled).
+0: Found the latest cached dataset configuration 'default' at /p/vast1/kirchenb/tar-root/cache/huggingface/datasets/cais___wmdp-bio-forget-corpus/default/0.0.0/5a786ed1041e56fef2d4ed26c1239f12b73a68eb (last modified on Fri Nov 20 23:17:01 2026).
+0: Loading actual checkpoint: defense 0
+0: Actual checkpoint: {'phase': 'defense', 'step': 0, 'probe_loss': 1.9487158536911011, 'heldout_loss': 2.027687728404999}
+0: Loading actual checkpoint: defense 1
+0: Actual checkpoint: {'phase': 'defense', 'step': 1, 'probe_loss': 1.9487158536911011, 'heldout_loss': 2.027687728404999}
+0: Loading actual checkpoint: defense 2
+0: Actual checkpoint: {'phase': 'defense', 'step': 2, 'probe_loss': 1.948595118522644, 'heldout_loss': 2.027761608362198}
+0: Loading actual checkpoint: defense 4
+0: Actual checkpoint: {'phase': 'defense', 'step': 4, 'probe_loss': 1.946741771697998, 'heldout_loss': 2.0259925350546837}
+0: Loading actual checkpoint: defense 8
+0: Actual checkpoint: {'phase': 'defense', 'step': 8, 'probe_loss': 1.952803111076355, 'heldout_loss': 2.0404110848903656}
+0: Loading actual checkpoint: defense 16
+0: Actual checkpoint: {'phase': 'defense', 'step': 16, 'probe_loss': 3.5782848834991454, 'heldout_loss': 3.8276499807834625}
+0: Loading actual checkpoint: defense 32
+0: Actual checkpoint: {'phase': 'defense', 'step': 32, 'probe_loss': 10.162818908691406, 'heldout_loss': 10.382303833961487}
+0: Loading actual checkpoint: defense 64
+0: Actual checkpoint: {'phase': 'defense', 'step': 64, 'probe_loss': 14.299567031860352, 'heldout_loss': 13.983370959758759}
+0: Loading actual checkpoint: defense 96
+0: Actual checkpoint: {'phase': 'defense', 'step': 96, 'probe_loss': 13.973600006103515, 'heldout_loss': 14.177097916603088}
+0: Loading actual checkpoint: defense 125
+0: Actual checkpoint: {'phase': 'defense', 'step': 125, 'probe_loss': 14.256085205078126, 'heldout_loss': 14.395937263965607}
+0: Loading actual checkpoint: attack 0
+0: Actual checkpoint: {'phase': 'attack', 'step': 0, 'probe_loss': 14.256085205078126, 'heldout_loss': 14.395937263965607, 'next_batch_loss': 14.133729934692383}
+0: Loading actual checkpoint: attack 1
+0: Actual checkpoint: {'phase': 'attack', 'step': 1, 'probe_loss': 13.995362472534179, 'heldout_loss': 13.740727841854095, 'last_batch_loss': 12.507658004760742, 'next_batch_loss': 12.923626899719238}
+0: Loading actual checkpoint: attack 2
+0: Actual checkpoint: {'phase': 'attack', 'step': 2, 'probe_loss': 13.724834442138672, 'heldout_loss': 13.48392778635025, 'last_batch_loss': 11.836892127990723, 'next_batch_loss': 14.655416488647461}
+0: Loading actual checkpoint: attack 3
+0: Actual checkpoint: {'phase': 'attack', 'step': 3, 'probe_loss': 13.588301849365234, 'heldout_loss': 13.36237770318985, 'last_batch_loss': 13.276250839233398, 'next_batch_loss': 15.568751335144043}
+0: Loading actual checkpoint: attack 4
+0: Actual checkpoint: {'phase': 'attack', 'step': 4, 'probe_loss': 13.458302116394043, 'heldout_loss': 13.265592575073242, 'last_batch_loss': 14.44950008392334, 'next_batch_loss': 12.842700958251953}
+0: Loading actual checkpoint: attack 5
+0: Actual checkpoint: {'phase': 'attack', 'step': 5, 'probe_loss': 13.339284324645996, 'heldout_loss': 13.181717574596405, 'last_batch_loss': 12.500265121459961, 'next_batch_loss': 14.231999397277832}
+0: Loading actual checkpoint: attack 6
+0: Actual checkpoint: {'phase': 'attack', 'step': 6, 'probe_loss': 13.220237731933594, 'heldout_loss': 13.095010459423065, 'last_batch_loss': 13.808980941772461, 'next_batch_loss': 12.988635063171387}
+0: Loading actual checkpoint: attack 7
+0: Actual checkpoint: {'phase': 'attack', 'step': 7, 'probe_loss': 13.102946853637695, 'heldout_loss': 13.00584888458252, 'last_batch_loss': 12.771798133850098, 'next_batch_loss': 12.762855529785156}
+0: Loading actual checkpoint: attack 8
+0: Actual checkpoint: {'phase': 'attack', 'step': 8, 'probe_loss': 12.979526329040528, 'heldout_loss': 12.912681519985199, 'last_batch_loss': 12.592329978942871, 'next_batch_loss': 14.494979858398438}
+0: Loading actual checkpoint: attack 12
+0: Actual checkpoint: {'phase': 'attack', 'step': 12, 'probe_loss': 12.511048507690429, 'heldout_loss': 12.573005259037018, 'last_batch_loss': 12.808511734008789, 'next_batch_loss': 13.312914848327637}
+0: Loading actual checkpoint: attack 16
+0: Actual checkpoint: {'phase': 'attack', 'step': 16, 'probe_loss': 12.17866382598877, 'heldout_loss': 12.288975715637207, 'last_batch_loss': 12.61872386932373, 'next_batch_loss': 12.260725021362305}
+0: Loading actual checkpoint: attack 24
+0: Actual checkpoint: {'phase': 'attack', 'step': 24, 'probe_loss': 11.48405876159668, 'heldout_loss': 11.548224329948425, 'last_batch_loss': 12.007411003112793, 'next_batch_loss': 12.157602310180664}
+0: Loading actual checkpoint: attack 32
+0: Actual checkpoint: {'phase': 'attack', 'step': 32, 'probe_loss': 10.998563194274903, 'heldout_loss': 10.946041643619537, 'last_batch_loss': 11.371222496032715, 'next_batch_loss': 11.110252380371094}
+0: Loading actual checkpoint: attack 40
+0: Actual checkpoint: {'phase': 'attack', 'step': 40, 'probe_loss': 10.522648811340332, 'heldout_loss': 10.545185625553131, 'last_batch_loss': 10.588797569274902, 'next_batch_loss': 11.028738021850586}
+0: Loading actual checkpoint: attack 48
+0: Actual checkpoint: {'phase': 'attack', 'step': 48, 'probe_loss': 10.17683219909668, 'heldout_loss': 10.299029886722565, 'last_batch_loss': 10.395085334777832, 'next_batch_loss': 10.68056869506836}
+0: Loading actual checkpoint: attack 56
+0: Actual checkpoint: {'phase': 'attack', 'step': 56, 'probe_loss': 9.9376615524292, 'heldout_loss': 10.021994352340698, 'last_batch_loss': 9.898309707641602, 'next_batch_loss': 10.857488632202148}
+0: Loading actual checkpoint: attack 64
+0: Actual checkpoint: {'phase': 'attack', 'step': 64, 'probe_loss': 9.711758422851563, 'heldout_loss': 9.766271829605103, 'last_batch_loss': 9.73523998260498, 'next_batch_loss': 9.87446117401123}
+0: Loading actual checkpoint: attack 80
+0: Actual checkpoint: {'phase': 'attack', 'step': 80, 'probe_loss': 9.292646789550782, 'heldout_loss': 9.342754185199738, 'last_batch_loss': 9.429125785827637, 'next_batch_loss': 9.226218223571777}
+0: Loading actual checkpoint: attack 96
+0: Actual checkpoint: {'phase': 'attack', 'step': 96, 'probe_loss': 8.88462791442871, 'heldout_loss': 8.923892498016357, 'last_batch_loss': 8.44081974029541, 'next_batch_loss': 8.952134132385254}
+0: Loading actual checkpoint: attack 112
+0: Actual checkpoint: {'phase': 'attack', 'step': 112, 'probe_loss': 8.445351219177246, 'heldout_loss': 8.471323728561401, 'last_batch_loss': 8.502126693725586, 'next_batch_loss': 8.547390937805176}
+0: Loading actual checkpoint: attack 128
+0: Actual checkpoint: {'phase': 'attack', 'step': 128, 'probe_loss': 8.085118961334228, 'heldout_loss': 8.116984993219376, 'last_batch_loss': 8.217647552490234, 'next_batch_loss': 8.237776756286621}
+0: Loading actual checkpoint: attack 192
+0: Actual checkpoint: {'phase': 'attack', 'step': 192, 'probe_loss': 7.114483261108399, 'heldout_loss': 7.134452313184738, 'last_batch_loss': 7.075803756713867, 'next_batch_loss': 7.668819427490234}
+0: Loading actual checkpoint: attack 256
+0: Actual checkpoint: {'phase': 'attack', 'step': 256, 'probe_loss': 6.348509216308594, 'heldout_loss': 6.403384238481522, 'last_batch_loss': 6.698088645935059, 'next_batch_loss': 6.975250720977783}
+0: Loading actual checkpoint: attack 384
+0: Actual checkpoint: {'phase': 'attack', 'step': 384, 'probe_loss': 5.518338584899903, 'heldout_loss': 5.540620774030685, 'last_batch_loss': 5.808232307434082, 'next_batch_loss': 5.975352764129639}
+0: Loading actual checkpoint: attack 512
+0: Actual checkpoint: {'phase': 'attack', 'step': 512, 'probe_loss': 5.0484458923339846, 'heldout_loss': 5.02326825261116, 'last_batch_loss': 5.1232991218566895, 'next_batch_loss': 5.253820419311523}
+0: Loading actual checkpoint: attack 768
+0: Actual checkpoint: {'phase': 'attack', 'step': 768, 'probe_loss': 4.644560146331787, 'heldout_loss': 4.627092927694321, 'last_batch_loss': 4.7314043045043945, 'next_batch_loss': 4.537938594818115}
+0: Loading actual checkpoint: attack 1000
+0: Actual checkpoint: {'phase': 'attack', 'step': 1000, 'probe_loss': 4.572003746032715, 'heldout_loss': 4.556388705968857, 'last_batch_loss': 4.7829508781433105}
+0: Loading visualization basis: random
+0: Loaded direction 1/2 (27.0 GiB in 48.0 s)
+0: Loaded direction 2/2 (27.0 GiB in 63.3 s)
+0: Surface: random 1 / 17
+0: Surface: random 2 / 17
+0: Surface: random 3 / 17
+0: Surface: random 4 / 17
+0: Surface: random 5 / 17
+0: Surface: random 6 / 17
+0: Surface: random 7 / 17
+0: Surface: random 8 / 17
+0: Surface: random 9 / 17
+0: Surface: random 10 / 17
+0: Surface: random 11 / 17
+0: Surface: random 12 / 17
+0: Surface: random 13 / 17
+0: Surface: random 14 / 17
+0: Surface: random 15 / 17
+0: Surface: random 16 / 17
+0: Surface: random 17 / 17
+0: Loading visualization basis: reference
+0: Loaded direction 1/2 (27.0 GiB in 53.8 s)
+0: Loaded direction 2/2 (27.0 GiB in 56.0 s)
+0: Surface: reference 1 / 17
+0: Surface: reference 2 / 17
+0: Surface: reference 3 / 17
+0: Surface: reference 4 / 17
+0: Surface: reference 5 / 17
+0: Surface: reference 6 / 17
+0: Surface: reference 7 / 17
+0: Surface: reference 8 / 17
+0: Surface: reference 9 / 17
+0: Surface: reference 10 / 17
+0: Surface: reference 11 / 17
+0: Surface: reference 12 / 17
+0: Surface: reference 13 / 17
+0: Surface: reference 14 / 17
+0: Surface: reference 15 / 17
+0: Surface: reference 16 / 17
+0: Surface: reference 17 / 17
+0: Loading local frame: defense 0
+0: Local row: defense 0 -0.15713339880469646
+0: Local row: defense 0 -0.11785004910352234
+0: Local row: defense 0 -0.07856669940234823
+0: Local row: defense 0 -0.039283349701174114
+0: Local row: defense 0 0.0
+0: Local row: defense 0 0.039283349701174114
+0: Local row: defense 0 0.07856669940234823
+0: Local row: defense 0 0.11785004910352237
+0: Local row: defense 0 0.15713339880469646
+0: Local frame: defense 0
+0: Loading local frame: defense 8
+0: Local row: defense 8 -0.15713339880469646
+0: Local row: defense 8 -0.11785004910352234
+0: Local row: defense 8 -0.07856669940234823
+0: Local row: defense 8 -0.039283349701174114
+0: Local row: defense 8 0.0
+0: Local row: defense 8 0.039283349701174114
+0: Local row: defense 8 0.07856669940234823
+0: Local row: defense 8 0.11785004910352237
+0: Local row: defense 8 0.15713339880469646
+0: Local frame: defense 8
+0: Loading local frame: defense 16
+0: Local row: defense 16 -0.15713339880469646
+0: Local row: defense 16 -0.11785004910352234
+0: Local row: defense 16 -0.07856669940234823
+0: Local row: defense 16 -0.039283349701174114
+0: Local row: defense 16 0.0
+0: Local row: defense 16 0.039283349701174114
+0: Local row: defense 16 0.07856669940234823
+0: Local row: defense 16 0.11785004910352237
+0: Local row: defense 16 0.15713339880469646
+0: Local frame: defense 16
+0: Loading local frame: defense 32
+0: Local row: defense 32 -0.15713339880469646
+0: Local row: defense 32 -0.11785004910352234
+0: Local row: defense 32 -0.07856669940234823
+0: Local row: defense 32 -0.039283349701174114
+0: Local row: defense 32 0.0
+0: Local row: defense 32 0.039283349701174114
+0: Local row: defense 32 0.07856669940234823
+0: Local row: defense 32 0.11785004910352237
+0: Local row: defense 32 0.15713339880469646
+0: Local frame: defense 32
+0: Loading local frame: defense 64
+0: Local row: defense 64 -0.15713339880469646
+0: Local row: defense 64 -0.11785004910352234
+0: Local row: defense 64 -0.07856669940234823
+0: Local row: defense 64 -0.039283349701174114
+0: Local row: defense 64 0.0
+0: Local row: defense 64 0.039283349701174114
+0: Local row: defense 64 0.07856669940234823
+0: Local row: defense 64 0.11785004910352237
+0: Local row: defense 64 0.15713339880469646
+0: Local frame: defense 64
+0: Loading local frame: defense 96
+0: Local row: defense 96 -0.15713339880469646
+0: Local row: defense 96 -0.11785004910352234
+0: Local row: defense 96 -0.07856669940234823
+0: Local row: defense 96 -0.039283349701174114
+0: Local row: defense 96 0.0
+0: Local row: defense 96 0.039283349701174114
+0: Local row: defense 96 0.07856669940234823
+0: Local row: defense 96 0.11785004910352237
+0: Local row: defense 96 0.15713339880469646
+0: Local frame: defense 96
+0: Loading local frame: defense 125
+0: Local row: defense 125 -0.15713339880469646
+0: Local row: defense 125 -0.11785004910352234
+0: Local row: defense 125 -0.07856669940234823
+0: Local row: defense 125 -0.039283349701174114
+0: Local row: defense 125 0.0
+0: Local row: defense 125 0.039283349701174114
+0: Local row: defense 125 0.07856669940234823
+0: Local row: defense 125 0.11785004910352237
+0: Local row: defense 125 0.15713339880469646
+0: Local frame: defense 125
+0: Loading local frame: attack 0
+0: Local row: attack 0 -0.15713339880469646
+0: Local row: attack 0 -0.11785004910352234
+0: Local row: attack 0 -0.07856669940234823
+0: Local row: attack 0 -0.039283349701174114
+0: Local row: attack 0 0.0
+0: Local row: attack 0 0.039283349701174114
+0: Local row: attack 0 0.07856669940234823
+0: Local row: attack 0 0.11785004910352237
+0: Local row: attack 0 0.15713339880469646
+0: Local frame: attack 0
+0: Loading local frame: attack 1
+0: Local row: attack 1 -0.15713339880469646
+0: Local row: attack 1 -0.11785004910352234
+0: Local row: attack 1 -0.07856669940234823
+0: Local row: attack 1 -0.039283349701174114
+0: Local row: attack 1 0.0
+0: Local row: attack 1 0.039283349701174114
+0: Local row: attack 1 0.07856669940234823
+0: Local row: attack 1 0.11785004910352237
+0: Local row: attack 1 0.15713339880469646
+0: Local frame: attack 1
+0: Loading local frame: attack 8
+0: Local row: attack 8 -0.15713339880469646
+0: Local row: attack 8 -0.11785004910352234
+0: Local row: attack 8 -0.07856669940234823
+0: Local row: attack 8 -0.039283349701174114
+0: Local row: attack 8 0.0
+0: Local row: attack 8 0.039283349701174114
+0: Local row: attack 8 0.07856669940234823
+0: Local row: attack 8 0.11785004910352237
+0: Local row: attack 8 0.15713339880469646
+0: Local frame: attack 8
+0: Loading local frame: attack 32
+0: Local row: attack 32 -0.15713339880469646
+0: Local row: attack 32 -0.11785004910352234
+0: Local row: attack 32 -0.07856669940234823
+0: Local row: attack 32 -0.039283349701174114
+0: Local row: attack 32 0.0
+0: Local row: attack 32 0.039283349701174114
+0: Local row: attack 32 0.07856669940234823
+0: Local row: attack 32 0.11785004910352237
+0: Local row: attack 32 0.15713339880469646
+0: Local frame: attack 32
+0: Loading local frame: attack 128
+0: Local row: attack 128 -0.15713339880469646
+0: Local row: attack 128 -0.11785004910352234
+0: Local row: attack 128 -0.07856669940234823
+0: Local row: attack 128 -0.039283349701174114
+0: Local row: attack 128 0.0
+0: Local row: attack 128 0.039283349701174114
+0: Local row: attack 128 0.07856669940234823
+0: Local row: attack 128 0.11785004910352237
+0: Local row: attack 128 0.15713339880469646
+0: Local frame: attack 128
+0: Loading local frame: attack 512
+0: Local row: attack 512 -0.15713339880469646
+0: Local row: attack 512 -0.11785004910352234
+0: Local row: attack 512 -0.07856669940234823
+0: Local row: attack 512 -0.039283349701174114
+0: Local row: attack 512 0.0
+0: Local row: attack 512 0.039283349701174114
+0: Local row: attack 512 0.07856669940234823
+0: Local row: attack 512 0.11785004910352237
+0: Local row: attack 512 0.15713339880469646
+0: Local frame: attack 512
+0: Loading local frame: attack 1000
+0: Local row: attack 1000 -0.15713339880469646
+0: Local row: attack 1000 -0.11785004910352234
+0: Local row: attack 1000 -0.07856669940234823
+0: Local row: attack 1000 -0.039283349701174114
+0: Local row: attack 1000 0.0
+0: Local row: attack 1000 0.039283349701174114
+0: Local row: attack 1000 0.07856669940234823
+0: Local row: attack 1000 0.11785004910352237
+0: Local row: attack 1000 0.15713339880469646
+0: Local frame: attack 1000
+0: Loading visualization basis: attack
+0: Loaded direction 1/2 (27.0 GiB in 70.7 s)
+0: Loaded direction 2/2 (27.0 GiB in 69.6 s)
+0: Surface: attack 1 / 17
+0: Surface: attack 2 / 17
+0: Surface: attack 3 / 17
+0: Surface: attack 4 / 17
+0: Surface: attack 5 / 17
+0: Surface: attack 6 / 17
+0: Surface: attack 7 / 17
+0: Surface: attack 8 / 17
+0: Surface: attack 9 / 17
+0: Surface: attack 10 / 17
+0: Surface: attack 11 / 17
+0: Surface: attack 12 / 17
+0: Surface: attack 13 / 17
+0: Surface: attack 14 / 17
+0: Surface: attack 15 / 17
+0: Surface: attack 16 / 17
+0: Surface: attack 17 / 17
+0: 	Command being timed: "python /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/../misc/trace_runner.py /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/misc/tar_dynamics.py surfaces /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6"
+0: 	User time (seconds): 1883.52
+0: 	System time (seconds): 1009.23
+0: 	Percent of CPU this job got: 110%
+0: 	Elapsed (wall clock) time (h:mm:ss or m:ss): 43:31.11
+0: 	Average shared text size (kbytes): 0
+0: 	Average unshared data size (kbytes): 0
+0: 	Average stack size (kbytes): 0
+0: 	Average total size (kbytes): 0
+0: 	Maximum resident set size (kbytes): 56967184
+0: 	Average resident set size (kbytes): 0
+0: 	Major (requiring I/O) page faults: 3592562
+0: 	Minor (reclaiming a frame) page faults: 200036935
+0: 	Voluntary context switches: 2962837
+0: 	Involuntary context switches: 195205
+0: 	Swaps: 0
+0: 
+0: 	File system inputs: 1477355312
+0: 	File system outputs: 17568
+0: 	Socket messages sent: 0
+0: 	Socket messages received: 0
+0: 	Signals delivered: 0
+0: 	Page size (bytes): 4096
+0: 	Exit status: 0
+0: Periodic asynchronous stack dumping disabled for this retry; fatal-fault reporting remains enabled.
+0: Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]
+0: Loading weights: 100%|██████████| 291/291 [00:00<00:00, 5625.37it/s]
+0: Using the latest cached version of the dataset since cais/wmdp-bio-forget-corpus couldn't be found on the Hugging Face Hub (offline mode is enabled).
+0: Found the latest cached dataset configuration 'default' at /p/vast1/kirchenb/tar-root/cache/huggingface/datasets/cais___wmdp-bio-forget-corpus/default/0.0.0/5a786ed1041e56fef2d4ed26c1239f12b73a68eb (last modified on Fri Nov 20 23:26:09 2026).
+0: Using the latest cached version of the dataset since cais/wmdp-bio-forget-corpus couldn't be found on the Hugging Face Hub (offline mode is enabled).
+0: Found the latest cached dataset configuration 'default' at /p/vast1/kirchenb/tar-root/cache/huggingface/datasets/cais___wmdp-bio-forget-corpus/default/0.0.0/5a786ed1041e56fef2d4ed26c1239f12b73a68eb (last modified on Fri Nov 20 23:26:09 2026).
+0: Loaded direction 1/2 (27.0 GiB in 46.3 s)
+0: Loaded direction 2/2 (27.0 GiB in 78.7 s)
+0: Loading broad random frame: defense 0
+0: Broad row: defense 0 -125.0
+0: Broad row: defense 0 -93.75
+0: Broad row: defense 0 -62.5
+0: Broad row: defense 0 -31.25
+0: Broad row: defense 0 0.0
+0: Broad row: defense 0 31.25
+0: Broad row: defense 0 62.5
+0: Broad row: defense 0 93.75
+0: Broad row: defense 0 125.0
+0: Broad random frame: defense 0
+0: Loading broad random frame: defense 8
+0: Broad row: defense 8 -125.0
+0: Broad row: defense 8 -93.75
+0: Broad row: defense 8 -62.5
+0: Broad row: defense 8 -31.25
+0: Broad row: defense 8 0.0
+0: Broad row: defense 8 31.25
+0: Broad row: defense 8 62.5
+0: Broad row: defense 8 93.75
+0: Broad row: defense 8 125.0
+0: Broad random frame: defense 8
+0: Loading broad random frame: defense 32
+0: Broad row: defense 32 -125.0
+0: Broad row: defense 32 -93.75
+0: Broad row: defense 32 -62.5
+0: Broad row: defense 32 -31.25
+0: Broad row: defense 32 0.0
+0: Broad row: defense 32 31.25
+0: Broad row: defense 32 62.5
+0: Broad row: defense 32 93.75
+0: Broad row: defense 32 125.0
+0: Broad random frame: defense 32
+0: Loading broad random frame: defense 125
+0: Broad row: defense 125 -125.0
+0: Broad row: defense 125 -93.75
+0: Broad row: defense 125 -62.5
+0: Broad row: defense 125 -31.25
+0: Broad row: defense 125 0.0
+0: Broad row: defense 125 31.25
+0: Broad row: defense 125 62.5
+0: Broad row: defense 125 93.75
+0: Broad row: defense 125 125.0
+0: Broad random frame: defense 125
+0: Loading broad random frame: attack 0
+0: Broad row: attack 0 -125.0
+0: Broad row: attack 0 -93.75
+0: Broad row: attack 0 -62.5
+0: Broad row: attack 0 -31.25
+0: Broad row: attack 0 0.0
+0: Broad row: attack 0 31.25
+0: Broad row: attack 0 62.5
+0: Broad row: attack 0 93.75
+0: Broad row: attack 0 125.0
+0: Broad random frame: attack 0
+0: Loading broad random frame: attack 128
+0: Broad row: attack 128 -125.0
+0: Broad row: attack 128 -93.75
+0: Broad row: attack 128 -62.5
+0: Broad row: attack 128 -31.25
+0: Broad row: attack 128 0.0
+0: Broad row: attack 128 31.25
+0: Broad row: attack 128 62.5
+0: Broad row: attack 128 93.75
+0: Broad row: attack 128 125.0
+0: Broad random frame: attack 128
+0: Loading broad random frame: attack 1000
+0: Broad row: attack 1000 -125.0
+0: Broad row: attack 1000 -93.75
+0: Broad row: attack 1000 -62.5
+0: Broad row: attack 1000 -31.25
+0: Broad row: attack 1000 0.0
+0: Broad row: attack 1000 31.25
+0: Broad row: attack 1000 62.5
+0: Broad row: attack 1000 93.75
+0: Broad row: attack 1000 125.0
+0: Broad random frame: attack 1000
+0: 	Command being timed: "python /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/../misc/trace_runner.py /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/misc/tar_dynamics.py random-frames /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6"
+0: 	User time (seconds): 423.40
+0: 	System time (seconds): 194.23
+0: 	Percent of CPU this job got: 93%
+0: 	Elapsed (wall clock) time (h:mm:ss or m:ss): 11:03.71
+0: 	Average shared text size (kbytes): 0
+0: 	Average unshared data size (kbytes): 0
+0: 	Average stack size (kbytes): 0
+0: 	Average total size (kbytes): 0
+0: 	Maximum resident set size (kbytes): 55695464
+0: 	Average resident set size (kbytes): 0
+0: 	Major (requiring I/O) page faults: 539696
+0: 	Minor (reclaiming a frame) page faults: 28492433
+0: 	Voluntary context switches: 476216
+0: 	Involuntary context switches: 14810
+0: 	Swaps: 0
+0: 	
+0: File system inputs: 189375424
+0: 	File system outputs: 4728
+0: 	Socket messages sent: 0
+0: 	Socket messages received: 0
+0: 	Signals delivered: 0
+0: 	Page size (bytes): 4096
+0: 	Exit status: 0
+0: Periodic asynchronous stack dumping disabled for this retry; fatal-fault reporting remains enabled.
+0: random minimum capture 1.6216215117289756e-12 maximum loss gap 9.684744644165036
+0: reference minimum capture 0.0004567205903814 maximum loss gap 9.300793457031249
+0: attack minimum capture 0.1185474501242714 maximum loss gap 0.44950199127197266
+0: {
+0:   "attack_rank": 13,
+0:   "attack_plane_energy_fraction": 0.98949575294224,
+0:   "radius": 3.532481154200853,
+0:   "random_transverse_overlap": null,
+0:   "rerun_distance_from_original": {},
+0:   "planes": {
+0:     "random": {
+0:       "minimum_capture": 1.6216215117289756e-12,
+0:       "maximum_projection_loss_gap": 9.684744644165036
+0:     },
+0:     "reference": {
+0:       "minimum_capture": 0.0004567205903814,
+0:       "maximum_projection_loss_gap": 9.300793457031249
+0:     },
+0:     "attack": {
+0:       "minimum_capture": 0.1185474501242714,
+0:       "maximum_projection_loss_gap": 0.44950199127197266
+0:     }
+0:   },
+0:   "actual_attack_start_loss": 14.256085205078126,
+0:   "actual_attack_end_loss": 4.572003746032715,
+0:   "local_plane": "reference",
+0:   "local_radius": 0.15713339880469646,
+0:   "matrix_batch_steps": [
+0:     1,
+0:     2,
+0:     3,
+0:     4,
+0:     5,
+0:     6,
+0:     7,
+0:     8,
+0:     9,
+0:     10,
+0:     11,
+0:     12,
+0:     13,
+0:     14,
+0:     15,
+0:     16,
+0:     24,
+0:     32,
+0:     44,
+0:     56,
+0:     68,
+0:     80,
+0:     92,
+0:     104,
+0:     116,
+0:     128,
+0:     141,
+0:     148,
+0:     155,
+0:     168,
+0:     175,
+0:     182,
+0: 
+0:     195,
+0:     202,
+0:     209,
+0:     216,
+0:     223,
+0:     230,
+0:     237,
+0:     250,
+0:     257,
+0:     264,
+0:     277,
+0:     284,
+0:     291,
+0:     304,
+0:     311,
+0:     318,
+0:     325,
+0:     332,
+0:     339,
+0:     346,
+0:     359,
+0:     366,
+0:     373,
+0:     386,
+0:     393,
+0:     400,
+0:     413,
+0:     420,
+0:     427,
+0:     434,
+0:     441,
+0:     448,
+0:     455,
+0:     468,
+0:     475,
+0:     482,
+0:     495,
+0:     502,
+0:     509,
+0:     522,
+0:     529,
+0:     536,
+0:     543,
+0:     550,
+0:     557,
+0:     564,
+0:     577,
+0:     584,
+0:     591,
+0:     604,
+0:     611,
+0:     618,
+0:     631,
+0:     638,
+0:     645,
+0:     652,
+0:     659,
+0:     666,
+0:     673,
+0:     686,
+0:     693,
+0:     700,
+0:     713,
+0:     720,
+0:     727,
+0:     740,
+0:     747,
+0:     754,
+0:     761,
+0:     768,
+0:     775,
+0:     782,
+0:     795,
+0:     802,
+0:     809,
+0:     822,
+0:     829,
+0:     836,
+0:     849,
+0:     856,
+0:     863,
+0:     870,
+0:     877,
+0:     884,
+0:     891,
+0:     904,
+0:     911,
+0:     918,
+0:     931,
+0:     938,
+0:     945,
+0:     958,
+0:     965,
+0:     972,
+0:     986,
+0:     1000
+0:   ]
+0: }
+0: 	Command being timed: "python /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/../misc/trace_runner.py /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/misc/tar_dynamics.py report /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6"
+0: 	User time (seconds): 9.42
+0: 	System time (seconds): 0.79
+0: 	Percent of CPU this job got: 97%
+0: 	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:10.46
+0: 	Average shared text size (kbytes): 0
+0: 	Average unshared data size (kbytes): 0
+0: 	Average stack size (kbytes): 0
+0: 	Average total size (kbytes): 0
+0: 	Maximum resident set size (kbytes): 316564
+0: 	Average resident set size (kbytes): 0
+0: 	Major (requiring I/O) page faults: 37
+0: 	Minor (reclaiming a frame) page faults: 112455
+0: 	Voluntary context switches: 3162
+0: 	Involuntary context switches: 107
+0: 	Swaps: 0
+0: 	File system inputs: 2064
+0: 0
+0: 	File system outputs: 12872
+0: 	Socket messages sent: 0
+0: 	Socket messages received: 0
+0: 	Signals delivered: 0
+0: 	Page size (bytes): 4096
+0: 	Exit status: 0

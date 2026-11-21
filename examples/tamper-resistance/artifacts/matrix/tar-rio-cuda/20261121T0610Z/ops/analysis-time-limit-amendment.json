@@ -1,0 +1,15 @@
+{
+  "applied_at_utc": "2026-11-21T06:51:15.223172+00:00",
+  "kind": "scheduler_time_limit_only",
+  "new_limit_minutes_by_job": {
+    "516707": 120,
+    "516708": 120,
+    "516709": 240,
+    "516710": 240,
+    "516711": 150,
+    "516712": 150,
+    "516719": 45
+  },
+  "reason": "Improve backfill with over twice the largest measured runtime for the same frozen analysis/evaluation/profile workload. Prior maximum analysis100min34sec, profiles65min56sec, evaluation50min25sec; report3min34sec plus new per-case rendering. Numerical settings, requested GPUs, source and full work remain unchanged.",
+  "prior_completed_accounting": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/status/final-accounting.json"
+}

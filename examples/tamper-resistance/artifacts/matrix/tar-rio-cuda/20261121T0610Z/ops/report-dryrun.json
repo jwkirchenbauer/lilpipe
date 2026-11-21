@@ -22,7 +22,6 @@
     "--pass_run_name=false",
     "--quiet_launch=true",
     "--squonce=false",
-    "--dependency=afterok:516707:516708:516709:516710:516711:516712",
     "--dryrun",
     "--",
     "bash",
@@ -33,14 +32,7 @@
   "case": null,
   "gpus": 1,
   "host_memory": "224G",
-  "dependencies": [
-    "516707",
-    "516708",
-    "516709",
-    "516710",
-    "516711",
-    "516712"
-  ],
+  "dependencies": [],
   "source_sha256": {
     "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/run_report.sh": "0a7c113ce9e11d6575701771164c606be5480fe1ac0272156d079d4bc997ad72"
   }

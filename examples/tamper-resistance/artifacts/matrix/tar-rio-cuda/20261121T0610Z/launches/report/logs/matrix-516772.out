@@ -1,0 +1,428 @@
+stty: 'standard input': Inappropriate ioctl for device
+Job 516772 started on matrix19 at 2026-11-21T01:38:47-08:00
+0: host=matrix19 job_id=516772 node_id=0 nodes=1 tasks_per_node=1 cpus_per_task=28
+0: rank=0 local_rank=0 world_size=1 step_gpus=1 cuda_visible_devices=0
+0: master_addr=matrix19 master_port=44945 pwd=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance
+0: bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+0: bash: no job control in this shell
+0: stty: 'standard input'
+0: : Inappropriate ioctl for device
+0: Wrote 62 measured task scores to /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/evaluation-scores.csv
+0: random minimum capture 1.6216215117289756e-12 maximum loss gap 9.684744644165036
+0: reference 
+0: minimum capture 0.0004567205903814 
+0: maximum loss gap 9.300793457031249
+0: attack minimum capture 
+0: 0.1185474501242714 maximum loss gap 
+0: 0.44950199127197266
+0: {
+0:   "attack_rank": 13,
+0:   "attack_plane_energy_fraction": 0.98949575294224,
+0:   "radius": 3.532481154200853,
+0:   "random_transverse_overlap": null,
+0:   "rerun_distance_from_original": {},
+0:   "planes": {
+0:     "random": {
+0:       "minimum_capture": 1.6216215117289756e-12,
+0:       "maximum_projection_loss_gap": 9.684744644165036
+0:     },
+0:     "reference": {
+0:       "minimum_capture": 0.0004567205903814,
+0:       "maximum_projection_loss_gap": 9.300793457031249
+0:     },
+0:     "attack": {
+0:       "minimum_capture": 0.1185474501242714,
+0:       "maximum_projection_loss_gap": 0.44950199127197266
+0:     }
+0:   },
+0:   "actual_attack_start_loss": 14.256085205078126,
+0:   "actual_attack_end_loss": 4.572003746032715,
+0:   "local_plane": "reference",
+0:   "local_radius": 0.15713339880469646,
+0:   "matrix_batch_steps": [
+0:     1,
+0:     2,
+0:     3,
+0:     4,
+0:     5,
+0:     6,
+0:     7,
+0:     8,
+0:     9,
+0:     10,
+0:     11,
+0:     12,
+0:     13,
+0:     14,
+0:     15,
+0:     16,
+0:     24,
+0:     32,
+0:     44,
+0:     56,
+0:     68,
+0:     80,
+0:     92,
+0:     104,
+0:     116,
+0:     128,
+0:     141,
+0:     148,
+0:     155,
+0:     168,
+0:     175,
+0:     182,
+0: 
+0:     195,
+0:     202,
+0:     209,
+0:     216,
+0:     223,
+0:     230,
+0:     237,
+0:     250,
+0:     257,
+0:     264,
+0:     277,
+0:     284,
+0:     291,
+0:     304,
+0:     311,
+0:     318,
+0:     325,
+0:     332,
+0:     339,
+0:     346,
+0:     359,
+0:     366,
+0:     373,
+0:     386,
+0:     393,
+0:     400,
+0:     413,
+0:     420,
+0:     427,
+0:     434,
+0:     441,
+0:     448,
+0:     455,
+0:     468,
+0:     475,
+0:     482,
+0:     495,
+0:     502,
+0:     509,
+0:     522,
+0:     529,
+0:     536,
+0:     543,
+0:     550,
+0:     557,
+0:     564,
+0:     577,
+0:     584,
+0:     591,
+0:     604,
+0:     611,
+0:     618,
+0:     631,
+0:     638,
+0:     645,
+0:     652,
+0:     659,
+0:     666,
+0:     673,
+0:     686,
+0:     693,
+0:     700,
+0:     713,
+0:     720,
+0:     727,
+0:     740,
+0:     747,
+0:     754,
+0:     761,
+0:     768,
+0:     775,
+0:     782,
+0:     795,
+0:     802,
+0:     809,
+0:     822,
+0:     829,
+0:     836,
+0:     849,
+0:     856,
+0:     863,
+0:     870,
+0:     877,
+0:     884,
+0:     891,
+0:     904,
+0:     911,
+0:     918,
+0:     931,
+0:     938,
+0:     945,
+0:     958,
+0:     965,
+0:     972,
+0:     986,
+0:     1000
+0:   ]
+0: }
+0: {
+0:   "state": "complete",
+0:   "case": "rio-k16-cuda-lr1e-6",
+0:   "stage": "profile-report"
+0: }
+0: random minimum capture 4.6119483834503234e-10 maximum loss gap 21.88405752182007
+0: reference minimum capture 
+0: 0.0004495470498487 maximum loss gap 21.554299068450927
+0: attack 
+0: minimum capture 
+0: 0.1679840316771561 maximum loss gap 4.882758331298826
+0: {
+0:   "attack_rank": 13,
+0:   "attack_plane_energy_fraction": 0.9772353124086554,
+0:   "radius": 2.079693568409434,
+0:   "random_transverse_overlap": null,
+0:   "rerun_distance_from_original": {},
+0:   "planes": {
+0:     "random": {
+0:       "minimum_capture": 4.6119483834503234e-10,
+0:       "maximum_projection_loss_gap": 21.88405752182007
+0:     },
+0:     "reference": {
+0:       "minimum_capture": 0.0004495470498487,
+0:       "maximum_projection_loss_gap": 21.554299068450927
+0:     },
+0:     "attack": {
+0:       "minimum_capture": 0.1679840316771561,
+0:       "maximum_projection_loss_gap": 4.882758331298826
+0:     }
+0:   },
+0:   "actual_attack_start_loss": 25.20522117614746,
+0:   "actual_attack_end_loss": 3.339250659942627,
+0:   "local_plane": "reference",
+0:   "local_radius": 0.15713339880469646,
+0:   "matrix_batch_steps": [
+0:     1,
+0:     2,
+0:     3,
+0:     4,
+0:     5,
+0:     6,
+0:     7,
+0:     8,
+0:     9,
+0:     10,
+0:     11,
+0:     12,
+0:     13,
+0:     14,
+0:     15,
+0:     16,
+0:     24,
+0:     32,
+0:     44,
+0:     56,
+0:     68,
+0:     80,
+0:     92,
+0:     104,
+0:     116,
+0:     128,
+0:     141,
+0:     148,
+0:     155,
+0:     168,
+0:     175,
+0:     182,
+0: 
+0:     195,
+0:     202,
+0:     209,
+0:     216,
+0:     223,
+0:     230,
+0:     237,
+0:     250,
+0:     257,
+0:     264,
+0:     277,
+0:     284,
+0:     291,
+0:     304,
+0:     311,
+0:     318,
+0:     325,
+0:     332,
+0:     339,
+0:     346,
+0:     359,
+0:     366,
+0:     373,
+0:     386,
+0:     393,
+0:     400,
+0:     413,
+0:     420,
+0:     427,
+0:     434,
+0:     441,
+0:     448,
+0:     455,
+0:     468,
+0:     475,
+0:     482,
+0:     495,
+0:     502,
+0:     509,
+0:     522,
+0:     529,
+0:     536,
+0:     543,
+0:     550,
+0:     557,
+0:     564,
+0:     577,
+0:     584,
+0:     591,
+0:     604,
+0:     611,
+0:     618,
+0:     631,
+0:     638,
+0:     645,
+0:     652,
+0:     659,
+0:     666,
+0:     673,
+0:     686,
+0:     693,
+0:     700,
+0:     713,
+0:     720,
+0:     727,
+0:     740,
+0:     747,
+0:     754,
+0:     761,
+0:     768,
+0:     775,
+0:     782,
+0:     795,
+0:     802,
+0:     809,
+0:     822,
+0:     829,
+0:     836,
+0:     849,
+0:     856,
+0:     863,
+0:     870,
+0:     877,
+0:     884,
+0:     891,
+0:     904,
+0:     911,
+0:     918,
+0:     931,
+0:     938,
+0:     945,
+0:     958,
+0:     965,
+0:     972,
+0:     986,
+0:     1000
+0:   ]
+0: }
+0: {
+0:   "state": "complete",
+0:   "case": "rio-k64-cuda-lr1e-6",
+0:   "stage": "profile-report"
+0: }
+0: {
+0:   "state": "complete",
+0:   "report": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/rio-cuda-report.md",
+0:   "validation": {
+0:     "K4": {
+0:       "issues": [],
+0:       "physical_comparable": true,
+0:       "heldout_matches_root": true,
+0:       "local_frames": [
+0:         0,
+0:         1,
+0:         8,
+0:         32,
+0:         128,
+0:         512,
+0:         1000
+0:       ],
+0:       "broad_frames": [
+0:         0,
+0:         128,
+0:         1000
+0:       ]
+0:     },
+0:     "K16": {
+0:       "issues": [],
+0:       "physical_comparable": true,
+0:       "heldout_matches_root": true,
+0:       "local_frames": [
+0:         0,
+0:         1,
+0:         8,
+0:         32,
+0:         128,
+0:         512,
+0:         1000
+0:       ],
+0:       "broad_frames": [
+0:         0,
+0:         128,
+0:         1000
+0:       ]
+0:     },
+0:     "K64": {
+0:       "issues": [],
+0:       "physical_comparable": true,
+0:       "heldout_matches_root": true,
+0:       "local_frames": [
+0:         0,
+0:         1,
+0:         8,
+0:         32,
+0:         128,
+0:         512,
+0:         1000
+0:       ],
+0:       "broad_frames": [
+0:   
+0:       0,
+0:         128,
+0:         1000
+0:       ]
+0:     },
+0:     "K256": {
+0:       "issues": [],
+0:       "physical_comparable": true,
+0:       "heldout_matches_root": true,
+0:       "local_frames": [
+0:         0,
+0:         1,
+0:         8,
+0:         32,
+0:         128,
+0:         512,
+0:         1000
+0:       ],
+0:       "broad_frames": [
+0:         0,
+0:         128,
+0:         1000
+0:       ]
+0:     }
+0:   }
+0: }

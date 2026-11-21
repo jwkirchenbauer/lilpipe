@@ -1,0 +1,2 @@
+Submission: sbatch --parsable --dependency=afterok:516703 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/launches/analysis-rio-k16-cuda-lr1e-6/launch-ocb4uf_8/launch.sh
+Dry run. Scripts are in /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/launches/analysis-rio-k16-cuda-lr1e-6/launch-ocb4uf_8

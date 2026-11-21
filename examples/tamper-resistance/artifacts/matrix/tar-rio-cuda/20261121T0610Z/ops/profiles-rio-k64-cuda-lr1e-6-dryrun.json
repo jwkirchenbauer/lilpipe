@@ -22,7 +22,7 @@
     "--pass_run_name=false",
     "--quiet_launch=true",
     "--squonce=false",
-    "--dependency=afterok:516710",
+    "--dependency=afterok:516711",
     "--dryrun",
     "--",
     "bash",
@@ -37,7 +37,7 @@
   "gpus": 1,
   "host_memory": "224G",
   "dependencies": [
-    "516710"
+    "516711"
   ],
   "source_sha256": {
     "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/entry.sh": "c508cd872e5a31e541887c0256f2c6dbb9f29b6d6fcbefbed07e692e6bfb5ece"

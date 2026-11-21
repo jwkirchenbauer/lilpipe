@@ -1,0 +1,28 @@
+{
+  "state": "complete",
+  "checked_at_utc": "2026-11-21T09:42:52.335334+00:00",
+  "active_phases_complete": 11,
+  "numerical_configuration_changed_for_report_recovery": false,
+  "report_output_regression_tests_passed": 4,
+  "profile_reference_order_tests_passed": 3,
+  "black_explicit_ops_files_passed": true,
+  "visually_inspected": [
+    "figures/fourway-trajectories.png",
+    "figures/broad-random.png",
+    "figures/broad-delta.png",
+    "cases/rio-k16-cuda-lr1e-6/defense-landscape-evolution.png",
+    "cases/rio-k16-cuda-lr1e-6/surfaces-and-checkpoints.png"
+  ],
+  "interpretation_limits": [
+    "One paired seed; no monotone K versus WMDP recovery relationship.",
+    "All four defended checkpoints fail the initial MMLU utility gate.",
+    "Fixed outer updates do not fix total defense compute or repeated simulation exposure.",
+    "K runs preserve legacy enclosing autocast-cache behavior; no numerical simulation parity claim.",
+    "Archived K16 backend diagnostic is also confounded by training source revision."
+  ],
+  "frozen_source_or_measurements_modified": false,
+  "independent_report_audit": "passed: score table, thresholds, raw-score provenance, links and scope",
+  "generic_utility_table_note": "Header-only because the follow-up manifest selects attack cases; clarified evaluation-report.md and linked complete checkpoint-zero gates.",
+  "source_and_document_whitespace_check": "passed",
+  "raw_progress_log_whitespace": "Preserved literally; terminal progress bars include trailing spaces and carriage returns."
+}

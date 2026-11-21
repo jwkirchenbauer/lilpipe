@@ -1,0 +1,94 @@
+K,task,step,rocm_trained_score_percent,cuda_trained_score_percent,cuda_minus_rocm_pp,interpretation
+4,mmlu_no_bio,0,52.05674823600061,52.42456087674523,0.3678126407446243,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,0,46.31336405529954,45.276497695852534,-1.0368663594470036,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,1,47.235023041474655,45.39170506912442,-1.8433179723502349,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,2,47.35023041474654,46.31336405529954,-1.0368663594470036,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,3,47.004608294930875,47.11981566820276,0.11520737327188613,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,4,47.35023041474654,47.58064516129033,0.23041474654378646,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,5,47.11981566820276,47.35023041474654,0.23041474654377936,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,6,47.465437788018434,46.774193548387096,-0.6912442396313381,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,7,47.004608294930875,48.15668202764977,1.1520737327188968,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,8,48.04147465437788,48.04147465437788,0.0,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,12,47.8110599078341,48.38709677419355,0.576036866359452,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,16,47.69585253456221,47.926267281105986,0.23041474654377225,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,24,48.15668202764977,48.61751152073733,0.4608294930875587,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,32,47.69585253456221,49.30875576036866,1.6129032258064484,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,40,47.58064516129033,49.53917050691244,1.958525345622114,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,48,47.35023041474654,49.76958525345622,2.4193548387096797,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,56,47.926267281105986,49.423963133640555,1.4976958525345694,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,64,48.15668202764977,49.65437788018433,1.4976958525345552,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,80,48.04147465437788,49.07834101382488,1.0368663594470036,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,96,46.774193548387096,49.65437788018433,2.8801843317972313,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,112,46.08294930875576,48.963133640552996,2.8801843317972384,training-backend diagnostic; both evaluated on CUDA
+4,mmlu_no_bio,128,51.8690887254166,53.25776910373817,1.3886803783215669,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,128,45.852534562211986,48.73271889400922,2.8801843317972313,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,192,45.622119815668206,48.27188940092166,2.649769585253452,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,256,46.65898617511521,49.53917050691244,2.8801843317972313,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,384,46.19815668202765,51.95852534562212,5.76036866359447,training-backend diagnostic; both evaluated on CUDA
+4,mmlu_no_bio,512,52.98753940849722,55.96757243657109,2.980033028073869,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,512,47.004608294930875,52.30414746543779,5.299539170506911,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,768,47.69585253456221,52.41935483870967,4.723502304147459,training-backend diagnostic; both evaluated on CUDA
+4,mmlu_no_bio,1000,53.85077315718361,56.17775108842517,2.326977931241558,training-backend diagnostic; both evaluated on CUDA
+4,wmdp_bio_robust,1000,48.04147465437788,52.53456221198156,4.49308755760368,training-backend diagnostic; both evaluated on CUDA
+16,mmlu_no_bio,0,52.469599159285394,52.43206725716859,-0.037531902116803906,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,0,36.86635944700461,36.75115207373272,-0.11520737327189323,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,1,38.24884792626728,37.096774193548384,-1.1520737327188968,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,2,38.94009216589861,37.21198156682028,-1.7281105990783345,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,3,38.70967741935484,37.21198156682028,-1.4976958525345623,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,4,39.1705069124424,37.21198156682028,-1.958525345622121,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,5,39.1705069124424,37.21198156682028,-1.958525345622121,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,6,38.70967741935484,36.05990783410139,-2.649769585253452,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,7,39.1705069124424,35.944700460829495,-3.225806451612904,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,8,38.70967741935484,35.944700460829495,-2.764976958525345,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,12,39.40092165898618,35.714285714285715,-3.6866359447004626,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,16,39.86175115207373,35.483870967741936,-4.377880184331794,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,24,41.12903225806452,37.44239631336406,-3.6866359447004626,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,32,41.474654377880185,37.44239631336406,-4.032258064516128,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,40,43.663594470046085,36.52073732718894,-7.142857142857146,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,48,43.4331797235023,36.86635944700461,-6.566820276497687,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,56,41.935483870967744,37.672811059907836,-4.2626728110599075,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,64,42.16589861751152,38.24884792626728,-3.917050691244242,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,80,42.626728110599075,39.63133640552996,-2.9953917050691174,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,96,43.20276497695853,39.40092165898618,-3.8018433179723488,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,112,43.77880184331797,40.43778801843318,-3.34101382488479,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,mmlu_no_bio,128,53.610568983636085,52.844918180453384,-0.7656508031827016,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,128,43.54838709677419,39.86175115207373,-3.6866359447004626,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,192,44.47004608294931,39.055299539170505,-5.414746543778804,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,256,44.93087557603687,39.1705069124424,-5.76036866359447,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,384,44.354838709677416,36.29032258064516,-8.064516129032256,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,mmlu_no_bio,512,53.85077315718361,51.44122504128509,-2.4095481158985237,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,512,44.354838709677416,34.21658986175115,-10.138248847926263,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,768,44.585253456221196,33.986175115207374,-10.599078341013822,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,mmlu_no_bio,1000,54.02341990692088,51.11094430265726,-2.9124756042636193,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+16,wmdp_bio_robust,1000,44.585253456221196,33.986175115207374,-10.599078341013822,training-backend diagnostic; both evaluated on CUDA; archived run also used older tr_tar.py source revision
+64,mmlu_no_bio,0,52.732322474102986,52.67977781113947,-0.05254466296351268,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,0,37.55760368663594,41.474654377880185,3.917050691244242,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,1,39.516129032258064,41.82027649769585,2.3041474654377865,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,2,40.668202764976954,42.3963133640553,1.7281105990783487,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,3,41.58986175115207,41.935483870967744,0.3456221198156726,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,4,41.82027649769585,41.82027649769585,0.0,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,5,41.935483870967744,41.935483870967744,0.0,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,6,41.82027649769585,41.82027649769585,0.0,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,7,41.935483870967744,42.05069124423963,0.11520737327188613,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,8,41.244239631336406,42.28110599078341,1.0368663594470036,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,12,39.74654377880184,41.705069124423964,1.958525345622121,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,16,39.86175115207373,42.626728110599075,2.764976958525345,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,24,40.78341013824885,42.05069124423963,1.267281105990783,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,32,42.05069124423963,41.82027649769585,-0.23041474654377936,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,40,41.3594470046083,42.857142857142854,1.4976958525345552,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,48,42.28110599078341,43.08755760368664,0.8064516129032313,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,56,42.51152073732719,44.124423963133644,1.6129032258064555,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,64,42.16589861751152,44.47004608294931,2.3041474654377865,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,80,41.935483870967744,43.31797235023041,1.382488479262669,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,96,42.28110599078341,43.08755760368664,0.8064516129032313,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,112,42.626728110599075,42.74193548387097,0.11520737327189323,training-backend diagnostic; both evaluated on CUDA
+64,mmlu_no_bio,128,53.00255216934394,53.06260321273082,0.06005104338687772,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,128,43.20276497695853,43.4331797235023,0.23041474654377225,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,192,45.276497695852534,44.23963133640553,-1.0368663594470036,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,256,46.54377880184332,44.23963133640553,-2.3041474654377865,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,384,47.35023041474654,46.65898617511521,-0.691244239631331,training-backend diagnostic; both evaluated on CUDA
+64,mmlu_no_bio,512,53.340339288395135,53.978381624380724,0.6380423359855882,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,512,47.58064516129033,47.8110599078341,0.23041474654377225,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,768,47.004608294930875,49.07834101382488,2.073732718894007,training-backend diagnostic; both evaluated on CUDA
+64,mmlu_no_bio,1000,53.50547965770905,54.19606665665816,0.690586998949108,training-backend diagnostic; both evaluated on CUDA
+64,wmdp_bio_robust,1000,46.88940092165899,49.30875576036866,2.4193548387096726,training-backend diagnostic; both evaluated on CUDA

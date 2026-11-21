@@ -1,0 +1,318 @@
+Periodic asynchronous stack dumping disabled for this retry; fatal-fault reporting remains enabled.
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   1%|          | 2/291 [00:00<00:50,  5.71it/s]Loading weights: 100%|██████████| 291/291 [00:00<00:00, 819.30it/s]
+Using the latest cached version of the dataset since cais/wmdp-bio-forget-corpus couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'default' at /p/vast1/kirchenb/tar-root/cache/huggingface/datasets/cais___wmdp-bio-forget-corpus/default/0.0.0/5a786ed1041e56fef2d4ed26c1239f12b73a68eb (last modified on Fri Nov 20 20:05:01 2026).
+Map:   0%|          | 0/10 [00:00<?, ? examples/s]Map: 100%|██████████| 10/10 [00:00<00:00, 63.32 examples/s]Map: 100%|██████████| 10/10 [00:00<00:00, 60.83 examples/s]
+Using the latest cached version of the dataset since cais/wmdp-bio-forget-corpus couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'default' at /p/vast1/kirchenb/tar-root/cache/huggingface/datasets/cais___wmdp-bio-forget-corpus/default/0.0.0/5a786ed1041e56fef2d4ed26c1239f12b73a68eb (last modified on Fri Nov 20 23:17:01 2026).
+Loading actual checkpoint: defense 0
+Actual checkpoint: {'phase': 'defense', 'step': 0, 'probe_loss': 1.9487158536911011, 'heldout_loss': 2.027687728404999}
+Loading actual checkpoint: defense 1
+Actual checkpoint: {'phase': 'defense', 'step': 1, 'probe_loss': 1.9487158536911011, 'heldout_loss': 2.027687728404999}
+Loading actual checkpoint: defense 2
+Actual checkpoint: {'phase': 'defense', 'step': 2, 'probe_loss': 1.948595118522644, 'heldout_loss': 2.027761608362198}
+Loading actual checkpoint: defense 4
+Actual checkpoint: {'phase': 'defense', 'step': 4, 'probe_loss': 1.946741771697998, 'heldout_loss': 2.0259925350546837}
+Loading actual checkpoint: defense 8
+Actual checkpoint: {'phase': 'defense', 'step': 8, 'probe_loss': 1.952803111076355, 'heldout_loss': 2.0404110848903656}
+Loading actual checkpoint: defense 16
+Actual checkpoint: {'phase': 'defense', 'step': 16, 'probe_loss': 3.5782848834991454, 'heldout_loss': 3.8276499807834625}
+Loading actual checkpoint: defense 32
+Actual checkpoint: {'phase': 'defense', 'step': 32, 'probe_loss': 10.162818908691406, 'heldout_loss': 10.382303833961487}
+Loading actual checkpoint: defense 64
+Actual checkpoint: {'phase': 'defense', 'step': 64, 'probe_loss': 14.299567031860352, 'heldout_loss': 13.983370959758759}
+Loading actual checkpoint: defense 96
+Actual checkpoint: {'phase': 'defense', 'step': 96, 'probe_loss': 13.973600006103515, 'heldout_loss': 14.177097916603088}
+Loading actual checkpoint: defense 125
+Actual checkpoint: {'phase': 'defense', 'step': 125, 'probe_loss': 14.256085205078126, 'heldout_loss': 14.395937263965607}
+Loading actual checkpoint: attack 0
+Actual checkpoint: {'phase': 'attack', 'step': 0, 'probe_loss': 14.256085205078126, 'heldout_loss': 14.395937263965607, 'next_batch_loss': 14.133729934692383}
+Loading actual checkpoint: attack 1
+Actual checkpoint: {'phase': 'attack', 'step': 1, 'probe_loss': 13.995362472534179, 'heldout_loss': 13.740727841854095, 'last_batch_loss': 12.507658004760742, 'next_batch_loss': 12.923626899719238}
+Loading actual checkpoint: attack 2
+Actual checkpoint: {'phase': 'attack', 'step': 2, 'probe_loss': 13.724834442138672, 'heldout_loss': 13.48392778635025, 'last_batch_loss': 11.836892127990723, 'next_batch_loss': 14.655416488647461}
+Loading actual checkpoint: attack 3
+Actual checkpoint: {'phase': 'attack', 'step': 3, 'probe_loss': 13.588301849365234, 'heldout_loss': 13.36237770318985, 'last_batch_loss': 13.276250839233398, 'next_batch_loss': 15.568751335144043}
+Loading actual checkpoint: attack 4
+Actual checkpoint: {'phase': 'attack', 'step': 4, 'probe_loss': 13.458302116394043, 'heldout_loss': 13.265592575073242, 'last_batch_loss': 14.44950008392334, 'next_batch_loss': 12.842700958251953}
+Loading actual checkpoint: attack 5
+Actual checkpoint: {'phase': 'attack', 'step': 5, 'probe_loss': 13.339284324645996, 'heldout_loss': 13.181717574596405, 'last_batch_loss': 12.500265121459961, 'next_batch_loss': 14.231999397277832}
+Loading actual checkpoint: attack 6
+Actual checkpoint: {'phase': 'attack', 'step': 6, 'probe_loss': 13.220237731933594, 'heldout_loss': 13.095010459423065, 'last_batch_loss': 13.808980941772461, 'next_batch_loss': 12.988635063171387}
+Loading actual checkpoint: attack 7
+Actual checkpoint: {'phase': 'attack', 'step': 7, 'probe_loss': 13.102946853637695, 'heldout_loss': 13.00584888458252, 'last_batch_loss': 12.771798133850098, 'next_batch_loss': 12.762855529785156}
+Loading actual checkpoint: attack 8
+Actual checkpoint: {'phase': 'attack', 'step': 8, 'probe_loss': 12.979526329040528, 'heldout_loss': 12.912681519985199, 'last_batch_loss': 12.592329978942871, 'next_batch_loss': 14.494979858398438}
+Loading actual checkpoint: attack 12
+Actual checkpoint: {'phase': 'attack', 'step': 12, 'probe_loss': 12.511048507690429, 'heldout_loss': 12.573005259037018, 'last_batch_loss': 12.808511734008789, 'next_batch_loss': 13.312914848327637}
+Loading actual checkpoint: attack 16
+Actual checkpoint: {'phase': 'attack', 'step': 16, 'probe_loss': 12.17866382598877, 'heldout_loss': 12.288975715637207, 'last_batch_loss': 12.61872386932373, 'next_batch_loss': 12.260725021362305}
+Loading actual checkpoint: attack 24
+Actual checkpoint: {'phase': 'attack', 'step': 24, 'probe_loss': 11.48405876159668, 'heldout_loss': 11.548224329948425, 'last_batch_loss': 12.007411003112793, 'next_batch_loss': 12.157602310180664}
+Loading actual checkpoint: attack 32
+Actual checkpoint: {'phase': 'attack', 'step': 32, 'probe_loss': 10.998563194274903, 'heldout_loss': 10.946041643619537, 'last_batch_loss': 11.371222496032715, 'next_batch_loss': 11.110252380371094}
+Loading actual checkpoint: attack 40
+Actual checkpoint: {'phase': 'attack', 'step': 40, 'probe_loss': 10.522648811340332, 'heldout_loss': 10.545185625553131, 'last_batch_loss': 10.588797569274902, 'next_batch_loss': 11.028738021850586}
+Loading actual checkpoint: attack 48
+Actual checkpoint: {'phase': 'attack', 'step': 48, 'probe_loss': 10.17683219909668, 'heldout_loss': 10.299029886722565, 'last_batch_loss': 10.395085334777832, 'next_batch_loss': 10.68056869506836}
+Loading actual checkpoint: attack 56
+Actual checkpoint: {'phase': 'attack', 'step': 56, 'probe_loss': 9.9376615524292, 'heldout_loss': 10.021994352340698, 'last_batch_loss': 9.898309707641602, 'next_batch_loss': 10.857488632202148}
+Loading actual checkpoint: attack 64
+Actual checkpoint: {'phase': 'attack', 'step': 64, 'probe_loss': 9.711758422851563, 'heldout_loss': 9.766271829605103, 'last_batch_loss': 9.73523998260498, 'next_batch_loss': 9.87446117401123}
+Loading actual checkpoint: attack 80
+Actual checkpoint: {'phase': 'attack', 'step': 80, 'probe_loss': 9.292646789550782, 'heldout_loss': 9.342754185199738, 'last_batch_loss': 9.429125785827637, 'next_batch_loss': 9.226218223571777}
+Loading actual checkpoint: attack 96
+Actual checkpoint: {'phase': 'attack', 'step': 96, 'probe_loss': 8.88462791442871, 'heldout_loss': 8.923892498016357, 'last_batch_loss': 8.44081974029541, 'next_batch_loss': 8.952134132385254}
+Loading actual checkpoint: attack 112
+Actual checkpoint: {'phase': 'attack', 'step': 112, 'probe_loss': 8.445351219177246, 'heldout_loss': 8.471323728561401, 'last_batch_loss': 8.502126693725586, 'next_batch_loss': 8.547390937805176}
+Loading actual checkpoint: attack 128
+Actual checkpoint: {'phase': 'attack', 'step': 128, 'probe_loss': 8.085118961334228, 'heldout_loss': 8.116984993219376, 'last_batch_loss': 8.217647552490234, 'next_batch_loss': 8.237776756286621}
+Loading actual checkpoint: attack 192
+Actual checkpoint: {'phase': 'attack', 'step': 192, 'probe_loss': 7.114483261108399, 'heldout_loss': 7.134452313184738, 'last_batch_loss': 7.075803756713867, 'next_batch_loss': 7.668819427490234}
+Loading actual checkpoint: attack 256
+Actual checkpoint: {'phase': 'attack', 'step': 256, 'probe_loss': 6.348509216308594, 'heldout_loss': 6.403384238481522, 'last_batch_loss': 6.698088645935059, 'next_batch_loss': 6.975250720977783}
+Loading actual checkpoint: attack 384
+Actual checkpoint: {'phase': 'attack', 'step': 384, 'probe_loss': 5.518338584899903, 'heldout_loss': 5.540620774030685, 'last_batch_loss': 5.808232307434082, 'next_batch_loss': 5.975352764129639}
+Loading actual checkpoint: attack 512
+Actual checkpoint: {'phase': 'attack', 'step': 512, 'probe_loss': 5.0484458923339846, 'heldout_loss': 5.02326825261116, 'last_batch_loss': 5.1232991218566895, 'next_batch_loss': 5.253820419311523}
+Loading actual checkpoint: attack 768
+Actual checkpoint: {'phase': 'attack', 'step': 768, 'probe_loss': 4.644560146331787, 'heldout_loss': 4.627092927694321, 'last_batch_loss': 4.7314043045043945, 'next_batch_loss': 4.537938594818115}
+Loading actual checkpoint: attack 1000
+Actual checkpoint: {'phase': 'attack', 'step': 1000, 'probe_loss': 4.572003746032715, 'heldout_loss': 4.556388705968857, 'last_batch_loss': 4.7829508781433105}
+Loading visualization basis: random
+Loaded direction 1/2 (27.0 GiB in 48.0 s)
+Loaded direction 2/2 (27.0 GiB in 63.3 s)
+Surface: random 1 / 17
+Surface: random 2 / 17
+Surface: random 3 / 17
+Surface: random 4 / 17
+Surface: random 5 / 17
+Surface: random 6 / 17
+Surface: random 7 / 17
+Surface: random 8 / 17
+Surface: random 9 / 17
+Surface: random 10 / 17
+Surface: random 11 / 17
+Surface: random 12 / 17
+Surface: random 13 / 17
+Surface: random 14 / 17
+Surface: random 15 / 17
+Surface: random 16 / 17
+Surface: random 17 / 17
+Loading visualization basis: reference
+Loaded direction 1/2 (27.0 GiB in 53.8 s)
+Loaded direction 2/2 (27.0 GiB in 56.0 s)
+Surface: reference 1 / 17
+Surface: reference 2 / 17
+Surface: reference 3 / 17
+Surface: reference 4 / 17
+Surface: reference 5 / 17
+Surface: reference 6 / 17
+Surface: reference 7 / 17
+Surface: reference 8 / 17
+Surface: reference 9 / 17
+Surface: reference 10 / 17
+Surface: reference 11 / 17
+Surface: reference 12 / 17
+Surface: reference 13 / 17
+Surface: reference 14 / 17
+Surface: reference 15 / 17
+Surface: reference 16 / 17
+Surface: reference 17 / 17
+Loading local frame: defense 0
+Local row: defense 0 -0.15713339880469646
+Local row: defense 0 -0.11785004910352234
+Local row: defense 0 -0.07856669940234823
+Local row: defense 0 -0.039283349701174114
+Local row: defense 0 0.0
+Local row: defense 0 0.039283349701174114
+Local row: defense 0 0.07856669940234823
+Local row: defense 0 0.11785004910352237
+Local row: defense 0 0.15713339880469646
+Local frame: defense 0
+Loading local frame: defense 8
+Local row: defense 8 -0.15713339880469646
+Local row: defense 8 -0.11785004910352234
+Local row: defense 8 -0.07856669940234823
+Local row: defense 8 -0.039283349701174114
+Local row: defense 8 0.0
+Local row: defense 8 0.039283349701174114
+Local row: defense 8 0.07856669940234823
+Local row: defense 8 0.11785004910352237
+Local row: defense 8 0.15713339880469646
+Local frame: defense 8
+Loading local frame: defense 16
+Local row: defense 16 -0.15713339880469646
+Local row: defense 16 -0.11785004910352234
+Local row: defense 16 -0.07856669940234823
+Local row: defense 16 -0.039283349701174114
+Local row: defense 16 0.0
+Local row: defense 16 0.039283349701174114
+Local row: defense 16 0.07856669940234823
+Local row: defense 16 0.11785004910352237
+Local row: defense 16 0.15713339880469646
+Local frame: defense 16
+Loading local frame: defense 32
+Local row: defense 32 -0.15713339880469646
+Local row: defense 32 -0.11785004910352234
+Local row: defense 32 -0.07856669940234823
+Local row: defense 32 -0.039283349701174114
+Local row: defense 32 0.0
+Local row: defense 32 0.039283349701174114
+Local row: defense 32 0.07856669940234823
+Local row: defense 32 0.11785004910352237
+Local row: defense 32 0.15713339880469646
+Local frame: defense 32
+Loading local frame: defense 64
+Local row: defense 64 -0.15713339880469646
+Local row: defense 64 -0.11785004910352234
+Local row: defense 64 -0.07856669940234823
+Local row: defense 64 -0.039283349701174114
+Local row: defense 64 0.0
+Local row: defense 64 0.039283349701174114
+Local row: defense 64 0.07856669940234823
+Local row: defense 64 0.11785004910352237
+Local row: defense 64 0.15713339880469646
+Local frame: defense 64
+Loading local frame: defense 96
+Local row: defense 96 -0.15713339880469646
+Local row: defense 96 -0.11785004910352234
+Local row: defense 96 -0.07856669940234823
+Local row: defense 96 -0.039283349701174114
+Local row: defense 96 0.0
+Local row: defense 96 0.039283349701174114
+Local row: defense 96 0.07856669940234823
+Local row: defense 96 0.11785004910352237
+Local row: defense 96 0.15713339880469646
+Local frame: defense 96
+Loading local frame: defense 125
+Local row: defense 125 -0.15713339880469646
+Local row: defense 125 -0.11785004910352234
+Local row: defense 125 -0.07856669940234823
+Local row: defense 125 -0.039283349701174114
+Local row: defense 125 0.0
+Local row: defense 125 0.039283349701174114
+Local row: defense 125 0.07856669940234823
+Local row: defense 125 0.11785004910352237
+Local row: defense 125 0.15713339880469646
+Local frame: defense 125
+Loading local frame: attack 0
+Local row: attack 0 -0.15713339880469646
+Local row: attack 0 -0.11785004910352234
+Local row: attack 0 -0.07856669940234823
+Local row: attack 0 -0.039283349701174114
+Local row: attack 0 0.0
+Local row: attack 0 0.039283349701174114
+Local row: attack 0 0.07856669940234823
+Local row: attack 0 0.11785004910352237
+Local row: attack 0 0.15713339880469646
+Local frame: attack 0
+Loading local frame: attack 1
+Local row: attack 1 -0.15713339880469646
+Local row: attack 1 -0.11785004910352234
+Local row: attack 1 -0.07856669940234823
+Local row: attack 1 -0.039283349701174114
+Local row: attack 1 0.0
+Local row: attack 1 0.039283349701174114
+Local row: attack 1 0.07856669940234823
+Local row: attack 1 0.11785004910352237
+Local row: attack 1 0.15713339880469646
+Local frame: attack 1
+Loading local frame: attack 8
+Local row: attack 8 -0.15713339880469646
+Local row: attack 8 -0.11785004910352234
+Local row: attack 8 -0.07856669940234823
+Local row: attack 8 -0.039283349701174114
+Local row: attack 8 0.0
+Local row: attack 8 0.039283349701174114
+Local row: attack 8 0.07856669940234823
+Local row: attack 8 0.11785004910352237
+Local row: attack 8 0.15713339880469646
+Local frame: attack 8
+Loading local frame: attack 32
+Local row: attack 32 -0.15713339880469646
+Local row: attack 32 -0.11785004910352234
+Local row: attack 32 -0.07856669940234823
+Local row: attack 32 -0.039283349701174114
+Local row: attack 32 0.0
+Local row: attack 32 0.039283349701174114
+Local row: attack 32 0.07856669940234823
+Local row: attack 32 0.11785004910352237
+Local row: attack 32 0.15713339880469646
+Local frame: attack 32
+Loading local frame: attack 128
+Local row: attack 128 -0.15713339880469646
+Local row: attack 128 -0.11785004910352234
+Local row: attack 128 -0.07856669940234823
+Local row: attack 128 -0.039283349701174114
+Local row: attack 128 0.0
+Local row: attack 128 0.039283349701174114
+Local row: attack 128 0.07856669940234823
+Local row: attack 128 0.11785004910352237
+Local row: attack 128 0.15713339880469646
+Local frame: attack 128
+Loading local frame: attack 512
+Local row: attack 512 -0.15713339880469646
+Local row: attack 512 -0.11785004910352234
+Local row: attack 512 -0.07856669940234823
+Local row: attack 512 -0.039283349701174114
+Local row: attack 512 0.0
+Local row: attack 512 0.039283349701174114
+Local row: attack 512 0.07856669940234823
+Local row: attack 512 0.11785004910352237
+Local row: attack 512 0.15713339880469646
+Local frame: attack 512
+Loading local frame: attack 1000
+Local row: attack 1000 -0.15713339880469646
+Local row: attack 1000 -0.11785004910352234
+Local row: attack 1000 -0.07856669940234823
+Local row: attack 1000 -0.039283349701174114
+Local row: attack 1000 0.0
+Local row: attack 1000 0.039283349701174114
+Local row: attack 1000 0.07856669940234823
+Local row: attack 1000 0.11785004910352237
+Local row: attack 1000 0.15713339880469646
+Local frame: attack 1000
+Loading visualization basis: attack
+Loaded direction 1/2 (27.0 GiB in 70.7 s)
+Loaded direction 2/2 (27.0 GiB in 69.6 s)
+Surface: attack 1 / 17
+Surface: attack 2 / 17
+Surface: attack 3 / 17
+Surface: attack 4 / 17
+Surface: attack 5 / 17
+Surface: attack 6 / 17
+Surface: attack 7 / 17
+Surface: attack 8 / 17
+Surface: attack 9 / 17
+Surface: attack 10 / 17
+Surface: attack 11 / 17
+Surface: attack 12 / 17
+Surface: attack 13 / 17
+Surface: attack 14 / 17
+Surface: attack 15 / 17
+Surface: attack 16 / 17
+Surface: attack 17 / 17
+	Command being timed: "python /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/../misc/trace_runner.py /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/misc/tar_dynamics.py surfaces /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6"
+	User time (seconds): 1883.52
+	System time (seconds): 1009.23
+	Percent of CPU this job got: 110%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 43:31.11
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 56967184
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 3592562
+	Minor (reclaiming a frame) page faults: 200036935
+	Voluntary context switches: 2962837
+	Involuntary context switches: 195205
+	Swaps: 0
+	File system inputs: 1477355312
+	File system outputs: 17568
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

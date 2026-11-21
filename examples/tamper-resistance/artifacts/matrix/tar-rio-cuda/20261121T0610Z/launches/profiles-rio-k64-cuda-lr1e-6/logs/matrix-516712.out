@@ -1,0 +1,51 @@
+stty: 'standard input': Inappropriate ioctl for device
+Job 516712 started on matrix43 at 2026-11-20T23:33:45-08:00
+0: host=matrix43 job_id=516712 node_id=0 nodes=1 tasks_per_node=1 cpus_per_task=28
+0: rank=0 local_rank=0 world_size=1 step_gpus=0 cuda_visible_devices=0
+0: master_addr=matrix43 master_port=57029 pwd=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance
+0: bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+0: bash: no job control in this shell
+0: stty: 'standard input'
+0: : Inappropriate ioctl for device
+0: bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+0: bash: no job control in this shell
+0: stty: 'standard input'
+0: : Inappropriate ioctl for device
+0: Landscape GPU assignment: {'physical_gpu_requested': '0', 'logical_device': 0, 'visible_devices': 1, 'device': "_CudaDeviceProperties(name='NVIDIA H100 80GB HBM3', major=9, minor=0, total_memory=81123MB, multi_processor_count=132, uuid=418817e0-6413-9d8b-5962-4e9805581560, pci_bus_id=76, pci_device_id=0, pci_domain_id=0, L2_cache_size=50MB)"}
+0: Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]
+0: Loading weights: 100%|██████████| 291/291 [00:00<00:00, 3584.16it/s]
+0: Using the latest cached version of the dataset since cais/wmdp-bio-forget-corpus couldn't be found on the Hugging Face Hub (offline mode is enabled).
+0: Found the latest cached dataset configuration 'default' at /p/vast1/kirchenb/tar-root/cache/huggingface/datasets/cais___wmdp-bio-forget-corpus/default/0.0.0/5a786ed1041e56fef2d4ed26c1239f12b73a68eb (last modified on Fri Nov 20 23:26:09 2026).
+0: Update 1 fraction -1
+0: Update 1 fraction -0.875
+0: Update 1 fraction -0.75
+0: Update 1 fraction -0.625
+0: Update 1 fraction -0.5
+0: Update 1 fraction -0.375
+0: Update 1 fraction -0.25
+0: Update 1 fraction -0.125
+0: Update 1 fraction 0
+0: Update 1 fraction 0.125
+0: Update 1 fraction 0.25
+0: Update 1 fraction 0.375
+0: Update 1 fraction 0.5
+0: Update 1 fraction 0.625
+0: Update 1 fraction 0.75
+0: Update 1 fraction 0.875
+0: Update 1 fraction 1
+0: Update 1 fraction 1.125
+0: Update 1 fraction 1.25
+0: Update 1 fraction 1.375
+0: Update 1 fraction 1.5
+0: Update 1 fraction 1.625
+0: Update 1 fraction 1.75
+0: Update 1 fraction 1.875
+0: Update 1 fraction 2
+0: First-update plane c0=-1
+0: First-update plane c0=-0.875
+srun: Job step aborted: Waiting up to 62 seconds for job step to finish.
+srun: got SIGCONT
+0: [2026-11-20T23:43:37.321] error: *** STEP 516712.0 ON matrix43 CANCELLED AT 2026-11-20T23:43:37 DUE to SIGNAL Terminated ***
+[2026-11-20T23:43:37.321] error: *** JOB 516712 ON matrix43 CANCELLED AT 2026-11-20T23:43:37 DUE to SIGNAL Terminated ***
+srun: forcing job termination
+0: First-update plane c0=-0.75

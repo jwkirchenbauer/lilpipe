@@ -9,6 +9,17 @@ report passed. All production requests used `pbatch/verival`. The detached
 its [report](/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/report.md),
 `matrix-jobs.json` and `cancellations.json` record outcomes and replacements.
 
+The additional CUDA K16/K64 controls also finished, including both full defenses,
+1000-update attacks, benchmark evaluations, landscapes, early-update profiles,
+and the strict report (eleven active phases, all complete). The
+[final K comparison](/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/report.md)
+uses CUDA and one frozen numerical source for K4/K16/K64/K256. No study work is
+queued or running. Superseded failed/canceled attempts are retained in the
+ledgers. All four defenders miss the initial utility gate, and this paired seed
+does not support a monotone K–recovery relationship. Earlier pilot and migration
+notes below describe the evidence available at each stage; their pending checks
+have now completed.
+
 The full paired K4 control shows training-backend score variation up to 5.76
 percentage points in WMDP and 2.98 in MMLU, with both models evaluated on CUDA.
 This is material uncertainty for the mixed-backend K256 comparison; a short

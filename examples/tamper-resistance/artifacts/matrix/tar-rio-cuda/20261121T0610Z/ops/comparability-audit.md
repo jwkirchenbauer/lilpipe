@@ -2,6 +2,12 @@
 
 Read-only audit of the archived RIO K16 control and the fresh CUDA K16/K64 configs staged under this run. No training, evaluation, or source files were changed for this audit.
 
+Completion note, 2026-11-21 UTC: the strict final report passed for both fresh
+cases, including all 125 observed defense batches and 1000 observed attack
+batches against the canonical order. The prepared checks described below have
+completed. See [report provenance](../report-provenance.json) and
+[final accounting](../status/final-accounting.json).
+
 ## Archived K16 versus fresh CUDA K16
 
 The archived control is `artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-defense` plus `hparam-rio-lr1e-6`. Its defense config has `attack_epochs: 1` and omits `attack_max_steps`; the archived trainer default is 16. The staged CUDA K16 config makes that cap explicit at 16. Both use the same defense recipe: Zephyr snapshot `892b3d7a7b1cf10c7a701c60881cd93df615734c`; forget/retain coefficients 1/4; defense forget/retain batch sizes 4/4; inner forget batch size 16 with per-iteration size 1; inner LR 1e-5; 125 outer updates; AdamW at 1e-5, zero weight decay, linear schedule, 12 warmup updates; BF16, TF32 off; seeds 42/42; and the same WMDP and WikiText revisions. The fresh K16 differs from that archived control in backend/runtime and config/code provenance, plus explicit K metadata and run-local paths/names. The prepared cache directory changes from the hparam run to the RIO run; source revisions and observed batch order are held fixed and checked below.

@@ -1,0 +1,45 @@
+{
+  "argv": [
+    "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+    "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+    "--run_name=tar-rio-cuda-analysis-rio-k16-cuda-lr1e-6",
+    "--partition=pbatch",
+    "--account=verival",
+    "--nodes=1",
+    "--tasks_per_node=1",
+    "--gpus_per_node=2",
+    "--gpus_per_task=2",
+    "--cpus_per_task=56",
+    "--exclusive=false",
+    "--torchrun=false",
+    "--launch_once_per_node=true",
+    "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "--env_act_style=mm_activate",
+    "--cuda_module=",
+    "--minutes=360",
+    "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/launches",
+    "--sub_output_dir_name=analysis-rio-k16-cuda-lr1e-6",
+    "--pass_run_name=false",
+    "--quiet_launch=true",
+    "--squonce=false",
+    "--dependency=afterok:516703",
+    "--dryrun",
+    "--",
+    "bash",
+    "-i",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z",
+    "rio-k16-cuda-lr1e-6",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json"
+  ],
+  "phase": "analysis",
+  "case": "rio-k16-cuda-lr1e-6",
+  "gpus": 2,
+  "host_memory": "224G",
+  "dependencies": [
+    "516703"
+  ],
+  "source_sha256": {
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh": "62e4cd65561c162b91221d3ea2b75461fa4d170ba607c6334db3ace9804d0945"
+  }
+}

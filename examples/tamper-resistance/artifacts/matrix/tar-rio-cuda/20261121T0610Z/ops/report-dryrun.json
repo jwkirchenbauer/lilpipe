@@ -1,0 +1,47 @@
+{
+  "argv": [
+    "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+    "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+    "--run_name=tar-rio-cuda-report",
+    "--partition=pbatch",
+    "--account=verival",
+    "--nodes=1",
+    "--tasks_per_node=1",
+    "--gpus_per_node=1",
+    "--gpus_per_task=1",
+    "--cpus_per_task=28",
+    "--exclusive=false",
+    "--torchrun=false",
+    "--launch_once_per_node=true",
+    "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "--env_act_style=mm_activate",
+    "--cuda_module=",
+    "--minutes=60",
+    "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/launches",
+    "--sub_output_dir_name=report",
+    "--pass_run_name=false",
+    "--quiet_launch=true",
+    "--squonce=false",
+    "--dependency=afterok:516707:516708:516709:516710:516711:516712",
+    "--dryrun",
+    "--",
+    "bash",
+    "-i",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/run_report.sh"
+  ],
+  "phase": "report",
+  "case": null,
+  "gpus": 1,
+  "host_memory": "224G",
+  "dependencies": [
+    "516707",
+    "516708",
+    "516709",
+    "516710",
+    "516711",
+    "516712"
+  ],
+  "source_sha256": {
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/run_report.sh": "0a7c113ce9e11d6575701771164c606be5480fe1ac0272156d079d4bc997ad72"
+  }
+}

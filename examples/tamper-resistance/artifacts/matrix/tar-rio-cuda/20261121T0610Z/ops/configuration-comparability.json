@@ -1,0 +1,73 @@
+{
+  "state": "complete",
+  "k_values": [
+    4,
+    16,
+    64,
+    256
+  ],
+  "defense_configuration_equal_after_removing": [
+    "output_dir",
+    "wandb_name",
+    "custom_trainer_args.attack_max_steps",
+    "custom_trainer_args.attack_epochs"
+  ],
+  "attack_configuration_equal_after_removing": [
+    "output_dir",
+    "wandb_name",
+    "base_model"
+  ],
+  "all_other_configuration_values_equal": true,
+  "literal_random_and_reference_bases_equal": true,
+  "artifacts": {
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/config.yml": {
+      "sha256": "998f74adc6993736c708c780a4c04fe01ba90aa31d1f9ca6aecc00df6eab5074",
+      "bytes": 2066
+    },
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-defense/config.yml": {
+      "sha256": "2d0844ce90236e18afe4dcd5a29ff6dfca3a5d1ca56dd62112152c2b10dba879",
+      "bytes": 2891
+    },
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/study.json": {
+      "sha256": "aa1d302d4b67068ee4547a06a99a96c8f439b1452d935f7daa837dcfbfd3462f",
+      "bytes": 4864
+    },
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6/config.yml": {
+      "sha256": "f1bffded2ae5271246c4e3935bff209a75da119b6cd921b679718a58d833608c",
+      "bytes": 2047
+    },
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-defense/config.yml": {
+      "sha256": "deca874c1ec84aa923e4e13f931073bd61ff95f755bf3d94825cda479930a191",
+      "bytes": 2883
+    },
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6/study.json": {
+      "sha256": "810169bc9726242ab62b891607702c3b0495d9f65b967c9e1cefc002e6d1d05f",
+      "bytes": 4854
+    },
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6/config.yml": {
+      "sha256": "3ea15595ac8a6b9d117f98c6a2a460b9c9874031dc4191dd5177b51249a99228",
+      "bytes": 2047
+    },
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-defense/config.yml": {
+      "sha256": "32cc7909f0d310648707c55adaca1f6951f1e0141809aadb2ab924b9e6c4c522",
+      "bytes": 2883
+    },
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6/study.json": {
+      "sha256": "43a9fdc16a9fc5c8b5800d15b48d8b228040133300e8b34dd777e78a3443caa7",
+      "bytes": 4854
+    },
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k256-lr1e-6/config.yml": {
+      "sha256": "5b5776a445bae92927dc62885cbf0c0fff2c763b2f79738a7967ef7576496e85",
+      "bytes": 2029
+    },
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/cases/rio-k256-defense/config.yml": {
+      "sha256": "088038c210fd17556387eb1dc390e22ea23d55ccec917a574133da27259b7d74",
+      "bytes": 2874
+    },
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k256-lr1e-6/study.json": {
+      "sha256": "8b39542d3332265774ad24036b698c5426c5ee9f347e14082387c10725d84436",
+      "bytes": 4601
+    }
+  },
+  "training_inputs_validated_after_execution": "Frozen tar_compute.py requires exact original125defense batches and1000attack batches; this preflight does not claim future execution is complete."
+}

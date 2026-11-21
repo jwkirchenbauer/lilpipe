@@ -6,6 +6,10 @@ All four K conditions miss the initial MMLU utility gate; the paired training
 backend control also shows material score variation. These limits are recorded
 with the measurements in the final report.
 
+A [same-backend CUDA follow-up](/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/README.md)
+adds K16 and K64 to the completed CUDA K4/K256 runs. It holds the numerical
+source fixed across all four K values to address backend/source uncertainty.
+
 This follows the [hyperparameter study](TAR_HPARAM_STUDY.md),
 [cleanroom study](TAR_CLEANROOM_STUDY.md), and
 [inner-versus-actual attack analysis](TAR_INNER_BASIS_STUDY.md).

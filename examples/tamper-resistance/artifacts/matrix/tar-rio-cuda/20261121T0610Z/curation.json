@@ -1,0 +1,224 @@
+{
+  "scope": "Immutable execution setup and preflight proofs for the CUDA K follow-up; completed results will be curated separately.",
+  "state": "execution-setup",
+  "files": [
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/OPERATOR_STATE.md",
+      "bytes": 3949,
+      "sha256": "4f3e1fe4997c34891a4c26fd3ecde9ca73488fd4e20376d2f1c91bfe54714a76"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/README.md",
+      "bytes": 852,
+      "sha256": "5619d8f57087e33623b3b4bb686a774dfb6de07431ddecd0604eced28da683e6"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-defense/case.json",
+      "bytes": 1834,
+      "sha256": "4522cd410da024caad92116c7d85dd1de6ed8654c1451579a562653d09b0cd69"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-defense/config.yml",
+      "bytes": 2883,
+      "sha256": "deca874c1ec84aa923e4e13f931073bd61ff95f755bf3d94825cda479930a191"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-defense/runtime.sh",
+      "bytes": 328,
+      "sha256": "9fa4c5ca7d76f7a775ed64161a664cea1d1d16a73a924acccfc1f9bd98cf62b0"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6/case.json",
+      "bytes": 2011,
+      "sha256": "14912ae0787bfc5f1a79e34f807c9a3497e0981e7bd357e9c60b49b389ce01f8"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6/config.yml",
+      "bytes": 2047,
+      "sha256": "f1bffded2ae5271246c4e3935bff209a75da119b6cd921b679718a58d833608c"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6/runtime.sh",
+      "bytes": 568,
+      "sha256": "d4d5aae97f3ec493cee8fce9301597b13008bc9e46f3c6efd9e6435dd27af756"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6/study.json",
+      "bytes": 4854,
+      "sha256": "810169bc9726242ab62b891607702c3b0495d9f65b967c9e1cefc002e6d1d05f"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-defense/case.json",
+      "bytes": 1834,
+      "sha256": "d8979b23dbbe9aa90d5df9d50d26c9c5d76e25a0aaed0c79748ca564260f96d4"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-defense/config.yml",
+      "bytes": 2883,
+      "sha256": "32cc7909f0d310648707c55adaca1f6951f1e0141809aadb2ab924b9e6c4c522"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-defense/runtime.sh",
+      "bytes": 328,
+      "sha256": "af615bac8a4faa604f93ae97ecb6d8dacca360ef2dee97ab5108cd739044908b"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6/case.json",
+      "bytes": 2011,
+      "sha256": "e421e0a1ef4b8095dd1c459d9b51f0bf9fc211510a5c66a84194a6d110c905e4"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6/config.yml",
+      "bytes": 2047,
+      "sha256": "3ea15595ac8a6b9d117f98c6a2a460b9c9874031dc4191dd5177b51249a99228"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6/runtime.sh",
+      "bytes": 568,
+      "sha256": "5680b18a811d7963931070886bb4684839b008a4b737300f5c522b7ad86ed859"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6/study.json",
+      "bytes": 4854,
+      "sha256": "43a9fdc16a9fc5c8b5800d15b48d8b228040133300e8b34dd777e78a3443caa7"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/matrix-jobs.json",
+      "bytes": 22064,
+      "sha256": "5a2acdf7d1836805e6e46d25e3ffbdfa8fdec29d59d3f5afb3c9e2c1c24f30de"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/README.md",
+      "bytes": 2126,
+      "sha256": "fec45e1be2498ae813d21b7d750dc3dcade53fe490b0d1aec36bdcdd33b152f1"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/analysis-rio-k16-cuda-lr1e-6-dryrun.json",
+      "bytes": 1781,
+      "sha256": "2e6d5317e301ba3840b6a2f3edd6035a2ca26277b5f72b58f46596bbf1a92dea"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/analysis-rio-k64-cuda-lr1e-6-dryrun.json",
+      "bytes": 1781,
+      "sha256": "92a5fbec7db01ba34c0c5076f15a380e0d23ff5b42c4492b9d4b68e269145b6c"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/comparability-audit.md",
+      "bytes": 6983,
+      "sha256": "7add863d775b3586ced0d0a4914459907dff139e051b165ff940a4de837a6140"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/configuration-comparability.json",
+      "bytes": 3855,
+      "sha256": "a0a7540faf44e57b89f00c6b26b2b053b0e73bd6623cb845b3fd84978e670f77"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/eval-rio-k16-cuda-lr1e-6-dryrun.json",
+      "bytes": 1595,
+      "sha256": "1802b136e7c263b48075faddb1bb3f924d8704ac57ff7d1582821a8555735fb9"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/eval-rio-k64-cuda-lr1e-6-dryrun.json",
+      "bytes": 1595,
+      "sha256": "1235d0275defd3afcd6131bd62aadb348d408cbe840f55ce08d989a3a3c58d4a"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/finish_report.py",
+      "bytes": 30708,
+      "sha256": "9db994ec630bb5d2e6d7550f75f89073e0ec2f012b976131f8ed6740a7eca01e"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/prepare.py",
+      "bytes": 8323,
+      "sha256": "6346ec6165394ea9ae124d4bc55e3161eda123bcb5aa869cf7997b825b009e72"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/profiles-rio-k16-cuda-lr1e-6-dryrun.json",
+      "bytes": 1611,
+      "sha256": "30cd47e664151bd79d20120865ec8837c6db00c6816c09b71b7223a135a22ac5"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/profiles-rio-k64-cuda-lr1e-6-dryrun.json",
+      "bytes": 1611,
+      "sha256": "c427fa09b0149b444cef50cddb84345666229c474fde45662089e665401e7abd"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/report-dryrun.json",
+      "bytes": 1487,
+      "sha256": "3179b0684cb53714b4ab7c7d6b96409f7a75dc251f5d40344066c1fb87b07752"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/report-preflight-validation.json",
+      "bytes": 69064,
+      "sha256": "2b51a0855bb47814f9b2b2a917f16d6dccf17fbafdaf56b184aaf6fe82a5b838"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/run_report.sh",
+      "bytes": 1147,
+      "sha256": "0a7c113ce9e11d6575701771164c606be5480fe1ac0272156d079d4bc997ad72"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/submit.py",
+      "bytes": 5424,
+      "sha256": "a5ccecf5434ac5cd1e32472606368594bd48b5ac31f96a2d4fa72ef32c2951df"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/time-limit-amendment.json",
+      "bytes": 512,
+      "sha256": "1e8c392c326a813c14a67ece5004139d4d5823cf31de99b1c3c758d5311d6212"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/train-rio-k16-cuda-defense-dryrun.json",
+      "bytes": 1555,
+      "sha256": "1804fe2c18f23614ff0cc2e3a9a44d351703f70c170dcf5c051425d4c28a4a86"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/train-rio-k16-cuda-lr1e-6-dryrun.json",
+      "bytes": 1602,
+      "sha256": "ffcda99e46210dbe7f9439a4a35f33efaadb9dad8adc322e389b6deb0097b1ca"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/train-rio-k64-cuda-defense-dryrun.json",
+      "bytes": 1555,
+      "sha256": "00bcda4b5b210af5e6949b022a34a3ca3f993a15f0183847ffea3b4777d0b9b2"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/train-rio-k64-cuda-lr1e-6-dryrun.json",
+      "bytes": 1602,
+      "sha256": "9f3e59d65f7f2eb1bca076dc3d6258ac5da855b00bd7c90af7b40b1b58cc424c"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/watch.py",
+      "bytes": 3494,
+      "sha256": "57cd9756ca84c23005a0e4d6a08d18737a42f0c1dc817b0356be3ce4a11062c4"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/ops/watch.sh",
+      "bytes": 452,
+      "sha256": "fcddc858c17d0136966d2075ff7f9b268fe37405726758ef7770be0e9f3e322f"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/probes.json",
+      "bytes": 6222,
+      "sha256": "073225fe3139c3021ac5bf831b2398a1d78b0e8c52210104a36cd732a9b52209"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/protocol.json",
+      "bytes": 6287,
+      "sha256": "46ce737d1382bd481503b6b17f61b0c35223628553c5a2d3d18d7aeb25ca09cb"
+    },
+    {
+      "path": "artifacts/matrix/tar-rio-cuda/20261121T0610Z/study.json",
+      "bytes": 120053,
+      "sha256": "7fd6a659ec28ed0c7dbaa55cd45a093d9ce485e237ac5082133934b268ee7902"
+    }
+  ],
+  "links": {
+    "artifacts/matrix/tar-rio-cuda/20261121T0610Z/source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source",
+    "artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-defense/source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/source",
+    "artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6/source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/source",
+    "artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-defense/source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/source",
+    "artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6/source": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/source"
+  },
+  "large_models_basis_arrays_corpora_and_caches_excluded": true
+}

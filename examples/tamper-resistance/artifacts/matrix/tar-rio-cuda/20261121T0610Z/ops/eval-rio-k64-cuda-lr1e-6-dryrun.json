@@ -1,0 +1,44 @@
+{
+  "argv": [
+    "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+    "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+    "--run_name=tar-rio-cuda-eval-rio-k64-cuda-lr1e-6",
+    "--partition=pbatch",
+    "--account=verival",
+    "--nodes=1",
+    "--tasks_per_node=1",
+    "--gpus_per_node=1",
+    "--gpus_per_task=1",
+    "--cpus_per_task=28",
+    "--exclusive=false",
+    "--torchrun=false",
+    "--launch_once_per_node=true",
+    "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "--env_act_style=mm_activate",
+    "--cuda_module=",
+    "--minutes=180",
+    "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/launches",
+    "--sub_output_dir_name=eval-rio-k64-cuda-lr1e-6",
+    "--pass_run_name=false",
+    "--quiet_launch=true",
+    "--squonce=false",
+    "--dependency=afterok:516704",
+    "--dryrun",
+    "--",
+    "bash",
+    "-i",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/eval_onegpu.sh",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z",
+    "rio-k64-cuda-lr1e-6"
+  ],
+  "phase": "eval",
+  "case": "rio-k64-cuda-lr1e-6",
+  "gpus": 1,
+  "host_memory": "224G",
+  "dependencies": [
+    "516704"
+  ],
+  "source_sha256": {
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/eval_onegpu.sh": "cadf86fc785ebdf1fe7a05915c14437d8074446a3282fea15792ebb6f6a075ec"
+  }
+}

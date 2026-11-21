@@ -1,0 +1,120 @@
+{
+  "purpose": "Complete a same-backend CUDA K4/K16/K64/K256 comparison.",
+  "parent_report": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/report.md",
+  "reason": "Paired K4 training-backend control differed by up to 5.760369 WMDP percentage points and 2.980033 MMLU percentage points.",
+  "new_k_values": [
+    16,
+    64
+  ],
+  "reused_cuda_attack_folders": {
+    "4": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6",
+    "256": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k256-lr1e-6"
+  },
+  "configuration_deltas_from_completed_cuda_k4": {
+    "rio-k16-cuda-defense": {
+      "custom_trainer_args": {
+        "template": {
+          "forget_coefficient": 1.0,
+          "retain_coefficient": 4.0,
+          "defence_forget_batch_size": 4,
+          "defence_retain_batch_size": 4,
+          "attack_forget_batch_size": 16,
+          "attack_forget_batch_size_per_iteration": 1,
+          "attack_epochs": 1,
+          "attack_learning_rate": 1e-05,
+          "attack_max_steps": 4
+        },
+        "new": {
+          "forget_coefficient": 1.0,
+          "retain_coefficient": 4.0,
+          "defence_forget_batch_size": 4,
+          "defence_retain_batch_size": 4,
+          "attack_forget_batch_size": 16,
+          "attack_forget_batch_size_per_iteration": 1,
+          "attack_epochs": 1,
+          "attack_learning_rate": 1e-05,
+          "attack_max_steps": 16
+        }
+      },
+      "output_dir": {
+        "template": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-defense/models/defense",
+        "new": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-defense/models/defense"
+      },
+      "wandb_name": {
+        "template": "rio-k4-cuda-defense",
+        "new": "rio-k16-cuda-defense"
+      }
+    },
+    "rio-k16-cuda-lr1e-6": {
+      "base_model": {
+        "template": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-defense/models/defense",
+        "new": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-defense/models/defense"
+      },
+      "output_dir": {
+        "template": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/models/attack",
+        "new": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k16-cuda-lr1e-6/models/attack"
+      },
+      "wandb_name": {
+        "template": "rio-k4-cuda-lr1e-6",
+        "new": "rio-k16-cuda-lr1e-6"
+      }
+    },
+    "rio-k64-cuda-defense": {
+      "custom_trainer_args": {
+        "template": {
+          "forget_coefficient": 1.0,
+          "retain_coefficient": 4.0,
+          "defence_forget_batch_size": 4,
+          "defence_retain_batch_size": 4,
+          "attack_forget_batch_size": 16,
+          "attack_forget_batch_size_per_iteration": 1,
+          "attack_epochs": 1,
+          "attack_learning_rate": 1e-05,
+          "attack_max_steps": 4
+        },
+        "new": {
+          "forget_coefficient": 1.0,
+          "retain_coefficient": 4.0,
+          "defence_forget_batch_size": 4,
+          "defence_retain_batch_size": 4,
+          "attack_forget_batch_size": 16,
+          "attack_forget_batch_size_per_iteration": 1,
+          "attack_epochs": 4,
+          "attack_learning_rate": 1e-05,
+          "attack_max_steps": 64
+        }
+      },
+      "output_dir": {
+        "template": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-defense/models/defense",
+        "new": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-defense/models/defense"
+      },
+      "wandb_name": {
+        "template": "rio-k4-cuda-defense",
+        "new": "rio-k64-cuda-defense"
+      }
+    },
+    "rio-k64-cuda-lr1e-6": {
+      "base_model": {
+        "template": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-defense/models/defense",
+        "new": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-defense/models/defense"
+      },
+      "output_dir": {
+        "template": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/models/attack",
+        "new": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio-cuda/20261121T0610Z/cases/rio-k64-cuda-lr1e-6/models/attack"
+      },
+      "wandb_name": {
+        "template": "rio-k4-cuda-lr1e-6",
+        "new": "rio-k64-cuda-lr1e-6"
+      }
+    }
+  },
+  "training_prefix": "/usr/workspace/wsb/kirchenb/lilpipe-tar-train-cu126-v1",
+  "evaluation_prefix": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+  "source_root": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source",
+  "training_worker_sha256": "5671bf1d64b62db46b8b7455b42175767a005a2bd128bbc19bbd05e2fbf67cc3",
+  "training_observer_sha256": "de44ad18b93267f41761aef0a7a53bb70b3320ff6d325ff1532ff684ca4b90a9",
+  "tar_trainer_sha256": "58fa7e4fb677e1a62d4088146798fdeaa084a93865f260edee8c86a1347fb069",
+  "probes_sha256": "073225fe3139c3021ac5bf831b2398a1d78b0e8c52210104a36cd732a9b52209",
+  "random_and_reference_directions": "Reuse the same literal saved directions as the completed study; each condition also has its own fitted attack basis.",
+  "predeclared_scope": "One paired seed; fixed 125 outer updates and increasing inner compute/exposure. Utility gate and legacy AMP-cache caveats remain. No numerical simulator correction in this comparison."
+}

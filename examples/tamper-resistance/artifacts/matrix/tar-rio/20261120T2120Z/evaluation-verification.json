@@ -1,0 +1,57 @@
+{
+  "coverage": [
+    {
+      "case": "rio-k4-lr1e-6",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "rio-k64-lr1e-6",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "rio-k256-lr1e-6",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "rio-prefix-forward-legacy-lr1e-6",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "rio-prefix-reverse-legacy-lr1e-6",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "rio-fresh-matched-lr1e-6",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "rio-prefix-forward-matched-lr1e-6",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    },
+    {
+      "case": "rio-prefix-reverse-matched-lr1e-6",
+      "measured_task_checkpoints": 31,
+      "expected_task_checkpoints": 31,
+      "complete": true
+    }
+  ],
+  "rejected": [],
+  "utility_references": {
+    "base": 58.57979282390031,
+    "defended": 52.469599159285394
+  }
+}

@@ -1,0 +1,282 @@
+{
+  "state": "complete",
+  "checked_at_utc": "2026-11-21T06:06:03.525355+00:00",
+  "tracked_phases": 44,
+  "all_tracked_phases_complete": true,
+  "focused_regression_tests": {
+    "report_and_geometry_reuse": 10,
+    "submission_preflight": 4,
+    "result": "passed"
+  },
+  "black_check": {
+    "files": 8,
+    "result": "passed"
+  },
+  "markdown_local_links": {
+    "missing": [],
+    "result": "passed"
+  },
+  "visually_inspected_figures": [
+    "rio-figures/rio-k-four-way-broad-random.png",
+    "rio-figures/rio-k-four-way-trajectories.png"
+  ],
+  "rendered_figure_numerical_inputs_unchanged": true,
+  "scalar_loss_archives": [
+    {
+      "path": "artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/surfaces/minibatch-losses.npz",
+      "arrays": {
+        "losses": {
+          "shape": [
+            7,
+            128
+          ],
+          "dtype": "float64"
+        },
+        "steps": {
+          "shape": [
+            7
+          ],
+          "dtype": "int64"
+        },
+        "batch_steps": {
+          "shape": [
+            128
+          ],
+          "dtype": "int64"
+        }
+      },
+      "bytes": 9010
+    },
+    {
+      "path": "artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-fresh-matched-lr1e-6/surfaces/minibatch-losses.npz",
+      "arrays": {
+        "losses": {
+          "shape": [
+            7,
+            128
+          ],
+          "dtype": "float64"
+        },
+        "steps": {
+          "shape": [
+            7
+          ],
+          "dtype": "int64"
+        },
+        "batch_steps": {
+          "shape": [
+            128
+          ],
+          "dtype": "int64"
+        }
+      },
+      "bytes": 9010
+    },
+    {
+      "path": "artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k256-lr1e-6/surfaces/minibatch-losses.npz",
+      "arrays": {
+        "losses": {
+          "shape": [
+            7,
+            128
+          ],
+          "dtype": "float64"
+        },
+        "steps": {
+          "shape": [
+            7
+          ],
+          "dtype": "int64"
+        },
+        "batch_steps": {
+          "shape": [
+            128
+          ],
+          "dtype": "int64"
+        }
+      },
+      "bytes": 9010
+    },
+    {
+      "path": "artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k4-lr1e-6/surfaces/minibatch-losses.npz",
+      "arrays": {
+        "losses": {
+          "shape": [
+            7,
+            128
+          ],
+          "dtype": "float64"
+        },
+        "steps": {
+          "shape": [
+            7
+          ],
+          "dtype": "int64"
+        },
+        "batch_steps": {
+          "shape": [
+            128
+          ],
+          "dtype": "int64"
+        }
+      },
+      "bytes": 9010
+    },
+    {
+      "path": "artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k64-lr1e-6/surfaces/minibatch-losses.npz",
+      "arrays": {
+        "losses": {
+          "shape": [
+            7,
+            128
+          ],
+          "dtype": "float64"
+        },
+        "steps": {
+          "shape": [
+            7
+          ],
+          "dtype": "int64"
+        },
+        "batch_steps": {
+          "shape": [
+            128
+          ],
+          "dtype": "int64"
+        }
+      },
+      "bytes": 9010
+    },
+    {
+      "path": "artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-legacy-lr1e-6/surfaces/minibatch-losses.npz",
+      "arrays": {
+        "losses": {
+          "shape": [
+            7,
+            128
+          ],
+          "dtype": "float64"
+        },
+        "steps": {
+          "shape": [
+            7
+          ],
+          "dtype": "int64"
+        },
+        "batch_steps": {
+          "shape": [
+            128
+          ],
+          "dtype": "int64"
+        }
+      },
+      "bytes": 9010
+    },
+    {
+      "path": "artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-matched-lr1e-6/surfaces/minibatch-losses.npz",
+      "arrays": {
+        "losses": {
+          "shape": [
+            7,
+            128
+          ],
+          "dtype": "float64"
+        },
+        "steps": {
+          "shape": [
+            7
+          ],
+          "dtype": "int64"
+        },
+        "batch_steps": {
+          "shape": [
+            128
+          ],
+          "dtype": "int64"
+        }
+      },
+      "bytes": 9010
+    },
+    {
+      "path": "artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-legacy-lr1e-6/surfaces/minibatch-losses.npz",
+      "arrays": {
+        "losses": {
+          "shape": [
+            7,
+            128
+          ],
+          "dtype": "float64"
+        },
+        "steps": {
+          "shape": [
+            7
+          ],
+          "dtype": "int64"
+        },
+        "batch_steps": {
+          "shape": [
+            128
+          ],
+          "dtype": "int64"
+        }
+      },
+      "bytes": 9010
+    },
+    {
+      "path": "artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-matched-lr1e-6/surfaces/minibatch-losses.npz",
+      "arrays": {
+        "losses": {
+          "shape": [
+            7,
+            128
+          ],
+          "dtype": "float64"
+        },
+        "steps": {
+          "shape": [
+            7
+          ],
+          "dtype": "int64"
+        },
+        "batch_steps": {
+          "shape": [
+            128
+          ],
+          "dtype": "int64"
+        }
+      },
+      "bytes": 9010
+    },
+    {
+      "path": "artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/surfaces/minibatch-losses.npz",
+      "arrays": {
+        "losses": {
+          "shape": [
+            7,
+            128
+          ],
+          "dtype": "float64"
+        },
+        "steps": {
+          "shape": [
+            7
+          ],
+          "dtype": "int64"
+        },
+        "batch_steps": {
+          "shape": [
+            128
+          ],
+          "dtype": "int64"
+        }
+      },
+      "bytes": 9010
+    }
+  ],
+  "scientific_limits": [
+    "All four K conditions fail the initial utility gate.",
+    "K256 training backend differs from the main K4/K64 conditions; the paired K4 backend control shows material score drift.",
+    "Legacy AMP-cache behavior remains in the K sweep; matched exact parity is established only at the tested anchor.",
+    "Single paired seed."
+  ]
+}

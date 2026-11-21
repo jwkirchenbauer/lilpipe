@@ -1,0 +1,40 @@
+[
+  {
+    "actual_rows": 37,
+    "matrix_shape": [
+      7,
+      128
+    ],
+    "settings_sha256": "aa1d302d4b67068ee4547a06a99a96c8f439b1452d935f7daa837dcfbfd3462f",
+    "geometry_sha256": "c59e7e9dae32bb7c0585ab690143bfefb929ba4f74631d38de4ee00ceedd26f4",
+    "bases": [
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/random-basis.npy",
+        "bytes": 57933856896,
+        "mtime_ns": 1794287213655003007
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/attack-basis.npy",
+        "bytes": 57933856896,
+        "mtime_ns": 1794287213826399917
+      },
+      {
+        "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/geometry/attack-basis.npy",
+        "bytes": 57933856896,
+        "mtime_ns": 1795232316111799413
+      }
+    ],
+    "immutable_loss_sha256": {
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/surfaces/actual-losses.csv": "b8e939ca440b8d8b4bad354c8be5c0a008d6b53896dbb39b600488565bfd8af9",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/surfaces/minibatch-losses.npz": "a36e21c6b18a7ed6b5434d167c006d09585f970dd70ff45cb56f10f625349acb"
+    },
+    "case": "rio-k4-cuda-lr1e-6",
+    "profile_job": "516532",
+    "analysis_job": "516531",
+    "verified_epoch": 1795235435.058007,
+    "before_dependencies": [
+      "516531"
+    ],
+    "applied": true
+  }
+]

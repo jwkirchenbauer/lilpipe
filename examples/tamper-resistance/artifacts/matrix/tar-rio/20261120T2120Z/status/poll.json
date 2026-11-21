@@ -1,0 +1,787 @@
+{
+  "observed_epoch": 1795240811.5111444,
+  "counts": {
+    "slurm": {
+      "COMPLETED": 42
+    },
+    "flux": {
+      "INACTIVE": 2
+    }
+  },
+  "errors": [],
+  "jobs": [
+    {
+      "key": "eval:rio-k4-lr1e-6",
+      "backend": "slurm",
+      "job_id": "516069",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516069",
+        "State": "COMPLETED",
+        "Elapsed": "00:49:31",
+        "Submit": "2026-11-20T13:41:03",
+        "Start": "2026-11-20T13:41:05",
+        "End": "2026-11-20T14:30:36",
+        "Reason": "None"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k4-lr1e-6/status/evaluation.json"
+    },
+    {
+      "key": "eval:hparam-rio-lr1e-6",
+      "backend": "slurm",
+      "job_id": "516070",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516070",
+        "State": "COMPLETED",
+        "Elapsed": "00:50:25",
+        "Submit": "2026-11-20T13:41:03",
+        "Start": "2026-11-20T13:49:15",
+        "End": "2026-11-20T14:39:40",
+        "Reason": "None"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/status/evaluation.json"
+    },
+    {
+      "key": "pilot:cuda-training",
+      "backend": "slurm",
+      "job_id": "516076",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516076",
+        "State": "COMPLETED",
+        "Elapsed": "00:07:38",
+        "Submit": "2026-11-20T13:48:06",
+        "Start": "2026-11-20T13:55:21",
+        "End": "2026-11-20T14:02:59",
+        "Reason": "None"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/cuda-training/status/validation.json"
+    },
+    {
+      "key": "train:rio-k256-defense",
+      "backend": "slurm",
+      "job_id": "516131",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516131",
+        "State": "COMPLETED",
+        "Elapsed": "01:04:28",
+        "Submit": "2026-11-20T14:09:42",
+        "Start": "2026-11-20T14:56:22",
+        "End": "2026-11-20T16:00:50",
+        "Reason": "None"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/cases/rio-k256-defense/status/train.json"
+    },
+    {
+      "key": "train:rio-k256-lr1e-6",
+      "backend": "slurm",
+      "job_id": "516136",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516136",
+        "State": "COMPLETED",
+        "Elapsed": "00:20:39",
+        "Submit": "2026-11-20T14:10:48",
+        "Start": "2026-11-20T16:03:31",
+        "End": "2026-11-20T16:24:10",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/cases/rio-k256-lr1e-6/status/train.json"
+    },
+    {
+      "key": "calibration:eval-onegpu",
+      "backend": "slurm",
+      "job_id": "516135",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516135",
+        "State": "COMPLETED",
+        "Elapsed": "00:01:47",
+        "Submit": "2026-11-20T14:10:16",
+        "Start": "2026-11-20T14:10:22",
+        "End": "2026-11-20T14:12:09",
+        "Reason": "None"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/calibration/eval-onegpu/calibration.json"
+    },
+    {
+      "key": "eval:rio-k64-lr1e-6",
+      "backend": "slurm",
+      "job_id": "516140",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516140",
+        "State": "COMPLETED",
+        "Elapsed": "00:31:27",
+        "Submit": "2026-11-20T14:14:43",
+        "Start": "2026-11-20T14:15:22",
+        "End": "2026-11-20T14:46:49",
+        "Reason": "None"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k64-lr1e-6/status/evaluation.json"
+    },
+    {
+      "key": "eval:rio-prefix-forward-legacy-lr1e-6",
+      "backend": "slurm",
+      "job_id": "516141",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516141",
+        "State": "COMPLETED",
+        "Elapsed": "00:33:12",
+        "Submit": "2026-11-20T14:15:26",
+        "Start": "2026-11-20T14:16:22",
+        "End": "2026-11-20T14:49:34",
+        "Reason": "None"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-legacy-lr1e-6/status/evaluation.json"
+    },
+    {
+      "key": "eval:rio-prefix-reverse-legacy-lr1e-6",
+      "backend": "slurm",
+      "job_id": "516142",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516142",
+        "State": "COMPLETED",
+        "Elapsed": "00:32:53",
+        "Submit": "2026-11-20T14:15:26",
+        "Start": "2026-11-20T14:16:22",
+        "End": "2026-11-20T14:49:15",
+        "Reason": "None"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-legacy-lr1e-6/status/evaluation.json"
+    },
+    {
+      "key": "eval:rio-fresh-matched-lr1e-6",
+      "backend": "slurm",
+      "job_id": "516143",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516143",
+        "State": "COMPLETED",
+        "Elapsed": "00:35:08",
+        "Submit": "2026-11-20T14:15:26",
+        "Start": "2026-11-20T14:16:22",
+        "End": "2026-11-20T14:51:30",
+        "Reason": "None"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-fresh-matched-lr1e-6/status/evaluation.json"
+    },
+    {
+      "key": "eval:rio-prefix-forward-matched-lr1e-6",
+      "backend": "slurm",
+      "job_id": "516144",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516144",
+        "State": "COMPLETED",
+        "Elapsed": "00:36:21",
+        "Submit": "2026-11-20T14:15:26",
+        "Start": "2026-11-20T14:16:22",
+        "End": "2026-11-20T14:52:43",
+        "Reason": "None"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-matched-lr1e-6/status/evaluation.json"
+    },
+    {
+      "key": "eval:rio-prefix-reverse-matched-lr1e-6",
+      "backend": "slurm",
+      "job_id": "516145",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516145",
+        "State": "COMPLETED",
+        "Elapsed": "00:32:59",
+        "Submit": "2026-11-20T14:15:26",
+        "Start": "2026-11-20T14:16:22",
+        "End": "2026-11-20T14:49:21",
+        "Reason": "None"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-matched-lr1e-6/status/evaluation.json"
+    },
+    {
+      "key": "eval:rio-k256-lr1e-6",
+      "backend": "slurm",
+      "job_id": "516146",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516146",
+        "State": "COMPLETED",
+        "Elapsed": "00:31:25",
+        "Submit": "2026-11-20T14:15:26",
+        "Start": "2026-11-20T16:25:09",
+        "End": "2026-11-20T16:56:34",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k256-lr1e-6/status/evaluation.json"
+    },
+    {
+      "key": "profiles:rio-k4-lr1e-6",
+      "backend": "slurm",
+      "job_id": "516150",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516150",
+        "State": "COMPLETED",
+        "Elapsed": "00:57:54",
+        "Submit": "2026-11-20T14:20:48",
+        "Start": "2026-11-20T15:05:47",
+        "End": "2026-11-20T16:03:41",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k4-lr1e-6/status/step-profiles.json"
+    },
+    {
+      "key": "reference:base",
+      "backend": "slurm",
+      "job_id": "516152",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516152",
+        "State": "COMPLETED",
+        "Elapsed": "00:02:42",
+        "Submit": "2026-11-20T14:20:48",
+        "Start": "2026-11-20T14:21:22",
+        "End": "2026-11-20T14:24:04",
+        "Reason": "None"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/base-reference/validation.json"
+    },
+    {
+      "key": "parity:new-anchor",
+      "backend": "slurm",
+      "job_id": "516180",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516180",
+        "State": "COMPLETED",
+        "Elapsed": "00:09:48",
+        "Submit": "2026-11-20T14:31:38",
+        "Start": "2026-11-20T14:33:22",
+        "End": "2026-11-20T14:43:10",
+        "Reason": "None"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/rio-prefix-new-anchor/status/train.json"
+    },
+    {
+      "key": "train:rio-k4-cuda-defense",
+      "backend": "slurm",
+      "job_id": "516185",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516185",
+        "State": "COMPLETED",
+        "Elapsed": "00:08:47",
+        "Submit": "2026-11-20T14:36:56",
+        "Start": "2026-11-20T14:57:10",
+        "End": "2026-11-20T15:05:57",
+        "Reason": "None"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-defense/status/train.json"
+    },
+    {
+      "key": "audit:precision",
+      "backend": "slurm",
+      "job_id": "516186",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516186",
+        "State": "COMPLETED",
+        "Elapsed": "00:09:01",
+        "Submit": "2026-11-20T14:36:57",
+        "Start": "2026-11-20T14:44:22",
+        "End": "2026-11-20T14:53:23",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/precision-audit/results/precision-audit.json"
+    },
+    {
+      "key": "train:rio-k4-cuda-lr1e-6",
+      "backend": "slurm",
+      "job_id": "516187",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516187",
+        "State": "COMPLETED",
+        "Elapsed": "00:19:32",
+        "Submit": "2026-11-20T14:40:17",
+        "Start": "2026-11-20T15:06:47",
+        "End": "2026-11-20T15:26:19",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/status/train.json"
+    },
+    {
+      "key": "eval:rio-k4-cuda-lr1e-6",
+      "backend": "slurm",
+      "job_id": "516191",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516191",
+        "State": "COMPLETED",
+        "Elapsed": "00:39:06",
+        "Submit": "2026-11-20T14:44:57",
+        "Start": "2026-11-20T15:27:22",
+        "End": "2026-11-20T16:06:28",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/status/evaluation.json"
+    },
+    {
+      "key": "pilot-peer:final-binding",
+      "backend": "slurm",
+      "job_id": "516325",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516325",
+        "State": "COMPLETED",
+        "Elapsed": "00:06:41",
+        "Submit": "2026-11-20T16:28:38",
+        "Start": "2026-11-20T16:28:38",
+        "End": "2026-11-20T16:35:19",
+        "Reason": "None"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json"
+    },
+    {
+      "key": "analysis:rio-k4-lr1e-6:peer-v2",
+      "backend": "slurm",
+      "job_id": "516329",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516329",
+        "State": "COMPLETED",
+        "Elapsed": "00:22:29",
+        "Submit": "2026-11-20T16:36:06",
+        "Start": "2026-11-20T16:56:34",
+        "End": "2026-11-20T17:19:03",
+        "Reason": "None"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k4-lr1e-6/status/analysis.json"
+    },
+    {
+      "key": "analysis:rio-k64-lr1e-6:peer-v2",
+      "backend": "slurm",
+      "job_id": "516332",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516332",
+        "State": "COMPLETED",
+        "Elapsed": "01:24:27",
+        "Submit": "2026-11-20T16:39:07",
+        "Start": "2026-11-20T17:19:25",
+        "End": "2026-11-20T18:43:52",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k64-lr1e-6/status/analysis.json"
+    },
+    {
+      "key": "analysis:rio-k256-lr1e-6:peer-v2",
+      "backend": "slurm",
+      "job_id": "516333",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516333",
+        "State": "COMPLETED",
+        "Elapsed": "01:36:45",
+        "Submit": "2026-11-20T16:39:07",
+        "Start": "2026-11-20T17:27:14",
+        "End": "2026-11-20T19:03:59",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k256-lr1e-6/status/analysis.json"
+    },
+    {
+      "key": "analysis:rio-prefix-forward-legacy-lr1e-6:peer-v2",
+      "backend": "slurm",
+      "job_id": "516334",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516334",
+        "State": "COMPLETED",
+        "Elapsed": "01:34:38",
+        "Submit": "2026-11-20T16:39:07",
+        "Start": "2026-11-20T17:29:58",
+        "End": "2026-11-20T19:04:36",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-legacy-lr1e-6/status/analysis.json"
+    },
+    {
+      "key": "analysis:rio-prefix-reverse-legacy-lr1e-6:peer-v2",
+      "backend": "slurm",
+      "job_id": "516335",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516335",
+        "State": "COMPLETED",
+        "Elapsed": "01:34:47",
+        "Submit": "2026-11-20T16:39:08",
+        "Start": "2026-11-20T17:29:58",
+        "End": "2026-11-20T19:04:45",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-legacy-lr1e-6/status/analysis.json"
+    },
+    {
+      "key": "analysis:rio-fresh-matched-lr1e-6:peer-v2",
+      "backend": "slurm",
+      "job_id": "516336",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516336",
+        "State": "COMPLETED",
+        "Elapsed": "01:40:34",
+        "Submit": "2026-11-20T16:39:08",
+        "Start": "2026-11-20T18:07:29",
+        "End": "2026-11-20T19:48:03",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-fresh-matched-lr1e-6/status/analysis.json"
+    },
+    {
+      "key": "analysis:rio-prefix-forward-matched-lr1e-6:peer-v2",
+      "backend": "slurm",
+      "job_id": "516337",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516337",
+        "State": "COMPLETED",
+        "Elapsed": "01:34:56",
+        "Submit": "2026-11-20T16:39:08",
+        "Start": "2026-11-20T18:39:33",
+        "End": "2026-11-20T20:14:29",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-matched-lr1e-6/status/analysis.json"
+    },
+    {
+      "key": "analysis:rio-prefix-reverse-matched-lr1e-6:peer-v2",
+      "backend": "slurm",
+      "job_id": "516338",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516338",
+        "State": "COMPLETED",
+        "Elapsed": "01:31:26",
+        "Submit": "2026-11-20T16:39:08",
+        "Start": "2026-11-20T18:44:34",
+        "End": "2026-11-20T20:16:00",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-matched-lr1e-6/status/analysis.json"
+    },
+    {
+      "key": "analysis:hparam-rio-lr1e-6:peer-v2",
+      "backend": "slurm",
+      "job_id": "516339",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516339",
+        "State": "COMPLETED",
+        "Elapsed": "01:00:23",
+        "Submit": "2026-11-20T16:39:08",
+        "Start": "2026-11-20T19:03:36",
+        "End": "2026-11-20T20:03:59",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/status/analysis.json"
+    },
+    {
+      "key": "profiles:rio-k64-lr1e-6:retry-v2",
+      "backend": "slurm",
+      "job_id": "516341",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516341",
+        "State": "COMPLETED",
+        "Elapsed": "00:58:44",
+        "Submit": "2026-11-20T16:40:10",
+        "Start": "2026-11-20T18:31:32",
+        "End": "2026-11-20T19:30:16",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k64-lr1e-6/status/step-profiles.json"
+    },
+    {
+      "key": "profiles:rio-k256-lr1e-6:retry-v2",
+      "backend": "slurm",
+      "job_id": "516342",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516342",
+        "State": "COMPLETED",
+        "Elapsed": "00:57:37",
+        "Submit": "2026-11-20T16:40:10",
+        "Start": "2026-11-20T18:36:33",
+        "End": "2026-11-20T19:34:10",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k256-lr1e-6/status/step-profiles.json"
+    },
+    {
+      "key": "profiles:rio-prefix-forward-legacy-lr1e-6:retry-v2",
+      "backend": "slurm",
+      "job_id": "516343",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516343",
+        "State": "COMPLETED",
+        "Elapsed": "01:05:19",
+        "Submit": "2026-11-20T16:40:10",
+        "Start": "2026-11-20T18:44:34",
+        "End": "2026-11-20T19:49:53",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-legacy-lr1e-6/status/step-profiles.json"
+    },
+    {
+      "key": "profiles:rio-prefix-reverse-legacy-lr1e-6:retry-v2",
+      "backend": "slurm",
+      "job_id": "516344",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516344",
+        "State": "COMPLETED",
+        "Elapsed": "01:02:18",
+        "Submit": "2026-11-20T16:40:11",
+        "Start": "2026-11-20T19:04:36",
+        "End": "2026-11-20T20:06:54",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-legacy-lr1e-6/status/step-profiles.json"
+    },
+    {
+      "key": "profiles:rio-fresh-matched-lr1e-6:retry-v2",
+      "backend": "slurm",
+      "job_id": "516345",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516345",
+        "State": "COMPLETED",
+        "Elapsed": "00:52:34",
+        "Submit": "2026-11-20T16:40:11",
+        "Start": "2026-11-20T19:26:38",
+        "End": "2026-11-20T20:19:12",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-fresh-matched-lr1e-6/status/step-profiles.json"
+    },
+    {
+      "key": "profiles:rio-prefix-forward-matched-lr1e-6:retry-v2",
+      "backend": "slurm",
+      "job_id": "516346",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516346",
+        "State": "COMPLETED",
+        "Elapsed": "00:59:06",
+        "Submit": "2026-11-20T16:40:11",
+        "Start": "2026-11-20T19:34:39",
+        "End": "2026-11-20T20:33:45",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-matched-lr1e-6/status/step-profiles.json"
+    },
+    {
+      "key": "profiles:rio-prefix-reverse-matched-lr1e-6:retry-v2",
+      "backend": "slurm",
+      "job_id": "516347",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516347",
+        "State": "COMPLETED",
+        "Elapsed": "01:05:56",
+        "Submit": "2026-11-20T16:40:11",
+        "Start": "2026-11-20T19:39:39",
+        "End": "2026-11-20T20:45:35",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-matched-lr1e-6/status/step-profiles.json"
+    },
+    {
+      "key": "profiles:hparam-rio-lr1e-6:retry-v2",
+      "backend": "slurm",
+      "job_id": "516348",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516348",
+        "State": "COMPLETED",
+        "Elapsed": "00:57:54",
+        "Submit": "2026-11-20T16:40:11",
+        "Start": "2026-11-20T19:40:39",
+        "End": "2026-11-20T20:38:33",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/status/step-profiles.json"
+    },
+    {
+      "key": "analysis:rio-k4-cuda-lr1e-6:peer-v3",
+      "backend": "slurm",
+      "job_id": "516531",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516531",
+        "State": "COMPLETED",
+        "Elapsed": "01:19:19",
+        "Submit": "2026-11-20T19:51:17",
+        "Start": "2026-11-20T20:04:41",
+        "End": "2026-11-20T21:24:00",
+        "Reason": "None"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/status/analysis.json"
+    },
+    {
+      "key": "profiles:rio-k4-cuda-lr1e-6:retry-v3",
+      "backend": "slurm",
+      "job_id": "516532",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516532",
+        "State": "COMPLETED",
+        "Elapsed": "00:56:10",
+        "Submit": "2026-11-20T19:52:26",
+        "Start": "2026-11-20T20:30:42",
+        "End": "2026-11-20T21:26:52",
+        "Reason": "Dependency"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/status/step-profiles.json"
+    },
+    {
+      "key": "report:final:retry-v4",
+      "backend": "slurm",
+      "job_id": "516680",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516680",
+        "State": "COMPLETED",
+        "Elapsed": "00:03:34",
+        "Submit": "2026-11-20T21:47:16",
+        "Start": "2026-11-20T21:47:43",
+        "End": "2026-11-20T21:51:17",
+        "Reason": "None"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/report-matrix-references.json"
+    },
+    {
+      "key": "render:compact-titles",
+      "backend": "slurm",
+      "job_id": "516682",
+      "allocation_state": "COMPLETED",
+      "phase_state": "complete",
+      "done": true,
+      "scheduler": {
+        "JobID": "516682",
+        "State": "COMPLETED",
+        "Elapsed": "00:01:02",
+        "Submit": "2026-11-20T21:58:34",
+        "Start": "2026-11-20T21:58:43",
+        "End": "2026-11-20T21:59:45",
+        "Reason": "None"
+      },
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/plot-rendering-validation.json"
+    },
+    {
+      "key": "aux-new-anchor-parity",
+      "backend": "flux",
+      "job_id": "f3m5LNyUCuVq",
+      "allocation_state": "INACTIVE",
+      "phase_state": "complete",
+      "done": true
+    },
+    {
+      "key": "aux-precision-audit",
+      "backend": "flux",
+      "job_id": "f3m6GBJfJki3",
+      "allocation_state": "INACTIVE",
+      "phase_state": "complete",
+      "done": true
+    }
+  ],
+  "superseded_original_requests": 26
+}

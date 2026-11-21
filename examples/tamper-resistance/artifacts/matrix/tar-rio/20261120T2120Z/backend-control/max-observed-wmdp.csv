@@ -1,0 +1,5 @@
+case,learning_rate,budget,max_observed_wmdp_percent,observed_peak_step,measured_checkpoints,expected_checkpoints,complete_through_budget
+rio-k4-cuda-lr1e-6,1e-06,128,49.76958525345622,48,21,21,True
+rio-k4-cuda-lr1e-6,1e-06,256,49.76958525345622,48,23,23,True
+rio-k4-cuda-lr1e-6,1e-06,512,52.30414746543779,512,25,25,True
+rio-k4-cuda-lr1e-6,1e-06,1000,52.53456221198156,1000,27,27,True

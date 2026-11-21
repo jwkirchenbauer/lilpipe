@@ -41,6 +41,9 @@ def validate_case(run, case):
     for name in ("study.json", "case.json"):
         if not (folder / name).is_file():
             raise ValueError(f"Missing prepared case metadata: {folder / name}")
+    reference_helper = folder / "source/misc/reference_get_ll.py"
+    if not reference_helper.is_file():
+        raise ValueError(f"Missing case-local analysis helper: {reference_helper}")
     train_path = folder / "status" / "train.json"
     if (
         not train_path.is_file()

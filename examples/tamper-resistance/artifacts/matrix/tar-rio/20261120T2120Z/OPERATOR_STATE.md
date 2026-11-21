@@ -1,5 +1,208 @@
 # Matrix transition state
 
+## Final update: 2026-11-21 06:04 UTC
+
+All 44 tracked phases are complete, including strict report516680 and the
+render-only title cleanup516682. The Matrix queue is empty. The 900-second
+watcher has stopped because there is no remaining work to monitor.
+
+Start at report.md; rio-report.md has complete declared measurement coverage.
+All nine profile-overlap input pairs retained their saved CSV/NPZ hashes.
+The geometry-reuse adapter reconciles only two operational settings for the
+archived K4/K16 geometry; original geometry metadata remains byte-identical.
+The render cleanup shortened subplot titles without changing numerical inputs;
+plot-rendering-validation.json records both input and final figure hashes.
+The final K landscape and trajectory figures have been visually inspected.
+
+Scientific limits are explicit: all four K conditions fail the initial utility
+gate. K256 trained on CUDA, while the main K4/K64 and fidelity conditions trained
+on ROCm. The paired K4 control differs by up to 5.76 WMDP percentage points and
+2.98 MMLU percentage points, so this is a material comparison limitation.
+The legacy K sweep also retains the original AMP-cache behavior; exact parity
+was demonstrated only for the matched implementation at the tested CUDA anchor.
+
+Final small-artifact curation and commit include completed figures, summaries,
+validation proofs, and execution sources. Raw models, optimizer states, basis
+arrays, datasets and caches stay outside Git. Preserve the user's AGENTS.md
+change and unrelated untracked files.
+
+## Latest update: 2026-11-21 05:07 UTC
+
+All main conditions and the fresh K16 control have finished analyses/profiles.
+Only repaired CUDA K4 backend analysis531/profile532 and strict report534 remain.
+Last04:54 monitor:38 native completed,2 running,1 pending, plus2 completed Flux
+auxiliaries =40/43 complete, no errors. Backend531 reused geometry and now has
+complete local frames, loading its attack basis before broad frames. Its first
+27GiB basis direction took275sec (slow VAST read, still progressing). Backend
+profile532 is near the end of its first-update grid and continues its eight
+saved-update segments. Both retain their original requested limits.
+
+All nine profile overlap releases are complete; backend532 used retry-v3 /
+peer-v3 and dynamically resolved final534. After everything finishes, recheck
+all status/profile-overlap-readiness.json loss hashes and save final proof.
+Source/link fix is in backend-control/source-link-amendment.json; no numerical
+source or science settings changed. Watcher2067621 remains active, sleep900.
+
+Agent prepared source/transition/final-curation-candidates.json: review-only
+inventory with current/future paths, small scalar NPZ exception, no directory
+symlink traversal or large tensors/data. Rescan/hash AFTER strict report passes,
+do not assume its earlier sizes are final. Final outputs include root report.md,
+rio-report.md, backend-control-drift.csv and report-matrix-references.json.
+Inspect final key charts and backend drift, curate/commit/push; preserve user's
+AGENTS.md and unrelated files. Latest pushed commit da95eecd; subsequent ops,
+overlap proofs and source-link fix are still uncommitted.
+
+## Latest update: 2026-11-21 03:56 UTC
+
+The failed backend branch is repaired and resubmitted:
+analysis531 (peer-v3) -> profile532 (retry-v3), with final report534 (retry-v3).
+All three replaced340/349/351 rows explicitly name their replacements. The
+case-local source links now resolve to the unchanged frozen helper; geometry
+is reused. The case's analysis.json can still show the old failed state while
+531 is pending; the new worker resets it when it actually starts.
+
+Read-only watcher is RESTARTED, PID2067621 on tuolumne1004, parent1, sleep900.
+Old1301232 exited on the caught failure. First new03:54 poll:30 native complete,
+8 running,3 pending, plus2 completed Flux auxiliaries; no current errors.
+Final report534 retains all unfinished full analyses and profiles. Completed
+producer markers were verified and omitted from new dependencies (Slurm purge).
+
+Overlap helper now accepts --profile-attempt/--analysis-attempt and resolves
+the unique active report from the ledger instead of hardcoding351. For the new
+backend profile use retry-v3/peer-v3. Release532 only after its 37-row/7x128
+readiness gate passes, or let its own analysis dependency finish normally.
+All other eight profiles have already been released or completed. Saved loss
+hashes have been rechecked unchanged for K64,K256,forward-legacy after both
+analysis/profile completed; status/profile-overlap-verification.json records it.
+Continue checking the rest at completion. Full numerical source stays frozen.
+
+Remaining main analyses337,338 and K16 control339 were running. Profiles344--348
+were running. Everything trained and all benchmark evaluations are complete.
+Continue slow polling, inspect final figures and paired backend drift, complete
+strict report marker report-matrix-references.json, curate and commit/push.
+Latest pushed da95eecd; later ops metadata/fix/overlap proofs await curation.
+
+## Latest update: 2026-11-21 03:52 UTC
+
+Monitor caught backend-control analysis340 failing in surfaces: the generated
+attack case lacked source/misc/reference_get_ll.py because its case-local
+source symlink was absent. Geometry had finished and is preserved. Profile349
+and final351 were canceled by Slurm's dependency gate. Watcher1301232 exited
+on this error and MUST be restarted after replacement jobs are registered.
+
+Root restored both backend case/source links to the same frozen TARGET/source;
+source-link-amendment.json records this metadata-only repair. No numerical
+source/settings/checkpoints changed. submit_peer.py now checks this helper
+path before allocation; four regression tests pass. Old340/349/351 rows are
+superseded. Replacement analysis531 is submitted with attempt peer-v3 and
+reuses completed geometry. Profile retry-v3 dryrun is being reviewed next,
+then final report retry-v3 will be submitted against the current live jobs.
+Do not reuse the canceled351 dependency graph or report restoration helper's
+hardcoded retry-v2 attempt for real submission.
+
+Other work was progressing normally: last03:44 poll had28 native completions,
+10 running plus the above failed/canceled branch. K256 profile342 completed.
+All training/benchmarks remain complete. Finish this branch repair, restart
+900-second watcher, continue all remaining phases, verify overlap input hashes,
+inspect final figures/backend drift, curate and commit/push. Latest pushed
+commit remains da95eecd. Preserve user's AGENTS.md and unrelated files.
+
+## Latest update: 2026-11-21 03:34 UTC
+
+Completed full analyses: K4/K64/K256 and both legacy prefix conditions
+(329,332,333,334,335). Analyses336--340 are running, including fresh K16 and
+paired CUDA K4 controls. K64 profile341 has completed; its saved immutable
+CSV/NPZ hashes were rechecked unchanged after both phases, recorded in
+status/profile-overlap-verification.json. Profile342 was at update7 around
+03:31. Profiles343--345 are running. Readiness checks also passed for forward/
+reverse matched and K16 control; root released profiles346,347,348 with their
+exact applied input proofs. Only CUDA K4 profile349 retains its own-analysis
+dependency until its actual-loss pair becomes complete (or analysis finishes).
+
+Final report351 still requires ALL full analyses and profiles. Last03:29
+monitor:26 native completed,10 running,5 pending, plus2 completed auxiliaries;
+no errors. All training/benchmarks are complete. Continue slow polling with
+sleep900, finish remaining profile releases only after input checks, verify
+all overlap loss-file hashes, inspect final figures and backend drift, then
+curate/commit/push. Source runtime stays frozen. Latest pushed da95eecd; later
+operational files/overlap helper and proof files still await curation.
+
+## Latest update: 2026-11-21 03:17 UTC
+
+K4, K64 and K256 full analyses329/332/333 have passed. Root inspected the
+K4 broad/fitted figures and K64/K256 broad evolution figures; rendered labels,
+shared within-case scales and checkpoint panels are intact. Do not infer the
+whole K comparison before fresh K16 and paired CUDA K4 controls finish.
+
+Five profile jobs341--345 have now been released after the exact immutable
+input gate (K64,K256,forward/reverse legacy,fresh matched). Their applied proofs
+are under source/transition/profile-overlap-*-applied.json and each case's
+status/profile-overlap-readiness.json. No source/settings changed. The other
+profiles346--349 remain dependent on their own analyses; check readiness at
+later15min polls to overlap them if useful. Final351 retains all analysis and
+profile completion dependencies. Verify loss-file hashes after overlaps finish.
+
+Last02:59 monitor:23 native completed,9 running,9 pending, plus2 completed Flux
+auxiliaries; no errors. Original training and all benchmarks are complete.
+First two released profiles341/342 were running; K64 profile was at update3
+around03:11. The remaining analyses are progressing through geometry/grids.
+Keep frozen source/peer-landscape and source/misc unchanged. Watcher1301232
+still uses sleep900. Latest pushed commit da95eecd; operational metadata and
+overlap helper/proofs still need final curation/commit along with results.
+
+## Latest update: 2026-11-21 02:20 UTC
+
+K4 full analysis516329 PASSED. Root visually inspected its
+random-landscape-evolution.png and surfaces-and-checkpoints.png; axes/markers
+and broad versus fitted views render correctly. All training and evaluations
+remain complete. Five sibling analyses were running at the02:14 monitor poll;
+no errors. All observed peer assignments expose two H100s with P2P true.
+
+After a read-only code/write-lock audit, root released K64 profile516341 and
+K256 profile516342 to overlap their unfinished landscape grids. Both fresh
+readiness checks passed: geometry complete, every basis header/stat valid,
+37 finite/unique expected actual checkpoint rows through1000, complete finite
+7x128 minibatch matrix matching settings. Exact CSV/NPZ hashes and geometry
+identities are saved in each case's status/profile-overlap-readiness.json and
+source/transition/profile-overlap-*-applied.json. New helper overlap_profiles.py
+first dry-runs the checks, then --apply removes only the profile dependency.
+Analysis and profile outputs/locks are disjoint. Final report516351 STILL waits
+for every full analysis and every profile. No numerical settings/source changed.
+
+At subsequent15min polls, the same per-case gate may release profiles343--349
+once their actual outputs are complete; do not release merely because geometry
+exists. If their own analysis finishes first, no change is needed. After each
+overlapped profile/analysis finishes, verify the saved immutable CSV/NPZ hashes
+are unchanged and record that proof before final curation. Pending profiles
+remain original one-GPU workers. Watch1301232 is alive with literal sleep900.
+
+Continue to completion, inspect the final comparison figures/backend drift,
+curate small result files (no tensors/corpora), update curation hashes, and
+commit/push. Latest pushed commit is da95eecd; later operational metadata is
+not committed yet. Preserve user AGENTS.md and unrelated files.
+
+## Latest update: 2026-11-21 01:19 UTC
+
+K4 peer516329 started00:56:34UTC, earlier than the forecast. Production device
+checks passed on matrix22: global Slurm IDs1,3, inherited local CUDA mask0,1,
+two distinct H100 UUIDs, peer access true in both directions. It reused
+completed geometry/actual losses/grid rows and is now in the last broad frame
+(attack1000). Keep the full K4 completion gate for siblings516332--516340.
+
+All training AND all benchmark evaluations are now complete, including K256
+evaluation516146. Existing final-report dependency on146 was established while
+it was live and is valid; do not edit merely because its record later purges.
+Monitor1301232 remains healthy, polls every900sec. Last01:14 snapshot:21 native
+completed,1 running,19 pending, plus2 completed Flux auxiliaries; no errors.
+
+Commit da95eecd is PUSHED: frozen peer runtime, exact6.1784x pilot proof,
+binding/localization tests, reviewed restored DAG and backend reference fix.
+Only user's AGENTS.md change and unrelated untracked files remained after it.
+Next: verify K4 completion and inspect its figures, monitor sibling analyses,
+profiles341--349 and final report351, resolve failures, assess paired backend
+drift, curate final small results/figures, and commit/push. Do not mark the
+study finished before report-matrix-references.json passes.
+
 ## Latest update: 2026-11-21 00:43 UTC
 
 The DAG is fully restored. K4 peer-v2 analysis516329 (2GPUs/56CPU/224G/360min)

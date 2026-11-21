@@ -1,0 +1,253 @@
+{
+  "coverage": "complete",
+  "cases": {
+    "rio-k16": {
+      "issues": [],
+      "physical_comparable": true,
+      "heldout_matches_root": true,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ],
+      "geometry_reuse": {
+        "state": "cached_geometry_reused_with_operational_settings_projection",
+        "changed_fields": [
+          "capability_scores_file",
+          "cpu_landscape_anchor"
+        ],
+        "saved_protocol_values": {
+          "capability_scores_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-lr1e-6/evaluation-scores.csv",
+          "cpu_landscape_anchor": {
+            "__absent__": true
+          }
+        },
+        "current_study_values": {
+          "capability_scores_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/evaluation-scores.csv",
+          "cpu_landscape_anchor": true
+        },
+        "saved_protocol_identity": "464b5b423c5683b796d30c96656caebde9d7ad1e434aa93ec123ac0c3e178c6e",
+        "geometry_recomputed": false
+      }
+    },
+    "rio-k4-lr1e-6": {
+      "issues": [],
+      "physical_comparable": true,
+      "heldout_matches_root": true,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ],
+      "geometry_reuse": {
+        "state": "cached_geometry_reused_with_operational_settings_projection",
+        "changed_fields": [
+          "capability_scores_file",
+          "cpu_landscape_anchor"
+        ],
+        "saved_protocol_values": {
+          "capability_scores_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/cases/rio-k4-lr1e-6/evaluation-scores.csv",
+          "cpu_landscape_anchor": {
+            "__absent__": true
+          }
+        },
+        "current_study_values": {
+          "capability_scores_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k4-lr1e-6/evaluation-scores.csv",
+          "cpu_landscape_anchor": true
+        },
+        "saved_protocol_identity": "695a89c513bbc11840a96c9ee50d3308f4f3746f9fedc6ff094096bd4dc92505",
+        "geometry_recomputed": false
+      }
+    },
+    "rio-k64-lr1e-6": {
+      "issues": [],
+      "physical_comparable": true,
+      "heldout_matches_root": true,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ]
+    },
+    "rio-k256-lr1e-6": {
+      "issues": [],
+      "physical_comparable": true,
+      "heldout_matches_root": true,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ]
+    },
+    "rio-prefix-forward-legacy-lr1e-6": {
+      "issues": [],
+      "physical_comparable": true,
+      "heldout_matches_root": true,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ],
+      "replay_inner_audit": {
+        "complete": true,
+        "issues": [],
+        "outer_steps": 125,
+        "inner_steps": 2000,
+        "supervised_tokens": 1022000
+      }
+    },
+    "rio-prefix-reverse-legacy-lr1e-6": {
+      "issues": [],
+      "physical_comparable": true,
+      "heldout_matches_root": true,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ],
+      "replay_inner_audit": {
+        "complete": true,
+        "issues": [],
+        "outer_steps": 125,
+        "inner_steps": 2000,
+        "supervised_tokens": 1022000
+      }
+    },
+    "rio-fresh-matched-lr1e-6": {
+      "issues": [],
+      "physical_comparable": true,
+      "heldout_matches_root": true,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ],
+      "replay_inner_audit": {
+        "complete": true,
+        "issues": [],
+        "outer_steps": 125,
+        "inner_steps": 2000,
+        "supervised_tokens": 1022000
+      }
+    },
+    "rio-prefix-forward-matched-lr1e-6": {
+      "issues": [],
+      "physical_comparable": true,
+      "heldout_matches_root": true,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ],
+      "replay_inner_audit": {
+        "complete": true,
+        "issues": [],
+        "outer_steps": 125,
+        "inner_steps": 2000,
+        "supervised_tokens": 1022000
+      }
+    },
+    "rio-prefix-reverse-matched-lr1e-6": {
+      "issues": [],
+      "physical_comparable": true,
+      "heldout_matches_root": true,
+      "local_frames": [
+        0,
+        1,
+        8,
+        32,
+        128,
+        512,
+        1000
+      ],
+      "broad_frames": [
+        0,
+        128,
+        1000
+      ],
+      "replay_inner_audit": {
+        "complete": true,
+        "issues": [],
+        "outer_steps": 125,
+        "inner_steps": 2000,
+        "supervised_tokens": 1022000
+      }
+    },
+    "parity-pilot": {
+      "issues": [],
+      "verdict": "exact"
+    }
+  }
+}

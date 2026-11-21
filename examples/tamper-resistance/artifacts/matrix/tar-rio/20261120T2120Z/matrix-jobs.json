@@ -3954,7 +3954,10 @@
       "rio-k4-cuda-lr1e-6",
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json"
     ],
-    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-k4-cuda-lr1e-6-peer-v2-submit.log"
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-k4-cuda-lr1e-6-peer-v2-submit.log",
+    "superseded": true,
+    "supersession_reason": "Case-local source link missing; restore pointer to the same frozen source, retain completed geometry, retry only this failed branch.",
+    "superseded_by": "516531"
   },
   "profiles:rio-k64-lr1e-6:retry-v2": {
     "job_id": "516341",
@@ -3972,9 +3975,7 @@
     "host_memory": "256G",
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k64-lr1e-6/status/step-profiles.json",
-    "dependencies": [
-      "516332"
-    ],
+    "dependencies": [],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
       "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
@@ -4006,7 +4007,50 @@
       "rio-k64-lr1e-6"
     ],
     "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-k64-lr1e-6-retry-v2-submit.log",
-    "attempt": "retry-v2"
+    "attempt": "retry-v2",
+    "dependency_amendments": [
+      {
+        "reason": "Immutable geometry and complete checkpoint/minibatch losses published; overlap disjoint profile work. Final report retains full analysis.",
+        "readiness": {
+          "actual_rows": 37,
+          "matrix_shape": [
+            7,
+            128
+          ],
+          "settings_sha256": "400b48c78f485645e03017a53b3681e24abaeecc04e04c514a04dec9a7fff185",
+          "geometry_sha256": "38e192f03b1ee0640799d9d7fdcdcde18da0a3950aa6c60b42796407e1ab0bf2",
+          "bases": [
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/random-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213655003007
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213826399917
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k64-lr1e-6/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1795225526996126727
+            }
+          ],
+          "immutable_loss_sha256": {
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k64-lr1e-6/surfaces/actual-losses.csv": "fa45a859e5accbee66c8029f609cf946daed4655400ee0a3fcec340c1d82cf55",
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k64-lr1e-6/surfaces/minibatch-losses.npz": "007ef9c00c57be6180af20a027a6530b00cb26d14bca27a478c2a9c14e8486ff"
+          },
+          "case": "rio-k64-lr1e-6",
+          "profile_job": "516341",
+          "analysis_job": "516332",
+          "verified_epoch": 1795227512.0217555,
+          "before_dependencies": [
+            "516332"
+          ],
+          "applied": true
+        }
+      }
+    ]
   },
   "profiles:rio-k256-lr1e-6:retry-v2": {
     "job_id": "516342",
@@ -4024,9 +4068,7 @@
     "host_memory": "256G",
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k256-lr1e-6/status/step-profiles.json",
-    "dependencies": [
-      "516333"
-    ],
+    "dependencies": [],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
       "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
@@ -4058,7 +4100,50 @@
       "rio-k256-lr1e-6"
     ],
     "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-k256-lr1e-6-retry-v2-submit.log",
-    "attempt": "retry-v2"
+    "attempt": "retry-v2",
+    "dependency_amendments": [
+      {
+        "reason": "Immutable geometry and complete checkpoint/minibatch losses published; overlap disjoint profile work. Final report retains full analysis.",
+        "readiness": {
+          "actual_rows": 37,
+          "matrix_shape": [
+            7,
+            128
+          ],
+          "settings_sha256": "8b39542d3332265774ad24036b698c5426c5ee9f347e14082387c10725d84436",
+          "geometry_sha256": "ea680794af0313cb9f828e486541c38f044cae807b3d93691ddf7f0e2918a9f2",
+          "bases": [
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/random-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213655003007
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213826399917
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k256-lr1e-6/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1795226403060074757
+            }
+          ],
+          "immutable_loss_sha256": {
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k256-lr1e-6/surfaces/actual-losses.csv": "50113ab320a2ddd1ebde173f67ee7c3c0f6ceac4954204d9703049db83de8c1b",
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k256-lr1e-6/surfaces/minibatch-losses.npz": "1fc6060d2251a0490408ad02e1487a812a0f44df47d7bc6c80642b03944d8c6a"
+          },
+          "case": "rio-k256-lr1e-6",
+          "profile_job": "516342",
+          "analysis_job": "516333",
+          "verified_epoch": 1795227512.0794015,
+          "before_dependencies": [
+            "516333"
+          ],
+          "applied": true
+        }
+      }
+    ]
   },
   "profiles:rio-prefix-forward-legacy-lr1e-6:retry-v2": {
     "job_id": "516343",
@@ -4076,9 +4161,7 @@
     "host_memory": "256G",
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-legacy-lr1e-6/status/step-profiles.json",
-    "dependencies": [
-      "516334"
-    ],
+    "dependencies": [],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
       "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
@@ -4110,7 +4193,50 @@
       "rio-prefix-forward-legacy-lr1e-6"
     ],
     "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-prefix-forward-legacy-lr1e-6-retry-v2-submit.log",
-    "attempt": "retry-v2"
+    "attempt": "retry-v2",
+    "dependency_amendments": [
+      {
+        "reason": "Immutable geometry and complete checkpoint/minibatch losses published; overlap disjoint profile work. Final report retains full analysis.",
+        "readiness": {
+          "actual_rows": 37,
+          "matrix_shape": [
+            7,
+            128
+          ],
+          "settings_sha256": "7b0be9a7c052bcd315daf790a842af51b7d93ca4da1e6ecaa77f0aa0b1c9ab33",
+          "geometry_sha256": "02e228fd50f82615dddca6359d8e696237f5b02341648b748aeb1d5afde57009",
+          "bases": [
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/random-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213655003007
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213826399917
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-legacy-lr1e-6/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1795226604297489303
+            }
+          ],
+          "immutable_loss_sha256": {
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-legacy-lr1e-6/surfaces/actual-losses.csv": "6cb0000f828ba27820c88f22e3b6aa1c564547ec56c728e20b83720ba33599f2",
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-legacy-lr1e-6/surfaces/minibatch-losses.npz": "f6370bb4e798c310ac3717b61861a5f92f8041af1361ca96d26467308222ab57"
+          },
+          "case": "rio-prefix-forward-legacy-lr1e-6",
+          "profile_job": "516343",
+          "analysis_job": "516334",
+          "verified_epoch": 1795228610.5808382,
+          "before_dependencies": [
+            "516334"
+          ],
+          "applied": true
+        }
+      }
+    ]
   },
   "profiles:rio-prefix-reverse-legacy-lr1e-6:retry-v2": {
     "job_id": "516344",
@@ -4128,9 +4254,7 @@
     "host_memory": "256G",
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-legacy-lr1e-6/status/step-profiles.json",
-    "dependencies": [
-      "516335"
-    ],
+    "dependencies": [],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
       "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
@@ -4162,7 +4286,50 @@
       "rio-prefix-reverse-legacy-lr1e-6"
     ],
     "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-prefix-reverse-legacy-lr1e-6-retry-v2-submit.log",
-    "attempt": "retry-v2"
+    "attempt": "retry-v2",
+    "dependency_amendments": [
+      {
+        "reason": "Immutable geometry and complete checkpoint/minibatch losses published; overlap disjoint profile work. Final report retains full analysis.",
+        "readiness": {
+          "actual_rows": 37,
+          "matrix_shape": [
+            7,
+            128
+          ],
+          "settings_sha256": "19f7f4de6a6632d38ddf66b298d0dcab9cef999786c858dc32deca58cde1940a",
+          "geometry_sha256": "848756e3f0cd82f4009729a373120ce83b119d2a6b659ae46224c7832017c1e4",
+          "bases": [
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/random-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213655003007
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213826399917
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-legacy-lr1e-6/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1795226604419680169
+            }
+          ],
+          "immutable_loss_sha256": {
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-legacy-lr1e-6/surfaces/actual-losses.csv": "48aff86c1e667b6b2655f1611fbe58c33b92e23923558c4258847f3efa8f8b13",
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-legacy-lr1e-6/surfaces/minibatch-losses.npz": "bfb2466e9b42fe8959c516d566c2b5dc4b3a1b758d709a7c1eccfd4eec23fa65"
+          },
+          "case": "rio-prefix-reverse-legacy-lr1e-6",
+          "profile_job": "516344",
+          "analysis_job": "516335",
+          "verified_epoch": 1795228610.638624,
+          "before_dependencies": [
+            "516335"
+          ],
+          "applied": true
+        }
+      }
+    ]
   },
   "profiles:rio-fresh-matched-lr1e-6:retry-v2": {
     "job_id": "516345",
@@ -4180,9 +4347,7 @@
     "host_memory": "256G",
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-fresh-matched-lr1e-6/status/step-profiles.json",
-    "dependencies": [
-      "516336"
-    ],
+    "dependencies": [],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
       "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
@@ -4214,7 +4379,50 @@
       "rio-fresh-matched-lr1e-6"
     ],
     "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-fresh-matched-lr1e-6-retry-v2-submit.log",
-    "attempt": "retry-v2"
+    "attempt": "retry-v2",
+    "dependency_amendments": [
+      {
+        "reason": "Immutable geometry and complete checkpoint/minibatch losses published; overlap disjoint profile work. Final report retains full analysis.",
+        "readiness": {
+          "actual_rows": 37,
+          "matrix_shape": [
+            7,
+            128
+          ],
+          "settings_sha256": "29f7d5ab6649146fac55a46fdb224a525ecd40fba81417095b4e80022bb05195",
+          "geometry_sha256": "5de30ac9f300b09b0c20967c084b6c77e0531afc69b7e8acb3be8966e217485b",
+          "bases": [
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/random-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213655003007
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213826399917
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-fresh-matched-lr1e-6/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1795228942879070498
+            }
+          ],
+          "immutable_loss_sha256": {
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-fresh-matched-lr1e-6/surfaces/actual-losses.csv": "63e38213a59c4cb9c9fddead2291f9f5d7da35357be1b96ba64fc9401ccb007a",
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-fresh-matched-lr1e-6/surfaces/minibatch-losses.npz": "965e94e9fc1facc3381419c489db6be088039209e35175b7a0e598e2544f4f51"
+          },
+          "case": "rio-fresh-matched-lr1e-6",
+          "profile_job": "516345",
+          "analysis_job": "516336",
+          "verified_epoch": 1795230738.857239,
+          "before_dependencies": [
+            "516336"
+          ],
+          "applied": true
+        }
+      }
+    ]
   },
   "profiles:rio-prefix-forward-matched-lr1e-6:retry-v2": {
     "job_id": "516346",
@@ -4232,9 +4440,7 @@
     "host_memory": "256G",
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-matched-lr1e-6/status/step-profiles.json",
-    "dependencies": [
-      "516337"
-    ],
+    "dependencies": [],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
       "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
@@ -4266,7 +4472,50 @@
       "rio-prefix-forward-matched-lr1e-6"
     ],
     "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-prefix-forward-matched-lr1e-6-retry-v2-submit.log",
-    "attempt": "retry-v2"
+    "attempt": "retry-v2",
+    "dependency_amendments": [
+      {
+        "reason": "Immutable geometry and complete checkpoint/minibatch losses published; overlap disjoint profile work. Final report retains full analysis.",
+        "readiness": {
+          "actual_rows": 37,
+          "matrix_shape": [
+            7,
+            128
+          ],
+          "settings_sha256": "d911a61039b2dbdd21c3332791b62c1961931561744feddd7f77d04dffd976a9",
+          "geometry_sha256": "a9baa2409db21a98854052e259ce3214837548fc7c1ca239800d6549c1748443",
+          "bases": [
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/random-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213655003007
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213826399917
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-matched-lr1e-6/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1795230685615893942
+            }
+          ],
+          "immutable_loss_sha256": {
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-matched-lr1e-6/surfaces/actual-losses.csv": "7df5087fe7aab370a3d666ace63f8d29551c586f3d1fed4a737ee0dc38b66dfe",
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-matched-lr1e-6/surfaces/minibatch-losses.npz": "aeb7ea9e4664b0ff8d148a354285d42ece6919e57d647f6b7d3ea23112536a0f"
+          },
+          "case": "rio-prefix-forward-matched-lr1e-6",
+          "profile_job": "516346",
+          "analysis_job": "516337",
+          "verified_epoch": 1795231927.8373027,
+          "before_dependencies": [
+            "516337"
+          ],
+          "applied": true
+        }
+      }
+    ]
   },
   "profiles:rio-prefix-reverse-matched-lr1e-6:retry-v2": {
     "job_id": "516347",
@@ -4284,9 +4533,7 @@
     "host_memory": "256G",
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-matched-lr1e-6/status/step-profiles.json",
-    "dependencies": [
-      "516338"
-    ],
+    "dependencies": [],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
       "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
@@ -4318,7 +4565,50 @@
       "rio-prefix-reverse-matched-lr1e-6"
     ],
     "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-prefix-reverse-matched-lr1e-6-retry-v2-submit.log",
-    "attempt": "retry-v2"
+    "attempt": "retry-v2",
+    "dependency_amendments": [
+      {
+        "reason": "Immutable geometry and complete checkpoint/minibatch losses published; overlap disjoint profile work. Final report retains full analysis.",
+        "readiness": {
+          "actual_rows": 37,
+          "matrix_shape": [
+            7,
+            128
+          ],
+          "settings_sha256": "74d74de5524063db2ae3494c5fa97a3844ca20b283804bf46e102c193c58468f",
+          "geometry_sha256": "c59f468de1cb0e93b20438d63c9da609c53d0fabc53bcad55d3a64845337a633",
+          "bases": [
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/random-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213655003007
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213826399917
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-matched-lr1e-6/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1795230875883737107
+            }
+          ],
+          "immutable_loss_sha256": {
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-matched-lr1e-6/surfaces/actual-losses.csv": "cb43b52d5690de3f26f3a0c10e18f6207d843d8e8f2cd31adc3bc0c98b590248",
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-matched-lr1e-6/surfaces/minibatch-losses.npz": "70e9d18f2b40b3c0fcd9be8b666d06f7acf62353c9f70493e20f228630f5794a"
+          },
+          "case": "rio-prefix-reverse-matched-lr1e-6",
+          "profile_job": "516347",
+          "analysis_job": "516338",
+          "verified_epoch": 1795231927.9115207,
+          "before_dependencies": [
+            "516338"
+          ],
+          "applied": true
+        }
+      }
+    ]
   },
   "profiles:hparam-rio-lr1e-6:retry-v2": {
     "job_id": "516348",
@@ -4336,9 +4626,7 @@
     "host_memory": "256G",
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/status/step-profiles.json",
-    "dependencies": [
-      "516339"
-    ],
+    "dependencies": [],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
       "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
@@ -4370,7 +4658,50 @@
       "hparam-rio-lr1e-6"
     ],
     "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-hparam-rio-lr1e-6-retry-v2-submit.log",
-    "attempt": "retry-v2"
+    "attempt": "retry-v2",
+    "dependency_amendments": [
+      {
+        "reason": "Immutable geometry and complete checkpoint/minibatch losses published; overlap disjoint profile work. Final report retains full analysis.",
+        "readiness": {
+          "actual_rows": 37,
+          "matrix_shape": [
+            7,
+            128
+          ],
+          "settings_sha256": "57260732ced93a43ffc678dd1202339ef94bea4197a180c8f8cf984cdd466429",
+          "geometry_sha256": "e4d81216863c1bf45196a5046af6c2e44e913a0630f83811aba967eb1aaf0fc9",
+          "bases": [
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/random-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213655003007
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213826399917
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-lr1e-6/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794885295772519564
+            }
+          ],
+          "immutable_loss_sha256": {
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/surfaces/actual-losses.csv": "aa780b3cbefb56109059a3b10f19f1e4f8874e61bcfca52d4796eee9dabb246f",
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/surfaces/minibatch-losses.npz": "13e1a94d4f03e81ab075de57d3bfdec208c84a57a69027018345e8fa5736d506"
+          },
+          "case": "hparam-rio-lr1e-6",
+          "profile_job": "516348",
+          "analysis_job": "516339",
+          "verified_epoch": 1795231927.9893796,
+          "before_dependencies": [
+            "516339"
+          ],
+          "applied": true
+        }
+      }
+    ]
   },
   "profiles:rio-k4-cuda-lr1e-6:retry-v2": {
     "job_id": "516349",
@@ -4422,7 +4753,10 @@
       "rio-k4-cuda-lr1e-6"
     ],
     "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-k4-cuda-lr1e-6-retry-v2-submit.log",
-    "attempt": "retry-v2"
+    "attempt": "retry-v2",
+    "superseded": true,
+    "supersession_reason": "Case-local source link missing; restore pointer to the same frozen source, retain completed geometry, retry only this failed branch.",
+    "superseded_by": "516532"
   },
   "report:final:retry-v2": {
     "job_id": "516351",
@@ -4491,6 +4825,259 @@
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z"
     ],
     "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/report-final-retry-v2-submit.log",
-    "attempt": "retry-v2"
+    "attempt": "retry-v2",
+    "superseded": true,
+    "supersession_reason": "Case-local source link missing; restore pointer to the same frozen source, retain completed geometry, retry only this failed branch.",
+    "superseded_by": "516534"
+  },
+  "analysis:rio-k4-cuda-lr1e-6:peer-v3": {
+    "job_id": "516531",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis-peer",
+    "case": "rio-k4-cuda-lr1e-6",
+    "attempt": "peer-v3",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control",
+    "minutes": 360,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/status/analysis.json",
+    "peer_status_pattern": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/status/analysis-peer-<job_id>.json",
+    "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+    "pilot_result_sha256": "130a97f7d32562aefc824486e83c86f7d50170accfcd15c2e70fffff83e5c653",
+    "pilot_state": "complete",
+    "dependencies": [],
+    "dependency_mode": "afterok",
+    "old_parent_job_ids": [],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-rio-k4-cuda-lr1e-6-peer-v3",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--gpus_per_task=2",
+      "--cpus_per_task=56",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-rio-k4-cuda-lr1e-6-peer-v3",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control",
+      "rio-k4-cuda-lr1e-6",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-k4-cuda-lr1e-6-peer-v3-submit.log"
+  },
+  "profiles:rio-k4-cuda-lr1e-6:retry-v3": {
+    "job_id": "516532",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "profiles",
+    "case": "rio-k4-cuda-lr1e-6",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control",
+    "minutes": 180,
+    "gpus": 1,
+    "evaluation_processes": null,
+    "cpus": 28,
+    "host_memory": "256G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/status/step-profiles.json",
+    "dependencies": [],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-profiles-rio-k4-cuda-lr1e-6-retry-v3",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=1",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=180",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=profiles-rio-k4-cuda-lr1e-6-retry-v3",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516531",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/entry.sh",
+      "profiles",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control",
+      "rio-k4-cuda-lr1e-6"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-k4-cuda-lr1e-6-retry-v3-submit.log",
+    "attempt": "retry-v3",
+    "dependency_amendments": [
+      {
+        "reason": "Immutable geometry and complete checkpoint/minibatch losses published; overlap disjoint profile work. Final report retains full analysis.",
+        "readiness": {
+          "actual_rows": 37,
+          "matrix_shape": [
+            7,
+            128
+          ],
+          "settings_sha256": "aa1d302d4b67068ee4547a06a99a96c8f439b1452d935f7daa837dcfbfd3462f",
+          "geometry_sha256": "c59e7e9dae32bb7c0585ab690143bfefb929ba4f74631d38de4ee00ceedd26f4",
+          "bases": [
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/random-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213655003007
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1794287213826399917
+            },
+            {
+              "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/geometry/attack-basis.npy",
+              "bytes": 57933856896,
+              "mtime_ns": 1795232316111799413
+            }
+          ],
+          "immutable_loss_sha256": {
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/surfaces/actual-losses.csv": "b8e939ca440b8d8b4bad354c8be5c0a008d6b53896dbb39b600488565bfd8af9",
+            "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/surfaces/minibatch-losses.npz": "a36e21c6b18a7ed6b5434d167c006d09585f970dd70ff45cb56f10f625349acb"
+          },
+          "case": "rio-k4-cuda-lr1e-6",
+          "profile_job": "516532",
+          "analysis_job": "516531",
+          "verified_epoch": 1795235435.058007,
+          "before_dependencies": [
+            "516531"
+          ],
+          "applied": true
+        }
+      }
+    ]
+  },
+  "report:final:retry-v3": {
+    "job_id": "516534",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "report",
+    "case": "final",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 120,
+    "gpus": 1,
+    "evaluation_processes": null,
+    "cpus": 28,
+    "host_memory": "256G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/report-matrix-references.json",
+    "dependencies": [
+      "516337",
+      "516338",
+      "516339",
+      "516344",
+      "516345",
+      "516346",
+      "516347",
+      "516348",
+      "516531",
+      "516532"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-report-final-retry-v3",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=1",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=120",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=report-final-retry-v3",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516337:516338:516339:516344:516345:516346:516347:516348:516531:516532",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/report-matrix/run_report.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/report-final-retry-v3-submit.log",
+    "attempt": "retry-v3",
+    "superseded": true,
+    "supersession_reason": "All numerical phases complete. Report blocked on irrelevant output-path/CPU-anchor settings in reused geometry fingerprints; reconcile via isolated, tested report adapter, preserving original protocol and all scientific validation.",
+    "superseded_by": "516680"
+  },
+  "report:final:retry-v4": {
+    "job_id": "516680",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "report",
+    "case": "final",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 120,
+    "gpus": 1,
+    "cpus": 28,
+    "host_memory": "256G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/report-matrix-references.json",
+    "dependencies": [],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/report-final-retry-v4-submit.log",
+    "worker": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/report-matrix-v2/run_report.sh",
+    "method_amendment": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/report-matrix-v2/method-amendment.json"
+  },
+  "render:compact-titles": {
+    "job_id": "516682",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "render",
+    "case": "compact-titles",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 30,
+    "gpus": 1,
+    "cpus": 28,
+    "host_memory": "128G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/plot-rendering-validation.json",
+    "dependencies": [],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/compact-titles-submit.log",
+    "worker": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/report-matrix-v2/run_cached_plots.sh"
   }
 }

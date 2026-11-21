@@ -1,0 +1,77 @@
+{
+  "state": "complete",
+  "cases": [
+    {
+      "case": "rio-k64-lr1e-6",
+      "state": "complete",
+      "immutable_loss_sha256": {
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k64-lr1e-6/surfaces/actual-losses.csv": "fa45a859e5accbee66c8029f609cf946daed4655400ee0a3fcec340c1d82cf55",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k64-lr1e-6/surfaces/minibatch-losses.npz": "007ef9c00c57be6180af20a027a6530b00cb26d14bca27a478c2a9c14e8486ff"
+      }
+    },
+    {
+      "case": "rio-k256-lr1e-6",
+      "state": "complete",
+      "immutable_loss_sha256": {
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k256-lr1e-6/surfaces/actual-losses.csv": "50113ab320a2ddd1ebde173f67ee7c3c0f6ceac4954204d9703049db83de8c1b",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k256-lr1e-6/surfaces/minibatch-losses.npz": "1fc6060d2251a0490408ad02e1487a812a0f44df47d7bc6c80642b03944d8c6a"
+      }
+    },
+    {
+      "case": "rio-prefix-forward-legacy-lr1e-6",
+      "state": "complete",
+      "immutable_loss_sha256": {
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-legacy-lr1e-6/surfaces/actual-losses.csv": "6cb0000f828ba27820c88f22e3b6aa1c564547ec56c728e20b83720ba33599f2",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-legacy-lr1e-6/surfaces/minibatch-losses.npz": "f6370bb4e798c310ac3717b61861a5f92f8041af1361ca96d26467308222ab57"
+      }
+    },
+    {
+      "case": "rio-prefix-reverse-legacy-lr1e-6",
+      "state": "complete",
+      "immutable_loss_sha256": {
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-legacy-lr1e-6/surfaces/actual-losses.csv": "48aff86c1e667b6b2655f1611fbe58c33b92e23923558c4258847f3efa8f8b13",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-legacy-lr1e-6/surfaces/minibatch-losses.npz": "bfb2466e9b42fe8959c516d566c2b5dc4b3a1b758d709a7c1eccfd4eec23fa65"
+      }
+    },
+    {
+      "case": "rio-fresh-matched-lr1e-6",
+      "state": "complete",
+      "immutable_loss_sha256": {
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-fresh-matched-lr1e-6/surfaces/actual-losses.csv": "63e38213a59c4cb9c9fddead2291f9f5d7da35357be1b96ba64fc9401ccb007a",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-fresh-matched-lr1e-6/surfaces/minibatch-losses.npz": "965e94e9fc1facc3381419c489db6be088039209e35175b7a0e598e2544f4f51"
+      }
+    },
+    {
+      "case": "rio-prefix-forward-matched-lr1e-6",
+      "state": "complete",
+      "immutable_loss_sha256": {
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-matched-lr1e-6/surfaces/actual-losses.csv": "7df5087fe7aab370a3d666ace63f8d29551c586f3d1fed4a737ee0dc38b66dfe",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-matched-lr1e-6/surfaces/minibatch-losses.npz": "aeb7ea9e4664b0ff8d148a354285d42ece6919e57d647f6b7d3ea23112536a0f"
+      }
+    },
+    {
+      "case": "rio-prefix-reverse-matched-lr1e-6",
+      "state": "complete",
+      "immutable_loss_sha256": {
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-matched-lr1e-6/surfaces/actual-losses.csv": "cb43b52d5690de3f26f3a0c10e18f6207d843d8e8f2cd31adc3bc0c98b590248",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-matched-lr1e-6/surfaces/minibatch-losses.npz": "70e9d18f2b40b3c0fcd9be8b666d06f7acf62353c9f70493e20f228630f5794a"
+      }
+    },
+    {
+      "case": "hparam-rio-lr1e-6",
+      "state": "complete",
+      "immutable_loss_sha256": {
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/surfaces/actual-losses.csv": "aa780b3cbefb56109059a3b10f19f1e4f8874e61bcfca52d4796eee9dabb246f",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/surfaces/minibatch-losses.npz": "13e1a94d4f03e81ab075de57d3bfdec208c84a57a69027018345e8fa5736d506"
+      }
+    },
+    {
+      "case": "rio-k4-cuda-lr1e-6",
+      "state": "complete",
+      "immutable_loss_sha256": {
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/surfaces/actual-losses.csv": "b8e939ca440b8d8b4bad354c8be5c0a008d6b53896dbb39b600488565bfd8af9",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/surfaces/minibatch-losses.npz": "a36e21c6b18a7ed6b5434d167c006d09585f970dd70ff45cb56f10f625349acb"
+      }
+    }
+  ]
+}

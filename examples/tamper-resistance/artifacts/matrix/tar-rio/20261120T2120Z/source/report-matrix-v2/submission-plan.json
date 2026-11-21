@@ -1,0 +1,20 @@
+{
+  "job_id": "516680",
+  "backend": "slurm",
+  "cluster": "matrix",
+  "partition": "pbatch",
+  "account": "verival",
+  "phase": "report",
+  "case": "final",
+  "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+  "minutes": 120,
+  "gpus": 1,
+  "cpus": 28,
+  "host_memory": "256G",
+  "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+  "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/report-matrix-references.json",
+  "dependencies": [],
+  "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/report-final-retry-v4-submit.log",
+  "worker": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/report-matrix-v2/run_report.sh",
+  "method_amendment": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/report-matrix-v2/method-amendment.json"
+}

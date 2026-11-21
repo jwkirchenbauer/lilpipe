@@ -1,5 +1,11 @@
 # RIO: simulation depth and attacker matching
 
+Completed on Matrix on 2026-11-21 UTC. The strict report has complete coverage:
+[results and key figures](/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/report.md).
+All four K conditions miss the initial MMLU utility gate; the paired training
+backend control also shows material score variation. These limits are recorded
+with the measurements in the final report.
+
 This follows the [hyperparameter study](TAR_HPARAM_STUDY.md),
 [cleanroom study](TAR_CLEANROOM_STUDY.md), and
 [inner-versus-actual attack analysis](TAR_INNER_BASIS_STUDY.md).

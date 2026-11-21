@@ -1,0 +1,55 @@
+{
+  "settings_sha256": "7b0be9a7c052bcd315daf790a842af51b7d93ca4da1e6ecaa77f0aa0b1c9ab33",
+  "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+  "pilot_result_sha256": "130a97f7d32562aefc824486e83c86f7d50170accfcd15c2e70fffff83e5c653",
+  "runtime_source_sha256": {
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/misc/tar_dynamics.py": "74a8cd7a1d142bb0c9b44f2935a120e45a3be32485a0144ffcc94d09d0b4d97e",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/misc/tar_dynamics.py": "cde0537a6aed607934c9b72b295cccb65a5bb65d8685c1cedfd4a99a84eda3d2",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/misc/trace_runner.py": "28a679f2ade245644b3ce3a2cc071633dbf5be07824bc06c8a1bf76809c4d4e1",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh": "62e4cd65561c162b91221d3ea2b75461fa4d170ba607c6334db3ace9804d0945",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/matrix_env.sh": "6832f5aee80d5a19b47b7e8ffab119f314b6cd4eebc1f6d3becce742fb4a0608",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/runtime.py": "f6e7b56f9485a5b58fcd38895d85fe61c2d0ff341d05cbdb14fdb1d7c7cc2bfc"
+  },
+  "runtime": {
+    "host": "matrix30",
+    "python": "3.12.16 (main, Oct 26 2026, 11:37:43) [GCC 15.3.0]",
+    "python_executable": "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+    "environment": {
+      "SLURM_CLUSTER_NAME": "matrix",
+      "SLURM_JOB_ID": "516334",
+      "SLURM_STEP_ID": "0",
+      "SLURM_NTASKS": "1",
+      "SLURM_CPUS_PER_TASK": "56",
+      "TAR_GPU_ASSIGNMENT_MODE": "slurm_step_gpus",
+      "CONDA_PREFIX": "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "TAR_RUNTIME_BACKEND": "matrix",
+      "TAR_LANDSCAPE_PEER": "1",
+      "HF_HOME": "/p/vast1/kirchenb/tar-root/cache/huggingface",
+      "HF_HUB_OFFLINE": "1",
+      "HF_DATASETS_OFFLINE": "1",
+      "TRANSFORMERS_OFFLINE": "1",
+      "TORCH_BLAS_PREFER_CUBLASLT": "0",
+      "TORCHAO_FORCE_SKIP_LOADING_SO_FILES": "1",
+      "TOKENIZERS_PARALLELISM": "false",
+      "OMP_NUM_THREADS": "8",
+      "PYTHONUNBUFFERED": "1",
+      "MPLBACKEND": "Agg",
+      "NVIDIA_TF32_OVERRIDE": "0",
+      "SLURM_STEP_GPUS": "0,1",
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "TAR_SLURM_INHERITED_CUDA_VISIBLE_DEVICES": "0,1"
+    },
+    "cuda_device_order": null,
+    "torch": "2.12.1+cu126",
+    "cuda": "12.6",
+    "hip": null,
+    "matmul_allow_tf32": false,
+    "cudnn_allow_tf32": false,
+    "devices": [
+      "_CudaDeviceProperties(name='NVIDIA H100 80GB HBM3', major=9, minor=0, total_memory=81123MB, multi_processor_count=132, uuid=98752197-1879-41e0-90af-35b1ba2ac69c, pci_bus_id=76, pci_device_id=0, pci_domain_id=0, L2_cache_size=50MB)",
+      "_CudaDeviceProperties(name='NVIDIA H100 80GB HBM3', major=9, minor=0, total_memory=81123MB, multi_processor_count=132, uuid=7edac8f2-a0ee-3cd6-1009-9525309996b7, pci_bus_id=93, pci_device_id=0, pci_domain_id=0, L2_cache_size=50MB)"
+    ],
+    "peer_access_0_to_1": true,
+    "peer_access_1_to_0": true
+  }
+}

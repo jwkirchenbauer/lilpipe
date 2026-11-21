@@ -1,0 +1,171 @@
+{
+  "new_gate": "516314",
+  "old_gate": "516227",
+  "old_worker": "516068",
+  "updates": [
+    {
+      "key": "analysis:hparam-rio-lr1e-6",
+      "job_id": "516151",
+      "before": [
+        "516227"
+      ],
+      "after": [
+        "516314"
+      ],
+      "completed_markers_verified": []
+    },
+    {
+      "key": "analysis:rio-k64-lr1e-6",
+      "job_id": "516154",
+      "before": [
+        "516227"
+      ],
+      "after": [
+        "516314"
+      ],
+      "completed_markers_verified": []
+    },
+    {
+      "key": "analysis:rio-prefix-forward-legacy-lr1e-6",
+      "job_id": "516155",
+      "before": [
+        "516227"
+      ],
+      "after": [
+        "516314"
+      ],
+      "completed_markers_verified": []
+    },
+    {
+      "key": "analysis:rio-prefix-reverse-legacy-lr1e-6",
+      "job_id": "516156",
+      "before": [
+        "516227"
+      ],
+      "after": [
+        "516314"
+      ],
+      "completed_markers_verified": []
+    },
+    {
+      "key": "analysis:rio-fresh-matched-lr1e-6",
+      "job_id": "516157",
+      "before": [
+        "516227"
+      ],
+      "after": [
+        "516314"
+      ],
+      "completed_markers_verified": []
+    },
+    {
+      "key": "analysis:rio-prefix-forward-matched-lr1e-6",
+      "job_id": "516158",
+      "before": [
+        "516227"
+      ],
+      "after": [
+        "516314"
+      ],
+      "completed_markers_verified": []
+    },
+    {
+      "key": "analysis:rio-prefix-reverse-matched-lr1e-6",
+      "job_id": "516159",
+      "before": [
+        "516227"
+      ],
+      "after": [
+        "516314"
+      ],
+      "completed_markers_verified": []
+    },
+    {
+      "key": "analysis:rio-k256-lr1e-6",
+      "job_id": "516160",
+      "before": [
+        "516227",
+        "516136"
+      ],
+      "after": [
+        "516314",
+        "516136"
+      ],
+      "completed_markers_verified": []
+    },
+    {
+      "key": "analysis:rio-k4-cuda-lr1e-6",
+      "job_id": "516192",
+      "before": [
+        "516227"
+      ],
+      "after": [
+        "516314"
+      ],
+      "completed_markers_verified": []
+    },
+    {
+      "key": "report:final",
+      "job_id": "516219",
+      "before": [
+        "516227",
+        "516131",
+        "516136",
+        "516146",
+        "516150",
+        "516151",
+        "516154",
+        "516155",
+        "516156",
+        "516157",
+        "516158",
+        "516159",
+        "516160",
+        "516161",
+        "516165",
+        "516166",
+        "516167",
+        "516168",
+        "516169",
+        "516170",
+        "516171",
+        "516191",
+        "516192",
+        "516197"
+      ],
+      "after": [
+        "516314",
+        "516136",
+        "516146",
+        "516151",
+        "516154",
+        "516155",
+        "516156",
+        "516157",
+        "516158",
+        "516159",
+        "516160",
+        "516161",
+        "516165",
+        "516166",
+        "516167",
+        "516168",
+        "516169",
+        "516170",
+        "516171",
+        "516192",
+        "516197"
+      ],
+      "completed_markers_verified": [
+        "516131",
+        "516150",
+        "516191"
+      ]
+    }
+  ],
+  "state": "complete",
+  "canceled": [
+    "516227",
+    "516068"
+  ]
+}

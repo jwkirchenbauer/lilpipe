@@ -16,6 +16,31 @@ SPEC.loader.exec_module(submit_peer)
 
 
 class SubmitPeerTests(unittest.TestCase):
+    def test_validate_case_requires_case_local_reference_helper(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            run = Path(temporary)
+            folder = run / "cases" / "rio-k16"
+            for name in (
+                "status",
+                "logs",
+                "cache",
+                "models",
+                "geometry",
+                "surfaces",
+                "source/misc",
+            ):
+                (folder / name).mkdir(parents=True, exist_ok=True)
+            (folder / "study.json").write_text("{}\n")
+            (folder / "case.json").write_text("{}\n")
+            (folder / "status/train.json").write_text('{"state":"complete"}\n')
+
+            with self.assertRaisesRegex(ValueError, "case-local analysis helper"):
+                submit_peer.validate_case(run, "rio-k16")
+
+            helper = folder / "source/misc/reference_get_ll.py"
+            helper.write_text("# prepared helper\n")
+            self.assertEqual(submit_peer.validate_case(run, "rio-k16"), folder)
+
     def test_command_has_fixed_matrix_resources_and_peer_target(self):
         run = Path("/tmp/matrix-run")
         pilot = Path("/tmp/pilot/result.json")
@@ -60,6 +85,8 @@ class SubmitPeerTests(unittest.TestCase):
                 (folder / name).mkdir(parents=True, exist_ok=True)
             (folder / "study.json").write_text("{}\n")
             (folder / "case.json").write_text("{}\n")
+            (folder / "source/misc").mkdir(parents=True)
+            (folder / "source/misc/reference_get_ll.py").write_text("# helper\n")
             (folder / "status" / "train.json").write_text('{"state":"complete"}\n')
             pilot = root / "pilot.json"
             pilot.write_text('{"state":"complete","gates":{"accuracy":true}}\n')

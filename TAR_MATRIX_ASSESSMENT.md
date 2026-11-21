@@ -1,13 +1,18 @@
 # Matrix assessment, 2026-11-20
 
-Matrix is now running production evaluation and landscape work for the
-[RIO study](TAR_RIO_K_AND_FIDELITY.md). Following user authorization and a
-successful training pilot, K256 training has also moved there. Its defense and
-1000-step attack are complete and validated. All requests use `pbatch/verival`.
-The detached monitor on `tuolumne1004` polls both clusters every 900 seconds.
-The active run is
+The [RIO study](TAR_RIO_K_AND_FIDELITY.md) finished on Matrix on 2026-11-21 UTC.
+All 43 required phases completed, including the migrated K256 training,
+paired CUDA K4 control, evaluations, landscapes and profiles. The strict final
+report passed. All production requests used `pbatch/verival`. The detached
+15-minute monitor was stopped after completion. Results are under
 `/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z`;
-its `matrix-jobs.json` and `cancellations.json` record replacements.
+its [report](/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/report.md),
+`matrix-jobs.json` and `cancellations.json` record outcomes and replacements.
+
+The full paired K4 control shows training-backend score variation up to 5.76
+percentage points in WMDP and 2.98 in MMLU, with both models evaluated on CUDA.
+This is material uncertainty for the mixed-backend K256 comparison; a short
+numerical pilot alone does not bound accumulated training differences.
 
 Using `ssh matrix` and the documented Matrix launcher, the CUDA/BF16 probe
 passed on an H100. Its measured queue wait was one second. The four-Slurm-process
@@ -132,9 +137,10 @@ refused an inconsistent one-GPU assignment before loading a model, canceling
 its dependent allocations. Completed rows were preserved. An explicit
 `--gpus_per_task=2` binding probe then passed on both assigned H100s. The
 final mask-preserving worker passed its repeat pilot516325 with identical
-losses and tested parameter bytes, and **6.18x** point throughput. Ten
-replacement analyses are queued, with K4's full validation gating the other
-nine. Profiles and the strict report are queued behind those analyses.
+losses and tested parameter bytes, and **6.18x** point throughput. All ten
+replacement analyses, profiles and the strict report subsequently completed.
+Profiles overlapped grids only after complete immutable inputs were verified;
+their recorded loss-file hashes remained unchanged.
 Workers retain Slurm's CUDA visibility: global GPU IDs can differ from local
 CUDA indices, and some nodes supply isolation through cgroups without GPU
 environment variables. They verify exactly two distinct H100s before work.

@@ -1,0 +1,11 @@
+{
+  "reason": "Saved geometry hashes include two settings unused by geometry computation; compare their saved values only for the original geometry validation, preserving current fresh scores and all original provenance.",
+  "allowed_geometry_irrelevant_fields": [
+    "capability_scores_file",
+    "cpu_landscape_anchor"
+  ],
+  "frozen_geometry_source_sha256": "74a8cd7a1d142bb0c9b44f2935a120e45a3be32485a0144ffcc94d09d0b4d97e",
+  "geometry_function_does_not_read_ignored_keys": true,
+  "original_progress_files_unchanged": true,
+  "numerical_work_not_repeated": true
+}

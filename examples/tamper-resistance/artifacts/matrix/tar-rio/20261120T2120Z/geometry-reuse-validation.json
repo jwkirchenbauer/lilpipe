@@ -1,0 +1,54 @@
+{
+  "state": "complete",
+  "cases": {
+    "rio-k16": {
+      "state": "cached_geometry_reused_with_operational_settings_projection",
+      "changed_fields": [
+        "capability_scores_file",
+        "cpu_landscape_anchor"
+      ],
+      "saved_protocol_values": {
+        "capability_scores_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-lr1e-6/evaluation-scores.csv",
+        "cpu_landscape_anchor": {
+          "__absent__": true
+        }
+      },
+      "current_study_values": {
+        "capability_scores_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/evaluation-scores.csv",
+        "cpu_landscape_anchor": true
+      },
+      "saved_protocol_identity": "464b5b423c5683b796d30c96656caebde9d7ad1e434aa93ec123ac0c3e178c6e",
+      "geometry_recomputed": false
+    },
+    "rio-k4-lr1e-6": {
+      "state": "cached_geometry_reused_with_operational_settings_projection",
+      "changed_fields": [
+        "capability_scores_file",
+        "cpu_landscape_anchor"
+      ],
+      "saved_protocol_values": {
+        "capability_scores_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/cases/rio-k4-lr1e-6/evaluation-scores.csv",
+        "cpu_landscape_anchor": {
+          "__absent__": true
+        }
+      },
+      "current_study_values": {
+        "capability_scores_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k4-lr1e-6/evaluation-scores.csv",
+        "cpu_landscape_anchor": true
+      },
+      "saved_protocol_identity": "695a89c513bbc11840a96c9ee50d3308f4f3746f9fedc6ff094096bd4dc92505",
+      "geometry_recomputed": false
+    }
+  },
+  "original_geometry_files_unchanged": true,
+  "geometry_file_sha256": {
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k4-lr1e-6/geometry/geometry.json": "d2f5dbebbdaa2547ebba6a4bfa91246bded67f455c397bf7a8eb0ac1cf199e2a",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k4-lr1e-6/geometry/progress-protocol.json": "a8cd13068fb29fee7f19df605cf414a06c0531cffd3170e4caf28a12f486ea68",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k4-lr1e-6/geometry/gram-progress.json": "e07b183bfe5fa3c4e76be319eecd1b2e16af6e124d29b3efb36a831a0d7216b3",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k4-lr1e-6/geometry/basis-progress.json": "37649b3b943262349808c64bb0cb01769daa3443d5b278e799e1f1a877926cd9",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/geometry/geometry.json": "e4d81216863c1bf45196a5046af6c2e44e913a0630f83811aba967eb1aaf0fc9",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/geometry/progress-protocol.json": "e3441474be818712d4bb1ff690f0df1df93f65daef8629572a7326fbec75d253",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/geometry/gram-progress.json": "6586a719a5a0cb889de3ac7a2fee251740741332d710a4cdfb6e5c9b15d1ea2f",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/geometry/basis-progress.json": "1c294179392d9c9430e33dab784c49cf295ab01a5727d74b40bc1384654d29dc"
+  }
+}

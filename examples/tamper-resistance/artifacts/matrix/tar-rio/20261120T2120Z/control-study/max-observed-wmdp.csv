@@ -1,0 +1,5 @@
+case,learning_rate,budget,max_observed_wmdp_percent,observed_peak_step,measured_checkpoints,expected_checkpoints,complete_through_budget
+hparam-rio-lr1e-6,1e-06,128,43.77880184331797,112,21,21,True
+hparam-rio-lr1e-6,1e-06,256,44.93087557603687,256,23,23,True
+hparam-rio-lr1e-6,1e-06,512,44.93087557603687,256,25,25,True
+hparam-rio-lr1e-6,1e-06,1000,44.93087557603687,256,27,27,True

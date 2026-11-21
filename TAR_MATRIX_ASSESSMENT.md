@@ -2,8 +2,8 @@
 
 Matrix is now running production evaluation and landscape work for the
 [RIO study](TAR_RIO_K_AND_FIDELITY.md). Following user authorization and a
-successful training pilot, the unfinished K256 defense and attack have also
-been submitted there. All requests use `pbatch/verival`.
+successful training pilot, K256 training has also moved there. Its defense and
+1000-step attack are complete and validated. All requests use `pbatch/verival`.
 The detached monitor on `tuolumne1004` polls both clusters every 900 seconds.
 The active run is
 `/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z`;
@@ -89,8 +89,9 @@ Initial weights were bitwise equal and outer batches/rates matched exactly.
 The K4 update cosine was **0.9931**, relative update error **0.1174**, and maximum
 loss difference **0.04494 nats**, within the predeclared migration limits.
 This establishes approximate agreement over a short prefix. A full K4 CUDA
-defense and standard attack are submitted as a separate backend control to
-measure accumulated drift.
+defense and standard attack have also completed as a separate backend control
+to measure accumulated drift. Their benchmarks are complete; the final paired
+comparison will include the landscape and profile checks.
 
 The K256 update took 31.1 seconds, suggesting roughly 65 minutes for 125 updates
 before checkpoint I/O. Its production defense requests three hours. The old
@@ -121,10 +122,24 @@ Its archived ROCm comparison is a separate diagnostic. This check applies
 after checkpoint reload and to the matched implementation, while the main
 K conditions retain their declared legacy simulator.
 
-Both full four-GPU production defenses are now advancing. The optional
-two-H100 placement pilot remains prepared and unrun; the validated production
-placement stays in use. Slurm's earlier forecasts were more pessimistic than
-the eventual starts, so forecast queue times should remain provisional.
+Both full four-GPU production defenses are complete. The optional two-H100
+training placement pilot remains prepared and unrun; production retains its
+validated placement. A separate two-H100 landscape pilot passed with identical
+losses at nine coordinates, identical perturbed parameter bytes at the tested
+coordinate, and **6.28x** synchronized point throughput. That is a grid timing,
+not a measurement of whole-analysis speedup. The first production allocation
+refused an inconsistent one-GPU assignment before loading a model, canceling
+its dependent allocations. Completed rows were preserved. An explicit
+`--gpus_per_task=2` binding probe then passed on both assigned H100s. The
+final mask-preserving worker passed its repeat pilot516325 with identical
+losses and tested parameter bytes, and **6.18x** point throughput. Ten
+replacement analyses are queued, with K4's full validation gating the other
+nine. Profiles and the strict report are queued behind those analyses.
+Workers retain Slurm's CUDA visibility: global GPU IDs can differ from local
+CUDA indices, and some nodes supply isolation through cgroups without GPU
+environment variables. They verify exactly two distinct H100s before work.
+Slurm's earlier forecasts were more pessimistic than the eventual starts,
+so forecast queue times should remain provisional.
 
 Runtime manifests:
 `/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/runtime/matrix`.

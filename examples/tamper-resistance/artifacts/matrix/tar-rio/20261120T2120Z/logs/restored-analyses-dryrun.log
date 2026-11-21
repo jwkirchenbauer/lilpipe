@@ -1,0 +1,27 @@
+rio-k64-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516329 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/analysis-rio-k64-lr1e-6-peer-v2/launch-6n9x75yp/launch.sh
+Dry run. Scripts are in /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/analysis-rio-k64-lr1e-6-peer-v2/launch-6n9x75yp
+rio-k256-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516329 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/analysis-rio-k256-lr1e-6-peer-v2/launch-7saal318/launch.sh
+Dry run. Scripts are in /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/analysis-rio-k256-lr1e-6-peer-v2/launch-7saal318
+rio-prefix-forward-legacy-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516329 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/analysis-rio-prefix-forward-legacy-lr1e-6-peer-v2/launch-0mnat9ms/launch.sh
+Dry run. Scripts are in /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/analysis-rio-prefix-forward-legacy-lr1e-6-peer-v2/launch-0mnat9ms
+rio-prefix-reverse-legacy-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516329 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/analysis-rio-prefix-reverse-legacy-lr1e-6-peer-v2/launch-l1_t0cnk/launch.sh
+Dry run. Scripts are in /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/analysis-rio-prefix-reverse-legacy-lr1e-6-peer-v2/launch-l1_t0cnk
+rio-fresh-matched-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516329 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/analysis-rio-fresh-matched-lr1e-6-peer-v2/launch-7g6bryqc/launch.sh
+Dry run. Scripts are in /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/analysis-rio-fresh-matched-lr1e-6-peer-v2/launch-7g6bryqc
+rio-prefix-forward-matched-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516329 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/analysis-rio-prefix-forward-matched-lr1e-6-peer-v2/launch-jzcmsxj9/launch.sh
+Dry run. Scripts are in /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/analysis-rio-prefix-forward-matched-lr1e-6-peer-v2/launch-jzcmsxj9
+rio-prefix-reverse-matched-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516329 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/analysis-rio-prefix-reverse-matched-lr1e-6-peer-v2/launch-fw_uv2qd/launch.sh
+Dry run. Scripts are in /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/analysis-rio-prefix-reverse-matched-lr1e-6-peer-v2/launch-fw_uv2qd
+hparam-rio-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516329 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/analysis-hparam-rio-lr1e-6-peer-v2/launch-4c3b9xp0/launch.sh
+Dry run. Scripts are in /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/analysis-hparam-rio-lr1e-6-peer-v2/launch-4c3b9xp0
+rio-k4-cuda-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516329 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/analysis-rio-k4-cuda-lr1e-6-peer-v2/launch-5uebblei/launch.sh
+Dry run. Scripts are in /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/analysis-rio-k4-cuda-lr1e-6-peer-v2/launch-5uebblei

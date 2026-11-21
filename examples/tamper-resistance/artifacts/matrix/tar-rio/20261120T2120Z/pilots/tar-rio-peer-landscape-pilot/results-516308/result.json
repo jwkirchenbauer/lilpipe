@@ -1,0 +1,310 @@
+{
+  "state": "complete",
+  "gates": {
+    "all_nine_pairs_finite_and_within_ce_tolerance": true,
+    "full_model_parameter_bytes_equal_at_warmup_point": true,
+    "grid_speedup_strictly_greater_than_minimum": true
+  },
+  "ce_tolerance_nats": 0.0001,
+  "maximum_absolute_ce_error_nats": 0.0,
+  "all_nine_ce_values_equal": true,
+  "minimum_speedup_exclusive": 2.0,
+  "perturb_and_forward_speedup": 6.281844371145952,
+  "points": [
+    {
+      "c0": -125.0,
+      "c1": -125.0,
+      "cpu_anchor": {
+        "ce_nats": 12.39566249847412,
+        "seconds": 4.885182084981352
+      },
+      "peer": {
+        "ce_nats": 12.39566249847412,
+        "seconds": 0.775064708897844
+      },
+      "abs_ce_error_nats": 0.0,
+      "archived_cuda_ce_nats": 12.39566249847412,
+      "cpu_anchor_vs_archive_abs_ce_error_nats": 0.0
+    },
+    {
+      "c0": -125.0,
+      "c1": 0.0,
+      "cpu_anchor": {
+        "ce_nats": 11.403860473632813,
+        "seconds": 4.869791936129332
+      },
+      "peer": {
+        "ce_nats": 11.403860473632813,
+        "seconds": 0.7767294640652835
+      },
+      "abs_ce_error_nats": 0.0,
+      "archived_cuda_ce_nats": 11.403860473632813,
+      "cpu_anchor_vs_archive_abs_ce_error_nats": 0.0
+    },
+    {
+      "c0": -125.0,
+      "c1": 125.0,
+      "cpu_anchor": {
+        "ce_nats": 12.42232837677002,
+        "seconds": 4.868893245002255
+      },
+      "peer": {
+        "ce_nats": 12.42232837677002,
+        "seconds": 0.7756638559512794
+      },
+      "abs_ce_error_nats": 0.0,
+      "archived_cuda_ce_nats": 12.42232837677002,
+      "cpu_anchor_vs_archive_abs_ce_error_nats": 0.0
+    },
+    {
+      "c0": 0.0,
+      "c1": -125.0,
+      "cpu_anchor": {
+        "ce_nats": 11.21496353149414,
+        "seconds": 4.874195629963651
+      },
+      "peer": {
+        "ce_nats": 11.21496353149414,
+        "seconds": 0.7766508420463651
+      },
+      "abs_ce_error_nats": 0.0,
+      "archived_cuda_ce_nats": 11.21496353149414,
+      "cpu_anchor_vs_archive_abs_ce_error_nats": 0.0
+    },
+    {
+      "c0": 0.0,
+      "c1": 0.0,
+      "cpu_anchor": {
+        "ce_nats": 14.407459449768066,
+        "seconds": 4.877600111067295
+      },
+      "peer": {
+        "ce_nats": 14.407459449768066,
+        "seconds": 0.7774722320027649
+      },
+      "abs_ce_error_nats": 0.0,
+      "archived_cuda_ce_nats": 14.407459449768066,
+      "cpu_anchor_vs_archive_abs_ce_error_nats": 0.0
+    },
+    {
+      "c0": 0.0,
+      "c1": 125.0,
+      "cpu_anchor": {
+        "ce_nats": 11.245513916015625,
+        "seconds": 4.8790230981539935
+      },
+      "peer": {
+        "ce_nats": 11.245513916015625,
+        "seconds": 0.7769465991295874
+      },
+      "abs_ce_error_nats": 0.0,
+      "archived_cuda_ce_nats": 11.245513916015625,
+      "cpu_anchor_vs_archive_abs_ce_error_nats": 0.0
+    },
+    {
+      "c0": 125.0,
+      "c1": -125.0,
+      "cpu_anchor": {
+        "ce_nats": 12.445844268798828,
+        "seconds": 4.87889035907574
+      },
+      "peer": {
+        "ce_nats": 12.445844268798828,
+        "seconds": 0.7759014468174428
+      },
+      "abs_ce_error_nats": 0.0,
+      "archived_cuda_ce_nats": 12.445844268798828,
+      "cpu_anchor_vs_archive_abs_ce_error_nats": 0.0
+    },
+    {
+      "c0": 125.0,
+      "c1": 0.0,
+      "cpu_anchor": {
+        "ce_nats": 11.360921669006348,
+        "seconds": 4.879896853119135
+      },
+      "peer": {
+        "ce_nats": 11.360921669006348,
+        "seconds": 0.7772819339297712
+      },
+      "abs_ce_error_nats": 0.0,
+      "archived_cuda_ce_nats": 11.360921669006348,
+      "cpu_anchor_vs_archive_abs_ce_error_nats": 0.0
+    },
+    {
+      "c0": 125.0,
+      "c1": 125.0,
+      "cpu_anchor": {
+        "ce_nats": 12.45520839691162,
+        "seconds": 4.8803442472126335
+      },
+      "peer": {
+        "ce_nats": 12.45520839691162,
+        "seconds": 0.7756981828715652
+      },
+      "abs_ce_error_nats": 0.0,
+      "archived_cuda_ce_nats": 12.45520839691162,
+      "cpu_anchor_vs_archive_abs_ce_error_nats": 0.0
+    }
+  ],
+  "common_setup": {
+    "seconds": 61.242248174967244,
+    "memory": {
+      "cuda": {
+        "cuda:0": {
+          "allocated_bytes": 14483588096,
+          "reserved_bytes": 14619246592,
+          "peak_allocated_bytes": 14483588096,
+          "peak_reserved_bytes": 14619246592
+        },
+        "cuda:1": {
+          "allocated_bytes": 0,
+          "reserved_bytes": 0,
+          "peak_allocated_bytes": 0,
+          "peak_reserved_bytes": 0
+        }
+      },
+      "peak_host_rss_kib_so_far": 16622260
+    }
+  },
+  "cpu_anchor": {
+    "setup_seconds": 152.33636358915828,
+    "warmup_seconds": 5.9180717098060995,
+    "parameter_digest_seconds": 13.887470137095079,
+    "perturb_and_forward_seconds": 43.89381756470539,
+    "measured_phase_wall_seconds": 63.69979027379304,
+    "parameter_digest_point": [
+      -125.0,
+      125.0
+    ],
+    "evaluated_parameters_sha256": "2447d307be6212d52592b2aba84fc0be828e474f3f63c99e6d2b79841c61b31e",
+    "memory": {
+      "cuda": {
+        "cuda:0": {
+          "allocated_bytes": 72450999296,
+          "reserved_bytes": 75178704896,
+          "peak_allocated_bytes": 74548151296,
+          "peak_reserved_bytes": 75178704896
+        },
+        "cuda:1": {
+          "allocated_bytes": 0,
+          "reserved_bytes": 0,
+          "peak_allocated_bytes": 0,
+          "peak_reserved_bytes": 0
+        }
+      },
+      "peak_host_rss_kib_so_far": 49533476
+    }
+  },
+  "peer": {
+    "setup_seconds": 101.93047425081022,
+    "warmup_seconds": 0.8166527689900249,
+    "parameter_digest_seconds": 9.056536601157859,
+    "perturb_and_forward_seconds": 6.987409265711904,
+    "measured_phase_wall_seconds": 16.862425009021536,
+    "parameter_digest_point": [
+      -125.0,
+      125.0
+    ],
+    "evaluated_parameters_sha256": "2447d307be6212d52592b2aba84fc0be828e474f3f63c99e6d2b79841c61b31e",
+    "memory": {
+      "cuda": {
+        "cuda:0": {
+          "allocated_bytes": 29000606720,
+          "reserved_bytes": 32419872768,
+          "peak_allocated_bytes": 32146334720,
+          "peak_reserved_bytes": 32419872768
+        },
+        "cuda:1": {
+          "allocated_bytes": 57933856768,
+          "reserved_bytes": 57935921152,
+          "peak_allocated_bytes": 57933856768,
+          "peak_reserved_bytes": 57935921152
+        }
+      },
+      "peak_host_rss_kib_so_far": 59009164
+    }
+  },
+  "end_to_end_seconds": 396.2542658539023,
+  "peak_host_rss_kib": 59009164,
+  "runtime": {
+    "host": "matrix22",
+    "python": "3.12.16 (main, Oct 26 2026, 11:37:43) [GCC 15.3.0]",
+    "python_executable": "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+    "environment": {
+      "SLURM_CLUSTER_NAME": "matrix",
+      "SLURM_JOB_ID": "516308",
+      "SLURM_STEP_ID": "0",
+      "SLURM_NTASKS": "1",
+      "SLURM_CPUS_PER_TASK": "56",
+      "TAR_GPU_ASSIGNMENT_MODE": "slurm_cgroup",
+      "CONDA_PREFIX": "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "TAR_RUNTIME_BACKEND": "matrix",
+      "TAR_LANDSCAPE_PEER": "1",
+      "HF_HOME": "/p/vast1/kirchenb/tar-root/cache/huggingface",
+      "HF_HUB_OFFLINE": "1",
+      "HF_DATASETS_OFFLINE": "1",
+      "TRANSFORMERS_OFFLINE": "1",
+      "TORCH_BLAS_PREFER_CUBLASLT": "0",
+      "TORCHAO_FORCE_SKIP_LOADING_SO_FILES": "1",
+      "TOKENIZERS_PARALLELISM": "false",
+      "OMP_NUM_THREADS": "8",
+      "PYTHONUNBUFFERED": "1",
+      "MPLBACKEND": "Agg",
+      "NVIDIA_TF32_OVERRIDE": "0",
+      "SLURM_STEP_GPUS": null,
+      "CUDA_VISIBLE_DEVICES": null,
+      "TAR_SLURM_INHERITED_CUDA_VISIBLE_DEVICES": null
+    },
+    "cuda_device_order": null,
+    "torch": "2.12.1+cu126",
+    "cuda": "12.6",
+    "hip": null,
+    "matmul_allow_tf32": false,
+    "cudnn_allow_tf32": false,
+    "devices": [
+      "_CudaDeviceProperties(name='NVIDIA H100 80GB HBM3', major=9, minor=0, total_memory=81123MB, multi_processor_count=132, uuid=fccc57ac-49ff-bcaa-008e-f943f8501b0c, pci_bus_id=93, pci_device_id=0, pci_domain_id=0, L2_cache_size=50MB)",
+      "_CudaDeviceProperties(name='NVIDIA H100 80GB HBM3', major=9, minor=0, total_memory=81123MB, multi_processor_count=132, uuid=fd4d1cb2-4e1d-402a-ac0c-c6acfae23319, pci_bus_id=204, pci_device_id=0, pci_domain_id=0, L2_cache_size=50MB)"
+    ],
+    "peer_access_0_to_1": true,
+    "peer_access_1_to_0": true,
+    "nvidia_smi_topology": {
+      "exit_code": 0,
+      "stdout": "\t\u001b[4mGPU0\tGPU1\tNIC0\tNIC1\tCPU Affinity\tNUMA Affinity\tGPU NUMA ID\u001b[0m\nGPU0\t X \tNV6\tPIX\tSYS\t\t1\t\tN/A\nGPU1\tNV6\t X \tSYS\tPIX\t98-111,210-223\t7\t\tN/A\nNIC0\tPIX\tSYS\t X \tSYS\t\t\t\t\nNIC1\tSYS\tPIX\tSYS\t X \t\t\t\t\n\nLegend:\n\n  X    = Self\n  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)\n  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node\n  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)\n  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)\n  PIX  = Connection traversing at most a single PCIe bridge\n  NV#  = Connection traversing a bonded set of # NVLinks\n\nNIC Legend:\n\n  NIC0: mlx5_0\n  NIC1: mlx5_1\n\n",
+      "stderr": ""
+    }
+  },
+  "runtime_source_sha256": {
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/misc/tar_dynamics.py": "74a8cd7a1d142bb0c9b44f2935a120e45a3be32485a0144ffcc94d09d0b4d97e",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/misc/tar_dynamics.py": "cde0537a6aed607934c9b72b295cccb65a5bb65d8685c1cedfd4a99a84eda3d2",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/misc/trace_runner.py": "28a679f2ade245644b3ce3a2cc071633dbf5be07824bc06c8a1bf76809c4d4e1",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh": "62e4cd65561c162b91221d3ea2b75461fa4d170ba607c6334db3ace9804d0945",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/matrix_env.sh": "b9153ffae025b364fc6aeec1ee8651013f5f14a82ea709acd148b29cca48a5d7",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/runtime.py": "45f7508bdf47e0e694acd32cdb9ffd461a06c89eaa3fb195d973c8407dbe9f19"
+  },
+  "pilot_source_sha256": {
+    "pilot.py": "b795a94c4df7ed8d774abefc5be887273ed9a04424557d790a55a41a99b93ec5",
+    "pilot.sh": "56c618a3e564cc346385c5741905694e69a50b51229548b8a309f23149ac3b2e"
+  },
+  "archived_input_sha256": {
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/matrix-assessment/checkpoint-probe/result.json": "e32171afbf089be20d0c61d509c365f03780115bc75562e89e11f1c3a6473576",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/matrix-assessment/checkpoint-probe/study.json": "b67583fdad3e08472ba7f4b707f3ec4bb66bb9b3f77ede957b7c914f6c04191f",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/matrix-assessment/checkpoint-probe/comparison.csv": "79bc6450201370cd3ba815901feaac276f2f84e659136455721eb907f9a07de0",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/matrix-assessment/checkpoint-probe/geometry/geometry.json": "e4d81216863c1bf45196a5046af6c2e44e913a0630f83811aba967eb1aaf0fc9",
+    "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/matrix-assessment/checkpoint-probe/source/misc/reference_get_ll.py": "ffc0d86d6e51298bdf5595d4bee7a3d0f3e1ca95d5d76e613a73d3c154944c91"
+  },
+  "archived_large_input_identities": [
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-k16-repro/20261109T1830Z/dynamics/baseline-k16-20261110T0400Z/geometry/random-basis.npy",
+      "bytes": 57933856896,
+      "mtime_ns": 1794287213655003007
+    },
+    {
+      "path": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-defense/models/defense/model.safetensors",
+      "bytes": 15008318632,
+      "mtime_ns": 1794876244232492335
+    }
+  ],
+  "checkpoint": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-hparams/20261116T2310Z/cases/hparam-rio-defense/models/defense",
+  "fixed_probe_tensor_sha256": "fbf1c376943eb1701d4c62f866ab739d7ab82d7942196bee40a9b989157659b6"
+}

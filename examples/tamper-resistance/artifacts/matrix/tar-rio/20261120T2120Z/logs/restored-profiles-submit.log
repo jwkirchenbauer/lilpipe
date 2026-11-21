@@ -1,0 +1,27 @@
+rio-k64-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516332 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-k64-lr1e-6-retry-v2/launch-rv9k1h52/launch.sh
+Launched job 1/1 with job_id=516341.
+rio-k256-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516333 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-k256-lr1e-6-retry-v2/launch-5dlkfwsy/launch.sh
+Launched job 1/1 with job_id=516342.
+rio-prefix-forward-legacy-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516334 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-prefix-forward-legacy-lr1e-6-retry-v2/launch-6uffkult/launch.sh
+Launched job 1/1 with job_id=516343.
+rio-prefix-reverse-legacy-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516335 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-prefix-reverse-legacy-lr1e-6-retry-v2/launch-ubk5fmuf/launch.sh
+Launched job 1/1 with job_id=516344.
+rio-fresh-matched-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516336 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-fresh-matched-lr1e-6-retry-v2/launch-67osv5ix/launch.sh
+Launched job 1/1 with job_id=516345.
+rio-prefix-forward-matched-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516337 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-prefix-forward-matched-lr1e-6-retry-v2/launch-0_o2hy4q/launch.sh
+Launched job 1/1 with job_id=516346.
+rio-prefix-reverse-matched-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516338 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-prefix-reverse-matched-lr1e-6-retry-v2/launch-h_jn8rer/launch.sh
+Launched job 1/1 with job_id=516347.
+hparam-rio-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516339 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-hparam-rio-lr1e-6-retry-v2/launch-7g0jcgu3/launch.sh
+Launched job 1/1 with job_id=516348.
+rio-k4-cuda-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516340 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-k4-cuda-lr1e-6-retry-v2/launch-vgof8sbu/launch.sh
+Launched job 1/1 with job_id=516349.

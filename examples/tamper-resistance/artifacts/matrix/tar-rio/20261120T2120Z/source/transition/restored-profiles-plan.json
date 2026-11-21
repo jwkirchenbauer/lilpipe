@@ -1,0 +1,159 @@
+{
+  "stage": "profiles",
+  "reviewed": true,
+  "commands": [
+    {
+      "case": "rio-k64-lr1e-6",
+      "argv": [
+        "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/launch.py",
+        "profiles",
+        "rio-k64-lr1e-6",
+        "--run",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+        "--attempt",
+        "retry-v2",
+        "--minutes",
+        "180",
+        "--dependency",
+        "516332"
+      ]
+    },
+    {
+      "case": "rio-k256-lr1e-6",
+      "argv": [
+        "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/launch.py",
+        "profiles",
+        "rio-k256-lr1e-6",
+        "--run",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+        "--attempt",
+        "retry-v2",
+        "--minutes",
+        "180",
+        "--dependency",
+        "516333"
+      ]
+    },
+    {
+      "case": "rio-prefix-forward-legacy-lr1e-6",
+      "argv": [
+        "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/launch.py",
+        "profiles",
+        "rio-prefix-forward-legacy-lr1e-6",
+        "--run",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+        "--attempt",
+        "retry-v2",
+        "--minutes",
+        "180",
+        "--dependency",
+        "516334"
+      ]
+    },
+    {
+      "case": "rio-prefix-reverse-legacy-lr1e-6",
+      "argv": [
+        "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/launch.py",
+        "profiles",
+        "rio-prefix-reverse-legacy-lr1e-6",
+        "--run",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+        "--attempt",
+        "retry-v2",
+        "--minutes",
+        "180",
+        "--dependency",
+        "516335"
+      ]
+    },
+    {
+      "case": "rio-fresh-matched-lr1e-6",
+      "argv": [
+        "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/launch.py",
+        "profiles",
+        "rio-fresh-matched-lr1e-6",
+        "--run",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+        "--attempt",
+        "retry-v2",
+        "--minutes",
+        "180",
+        "--dependency",
+        "516336"
+      ]
+    },
+    {
+      "case": "rio-prefix-forward-matched-lr1e-6",
+      "argv": [
+        "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/launch.py",
+        "profiles",
+        "rio-prefix-forward-matched-lr1e-6",
+        "--run",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+        "--attempt",
+        "retry-v2",
+        "--minutes",
+        "180",
+        "--dependency",
+        "516337"
+      ]
+    },
+    {
+      "case": "rio-prefix-reverse-matched-lr1e-6",
+      "argv": [
+        "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/launch.py",
+        "profiles",
+        "rio-prefix-reverse-matched-lr1e-6",
+        "--run",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+        "--attempt",
+        "retry-v2",
+        "--minutes",
+        "180",
+        "--dependency",
+        "516338"
+      ]
+    },
+    {
+      "case": "hparam-rio-lr1e-6",
+      "argv": [
+        "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/launch.py",
+        "profiles",
+        "hparam-rio-lr1e-6",
+        "--run",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study",
+        "--attempt",
+        "retry-v2",
+        "--minutes",
+        "180",
+        "--dependency",
+        "516339"
+      ]
+    },
+    {
+      "case": "rio-k4-cuda-lr1e-6",
+      "argv": [
+        "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/launch.py",
+        "profiles",
+        "rio-k4-cuda-lr1e-6",
+        "--run",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control",
+        "--attempt",
+        "retry-v2",
+        "--minutes",
+        "180",
+        "--dependency",
+        "516340"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "stage": "report",
+  "reviewed": true,
+  "commands": [
+    {
+      "case": "final",
+      "argv": [
+        "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/launch.py",
+        "report",
+        "final",
+        "--run",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+        "--attempt",
+        "retry-v2",
+        "--minutes",
+        "120",
+        "--dependency",
+        "516146",
+        "516329",
+        "516332",
+        "516333",
+        "516334",
+        "516335",
+        "516336",
+        "516337",
+        "516338",
+        "516339",
+        "516340",
+        "516341",
+        "516342",
+        "516343",
+        "516344",
+        "516345",
+        "516346",
+        "516347",
+        "516348",
+        "516349"
+      ]
+    }
+  ],
+  "completed_markers_verified": [
+    {
+      "key": "eval:rio-k4-lr1e-6",
+      "job_id": "516069",
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k4-lr1e-6/status/evaluation.json"
+    },
+    {
+      "key": "eval:hparam-rio-lr1e-6",
+      "job_id": "516070",
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/status/evaluation.json"
+    },
+    {
+      "key": "pilot:cuda-training",
+      "job_id": "516076",
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/cuda-training/status/validation.json"
+    },
+    {
+      "key": "train:rio-k256-defense",
+      "job_id": "516131",
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/cases/rio-k256-defense/status/train.json"
+    },
+    {
+      "key": "train:rio-k256-lr1e-6",
+      "job_id": "516136",
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/tuolumne/tar-rio/20261119T1620Z/cases/rio-k256-lr1e-6/status/train.json"
+    },
+    {
+      "key": "calibration:eval-onegpu",
+      "job_id": "516135",
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/calibration/eval-onegpu/calibration.json"
+    },
+    {
+      "key": "eval:rio-k64-lr1e-6",
+      "job_id": "516140",
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k64-lr1e-6/status/evaluation.json"
+    },
+    {
+      "key": "eval:rio-prefix-forward-legacy-lr1e-6",
+      "job_id": "516141",
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-legacy-lr1e-6/status/evaluation.json"
+    },
+    {
+      "key": "eval:rio-prefix-reverse-legacy-lr1e-6",
+      "job_id": "516142",
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-legacy-lr1e-6/status/evaluation.json"
+    },
+    {
+      "key": "eval:rio-fresh-matched-lr1e-6",
+      "job_id": "516143",
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-fresh-matched-lr1e-6/status/evaluation.json"
+    },
+    {
+      "key": "eval:rio-prefix-forward-matched-lr1e-6",
+      "job_id": "516144",
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-matched-lr1e-6/status/evaluation.json"
+    },
+    {
+      "key": "eval:rio-prefix-reverse-matched-lr1e-6",
+      "job_id": "516145",
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-matched-lr1e-6/status/evaluation.json"
+    },
+    {
+      "key": "profiles:rio-k4-lr1e-6",
+      "job_id": "516150",
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k4-lr1e-6/status/step-profiles.json"
+    },
+    {
+      "key": "reference:base",
+      "job_id": "516152",
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/base-reference/validation.json"
+    },
+    {
+      "key": "parity:new-anchor",
+      "job_id": "516180",
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/rio-prefix-new-anchor/status/train.json"
+    },
+    {
+      "key": "train:rio-k4-cuda-defense",
+      "job_id": "516185",
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-defense/status/train.json"
+    },
+    {
+      "key": "audit:precision",
+      "job_id": "516186",
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/precision-audit/results/precision-audit.json"
+    },
+    {
+      "key": "train:rio-k4-cuda-lr1e-6",
+      "job_id": "516187",
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/status/train.json"
+    },
+    {
+      "key": "eval:rio-k4-cuda-lr1e-6",
+      "job_id": "516191",
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/status/evaluation.json"
+    },
+    {
+      "key": "pilot-peer:final-binding",
+      "job_id": "516325",
+      "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json"
+    }
+  ]
+}

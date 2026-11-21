@@ -27,6 +27,7 @@ def main():
         "phase", choices=("eval", "analysis", "profiles", "train", "pilot", "report")
     )
     parser.add_argument("case")
+    parser.add_argument("--attempt", default="")
     parser.add_argument("--run", type=Path, default=ROOT)
     parser.add_argument("--minutes", type=int)
     parser.add_argument("--eval-processes", type=int, choices=(1, 4), default=4)
@@ -34,9 +35,15 @@ def main():
     parser.add_argument("--dryrun", action="store_true")
     args = parser.parse_args()
     assert args.run.is_absolute()
+    if args.attempt and (
+        not re.fullmatch(r"[A-Za-z0-9_.-]+", args.attempt)
+        or args.attempt in (".", "..")
+    ):
+        parser.error("--attempt must be a safe suffix")
     if args.phase not in ("pilot", "report"):
         require_case_directories(args.run, args.case)
-    key = args.phase + ":" + args.case
+    suffix = "-" + args.attempt if args.attempt else ""
+    key = args.phase + ":" + args.case + (":" + args.attempt if args.attempt else "")
     ledger_path = ROOT / "matrix-jobs.json"
     ledger = json.loads(ledger_path.read_text()) if ledger_path.exists() else {}
     if key in ledger and not args.dryrun:
@@ -91,7 +98,7 @@ def main():
     command = [
         sys.executable,
         "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
-        "--run_name=tar-rio-" + args.phase + "-" + args.case,
+        "--run_name=tar-rio-" + args.phase + "-" + args.case + suffix,
         "--partition=pbatch",
         "--account=verival",
         "--nodes=1",
@@ -105,7 +112,7 @@ def main():
         "--cuda_module=",
         "--minutes=" + str(minutes),
         "--output_dir=" + str(ROOT / "launches"),
-        "--sub_output_dir_name=" + args.phase + "-" + args.case,
+        "--sub_output_dir_name=" + args.phase + "-" + args.case + suffix,
         "--pass_run_name=false",
         "--quiet_launch=true",
         "--squonce=false",
@@ -135,6 +142,7 @@ def main():
             args.phase
             + "-"
             + args.case
+            + suffix
             + ("-dryrun" if args.dryrun else "-submit")
             + ".log"
         )
@@ -172,6 +180,8 @@ def main():
         "argv": command,
         "log": str(log),
     }
+    if args.attempt:
+        ledger[key]["attempt"] = args.attempt
     temporary = ledger_path.with_suffix(".json.tmp")
     temporary.write_text(json.dumps(ledger, indent=2) + "\n")
     temporary.replace(ledger_path)

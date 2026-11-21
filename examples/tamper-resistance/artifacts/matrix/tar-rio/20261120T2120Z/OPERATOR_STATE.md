@@ -1,5 +1,112 @@
 # Matrix transition state
 
+## Latest update: 2026-11-21 00:43 UTC
+
+The DAG is fully restored. K4 peer-v2 analysis516329 (2GPUs/56CPU/224G/360min)
+is pending for resources. Its last provisional forecast was01:25UTC. Nine
+sibling analyses516332--516340 wait afterok516329. Nine profiles516341--516349
+wait on their respective analyses; the completed K4 reference profile516150
+is verified directly, avoiding Slurm dependencies on purged completed jobs.
+Strict final report516351 waits on all19 new analysis/profile jobs plus current
+K256 benchmark516146. Its completion marker is report-matrix-references.json.
+All requests are pbatch/verival. Exact reviewed command plans are
+source/transition/restored-{analyses,profiles,report}-plan.json.
+
+No new peer source edits: final runtime was validated by516325 (nine loss pairs
+exact, tested model bytes exact,6.1784x point throughput). Failed attempts and
+canceled descendants remain explicitly superseded in the ledger. The final
+report independently checks ten attack cases and does not read old job IDs.
+
+All training is complete and validated. Continue sleep900 monitoring via
+watcher1301232; verify the first production peer assignment/P2P capability and
+cache reuse when516329 starts. Finish analyses/profiles/report, inspect figures
+and paired K4 backend drift, curate final small results, then commit/push.
+Preserve user's unstaged AGENTS.md and unrelated untracked files. No raw model,
+optimizer, basis-array, data-cache or corpus files should enter Git.
+
+## Latest update: 2026-11-21 00:39 UTC
+
+The final mask-preserving two-GPU pilot516325 PASSED: nine CE pairs exactly
+equal, tested perturbed model bytes equal,6.1784x point throughput. Explicit
+--gpus_per_task=2 binding probe516323 also passed on both H100s. Final worker
+source/peer-landscape is FROZEN; do not edit. Production uses two visible GPUs,
+preserves Slurm's local CUDA mask and validates published global IDs without
+using them as CUDA indices. No source math/probes/radii/coordinates changed.
+
+New K4 analysis516329 is pending for resources (six-hour pbatch/verival request,
+2GPUs/56CPU/224G); last forecast01:25UTC, provisional. It resumes cached rows.
+Nine sibling peer-v2 analyses516332--516340 are submitted afterok516329; all
+remain blocked until full K4 validation. The nine retry-v2 profile dryruns are
+under review next, followed by final report resubmission. restore_dag.py keeps
+reviewed command plans separate from real submission. Old canceled attempts
+remain superseded; do not requeue or reuse them. Final report source remains
+source/report-matrix, its strict completion marker unchanged.
+
+Training is all complete; benchmark516146 is the only unfinished evaluation.
+Watch1301232 remains alive with sleep900 and now tracks the restored ledger.
+Remaining work: finish submitting profiles/report, monitor/recover, inspect
+finished figures and backend drift, curate small source/proof/result files,
+commit/push, and finish the strict report. Preserve user's AGENTS.md edit.
+
+## Latest update: 2026-11-21 00:28 UTC
+
+All production training is complete, including K256 attack516136. K256
+benchmark516146 is running; every other benchmark is complete. Original K4
+profiles516150 passed. Remaining work: landscape grids, other profiles, strict
+report, figure inspection, curation and push.
+
+The peer landscape pilot516308 PASSED: identical losses at all nine points,
+identical perturbed parameter bytes,6.2818x point speedup. K4 replacement516314
+then failed BEFORE Torch: despite a two-GPU request, its step supplied only
+SLURM_STEP_GPUS=3 and CUDA_VISIBLE_DEVICES=1. Its dependency gate canceled all
+remaining analysis/profile/report allocations. These attempts are preserved
+and marked superseded in matrix-jobs.json. New allocations must be submitted;
+old IDs516219 and516227 are no longer live. Completed cached rows survive.
+The old active K4 analysis516068 and its pending closure516227 were deliberately
+canceled only after all consumers were rewired to516314, so no duplicate writer
+is active. The interrupted peer-rewire script performed no successful updates.
+
+Explicit per-task binding probe516323 is submitted (2GPUs,56CPU,224G,5min,
+pbatch/verival, --gpus_per_task=2). It records inherited visibility, UUIDs and
+device cgroup rules; it never widens the mask. Await that proof. The peer agent
+is changing matrix_env/runtime to preserve inherited CUDA visibility even when
+global Slurm IDs differ, while still requiring exactly two distinct H100s.
+No peer numerical source is running during these edits. Source hashes will
+change, requiring a NEW nine-point pilot before retrying production. The peer
+submission helper is being amended with explicit binding and attempt suffixes
+to retain failed ledger entries. Submit only K4 first; retain its full validation
+gate before releasing siblings. All profile workers stay on the frozen one-GPU
+source. Final report source/report-matrix remains frozen and can be resubmitted.
+
+Backend-control/study.json now explicitly names rio-k4-cuda-lr1e-6 as its profile
+reference; otherwise the default referenced an absent baseline case. Only root
+metadata changed; per-case settings and numerical source are unchanged. The
+amendment is recorded in backend-control/profile-reference-amendment.json.
+
+## Latest update: 2026-11-21 00:13 UTC
+
+K256 defense516131 is complete and its 1000-step attack516136 is running on
+Matrix. The paired full CUDA K4 defense, attack, benchmarks and the original
+K4 profile516150 have all completed. The read-only sleep900 watcher1301232
+is still alive on tuolumne1004. The main outstanding work is K256 attack/eval,
+landscape grids, the remaining profiles, and the strict report.
+
+A separate two-GPU LANDSCAPE pilot was submitted as516304. It stopped before
+Torch/model loading because SLURM_STEP_GPUS was absent. Some Matrix nodes
+provide allocation isolation only through the device cgroup (as in successful
+profile516150). The peer runtime is being amended to preserve the inherited
+visibility when assignment IDs are absent and require exactly two distinct
+H100 devices after initialization. It never guesses physical device IDs or
+widens visibility without recorded Slurm IDs. This feasibility pilot is kept
+outside the required production ledger, in pilots/tar-rio-peer-landscape-pilot/
+submissions.json. Existing one-GPU analyses/closure remain unchanged.
+
+The landscape pilot requires identical perturbed parameter bytes, nine CE
+differences <=1e-4 nats, and greater than2x synchronized point throughput to
+justify two GPUs. Only adopt after all gates pass. Its source is under
+source/peer-landscape. The earlier two-GPU TRAINING pilot remains deferred;
+all production training uses the validated four-GPU map.
+
 ## Latest update: 2026-11-20 23:40 UTC
 
 The complete CUDA K4 defense and its 1000-update attack have passed training

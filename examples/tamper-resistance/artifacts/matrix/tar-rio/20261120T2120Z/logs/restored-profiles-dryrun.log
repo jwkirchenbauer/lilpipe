@@ -1,0 +1,27 @@
+rio-k64-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516332 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-k64-lr1e-6-retry-v2/launch-igfvqih0/launch.sh
+Dry run. Scripts are in /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-k64-lr1e-6-retry-v2/launch-igfvqih0
+rio-k256-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516333 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-k256-lr1e-6-retry-v2/launch-clyecyx8/launch.sh
+Dry run. Scripts are in /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-k256-lr1e-6-retry-v2/launch-clyecyx8
+rio-prefix-forward-legacy-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516334 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-prefix-forward-legacy-lr1e-6-retry-v2/launch-g7o2p400/launch.sh
+Dry run. Scripts are in /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-prefix-forward-legacy-lr1e-6-retry-v2/launch-g7o2p400
+rio-prefix-reverse-legacy-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516335 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-prefix-reverse-legacy-lr1e-6-retry-v2/launch-6de9tjft/launch.sh
+Dry run. Scripts are in /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-prefix-reverse-legacy-lr1e-6-retry-v2/launch-6de9tjft
+rio-fresh-matched-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516336 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-fresh-matched-lr1e-6-retry-v2/launch-e5054edn/launch.sh
+Dry run. Scripts are in /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-fresh-matched-lr1e-6-retry-v2/launch-e5054edn
+rio-prefix-forward-matched-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516337 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-prefix-forward-matched-lr1e-6-retry-v2/launch-ds17dph9/launch.sh
+Dry run. Scripts are in /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-prefix-forward-matched-lr1e-6-retry-v2/launch-ds17dph9
+rio-prefix-reverse-matched-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516338 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-prefix-reverse-matched-lr1e-6-retry-v2/launch-e_2bk54s/launch.sh
+Dry run. Scripts are in /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-prefix-reverse-matched-lr1e-6-retry-v2/launch-e_2bk54s
+hparam-rio-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516339 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-hparam-rio-lr1e-6-retry-v2/launch-md9tx0dg/launch.sh
+Dry run. Scripts are in /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-hparam-rio-lr1e-6-retry-v2/launch-md9tx0dg
+rio-k4-cuda-lr1e-6
+Submission: sbatch --parsable --dependency=afterok:516340 /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-k4-cuda-lr1e-6-retry-v2/launch-jzlc055n/launch.sh
+Dry run. Scripts are in /p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches/profiles-rio-k4-cuda-lr1e-6-retry-v2/launch-jzlc055n

@@ -1,0 +1,9 @@
+{
+  "reason": "Declare existing attack as its profile reference, as done for the reused K16 control; otherwise the default names an absent baseline case.",
+  "before_sha256": "ca0c12bd2a42add284171dbb6615c03cd68d1ea6cf9a4e810cc0f29e6224c5b4",
+  "after_sha256": "10fd7b20c6e9f2100258931b796378054a56ffdf79ea7fe8221d024f1a9bde16",
+  "changes": {
+    "profile_reference_case": "rio-k4-cuda-lr1e-6"
+  },
+  "per_case_settings_unchanged": true
+}

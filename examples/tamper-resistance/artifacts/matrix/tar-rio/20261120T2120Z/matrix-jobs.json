@@ -46,8 +46,8 @@
     ],
     "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-k4-lr1e-6-submit.log",
     "superseded": true,
-    "superseded_by": "516227",
-    "supersession_reason": "Slurm rejects active-job time extension; same numerical worker reuses complete cached rows after original allocation ends. Final scientific completion is tracked by this pbatch closure allocation."
+    "superseded_by": "516314",
+    "supersession_reason": "Exact peer pilot passed; reuse completed rows with GPU-resident centers and directions."
   },
   "eval:rio-k4-lr1e-6": {
     "job_id": "516069",
@@ -713,7 +713,7 @@
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/status/analysis.json",
     "dependencies": [
-      "516227"
+      "516314"
     ],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
@@ -763,7 +763,26 @@
         "516068"
       ],
       "reason": "Track successful six-hour K4 closure, which reuses the active allocation's saved grids if needed."
-    }
+    },
+    "dependency_amendments": [
+      {
+        "before": [
+          "516227"
+        ],
+        "after": [
+          "516314"
+        ],
+        "completed_markers_verified": []
+      }
+    ],
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516151",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "Dependency"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
   },
   "reference:base": {
     "job_id": "516152",
@@ -800,7 +819,7 @@
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k64-lr1e-6/status/analysis.json",
     "dependencies": [
-      "516227"
+      "516314"
     ],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
@@ -850,7 +869,26 @@
         "516068"
       ],
       "reason": "Track successful six-hour K4 closure, which reuses the active allocation's saved grids if needed."
-    }
+    },
+    "dependency_amendments": [
+      {
+        "before": [
+          "516227"
+        ],
+        "after": [
+          "516314"
+        ],
+        "completed_markers_verified": []
+      }
+    ],
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516154",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "Dependency"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
   },
   "analysis:rio-prefix-forward-legacy-lr1e-6": {
     "job_id": "516155",
@@ -869,7 +907,7 @@
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-legacy-lr1e-6/status/analysis.json",
     "dependencies": [
-      "516227"
+      "516314"
     ],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
@@ -919,7 +957,26 @@
         "516068"
       ],
       "reason": "Track successful six-hour K4 closure, which reuses the active allocation's saved grids if needed."
-    }
+    },
+    "dependency_amendments": [
+      {
+        "before": [
+          "516227"
+        ],
+        "after": [
+          "516314"
+        ],
+        "completed_markers_verified": []
+      }
+    ],
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516155",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "Dependency"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
   },
   "analysis:rio-prefix-reverse-legacy-lr1e-6": {
     "job_id": "516156",
@@ -938,7 +995,7 @@
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-legacy-lr1e-6/status/analysis.json",
     "dependencies": [
-      "516227"
+      "516314"
     ],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
@@ -988,7 +1045,26 @@
         "516068"
       ],
       "reason": "Track successful six-hour K4 closure, which reuses the active allocation's saved grids if needed."
-    }
+    },
+    "dependency_amendments": [
+      {
+        "before": [
+          "516227"
+        ],
+        "after": [
+          "516314"
+        ],
+        "completed_markers_verified": []
+      }
+    ],
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516156",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "Dependency"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
   },
   "analysis:rio-fresh-matched-lr1e-6": {
     "job_id": "516157",
@@ -1007,7 +1083,7 @@
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-fresh-matched-lr1e-6/status/analysis.json",
     "dependencies": [
-      "516227"
+      "516314"
     ],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
@@ -1057,7 +1133,26 @@
         "516068"
       ],
       "reason": "Track successful six-hour K4 closure, which reuses the active allocation's saved grids if needed."
-    }
+    },
+    "dependency_amendments": [
+      {
+        "before": [
+          "516227"
+        ],
+        "after": [
+          "516314"
+        ],
+        "completed_markers_verified": []
+      }
+    ],
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516157",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "Dependency"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
   },
   "analysis:rio-prefix-forward-matched-lr1e-6": {
     "job_id": "516158",
@@ -1076,7 +1171,7 @@
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-matched-lr1e-6/status/analysis.json",
     "dependencies": [
-      "516227"
+      "516314"
     ],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
@@ -1126,7 +1221,26 @@
         "516068"
       ],
       "reason": "Track successful six-hour K4 closure, which reuses the active allocation's saved grids if needed."
-    }
+    },
+    "dependency_amendments": [
+      {
+        "before": [
+          "516227"
+        ],
+        "after": [
+          "516314"
+        ],
+        "completed_markers_verified": []
+      }
+    ],
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516158",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "Dependency"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
   },
   "analysis:rio-prefix-reverse-matched-lr1e-6": {
     "job_id": "516159",
@@ -1145,7 +1259,7 @@
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-matched-lr1e-6/status/analysis.json",
     "dependencies": [
-      "516227"
+      "516314"
     ],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
@@ -1195,7 +1309,26 @@
         "516068"
       ],
       "reason": "Track successful six-hour K4 closure, which reuses the active allocation's saved grids if needed."
-    }
+    },
+    "dependency_amendments": [
+      {
+        "before": [
+          "516227"
+        ],
+        "after": [
+          "516314"
+        ],
+        "completed_markers_verified": []
+      }
+    ],
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516159",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "Dependency"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
   },
   "analysis:rio-k256-lr1e-6": {
     "job_id": "516160",
@@ -1214,7 +1347,7 @@
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k256-lr1e-6/status/analysis.json",
     "dependencies": [
-      "516227",
+      "516314",
       "516136"
     ],
     "argv": [
@@ -1266,7 +1399,28 @@
         "516136"
       ],
       "reason": "Track successful six-hour K4 closure, which reuses the active allocation's saved grids if needed."
-    }
+    },
+    "dependency_amendments": [
+      {
+        "before": [
+          "516227",
+          "516136"
+        ],
+        "after": [
+          "516314",
+          "516136"
+        ],
+        "completed_markers_verified": []
+      }
+    ],
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516160",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "Dependency"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
   },
   "profiles:hparam-rio-lr1e-6": {
     "job_id": "516161",
@@ -1318,7 +1472,15 @@
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study",
       "hparam-rio-lr1e-6"
     ],
-    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-hparam-rio-lr1e-6-submit.log"
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-hparam-rio-lr1e-6-submit.log",
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516161",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "None"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
   },
   "profiles:rio-k64-lr1e-6": {
     "job_id": "516165",
@@ -1370,7 +1532,15 @@
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
       "rio-k64-lr1e-6"
     ],
-    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-k64-lr1e-6-submit.log"
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-k64-lr1e-6-submit.log",
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516165",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "None"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
   },
   "profiles:rio-prefix-forward-legacy-lr1e-6": {
     "job_id": "516166",
@@ -1422,7 +1592,15 @@
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
       "rio-prefix-forward-legacy-lr1e-6"
     ],
-    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-prefix-forward-legacy-lr1e-6-submit.log"
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-prefix-forward-legacy-lr1e-6-submit.log",
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516166",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "None"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
   },
   "profiles:rio-prefix-reverse-legacy-lr1e-6": {
     "job_id": "516167",
@@ -1474,7 +1652,15 @@
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
       "rio-prefix-reverse-legacy-lr1e-6"
     ],
-    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-prefix-reverse-legacy-lr1e-6-submit.log"
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-prefix-reverse-legacy-lr1e-6-submit.log",
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516167",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "None"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
   },
   "profiles:rio-fresh-matched-lr1e-6": {
     "job_id": "516168",
@@ -1526,7 +1712,15 @@
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
       "rio-fresh-matched-lr1e-6"
     ],
-    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-fresh-matched-lr1e-6-submit.log"
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-fresh-matched-lr1e-6-submit.log",
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516168",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "None"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
   },
   "profiles:rio-prefix-forward-matched-lr1e-6": {
     "job_id": "516169",
@@ -1578,7 +1772,15 @@
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
       "rio-prefix-forward-matched-lr1e-6"
     ],
-    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-prefix-forward-matched-lr1e-6-submit.log"
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-prefix-forward-matched-lr1e-6-submit.log",
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516169",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "None"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
   },
   "profiles:rio-prefix-reverse-matched-lr1e-6": {
     "job_id": "516170",
@@ -1630,7 +1832,15 @@
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
       "rio-prefix-reverse-matched-lr1e-6"
     ],
-    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-prefix-reverse-matched-lr1e-6-submit.log"
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-prefix-reverse-matched-lr1e-6-submit.log",
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516170",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "None"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
   },
   "profiles:rio-k256-lr1e-6": {
     "job_id": "516171",
@@ -1682,7 +1892,15 @@
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
       "rio-k256-lr1e-6"
     ],
-    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-k256-lr1e-6-submit.log"
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-k256-lr1e-6-submit.log",
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516171",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "None"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
   },
   "parity:new-anchor": {
     "job_id": "516180",
@@ -2149,7 +2367,7 @@
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/status/analysis.json",
     "dependencies": [
-      "516227"
+      "516314"
     ],
     "argv": [
       "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
@@ -2203,7 +2421,26 @@
         "516187"
       ],
       "reason": "Use six-hour K4 closure516227; omit completed controller-purged IDs after verifying their scientific statuses."
-    }
+    },
+    "dependency_amendments": [
+      {
+        "before": [
+          "516227"
+        ],
+        "after": [
+          "516314"
+        ],
+        "completed_markers_verified": []
+      }
+    ],
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516192",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "Dependency"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
   },
   "profiles:rio-k4-cuda-lr1e-6": {
     "job_id": "516197",
@@ -2255,7 +2492,15 @@
       "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control",
       "rio-k4-cuda-lr1e-6"
     ],
-    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-k4-cuda-lr1e-6-submit.log"
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-k4-cuda-lr1e-6-submit.log",
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516197",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "None"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
   },
   "report:final": {
     "job_id": "516219",
@@ -2274,11 +2519,9 @@
     "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
     "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/report-matrix-references.json",
     "dependencies": [
-      "516227",
-      "516131",
+      "516314",
       "516136",
       "516146",
-      "516150",
       "516151",
       "516154",
       "516155",
@@ -2295,7 +2538,6 @@
       "516169",
       "516170",
       "516171",
-      "516191",
       "516192",
       "516197"
     ],
@@ -2360,7 +2602,73 @@
         "516187"
       ],
       "reason": "Use six-hour K4 closure516227; omit completed controller-purged IDs after verifying their scientific statuses."
-    }
+    },
+    "dependency_amendments": [
+      {
+        "before": [
+          "516227",
+          "516131",
+          "516136",
+          "516146",
+          "516150",
+          "516151",
+          "516154",
+          "516155",
+          "516156",
+          "516157",
+          "516158",
+          "516159",
+          "516160",
+          "516161",
+          "516165",
+          "516166",
+          "516167",
+          "516168",
+          "516169",
+          "516170",
+          "516171",
+          "516191",
+          "516192",
+          "516197"
+        ],
+        "after": [
+          "516314",
+          "516136",
+          "516146",
+          "516151",
+          "516154",
+          "516155",
+          "516156",
+          "516157",
+          "516158",
+          "516159",
+          "516160",
+          "516161",
+          "516165",
+          "516166",
+          "516167",
+          "516168",
+          "516169",
+          "516170",
+          "516171",
+          "516192",
+          "516197"
+        ],
+        "completed_markers_verified": [
+          "516131",
+          "516150",
+          "516191"
+        ]
+      }
+    ],
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516219",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "None"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
   },
   "analysis:rio-k4-lr1e-6:closure": {
     "job_id": "516227",
@@ -2412,6 +2720,1777 @@
     ],
     "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/k4-closure-submit.log",
     "dependency_mode": "afterany",
-    "reason": "Slurm rejects active-job time extension; same numerical worker reuses complete cached rows after original allocation ends. Final scientific completion is tracked by this pbatch closure allocation."
+    "reason": "Slurm rejects active-job time extension; same numerical worker reuses complete cached rows after original allocation ends. Final scientific completion is tracked by this pbatch closure allocation.",
+    "superseded": true,
+    "superseded_by": "516314",
+    "supersession_reason": "Exact peer pilot passed; reuse completed rows with GPU-resident centers and directions."
+  },
+  "analysis:rio-k4-lr1e-6:peer": {
+    "job_id": "516314",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis-peer",
+    "case": "rio-k4-lr1e-6",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 360,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k4-lr1e-6/status/analysis.json",
+    "peer_status_pattern": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k4-lr1e-6/status/analysis-peer-<job_id>.json",
+    "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516308/result.json",
+    "pilot_result_sha256": "a9b639576932344208e7e20ade6460a64b620184695e912072a4d946f0b140c5",
+    "pilot_state": "complete",
+    "dependencies": [
+      "516068"
+    ],
+    "dependency_mode": "afterany",
+    "old_parent_job_ids": [
+      "516068"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-rio-k4-lr1e-6-peer",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--cpus_per_task=56",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-rio-k4-lr1e-6-peer",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterany:516068",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-k4-lr1e-6",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516308/result.json"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-k4-lr1e-6-peer-submit.log",
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516314",
+      "State": "FAILED",
+      "ExitCode": "2:0",
+      "Reason": "Dependency"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
+  },
+  "analysis:hparam-rio-lr1e-6:peer": {
+    "job_id": "516315",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis-peer",
+    "case": "hparam-rio-lr1e-6",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study",
+    "minutes": 360,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/status/analysis.json",
+    "peer_status_pattern": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/status/analysis-peer-<job_id>.json",
+    "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516308/result.json",
+    "pilot_result_sha256": "a9b639576932344208e7e20ade6460a64b620184695e912072a4d946f0b140c5",
+    "pilot_state": "complete",
+    "dependencies": [
+      "516314"
+    ],
+    "dependency_mode": "afterok",
+    "old_parent_job_ids": [
+      "516314"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-hparam-rio-lr1e-6-peer",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--cpus_per_task=56",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-hparam-rio-lr1e-6-peer",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516314",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study",
+      "hparam-rio-lr1e-6",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516308/result.json"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-hparam-rio-lr1e-6-peer-submit.log",
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516315",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "None"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
+  },
+  "analysis:rio-k64-lr1e-6:peer": {
+    "job_id": "516316",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis-peer",
+    "case": "rio-k64-lr1e-6",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 360,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k64-lr1e-6/status/analysis.json",
+    "peer_status_pattern": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k64-lr1e-6/status/analysis-peer-<job_id>.json",
+    "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516308/result.json",
+    "pilot_result_sha256": "a9b639576932344208e7e20ade6460a64b620184695e912072a4d946f0b140c5",
+    "pilot_state": "complete",
+    "dependencies": [
+      "516314"
+    ],
+    "dependency_mode": "afterok",
+    "old_parent_job_ids": [
+      "516314"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-rio-k64-lr1e-6-peer",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--cpus_per_task=56",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-rio-k64-lr1e-6-peer",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516314",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-k64-lr1e-6",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516308/result.json"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-k64-lr1e-6-peer-submit.log",
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516316",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "None"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
+  },
+  "analysis:rio-prefix-forward-legacy-lr1e-6:peer": {
+    "job_id": "516317",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis-peer",
+    "case": "rio-prefix-forward-legacy-lr1e-6",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 360,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-legacy-lr1e-6/status/analysis.json",
+    "peer_status_pattern": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-legacy-lr1e-6/status/analysis-peer-<job_id>.json",
+    "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516308/result.json",
+    "pilot_result_sha256": "a9b639576932344208e7e20ade6460a64b620184695e912072a4d946f0b140c5",
+    "pilot_state": "complete",
+    "dependencies": [
+      "516314"
+    ],
+    "dependency_mode": "afterok",
+    "old_parent_job_ids": [
+      "516314"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-rio-prefix-forward-legacy-lr1e-6-peer",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--cpus_per_task=56",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-rio-prefix-forward-legacy-lr1e-6-peer",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516314",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-prefix-forward-legacy-lr1e-6",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516308/result.json"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-prefix-forward-legacy-lr1e-6-peer-submit.log",
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516317",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "None"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
+  },
+  "analysis:rio-prefix-reverse-legacy-lr1e-6:peer": {
+    "job_id": "516318",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis-peer",
+    "case": "rio-prefix-reverse-legacy-lr1e-6",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 360,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-legacy-lr1e-6/status/analysis.json",
+    "peer_status_pattern": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-legacy-lr1e-6/status/analysis-peer-<job_id>.json",
+    "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516308/result.json",
+    "pilot_result_sha256": "a9b639576932344208e7e20ade6460a64b620184695e912072a4d946f0b140c5",
+    "pilot_state": "complete",
+    "dependencies": [
+      "516314"
+    ],
+    "dependency_mode": "afterok",
+    "old_parent_job_ids": [
+      "516314"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-rio-prefix-reverse-legacy-lr1e-6-peer",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--cpus_per_task=56",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-rio-prefix-reverse-legacy-lr1e-6-peer",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516314",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-prefix-reverse-legacy-lr1e-6",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516308/result.json"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-prefix-reverse-legacy-lr1e-6-peer-submit.log",
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516318",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "None"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
+  },
+  "analysis:rio-fresh-matched-lr1e-6:peer": {
+    "job_id": "516319",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis-peer",
+    "case": "rio-fresh-matched-lr1e-6",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 360,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-fresh-matched-lr1e-6/status/analysis.json",
+    "peer_status_pattern": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-fresh-matched-lr1e-6/status/analysis-peer-<job_id>.json",
+    "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516308/result.json",
+    "pilot_result_sha256": "a9b639576932344208e7e20ade6460a64b620184695e912072a4d946f0b140c5",
+    "pilot_state": "complete",
+    "dependencies": [
+      "516314"
+    ],
+    "dependency_mode": "afterok",
+    "old_parent_job_ids": [
+      "516314"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-rio-fresh-matched-lr1e-6-peer",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--cpus_per_task=56",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-rio-fresh-matched-lr1e-6-peer",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516314",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-fresh-matched-lr1e-6",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516308/result.json"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-fresh-matched-lr1e-6-peer-submit.log",
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516319",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "None"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
+  },
+  "analysis:rio-prefix-forward-matched-lr1e-6:peer": {
+    "job_id": "516320",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis-peer",
+    "case": "rio-prefix-forward-matched-lr1e-6",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 360,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-matched-lr1e-6/status/analysis.json",
+    "peer_status_pattern": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-matched-lr1e-6/status/analysis-peer-<job_id>.json",
+    "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516308/result.json",
+    "pilot_result_sha256": "a9b639576932344208e7e20ade6460a64b620184695e912072a4d946f0b140c5",
+    "pilot_state": "complete",
+    "dependencies": [
+      "516314"
+    ],
+    "dependency_mode": "afterok",
+    "old_parent_job_ids": [
+      "516314"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-rio-prefix-forward-matched-lr1e-6-peer",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--cpus_per_task=56",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-rio-prefix-forward-matched-lr1e-6-peer",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516314",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-prefix-forward-matched-lr1e-6",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516308/result.json"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-prefix-forward-matched-lr1e-6-peer-submit.log",
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516320",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "None"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
+  },
+  "analysis:rio-prefix-reverse-matched-lr1e-6:peer": {
+    "job_id": "516321",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis-peer",
+    "case": "rio-prefix-reverse-matched-lr1e-6",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 360,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-matched-lr1e-6/status/analysis.json",
+    "peer_status_pattern": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-matched-lr1e-6/status/analysis-peer-<job_id>.json",
+    "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516308/result.json",
+    "pilot_result_sha256": "a9b639576932344208e7e20ade6460a64b620184695e912072a4d946f0b140c5",
+    "pilot_state": "complete",
+    "dependencies": [
+      "516314"
+    ],
+    "dependency_mode": "afterok",
+    "old_parent_job_ids": [
+      "516314"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-rio-prefix-reverse-matched-lr1e-6-peer",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--cpus_per_task=56",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-rio-prefix-reverse-matched-lr1e-6-peer",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516314",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-prefix-reverse-matched-lr1e-6",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516308/result.json"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-prefix-reverse-matched-lr1e-6-peer-submit.log",
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516321",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "None"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
+  },
+  "analysis:rio-k4-cuda-lr1e-6:peer": {
+    "job_id": "516322",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis-peer",
+    "case": "rio-k4-cuda-lr1e-6",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control",
+    "minutes": 360,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/status/analysis.json",
+    "peer_status_pattern": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/status/analysis-peer-<job_id>.json",
+    "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516308/result.json",
+    "pilot_result_sha256": "a9b639576932344208e7e20ade6460a64b620184695e912072a4d946f0b140c5",
+    "pilot_state": "complete",
+    "dependencies": [
+      "516314"
+    ],
+    "dependency_mode": "afterok",
+    "old_parent_job_ids": [
+      "516314"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-rio-k4-cuda-lr1e-6-peer",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--cpus_per_task=56",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-rio-k4-cuda-lr1e-6-peer",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516314",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control",
+      "rio-k4-cuda-lr1e-6",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516308/result.json"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-k4-cuda-lr1e-6-peer-submit.log",
+    "superseded": true,
+    "allocation_failure": {
+      "JobID": "516322",
+      "State": "CANCELLED",
+      "ExitCode": "0:0",
+      "Reason": "None"
+    },
+    "supersession_reason": "Peer K4 gate refused inconsistent one-GPU Slurm assignment; dependent allocations canceled before work. Retry after explicit per-task binding probe."
+  },
+  "pilot-peer:final-binding": {
+    "job_id": "516325",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "calibration",
+    "case": "rio-k16",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 45,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+    "dependencies": [],
+    "optional": false,
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/peer-pilot-v3-submit.log",
+    "purpose": "Measure exact two-H100 landscape residency; adopt only after all numeric and speed gates pass.",
+    "allocation_state": "submitted",
+    "scientific_state": "pending",
+    "gpus_per_task": 2
+  },
+  "analysis:rio-k4-lr1e-6:peer-v2": {
+    "job_id": "516329",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis-peer",
+    "case": "rio-k4-lr1e-6",
+    "attempt": "peer-v2",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 360,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k4-lr1e-6/status/analysis.json",
+    "peer_status_pattern": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k4-lr1e-6/status/analysis-peer-<job_id>.json",
+    "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+    "pilot_result_sha256": "130a97f7d32562aefc824486e83c86f7d50170accfcd15c2e70fffff83e5c653",
+    "pilot_state": "complete",
+    "dependencies": [],
+    "dependency_mode": "afterok",
+    "old_parent_job_ids": [],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-rio-k4-lr1e-6-peer-v2",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--gpus_per_task=2",
+      "--cpus_per_task=56",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-rio-k4-lr1e-6-peer-v2",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-k4-lr1e-6",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-k4-lr1e-6-peer-v2-submit.log"
+  },
+  "analysis:rio-k64-lr1e-6:peer-v2": {
+    "job_id": "516332",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis-peer",
+    "case": "rio-k64-lr1e-6",
+    "attempt": "peer-v2",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 360,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k64-lr1e-6/status/analysis.json",
+    "peer_status_pattern": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k64-lr1e-6/status/analysis-peer-<job_id>.json",
+    "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+    "pilot_result_sha256": "130a97f7d32562aefc824486e83c86f7d50170accfcd15c2e70fffff83e5c653",
+    "pilot_state": "complete",
+    "dependencies": [
+      "516329"
+    ],
+    "dependency_mode": "afterok",
+    "old_parent_job_ids": [
+      "516329"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-rio-k64-lr1e-6-peer-v2",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--gpus_per_task=2",
+      "--cpus_per_task=56",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-rio-k64-lr1e-6-peer-v2",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516329",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-k64-lr1e-6",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-k64-lr1e-6-peer-v2-submit.log"
+  },
+  "analysis:rio-k256-lr1e-6:peer-v2": {
+    "job_id": "516333",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis-peer",
+    "case": "rio-k256-lr1e-6",
+    "attempt": "peer-v2",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 360,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k256-lr1e-6/status/analysis.json",
+    "peer_status_pattern": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k256-lr1e-6/status/analysis-peer-<job_id>.json",
+    "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+    "pilot_result_sha256": "130a97f7d32562aefc824486e83c86f7d50170accfcd15c2e70fffff83e5c653",
+    "pilot_state": "complete",
+    "dependencies": [
+      "516329"
+    ],
+    "dependency_mode": "afterok",
+    "old_parent_job_ids": [
+      "516329"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-rio-k256-lr1e-6-peer-v2",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--gpus_per_task=2",
+      "--cpus_per_task=56",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-rio-k256-lr1e-6-peer-v2",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516329",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-k256-lr1e-6",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-k256-lr1e-6-peer-v2-submit.log"
+  },
+  "analysis:rio-prefix-forward-legacy-lr1e-6:peer-v2": {
+    "job_id": "516334",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis-peer",
+    "case": "rio-prefix-forward-legacy-lr1e-6",
+    "attempt": "peer-v2",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 360,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-legacy-lr1e-6/status/analysis.json",
+    "peer_status_pattern": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-legacy-lr1e-6/status/analysis-peer-<job_id>.json",
+    "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+    "pilot_result_sha256": "130a97f7d32562aefc824486e83c86f7d50170accfcd15c2e70fffff83e5c653",
+    "pilot_state": "complete",
+    "dependencies": [
+      "516329"
+    ],
+    "dependency_mode": "afterok",
+    "old_parent_job_ids": [
+      "516329"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-rio-prefix-forward-legacy-lr1e-6-peer-v2",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--gpus_per_task=2",
+      "--cpus_per_task=56",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-rio-prefix-forward-legacy-lr1e-6-peer-v2",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516329",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-prefix-forward-legacy-lr1e-6",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-prefix-forward-legacy-lr1e-6-peer-v2-submit.log"
+  },
+  "analysis:rio-prefix-reverse-legacy-lr1e-6:peer-v2": {
+    "job_id": "516335",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis-peer",
+    "case": "rio-prefix-reverse-legacy-lr1e-6",
+    "attempt": "peer-v2",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 360,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-legacy-lr1e-6/status/analysis.json",
+    "peer_status_pattern": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-legacy-lr1e-6/status/analysis-peer-<job_id>.json",
+    "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+    "pilot_result_sha256": "130a97f7d32562aefc824486e83c86f7d50170accfcd15c2e70fffff83e5c653",
+    "pilot_state": "complete",
+    "dependencies": [
+      "516329"
+    ],
+    "dependency_mode": "afterok",
+    "old_parent_job_ids": [
+      "516329"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-rio-prefix-reverse-legacy-lr1e-6-peer-v2",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--gpus_per_task=2",
+      "--cpus_per_task=56",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-rio-prefix-reverse-legacy-lr1e-6-peer-v2",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516329",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-prefix-reverse-legacy-lr1e-6",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-prefix-reverse-legacy-lr1e-6-peer-v2-submit.log"
+  },
+  "analysis:rio-fresh-matched-lr1e-6:peer-v2": {
+    "job_id": "516336",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis-peer",
+    "case": "rio-fresh-matched-lr1e-6",
+    "attempt": "peer-v2",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 360,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-fresh-matched-lr1e-6/status/analysis.json",
+    "peer_status_pattern": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-fresh-matched-lr1e-6/status/analysis-peer-<job_id>.json",
+    "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+    "pilot_result_sha256": "130a97f7d32562aefc824486e83c86f7d50170accfcd15c2e70fffff83e5c653",
+    "pilot_state": "complete",
+    "dependencies": [
+      "516329"
+    ],
+    "dependency_mode": "afterok",
+    "old_parent_job_ids": [
+      "516329"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-rio-fresh-matched-lr1e-6-peer-v2",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--gpus_per_task=2",
+      "--cpus_per_task=56",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-rio-fresh-matched-lr1e-6-peer-v2",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516329",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-fresh-matched-lr1e-6",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-fresh-matched-lr1e-6-peer-v2-submit.log"
+  },
+  "analysis:rio-prefix-forward-matched-lr1e-6:peer-v2": {
+    "job_id": "516337",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis-peer",
+    "case": "rio-prefix-forward-matched-lr1e-6",
+    "attempt": "peer-v2",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 360,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-matched-lr1e-6/status/analysis.json",
+    "peer_status_pattern": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-matched-lr1e-6/status/analysis-peer-<job_id>.json",
+    "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+    "pilot_result_sha256": "130a97f7d32562aefc824486e83c86f7d50170accfcd15c2e70fffff83e5c653",
+    "pilot_state": "complete",
+    "dependencies": [
+      "516329"
+    ],
+    "dependency_mode": "afterok",
+    "old_parent_job_ids": [
+      "516329"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-rio-prefix-forward-matched-lr1e-6-peer-v2",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--gpus_per_task=2",
+      "--cpus_per_task=56",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-rio-prefix-forward-matched-lr1e-6-peer-v2",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516329",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-prefix-forward-matched-lr1e-6",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-prefix-forward-matched-lr1e-6-peer-v2-submit.log"
+  },
+  "analysis:rio-prefix-reverse-matched-lr1e-6:peer-v2": {
+    "job_id": "516338",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis-peer",
+    "case": "rio-prefix-reverse-matched-lr1e-6",
+    "attempt": "peer-v2",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 360,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-matched-lr1e-6/status/analysis.json",
+    "peer_status_pattern": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-matched-lr1e-6/status/analysis-peer-<job_id>.json",
+    "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+    "pilot_result_sha256": "130a97f7d32562aefc824486e83c86f7d50170accfcd15c2e70fffff83e5c653",
+    "pilot_state": "complete",
+    "dependencies": [
+      "516329"
+    ],
+    "dependency_mode": "afterok",
+    "old_parent_job_ids": [
+      "516329"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-rio-prefix-reverse-matched-lr1e-6-peer-v2",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--gpus_per_task=2",
+      "--cpus_per_task=56",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-rio-prefix-reverse-matched-lr1e-6-peer-v2",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516329",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-prefix-reverse-matched-lr1e-6",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-prefix-reverse-matched-lr1e-6-peer-v2-submit.log"
+  },
+  "analysis:hparam-rio-lr1e-6:peer-v2": {
+    "job_id": "516339",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis-peer",
+    "case": "hparam-rio-lr1e-6",
+    "attempt": "peer-v2",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study",
+    "minutes": 360,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/status/analysis.json",
+    "peer_status_pattern": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/status/analysis-peer-<job_id>.json",
+    "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+    "pilot_result_sha256": "130a97f7d32562aefc824486e83c86f7d50170accfcd15c2e70fffff83e5c653",
+    "pilot_state": "complete",
+    "dependencies": [
+      "516329"
+    ],
+    "dependency_mode": "afterok",
+    "old_parent_job_ids": [
+      "516329"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-hparam-rio-lr1e-6-peer-v2",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--gpus_per_task=2",
+      "--cpus_per_task=56",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-hparam-rio-lr1e-6-peer-v2",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516329",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study",
+      "hparam-rio-lr1e-6",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-hparam-rio-lr1e-6-peer-v2-submit.log"
+  },
+  "analysis:rio-k4-cuda-lr1e-6:peer-v2": {
+    "job_id": "516340",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "analysis-peer",
+    "case": "rio-k4-cuda-lr1e-6",
+    "attempt": "peer-v2",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control",
+    "minutes": 360,
+    "gpus": 2,
+    "cpus": 56,
+    "host_memory": "224G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/status/analysis.json",
+    "peer_status_pattern": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/status/analysis-peer-<job_id>.json",
+    "pilot_result": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+    "pilot_result_sha256": "130a97f7d32562aefc824486e83c86f7d50170accfcd15c2e70fffff83e5c653",
+    "pilot_state": "complete",
+    "dependencies": [
+      "516329"
+    ],
+    "dependency_mode": "afterok",
+    "old_parent_job_ids": [
+      "516329"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-analysis-rio-k4-cuda-lr1e-6-peer-v2",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=2",
+      "--gpus_per_task=2",
+      "--cpus_per_task=56",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=360",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=analysis-rio-k4-cuda-lr1e-6-peer-v2",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516329",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/peer-landscape/analysis.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control",
+      "rio-k4-cuda-lr1e-6",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/analysis-rio-k4-cuda-lr1e-6-peer-v2-submit.log"
+  },
+  "profiles:rio-k64-lr1e-6:retry-v2": {
+    "job_id": "516341",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "profiles",
+    "case": "rio-k64-lr1e-6",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 180,
+    "gpus": 1,
+    "evaluation_processes": null,
+    "cpus": 28,
+    "host_memory": "256G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k64-lr1e-6/status/step-profiles.json",
+    "dependencies": [
+      "516332"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-profiles-rio-k64-lr1e-6-retry-v2",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=1",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=180",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=profiles-rio-k64-lr1e-6-retry-v2",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516332",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/entry.sh",
+      "profiles",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-k64-lr1e-6"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-k64-lr1e-6-retry-v2-submit.log",
+    "attempt": "retry-v2"
+  },
+  "profiles:rio-k256-lr1e-6:retry-v2": {
+    "job_id": "516342",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "profiles",
+    "case": "rio-k256-lr1e-6",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 180,
+    "gpus": 1,
+    "evaluation_processes": null,
+    "cpus": 28,
+    "host_memory": "256G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-k256-lr1e-6/status/step-profiles.json",
+    "dependencies": [
+      "516333"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-profiles-rio-k256-lr1e-6-retry-v2",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=1",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=180",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=profiles-rio-k256-lr1e-6-retry-v2",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516333",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/entry.sh",
+      "profiles",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-k256-lr1e-6"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-k256-lr1e-6-retry-v2-submit.log",
+    "attempt": "retry-v2"
+  },
+  "profiles:rio-prefix-forward-legacy-lr1e-6:retry-v2": {
+    "job_id": "516343",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "profiles",
+    "case": "rio-prefix-forward-legacy-lr1e-6",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 180,
+    "gpus": 1,
+    "evaluation_processes": null,
+    "cpus": 28,
+    "host_memory": "256G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-legacy-lr1e-6/status/step-profiles.json",
+    "dependencies": [
+      "516334"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-profiles-rio-prefix-forward-legacy-lr1e-6-retry-v2",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=1",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=180",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=profiles-rio-prefix-forward-legacy-lr1e-6-retry-v2",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516334",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/entry.sh",
+      "profiles",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-prefix-forward-legacy-lr1e-6"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-prefix-forward-legacy-lr1e-6-retry-v2-submit.log",
+    "attempt": "retry-v2"
+  },
+  "profiles:rio-prefix-reverse-legacy-lr1e-6:retry-v2": {
+    "job_id": "516344",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "profiles",
+    "case": "rio-prefix-reverse-legacy-lr1e-6",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 180,
+    "gpus": 1,
+    "evaluation_processes": null,
+    "cpus": 28,
+    "host_memory": "256G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-legacy-lr1e-6/status/step-profiles.json",
+    "dependencies": [
+      "516335"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-profiles-rio-prefix-reverse-legacy-lr1e-6-retry-v2",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=1",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=180",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=profiles-rio-prefix-reverse-legacy-lr1e-6-retry-v2",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516335",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/entry.sh",
+      "profiles",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-prefix-reverse-legacy-lr1e-6"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-prefix-reverse-legacy-lr1e-6-retry-v2-submit.log",
+    "attempt": "retry-v2"
+  },
+  "profiles:rio-fresh-matched-lr1e-6:retry-v2": {
+    "job_id": "516345",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "profiles",
+    "case": "rio-fresh-matched-lr1e-6",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 180,
+    "gpus": 1,
+    "evaluation_processes": null,
+    "cpus": 28,
+    "host_memory": "256G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-fresh-matched-lr1e-6/status/step-profiles.json",
+    "dependencies": [
+      "516336"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-profiles-rio-fresh-matched-lr1e-6-retry-v2",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=1",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=180",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=profiles-rio-fresh-matched-lr1e-6-retry-v2",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516336",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/entry.sh",
+      "profiles",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-fresh-matched-lr1e-6"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-fresh-matched-lr1e-6-retry-v2-submit.log",
+    "attempt": "retry-v2"
+  },
+  "profiles:rio-prefix-forward-matched-lr1e-6:retry-v2": {
+    "job_id": "516346",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "profiles",
+    "case": "rio-prefix-forward-matched-lr1e-6",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 180,
+    "gpus": 1,
+    "evaluation_processes": null,
+    "cpus": 28,
+    "host_memory": "256G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-forward-matched-lr1e-6/status/step-profiles.json",
+    "dependencies": [
+      "516337"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-profiles-rio-prefix-forward-matched-lr1e-6-retry-v2",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=1",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=180",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=profiles-rio-prefix-forward-matched-lr1e-6-retry-v2",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516337",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/entry.sh",
+      "profiles",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-prefix-forward-matched-lr1e-6"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-prefix-forward-matched-lr1e-6-retry-v2-submit.log",
+    "attempt": "retry-v2"
+  },
+  "profiles:rio-prefix-reverse-matched-lr1e-6:retry-v2": {
+    "job_id": "516347",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "profiles",
+    "case": "rio-prefix-reverse-matched-lr1e-6",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 180,
+    "gpus": 1,
+    "evaluation_processes": null,
+    "cpus": 28,
+    "host_memory": "256G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/cases/rio-prefix-reverse-matched-lr1e-6/status/step-profiles.json",
+    "dependencies": [
+      "516338"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-profiles-rio-prefix-reverse-matched-lr1e-6-retry-v2",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=1",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=180",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=profiles-rio-prefix-reverse-matched-lr1e-6-retry-v2",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516338",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/entry.sh",
+      "profiles",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+      "rio-prefix-reverse-matched-lr1e-6"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-prefix-reverse-matched-lr1e-6-retry-v2-submit.log",
+    "attempt": "retry-v2"
+  },
+  "profiles:hparam-rio-lr1e-6:retry-v2": {
+    "job_id": "516348",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "profiles",
+    "case": "hparam-rio-lr1e-6",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study",
+    "minutes": 180,
+    "gpus": 1,
+    "evaluation_processes": null,
+    "cpus": 28,
+    "host_memory": "256G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study/cases/hparam-rio-lr1e-6/status/step-profiles.json",
+    "dependencies": [
+      "516339"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-profiles-hparam-rio-lr1e-6-retry-v2",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=1",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=180",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=profiles-hparam-rio-lr1e-6-retry-v2",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516339",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/entry.sh",
+      "profiles",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study",
+      "hparam-rio-lr1e-6"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-hparam-rio-lr1e-6-retry-v2-submit.log",
+    "attempt": "retry-v2"
+  },
+  "profiles:rio-k4-cuda-lr1e-6:retry-v2": {
+    "job_id": "516349",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "profiles",
+    "case": "rio-k4-cuda-lr1e-6",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control",
+    "minutes": 180,
+    "gpus": 1,
+    "evaluation_processes": null,
+    "cpus": 28,
+    "host_memory": "256G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control/cases/rio-k4-cuda-lr1e-6/status/step-profiles.json",
+    "dependencies": [
+      "516340"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-profiles-rio-k4-cuda-lr1e-6-retry-v2",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=1",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=180",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=profiles-rio-k4-cuda-lr1e-6-retry-v2",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516340",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/entry.sh",
+      "profiles",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control",
+      "rio-k4-cuda-lr1e-6"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/profiles-rio-k4-cuda-lr1e-6-retry-v2-submit.log",
+    "attempt": "retry-v2"
+  },
+  "report:final:retry-v2": {
+    "job_id": "516351",
+    "backend": "slurm",
+    "cluster": "matrix",
+    "partition": "pbatch",
+    "account": "verival",
+    "phase": "report",
+    "case": "final",
+    "run": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+    "minutes": 120,
+    "gpus": 1,
+    "evaluation_processes": null,
+    "cpus": 28,
+    "host_memory": "256G",
+    "environment": "/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+    "status_file": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/report-matrix-references.json",
+    "dependencies": [
+      "516146",
+      "516329",
+      "516332",
+      "516333",
+      "516334",
+      "516335",
+      "516336",
+      "516337",
+      "516338",
+      "516339",
+      "516340",
+      "516341",
+      "516342",
+      "516343",
+      "516344",
+      "516345",
+      "516346",
+      "516347",
+      "516348",
+      "516349"
+    ],
+    "argv": [
+      "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+      "/p/vast1/kirchenb/llnl-tools/launch_matrix.py",
+      "--run_name=tar-rio-report-final-retry-v2",
+      "--partition=pbatch",
+      "--account=verival",
+      "--nodes=1",
+      "--tasks_per_node=1",
+      "--gpus_per_node=1",
+      "--exclusive=false",
+      "--torchrun=false",
+      "--launch_once_per_node=true",
+      "--environment=/usr/workspace/wsb/kirchenb/lilpipe-tar-eval-cu126-v1",
+      "--env_act_style=mm_activate",
+      "--cuda_module=",
+      "--minutes=120",
+      "--output_dir=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/launches",
+      "--sub_output_dir_name=report-final-retry-v2",
+      "--pass_run_name=false",
+      "--quiet_launch=true",
+      "--squonce=false",
+      "--dependency=afterok:516146:516329:516332:516333:516334:516335:516336:516337:516338:516339:516340:516341:516342:516343:516344:516345:516346:516347:516348:516349",
+      "--",
+      "bash",
+      "-i",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/report-matrix/run_report.sh",
+      "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z"
+    ],
+    "log": "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/logs/report-final-retry-v2-submit.log",
+    "attempt": "retry-v2"
   }
 }

@@ -2276,5 +2276,6 @@
   },
   "evaluation_cases": [
     "rio-k4-cuda-lr1e-6"
-  ]
+  ],
+  "profile_reference_case": "rio-k4-cuda-lr1e-6"
 }

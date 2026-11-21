@@ -1,0 +1,12 @@
+stty: 'standard input': Inappropriate ioctl for device
+Job 516304 started on matrix22 at 2026-11-20T16:07:53-08:00
+0: host=matrix22 job_id=516304 node_id=0 nodes=1 tasks_per_node=1 cpus_per_task=56
+0: rank=0 local_rank=0 world_size=1 step_gpus=<unset> cuda_visible_devices=<unset>
+0: master_addr=matrix22 master_port=48317 pwd=/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance
+0: bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+0: bash: no job control in this shell
+0: stty: 'standard input'
+0: : Inappropriate ioctl for device
+0: Expected two distinct SLURM_STEP_GPUS IDs, got ''.
+srun: error: matrix22: task 0: Exited with exit code 2
+srun: Terminating StepId=516304.0

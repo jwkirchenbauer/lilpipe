@@ -1,0 +1,159 @@
+{
+  "stage": "analyses",
+  "reviewed": true,
+  "commands": [
+    {
+      "case": "rio-k64-lr1e-6",
+      "argv": [
+        "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/submit_peer.py",
+        "--run",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+        "--case",
+        "rio-k64-lr1e-6",
+        "--pilot",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+        "--attempt",
+        "peer-v2",
+        "--dependency",
+        "516329"
+      ]
+    },
+    {
+      "case": "rio-k256-lr1e-6",
+      "argv": [
+        "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/submit_peer.py",
+        "--run",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+        "--case",
+        "rio-k256-lr1e-6",
+        "--pilot",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+        "--attempt",
+        "peer-v2",
+        "--dependency",
+        "516329"
+      ]
+    },
+    {
+      "case": "rio-prefix-forward-legacy-lr1e-6",
+      "argv": [
+        "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/submit_peer.py",
+        "--run",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+        "--case",
+        "rio-prefix-forward-legacy-lr1e-6",
+        "--pilot",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+        "--attempt",
+        "peer-v2",
+        "--dependency",
+        "516329"
+      ]
+    },
+    {
+      "case": "rio-prefix-reverse-legacy-lr1e-6",
+      "argv": [
+        "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/submit_peer.py",
+        "--run",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+        "--case",
+        "rio-prefix-reverse-legacy-lr1e-6",
+        "--pilot",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+        "--attempt",
+        "peer-v2",
+        "--dependency",
+        "516329"
+      ]
+    },
+    {
+      "case": "rio-fresh-matched-lr1e-6",
+      "argv": [
+        "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/submit_peer.py",
+        "--run",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+        "--case",
+        "rio-fresh-matched-lr1e-6",
+        "--pilot",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+        "--attempt",
+        "peer-v2",
+        "--dependency",
+        "516329"
+      ]
+    },
+    {
+      "case": "rio-prefix-forward-matched-lr1e-6",
+      "argv": [
+        "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/submit_peer.py",
+        "--run",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+        "--case",
+        "rio-prefix-forward-matched-lr1e-6",
+        "--pilot",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+        "--attempt",
+        "peer-v2",
+        "--dependency",
+        "516329"
+      ]
+    },
+    {
+      "case": "rio-prefix-reverse-matched-lr1e-6",
+      "argv": [
+        "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/submit_peer.py",
+        "--run",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z",
+        "--case",
+        "rio-prefix-reverse-matched-lr1e-6",
+        "--pilot",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+        "--attempt",
+        "peer-v2",
+        "--dependency",
+        "516329"
+      ]
+    },
+    {
+      "case": "hparam-rio-lr1e-6",
+      "argv": [
+        "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/submit_peer.py",
+        "--run",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/control-study",
+        "--case",
+        "hparam-rio-lr1e-6",
+        "--pilot",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+        "--attempt",
+        "peer-v2",
+        "--dependency",
+        "516329"
+      ]
+    },
+    {
+      "case": "rio-k4-cuda-lr1e-6",
+      "argv": [
+        "/usr/WS2/kirchenb/lilpipe-tar-eval-cu126-v1/bin/python",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/source/transition/submit_peer.py",
+        "--run",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/backend-control",
+        "--case",
+        "rio-k4-cuda-lr1e-6",
+        "--pilot",
+        "/p/vast1/kirchenb/tar-root/lilpipe/examples/tamper-resistance/artifacts/matrix/tar-rio/20261120T2120Z/pilots/tar-rio-peer-landscape-pilot/results-516325/result.json",
+        "--attempt",
+        "peer-v2",
+        "--dependency",
+        "516329"
+      ]
+    }
+  ]
+}
